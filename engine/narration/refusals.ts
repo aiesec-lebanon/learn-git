@@ -1,0 +1,17 @@
+import type { RefusalCode } from "../types";
+
+/** What a refusal means for the sandbox, in plain words (the guide adds next steps). */
+export const REFUSAL_FACTS: Readonly<Record<RefusalCode, string>> = {
+  "unknown-command": "Git does not know that command.",
+  "not-simulated": "The sandbox does not simulate that yet.",
+  usage: "Git did not understand the options or arguments.",
+  "not-a-repository": "This folder is not inside a Git repository.",
+  "identity-unknown":
+    "Git needs your name and email before it records a commit.",
+  "pathspec-no-match": "No file matched that path.",
+  "nothing-to-commit": "The staging area matches the last commit.",
+  "empty-message": "A commit needs a message.",
+  "unborn-branch": "The branch has no commits yet.",
+  "outside-repository": "That path is outside the repository.",
+  "shell-error": "The shell could not run that line.",
+};

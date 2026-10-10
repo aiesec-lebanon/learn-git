@@ -6,3 +6,7 @@ export type { HistoryEntry, SessionSnapshot } from "./session";
 export { createWorld } from "./world/create";
 export { timeAt } from "./world/clock";
 export type * from "./types";
+export { describeGraph } from "./narration/describe";
+export { narrate } from "./narration/narrate";
+export type { Narration } from "./narration/narrate";
+export { REFUSAL_FACTS } from "./narration/refusals";

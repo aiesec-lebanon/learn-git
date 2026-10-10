@@ -3,6 +3,7 @@ import { AnnouncerProvider } from "@/features/announcer/announcer";
 import { bootstrapScript } from "@/features/preferences/bootstrap";
 import { InlineScript } from "@/features/preferences/inline-script";
 import { ThemeController } from "@/features/preferences/theme-controller";
+import { RouteFocus } from "@/features/site/route-focus";
 import { SiteFooter } from "@/features/site/site-footer";
 import { SiteHeader } from "@/features/site/site-header";
 import { fontClassName } from "@/themes/active-fonts";
@@ -30,10 +31,11 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <AnnouncerProvider>
           <SkipLink />
           <SiteHeader />
-          <main id="main" className="flex-1">
+          <main id="main" tabIndex={-1} className="flex-1 outline-none">
             {children}
           </main>
           <SiteFooter />
+          <RouteFocus />
         </AnnouncerProvider>
       </body>
     </html>

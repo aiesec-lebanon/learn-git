@@ -12,6 +12,7 @@ import {
 } from "@/content/registry";
 import { capstoneHref, lessonHref } from "@/content/routes";
 import { ChapterStatus } from "@/features/track/chapter-status";
+import { NAV_FORWARD } from "@/features/site/page-transition";
 import { AppLink } from "@/ui/link";
 
 export function generateStaticParams() {
@@ -53,7 +54,10 @@ export default async function TrackPage({
               {lessonsOf(chapter.id).map((lesson) => (
                 <li key={lesson.id}>
                   {lesson.ready ? (
-                    <AppLink href={lessonHref(lesson.id)}>
+                    <AppLink
+                      href={lessonHref(lesson.id)}
+                      transitionTypes={NAV_FORWARD}
+                    >
                       {lessonCode(lesson.id)} {lesson.title}
                     </AppLink>
                   ) : (
@@ -70,7 +74,10 @@ export default async function TrackPage({
             {CAPSTONES[chapter.id] ? (
               <p className="m-0">
                 Already know this?{" "}
-                <AppLink href={capstoneHref(chapter.id)}>
+                <AppLink
+                  href={capstoneHref(chapter.id)}
+                  transitionTypes={NAV_FORWARD}
+                >
                   Do the {chapterCode(chapter.id)} capstone
                 </AppLink>
               </p>

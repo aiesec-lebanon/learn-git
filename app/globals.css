@@ -114,6 +114,63 @@ html:root[data-motion="reduce"] {
   --dur-4: 0s;
 }
 
+/* Route transitions (ADR-004): durations follow the motion tokens, so reduced motion swaps instantly. */
+::view-transition {
+  pointer-events: none;
+}
+
+::view-transition-old(.nav-forward),
+::view-transition-old(.nav-back) {
+  animation:
+    var(--dur-1) ease-in both vt-fade reverse,
+    var(--dur-3) var(--curve-standard) both vt-slide reverse;
+}
+
+::view-transition-new(.nav-forward),
+::view-transition-new(.nav-back) {
+  animation:
+    var(--dur-2) ease-out var(--dur-1) both vt-fade,
+    var(--dur-3) var(--curve-standard) both vt-slide;
+}
+
+::view-transition-old(.nav-forward),
+::view-transition-new(.nav-back) {
+  --slide-offset: -48px;
+}
+
+::view-transition-new(.nav-forward),
+::view-transition-old(.nav-back) {
+  --slide-offset: 48px;
+}
+
+::view-transition-group(site-header) {
+  animation: none;
+  z-index: 100;
+}
+
+::view-transition-old(site-header) {
+  display: none;
+}
+
+::view-transition-new(site-header) {
+  animation: none;
+}
+
+@keyframes vt-fade {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes vt-slide {
+  from {
+    translate: var(--slide-offset);
+  }
+  to {
+    translate: 0;
+  }
+}
+
 @layer base {
   body {
     @apply bg-bg font-body text-base/[1.6] text-fg;

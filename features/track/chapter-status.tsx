@@ -7,6 +7,7 @@ import { browser } from "react-dom";
 import { lessonById, type ChapterId } from "@/content/registry";
 import { lessonHref } from "@/content/routes";
 import { useProgress } from "@/features/progress/progress";
+import { NAV_FORWARD } from "@/features/site/page-transition";
 import { buttonClass } from "@/ui/button";
 
 /** A chapter's check mark when finished, and Continue when the resume point is in it. */
@@ -39,6 +40,7 @@ export function ChapterStatus({ chapter }: { chapter: ChapterId }) {
       {here && lesson ? (
         <Link
           href={`${lessonHref(lesson.id)}#step-${here.step}` as Route}
+          transitionTypes={NAV_FORWARD}
           className={buttonClass("primary")}
         >
           Continue

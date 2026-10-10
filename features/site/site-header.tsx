@@ -3,7 +3,10 @@ import { Logo } from "@/themes/active";
 
 export function SiteHeader() {
   return (
-    <header className="sticky top-0 z-40 border-b border-line bg-nav-bg backdrop-blur-sm">
+    <header
+      style={{ viewTransitionName: "site-header" }}
+      className="sticky top-0 z-40 border-b border-line bg-nav-bg backdrop-blur-sm"
+    >
       <div className="mx-auto flex h-16 w-full max-w-[1200px] items-center px-4 sm:px-6">
         <Link
           href="/"

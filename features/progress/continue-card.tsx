@@ -6,6 +6,7 @@ import { use } from "react";
 import { browser } from "react-dom";
 import { lessonById, lessonCode } from "@/content/registry";
 import { lessonHref } from "@/content/routes";
+import { NAV_FORWARD } from "@/features/site/page-transition";
 import { buttonClass } from "@/ui/button";
 import { useProgress } from "./progress";
 
@@ -28,6 +29,7 @@ export function ContinueCard() {
       </p>
       <Link
         href={`${lessonHref(lesson.id)}#step-${resume.step}` as Route}
+        transitionTypes={NAV_FORWARD}
         className={buttonClass("primary")}
       >
         Continue

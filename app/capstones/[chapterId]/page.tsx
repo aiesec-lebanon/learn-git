@@ -3,9 +3,11 @@ import { notFound } from "next/navigation";
 import { createWorld } from "@/engine";
 import { CAPSTONES, readyCapstones } from "@/content/capstones";
 import { chapterById, chapterCode, trackById } from "@/content/registry";
-import { trackHref } from "@/content/routes";
+import { capstoneHref, trackHref } from "@/content/routes";
 import { Checkpoint } from "@/features/checkpoint/checkpoint";
 import { stageFrame } from "@/features/stage/frame";
+import { CourseNav } from "@/features/site/course-nav";
+import { NAV_BACK } from "@/features/site/page-transition";
 import { AppLink } from "@/ui/link";
 
 export function generateStaticParams() {
@@ -37,7 +39,9 @@ export default async function CapstonePage({
       <header className="mb-8 max-w-prose">
         <p className="m-0 font-display text-sm font-semibold text-fg-muted">
           {track ? (
-            <AppLink href={trackHref(track.id)}>{track.title}</AppLink>
+            <AppLink href={trackHref(track.id)} transitionTypes={NAV_BACK}>
+              {track.title}
+            </AppLink>
           ) : null}{" "}
           · {chapter.title}
         </p>
@@ -56,6 +60,7 @@ export default async function CapstonePage({
         target={capstone.target}
         start={stageFrame(createWorld(capstone.world), [])}
       />
+      <CourseNav track={chapter.track} here={capstoneHref(chapter.id)} />
     </article>
   );
 }

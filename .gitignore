@@ -46,3 +46,8 @@ next-env.d.ts
 # playwright
 /playwright-report/
 /test-results/
+
+# AI skills
+.agents/
+.claude/
+skills-lock.json

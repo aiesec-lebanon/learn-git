@@ -13,8 +13,12 @@ export function pathForms(nativeDir) {
  * repositories under `<tmp>/hub/` read as `https://hub.test/`, the host
  * name is neutral and bash's `line N:` (from `bash -c`) is dropped.
  */
-export function createRewriter({ tmpDir, hostname }) {
-  const forms = pathForms(tmpDir);
+export function createRewriter({
+  tmpDir,
+  hostname,
+  aliases = /** @type {string[]} */ ([]),
+}) {
+  const forms = [...pathForms(tmpDir), ...aliases];
   return (text) => {
     let out = text;
     for (const form of forms) {
@@ -23,7 +27,7 @@ export function createRewriter({ tmpDir, hostname }) {
     }
     if (hostname) out = out.split(hostname).join("laptop");
     return out
-      .replace(/^bash: line \d+: /gm, "bash: ")
+      .replace(/^(?:\/usr\/bin\/)?bash: line \d+: /gm, "bash: ")
       .replace(COMMAND_SCOPE_LINE, "");
   };
 }

@@ -139,7 +139,11 @@ function record(tools, rel) {
       home: ctx.home,
       systemConfig: ctx.systemConfig,
     });
-    const rewrite = createRewriter({ tmpDir: tmp, hostname: os.hostname() });
+    const rewrite = createRewriter({
+      tmpDir: tmp,
+      hostname: os.hostname(),
+      aliases: [`/tmp/${path.basename(tmp)}`],
+    });
     const fixture = rewriteDeep(
       { git: tools.version, script, steps, final },
       rewrite,

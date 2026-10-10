@@ -7,7 +7,11 @@ import {
 } from "./rewrite.mjs";
 
 const tmpDir = "C:\\Users\\Ada\\AppData\\Local\\Temp\\lg-fx-abc";
-const rewrite = createRewriter({ tmpDir, hostname: "DESKTOP-42" });
+const rewrite = createRewriter({
+  tmpDir,
+  hostname: "DESKTOP-42",
+  aliases: ["/tmp/lg-fx-abc"],
+});
 
 describe("fixture rewriting", () => {
   it("knows the native, forward and MSYS spellings", () => {
@@ -34,6 +38,11 @@ describe("fixture rewriting", () => {
       "bash: cd: nope: No such file or directory\n",
     ],
     ["you@DESKTOP-42.(none)", "you@laptop.(none)"],
+    ["/tmp/lg-fx-abc/home/you/p\n", "/home/you/p\n"],
+    [
+      "/usr/bin/bash: line 2: cd: x: Not a directory\n",
+      "bash: cd: x: Not a directory\n",
+    ],
     ["user.name=Sam\nlog.decorate=short\n", "user.name=Sam\n"],
     ["command\tlog.decorate=short\n", ""],
   ])("rewrites %j", (input, output) => {

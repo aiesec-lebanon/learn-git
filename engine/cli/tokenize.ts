@@ -132,7 +132,7 @@ class Tokenizer {
     this.endWord();
     if (this.pendingOp)
       this.fail({ kind: "unexpected-token", token: "newline" });
-    if (this.words.length > 0) this.push(null);
+    if (this.words.length > 0 || this.redirect) this.push(null);
     else if (this.lastOp === "&&") this.fail({ kind: "unexpected-eof" });
     return this.steps;
   }
@@ -227,7 +227,7 @@ class Tokenizer {
   private operator(op: "&&" | ";", token: string) {
     this.endWord();
     if (this.pendingOp) this.fail({ kind: "unexpected-token", token });
-    if (this.words.length === 0) {
+    if (this.words.length === 0 && !this.redirect) {
       if (token !== "newline")
         this.fail({
           kind: "unexpected-token",

@@ -42,3 +42,50 @@ export function tokenizeErrorOutput(error: TokenizeError): {
       };
   }
 }
+
+const SAFE_NAME = /^[A-Za-z0-9_\-.,:/@%+=]+$/;
+/** GNU's quoting when a name needs it (cat), and always (ls, rm, mkdir, mv, touch). */
+const quoteIfNeeded = (name: string) =>
+  SAFE_NAME.test(name) ? name : `'${name}'`;
+const q = (name: string) => `'${name}'`;
+
+export const shellMessages = {
+  notFound: (program: string) => `bash: ${program}: command not found\n`,
+  cdMissing: (dir: string) => `bash: cd: ${dir}: No such file or directory\n`,
+  cdNotDir: (dir: string) => `bash: cd: ${dir}: Not a directory\n`,
+  cdTooMany: () => "bash: cd: too many arguments\n",
+  redirectMissing: (target: string) =>
+    `bash: ${target}: No such file or directory\n`,
+  redirectIsDir: (target: string) => `bash: ${target}: Is a directory\n`,
+  lsMissing: (name: string) =>
+    `ls: cannot access ${q(name)}: No such file or directory\n`,
+  catMissing: (name: string) =>
+    `cat: ${quoteIfNeeded(name)}: No such file or directory\n`,
+  catIsDir: (name: string) => `cat: ${quoteIfNeeded(name)}: Is a directory\n`,
+  touchMissing: (name: string) =>
+    `touch: cannot touch ${q(name)}: No such file or directory\n`,
+  mkdirExists: (name: string) =>
+    `mkdir: cannot create directory ${q(name)}: File exists\n`,
+  mkdirMissing: (name: string) =>
+    `mkdir: cannot create directory ${q(name)}: No such file or directory\n`,
+  rmMissing: (name: string) =>
+    `rm: cannot remove ${q(name)}: No such file or directory\n`,
+  rmIsDir: (name: string) => `rm: cannot remove ${q(name)}: Is a directory\n`,
+  missingOperand: (program: string) =>
+    `${program}: missing operand\nTry '${program} --help' for more information.\n`,
+  mvMissing: (name: string) =>
+    `mv: cannot stat ${q(name)}: No such file or directory\n`,
+  mvNotDir: (name: string) => `mv: target ${q(name)} is not a directory\n`,
+  mvIntoSelf: (from: string, to: string) =>
+    `mv: cannot move ${q(from)} to a subdirectory of itself, ${q(to)}\n`,
+  mvDirOverFile: (to: string, from: string) =>
+    `mv: cannot overwrite non-directory ${q(to)} with directory ${q(from)}\n`,
+  mvNoParent: (from: string, to: string) =>
+    `mv: cannot move ${q(from)} to ${q(to)}: No such file or directory\n`,
+};
+
+export const SANDBOX_HELP = `Shell commands in this sandbox:
+  cd, pwd, ls [-a], cat, echo [-n] (with > and >>), touch, mkdir [-p],
+  rm [-r] [-f], mv, clear, help
+Git commands behave like Git; "git help <command>" opens its reference entry.
+`;

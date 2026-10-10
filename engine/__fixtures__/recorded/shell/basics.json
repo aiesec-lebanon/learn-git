@@ -1,0 +1,438 @@
+{
+  "final": {
+    "config": {
+      "global": [
+        [
+          "user.name",
+          "Sam Lee"
+        ],
+        [
+          "user.email",
+          "sam@example.com"
+        ],
+        [
+          "init.defaultbranch",
+          "main"
+        ]
+      ],
+      "system": []
+    },
+    "dirs": [
+      "project",
+      "project/deep",
+      "project/deep/er",
+      "project/deep/er/est",
+      "project/docs",
+      "project/src"
+    ],
+    "files": {
+      "project/.hidden": "h\n",
+      "project/deep/renamed.txt": "alpha\n",
+      "project/docs/c.txt": "quoted  spaces\nmore\n",
+      "project/src/b.js": "b\n"
+    },
+    "repos": {}
+  },
+  "git": "2.45.1.windows.1",
+  "script": {
+    "steps": [
+      "pwd",
+      "ls",
+      "ls -a",
+      "ls src",
+      "ls nope",
+      "ls a.txt src",
+      "ls empty",
+      "cat a.txt",
+      "cat nope",
+      "cat src",
+      "cat a.txt src/b.js",
+      "echo hello   world",
+      "echo -n no newline",
+      "echo 'quoted  spaces' > c.txt",
+      "echo more >> c.txt",
+      "cat c.txt",
+      "touch d.txt",
+      "touch a.txt",
+      "touch new/file.txt",
+      "mkdir docs",
+      "mkdir docs",
+      "mkdir -p deep/er/est",
+      "mkdir x/y",
+      "rm d.txt",
+      "rm nope",
+      "rm empty",
+      "rm -r empty",
+      "rm -rf nope2",
+      "mv c.txt docs/",
+      "mv a.txt renamed.txt",
+      "mv nope x",
+      "mv renamed.txt deep",
+      "cd src",
+      "pwd",
+      "cd ..",
+      "cd nope",
+      "cd deep/renamed.txt",
+      "cd ~",
+      "cd",
+      "cd project",
+      "ls *.txt",
+      "ls deep/*",
+      "cat *.md",
+      "echo *",
+      "echo .*",
+      "echo hi > nodir/x",
+      "echo hi > docs",
+      "ls"
+    ],
+    "world": {
+      "cwd": "project",
+      "dirs": [
+        "project/empty"
+      ],
+      "files": {
+        "project/.hidden": "h\n",
+        "project/a.txt": "alpha\n",
+        "project/src/b.js": "b\n"
+      }
+    }
+  },
+  "steps": [
+    {
+      "cmd": "pwd",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "/home/you/project\n"
+    },
+    {
+      "cmd": "ls",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "a.txt\nempty\nsrc\n"
+    },
+    {
+      "cmd": "ls -a",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ".\n..\n.hidden\na.txt\nempty\nsrc\n"
+    },
+    {
+      "cmd": "ls src",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "b.js\n"
+    },
+    {
+      "cmd": "ls nope",
+      "cwd": "/home/you/project",
+      "exitCode": 2,
+      "stderr": "ls: cannot access 'nope': No such file or directory\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "ls a.txt src",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "a.txt\n\nsrc:\nb.js\n"
+    },
+    {
+      "cmd": "ls empty",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "cat a.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "alpha\n"
+    },
+    {
+      "cmd": "cat nope",
+      "cwd": "/home/you/project",
+      "exitCode": 1,
+      "stderr": "cat: nope: No such file or directory\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "cat src",
+      "cwd": "/home/you/project",
+      "exitCode": 1,
+      "stderr": "cat: src: Is a directory\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "cat a.txt src/b.js",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "alpha\nb\n"
+    },
+    {
+      "cmd": "echo hello   world",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "hello world\n"
+    },
+    {
+      "cmd": "echo -n no newline",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "no newline"
+    },
+    {
+      "cmd": "echo 'quoted  spaces' > c.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "echo more >> c.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "cat c.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "quoted  spaces\nmore\n"
+    },
+    {
+      "cmd": "touch d.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "touch a.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "touch new/file.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 1,
+      "stderr": "touch: cannot touch 'new/file.txt': No such file or directory\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "mkdir docs",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "mkdir docs",
+      "cwd": "/home/you/project",
+      "exitCode": 1,
+      "stderr": "mkdir: cannot create directory 'docs': File exists\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "mkdir -p deep/er/est",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "mkdir x/y",
+      "cwd": "/home/you/project",
+      "exitCode": 1,
+      "stderr": "mkdir: cannot create directory 'x/y': No such file or directory\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "rm d.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "rm nope",
+      "cwd": "/home/you/project",
+      "exitCode": 1,
+      "stderr": "rm: cannot remove 'nope': No such file or directory\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "rm empty",
+      "cwd": "/home/you/project",
+      "exitCode": 1,
+      "stderr": "rm: cannot remove 'empty': Is a directory\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "rm -r empty",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "rm -rf nope2",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "mv c.txt docs/",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "mv a.txt renamed.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "mv nope x",
+      "cwd": "/home/you/project",
+      "exitCode": 1,
+      "stderr": "mv: cannot stat 'nope': No such file or directory\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "mv renamed.txt deep",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "cd src",
+      "cwd": "/home/you/project/src",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "pwd",
+      "cwd": "/home/you/project/src",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "/home/you/project/src\n"
+    },
+    {
+      "cmd": "cd ..",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "cd nope",
+      "cwd": "/home/you/project",
+      "exitCode": 1,
+      "stderr": "bash: cd: nope: No such file or directory\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "cd deep/renamed.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 1,
+      "stderr": "bash: cd: deep/renamed.txt: Not a directory\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "cd ~",
+      "cwd": "/home/you",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "cd",
+      "cwd": "/home/you",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "cd project",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "ls *.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 2,
+      "stderr": "ls: cannot access '*.txt': No such file or directory\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "ls deep/*",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "deep/renamed.txt\n\ndeep/er:\nest\n"
+    },
+    {
+      "cmd": "cat *.md",
+      "cwd": "/home/you/project",
+      "exitCode": 1,
+      "stderr": "cat: '*.md': No such file or directory\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "echo *",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "deep docs src\n"
+    },
+    {
+      "cmd": "echo .*",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ".hidden\n"
+    },
+    {
+      "cmd": "echo hi > nodir/x",
+      "cwd": "/home/you/project",
+      "exitCode": 1,
+      "stderr": "bash: nodir/x: No such file or directory\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "echo hi > docs",
+      "cwd": "/home/you/project",
+      "exitCode": 1,
+      "stderr": "bash: docs: Is a directory\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "ls",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "deep\ndocs\nsrc\n"
+    }
+  ]
+}

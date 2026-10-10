@@ -4,6 +4,7 @@ import { execute } from "../execute";
 import { relativeTo } from "../files/paths";
 import { isGitPath } from "../files/worktree";
 import { GIT_COMMANDS } from "../messages/commands";
+import { SHELL_REGISTRY } from "../shell";
 import { commitText } from "../objects/serialize";
 import { reflogLine } from "../refs/reflog";
 import { indexEntries } from "../staging/index";
@@ -94,6 +95,9 @@ function singleInvocation(world: World, cmd: string): Invocation {
 export function pendingReason(fixture: RecordedFixture): string | null {
   for (const step of fixture.steps) {
     const words = step.cmd.split(/\s+/);
+    if (words[0] !== "git" && !SHELL_REGISTRY.has(words[0] ?? "")) {
+      return `${words[0]} is not simulated`;
+    }
     const sub =
       words[0] === "git"
         ? words.slice(1).find((w) => !w.startsWith("-"))

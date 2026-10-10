@@ -136,6 +136,33 @@ export const VERBS: readonly ChipVerb[] = [
     ready: (s) => s.commits,
   },
   {
+    program: "git",
+    name: "rm",
+    hint: "remove tracked files",
+    params: [
+      { kind: "flag", flag: "--cached", label: "keep my copy" },
+      { kind: "flag", flag: "-r", label: "folders too" },
+      { kind: "paths", label: "files", pick: "files", required: true },
+    ],
+    ready: (s) => s.repo && s.files,
+  },
+  {
+    program: "git",
+    name: "mv",
+    hint: "move or rename a tracked file",
+    params: [
+      {
+        kind: "paths",
+        label: "file",
+        pick: "files",
+        single: true,
+        required: true,
+      },
+      { kind: "value", label: "new name", required: true },
+    ],
+    ready: (s) => s.repo && s.files,
+  },
+  {
     program: "shell",
     name: "ls",
     hint: "list files",

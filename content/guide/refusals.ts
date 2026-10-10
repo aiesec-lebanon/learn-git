@@ -24,6 +24,16 @@ export const REFUSAL_GUIDE: Readonly<Record<RefusalCode, string>> = {
     "Git found no commit and no file by that name. git log --oneline lists the commits you can name, and ls lists the files.",
   "outside-repository":
     "That path is outside this repository, so Git leaves it alone. Use a path inside the repository folder.",
+  "would-lose-changes":
+    "Git keeps the file because it holds changes no commit has. git rm --cached stops tracking it and keeps your copy; -f removes it anyway.",
+  "not-recursive":
+    "That path is a folder. Add -r to remove it and every file Git tracks inside.",
+  "not-tracked":
+    "git mv moves files Git already tracks. git add the file first, or use mv for an untracked one.",
+  "destination-exists":
+    "git mv won't overwrite a file by default. Pick another name, or add -f to replace it.",
+  "no-such-directory":
+    "git mv doesn't create folders. Make the folder with mkdir first, then move the file.",
   "shell-error":
     "The shell couldn't run that line. The message above says why.",
 };

@@ -228,6 +228,11 @@ export type RefusalCode =
   | "unborn-branch"
   | "unknown-revision"
   | "outside-repository"
+  | "would-lose-changes"
+  | "not-recursive"
+  | "not-tracked"
+  | "destination-exists"
+  | "no-such-directory"
   | "shell-error";
 
 export type EditorRequest = {

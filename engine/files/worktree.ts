@@ -74,3 +74,21 @@ export function worktreeFiles(
   }
   return files;
 }
+
+/** Removes a file, then each folder it leaves empty, up to but not including `stop`. */
+export function removeFilePruning(
+  fs: Fs,
+  path: string,
+  stop: string,
+): { fs: Fs; removedDirs: string[] } {
+  let next = removeFile(fs, path);
+  const removedDirs: string[] = [];
+  for (let dir = parentOf(path); dir !== stop; dir = parentOf(dir)) {
+    if (relativeTo(stop, dir) === null || listDir(next, dir).length) break;
+    const dirs = new Set(next.dirs);
+    dirs.delete(dir);
+    next = { files: next.files, dirs };
+    removedDirs.push(dir);
+  }
+  return { fs: next, removedDirs };
+}

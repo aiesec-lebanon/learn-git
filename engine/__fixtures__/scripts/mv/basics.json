@@ -1,0 +1,48 @@
+{
+  "world": {
+    "files": {
+      "project/a.txt": "a\n",
+      "project/b.txt": "b\n",
+      "project/c.txt": "c\n",
+      "project/docs/guide.md": "# Guide\n",
+      "project/docs/faq.md": "# FAQ\n",
+      "project/notes.txt": "untracked\n"
+    },
+    "dirs": [
+      "project/archive"
+    ],
+    "cwd": "project"
+  },
+  "steps": [
+    "git init -q",
+    "git mv a.txt b2.txt",
+    "git add a.txt b.txt c.txt docs",
+    "git commit -q -m \"First\"",
+    "git mv a.txt renamed.txt",
+    "ls",
+    "git mv b.txt archive",
+    "git mv docs manual",
+    "ls manual",
+    "git mv notes.txt n.txt",
+    "git mv missing.txt m.txt",
+    "git mv c.txt renamed.txt",
+    "git mv -f c.txt renamed.txt",
+    "git mv renamed.txt nodir/x.txt",
+    "git mv renamed.txt manual/guide.md archive/b.txt",
+    "git mv manual/guide.md manual/faq.md archive",
+    "echo edit >> archive/b.txt",
+    "git mv archive/b.txt b.txt",
+    "ls archive",
+    "git mv",
+    "git mv b.txt",
+    "git mv b.txt c.txt",
+    "git mv b.txt ../out.txt",
+    "git commit -q -m \"Moves\"",
+    "cd manual",
+    "git mv ../renamed.txt here.txt",
+    "cd ..",
+    "ls manual",
+    "git mv docs2 x",
+    "git mv manual archive"
+  ]
+}

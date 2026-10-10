@@ -14,5 +14,11 @@ export const REFUSAL_FACTS: Readonly<Record<RefusalCode, string>> = {
   "unborn-branch": "The branch has no commits yet.",
   "unknown-revision": "Git found no commit or file by that name.",
   "outside-repository": "That path is outside the repository.",
+  "would-lose-changes": "Removing the file would lose changes no commit holds.",
+  "not-recursive":
+    "That path is a folder, and Git removes folders only with -r.",
+  "not-tracked": "Git does not track that file.",
+  "destination-exists": "A file already has that name.",
+  "no-such-directory": "The destination folder does not exist.",
   "shell-error": "The shell could not run that line.",
 };

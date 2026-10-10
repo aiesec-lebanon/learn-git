@@ -1,0 +1,456 @@
+{
+  "final": {
+    "config": {
+      "global": [
+        [
+          "user.name",
+          "Sam Lee"
+        ],
+        [
+          "user.email",
+          "sam@example.com"
+        ],
+        [
+          "init.defaultbranch",
+          "main"
+        ]
+      ],
+      "system": []
+    },
+    "dirs": [
+      "project",
+      "project/archive",
+      "project/archive/manual"
+    ],
+    "files": {
+      "project/archive/faq.md": "# FAQ\n",
+      "project/archive/guide.md": "# Guide\n",
+      "project/archive/manual/here.txt": "c\n",
+      "project/c.txt": "b\nedit\n",
+      "project/notes.txt": "untracked\n"
+    },
+    "repos": {
+      "project": {
+        "config": [
+          [
+            "core.repositoryformatversion",
+            "0"
+          ],
+          [
+            "core.filemode",
+            "false"
+          ],
+          [
+            "core.bare",
+            "false"
+          ],
+          [
+            "core.logallrefupdates",
+            "true"
+          ],
+          [
+            "core.symlinks",
+            "false"
+          ],
+          [
+            "core.ignorecase",
+            "true"
+          ]
+        ],
+        "head": {
+          "ref": "refs/heads/main"
+        },
+        "index": [
+          {
+            "mode": "100644",
+            "oid": "4514b4c10652208edff9229b29c132b6f61399f0",
+            "path": "archive/faq.md",
+            "stage": 0
+          },
+          {
+            "mode": "100644",
+            "oid": "8c0d02fadc02df29eefff5ad660a022b4a8e5efd",
+            "path": "archive/guide.md",
+            "stage": 0
+          },
+          {
+            "mode": "100644",
+            "oid": "f2ad6c76f0115a6ba5b00456a849810e7ec0af20",
+            "path": "archive/manual/here.txt",
+            "stage": 0
+          },
+          {
+            "mode": "100644",
+            "oid": "61780798228d17af2d34fce4cfbdf35556832472",
+            "path": "c.txt",
+            "stage": 0
+          }
+        ],
+        "objects": {
+          "269aaaefa76ea49369bb24d827a2894795819db1": {
+            "entries": [
+              {
+                "mode": "40000",
+                "name": "archive",
+                "oid": "c7d6f9420e90507a3edf9724ccc214a6b8cee912"
+              },
+              {
+                "mode": "100644",
+                "name": "c.txt",
+                "oid": "61780798228d17af2d34fce4cfbdf35556832472"
+              },
+              {
+                "mode": "100644",
+                "name": "renamed.txt",
+                "oid": "f2ad6c76f0115a6ba5b00456a849810e7ec0af20"
+              }
+            ],
+            "type": "tree"
+          },
+          "30b3857d67607edb9e3c09b293638c4d6ca93bbd": {
+            "body": "tree 269aaaefa76ea49369bb24d827a2894795819db1\nparent fc57e957f04dd7f4eea30e4b693f49e8d345ff59\nauthor Sam Lee <sam@example.com> 1767226980 +0000\ncommitter Sam Lee <sam@example.com> 1767226980 +0000\n\nMoves\n",
+            "type": "commit"
+          },
+          "4514b4c10652208edff9229b29c132b6f61399f0": {
+            "body": "# FAQ\n",
+            "type": "blob"
+          },
+          "61780798228d17af2d34fce4cfbdf35556832472": {
+            "body": "b\n",
+            "type": "blob"
+          },
+          "78981922613b2afb6025042ff6bd878ac1994e85": {
+            "body": "a\n",
+            "type": "blob"
+          },
+          "8c0d02fadc02df29eefff5ad660a022b4a8e5efd": {
+            "body": "# Guide\n",
+            "type": "blob"
+          },
+          "bf81680aa5eee96fc56a109eb04bd0a84276ac6b": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "a.txt",
+                "oid": "78981922613b2afb6025042ff6bd878ac1994e85"
+              },
+              {
+                "mode": "100644",
+                "name": "b.txt",
+                "oid": "61780798228d17af2d34fce4cfbdf35556832472"
+              },
+              {
+                "mode": "100644",
+                "name": "c.txt",
+                "oid": "f2ad6c76f0115a6ba5b00456a849810e7ec0af20"
+              },
+              {
+                "mode": "40000",
+                "name": "docs",
+                "oid": "c7d6f9420e90507a3edf9724ccc214a6b8cee912"
+              }
+            ],
+            "type": "tree"
+          },
+          "c7d6f9420e90507a3edf9724ccc214a6b8cee912": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "faq.md",
+                "oid": "4514b4c10652208edff9229b29c132b6f61399f0"
+              },
+              {
+                "mode": "100644",
+                "name": "guide.md",
+                "oid": "8c0d02fadc02df29eefff5ad660a022b4a8e5efd"
+              }
+            ],
+            "type": "tree"
+          },
+          "f2ad6c76f0115a6ba5b00456a849810e7ec0af20": {
+            "body": "c\n",
+            "type": "blob"
+          },
+          "fc57e957f04dd7f4eea30e4b693f49e8d345ff59": {
+            "body": "tree bf81680aa5eee96fc56a109eb04bd0a84276ac6b\nauthor Sam Lee <sam@example.com> 1767225780 +0000\ncommitter Sam Lee <sam@example.com> 1767225780 +0000\n\nFirst\n",
+            "type": "commit"
+          }
+        },
+        "reflogs": {
+          "HEAD": [
+            "0000000000000000000000000000000000000000 fc57e957f04dd7f4eea30e4b693f49e8d345ff59 Sam Lee <sam@example.com> 1767225780 +0000\tcommit (initial): First",
+            "fc57e957f04dd7f4eea30e4b693f49e8d345ff59 30b3857d67607edb9e3c09b293638c4d6ca93bbd Sam Lee <sam@example.com> 1767226980 +0000\tcommit: Moves"
+          ],
+          "refs/heads/main": [
+            "0000000000000000000000000000000000000000 fc57e957f04dd7f4eea30e4b693f49e8d345ff59 Sam Lee <sam@example.com> 1767225780 +0000\tcommit (initial): First",
+            "fc57e957f04dd7f4eea30e4b693f49e8d345ff59 30b3857d67607edb9e3c09b293638c4d6ca93bbd Sam Lee <sam@example.com> 1767226980 +0000\tcommit: Moves"
+          ]
+        },
+        "refs": {
+          "refs/heads/main": "30b3857d67607edb9e3c09b293638c4d6ca93bbd"
+        }
+      }
+    }
+  },
+  "git": "2.45.1.windows.1",
+  "script": {
+    "steps": [
+      "git init -q",
+      "git mv a.txt b2.txt",
+      "git add a.txt b.txt c.txt docs",
+      "git commit -q -m \"First\"",
+      "git mv a.txt renamed.txt",
+      "ls",
+      "git mv b.txt archive",
+      "git mv docs manual",
+      "ls manual",
+      "git mv notes.txt n.txt",
+      "git mv missing.txt m.txt",
+      "git mv c.txt renamed.txt",
+      "git mv -f c.txt renamed.txt",
+      "git mv renamed.txt nodir/x.txt",
+      "git mv renamed.txt manual/guide.md archive/b.txt",
+      "git mv manual/guide.md manual/faq.md archive",
+      "echo edit >> archive/b.txt",
+      "git mv archive/b.txt b.txt",
+      "ls archive",
+      "git mv",
+      "git mv b.txt",
+      "git mv b.txt c.txt",
+      "git mv b.txt ../out.txt",
+      "git commit -q -m \"Moves\"",
+      "cd manual",
+      "git mv ../renamed.txt here.txt",
+      "cd ..",
+      "ls manual",
+      "git mv docs2 x",
+      "git mv manual archive"
+    ],
+    "world": {
+      "cwd": "project",
+      "dirs": [
+        "project/archive"
+      ],
+      "files": {
+        "project/a.txt": "a\n",
+        "project/b.txt": "b\n",
+        "project/c.txt": "c\n",
+        "project/docs/faq.md": "# FAQ\n",
+        "project/docs/guide.md": "# Guide\n",
+        "project/notes.txt": "untracked\n"
+      }
+    }
+  },
+  "steps": [
+    {
+      "cmd": "git init -q",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git mv a.txt b2.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 128,
+      "stderr": "fatal: not under version control, source=a.txt, destination=b2.txt\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git add a.txt b.txt c.txt docs",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git commit -q -m \"First\"",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git mv a.txt renamed.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "ls",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "archive\nb.txt\nc.txt\ndocs\nnotes.txt\nrenamed.txt\n"
+    },
+    {
+      "cmd": "git mv b.txt archive",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git mv docs manual",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "ls manual",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "faq.md\nguide.md\n"
+    },
+    {
+      "cmd": "git mv notes.txt n.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 128,
+      "stderr": "fatal: not under version control, source=notes.txt, destination=n.txt\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git mv missing.txt m.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 128,
+      "stderr": "fatal: bad source, source=missing.txt, destination=m.txt\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git mv c.txt renamed.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 128,
+      "stderr": "fatal: destination exists, source=c.txt, destination=renamed.txt\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git mv -f c.txt renamed.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git mv renamed.txt nodir/x.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 128,
+      "stderr": "fatal: renaming 'renamed.txt' failed: No such file or directory\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git mv renamed.txt manual/guide.md archive/b.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 128,
+      "stderr": "fatal: destination 'archive/b.txt' is not a directory\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git mv manual/guide.md manual/faq.md archive",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "echo edit >> archive/b.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git mv archive/b.txt b.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "ls archive",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "faq.md\nguide.md\n"
+    },
+    {
+      "cmd": "git mv",
+      "cwd": "/home/you/project",
+      "exitCode": 129,
+      "stderr": "usage: git mv [<options>] <source>... <destination>\n\n    -v, --[no-]verbose    be verbose\n    -n, --[no-]dry-run    dry run\n    -f, --[no-]force      force move/rename even if target exists\n    -k                    skip move/rename errors\n    --[no-]sparse         allow updating entries outside of the sparse-checkout cone\n\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git mv b.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 129,
+      "stderr": "usage: git mv [<options>] <source>... <destination>\n\n    -v, --[no-]verbose    be verbose\n    -n, --[no-]dry-run    dry run\n    -f, --[no-]force      force move/rename even if target exists\n    -k                    skip move/rename errors\n    --[no-]sparse         allow updating entries outside of the sparse-checkout cone\n\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git mv b.txt c.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git mv b.txt ../out.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 128,
+      "stderr": "fatal: '../out.txt' is outside repository at '/home/you/project'\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git commit -q -m \"Moves\"",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "cd manual",
+      "cwd": "/home/you/project/manual",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git mv ../renamed.txt here.txt",
+      "cwd": "/home/you/project/manual",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "cd ..",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "ls manual",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "here.txt\n"
+    },
+    {
+      "cmd": "git mv docs2 x",
+      "cwd": "/home/you/project",
+      "exitCode": 128,
+      "stderr": "fatal: bad source, source=docs2, destination=x\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git mv manual archive",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    }
+  ]
+}

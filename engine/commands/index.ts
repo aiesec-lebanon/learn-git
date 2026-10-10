@@ -5,8 +5,10 @@ import { config } from "./config";
 import { diff } from "./diff";
 import { init } from "./init";
 import { log } from "./log";
+import { mv } from "./mv";
 import { createRegistry } from "./registry";
 import { restore } from "./restore";
+import { rm } from "./rm";
 import { show } from "./show";
 import { status } from "./status";
 
@@ -21,6 +23,8 @@ export const GIT_REGISTRY = createRegistry([
   diff,
   show,
   restore,
+  rm,
+  mv,
   checkout,
   reset,
 ]);

@@ -35,6 +35,10 @@ function mdxProblems(mdx: string): string[] {
   for (const [, tag] of text.matchAll(/<\/?([A-Za-z][\w.]*)/g)) {
     if (tag && !ALLOWED.has(tag)) problems.push(`uses <${tag}>`);
   }
+  const outside = text
+    .replace(/<([A-Z]\w*)[^>]*\/>/g, "")
+    .replace(/<([A-Z]\w*)[^>]*>[\s\S]*?<\/\1>/g, "");
+  if (outside.trim()) problems.push("has prose outside a component");
   for (const problem of voiceProblems(text.replace(/<[^>]*>/g, " ")))
     problems.push(problem);
   return problems;
@@ -71,6 +75,7 @@ describe("content harness", () => {
       "imports or exports code",
       "uses <div>",
       "uses <div>",
+      "has prose outside a component",
       'says "Simply"',
       "uses an exclamation mark",
     ]);

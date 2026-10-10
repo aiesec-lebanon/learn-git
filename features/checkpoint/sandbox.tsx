@@ -1,0 +1,137 @@
+"use client";
+
+import { useEffect, useMemo, useRef, useState } from "react";
+import {
+  createWorld,
+  match,
+  narrate,
+  Session,
+  type HistoryEntry,
+  type MatchReport,
+  type TargetSpec,
+  type WorldSpec,
+} from "@/engine";
+import { useAnnounce } from "@/features/announcer/announcer";
+import { CommandChips } from "@/features/chips/chips";
+import { Guide } from "@/features/guide/guide";
+import { Rewind } from "@/features/stage/rewind";
+import { sessions } from "@/features/stage/session-registry";
+import { Stage } from "@/features/stage/stage";
+import { useSession } from "@/features/stage/use-session";
+import { WhatHappened } from "@/features/stage/what-happened";
+import { Terminal } from "@/features/terminal/terminal";
+import { Button } from "@/ui/button";
+import { TargetPanel } from "./target-panel";
+
+export type SandboxProps = {
+  sessionKey: string;
+  world: WorldSpec;
+  target: TargetSpec;
+  /** A command typed before the sandbox loaded; it runs first. */
+  queued: string | null;
+  focus: boolean;
+};
+
+function YourPath({ history }: { history: readonly HistoryEntry[] }) {
+  return (
+    <details className="text-sm">
+      <summary className="min-h-11 cursor-pointer content-center font-semibold">
+        Your path ({history.length} commands)
+      </summary>
+      <ol className="m-0 grid gap-2 pl-5">
+        {history.map((entry, i) => (
+          <li key={i}>
+            <code className="font-mono">{entry.text}</code>
+            <br />
+            <span className="text-fg-muted">
+              {narrate(entry.outcome.effects, entry.outcome.world).announcement}
+            </span>
+          </li>
+        ))}
+      </ol>
+    </details>
+  );
+}
+
+function Check({
+  report,
+  history,
+}: {
+  report: MatchReport;
+  history: readonly HistoryEntry[];
+}) {
+  const [open, setOpen] = useState(false);
+  const say = useAnnounce();
+  const was = useRef(report.ok);
+  useEffect(() => {
+    if (report.ok && !was.current)
+      say("Your repository now matches the target.");
+    was.current = report.ok;
+  }, [report.ok, say]);
+
+  if (report.ok)
+    return (
+      <div className="grid gap-2 rounded-sm bg-accent-soft p-3">
+        <p className="m-0 font-display text-lg font-semibold">
+          Your repository now matches the target.
+        </p>
+        <YourPath history={history} />
+      </div>
+    );
+  return (
+    <div className="grid justify-items-start gap-2">
+      <Button aria-expanded={open} onClick={() => setOpen(!open)}>
+        {open ? "Hide differences" : "Show differences"}
+      </Button>
+      {open ? (
+        <ul className="m-0 grid gap-1 pl-5 text-sm">
+          {report.differences.map((line) => (
+            <li key={line}>{line}</li>
+          ))}
+        </ul>
+      ) : null}
+    </div>
+  );
+}
+
+/** The live sandbox of a checkpoint; loaded only when the learner gets near it. */
+export function Sandbox({
+  sessionKey,
+  world,
+  target,
+  queued,
+  focus,
+}: SandboxProps) {
+  const session = useMemo(
+    () => sessions.get(sessionKey, () => new Session(createWorld(world))),
+    [sessionKey, world],
+  );
+  const { world: now, history } = useSession(session);
+  const report = useMemo(() => match(now, target), [now, target]);
+  const ran = useRef(false);
+  useEffect(() => {
+    if (queued && !ran.current) session.run(queued);
+    ran.current = true;
+  }, [queued, session]);
+
+  return (
+    <div className="grid gap-6 lg:grid-cols-[minmax(0,1.3fr)_minmax(0,1fr)]">
+      <div className="grid content-start gap-4">
+        <Guide session={session} verbosity="light" achieved={report.ok} />
+        <Stage session={session} />
+      </div>
+      <div className="grid content-start gap-4">
+        <div className="hidden md:block">
+          <Terminal session={session} takeFocus={focus} />
+        </div>
+        <div className="md:hidden">
+          <CommandChips session={session} />
+        </div>
+        <Rewind session={session} />
+        <Check report={report} history={history} />
+        <TargetPanel target={target} />
+        <WhatHappened session={session} />
+      </div>
+    </div>
+  );
+}

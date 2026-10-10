@@ -8,8 +8,12 @@ import {
   lessonCode,
   readyLessons,
 } from "@/content/registry";
+import { YourTurn } from "@/features/checkpoint/your-turn";
 import { beatFrames } from "@/features/lesson/frames";
 import { LessonScroller } from "@/features/lesson/scroller";
+
+/** The prose renders twice: the beats beside the pinned stage, then the rest. */
+const Nothing = () => null;
 
 export function generateStaticParams() {
   return readyLessons().map((lesson) => ({ lessonId: lesson.id }));
@@ -52,8 +56,20 @@ export default async function LessonPage({
         </h1>
       </header>
       <LessonScroller frames={beatFrames(scene)}>
-        <Prose />
+        <Prose components={{ YourTurn: Nothing, Wrap: Nothing }} />
       </LessonScroller>
+      <Prose
+        components={{
+          ColdOpen: Nothing,
+          Beat: Nothing,
+          YourTurn: () => (
+            <YourTurn
+              sessionKey={`lesson:${lesson.id}`}
+              checkpoint={scene.yourTurn}
+            />
+          ),
+        }}
+      />
     </article>
   );
 }

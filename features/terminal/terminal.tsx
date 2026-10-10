@@ -53,12 +53,20 @@ function Output({ entry }: { entry: HistoryEntry }) {
 }
 
 /** A labelled command line over the session; output is a log that does not speak (the announcer does). */
-export function Terminal({ session }: { session: Session }) {
+export function Terminal({
+  session,
+  takeFocus = false,
+}: {
+  session: Session;
+  /** Take focus on mount (the learner was typing before the sandbox loaded). */
+  takeFocus?: boolean;
+}) {
   const { history: entries, world } = useSession(session);
   const [value, setValue] = useState("");
   const [typed, setTyped] = useState(emptyHistory);
   const [hint, setHint] = useState<string | null>(null);
   const log = useRef<HTMLDivElement>(null);
+  const input = useRef<HTMLInputElement>(null);
   const inputId = useId();
   const hintId = useId();
   const shown = visible(entries);
@@ -66,6 +74,10 @@ export function Terminal({ session }: { session: Session }) {
   const cwd = machine.cwd.startsWith(machine.home)
     ? `~${machine.cwd.slice(machine.home.length)}`
     : machine.cwd;
+
+  useLayoutEffect(() => {
+    if (takeFocus) input.current?.focus();
+  }, [takeFocus]);
 
   useLayoutEffect(() => {
     const el = log.current;
@@ -133,6 +145,7 @@ export function Terminal({ session }: { session: Session }) {
           {cwd} $
         </label>
         <input
+          ref={input}
           id={inputId}
           type="text"
           value={value}

@@ -63,6 +63,7 @@ export function dispatchGit(
   args: readonly string[],
   time: number,
   registry: ReadonlyMap<string, GitCommand>,
+  answer?: string,
 ): Dispatched {
   let at = 0;
   let cwd = machine.cwd;
@@ -144,6 +145,7 @@ export function dispatchGit(
       repo,
       options: parsed.options,
       time,
+      ...(answer === undefined ? {} : { answer }),
     });
   };
   const outcome = result();

@@ -40,5 +40,8 @@ describe("announcementFor", () => {
       /^fatal: not a git repository .* Nothing changed\. This folder is not inside a Git repository\.$/,
     );
     expect(announcementFor(s.run("git init"))).not.toContain("fatal");
+    expect(announcementFor(s.run("edit notes.txt"))).toBe(
+      "The editor opened for notes.txt.",
+    );
   });
 });

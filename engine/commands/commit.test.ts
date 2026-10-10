@@ -65,10 +65,6 @@ describe("git commit", () => {
   it.each([
     ["git commit --amend -m x", "not simulated here: git commit --amend\n"],
     ["git commit -i -m x a.txt", "not simulated here: git commit --include\n"],
-    [
-      "git commit",
-      "not simulated here: git commit without -m (the message editor)\n",
-    ],
     [`git commit -m ${"x".repeat(1990)}`, ""],
   ])("%s", (line, out) => {
     expect(run(staged(), line).out.startsWith(out)).toBe(true);

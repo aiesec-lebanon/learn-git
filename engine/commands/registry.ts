@@ -17,6 +17,8 @@ export type GitContext = {
   readonly options: ParsedOptions;
   /** Seconds since the epoch at which this invocation runs. */
   readonly time: number;
+  /** What the editor returned when a waiting command resumes. */
+  readonly answer?: string;
 };
 
 export type CommandResult = {

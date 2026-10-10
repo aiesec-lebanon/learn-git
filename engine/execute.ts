@@ -2,6 +2,7 @@ import type { Dispatched } from "./cli/dispatch";
 import { dispatchGit } from "./cli/dispatch";
 import { GIT_REGISTRY } from "./commands";
 import type { CommandResult } from "./commands/registry";
+import { invariant } from "./errors";
 import { shellMessages } from "./messages/shell";
 import { SHELL_REGISTRY } from "./shell";
 import { expandWord } from "./shell/glob";
@@ -16,22 +17,48 @@ function runProgram(
   machine: Machine,
   argv: readonly string[],
   time: number,
+  answer?: string,
 ): Dispatched {
   const [program, ...args] = argv;
   if (program === undefined) return { command: "", counted: false };
   if (program === "git")
-    return dispatchGit(world, machine, args, time, GIT_REGISTRY);
+    return dispatchGit(world, machine, args, time, GIT_REGISTRY, answer);
   const shell = SHELL_REGISTRY.get(program);
   const result: CommandResult = shell
-    ? shell.run({ world, machine, args, time })
+    ? shell.run({
+        world,
+        machine,
+        args,
+        time,
+        ...(answer === undefined ? {} : { answer }),
+      })
     : shellFail(shellMessages.notFound(program), 127);
   return { ...result, command: program, counted: false };
+}
+
+function toOutcome(result: Dispatched, world: World): Outcome {
+  return {
+    world: result.world ?? world,
+    output: {
+      stdout: result.stdout ?? "",
+      stderr: result.stderr ?? "",
+      exitCode: result.exitCode ?? 0,
+    },
+    effects: result.effects ?? [],
+    ...(result.request ? { request: result.request } : {}),
+    notes: result.notes ?? [],
+    meta: {
+      command: result.command,
+      counted: result.counted,
+      ...(result.lines ? { lines: result.lines } : {}),
+    },
+  };
 }
 
 /** Runs one simple command. Pure: the input world is never changed. */
 export function execute(world: World, invocation: Invocation): Outcome {
   const time = timeAt(world.seq);
-  let current: World = { ...world, seq: world.seq + 1 };
+  let current: World = { ...world, seq: world.seq + 1, pending: undefined };
   const machine = machineOf(current, invocation.machine);
   const argv = invocation.words.flatMap((w) =>
     expandWord(machine.fs, machine.cwd, w),
@@ -58,20 +85,53 @@ export function execute(world: World, invocation: Invocation): Outcome {
   } else {
     result = runProgram(current, machine, argv, time);
   }
+  const outcome = toOutcome(result, current);
+  if (outcome.request?.kind !== "editor") return outcome;
+  const pending = {
+    request: outcome.request,
+    argv,
+    machine: machine.id,
+    cwd: machine.cwd,
+    time,
+  };
+  return { ...outcome, world: { ...outcome.world, pending } };
+}
+
+/**
+ * Answers the editor the last command is waiting for (null = closed
+ * without saving) by re-running that command with the text; the clock
+ * does not tick, as the editor belongs to the same command.
+ */
+export function resume(world: World, answer: string | null): Outcome {
+  const { pending } = world;
+  invariant(pending, "No command is waiting for an editor");
+  const rest: World = { ...world, pending: undefined };
+  const command = pending.argv[0] ?? "";
+  if (answer === null && pending.request.purpose === "file") {
+    return toOutcome({ command, counted: false }, rest);
+  }
+  const result = runProgram(
+    rest,
+    machineOf(rest, pending.machine),
+    pending.argv,
+    pending.time,
+    answer ?? pending.request.initial,
+  );
+  return toOutcome(result, rest);
+}
+
+/** One history entry for a command and its resumed editor. */
+export function mergeOutcomes(first: Outcome, second: Outcome): Outcome {
   return {
-    world: result.world ?? current,
+    world: second.world,
     output: {
-      stdout: result.stdout ?? "",
-      stderr: result.stderr ?? "",
-      exitCode: result.exitCode ?? 0,
+      stdout: first.output.stdout + second.output.stdout,
+      stderr: first.output.stderr + second.output.stderr,
+      exitCode: second.output.exitCode,
     },
-    effects: result.effects ?? [],
-    ...(result.request ? { request: result.request } : {}),
-    notes: result.notes ?? [],
-    meta: {
-      command: result.command,
-      counted: result.counted,
-      ...(result.lines ? { lines: result.lines } : {}),
-    },
+    effects: [...first.effects, ...second.effects],
+    ...(second.request ? { request: second.request } : {}),
+    notes: [...first.notes, ...second.notes],
+    meta: { ...first.meta, ...second.meta },
   };
 }

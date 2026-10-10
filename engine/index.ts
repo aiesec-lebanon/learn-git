@@ -1,5 +1,5 @@
 export { EngineInvariantError } from "./errors";
-export { execute } from "./execute";
+export { execute, mergeOutcomes, resume } from "./execute";
 export { invocationText, runLine } from "./run";
 export { Session } from "./session";
 export type { HistoryEntry, SessionSnapshot } from "./session";

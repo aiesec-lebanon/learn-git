@@ -1,4 +1,5 @@
 import { LIMITS } from "./limits";
+import { mergeOutcomes, resume } from "./execute";
 import { runLine } from "./run";
 import type { InteractionRequest, Outcome, World } from "./types";
 
@@ -58,6 +59,20 @@ export class Session {
     this.latest = ran;
     this.changed();
     return ran;
+  }
+
+  /** Answers the editor the last command waits for (null = closed unsaved). */
+  resume(answer: string | null): void {
+    const last = this.entries.at(-1);
+    if (last?.outcome.request?.kind !== "editor") return;
+    const entry: HistoryEntry = {
+      text: last.text,
+      outcome: mergeOutcomes(last.outcome, resume(this.world, answer)),
+    };
+    this.entries[this.entries.length - 1] = entry;
+    this.worlds[this.worlds.length - 1] = entry.outcome.world;
+    this.latest = [entry];
+    this.changed();
   }
 
   /** What the line would do, without recording anything. */

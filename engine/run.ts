@@ -19,6 +19,7 @@ export function invocationText(
 /**
  * Runs one typed line: `&&` stops at the first failure, `;` and newlines
  * always continue. A line the shell cannot parse is one failed invocation.
+ * A command waiting for its editor ends the line (the rest is dropped).
  * `texts[i]` is the command text of `outcomes[i]`.
  */
 export function runLine(
@@ -56,6 +57,7 @@ export function runLine(
       outcomes.push(outcome);
       texts.push(invocationText(step.command));
       current = outcome.world;
+      if (outcome.request?.kind === "editor") break;
       skip = step.next === "&&" && outcome.output.exitCode !== 0;
     } else {
       skip = step.next === "&&";

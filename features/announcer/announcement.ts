@@ -7,6 +7,10 @@ const refused = (entry: HistoryEntry) =>
 export function announcementFor(entries: readonly HistoryEntry[]): string {
   return entries
     .map((entry) => {
+      const { request } = entry.outcome;
+      if (request?.kind === "editor") {
+        return `The editor opened for ${request.file}.`;
+      }
       const summary = narrate(
         entry.outcome.effects,
         entry.outcome.world,

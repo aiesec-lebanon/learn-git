@@ -22,3 +22,9 @@ export function subjectOf(message: string): string {
   const paragraph = message.split("\n\n")[0] ?? "";
   return paragraph.split("\n").join(" ").trimEnd();
 }
+
+/** Git's `strip` cleanup for an edited message: comment lines go, then whitespace cleanup. */
+export function stripMessage(text: string): string {
+  const kept = text.split("\n").filter((line) => !line.startsWith("#"));
+  return cleanupMessage([kept.join("\n")]);
+}

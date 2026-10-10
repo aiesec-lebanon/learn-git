@@ -1,6 +1,6 @@
 import { tokenize } from "../cli/tokenize";
 import { GIT_REGISTRY } from "../commands";
-import { execute } from "../execute";
+import { execute, mergeOutcomes, resume } from "../execute";
 import { relativeTo, resolvePath } from "../files/paths";
 import { isGitPath, makeDir } from "../files/worktree";
 import { GIT_COMMANDS } from "../messages/commands";
@@ -243,7 +243,15 @@ export function replayFixture(fixture: RecordedFixture): {
   const steps = (seeded ? fixture.steps.slice(-1) : fixture.steps).map(
     (expected) => {
       const before = world;
-      const outcome = execute(world, singleInvocation(world, expected.cmd));
+      let outcome = execute(world, singleInvocation(world, expected.cmd));
+      const request = outcome.request;
+      const editor =
+        request?.kind === "editor"
+          ? { received: request.initial, wrote: expected.editor?.wrote ?? null }
+          : undefined;
+      if (editor) {
+        outcome = mergeOutcomes(outcome, resume(outcome.world, editor.wrote));
+      }
       world = outcome.world;
       const changes = {
         derived: stateChanges(before, world),
@@ -257,6 +265,7 @@ export function replayFixture(fixture: RecordedFixture): {
         stderr: strip(outcome.output.stderr),
         exitCode: outcome.output.exitCode,
         cwd: machineOf(world).cwd,
+        ...(editor ? { editor } : {}),
       };
       const normalized =
         expected.exitCode === 129
@@ -267,7 +276,7 @@ export function replayFixture(fixture: RecordedFixture): {
             }
           : expected;
       const comparable: RecordedStep = { ...normalized };
-      delete comparable.editor;
+      if (!comparable.editor?.received) delete comparable.editor;
       return { expected: comparable, actual, changes };
     },
   );

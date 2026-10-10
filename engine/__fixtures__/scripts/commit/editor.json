@@ -1,0 +1,32 @@
+{
+  "world": {
+    "files": {
+      "project/a.txt": "a\n",
+      "project/b.txt": "b\n",
+      "project/notes.txt": "n\n"
+    },
+    "cwd": "project"
+  },
+  "steps": [
+    "git init -q",
+    "git add a.txt b.txt",
+    {
+      "cmd": "git commit",
+      "editor": "First commit\n\nWhy: it starts here.   \n# a comment\n\n\n"
+    },
+    "echo more >> a.txt",
+    "rm b.txt",
+    { "cmd": "git commit -a", "editor": "" },
+    { "cmd": "git commit -a", "editor": "# only a comment\n\n" },
+    {
+      "cmd": "git commit -a -q",
+      "editor": "  Indented subject\n#not a body\nBody line\n"
+    },
+    "git commit",
+    "echo again >> a.txt",
+    "git add a.txt",
+    "echo later >> a.txt",
+    { "cmd": "git commit", "editor": "Staged only\n" },
+    "git log --oneline"
+  ]
+}

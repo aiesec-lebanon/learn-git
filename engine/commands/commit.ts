@@ -1,5 +1,5 @@
 import { flag, stringValues, type OptionSpec } from "../cli/options";
-import { cleanupMessage, subjectOf } from "../commit/message";
+import { cleanupMessage, stripMessage, subjectOf } from "../commit/message";
 import {
   prepareAll,
   prepareOnly,
@@ -20,7 +20,7 @@ import { appendReflog } from "../refs/reflog";
 import { resolveHead, updateRef } from "../refs/refs";
 import { stagedFiles } from "../staging/index";
 import { computeStatus } from "../status/compute";
-import { longStatus } from "../status/format";
+import { commitTemplate, longStatus } from "../status/format";
 import type { Commit, Effect, Repo, RepoPath, Signature } from "../types";
 import { withRepo } from "../world/access";
 import { defineCommand, refuse } from "./registry";
@@ -79,7 +79,7 @@ export const commit = defineCommand({
                   [(--trailer <token>[(=|:)<value>])...] [-S[<keyid>]]
                   [--] [<pathspec>...]`,
   options: OPTIONS,
-  run: ({ world, machine, repo, options, time }) => {
+  run: ({ world, machine, repo, options, time, answer }) => {
     const unsupported = [...options.values.keys()].find((k) =>
       k.startsWith("x-"),
     );
@@ -156,14 +156,22 @@ export const commit = defineCommand({
       };
     }
     const paragraphs = stringValues(options, "message");
-    if (paragraphs.length === 0) {
-      return refuse(
-        "not-simulated",
-        notSimulated("git commit without -m (the message editor)"),
-        1,
-      );
+    if (paragraphs.length === 0 && answer === undefined) {
+      const staged = { ...repo, index: prepared.index };
+      const data = computeStatus(world.objects, staged, machine.fs);
+      const view = { data, repo: staged, from: machine.cwd, keep: () => true };
+      return {
+        request: {
+          kind: "editor",
+          purpose: "commit-message",
+          file: ".git/COMMIT_EDITMSG",
+          initial: commitTemplate(view),
+        },
+      };
     }
-    const message = cleanupMessage(paragraphs);
+    const message = paragraphs.length
+      ? cleanupMessage(paragraphs)
+      : stripMessage(answer ?? "");
     if (message === "") return refuse("empty-message", ABORT_EMPTY, 1);
     if (message.length > LIMITS.messageChars) {
       return refuse(

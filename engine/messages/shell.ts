@@ -82,10 +82,14 @@ export const shellMessages = {
     `mv: cannot overwrite non-directory ${q(to)} with directory ${q(from)}\n`,
   mvNoParent: (from: string, to: string) =>
     `mv: cannot move ${q(from)} to ${q(to)}: No such file or directory\n`,
+  editUsage: () => "edit: usage: edit <file> (opens the sandbox editor)\n",
+  editIsDir: (name: string) => `edit: ${q(name)}: Is a directory\n`,
+  editMissing: (name: string) =>
+    `edit: ${q(name)}: No such file or directory\n`,
 };
 
 export const SANDBOX_HELP = `Shell commands in this sandbox:
   cd, pwd, ls [-a], cat, echo [-n] (with > and >>), touch, mkdir [-p],
-  rm [-r] [-f], mv, clear, help
+  rm [-r] [-f], mv, edit <file> (an editor for this sandbox), clear, help
 Git commands behave like Git; "git help <command>" opens its reference entry.
 `;

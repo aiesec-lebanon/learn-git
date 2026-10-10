@@ -11,6 +11,8 @@ export type ShellContext = {
   readonly machine: Machine;
   readonly args: readonly string[];
   readonly time: number;
+  /** What the editor returned when a waiting command resumes. */
+  readonly answer?: string;
 };
 
 export type ShellCommand = {

@@ -103,6 +103,8 @@ export type World = {
   readonly system: ConfigFile;
   readonly machines: ReadonlyMap<MachineId, Machine>;
   readonly repos: ReadonlyMap<RepoId, Repo>;
+  /** Set while the last command waits for its editor (ADR-002). */
+  readonly pending?: PendingEdit;
 };
 
 /** Paths are relative to the machine's home; Git config keys as Git spells them. */
@@ -224,9 +226,24 @@ export type RefusalCode =
   | "outside-repository"
   | "shell-error";
 
-export type InteractionRequest = {
-  readonly kind: "open-reference";
-  readonly entryId: string;
+export type EditorRequest = {
+  readonly kind: "editor";
+  readonly purpose: "commit-message" | "file";
+  /** The file being edited, as the terminal would name it. */
+  readonly file: string;
+  readonly initial: string;
+};
+
+export type InteractionRequest =
+  { readonly kind: "open-reference"; readonly entryId: string } | EditorRequest;
+
+/** A command waiting for an editor; `resume` re-runs `argv` with the answer. */
+export type PendingEdit = {
+  readonly request: EditorRequest;
+  readonly argv: readonly string[];
+  readonly machine: MachineId;
+  readonly cwd: string;
+  readonly time: number;
 };
 
 export type LineRef = { readonly line: number; readonly oid: Oid };

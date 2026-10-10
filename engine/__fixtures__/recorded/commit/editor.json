@@ -1,0 +1,311 @@
+{
+  "final": {
+    "config": {
+      "global": [
+        [
+          "user.name",
+          "Sam Lee"
+        ],
+        [
+          "user.email",
+          "sam@example.com"
+        ],
+        [
+          "init.defaultbranch",
+          "main"
+        ]
+      ],
+      "system": []
+    },
+    "dirs": [
+      "project"
+    ],
+    "files": {
+      "project/a.txt": "a\nmore\nagain\nlater\n",
+      "project/notes.txt": "n\n"
+    },
+    "repos": {
+      "project": {
+        "config": [
+          [
+            "core.repositoryformatversion",
+            "0"
+          ],
+          [
+            "core.filemode",
+            "false"
+          ],
+          [
+            "core.bare",
+            "false"
+          ],
+          [
+            "core.logallrefupdates",
+            "true"
+          ],
+          [
+            "core.symlinks",
+            "false"
+          ],
+          [
+            "core.ignorecase",
+            "true"
+          ]
+        ],
+        "head": {
+          "ref": "refs/heads/main"
+        },
+        "index": [
+          {
+            "mode": "100644",
+            "oid": "24414e00bd26dc3ab600b386547743f2c09cdad9",
+            "path": "a.txt",
+            "stage": 0
+          }
+        ],
+        "objects": {
+          "1c9ba39e4ea456a136bad8bb16878b68415476ab": {
+            "body": "tree f4b354863caa9cea99b95422c9dab70465757d87\nauthor Sam Lee <sam@example.com> 1767225720 +0000\ncommitter Sam Lee <sam@example.com> 1767225720 +0000\n\nFirst commit\n\nWhy: it starts here.\n",
+            "type": "commit"
+          },
+          "24414e00bd26dc3ab600b386547743f2c09cdad9": {
+            "body": "a\nmore\nagain\n",
+            "type": "blob"
+          },
+          "36deb5c2e7f170bc60a9074ca56303dbfad3ad7b": {
+            "body": "tree fe8213668b3227b4142c5fbff47cba0fe1d14405\nparent e54358b56ba5a5bdfd6e4bf786729495bd6bf2fd\nauthor Sam Lee <sam@example.com> 1767226320 +0000\ncommitter Sam Lee <sam@example.com> 1767226320 +0000\n\nStaged only\n",
+            "type": "commit"
+          },
+          "50e93c386e1681b40b7f5d9b7de2d669c6877c54": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "a.txt",
+                "oid": "d49c2e721b44b101b9b65c1e2847063a0f0c53b9"
+              }
+            ],
+            "type": "tree"
+          },
+          "61780798228d17af2d34fce4cfbdf35556832472": {
+            "body": "b\n",
+            "type": "blob"
+          },
+          "78981922613b2afb6025042ff6bd878ac1994e85": {
+            "body": "a\n",
+            "type": "blob"
+          },
+          "d49c2e721b44b101b9b65c1e2847063a0f0c53b9": {
+            "body": "a\nmore\n",
+            "type": "blob"
+          },
+          "e54358b56ba5a5bdfd6e4bf786729495bd6bf2fd": {
+            "body": "tree 50e93c386e1681b40b7f5d9b7de2d669c6877c54\nparent 1c9ba39e4ea456a136bad8bb16878b68415476ab\nauthor Sam Lee <sam@example.com> 1767226020 +0000\ncommitter Sam Lee <sam@example.com> 1767226020 +0000\n\n  Indented subject\nBody line\n",
+            "type": "commit"
+          },
+          "f4b354863caa9cea99b95422c9dab70465757d87": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "a.txt",
+                "oid": "78981922613b2afb6025042ff6bd878ac1994e85"
+              },
+              {
+                "mode": "100644",
+                "name": "b.txt",
+                "oid": "61780798228d17af2d34fce4cfbdf35556832472"
+              }
+            ],
+            "type": "tree"
+          },
+          "fe8213668b3227b4142c5fbff47cba0fe1d14405": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "a.txt",
+                "oid": "24414e00bd26dc3ab600b386547743f2c09cdad9"
+              }
+            ],
+            "type": "tree"
+          }
+        },
+        "reflogs": {
+          "HEAD": [
+            "0000000000000000000000000000000000000000 1c9ba39e4ea456a136bad8bb16878b68415476ab Sam Lee <sam@example.com> 1767225720 +0000\tcommit (initial): First commit",
+            "1c9ba39e4ea456a136bad8bb16878b68415476ab e54358b56ba5a5bdfd6e4bf786729495bd6bf2fd Sam Lee <sam@example.com> 1767226020 +0000\tcommit: Indented subject",
+            "e54358b56ba5a5bdfd6e4bf786729495bd6bf2fd 36deb5c2e7f170bc60a9074ca56303dbfad3ad7b Sam Lee <sam@example.com> 1767226320 +0000\tcommit: Staged only"
+          ],
+          "refs/heads/main": [
+            "0000000000000000000000000000000000000000 1c9ba39e4ea456a136bad8bb16878b68415476ab Sam Lee <sam@example.com> 1767225720 +0000\tcommit (initial): First commit",
+            "1c9ba39e4ea456a136bad8bb16878b68415476ab e54358b56ba5a5bdfd6e4bf786729495bd6bf2fd Sam Lee <sam@example.com> 1767226020 +0000\tcommit: Indented subject",
+            "e54358b56ba5a5bdfd6e4bf786729495bd6bf2fd 36deb5c2e7f170bc60a9074ca56303dbfad3ad7b Sam Lee <sam@example.com> 1767226320 +0000\tcommit: Staged only"
+          ]
+        },
+        "refs": {
+          "refs/heads/main": "36deb5c2e7f170bc60a9074ca56303dbfad3ad7b"
+        }
+      }
+    }
+  },
+  "git": "2.45.1.windows.1",
+  "script": {
+    "steps": [
+      "git init -q",
+      "git add a.txt b.txt",
+      {
+        "cmd": "git commit",
+        "editor": "First commit\n\nWhy: it starts here.   \n# a comment\n\n\n"
+      },
+      "echo more >> a.txt",
+      "rm b.txt",
+      {
+        "cmd": "git commit -a",
+        "editor": ""
+      },
+      {
+        "cmd": "git commit -a",
+        "editor": "# only a comment\n\n"
+      },
+      {
+        "cmd": "git commit -a -q",
+        "editor": "  Indented subject\n#not a body\nBody line\n"
+      },
+      "git commit",
+      "echo again >> a.txt",
+      "git add a.txt",
+      "echo later >> a.txt",
+      {
+        "cmd": "git commit",
+        "editor": "Staged only\n"
+      },
+      "git log --oneline"
+    ],
+    "world": {
+      "cwd": "project",
+      "files": {
+        "project/a.txt": "a\n",
+        "project/b.txt": "b\n",
+        "project/notes.txt": "n\n"
+      }
+    }
+  },
+  "steps": [
+    {
+      "cmd": "git init -q",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git add a.txt b.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git commit",
+      "cwd": "/home/you/project",
+      "editor": {
+        "received": "\n# Please enter the commit message for your changes. Lines starting\n# with '#' will be ignored, and an empty message aborts the commit.\n#\n# On branch main\n#\n# Initial commit\n#\n# Changes to be committed:\n#\tnew file:   a.txt\n#\tnew file:   b.txt\n#\n# Untracked files:\n#\tnotes.txt\n#\n",
+        "wrote": "First commit\n\nWhy: it starts here.   \n# a comment\n\n\n"
+      },
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "[main (root-commit) 1c9ba39] First commit\n 2 files changed, 2 insertions(+)\n create mode 100644 a.txt\n create mode 100644 b.txt\n"
+    },
+    {
+      "cmd": "echo more >> a.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "rm b.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git commit -a",
+      "cwd": "/home/you/project",
+      "editor": {
+        "received": "\n# Please enter the commit message for your changes. Lines starting\n# with '#' will be ignored, and an empty message aborts the commit.\n#\n# On branch main\n# Changes to be committed:\n#\tmodified:   a.txt\n#\tdeleted:    b.txt\n#\n# Untracked files:\n#\tnotes.txt\n#\n",
+        "wrote": ""
+      },
+      "exitCode": 1,
+      "stderr": "Aborting commit due to empty commit message.\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git commit -a",
+      "cwd": "/home/you/project",
+      "editor": {
+        "received": "\n# Please enter the commit message for your changes. Lines starting\n# with '#' will be ignored, and an empty message aborts the commit.\n#\n# On branch main\n# Changes to be committed:\n#\tmodified:   a.txt\n#\tdeleted:    b.txt\n#\n# Untracked files:\n#\tnotes.txt\n#\n",
+        "wrote": "# only a comment\n\n"
+      },
+      "exitCode": 1,
+      "stderr": "Aborting commit due to empty commit message.\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git commit -a -q",
+      "cwd": "/home/you/project",
+      "editor": {
+        "received": "\n# Please enter the commit message for your changes. Lines starting\n# with '#' will be ignored, and an empty message aborts the commit.\n#\n# On branch main\n# Changes to be committed:\n#\tmodified:   a.txt\n#\tdeleted:    b.txt\n#\n# Untracked files:\n#\tnotes.txt\n#\n",
+        "wrote": "  Indented subject\n#not a body\nBody line\n"
+      },
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git commit",
+      "cwd": "/home/you/project",
+      "exitCode": 1,
+      "stderr": "",
+      "stdout": "On branch main\nUntracked files:\n  (use \"git add <file>...\" to include in what will be committed)\n\tnotes.txt\n\nnothing added to commit but untracked files present (use \"git add\" to track)\n"
+    },
+    {
+      "cmd": "echo again >> a.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git add a.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "echo later >> a.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git commit",
+      "cwd": "/home/you/project",
+      "editor": {
+        "received": "\n# Please enter the commit message for your changes. Lines starting\n# with '#' will be ignored, and an empty message aborts the commit.\n#\n# On branch main\n# Changes to be committed:\n#\tmodified:   a.txt\n#\n# Changes not staged for commit:\n#\tmodified:   a.txt\n#\n# Untracked files:\n#\tnotes.txt\n#\n",
+        "wrote": "Staged only\n"
+      },
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "[main 36deb5c] Staged only\n 1 file changed, 1 insertion(+)\n"
+    },
+    {
+      "cmd": "git log --oneline",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "36deb5c (HEAD -> main) Staged only\ne54358b   Indented subject Body line\n1c9ba39 First commit\n"
+    }
+  ]
+}

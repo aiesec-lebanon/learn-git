@@ -98,3 +98,29 @@ export function shortStatus(view: StatusView, branch: boolean): string {
   const others = untracked.map((p) => `?? ${shown(view, p)}\n`);
   return header + tracked.join("") + others.join("");
 }
+
+/** The status Git puts in the commit message template, as `#` comment lines. */
+export function commitTemplate(view: StatusView): string {
+  const { staged, unstaged, untracked } = filtered(view);
+  const entry = (c: FileChange) =>
+    `\t${LABELS[c.kind].padEnd(12)}${shown(view, c.path)}`;
+  const lines = [
+    "Please enter the commit message for your changes. Lines starting",
+    "with '#' will be ignored, and an empty message aborts the commit.",
+    "",
+    `On branch ${branchName(view.repo)}`,
+  ];
+  if (view.data.unborn) lines.push("", "Initial commit", "");
+  const section = (title: string, entries: readonly string[]) => {
+    if (entries.length) lines.push(title, ...entries, "");
+  };
+  section(m.stagedTitle(), staged.map(entry));
+  section(m.unstagedTitle(), unstaged.map(entry));
+  section(
+    m.untrackedTitle(),
+    untracked.map((p) => `\t${shown(view, p)}`),
+  );
+  const comment = (line: string) =>
+    line === "" ? "#" : line.startsWith("\t") ? `#${line}` : `# ${line}`;
+  return `\n${lines.map(comment).join("\n")}\n`;
+}

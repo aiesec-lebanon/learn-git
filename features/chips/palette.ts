@@ -185,6 +185,13 @@ export const VERBS: readonly ChipVerb[] = [
   },
   {
     program: "shell",
+    name: "edit",
+    hint: "write file",
+    params: [{ kind: "value", label: "file name", required: true }],
+    ready: always,
+  },
+  {
+    program: "shell",
     name: "mv",
     hint: "rename a file",
     params: [

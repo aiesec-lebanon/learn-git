@@ -14,6 +14,7 @@ import { CommandChips } from "@/features/chips/chips";
 import { Guide } from "@/features/guide/guide";
 import { progressStore, useProgress } from "@/features/progress/progress";
 import type { ResumePointer } from "@/features/progress/schema";
+import { EditorSheet } from "@/features/stage/editor-sheet";
 import { Rewind } from "@/features/stage/rewind";
 import { sandboxFor } from "@/features/stage/session-registry";
 import { Stage } from "@/features/stage/stage";
@@ -138,6 +139,7 @@ export function Sandbox({
         <Check report={report} history={history} resume={resume} />
         <TargetPanel target={target} />
         <WhatHappened session={session} />
+        <EditorSheet session={session} />
       </div>
     </div>
   );

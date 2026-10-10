@@ -2,6 +2,7 @@ import { SANDBOX_HELP } from "../messages/shell";
 import { cd, pwd } from "./navigate";
 import { cat, echo, ls } from "./read";
 import { createShellRegistry, defineShell } from "./registry";
+import { edit } from "./edit";
 import { mkdir, mv, rm, touch } from "./write";
 
 const clear = defineShell({
@@ -25,6 +26,7 @@ export const SHELL_REGISTRY = createShellRegistry([
   mkdir,
   rm,
   mv,
+  edit,
   clear,
   help,
 ]);

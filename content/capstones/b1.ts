@@ -1,4 +1,4 @@
-import { defineCapstone } from "../define";
+import { defineCapstone, FIRST_COMMIT } from "../define";
 import { recipeSiteFiles, recipeSiteWithIdentity } from "../worlds/recipe-site";
 
 const readme = recipeSiteFiles["recipe-site/README.md"];
@@ -32,9 +32,7 @@ export default defineCapstone({
     clean: true,
   },
   solution: [
-    "git init",
-    "git add .",
-    'git commit -m "First snapshot"',
+    ...FIRST_COMMIT,
     'echo "New recipes every week." >> README.md',
     'echo "<p>More soon.</p>" >> index.html',
     "git add README.md",

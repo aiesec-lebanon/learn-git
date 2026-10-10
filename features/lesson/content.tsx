@@ -25,12 +25,12 @@ export function Beat({
     <section
       data-beat={id}
       aria-labelledby={beatHeadingId(id)}
-      className="scroll-mt-24 py-8 [&_p]:my-3"
+      className="py-8 [&_p]:my-3"
     >
       <h2
         id={beatHeadingId(id)}
         tabIndex={-1}
-        className="m-0 text-2xl font-bold"
+        className="m-0 scroll-mt-[calc(45dvh+5rem)] text-2xl font-bold md:scroll-mt-24"
       >
         {title}
       </h2>

@@ -1,17 +1,17 @@
 "use client";
 
 import { useLayoutEffect, useMemo, useRef } from "react";
-import { describeGraph, type Session } from "@/engine";
+import type { Session } from "@/engine";
 import { useSessionAnnouncer } from "@/features/announcer/announcer";
 import { CommitGraph, graphLayout } from "@/features/graph/graph";
-import { repoView } from "@/features/graph/view-model";
 import { motionTokens, useMotion } from "@/features/motion/policy";
 import { Area } from "./area";
-import { Annotations, annotate } from "./choreography/annotations";
+import { Annotations } from "./choreography/annotations";
 import { planChoreography, type GraphFrame } from "./choreography/plan";
 import { playChoreography, type Timeline } from "./choreography/runner";
 import { FileCard } from "./file-card";
-import { stageFiles, type FileCard as Card } from "./files";
+import type { FileCard as Card } from "./files";
+import { stageFrame, type StageFrame } from "./frame";
 import { StageBoundary } from "./stage-boundary";
 import { useSession } from "./use-session";
 
@@ -35,58 +35,63 @@ function FileList({
   );
 }
 
-function StageAreas({ session }: { session: Session }) {
-  const { world, latest } = useSession(session);
-  useSessionAnnouncer(session);
+/** The stage for one frame; it animates the frame's effects when `animate` is on. */
+export function StageView({
+  frame,
+  animate = true,
+}: {
+  frame: StageFrame;
+  animate?: boolean;
+}) {
   const motion = useMotion();
-  const files = useMemo(() => stageFiles(world), [world]);
-  const repo = files.repo ? world.repos.get(files.repo) : undefined;
-  const view = useMemo(
-    () => (repo ? repoView(world, repo) : null),
-    [world, repo],
-  );
-  const frame = useMemo<GraphFrame | null>(
+  const { files, view } = frame;
+  const graph = useMemo<GraphFrame | null>(
     () => (view ? { layout: graphLayout(view), head: view.head.target } : null),
     [view],
-  );
-  const effects = useMemo(
-    () => latest.flatMap((e) => e.outcome.effects),
-    [latest],
   );
   const root = useRef<HTMLDivElement>(null);
   const shown = useRef<GraphFrame | null>(null);
   const timeline = useRef<Timeline | null>(null);
-  const played = useRef(effects);
+  const played = useRef(frame);
 
   useLayoutEffect(() => {
     timeline.current?.finish();
     timeline.current = null;
-    const fresh = played.current !== effects;
-    played.current = effects;
-    if (fresh && motion === "full" && effects.length && root.current) {
+    const fresh = played.current !== frame;
+    played.current = frame;
+    if (
+      fresh &&
+      animate &&
+      motion === "full" &&
+      frame.effects.length &&
+      root.current
+    ) {
       const steps = planChoreography(
-        { effects, before: shown.current, after: frame, root: files.root },
+        {
+          effects: frame.effects,
+          before: shown.current,
+          after: graph,
+          root: files.root,
+        },
         motionTokens,
       );
       timeline.current = playChoreography(root.current, steps);
     }
-    shown.current = frame;
-  }, [effects, frame, files.root, motion]);
+    shown.current = graph;
+  }, [frame, graph, files.root, animate, motion]);
 
   useLayoutEffect(() => () => timeline.current?.finish(), []);
 
   return (
     <div ref={root} className="grid gap-4">
-      {motion === "reduce" ? (
-        <Annotations notes={annotate(effects, world, files.root)} />
-      ) : null}
-      <Area title="Repository" hint={repo ? "inside .git" : undefined}>
-        {view && frame && repo ? (
+      {motion === "reduce" ? <Annotations notes={frame.notes} /> : null}
+      <Area title="Repository" hint={view ? "inside .git" : undefined}>
+        {view && graph ? (
           <CommitGraph
             view={view}
-            layout={frame.layout}
+            layout={graph.layout}
             label="Repository"
-            describe={() => describeGraph(world, repo.id)}
+            describe={() => frame.description ?? ""}
           />
         ) : (
           <p className="m-0 text-sm text-fg-muted">
@@ -112,11 +117,25 @@ function StageAreas({ session }: { session: Session }) {
   );
 }
 
+function SessionStage({ session }: { session: Session }) {
+  const { world, latest } = useSession(session);
+  useSessionAnnouncer(session);
+  const frame = useMemo(
+    () =>
+      stageFrame(
+        world,
+        latest.flatMap((e) => e.outcome.effects),
+      ),
+    [world, latest],
+  );
+  return <StageView frame={frame} />;
+}
+
 /** The three-area stage for one sandbox session. */
 export function Stage({ session }: { session: Session }) {
   return (
     <StageBoundary session={session}>
-      <StageAreas session={session} />
+      <SessionStage session={session} />
     </StageBoundary>
   );
 }

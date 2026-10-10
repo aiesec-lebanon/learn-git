@@ -1,0 +1,39 @@
+<ColdOpen>
+  Your recipe site folder holds `index.html`, `index-old.html`,
+  `index-final.html` and `index-final-v2-REAL.html`. Which one is the page that
+  worked last Tuesday?
+</ColdOpen>
+
+<Beat id="copies" title="A folder full of copies">
+  Saving copies with names like `index-final-v2-REAL.html` is how most of us
+  start. Each copy keeps one file, not the whole project. Nothing records who
+  changed what, when, or why, and after a week the names stop meaning anything.
+</Beat>
+
+<Beat id="snapshot" title="A snapshot of the whole project">
+  Git keeps save points called <Term>commits</Term>. A commit is a snapshot of
+  every file in the project at one moment, plus who made it, a message saying
+  why, and a link to the commit before it. You never copy files by hand, and
+  every save point stays.
+</Beat>
+
+<Beat id="init" title="git init creates the repository">
+  Run `git init` in the folder and Git creates a hidden `.git` folder. That
+  folder is the <Term>repository</Term>: the whole history lives there, on your
+  computer, with no server involved. Your files stay where they are. Git calls
+  them the <Term>working tree</Term>.
+</Beat>
+
+<Beat id="identity" title="Tell Git who you are">
+  Every commit records an author, so Git needs your name and email once per
+  computer. `git config set --global user.name` and `user.email` store them in
+  your home folder. This sandbox also sets `init.defaultBranch` to `main`, so
+  new repositories start on a branch called main.
+</Beat>
+
+<Beat id="first-commit" title="The first commit">
+  `git add .` puts every file into the <Term>staging area</Term>, the draft of
+  the next commit. `git commit -m` turns the draft into a commit with your
+  message. It is the <Term>root commit</Term>, the one with no parent, and its
+  short ID now names this snapshot.
+</Beat>

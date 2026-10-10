@@ -1,4 +1,7 @@
+import Link from "next/link";
+import { lessonHref } from "@/content/routes";
 import { copy } from "@/themes/active";
+import { buttonClass } from "@/ui/button";
 
 export default function Home() {
   return (
@@ -8,8 +11,13 @@ export default function Home() {
       <p className="mt-8 max-w-prose">
         Learn Git and GitHub at the whiteboard: every command you run is drawn
         as it happens and explained in plain words, in a playground you
-        can&apos;t break. The first lessons are being written now.
+        can&apos;t break.
       </p>
+      <div className="mt-8 flex flex-wrap gap-3">
+        <Link href={lessonHref("b1-1")} className={buttonClass("primary")}>
+          New to Git? Start here
+        </Link>
+      </div>
     </div>
   );
 }

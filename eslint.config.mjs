@@ -123,7 +123,7 @@ const eslintConfig = defineConfig([
     rules: bannedImports("^@/app(/|$)", "Features never import routes."),
   },
   {
-    files: ["scripts/**"],
+    files: ["scripts/**", "e2e/**"],
     rules: { "no-console": "off" },
   },
   {

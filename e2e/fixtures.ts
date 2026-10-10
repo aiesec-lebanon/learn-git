@@ -2,15 +2,31 @@ import AxeBuilder from "@axe-core/playwright";
 import { test as base, expect, type Page } from "@playwright/test";
 
 const ownProtocols = new Set(["data:", "blob:"]);
+const failedLoad = "Failed to load resource";
 
 export const test = base.extend<{ guard: void }>({
   guard: [
     async ({ page, context, baseURL }, use) => {
       const origin = new URL(baseURL ?? "http://localhost").origin;
       const problems: string[] = [];
+      await page.addInitScript(() =>
+        document.addEventListener("securitypolicyviolation", (event) =>
+          console.error(`CSP violation: ${event.violatedDirective}`),
+        ),
+      );
       page.on("console", (message) => {
-        if (message.type() === "error")
-          problems.push(`console: ${message.text()}`);
+        const text = message.text();
+        if (message.type() === "error" && !text.startsWith(failedLoad)) {
+          problems.push(`console: ${text}`);
+        }
+      });
+      page.on("response", (response) => {
+        const request = response.request();
+        const isPage =
+          request.isNavigationRequest() && request.frame() === page.mainFrame();
+        if (response.status() >= 400 && !isPage) {
+          problems.push(`HTTP ${response.status()}: ${response.url()}`);
+        }
       });
       page.on("pageerror", (error) =>
         problems.push(`page error: ${error.message}`),

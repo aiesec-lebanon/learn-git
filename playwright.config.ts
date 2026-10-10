@@ -1,7 +1,7 @@
 import { defineConfig, devices } from "@playwright/test";
 
 const CI = Boolean(process.env.CI);
-const port = 3000;
+const port = 3100;
 
 export default defineConfig({
   testDir: "e2e",
@@ -22,9 +22,8 @@ export default defineConfig({
     { name: "webkit-phone", use: devices["iPhone 15"], grep: /@phone/ },
   ],
   webServer: {
-    command: CI ? "npm run start" : "npm run build && npm run start",
+    command: `${CI ? "" : "npm run build && "}npm run start -- -p ${port}`,
     port,
-    reuseExistingServer: !CI,
     timeout: 300_000,
   },
 });

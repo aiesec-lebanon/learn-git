@@ -1,10 +1,8 @@
 import type { NextConfig } from "next";
+import { securityHeaders } from "./lib/security-headers";
 
 const nextConfig: NextConfig = {
-  /* config options here */
-  experimental: {
-    agentFeedback: true,
-  },
+  poweredByHeader: false,
   cacheComponents: true,
   typedRoutes: true,
   partialPrefetching: true,
@@ -15,6 +13,14 @@ const nextConfig: NextConfig = {
         as: "*.css",
       },
     },
+  },
+  async headers() {
+    return [
+      {
+        source: "/(.*)",
+        headers: securityHeaders(process.env.NODE_ENV === "development"),
+      },
+    ];
   },
 };
 

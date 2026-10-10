@@ -1,0 +1,290 @@
+{
+  "final": {
+    "config": {
+      "global": [
+        [
+          "user.name",
+          "Sam Lee"
+        ],
+        [
+          "user.email",
+          "sam@example.com"
+        ],
+        [
+          "init.defaultbranch",
+          "main"
+        ]
+      ],
+      "system": []
+    },
+    "dirs": [
+      "project",
+      "project/src"
+    ],
+    "files": {
+      "project/e.txt": "new\n",
+      "project/g.txt": "g\n",
+      "project/src/c.js": "c\nmore\n",
+      "project/src/f.js": "f\n"
+    },
+    "repos": {
+      "project": {
+        "config": [
+          [
+            "core.repositoryformatversion",
+            "0"
+          ],
+          [
+            "core.filemode",
+            "false"
+          ],
+          [
+            "core.bare",
+            "false"
+          ],
+          [
+            "core.logallrefupdates",
+            "true"
+          ],
+          [
+            "core.symlinks",
+            "false"
+          ],
+          [
+            "core.ignorecase",
+            "true"
+          ]
+        ],
+        "head": {
+          "ref": "refs/heads/main"
+        },
+        "index": [
+          {
+            "mode": "100644",
+            "oid": "3e757656cf36eca53338e520d134963a44f793f8",
+            "path": "e.txt",
+            "stage": 0
+          },
+          {
+            "mode": "100644",
+            "oid": "01058d844a98d293a3b03a8615a34700e4ed2be3",
+            "path": "g.txt",
+            "stage": 0
+          },
+          {
+            "mode": "100644",
+            "oid": "fcfcb6951794d32a501226b5eff692d86508bb18",
+            "path": "src/c.js",
+            "stage": 0
+          },
+          {
+            "mode": "100644",
+            "oid": "6a69f92020f5df77af6e8813ff1232493383b708",
+            "path": "src/f.js",
+            "stage": 0
+          }
+        ],
+        "objects": {
+          "01058d844a98d293a3b03a8615a34700e4ed2be3": {
+            "body": "g\n",
+            "type": "blob"
+          },
+          "3e757656cf36eca53338e520d134963a44f793f8": {
+            "body": "new\n",
+            "type": "blob"
+          },
+          "4bcfe98e640c8284511312660fb8709b0afa888e": {
+            "body": "d\n",
+            "type": "blob"
+          },
+          "61780798228d17af2d34fce4cfbdf35556832472": {
+            "body": "b\n",
+            "type": "blob"
+          },
+          "6a69f92020f5df77af6e8813ff1232493383b708": {
+            "body": "f\n",
+            "type": "blob"
+          },
+          "78981922613b2afb6025042ff6bd878ac1994e85": {
+            "body": "a\n",
+            "type": "blob"
+          },
+          "8cd63ec1c8d8ef5b87ff97b87b4a2fd62ff15d9d": {
+            "body": "a\nchange\n",
+            "type": "blob"
+          },
+          "f2ad6c76f0115a6ba5b00456a849810e7ec0af20": {
+            "body": "c\n",
+            "type": "blob"
+          },
+          "fcfcb6951794d32a501226b5eff692d86508bb18": {
+            "body": "c\nmore\n",
+            "type": "blob"
+          }
+        },
+        "reflogs": {},
+        "refs": {}
+      }
+    }
+  },
+  "git": "2.45.1.windows.1",
+  "script": {
+    "steps": [
+      "git init -q",
+      "git add .",
+      "echo change >> a.txt",
+      "rm b.txt",
+      "echo new > e.txt",
+      "git add -u",
+      "git add -A",
+      "rm src/d.js",
+      "echo more >> src/c.js",
+      "echo f > src/f.js",
+      "cd src",
+      "git add .",
+      "echo g > ../g.txt",
+      "git add ../g.txt",
+      "rm ../a.txt",
+      "git add ../a.txt",
+      "git add -A ..",
+      "git add -u -A"
+    ],
+    "world": {
+      "cwd": "project",
+      "files": {
+        "project/a.txt": "a\n",
+        "project/b.txt": "b\n",
+        "project/src/c.js": "c\n",
+        "project/src/d.js": "d\n"
+      }
+    }
+  },
+  "steps": [
+    {
+      "cmd": "git init -q",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git add .",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "echo change >> a.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "rm b.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "echo new > e.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git add -u",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git add -A",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "rm src/d.js",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "echo more >> src/c.js",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "echo f > src/f.js",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "cd src",
+      "cwd": "/home/you/project/src",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git add .",
+      "cwd": "/home/you/project/src",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "echo g > ../g.txt",
+      "cwd": "/home/you/project/src",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git add ../g.txt",
+      "cwd": "/home/you/project/src",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "rm ../a.txt",
+      "cwd": "/home/you/project/src",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git add ../a.txt",
+      "cwd": "/home/you/project/src",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git add -A ..",
+      "cwd": "/home/you/project/src",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git add -u -A",
+      "cwd": "/home/you/project/src",
+      "exitCode": 128,
+      "stderr": "fatal: options '-A' and '-u' cannot be used together\n",
+      "stdout": ""
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "world": {
+    "files": {
+      "project/a.txt": "a\n",
+      "project/b.txt": "b\n",
+      "project/src/c.js": "c\n",
+      "project/src/d.js": "d\n"
+    },
+    "cwd": "project"
+  },
+  "steps": [
+    "git init -q",
+    "git add .",
+    "echo change >> a.txt",
+    "rm b.txt",
+    "echo new > e.txt",
+    "git add -u",
+    "git add -A",
+    "rm src/d.js",
+    "echo more >> src/c.js",
+    "echo f > src/f.js",
+    "cd src",
+    "git add .",
+    "echo g > ../g.txt",
+    "git add ../g.txt",
+    "rm ../a.txt",
+    "git add ../a.txt",
+    "git add -A ..",
+    "git add -u -A"
+  ]
+}

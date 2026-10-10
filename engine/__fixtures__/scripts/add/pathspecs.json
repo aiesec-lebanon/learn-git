@@ -1,0 +1,29 @@
+{
+  "world": {
+    "files": {
+      "project/a.txt": "a\n",
+      "project/b.txt": "b\n",
+      "project/src/c.js": "c\n",
+      "project/src/d.js": "d\n",
+      "project/docs/readme.md": "# Docs\n",
+      "project/top.md": "# Top\n",
+      "outside.txt": "o\n"
+    },
+    "cwd": "project"
+  },
+  "steps": [
+    "git add a.txt",
+    "git init -q",
+    "git add a.txt",
+    "git add src",
+    "git add nope.txt",
+    "git add a.txt nope.txt",
+    "git add",
+    "git add '*.md'",
+    "git add ../outside.txt",
+    "git add .git/config",
+    "mkdir empty",
+    "git add empty",
+    "git add 'src/*.js' b.txt"
+  ]
+}

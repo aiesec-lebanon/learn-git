@@ -1,0 +1,4 @@
+{
+  "world": { "dirs": ["project"], "cwd": "project" },
+  "steps": ["git init -q -b trunk", "git log --oneline"]
+}

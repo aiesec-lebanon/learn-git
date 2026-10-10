@@ -1,0 +1,91 @@
+{
+  "final": {
+    "config": {
+      "global": [
+        [
+          "user.name",
+          "Sam Lee"
+        ],
+        [
+          "user.email",
+          "sam@example.com"
+        ],
+        [
+          "init.defaultbranch",
+          "main"
+        ]
+      ],
+      "system": []
+    },
+    "dirs": [
+      "project"
+    ],
+    "files": {},
+    "repos": {
+      "project": {
+        "config": [
+          [
+            "core.repositoryformatversion",
+            "0"
+          ],
+          [
+            "core.filemode",
+            "false"
+          ],
+          [
+            "core.bare",
+            "false"
+          ],
+          [
+            "core.logallrefupdates",
+            "true"
+          ],
+          [
+            "core.symlinks",
+            "false"
+          ],
+          [
+            "core.ignorecase",
+            "true"
+          ]
+        ],
+        "head": {
+          "ref": "refs/heads/trunk"
+        },
+        "index": [],
+        "objects": {},
+        "reflogs": {},
+        "refs": {}
+      }
+    }
+  },
+  "git": "2.45.1.windows.1",
+  "script": {
+    "steps": [
+      "git init -q -b trunk",
+      "git log --oneline"
+    ],
+    "world": {
+      "cwd": "project",
+      "dirs": [
+        "project"
+      ]
+    }
+  },
+  "steps": [
+    {
+      "cmd": "git init -q -b trunk",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git log --oneline",
+      "cwd": "/home/you/project",
+      "exitCode": 128,
+      "stderr": "fatal: your current branch 'trunk' does not have any commits yet\n",
+      "stdout": ""
+    }
+  ]
+}

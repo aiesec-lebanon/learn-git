@@ -1,0 +1,31 @@
+{
+  "world": {
+    "files": {
+      "project/a.txt": "a\n"
+    },
+    "cwd": "project"
+  },
+  "steps": [
+    "git init -q",
+    "git log",
+    "git log --oneline",
+    "git add a.txt",
+    "git commit -q -m \"First\"",
+    "git log",
+    "echo b >> a.txt",
+    "git add a.txt",
+    "git commit -q -m \"Second\" -m \"Why: a body paragraph.\" -m \"  Indented line\"",
+    "echo c >> a.txt",
+    "git add a.txt",
+    "git commit -q -m \"Third\"",
+    "git log",
+    "git log --oneline",
+    "git log -n 2",
+    "git log -2 --oneline",
+    "git log --max-count=1",
+    "git log -n1 --no-decorate",
+    "git log --oneline --decorate",
+    "git log -n x",
+    "git log -0"
+  ]
+}

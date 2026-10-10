@@ -6,6 +6,8 @@ export type OptionSpec = {
   readonly value?: "none" | "required" | "optional";
   /** Whether `--no-<long>` is accepted (Git's default). */
   readonly negatable?: boolean;
+  /** Also accepts `-<number>` (as `git log -3`). */
+  readonly numeric?: boolean;
 };
 
 /** `true` for a flag, `false` for `--no-<flag>`, a string for a value. */
@@ -110,6 +112,8 @@ export function parseOptions(
             throw new Fail({ kind: "option-requires-value", name: label });
           add(match.spec.key, next);
         }
+      } else if (/^-\d+$/.test(arg) && specs.some((s) => s.numeric)) {
+        add(specs.find((s) => s.numeric)?.key ?? "", arg.slice(1));
       } else {
         for (let j = 1; j < arg.length; j++) {
           const letter = arg[j] ?? "";

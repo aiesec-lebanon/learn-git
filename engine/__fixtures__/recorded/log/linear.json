@@ -1,0 +1,320 @@
+{
+  "final": {
+    "config": {
+      "global": [
+        [
+          "user.name",
+          "Sam Lee"
+        ],
+        [
+          "user.email",
+          "sam@example.com"
+        ],
+        [
+          "init.defaultbranch",
+          "main"
+        ]
+      ],
+      "system": []
+    },
+    "dirs": [
+      "project"
+    ],
+    "files": {
+      "project/a.txt": "a\nb\nc\n"
+    },
+    "repos": {
+      "project": {
+        "config": [
+          [
+            "core.repositoryformatversion",
+            "0"
+          ],
+          [
+            "core.filemode",
+            "false"
+          ],
+          [
+            "core.bare",
+            "false"
+          ],
+          [
+            "core.logallrefupdates",
+            "true"
+          ],
+          [
+            "core.symlinks",
+            "false"
+          ],
+          [
+            "core.ignorecase",
+            "true"
+          ]
+        ],
+        "head": {
+          "ref": "refs/heads/main"
+        },
+        "index": [
+          {
+            "mode": "100644",
+            "oid": "de980441c3ab03a8c07dda1ad27b8a11f39deb1e",
+            "path": "a.txt",
+            "stage": 0
+          }
+        ],
+        "objects": {
+          "08585692ce06452da6f82ae66b90d98b55536fca": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "a.txt",
+                "oid": "78981922613b2afb6025042ff6bd878ac1994e85"
+              }
+            ],
+            "type": "tree"
+          },
+          "13d589331eec38390bdc567490e0bda518253de1": {
+            "body": "tree 187438d7d3fbee49dba13a50af1a6af1f1c7c17c\nparent 841b1099022574b31392af1f6e03ce1ad50c92f8\nauthor Sam Lee <sam@example.com> 1767226080 +0000\ncommitter Sam Lee <sam@example.com> 1767226080 +0000\n\nSecond\n\nWhy: a body paragraph.\n\n  Indented line\n",
+            "type": "commit"
+          },
+          "187438d7d3fbee49dba13a50af1a6af1f1c7c17c": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "a.txt",
+                "oid": "422c2b7ab3b3c668038da977e4e93a5fc623169c"
+              }
+            ],
+            "type": "tree"
+          },
+          "20c053d6cbf9da6d91ef33f21587c396192d8627": {
+            "body": "tree 5eb56f37d65808cb4cec9d09269ecad72aa06c9b\nparent 13d589331eec38390bdc567490e0bda518253de1\nauthor Sam Lee <sam@example.com> 1767226260 +0000\ncommitter Sam Lee <sam@example.com> 1767226260 +0000\n\nThird\n",
+            "type": "commit"
+          },
+          "422c2b7ab3b3c668038da977e4e93a5fc623169c": {
+            "body": "a\nb\n",
+            "type": "blob"
+          },
+          "5eb56f37d65808cb4cec9d09269ecad72aa06c9b": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "a.txt",
+                "oid": "de980441c3ab03a8c07dda1ad27b8a11f39deb1e"
+              }
+            ],
+            "type": "tree"
+          },
+          "78981922613b2afb6025042ff6bd878ac1994e85": {
+            "body": "a\n",
+            "type": "blob"
+          },
+          "841b1099022574b31392af1f6e03ce1ad50c92f8": {
+            "body": "tree 08585692ce06452da6f82ae66b90d98b55536fca\nauthor Sam Lee <sam@example.com> 1767225840 +0000\ncommitter Sam Lee <sam@example.com> 1767225840 +0000\n\nFirst\n",
+            "type": "commit"
+          },
+          "de980441c3ab03a8c07dda1ad27b8a11f39deb1e": {
+            "body": "a\nb\nc\n",
+            "type": "blob"
+          }
+        },
+        "reflogs": {
+          "HEAD": [
+            "0000000000000000000000000000000000000000 841b1099022574b31392af1f6e03ce1ad50c92f8 Sam Lee <sam@example.com> 1767225840 +0000\tcommit (initial): First",
+            "841b1099022574b31392af1f6e03ce1ad50c92f8 13d589331eec38390bdc567490e0bda518253de1 Sam Lee <sam@example.com> 1767226080 +0000\tcommit: Second",
+            "13d589331eec38390bdc567490e0bda518253de1 20c053d6cbf9da6d91ef33f21587c396192d8627 Sam Lee <sam@example.com> 1767226260 +0000\tcommit: Third"
+          ],
+          "refs/heads/main": [
+            "0000000000000000000000000000000000000000 841b1099022574b31392af1f6e03ce1ad50c92f8 Sam Lee <sam@example.com> 1767225840 +0000\tcommit (initial): First",
+            "841b1099022574b31392af1f6e03ce1ad50c92f8 13d589331eec38390bdc567490e0bda518253de1 Sam Lee <sam@example.com> 1767226080 +0000\tcommit: Second",
+            "13d589331eec38390bdc567490e0bda518253de1 20c053d6cbf9da6d91ef33f21587c396192d8627 Sam Lee <sam@example.com> 1767226260 +0000\tcommit: Third"
+          ]
+        },
+        "refs": {
+          "refs/heads/main": "20c053d6cbf9da6d91ef33f21587c396192d8627"
+        }
+      }
+    }
+  },
+  "git": "2.45.1.windows.1",
+  "script": {
+    "steps": [
+      "git init -q",
+      "git log",
+      "git log --oneline",
+      "git add a.txt",
+      "git commit -q -m \"First\"",
+      "git log",
+      "echo b >> a.txt",
+      "git add a.txt",
+      "git commit -q -m \"Second\" -m \"Why: a body paragraph.\" -m \"  Indented line\"",
+      "echo c >> a.txt",
+      "git add a.txt",
+      "git commit -q -m \"Third\"",
+      "git log",
+      "git log --oneline",
+      "git log -n 2",
+      "git log -2 --oneline",
+      "git log --max-count=1",
+      "git log -n1 --no-decorate",
+      "git log --oneline --decorate",
+      "git log -n x",
+      "git log -0"
+    ],
+    "world": {
+      "cwd": "project",
+      "files": {
+        "project/a.txt": "a\n"
+      }
+    }
+  },
+  "steps": [
+    {
+      "cmd": "git init -q",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git log",
+      "cwd": "/home/you/project",
+      "exitCode": 128,
+      "stderr": "fatal: your current branch 'main' does not have any commits yet\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git log --oneline",
+      "cwd": "/home/you/project",
+      "exitCode": 128,
+      "stderr": "fatal: your current branch 'main' does not have any commits yet\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git add a.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git commit -q -m \"First\"",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git log",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "commit 841b1099022574b31392af1f6e03ce1ad50c92f8 (HEAD -> main)\nAuthor: Sam Lee <sam@example.com>\nDate:   Thu Jan 1 00:04:00 2026 +0000\n\n    First\n"
+    },
+    {
+      "cmd": "echo b >> a.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git add a.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git commit -q -m \"Second\" -m \"Why: a body paragraph.\" -m \"  Indented line\"",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "echo c >> a.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git add a.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git commit -q -m \"Third\"",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git log",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "commit 20c053d6cbf9da6d91ef33f21587c396192d8627 (HEAD -> main)\nAuthor: Sam Lee <sam@example.com>\nDate:   Thu Jan 1 00:11:00 2026 +0000\n\n    Third\n\ncommit 13d589331eec38390bdc567490e0bda518253de1\nAuthor: Sam Lee <sam@example.com>\nDate:   Thu Jan 1 00:08:00 2026 +0000\n\n    Second\n    \n    Why: a body paragraph.\n    \n      Indented line\n\ncommit 841b1099022574b31392af1f6e03ce1ad50c92f8\nAuthor: Sam Lee <sam@example.com>\nDate:   Thu Jan 1 00:04:00 2026 +0000\n\n    First\n"
+    },
+    {
+      "cmd": "git log --oneline",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "20c053d (HEAD -> main) Third\n13d5893 Second\n841b109 First\n"
+    },
+    {
+      "cmd": "git log -n 2",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "commit 20c053d6cbf9da6d91ef33f21587c396192d8627 (HEAD -> main)\nAuthor: Sam Lee <sam@example.com>\nDate:   Thu Jan 1 00:11:00 2026 +0000\n\n    Third\n\ncommit 13d589331eec38390bdc567490e0bda518253de1\nAuthor: Sam Lee <sam@example.com>\nDate:   Thu Jan 1 00:08:00 2026 +0000\n\n    Second\n    \n    Why: a body paragraph.\n    \n      Indented line\n"
+    },
+    {
+      "cmd": "git log -2 --oneline",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "20c053d (HEAD -> main) Third\n13d5893 Second\n"
+    },
+    {
+      "cmd": "git log --max-count=1",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "commit 20c053d6cbf9da6d91ef33f21587c396192d8627 (HEAD -> main)\nAuthor: Sam Lee <sam@example.com>\nDate:   Thu Jan 1 00:11:00 2026 +0000\n\n    Third\n"
+    },
+    {
+      "cmd": "git log -n1 --no-decorate",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "commit 20c053d6cbf9da6d91ef33f21587c396192d8627\nAuthor: Sam Lee <sam@example.com>\nDate:   Thu Jan 1 00:11:00 2026 +0000\n\n    Third\n"
+    },
+    {
+      "cmd": "git log --oneline --decorate",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "20c053d (HEAD -> main) Third\n13d5893 Second\n841b109 First\n"
+    },
+    {
+      "cmd": "git log -n x",
+      "cwd": "/home/you/project",
+      "exitCode": 128,
+      "stderr": "fatal: 'x': not an integer\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git log -0",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    }
+  ]
+}

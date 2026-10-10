@@ -46,6 +46,7 @@ export default defineCapstone({
     nudge: "After you edit both files, which of them is in the staging area?",
     pointer:
       "git commit records only what is staged, and git add stages the files you name.",
+    reference: "add",
     next: "Commit the folder first. After editing both files, git add README.md and commit, then git add index.html and commit again.",
   },
 });

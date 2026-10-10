@@ -4,7 +4,9 @@ import { useRef, useState } from "react";
 import type { Session } from "@/engine";
 import type { Hints } from "@/content/define";
 import { useSession } from "@/features/stage/use-session";
+import { referenceHref } from "@/content/routes";
 import { Button } from "@/ui/button";
+import { AppLink } from "@/ui/link";
 import { HINT_LABELS, HINT_STEPS, nudgeDue } from "./hints";
 
 type Offer = "waiting" | "open" | "closed";
@@ -63,7 +65,17 @@ export function HintLadder({
           {HINT_STEPS.slice(0, shown).map((step) => (
             <div key={step}>
               <dt className="font-semibold">{HINT_LABELS[step]}</dt>
-              <dd className="m-0">{hints[step]}</dd>
+              <dd className="m-0">
+                {hints[step]}
+                {step === "pointer" && hints.reference ? (
+                  <>
+                    {" "}
+                    <AppLink href={referenceHref(hints.reference)}>
+                      Reference: git {hints.reference}
+                    </AppLink>
+                  </>
+                ) : null}
+              </dd>
             </div>
           ))}
         </dl>

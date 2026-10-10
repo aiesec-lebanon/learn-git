@@ -24,7 +24,10 @@ export default async function ReferenceEntryPage({
 }: PageProps<"/reference/[entryId]">) {
   const entry = referenceById((await params).entryId);
   if (!entry) notFound();
-  const lessons = entry.lessons.flatMap((id) => lessonById(id) ?? []);
+  const lessons = entry.lessons.flatMap((id) => {
+    const lesson = lessonById(id);
+    return lesson?.ready ? [lesson] : [];
+  });
   return (
     <article className="mx-auto w-full max-w-[1200px] px-4 py-8 sm:px-6 sm:py-12">
       <header className="mb-8 max-w-prose">

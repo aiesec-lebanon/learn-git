@@ -13,6 +13,8 @@ export type Hints = {
   readonly nudge: string;
   /** The concept to use. */
   readonly pointer: string;
+  /** The reference entry the pointer refers to. */
+  readonly reference?: string;
   /** The command and why. */
   readonly next: string;
 };

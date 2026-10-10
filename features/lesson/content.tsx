@@ -1,5 +1,7 @@
 import type { Route } from "next";
 import type { ReactNode } from "react";
+import { referenceById } from "@/content/reference/registry";
+import { referenceHref } from "@/content/routes";
 import { AppLink } from "@/ui/link";
 
 /** The opening situation and its question (learning design 1.5). */
@@ -59,14 +61,21 @@ export function Wrap({
       </h2>
       {children}
       <ul className="m-0 mt-4 flex list-none flex-wrap gap-2 p-0">
-        {commands.map((command) => (
-          <li
-            key={command}
-            className="rounded-sm border border-line bg-surface px-3 py-2 font-mono text-sm shadow-1"
-          >
-            {command}
-          </li>
-        ))}
+        {commands.map((command) => {
+          const entry = referenceById(command.split(" ")[1] ?? "");
+          return (
+            <li
+              key={command}
+              className="rounded-sm border border-line bg-surface px-3 py-2 font-mono text-sm shadow-1"
+            >
+              {entry ? (
+                <AppLink href={referenceHref(entry.id)}>{command}</AppLink>
+              ) : (
+                command
+              )}
+            </li>
+          );
+        })}
       </ul>
       {playground ? (
         <p>

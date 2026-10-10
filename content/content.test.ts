@@ -3,6 +3,7 @@ import { countPar, createWorld, match, Session } from "@/engine";
 import { CAPSTONES } from "./capstones";
 import type { Checkpoint } from "./define";
 import { voiceProblems } from "./guide/voice";
+import { referenceById } from "./reference/registry";
 import { SCENES } from "./lessons";
 import { CHAPTERS, LESSONS, readyLessons } from "./registry";
 
@@ -158,8 +159,10 @@ const checkpoints: [string, Checkpoint | undefined][] = [
 describe("hints", () => {
   it.each(checkpoints)("%s has a ladder in the guide's voice", (_, c) => {
     expect(c?.hints).toBeDefined();
-    for (const line of Object.values(c?.hints ?? {}))
+    const { reference, ...lines } = c?.hints ?? { nudge: "" };
+    for (const line of Object.values(lines))
       expect(voiceProblems(line)).toEqual([]);
+    if (reference) expect(referenceById(reference)).toBeDefined();
   });
 });
 

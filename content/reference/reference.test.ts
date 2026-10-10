@@ -24,7 +24,7 @@ for (const entry of REFERENCE) {
       expect(entry.gotchas.length).toBeLessThanOrEqual(3);
       for (const text of [entry.summary, ...entry.gotchas])
         expect(voiceProblems(text), text).toEqual([]);
-      for (const id of entry.lessons) expect(lessonById(id)?.ready).toBe(true);
+      for (const id of entry.lessons) expect(lessonById(id)).toBeDefined();
     });
 
     it("runs every form on every preset without waiting for input", () => {

@@ -1,0 +1,472 @@
+{
+  "final": {
+    "config": {
+      "global": [
+        [
+          "user.name",
+          "Sam Lee"
+        ],
+        [
+          "user.email",
+          "sam@example.com"
+        ],
+        [
+          "init.defaultbranch",
+          "main"
+        ]
+      ],
+      "system": []
+    },
+    "dirs": [
+      "project",
+      "project/docs"
+    ],
+    "files": {
+      "project/a.txt": "a\nb\n",
+      "project/docs/guide.md": "# Guide\nmore\n"
+    },
+    "repos": {
+      "project": {
+        "config": [
+          [
+            "core.repositoryformatversion",
+            "0"
+          ],
+          [
+            "core.filemode",
+            "false"
+          ],
+          [
+            "core.bare",
+            "false"
+          ],
+          [
+            "core.logallrefupdates",
+            "true"
+          ],
+          [
+            "core.symlinks",
+            "false"
+          ],
+          [
+            "core.ignorecase",
+            "true"
+          ]
+        ],
+        "head": {
+          "ref": "refs/heads/main"
+        },
+        "index": [
+          {
+            "mode": "100644",
+            "oid": "422c2b7ab3b3c668038da977e4e93a5fc623169c",
+            "path": "a.txt",
+            "stage": 0
+          },
+          {
+            "mode": "100644",
+            "oid": "60141d6771b72eb81827f04ecd6fee8c980fda32",
+            "path": "docs/guide.md",
+            "stage": 0
+          }
+        ],
+        "objects": {
+          "11b5808e4673faf1188335b322fd347dbd083e4c": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "a.txt",
+                "oid": "422c2b7ab3b3c668038da977e4e93a5fc623169c"
+              },
+              {
+                "mode": "40000",
+                "name": "docs",
+                "oid": "a2cee25e07384988b388900d21dd2c9bd32ed487"
+              }
+            ],
+            "type": "tree"
+          },
+          "422c2b7ab3b3c668038da977e4e93a5fc623169c": {
+            "body": "a\nb\n",
+            "type": "blob"
+          },
+          "47e7fcce03c2531dd9acd972c7df4331c8815d69": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "a.txt",
+                "oid": "422c2b7ab3b3c668038da977e4e93a5fc623169c"
+              },
+              {
+                "mode": "40000",
+                "name": "docs",
+                "oid": "74eaebdf16b7b37d56d0ed6025aa53bcb0c8192b"
+              }
+            ],
+            "type": "tree"
+          },
+          "4eb6201bf43f330a72039550c7f35e81e818baf5": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "a.txt",
+                "oid": "78981922613b2afb6025042ff6bd878ac1994e85"
+              },
+              {
+                "mode": "40000",
+                "name": "docs",
+                "oid": "a2cee25e07384988b388900d21dd2c9bd32ed487"
+              }
+            ],
+            "type": "tree"
+          },
+          "60141d6771b72eb81827f04ecd6fee8c980fda32": {
+            "body": "# Guide\nmore\n",
+            "type": "blob"
+          },
+          "74eaebdf16b7b37d56d0ed6025aa53bcb0c8192b": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "guide.md",
+                "oid": "60141d6771b72eb81827f04ecd6fee8c980fda32"
+              }
+            ],
+            "type": "tree"
+          },
+          "78981922613b2afb6025042ff6bd878ac1994e85": {
+            "body": "a\n",
+            "type": "blob"
+          },
+          "8c0d02fadc02df29eefff5ad660a022b4a8e5efd": {
+            "body": "# Guide\n",
+            "type": "blob"
+          },
+          "8c9a4cdac83f2474b2993f04a1573a73efcb5367": {
+            "body": "tree 47e7fcce03c2531dd9acd972c7df4331c8815d69\nparent 9f25dd753105f240be2ecba816d1d4ac087e354f\nauthor Sam Lee <sam@example.com> 1767226080 +0000\ncommitter Sam Lee <sam@example.com> 1767226080 +0000\n\nChange guide\n",
+            "type": "commit"
+          },
+          "900b4f4c253cde0c756bd10c075f1e4d6add2a48": {
+            "body": "tree 4eb6201bf43f330a72039550c7f35e81e818baf5\nauthor Sam Lee <sam@example.com> 1767225720 +0000\ncommitter Sam Lee <sam@example.com> 1767225720 +0000\n\nFirst\n",
+            "type": "commit"
+          },
+          "9f25dd753105f240be2ecba816d1d4ac087e354f": {
+            "body": "tree 11b5808e4673faf1188335b322fd347dbd083e4c\nparent 900b4f4c253cde0c756bd10c075f1e4d6add2a48\nauthor Sam Lee <sam@example.com> 1767225900 +0000\ncommitter Sam Lee <sam@example.com> 1767225900 +0000\n\nChange a\n",
+            "type": "commit"
+          },
+          "a2cee25e07384988b388900d21dd2c9bd32ed487": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "guide.md",
+                "oid": "8c0d02fadc02df29eefff5ad660a022b4a8e5efd"
+              }
+            ],
+            "type": "tree"
+          }
+        },
+        "reflogs": {
+          "HEAD": [
+            "0000000000000000000000000000000000000000 900b4f4c253cde0c756bd10c075f1e4d6add2a48 Sam Lee <sam@example.com> 1767225720 +0000\tcommit (initial): First",
+            "900b4f4c253cde0c756bd10c075f1e4d6add2a48 9f25dd753105f240be2ecba816d1d4ac087e354f Sam Lee <sam@example.com> 1767225900 +0000\tcommit: Change a",
+            "9f25dd753105f240be2ecba816d1d4ac087e354f 8c9a4cdac83f2474b2993f04a1573a73efcb5367 Sam Lee <sam@example.com> 1767226080 +0000\tcommit: Change guide"
+          ],
+          "refs/heads/main": [
+            "0000000000000000000000000000000000000000 900b4f4c253cde0c756bd10c075f1e4d6add2a48 Sam Lee <sam@example.com> 1767225720 +0000\tcommit (initial): First",
+            "900b4f4c253cde0c756bd10c075f1e4d6add2a48 9f25dd753105f240be2ecba816d1d4ac087e354f Sam Lee <sam@example.com> 1767225900 +0000\tcommit: Change a",
+            "9f25dd753105f240be2ecba816d1d4ac087e354f 8c9a4cdac83f2474b2993f04a1573a73efcb5367 Sam Lee <sam@example.com> 1767226080 +0000\tcommit: Change guide"
+          ]
+        },
+        "refs": {
+          "refs/heads/main": "8c9a4cdac83f2474b2993f04a1573a73efcb5367"
+        }
+      }
+    }
+  },
+  "git": "2.45.1.windows.1",
+  "script": {
+    "steps": [
+      "git init -q",
+      "git add .",
+      "git commit -q -m \"First\"",
+      "echo b >> a.txt",
+      "git add a.txt",
+      "git commit -q -m \"Change a\"",
+      "echo more >> docs/guide.md",
+      "git add docs",
+      "git commit -q -m \"Change guide\"",
+      "git log --oneline HEAD~1",
+      "git log --oneline -n 1 HEAD~1",
+      "git log HEAD~2",
+      "git log --oneline HEAD HEAD~1",
+      "git log --oneline -- a.txt",
+      "git log --oneline docs",
+      "git log --oneline -- missing.txt",
+      "git log --oneline main -- docs/guide.md",
+      "git log -p -n 2",
+      "git log --oneline -p -2",
+      "git log --stat",
+      "git log --oneline --stat",
+      "git log -p -- a.txt",
+      "git log --name-only -2",
+      "git log --oneline --name-only",
+      "git log -s -1",
+      "cd docs",
+      "git log --oneline -- .",
+      "git log --oneline guide.md",
+      "cd ..",
+      "git log --oneline nope",
+      "git log --oneline HEAD~9 --",
+      "git log --oneline missing.txt",
+      "git log --graph --oneline -- a.txt",
+      "git log --graph --stat -2"
+    ],
+    "world": {
+      "cwd": "project",
+      "files": {
+        "project/a.txt": "a\n",
+        "project/docs/guide.md": "# Guide\n"
+      }
+    }
+  },
+  "steps": [
+    {
+      "cmd": "git init -q",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git add .",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git commit -q -m \"First\"",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "echo b >> a.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git add a.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git commit -q -m \"Change a\"",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "echo more >> docs/guide.md",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git add docs",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git commit -q -m \"Change guide\"",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git log --oneline HEAD~1",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "9f25dd7 Change a\n900b4f4 First\n"
+    },
+    {
+      "cmd": "git log --oneline -n 1 HEAD~1",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "9f25dd7 Change a\n"
+    },
+    {
+      "cmd": "git log HEAD~2",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "commit 900b4f4c253cde0c756bd10c075f1e4d6add2a48\nAuthor: Sam Lee <sam@example.com>\nDate:   Thu Jan 1 00:02:00 2026 +0000\n\n    First\n"
+    },
+    {
+      "cmd": "git log --oneline HEAD HEAD~1",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "8c9a4cd (HEAD -> main) Change guide\n9f25dd7 Change a\n900b4f4 First\n"
+    },
+    {
+      "cmd": "git log --oneline -- a.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "9f25dd7 Change a\n900b4f4 First\n"
+    },
+    {
+      "cmd": "git log --oneline docs",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "8c9a4cd (HEAD -> main) Change guide\n900b4f4 First\n"
+    },
+    {
+      "cmd": "git log --oneline -- missing.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git log --oneline main -- docs/guide.md",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "8c9a4cd (HEAD -> main) Change guide\n900b4f4 First\n"
+    },
+    {
+      "cmd": "git log -p -n 2",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "commit 8c9a4cdac83f2474b2993f04a1573a73efcb5367 (HEAD -> main)\nAuthor: Sam Lee <sam@example.com>\nDate:   Thu Jan 1 00:08:00 2026 +0000\n\n    Change guide\n\ndiff --git a/docs/guide.md b/docs/guide.md\nindex 8c0d02f..60141d6 100644\n--- a/docs/guide.md\n+++ b/docs/guide.md\n@@ -1 +1,2 @@\n # Guide\n+more\n\ncommit 9f25dd753105f240be2ecba816d1d4ac087e354f\nAuthor: Sam Lee <sam@example.com>\nDate:   Thu Jan 1 00:05:00 2026 +0000\n\n    Change a\n\ndiff --git a/a.txt b/a.txt\nindex 7898192..422c2b7 100644\n--- a/a.txt\n+++ b/a.txt\n@@ -1 +1,2 @@\n a\n+b\n"
+    },
+    {
+      "cmd": "git log --oneline -p -2",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "8c9a4cd (HEAD -> main) Change guide\ndiff --git a/docs/guide.md b/docs/guide.md\nindex 8c0d02f..60141d6 100644\n--- a/docs/guide.md\n+++ b/docs/guide.md\n@@ -1 +1,2 @@\n # Guide\n+more\n9f25dd7 Change a\ndiff --git a/a.txt b/a.txt\nindex 7898192..422c2b7 100644\n--- a/a.txt\n+++ b/a.txt\n@@ -1 +1,2 @@\n a\n+b\n"
+    },
+    {
+      "cmd": "git log --stat",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "commit 8c9a4cdac83f2474b2993f04a1573a73efcb5367 (HEAD -> main)\nAuthor: Sam Lee <sam@example.com>\nDate:   Thu Jan 1 00:08:00 2026 +0000\n\n    Change guide\n\n docs/guide.md | 1 +\n 1 file changed, 1 insertion(+)\n\ncommit 9f25dd753105f240be2ecba816d1d4ac087e354f\nAuthor: Sam Lee <sam@example.com>\nDate:   Thu Jan 1 00:05:00 2026 +0000\n\n    Change a\n\n a.txt | 1 +\n 1 file changed, 1 insertion(+)\n\ncommit 900b4f4c253cde0c756bd10c075f1e4d6add2a48\nAuthor: Sam Lee <sam@example.com>\nDate:   Thu Jan 1 00:02:00 2026 +0000\n\n    First\n\n a.txt         | 1 +\n docs/guide.md | 1 +\n 2 files changed, 2 insertions(+)\n"
+    },
+    {
+      "cmd": "git log --oneline --stat",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "8c9a4cd (HEAD -> main) Change guide\n docs/guide.md | 1 +\n 1 file changed, 1 insertion(+)\n9f25dd7 Change a\n a.txt | 1 +\n 1 file changed, 1 insertion(+)\n900b4f4 First\n a.txt         | 1 +\n docs/guide.md | 1 +\n 2 files changed, 2 insertions(+)\n"
+    },
+    {
+      "cmd": "git log -p -- a.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "commit 9f25dd753105f240be2ecba816d1d4ac087e354f\nAuthor: Sam Lee <sam@example.com>\nDate:   Thu Jan 1 00:05:00 2026 +0000\n\n    Change a\n\ndiff --git a/a.txt b/a.txt\nindex 7898192..422c2b7 100644\n--- a/a.txt\n+++ b/a.txt\n@@ -1 +1,2 @@\n a\n+b\n\ncommit 900b4f4c253cde0c756bd10c075f1e4d6add2a48\nAuthor: Sam Lee <sam@example.com>\nDate:   Thu Jan 1 00:02:00 2026 +0000\n\n    First\n\ndiff --git a/a.txt b/a.txt\nnew file mode 100644\nindex 0000000..7898192\n--- /dev/null\n+++ b/a.txt\n@@ -0,0 +1 @@\n+a\n"
+    },
+    {
+      "cmd": "git log --name-only -2",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "commit 8c9a4cdac83f2474b2993f04a1573a73efcb5367 (HEAD -> main)\nAuthor: Sam Lee <sam@example.com>\nDate:   Thu Jan 1 00:08:00 2026 +0000\n\n    Change guide\n\ndocs/guide.md\n\ncommit 9f25dd753105f240be2ecba816d1d4ac087e354f\nAuthor: Sam Lee <sam@example.com>\nDate:   Thu Jan 1 00:05:00 2026 +0000\n\n    Change a\n\na.txt\n"
+    },
+    {
+      "cmd": "git log --oneline --name-only",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "8c9a4cd (HEAD -> main) Change guide\ndocs/guide.md\n9f25dd7 Change a\na.txt\n900b4f4 First\na.txt\ndocs/guide.md\n"
+    },
+    {
+      "cmd": "git log -s -1",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "commit 8c9a4cdac83f2474b2993f04a1573a73efcb5367 (HEAD -> main)\nAuthor: Sam Lee <sam@example.com>\nDate:   Thu Jan 1 00:08:00 2026 +0000\n\n    Change guide\n"
+    },
+    {
+      "cmd": "cd docs",
+      "cwd": "/home/you/project/docs",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git log --oneline -- .",
+      "cwd": "/home/you/project/docs",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "8c9a4cd (HEAD -> main) Change guide\n900b4f4 First\n"
+    },
+    {
+      "cmd": "git log --oneline guide.md",
+      "cwd": "/home/you/project/docs",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "8c9a4cd (HEAD -> main) Change guide\n900b4f4 First\n"
+    },
+    {
+      "cmd": "cd ..",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git log --oneline nope",
+      "cwd": "/home/you/project",
+      "exitCode": 128,
+      "stderr": "fatal: ambiguous argument 'nope': unknown revision or path not in the working tree.\nUse '--' to separate paths from revisions, like this:\n'git <command> [<revision>...] -- [<file>...]'\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git log --oneline HEAD~9 --",
+      "cwd": "/home/you/project",
+      "exitCode": 128,
+      "stderr": "fatal: bad revision 'HEAD~9'\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git log --oneline missing.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 128,
+      "stderr": "fatal: ambiguous argument 'missing.txt': unknown revision or path not in the working tree.\nUse '--' to separate paths from revisions, like this:\n'git <command> [<revision>...] -- [<file>...]'\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git log --graph --oneline -- a.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "* 9f25dd7 Change a\n* 900b4f4 First\n"
+    },
+    {
+      "cmd": "git log --graph --stat -2",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "* commit 8c9a4cdac83f2474b2993f04a1573a73efcb5367 (HEAD -> main)\n| Author: Sam Lee <sam@example.com>\n| Date:   Thu Jan 1 00:08:00 2026 +0000\n| \n|     Change guide\n| \n|  docs/guide.md | 1 +\n|  1 file changed, 1 insertion(+)\n| \n* commit 9f25dd753105f240be2ecba816d1d4ac087e354f\n| Author: Sam Lee <sam@example.com>\n| Date:   Thu Jan 1 00:05:00 2026 +0000\n| \n|     Change a\n| \n|  a.txt | 1 +\n|  1 file changed, 1 insertion(+)\n"
+    }
+  ]
+}

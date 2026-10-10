@@ -2,7 +2,7 @@ import type { OptionSpec } from "../cli/options";
 import { diffFormat, FORMAT_OPTIONS, renderDiff } from "../diff/render";
 import {
   commitChanges,
-  commitHeader,
+  commitEntry,
   HEADER_OPTIONS,
   headerStyle,
   unbornRefusal,
@@ -73,10 +73,7 @@ export const show = defineCommand({
       const pairs = commitChanges(pool, commit, input.specs);
       if (input.specs.length && !pairs.length) continue;
       const changes = renderDiff(pool, pairs, format);
-      const header = commitHeader(pool, repo, oid, commit, style);
-      blocks.push(
-        style.oneline || !changes ? header + changes : `${header}\n${changes}`,
-      );
+      blocks.push(commitEntry(pool, repo, { oid, commit }, style, changes));
     }
     return { stdout: blocks.join(style.oneline ? "" : "\n") };
   },

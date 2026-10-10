@@ -1,0 +1,42 @@
+{
+  "world": {
+    "files": { "project/a.txt": "a\n", "project/docs/guide.md": "# Guide\n" },
+    "cwd": "project"
+  },
+  "steps": [
+    "git init -q",
+    "git add .",
+    "git commit -q -m \"First\"",
+    "echo b >> a.txt",
+    "git add a.txt",
+    "git commit -q -m \"Change a\"",
+    "echo more >> docs/guide.md",
+    "git add docs",
+    "git commit -q -m \"Change guide\"",
+    "git log --oneline HEAD~1",
+    "git log --oneline -n 1 HEAD~1",
+    "git log HEAD~2",
+    "git log --oneline HEAD HEAD~1",
+    "git log --oneline -- a.txt",
+    "git log --oneline docs",
+    "git log --oneline -- missing.txt",
+    "git log --oneline main -- docs/guide.md",
+    "git log -p -n 2",
+    "git log --oneline -p -2",
+    "git log --stat",
+    "git log --oneline --stat",
+    "git log -p -- a.txt",
+    "git log --name-only -2",
+    "git log --oneline --name-only",
+    "git log -s -1",
+    "cd docs",
+    "git log --oneline -- .",
+    "git log --oneline guide.md",
+    "cd ..",
+    "git log --oneline nope",
+    "git log --oneline HEAD~9 --",
+    "git log --oneline missing.txt",
+    "git log --graph --oneline -- a.txt",
+    "git log --graph --stat -2"
+  ]
+}

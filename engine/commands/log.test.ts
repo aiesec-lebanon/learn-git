@@ -40,8 +40,9 @@ describe("git log", () => {
 
   it.each([
     ["git log --all", "not simulated here: git log --all\n"],
-    ["git log -p", "not simulated here: git log --patch\n"],
-    ["git log main", "not simulated here: git log with revisions or paths\n"],
+    ["git log --follow", "not simulated here: git log --follow\n"],
+    ["git log main..HEAD", "not simulated here: revision ranges\n"],
+    ["git log ^main", "not simulated here: revision ranges\n"],
     [
       "git log --decorate=full",
       "not simulated here: git log --decorate=full\n",

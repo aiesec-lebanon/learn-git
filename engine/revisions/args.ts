@@ -2,6 +2,7 @@ import type { ParsedOptions } from "../cli/options";
 import { refuse, type CommandResult } from "../commands/registry";
 import { resolvePath } from "../files/paths";
 import { addMessages } from "../messages/add";
+import { notSimulated } from "../messages/git";
 import { revisionMessages as m } from "../messages/revisions";
 import { parsePathspecs, type Pathspec } from "../pathspec";
 import type { Machine, ObjectPool, Oid, Repo } from "../types";
@@ -13,9 +14,14 @@ export type RevisionArgs =
       readonly revisions: readonly { text: string; oid: Oid }[];
       readonly paths: readonly string[];
     }
-  | { readonly ok: false; readonly stderr: string };
+  | {
+      readonly ok: false;
+      readonly stderr: string;
+      readonly code: "unknown-revision" | "not-simulated";
+    };
 
 const GLOB = /[*?[]/;
+const RANGE = /^\^.|\.\./;
 
 /**
  * Splits arguments into revisions and paths as Git's `setup_revisions`
@@ -40,24 +46,43 @@ export function revisionArgs(
     const text = args[i] ?? "";
     const resolved = resolveRevision(pool, repo, text);
     if (!resolved.ok) {
+      if (
+        RANGE.test(text) &&
+        !text.split("/").includes("..") &&
+        !exists(text)
+      ) {
+        return {
+          ok: false,
+          stderr: notSimulated("revision ranges"),
+          code: "not-simulated",
+        };
+      }
       const prefix =
         resolved.reason === "ambiguous-id" ? m.ambiguousId(text) : "";
       if (afterDashDash !== null) {
-        return { ok: false, stderr: prefix + m.badRevision(text) };
+        return {
+          ok: false,
+          stderr: prefix + m.badRevision(text),
+          code: "unknown-revision",
+        };
       }
       for (let j = i; j < args.length; j++) {
         const arg = args[j] ?? "";
         if (GLOB.test(arg) || exists(arg)) continue;
         const stderr = j === i ? prefix + m.unknown(arg) : m.noSuchPath(arg);
-        return { ok: false, stderr };
+        return { ok: false, stderr, code: "unknown-revision" };
       }
       return { ok: true, revisions, paths: args.slice(i) };
     }
     if (afterDashDash === null && exists(text)) {
-      return { ok: false, stderr: m.both(text) };
+      return { ok: false, stderr: m.both(text), code: "unknown-revision" };
     }
     if (!pool.has(resolved.oid)) {
-      return { ok: false, stderr: m.badObject(text) };
+      return {
+        ok: false,
+        stderr: m.badObject(text),
+        code: "unknown-revision",
+      };
     }
     revisions.push({ text, oid: resolved.oid });
   }
@@ -77,7 +102,11 @@ export function revisionInput(
   options: ParsedOptions,
 ): RevisionInput | CommandResult {
   const split = revisionArgs(pool, repo, machine, options);
-  if (!split.ok) return refuse("unknown-revision", split.stderr);
+  if (!split.ok) {
+    return split.code === "not-simulated"
+      ? refuse(split.code, split.stderr, 1)
+      : refuse(split.code, split.stderr);
+  }
   const parsed = parsePathspecs(split.paths, repo.workdir, machine.cwd);
   if (!parsed.ok) {
     return refuse(

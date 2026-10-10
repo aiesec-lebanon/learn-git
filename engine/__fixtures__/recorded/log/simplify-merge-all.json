@@ -1,0 +1,311 @@
+{
+  "final": {
+    "config": {
+      "global": [
+        [
+          "user.name",
+          "Sam Lee"
+        ],
+        [
+          "user.email",
+          "sam@example.com"
+        ],
+        [
+          "init.defaultbranch",
+          "main"
+        ]
+      ],
+      "system": []
+    },
+    "dirs": [
+      "project"
+    ],
+    "files": {
+      "project/a.txt": "a\nm\n",
+      "project/b.txt": "b\nt\n"
+    },
+    "repos": {
+      "project": {
+        "config": [
+          [
+            "core.repositoryformatversion",
+            "0"
+          ],
+          [
+            "core.filemode",
+            "false"
+          ],
+          [
+            "core.bare",
+            "false"
+          ],
+          [
+            "core.logallrefupdates",
+            "true"
+          ],
+          [
+            "core.symlinks",
+            "false"
+          ],
+          [
+            "core.ignorecase",
+            "true"
+          ]
+        ],
+        "head": {
+          "ref": "refs/heads/main"
+        },
+        "index": [
+          {
+            "mode": "100644",
+            "oid": "9327e295f637fe6fd721999358fd4aa194024d19",
+            "path": "a.txt",
+            "stage": 0
+          },
+          {
+            "mode": "100644",
+            "oid": "fcd2c724aee71816ae2f0e497b058ef58fd65655",
+            "path": "b.txt",
+            "stage": 0
+          }
+        ],
+        "objects": {
+          "2d9f2c281513f3232fd9cfc393874efe554546fa": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "a.txt",
+                "oid": "9327e295f637fe6fd721999358fd4aa194024d19"
+              },
+              {
+                "mode": "100644",
+                "name": "b.txt",
+                "oid": "61780798228d17af2d34fce4cfbdf35556832472"
+              }
+            ],
+            "type": "tree"
+          },
+          "3a3b89d4fe0c65128ffb67db9becc896e5d54a2a": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "a.txt",
+                "oid": "9327e295f637fe6fd721999358fd4aa194024d19"
+              },
+              {
+                "mode": "100644",
+                "name": "b.txt",
+                "oid": "fcd2c724aee71816ae2f0e497b058ef58fd65655"
+              }
+            ],
+            "type": "tree"
+          },
+          "3d7cd1bd660b6017222dcec5f640edf1819fba6c": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "a.txt",
+                "oid": "78981922613b2afb6025042ff6bd878ac1994e85"
+              },
+              {
+                "mode": "100644",
+                "name": "b.txt",
+                "oid": "fcd2c724aee71816ae2f0e497b058ef58fd65655"
+              }
+            ],
+            "type": "tree"
+          },
+          "4eba3545284c20140967eda4dd9975ac27ef9fd1": {
+            "body": "tree f4b354863caa9cea99b95422c9dab70465757d87\nauthor Sam Lee <sam@example.com> 1767225720 +0000\ncommitter Sam Lee <sam@example.com> 1767225720 +0000\n\nBase\n",
+            "type": "commit"
+          },
+          "61780798228d17af2d34fce4cfbdf35556832472": {
+            "body": "b\n",
+            "type": "blob"
+          },
+          "78981922613b2afb6025042ff6bd878ac1994e85": {
+            "body": "a\n",
+            "type": "blob"
+          },
+          "9327e295f637fe6fd721999358fd4aa194024d19": {
+            "body": "a\nm\n",
+            "type": "blob"
+          },
+          "bdd30175c72cfeb51ae19355ffe35c7585338d0a": {
+            "body": "tree 2d9f2c281513f3232fd9cfc393874efe554546fa\nparent 4eba3545284c20140967eda4dd9975ac27ef9fd1\nauthor Sam Lee <sam@example.com> 1767226200 +0000\ncommitter Sam Lee <sam@example.com> 1767226200 +0000\n\nMain changes a\n",
+            "type": "commit"
+          },
+          "cc26d9a7ff7faaa752823a56dfee843e392f88e1": {
+            "body": "tree 3a3b89d4fe0c65128ffb67db9becc896e5d54a2a\nparent bdd30175c72cfeb51ae19355ffe35c7585338d0a\nparent d618aa3f22de61c5bd27706118a775488de5e007\nauthor Sam Lee <sam@example.com> 1767226260 +0000\ncommitter Sam Lee <sam@example.com> 1767226260 +0000\n\nMerge branch 'topic'\n",
+            "type": "commit"
+          },
+          "d618aa3f22de61c5bd27706118a775488de5e007": {
+            "body": "tree 3d7cd1bd660b6017222dcec5f640edf1819fba6c\nparent 4eba3545284c20140967eda4dd9975ac27ef9fd1\nauthor Sam Lee <sam@example.com> 1767225960 +0000\ncommitter Sam Lee <sam@example.com> 1767225960 +0000\n\nTopic changes b\n",
+            "type": "commit"
+          },
+          "f4b354863caa9cea99b95422c9dab70465757d87": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "a.txt",
+                "oid": "78981922613b2afb6025042ff6bd878ac1994e85"
+              },
+              {
+                "mode": "100644",
+                "name": "b.txt",
+                "oid": "61780798228d17af2d34fce4cfbdf35556832472"
+              }
+            ],
+            "type": "tree"
+          },
+          "fcd2c724aee71816ae2f0e497b058ef58fd65655": {
+            "body": "b\nt\n",
+            "type": "blob"
+          }
+        },
+        "reflogs": {
+          "HEAD": [
+            "0000000000000000000000000000000000000000 4eba3545284c20140967eda4dd9975ac27ef9fd1 Sam Lee <sam@example.com> 1767225720 +0000\tcommit (initial): Base",
+            "4eba3545284c20140967eda4dd9975ac27ef9fd1 4eba3545284c20140967eda4dd9975ac27ef9fd1 Sam Lee <sam@example.com> 1767225780 +0000\tcheckout: moving from main to topic",
+            "4eba3545284c20140967eda4dd9975ac27ef9fd1 d618aa3f22de61c5bd27706118a775488de5e007 Sam Lee <sam@example.com> 1767225960 +0000\tcommit: Topic changes b",
+            "d618aa3f22de61c5bd27706118a775488de5e007 4eba3545284c20140967eda4dd9975ac27ef9fd1 Sam Lee <sam@example.com> 1767226020 +0000\tcheckout: moving from topic to main",
+            "4eba3545284c20140967eda4dd9975ac27ef9fd1 bdd30175c72cfeb51ae19355ffe35c7585338d0a Sam Lee <sam@example.com> 1767226200 +0000\tcommit: Main changes a",
+            "bdd30175c72cfeb51ae19355ffe35c7585338d0a cc26d9a7ff7faaa752823a56dfee843e392f88e1 Sam Lee <sam@example.com> 1767226260 +0000\tmerge topic: Merge made by the 'ort' strategy."
+          ],
+          "refs/heads/main": [
+            "0000000000000000000000000000000000000000 4eba3545284c20140967eda4dd9975ac27ef9fd1 Sam Lee <sam@example.com> 1767225720 +0000\tcommit (initial): Base",
+            "4eba3545284c20140967eda4dd9975ac27ef9fd1 bdd30175c72cfeb51ae19355ffe35c7585338d0a Sam Lee <sam@example.com> 1767226200 +0000\tcommit: Main changes a",
+            "bdd30175c72cfeb51ae19355ffe35c7585338d0a cc26d9a7ff7faaa752823a56dfee843e392f88e1 Sam Lee <sam@example.com> 1767226260 +0000\tmerge topic: Merge made by the 'ort' strategy."
+          ],
+          "refs/heads/topic": [
+            "0000000000000000000000000000000000000000 4eba3545284c20140967eda4dd9975ac27ef9fd1 Sam Lee <sam@example.com> 1767225780 +0000\tbranch: Created from HEAD",
+            "4eba3545284c20140967eda4dd9975ac27ef9fd1 d618aa3f22de61c5bd27706118a775488de5e007 Sam Lee <sam@example.com> 1767225960 +0000\tcommit: Topic changes b"
+          ]
+        },
+        "refs": {
+          "refs/heads/main": "cc26d9a7ff7faaa752823a56dfee843e392f88e1",
+          "refs/heads/topic": "d618aa3f22de61c5bd27706118a775488de5e007"
+        }
+      }
+    }
+  },
+  "git": "2.45.1.windows.1",
+  "script": {
+    "mode": "seeded",
+    "steps": [
+      "git init -q",
+      "git add .",
+      "git commit -q -m \"Base\"",
+      "git switch -q -c topic",
+      "echo t >> b.txt",
+      "git add b.txt",
+      "git commit -q -m \"Topic changes b\"",
+      "git switch -q main",
+      "echo m >> a.txt",
+      "git add a.txt",
+      "git commit -q -m \"Main changes a\"",
+      "git merge -q --no-edit topic",
+      "git log -p"
+    ],
+    "world": {
+      "cwd": "project",
+      "files": {
+        "project/a.txt": "a\n",
+        "project/b.txt": "b\n"
+      }
+    }
+  },
+  "steps": [
+    {
+      "cmd": "git init -q",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git add .",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git commit -q -m \"Base\"",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git switch -q -c topic",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "echo t >> b.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git add b.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git commit -q -m \"Topic changes b\"",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git switch -q main",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "echo m >> a.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git add a.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git commit -q -m \"Main changes a\"",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git merge -q --no-edit topic",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git log -p",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "commit cc26d9a7ff7faaa752823a56dfee843e392f88e1 (HEAD -> main)\nMerge: bdd3017 d618aa3\nAuthor: Sam Lee <sam@example.com>\nDate:   Thu Jan 1 00:11:00 2026 +0000\n\n    Merge branch 'topic'\n\ncommit bdd30175c72cfeb51ae19355ffe35c7585338d0a\nAuthor: Sam Lee <sam@example.com>\nDate:   Thu Jan 1 00:10:00 2026 +0000\n\n    Main changes a\n\ndiff --git a/a.txt b/a.txt\nindex 7898192..9327e29 100644\n--- a/a.txt\n+++ b/a.txt\n@@ -1 +1,2 @@\n a\n+m\n\ncommit d618aa3f22de61c5bd27706118a775488de5e007 (topic)\nAuthor: Sam Lee <sam@example.com>\nDate:   Thu Jan 1 00:06:00 2026 +0000\n\n    Topic changes b\n\ndiff --git a/b.txt b/b.txt\nindex 6178079..fcd2c72 100644\n--- a/b.txt\n+++ b/b.txt\n@@ -1 +1,2 @@\n b\n+t\n\ncommit 4eba3545284c20140967eda4dd9975ac27ef9fd1\nAuthor: Sam Lee <sam@example.com>\nDate:   Thu Jan 1 00:02:00 2026 +0000\n\n    Base\n\ndiff --git a/a.txt b/a.txt\nnew file mode 100644\nindex 0000000..7898192\n--- /dev/null\n+++ b/a.txt\n@@ -0,0 +1 @@\n+a\ndiff --git a/b.txt b/b.txt\nnew file mode 100644\nindex 0000000..6178079\n--- /dev/null\n+++ b/b.txt\n@@ -0,0 +1 @@\n+b\n"
+    }
+  ]
+}

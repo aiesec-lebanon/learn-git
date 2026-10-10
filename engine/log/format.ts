@@ -65,8 +65,12 @@ export function commitHeader(
   if (style.oneline) {
     return `${abbreviate(pool, oid)}${label} ${subjectOf(commit.message)}\n`;
   }
-  const { author } = commit;
-  return `commit ${oid}${label}\nAuthor: ${author.name} <${author.email}>\nDate:   ${formatGitDate(author.time, author.tz)}\n\n${indent(commit.message)}`;
+  const { author, parents } = commit;
+  const merge =
+    parents.length > 1
+      ? `Merge: ${parents.map((p) => abbreviate(pool, p)).join(" ")}\n`
+      : "";
+  return `commit ${oid}${label}\n${merge}Author: ${author.name} <${author.email}>\nDate:   ${formatGitDate(author.time, author.tz)}\n\n${indent(commit.message)}`;
 }
 
 /** What a commit changed against its first parent (all files for a root commit). */
@@ -86,4 +90,16 @@ export function unbornRefusal(repo: Repo): CommandResult {
   const branch =
     repo.head.kind === "symbolic" ? shortRefName(repo.head.ref) : "HEAD";
   return refuse("unborn-branch", noCommitsYet(branch));
+}
+
+/** A commit block followed by its rendered changes, spaced as `log` and `show` print them. */
+export function commitEntry(
+  pool: ObjectPool,
+  repo: Repo,
+  walked: { readonly oid: Oid; readonly commit: Commit },
+  style: HeaderStyle,
+  changes: string,
+): string {
+  const header = commitHeader(pool, repo, walked.oid, walked.commit, style);
+  return style.oneline || !changes ? header + changes : `${header}\n${changes}`;
 }

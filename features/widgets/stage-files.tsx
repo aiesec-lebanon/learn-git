@@ -41,7 +41,7 @@ function StageFilesFor({ session }: { session: Session }) {
   const [ran, setRan] = useState<string | null>(null);
   const help = useId();
   const preview = carry ? dropCommand(carry.item, carry.target) : null;
-  const cards = carryable(files);
+  const movable = new Set(carryable(files).map((f) => f.path));
 
   const drop = (c: Carry<string, string> | null) => {
     setCarry(null);
@@ -99,9 +99,9 @@ function StageFilesFor({ session }: { session: Session }) {
       <div className="grid gap-3 sm:grid-cols-2">
         <section aria-label="Working tree" className={`${zone} border-line`}>
           <h4 className="m-0 font-display font-bold">Working tree</h4>
-          {cards.length ? (
-            <ul className="m-0 grid list-none gap-1 p-0">
-              {cards.map((file) => (
+          <ul className="m-0 grid list-none gap-1 p-0">
+            {files.worktree.map((file) =>
+              movable.has(file.path) ? (
                 <li key={file.path}>
                   <button
                     type="button"
@@ -122,13 +122,19 @@ function StageFilesFor({ session }: { session: Session }) {
                     {file.state ? <FileStateChip state={file.state} /> : null}
                   </button>
                 </li>
-              ))}
-            </ul>
-          ) : (
-            <p className="m-0 text-sm text-fg-muted">
-              Nothing changed since the staging area.
-            </p>
-          )}
+              ) : (
+                <li
+                  key={file.path}
+                  className="flex min-h-11 min-w-0 items-center gap-2 border-2 border-transparent px-3"
+                >
+                  <code className="min-w-0 truncate text-sm">
+                    <bdi>{file.path}</bdi>
+                  </code>
+                  <FileStateChip state="unmodified" />
+                </li>
+              ),
+            )}
+          </ul>
         </section>
         <section
           aria-label="Staging area"

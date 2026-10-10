@@ -1,0 +1,180 @@
+{
+  "final": {
+    "config": {
+      "global": [
+        [
+          "user.name",
+          "Sam Lee"
+        ],
+        [
+          "user.email",
+          "sam@example.com"
+        ],
+        [
+          "init.defaultbranch",
+          "main"
+        ]
+      ],
+      "system": []
+    },
+    "dirs": [
+      "project"
+    ],
+    "files": {
+      "project/notes.txt": "one\ntwo\n"
+    },
+    "repos": {
+      "project": {
+        "config": [
+          [
+            "core.repositoryformatversion",
+            "0"
+          ],
+          [
+            "core.filemode",
+            "false"
+          ],
+          [
+            "core.bare",
+            "false"
+          ],
+          [
+            "core.logallrefupdates",
+            "true"
+          ],
+          [
+            "core.symlinks",
+            "false"
+          ],
+          [
+            "core.ignorecase",
+            "true"
+          ]
+        ],
+        "head": {
+          "ref": "refs/heads/main"
+        },
+        "index": [
+          {
+            "mode": "100644",
+            "oid": "814f4a422927b82f5f8a43f8fab6d3839e3983f2",
+            "path": "notes.txt",
+            "stage": 0
+          }
+        ],
+        "objects": {
+          "02716b0d7b1d36fe6f4122715132b7ca69499cd4": {
+            "body": "tree 8faeb6afb911db3b97ef512d15f9bfe42ac16ce2\nauthor Sam Lee <sam@example.com> 1767225720 +0000\ncommitter Sam Lee <sam@example.com> 1767225720 +0000\n\nFirst\n",
+            "type": "commit"
+          },
+          "5626abf0f72e58d7a153368ba57db4c673c0e171": {
+            "body": "one\n",
+            "type": "blob"
+          },
+          "814f4a422927b82f5f8a43f8fab6d3839e3983f2": {
+            "body": "one\ntwo\n",
+            "type": "blob"
+          },
+          "8faeb6afb911db3b97ef512d15f9bfe42ac16ce2": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "notes.txt",
+                "oid": "5626abf0f72e58d7a153368ba57db4c673c0e171"
+              }
+            ],
+            "type": "tree"
+          },
+          "b8aec9de5833d1454488f7d3616a6408879f522b": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "notes.txt",
+                "oid": "814f4a422927b82f5f8a43f8fab6d3839e3983f2"
+              }
+            ],
+            "type": "tree"
+          },
+          "cb6ab9a0e9a0c58b90a7cbddd14666536beacdb6": {
+            "body": "tree b8aec9de5833d1454488f7d3616a6408879f522b\nparent 02716b0d7b1d36fe6f4122715132b7ca69499cd4\nauthor Sam Lee <sam@example.com> 1767225900 +0000\ncommitter Sam Lee <sam@example.com> 1767225900 +0000\n\nSecond line\n\nA body paragraph explains why.\n",
+            "type": "commit"
+          }
+        },
+        "reflogs": {
+          "HEAD": [
+            "0000000000000000000000000000000000000000 02716b0d7b1d36fe6f4122715132b7ca69499cd4 Sam Lee <sam@example.com> 1767225720 +0000\tcommit (initial): First",
+            "02716b0d7b1d36fe6f4122715132b7ca69499cd4 cb6ab9a0e9a0c58b90a7cbddd14666536beacdb6 Sam Lee <sam@example.com> 1767225900 +0000\tcommit: Second line"
+          ],
+          "refs/heads/main": [
+            "0000000000000000000000000000000000000000 02716b0d7b1d36fe6f4122715132b7ca69499cd4 Sam Lee <sam@example.com> 1767225720 +0000\tcommit (initial): First",
+            "02716b0d7b1d36fe6f4122715132b7ca69499cd4 cb6ab9a0e9a0c58b90a7cbddd14666536beacdb6 Sam Lee <sam@example.com> 1767225900 +0000\tcommit: Second line"
+          ]
+        },
+        "refs": {
+          "refs/heads/main": "cb6ab9a0e9a0c58b90a7cbddd14666536beacdb6"
+        }
+      }
+    }
+  },
+  "git": "2.45.1.windows.1",
+  "script": {
+    "steps": [
+      "git init",
+      "git add notes.txt",
+      "git commit -m \"First\"",
+      "echo two >> notes.txt",
+      "git add notes.txt",
+      "git commit -m \"Second line\" -m \"A body paragraph explains why.\""
+    ],
+    "world": {
+      "cwd": "project",
+      "files": {
+        "project/notes.txt": "one\n"
+      }
+    }
+  },
+  "steps": [
+    {
+      "cmd": "git init",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "Initialized empty Git repository in /home/you/project/.git/\n"
+    },
+    {
+      "cmd": "git add notes.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git commit -m \"First\"",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "[main (root-commit) 02716b0] First\n 1 file changed, 1 insertion(+)\n create mode 100644 notes.txt\n"
+    },
+    {
+      "cmd": "echo two >> notes.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git add notes.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git commit -m \"Second line\" -m \"A body paragraph explains why.\"",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "[main cb6ab9a] Second line\n 1 file changed, 1 insertion(+)\n"
+    }
+  ]
+}

@@ -1,0 +1,4 @@
+{
+  "world": { "files": { "project/hello.txt": "hello\n" }, "cwd": "project" },
+  "steps": ["git init", "git add hello.txt", "git commit -m \"Add hello\""]
+}

@@ -1,0 +1,305 @@
+{
+  "final": {
+    "config": {
+      "global": [
+        [
+          "user.name",
+          "Sam Lee"
+        ],
+        [
+          "user.email",
+          "sam@example.com"
+        ],
+        [
+          "init.defaultbranch",
+          "main"
+        ]
+      ],
+      "system": []
+    },
+    "dirs": [
+      "project",
+      "project/a",
+      "project/docs",
+      "project/docs/guide"
+    ],
+    "files": {
+      "project/A.md": "# Upper\n",
+      "project/a-b.txt": "dash\n",
+      "project/a.txt": "a\n",
+      "project/a/b.txt": "b\n",
+      "project/a0.txt": "zero\n",
+      "project/café notes.txt": "crème brûlée ☕\n",
+      "project/docs/guide/intro.md": "Welcome.\nSecond line.\n",
+      "project/empty.txt": "",
+      "project/no-newline.txt": "no newline at end"
+    },
+    "repos": {
+      "project": {
+        "config": [
+          [
+            "core.repositoryformatversion",
+            "0"
+          ],
+          [
+            "core.filemode",
+            "false"
+          ],
+          [
+            "core.bare",
+            "false"
+          ],
+          [
+            "core.logallrefupdates",
+            "true"
+          ],
+          [
+            "core.symlinks",
+            "false"
+          ],
+          [
+            "core.ignorecase",
+            "true"
+          ]
+        ],
+        "head": {
+          "ref": "refs/heads/main"
+        },
+        "index": [
+          {
+            "mode": "100644",
+            "oid": "4adf6825757801289bb2746e4bc84de90470bee5",
+            "path": "A.md",
+            "stage": 0
+          },
+          {
+            "mode": "100644",
+            "oid": "a2544f7ec3007899167de1fef481a5a0fd63fa41",
+            "path": "a-b.txt",
+            "stage": 0
+          },
+          {
+            "mode": "100644",
+            "oid": "78981922613b2afb6025042ff6bd878ac1994e85",
+            "path": "a.txt",
+            "stage": 0
+          },
+          {
+            "mode": "100644",
+            "oid": "61780798228d17af2d34fce4cfbdf35556832472",
+            "path": "a/b.txt",
+            "stage": 0
+          },
+          {
+            "mode": "100644",
+            "oid": "26af6a865b61e9a47e24ea6214a64c4cc294c215",
+            "path": "a0.txt",
+            "stage": 0
+          },
+          {
+            "mode": "100644",
+            "oid": "3d2c5754106ba0115675a02badd642dd3d7781f0",
+            "path": "café notes.txt",
+            "stage": 0
+          },
+          {
+            "mode": "100644",
+            "oid": "b5941b74b08cc8d85280cffe976901f315a8ecb7",
+            "path": "docs/guide/intro.md",
+            "stage": 0
+          },
+          {
+            "mode": "100644",
+            "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+            "path": "empty.txt",
+            "stage": 0
+          },
+          {
+            "mode": "100644",
+            "oid": "280250392660140786e862caaf3a1c6b92741d16",
+            "path": "no-newline.txt",
+            "stage": 0
+          }
+        ],
+        "objects": {
+          "006a4987bbf107972239c1d6e2662c8cf6324d63": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "A.md",
+                "oid": "4adf6825757801289bb2746e4bc84de90470bee5"
+              },
+              {
+                "mode": "100644",
+                "name": "a-b.txt",
+                "oid": "a2544f7ec3007899167de1fef481a5a0fd63fa41"
+              },
+              {
+                "mode": "100644",
+                "name": "a.txt",
+                "oid": "78981922613b2afb6025042ff6bd878ac1994e85"
+              },
+              {
+                "mode": "40000",
+                "name": "a",
+                "oid": "f8f7aefc2900a3d737cea9eee45729fd55761e1a"
+              },
+              {
+                "mode": "100644",
+                "name": "a0.txt",
+                "oid": "26af6a865b61e9a47e24ea6214a64c4cc294c215"
+              },
+              {
+                "mode": "100644",
+                "name": "café notes.txt",
+                "oid": "3d2c5754106ba0115675a02badd642dd3d7781f0"
+              },
+              {
+                "mode": "40000",
+                "name": "docs",
+                "oid": "3db0b10150e0684cf88a1b4da33154b2188b58b2"
+              },
+              {
+                "mode": "100644",
+                "name": "empty.txt",
+                "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+              },
+              {
+                "mode": "100644",
+                "name": "no-newline.txt",
+                "oid": "280250392660140786e862caaf3a1c6b92741d16"
+              }
+            ],
+            "type": "tree"
+          },
+          "0dbde7f45d78684545f0b7882bef9de143db10f0": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "intro.md",
+                "oid": "b5941b74b08cc8d85280cffe976901f315a8ecb7"
+              }
+            ],
+            "type": "tree"
+          },
+          "26af6a865b61e9a47e24ea6214a64c4cc294c215": {
+            "body": "zero\n",
+            "type": "blob"
+          },
+          "280250392660140786e862caaf3a1c6b92741d16": {
+            "body": "no newline at end",
+            "type": "blob"
+          },
+          "3d2c5754106ba0115675a02badd642dd3d7781f0": {
+            "body": "crème brûlée ☕\n",
+            "type": "blob"
+          },
+          "3db0b10150e0684cf88a1b4da33154b2188b58b2": {
+            "entries": [
+              {
+                "mode": "40000",
+                "name": "guide",
+                "oid": "0dbde7f45d78684545f0b7882bef9de143db10f0"
+              }
+            ],
+            "type": "tree"
+          },
+          "4adf6825757801289bb2746e4bc84de90470bee5": {
+            "body": "# Upper\n",
+            "type": "blob"
+          },
+          "61780798228d17af2d34fce4cfbdf35556832472": {
+            "body": "b\n",
+            "type": "blob"
+          },
+          "78981922613b2afb6025042ff6bd878ac1994e85": {
+            "body": "a\n",
+            "type": "blob"
+          },
+          "a2544f7ec3007899167de1fef481a5a0fd63fa41": {
+            "body": "dash\n",
+            "type": "blob"
+          },
+          "b5941b74b08cc8d85280cffe976901f315a8ecb7": {
+            "body": "Welcome.\nSecond line.\n",
+            "type": "blob"
+          },
+          "d1832d5151b5b23f07481531bc0b38479959a3bd": {
+            "body": "tree 006a4987bbf107972239c1d6e2662c8cf6324d63\nauthor Sam Lee <sam@example.com> 1767225720 +0000\ncommitter Sam Lee <sam@example.com> 1767225720 +0000\n\nSnapshot of nested folders\n",
+            "type": "commit"
+          },
+          "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391": {
+            "body": "",
+            "type": "blob"
+          },
+          "f8f7aefc2900a3d737cea9eee45729fd55761e1a": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "b.txt",
+                "oid": "61780798228d17af2d34fce4cfbdf35556832472"
+              }
+            ],
+            "type": "tree"
+          }
+        },
+        "reflogs": {
+          "HEAD": [
+            "0000000000000000000000000000000000000000 d1832d5151b5b23f07481531bc0b38479959a3bd Sam Lee <sam@example.com> 1767225720 +0000\tcommit (initial): Snapshot of nested folders"
+          ],
+          "refs/heads/main": [
+            "0000000000000000000000000000000000000000 d1832d5151b5b23f07481531bc0b38479959a3bd Sam Lee <sam@example.com> 1767225720 +0000\tcommit (initial): Snapshot of nested folders"
+          ]
+        },
+        "refs": {
+          "refs/heads/main": "d1832d5151b5b23f07481531bc0b38479959a3bd"
+        }
+      }
+    }
+  },
+  "git": "2.45.1.windows.1",
+  "script": {
+    "steps": [
+      "git init",
+      "git add .",
+      "git commit -m \"Snapshot of nested folders\""
+    ],
+    "world": {
+      "cwd": "project",
+      "files": {
+        "project/A.md": "# Upper\n",
+        "project/a-b.txt": "dash\n",
+        "project/a.txt": "a\n",
+        "project/a/b.txt": "b\n",
+        "project/a0.txt": "zero\n",
+        "project/café notes.txt": "crème brûlée ☕\n",
+        "project/docs/guide/intro.md": "Welcome.\nSecond line.\n",
+        "project/empty.txt": "",
+        "project/no-newline.txt": "no newline at end"
+      }
+    }
+  },
+  "steps": [
+    {
+      "cmd": "git init",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "Initialized empty Git repository in /home/you/project/.git/\n"
+    },
+    {
+      "cmd": "git add .",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git commit -m \"Snapshot of nested folders\"",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "[main (root-commit) d1832d5] Snapshot of nested folders\n 9 files changed, 9 insertions(+)\n create mode 100644 A.md\n create mode 100644 a-b.txt\n create mode 100644 a.txt\n create mode 100644 a/b.txt\n create mode 100644 a0.txt\n create mode 100644 \"caf\\303\\251 notes.txt\"\n create mode 100644 docs/guide/intro.md\n create mode 100644 empty.txt\n create mode 100644 no-newline.txt\n"
+    }
+  ]
+}

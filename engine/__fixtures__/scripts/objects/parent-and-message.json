@@ -1,0 +1,11 @@
+{
+  "world": { "files": { "project/notes.txt": "one\n" }, "cwd": "project" },
+  "steps": [
+    "git init",
+    "git add notes.txt",
+    "git commit -m \"First\"",
+    "echo two >> notes.txt",
+    "git add notes.txt",
+    "git commit -m \"Second line\" -m \"A body paragraph explains why.\""
+  ]
+}

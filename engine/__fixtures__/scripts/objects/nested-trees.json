@@ -1,0 +1,21 @@
+{
+  "world": {
+    "files": {
+      "project/a.txt": "a\n",
+      "project/a/b.txt": "b\n",
+      "project/a-b.txt": "dash\n",
+      "project/a0.txt": "zero\n",
+      "project/A.md": "# Upper\n",
+      "project/docs/guide/intro.md": "Welcome.\nSecond line.\n",
+      "project/empty.txt": "",
+      "project/no-newline.txt": "no newline at end",
+      "project/caf\u00e9 notes.txt": "cr\u00e8me br\u00fbl\u00e9e \u2615\n"
+    },
+    "cwd": "project"
+  },
+  "steps": [
+    "git init",
+    "git add .",
+    "git commit -m \"Snapshot of nested folders\""
+  ]
+}

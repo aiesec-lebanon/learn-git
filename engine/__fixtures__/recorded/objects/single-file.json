@@ -1,0 +1,136 @@
+{
+  "final": {
+    "config": {
+      "global": [
+        [
+          "user.name",
+          "Sam Lee"
+        ],
+        [
+          "user.email",
+          "sam@example.com"
+        ],
+        [
+          "init.defaultbranch",
+          "main"
+        ]
+      ],
+      "system": []
+    },
+    "dirs": [
+      "project"
+    ],
+    "files": {
+      "project/hello.txt": "hello\n"
+    },
+    "repos": {
+      "project": {
+        "config": [
+          [
+            "core.repositoryformatversion",
+            "0"
+          ],
+          [
+            "core.filemode",
+            "false"
+          ],
+          [
+            "core.bare",
+            "false"
+          ],
+          [
+            "core.logallrefupdates",
+            "true"
+          ],
+          [
+            "core.symlinks",
+            "false"
+          ],
+          [
+            "core.ignorecase",
+            "true"
+          ]
+        ],
+        "head": {
+          "ref": "refs/heads/main"
+        },
+        "index": [
+          {
+            "mode": "100644",
+            "oid": "ce013625030ba8dba906f756967f9e9ca394464a",
+            "path": "hello.txt",
+            "stage": 0
+          }
+        ],
+        "objects": {
+          "1d7605fc556cae079bde6f4de97ee3b1ce317ac1": {
+            "body": "tree aaa96ced2d9a1c8e72c56b253a0e2fe78393feb7\nauthor Sam Lee <sam@example.com> 1767225720 +0000\ncommitter Sam Lee <sam@example.com> 1767225720 +0000\n\nAdd hello\n",
+            "type": "commit"
+          },
+          "aaa96ced2d9a1c8e72c56b253a0e2fe78393feb7": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "hello.txt",
+                "oid": "ce013625030ba8dba906f756967f9e9ca394464a"
+              }
+            ],
+            "type": "tree"
+          },
+          "ce013625030ba8dba906f756967f9e9ca394464a": {
+            "body": "hello\n",
+            "type": "blob"
+          }
+        },
+        "reflogs": {
+          "HEAD": [
+            "0000000000000000000000000000000000000000 1d7605fc556cae079bde6f4de97ee3b1ce317ac1 Sam Lee <sam@example.com> 1767225720 +0000\tcommit (initial): Add hello"
+          ],
+          "refs/heads/main": [
+            "0000000000000000000000000000000000000000 1d7605fc556cae079bde6f4de97ee3b1ce317ac1 Sam Lee <sam@example.com> 1767225720 +0000\tcommit (initial): Add hello"
+          ]
+        },
+        "refs": {
+          "refs/heads/main": "1d7605fc556cae079bde6f4de97ee3b1ce317ac1"
+        }
+      }
+    }
+  },
+  "git": "2.45.1.windows.1",
+  "script": {
+    "steps": [
+      "git init",
+      "git add hello.txt",
+      "git commit -m \"Add hello\""
+    ],
+    "world": {
+      "cwd": "project",
+      "files": {
+        "project/hello.txt": "hello\n"
+      }
+    }
+  },
+  "steps": [
+    {
+      "cmd": "git init",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "Initialized empty Git repository in /home/you/project/.git/\n"
+    },
+    {
+      "cmd": "git add hello.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git commit -m \"Add hello\"",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "[main (root-commit) 1d7605f] Add hello\n 1 file changed, 1 insertion(+)\n create mode 100644 hello.txt\n"
+    }
+  ]
+}

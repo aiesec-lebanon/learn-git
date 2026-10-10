@@ -28,7 +28,11 @@ export default defineConfig({
     coverage: {
       provider: "v8",
       include: ["engine/**/*.ts"],
-      exclude: ["engine/**/*.test.ts", "engine/__fixtures__/**"],
+      exclude: [
+        "engine/**/*.test.ts",
+        "engine/__fixtures__/**",
+        "engine/test/**",
+      ],
       thresholds: { lines: 90, branches: 90 },
     },
   },

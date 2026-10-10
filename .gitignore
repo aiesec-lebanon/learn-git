@@ -42,3 +42,7 @@ next-env.d.ts
 
 # local 10x-Team state
 /.10x/
+
+# playwright
+/playwright-report/
+/test-results/

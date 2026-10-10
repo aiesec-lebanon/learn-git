@@ -1,0 +1,361 @@
+{
+  "final": {
+    "config": {
+      "global": [
+        [
+          "user.name",
+          "Sam Lee"
+        ],
+        [
+          "user.email",
+          "sam@example.com"
+        ],
+        [
+          "init.defaultbranch",
+          "main"
+        ]
+      ],
+      "system": []
+    },
+    "dirs": [
+      "project",
+      "project/docs",
+      "project/docs/guide",
+      "project/src"
+    ],
+    "files": {
+      "project/café notes.txt": "q\n",
+      "project/docs/guide/y.md": "y\n",
+      "project/src/b.js": "b\n",
+      "project/src/c.js": "c\n"
+    },
+    "repos": {
+      "project": {
+        "config": [
+          [
+            "core.repositoryformatversion",
+            "0"
+          ],
+          [
+            "core.filemode",
+            "false"
+          ],
+          [
+            "core.bare",
+            "false"
+          ],
+          [
+            "core.logallrefupdates",
+            "true"
+          ],
+          [
+            "core.symlinks",
+            "false"
+          ],
+          [
+            "core.ignorecase",
+            "true"
+          ]
+        ],
+        "head": {
+          "ref": "refs/heads/main"
+        },
+        "index": [
+          {
+            "mode": "100644",
+            "oid": "78981922613b2afb6025042ff6bd878ac1994e85",
+            "path": "a.txt",
+            "stage": 0
+          },
+          {
+            "mode": "100644",
+            "oid": "61780798228d17af2d34fce4cfbdf35556832472",
+            "path": "src/b.js",
+            "stage": 0
+          }
+        ],
+        "objects": {
+          "61780798228d17af2d34fce4cfbdf35556832472": {
+            "body": "b\n",
+            "type": "blob"
+          },
+          "78981922613b2afb6025042ff6bd878ac1994e85": {
+            "body": "a\n",
+            "type": "blob"
+          }
+        },
+        "reflogs": {},
+        "refs": {}
+      }
+    }
+  },
+  "git": "2.45.1.windows.1",
+  "script": {
+    "steps": [
+      "git status",
+      "git init -q",
+      "git status",
+      "git status -s",
+      "git status -sb",
+      "echo a > a.txt",
+      "mkdir -p src docs/guide",
+      "echo b > src/b.js",
+      "echo c > src/c.js",
+      "echo y > docs/guide/y.md",
+      "echo q > 'café notes.txt'",
+      "git status",
+      "git status -s",
+      "git add a.txt",
+      "git status",
+      "echo more >> a.txt",
+      "git status",
+      "git status --short --branch",
+      "git status -b",
+      "git add src/b.js",
+      "git status",
+      "cd src",
+      "git status",
+      "git status -s",
+      "cd ../docs/guide",
+      "git status -s",
+      "git status",
+      "cd ../..",
+      "rm a.txt",
+      "git status",
+      "git status -s src",
+      "git status a.txt"
+    ],
+    "world": {
+      "cwd": "project",
+      "dirs": [
+        "project"
+      ]
+    }
+  },
+  "steps": [
+    {
+      "cmd": "git status",
+      "cwd": "/home/you/project",
+      "exitCode": 128,
+      "stderr": "fatal: not a git repository (or any of the parent directories): .git\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git init -q",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git status",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "On branch main\n\nNo commits yet\n\nnothing to commit (create/copy files and use \"git add\" to track)\n"
+    },
+    {
+      "cmd": "git status -s",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git status -sb",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "## No commits yet on main\n"
+    },
+    {
+      "cmd": "echo a > a.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "mkdir -p src docs/guide",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "echo b > src/b.js",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "echo c > src/c.js",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "echo y > docs/guide/y.md",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "echo q > 'café notes.txt'",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git status",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "On branch main\n\nNo commits yet\n\nUntracked files:\n  (use \"git add <file>...\" to include in what will be committed)\n\ta.txt\n\t\"caf\\303\\251 notes.txt\"\n\tdocs/\n\tsrc/\n\nnothing added to commit but untracked files present (use \"git add\" to track)\n"
+    },
+    {
+      "cmd": "git status -s",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "?? a.txt\n?? \"caf\\303\\251 notes.txt\"\n?? docs/\n?? src/\n"
+    },
+    {
+      "cmd": "git add a.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git status",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "On branch main\n\nNo commits yet\n\nChanges to be committed:\n  (use \"git rm --cached <file>...\" to unstage)\n\tnew file:   a.txt\n\nUntracked files:\n  (use \"git add <file>...\" to include in what will be committed)\n\t\"caf\\303\\251 notes.txt\"\n\tdocs/\n\tsrc/\n\n"
+    },
+    {
+      "cmd": "echo more >> a.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git status",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "On branch main\n\nNo commits yet\n\nChanges to be committed:\n  (use \"git rm --cached <file>...\" to unstage)\n\tnew file:   a.txt\n\nChanges not staged for commit:\n  (use \"git add <file>...\" to update what will be committed)\n  (use \"git restore <file>...\" to discard changes in working directory)\n\tmodified:   a.txt\n\nUntracked files:\n  (use \"git add <file>...\" to include in what will be committed)\n\t\"caf\\303\\251 notes.txt\"\n\tdocs/\n\tsrc/\n\n"
+    },
+    {
+      "cmd": "git status --short --branch",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "## No commits yet on main\nAM a.txt\n?? \"caf\\303\\251 notes.txt\"\n?? docs/\n?? src/\n"
+    },
+    {
+      "cmd": "git status -b",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "On branch main\n\nNo commits yet\n\nChanges to be committed:\n  (use \"git rm --cached <file>...\" to unstage)\n\tnew file:   a.txt\n\nChanges not staged for commit:\n  (use \"git add <file>...\" to update what will be committed)\n  (use \"git restore <file>...\" to discard changes in working directory)\n\tmodified:   a.txt\n\nUntracked files:\n  (use \"git add <file>...\" to include in what will be committed)\n\t\"caf\\303\\251 notes.txt\"\n\tdocs/\n\tsrc/\n\n"
+    },
+    {
+      "cmd": "git add src/b.js",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git status",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "On branch main\n\nNo commits yet\n\nChanges to be committed:\n  (use \"git rm --cached <file>...\" to unstage)\n\tnew file:   a.txt\n\tnew file:   src/b.js\n\nChanges not staged for commit:\n  (use \"git add <file>...\" to update what will be committed)\n  (use \"git restore <file>...\" to discard changes in working directory)\n\tmodified:   a.txt\n\nUntracked files:\n  (use \"git add <file>...\" to include in what will be committed)\n\t\"caf\\303\\251 notes.txt\"\n\tdocs/\n\tsrc/c.js\n\n"
+    },
+    {
+      "cmd": "cd src",
+      "cwd": "/home/you/project/src",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git status",
+      "cwd": "/home/you/project/src",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "On branch main\n\nNo commits yet\n\nChanges to be committed:\n  (use \"git rm --cached <file>...\" to unstage)\n\tnew file:   ../a.txt\n\tnew file:   b.js\n\nChanges not staged for commit:\n  (use \"git add <file>...\" to update what will be committed)\n  (use \"git restore <file>...\" to discard changes in working directory)\n\tmodified:   ../a.txt\n\nUntracked files:\n  (use \"git add <file>...\" to include in what will be committed)\n\t\"../caf\\303\\251 notes.txt\"\n\t../docs/\n\tc.js\n\n"
+    },
+    {
+      "cmd": "git status -s",
+      "cwd": "/home/you/project/src",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "AM ../a.txt\nA  b.js\n?? \"../caf\\303\\251 notes.txt\"\n?? ../docs/\n?? c.js\n"
+    },
+    {
+      "cmd": "cd ../docs/guide",
+      "cwd": "/home/you/project/docs/guide",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git status -s",
+      "cwd": "/home/you/project/docs/guide",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "AM ../../a.txt\nA  ../../src/b.js\n?? \"../../caf\\303\\251 notes.txt\"\n?? ../\n?? ../../src/c.js\n"
+    },
+    {
+      "cmd": "git status",
+      "cwd": "/home/you/project/docs/guide",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "On branch main\n\nNo commits yet\n\nChanges to be committed:\n  (use \"git rm --cached <file>...\" to unstage)\n\tnew file:   ../../a.txt\n\tnew file:   ../../src/b.js\n\nChanges not staged for commit:\n  (use \"git add <file>...\" to update what will be committed)\n  (use \"git restore <file>...\" to discard changes in working directory)\n\tmodified:   ../../a.txt\n\nUntracked files:\n  (use \"git add <file>...\" to include in what will be committed)\n\t\"../../caf\\303\\251 notes.txt\"\n\t../\n\t../../src/c.js\n\n"
+    },
+    {
+      "cmd": "cd ../..",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "rm a.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git status",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "On branch main\n\nNo commits yet\n\nChanges to be committed:\n  (use \"git rm --cached <file>...\" to unstage)\n\tnew file:   a.txt\n\tnew file:   src/b.js\n\nChanges not staged for commit:\n  (use \"git add/rm <file>...\" to update what will be committed)\n  (use \"git restore <file>...\" to discard changes in working directory)\n\tdeleted:    a.txt\n\nUntracked files:\n  (use \"git add <file>...\" to include in what will be committed)\n\t\"caf\\303\\251 notes.txt\"\n\tdocs/\n\tsrc/c.js\n\n"
+    },
+    {
+      "cmd": "git status -s src",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "A  src/b.js\n?? src/c.js\n"
+    },
+    {
+      "cmd": "git status a.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "On branch main\n\nNo commits yet\n\nChanges to be committed:\n  (use \"git rm --cached <file>...\" to unstage)\n\tnew file:   a.txt\n\nChanges not staged for commit:\n  (use \"git add/rm <file>...\" to update what will be committed)\n  (use \"git restore <file>...\" to discard changes in working directory)\n\tdeleted:    a.txt\n\n"
+    }
+  ]
+}

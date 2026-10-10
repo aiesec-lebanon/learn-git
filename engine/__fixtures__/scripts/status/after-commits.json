@@ -1,0 +1,40 @@
+{
+  "world": {
+    "files": {
+      "project/a.txt": "a\n",
+      "project/b.txt": "b\n",
+      "project/c.txt": "c\n",
+      "project/lib/d.txt": "d\n"
+    },
+    "cwd": "project"
+  },
+  "steps": [
+    "git init -q",
+    "git add .",
+    "git commit -q -m \"Start\"",
+    "git status",
+    "git status -s",
+    "git status -sb",
+    "echo new > n.txt",
+    "git status",
+    "echo more >> a.txt",
+    "git status",
+    "git add a.txt",
+    "echo again >> a.txt",
+    "rm b.txt",
+    "echo cc >> c.txt",
+    "git add c.txt",
+    "rm lib/d.txt",
+    "git add lib/d.txt",
+    "echo e > lib/e.txt",
+    "git status",
+    "git status -s",
+    "git add -A",
+    "git status",
+    "git status -s",
+    "cd lib",
+    "git status",
+    "git status -s ..",
+    "git status --porcelain"
+  ]
+}

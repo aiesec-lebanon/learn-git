@@ -1,0 +1,410 @@
+{
+  "final": {
+    "config": {
+      "global": [
+        [
+          "user.name",
+          "Sam Lee"
+        ],
+        [
+          "user.email",
+          "sam@example.com"
+        ],
+        [
+          "init.defaultbranch",
+          "main"
+        ]
+      ],
+      "system": []
+    },
+    "dirs": [
+      "project",
+      "project/lib"
+    ],
+    "files": {
+      "project/a.txt": "a\nmore\nagain\n",
+      "project/c.txt": "c\ncc\n",
+      "project/lib/e.txt": "e\n",
+      "project/n.txt": "new\n"
+    },
+    "repos": {
+      "project": {
+        "config": [
+          [
+            "core.repositoryformatversion",
+            "0"
+          ],
+          [
+            "core.filemode",
+            "false"
+          ],
+          [
+            "core.bare",
+            "false"
+          ],
+          [
+            "core.logallrefupdates",
+            "true"
+          ],
+          [
+            "core.symlinks",
+            "false"
+          ],
+          [
+            "core.ignorecase",
+            "true"
+          ]
+        ],
+        "head": {
+          "ref": "refs/heads/main"
+        },
+        "index": [
+          {
+            "mode": "100644",
+            "oid": "24414e00bd26dc3ab600b386547743f2c09cdad9",
+            "path": "a.txt",
+            "stage": 0
+          },
+          {
+            "mode": "100644",
+            "oid": "2f773ae5ddcf9909bb1da80abc16bc882b654990",
+            "path": "c.txt",
+            "stage": 0
+          },
+          {
+            "mode": "100644",
+            "oid": "d905d9da82c97264ab6f4920e20242e088850ce9",
+            "path": "lib/e.txt",
+            "stage": 0
+          },
+          {
+            "mode": "100644",
+            "oid": "3e757656cf36eca53338e520d134963a44f793f8",
+            "path": "n.txt",
+            "stage": 0
+          }
+        ],
+        "objects": {
+          "24414e00bd26dc3ab600b386547743f2c09cdad9": {
+            "body": "a\nmore\nagain\n",
+            "type": "blob"
+          },
+          "2f773ae5ddcf9909bb1da80abc16bc882b654990": {
+            "body": "c\ncc\n",
+            "type": "blob"
+          },
+          "3e757656cf36eca53338e520d134963a44f793f8": {
+            "body": "new\n",
+            "type": "blob"
+          },
+          "4bcfe98e640c8284511312660fb8709b0afa888e": {
+            "body": "d\n",
+            "type": "blob"
+          },
+          "61780798228d17af2d34fce4cfbdf35556832472": {
+            "body": "b\n",
+            "type": "blob"
+          },
+          "78981922613b2afb6025042ff6bd878ac1994e85": {
+            "body": "a\n",
+            "type": "blob"
+          },
+          "abc366656a510a2a2f9f848d218d7dc5a7ee5ef7": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "d.txt",
+                "oid": "4bcfe98e640c8284511312660fb8709b0afa888e"
+              }
+            ],
+            "type": "tree"
+          },
+          "d49c2e721b44b101b9b65c1e2847063a0f0c53b9": {
+            "body": "a\nmore\n",
+            "type": "blob"
+          },
+          "d905d9da82c97264ab6f4920e20242e088850ce9": {
+            "body": "e\n",
+            "type": "blob"
+          },
+          "f1878733e43862cd558f98492d4fae5921d9ba18": {
+            "body": "tree f93d0f20328131d264071c5347d03d08dd9b1ce3\nauthor Sam Lee <sam@example.com> 1767225720 +0000\ncommitter Sam Lee <sam@example.com> 1767225720 +0000\n\nStart\n",
+            "type": "commit"
+          },
+          "f2ad6c76f0115a6ba5b00456a849810e7ec0af20": {
+            "body": "c\n",
+            "type": "blob"
+          },
+          "f93d0f20328131d264071c5347d03d08dd9b1ce3": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "a.txt",
+                "oid": "78981922613b2afb6025042ff6bd878ac1994e85"
+              },
+              {
+                "mode": "100644",
+                "name": "b.txt",
+                "oid": "61780798228d17af2d34fce4cfbdf35556832472"
+              },
+              {
+                "mode": "100644",
+                "name": "c.txt",
+                "oid": "f2ad6c76f0115a6ba5b00456a849810e7ec0af20"
+              },
+              {
+                "mode": "40000",
+                "name": "lib",
+                "oid": "abc366656a510a2a2f9f848d218d7dc5a7ee5ef7"
+              }
+            ],
+            "type": "tree"
+          }
+        },
+        "reflogs": {
+          "HEAD": [
+            "0000000000000000000000000000000000000000 f1878733e43862cd558f98492d4fae5921d9ba18 Sam Lee <sam@example.com> 1767225720 +0000\tcommit (initial): Start"
+          ],
+          "refs/heads/main": [
+            "0000000000000000000000000000000000000000 f1878733e43862cd558f98492d4fae5921d9ba18 Sam Lee <sam@example.com> 1767225720 +0000\tcommit (initial): Start"
+          ]
+        },
+        "refs": {
+          "refs/heads/main": "f1878733e43862cd558f98492d4fae5921d9ba18"
+        }
+      }
+    }
+  },
+  "git": "2.45.1.windows.1",
+  "script": {
+    "steps": [
+      "git init -q",
+      "git add .",
+      "git commit -q -m \"Start\"",
+      "git status",
+      "git status -s",
+      "git status -sb",
+      "echo new > n.txt",
+      "git status",
+      "echo more >> a.txt",
+      "git status",
+      "git add a.txt",
+      "echo again >> a.txt",
+      "rm b.txt",
+      "echo cc >> c.txt",
+      "git add c.txt",
+      "rm lib/d.txt",
+      "git add lib/d.txt",
+      "echo e > lib/e.txt",
+      "git status",
+      "git status -s",
+      "git add -A",
+      "git status",
+      "git status -s",
+      "cd lib",
+      "git status",
+      "git status -s ..",
+      "git status --porcelain"
+    ],
+    "world": {
+      "cwd": "project",
+      "files": {
+        "project/a.txt": "a\n",
+        "project/b.txt": "b\n",
+        "project/c.txt": "c\n",
+        "project/lib/d.txt": "d\n"
+      }
+    }
+  },
+  "steps": [
+    {
+      "cmd": "git init -q",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git add .",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git commit -q -m \"Start\"",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git status",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "On branch main\nnothing to commit, working tree clean\n"
+    },
+    {
+      "cmd": "git status -s",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git status -sb",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "## main\n"
+    },
+    {
+      "cmd": "echo new > n.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git status",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "On branch main\nUntracked files:\n  (use \"git add <file>...\" to include in what will be committed)\n\tn.txt\n\nnothing added to commit but untracked files present (use \"git add\" to track)\n"
+    },
+    {
+      "cmd": "echo more >> a.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git status",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "On branch main\nChanges not staged for commit:\n  (use \"git add <file>...\" to update what will be committed)\n  (use \"git restore <file>...\" to discard changes in working directory)\n\tmodified:   a.txt\n\nUntracked files:\n  (use \"git add <file>...\" to include in what will be committed)\n\tn.txt\n\nno changes added to commit (use \"git add\" and/or \"git commit -a\")\n"
+    },
+    {
+      "cmd": "git add a.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "echo again >> a.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "rm b.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "echo cc >> c.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git add c.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "rm lib/d.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git add lib/d.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "echo e > lib/e.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git status",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "On branch main\nChanges to be committed:\n  (use \"git restore --staged <file>...\" to unstage)\n\tmodified:   a.txt\n\tmodified:   c.txt\n\tdeleted:    lib/d.txt\n\nChanges not staged for commit:\n  (use \"git add/rm <file>...\" to update what will be committed)\n  (use \"git restore <file>...\" to discard changes in working directory)\n\tmodified:   a.txt\n\tdeleted:    b.txt\n\nUntracked files:\n  (use \"git add <file>...\" to include in what will be committed)\n\tlib/\n\tn.txt\n\n"
+    },
+    {
+      "cmd": "git status -s",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "MM a.txt\n D b.txt\nM  c.txt\nD  lib/d.txt\n?? lib/\n?? n.txt\n"
+    },
+    {
+      "cmd": "git add -A",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git status",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "On branch main\nChanges to be committed:\n  (use \"git restore --staged <file>...\" to unstage)\n\tmodified:   a.txt\n\tdeleted:    b.txt\n\tmodified:   c.txt\n\tdeleted:    lib/d.txt\n\tnew file:   lib/e.txt\n\tnew file:   n.txt\n\n"
+    },
+    {
+      "cmd": "git status -s",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "M  a.txt\nD  b.txt\nM  c.txt\nD  lib/d.txt\nA  lib/e.txt\nA  n.txt\n"
+    },
+    {
+      "cmd": "cd lib",
+      "cwd": "/home/you/project/lib",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git status",
+      "cwd": "/home/you/project/lib",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "On branch main\nChanges to be committed:\n  (use \"git restore --staged <file>...\" to unstage)\n\tmodified:   ../a.txt\n\tdeleted:    ../b.txt\n\tmodified:   ../c.txt\n\tdeleted:    d.txt\n\tnew file:   e.txt\n\tnew file:   ../n.txt\n\n"
+    },
+    {
+      "cmd": "git status -s ..",
+      "cwd": "/home/you/project/lib",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "M  ../a.txt\nD  ../b.txt\nM  ../c.txt\nD  d.txt\nA  e.txt\nA  ../n.txt\n"
+    },
+    {
+      "cmd": "git status --porcelain",
+      "cwd": "/home/you/project/lib",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "M  a.txt\nD  b.txt\nM  c.txt\nD  lib/d.txt\nA  lib/e.txt\nA  n.txt\n"
+    }
+  ]
+}

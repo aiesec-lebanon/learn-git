@@ -10,6 +10,7 @@ import {
 } from "@/content/registry";
 import { YourTurn } from "@/features/checkpoint/your-turn";
 import { beatFrames } from "@/features/lesson/frames";
+import { LessonSandboxProvider } from "@/features/lesson/lesson-sandbox";
 import { LessonScroller } from "@/features/lesson/scroller";
 
 /** The prose renders twice: the beats beside the pinned stage, then the rest. */
@@ -45,36 +46,39 @@ export default async function LessonPage({
     `@/content/lessons/${lesson.id}/lesson.mdx`
   )) as { default: MDXContent };
 
+  const sessionKey = `lesson:${lesson.id}`;
   return (
-    <article className="mx-auto w-full max-w-[1200px] px-4 py-8 sm:px-6 sm:py-12">
-      <header className="mb-8 max-w-prose">
-        <p className="m-0 font-display text-sm font-semibold text-fg-muted">
-          Beginner · {chapter?.title} · {lesson.minutes} min
-        </p>
-        <h1 className="m-0 mt-2 text-3xl font-bold">
-          {lessonCode(lesson.id)} {lesson.title}
-        </h1>
-      </header>
-      <LessonScroller lessonId={lesson.id} frames={beatFrames(scene)}>
-        <Prose components={{ YourTurn: Nothing, Wrap: Nothing }} />
-      </LessonScroller>
-      <Prose
-        components={{
-          ColdOpen: Nothing,
-          Beat: Nothing,
-          YourTurn: () => (
-            <YourTurn
-              sessionKey={`lesson:${lesson.id}`}
-              checkpoint={scene.yourTurn}
-              resume={{
-                kind: "lesson",
-                id: lesson.id,
-                step: scene.beats.length,
-              }}
-            />
-          ),
-        }}
-      />
-    </article>
+    <LessonSandboxProvider value={{ sessionKey, world: scene.yourTurn.world }}>
+      <article className="mx-auto w-full max-w-[1200px] px-4 py-8 sm:px-6 sm:py-12">
+        <header className="mb-8 max-w-prose">
+          <p className="m-0 font-display text-sm font-semibold text-fg-muted">
+            Beginner · {chapter?.title} · {lesson.minutes} min
+          </p>
+          <h1 className="m-0 mt-2 text-3xl font-bold">
+            {lessonCode(lesson.id)} {lesson.title}
+          </h1>
+        </header>
+        <LessonScroller lessonId={lesson.id} frames={beatFrames(scene)}>
+          <Prose components={{ YourTurn: Nothing, Wrap: Nothing }} />
+        </LessonScroller>
+        <Prose
+          components={{
+            ColdOpen: Nothing,
+            Beat: Nothing,
+            YourTurn: () => (
+              <YourTurn
+                sessionKey={sessionKey}
+                checkpoint={scene.yourTurn}
+                resume={{
+                  kind: "lesson",
+                  id: lesson.id,
+                  step: scene.beats.length,
+                }}
+              />
+            ),
+          }}
+        />
+      </article>
+    </LessonSandboxProvider>
   );
 }

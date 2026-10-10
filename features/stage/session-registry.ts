@@ -1,4 +1,4 @@
-import { LIMITS, type Session } from "@/engine";
+import { createWorld, LIMITS, Session, type WorldSpec } from "@/engine";
 
 /** Sandboxes by key, least recently used dropped first (they outlive hidden routes). */
 export function createSessionRegistry(capacity: number = LIMITS.sandboxes) {
@@ -29,3 +29,7 @@ export function createSessionRegistry(capacity: number = LIMITS.sandboxes) {
 }
 
 export const sessions = createSessionRegistry();
+
+/** The sandbox for a key, created from its start world on first use. */
+export const sandboxFor = (key: string, world: WorldSpec): Session =>
+  sessions.get(key, () => new Session(createWorld(world)));

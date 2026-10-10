@@ -2,10 +2,8 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import {
-  createWorld,
   match,
   narrate,
-  Session,
   type HistoryEntry,
   type MatchReport,
   type TargetSpec,
@@ -17,7 +15,7 @@ import { Guide } from "@/features/guide/guide";
 import { progressStore } from "@/features/progress/progress";
 import type { ResumePointer } from "@/features/progress/schema";
 import { Rewind } from "@/features/stage/rewind";
-import { sessions } from "@/features/stage/session-registry";
+import { sandboxFor } from "@/features/stage/session-registry";
 import { Stage } from "@/features/stage/stage";
 import { useSession } from "@/features/stage/use-session";
 import { WhatHappened } from "@/features/stage/what-happened";
@@ -111,7 +109,7 @@ export function Sandbox({
   focus,
 }: SandboxProps) {
   const session = useMemo(
-    () => sessions.get(sessionKey, () => new Session(createWorld(world))),
+    () => sandboxFor(sessionKey, world),
     [sessionKey, world],
   );
   const { world: now, history } = useSession(session);

@@ -1,1 +1,9 @@
-export { copy, Logo, pairs, scale, skin, tokens } from "./officehours";
+export {
+  copy,
+  GuideCharacter,
+  Logo,
+  pairs,
+  scale,
+  skin,
+  tokens,
+} from "./officehours";

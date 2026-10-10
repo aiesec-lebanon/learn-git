@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { AnnouncerProvider } from "@/features/announcer/announcer";
 import { bootstrapScript } from "@/features/preferences/bootstrap";
 import { InlineScript } from "@/features/preferences/inline-script";
 import { ThemeController } from "@/features/preferences/theme-controller";
@@ -26,12 +27,14 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       </head>
       <body className="flex min-h-dvh flex-col antialiased">
         <ThemeController />
-        <SkipLink />
-        <SiteHeader />
-        <main id="main" className="flex-1">
-          {children}
-        </main>
-        <SiteFooter />
+        <AnnouncerProvider>
+          <SkipLink />
+          <SiteHeader />
+          <main id="main" className="flex-1">
+            {children}
+          </main>
+          <SiteFooter />
+        </AnnouncerProvider>
       </body>
     </html>
   );

@@ -123,3 +123,12 @@ export type ThemeSkin = Readonly<{
   Node: (props: { node: SkinNode }) => ReactNode;
   Label: (props: { label: SkinLabel }) => ReactNode;
 }>;
+
+/** The guide's poses; "pleased" is brief and only follows a success. */
+export type GuidePose = "idle" | "explaining" | "surprised" | "pleased";
+
+/** The theme's guide character: decoration only, its words live in the DOM. */
+export type GuideCharacter = (props: {
+  pose: GuidePose;
+  animate: boolean;
+}) => ReactNode;

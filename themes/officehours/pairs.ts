@@ -23,6 +23,7 @@ export const pairs: readonly ContrastPair[] = [
   ["Control borders on the board", "line-strong", "bg", 3],
   ["Control borders on paper", "line-strong", "surface", 3],
   ["Nib's notes", "guide-ink", "g-bg", 4.5],
+  ["Nib's notes on the board", "guide-ink", "bg", 4.5],
   ["Nib's cap on the board", "guide", "bg", 3],
   ["Terminal text", "term-fg", "term-bg", 4.5],
   ["Terminal secondary", "term-muted", "term-bg", 4.5],

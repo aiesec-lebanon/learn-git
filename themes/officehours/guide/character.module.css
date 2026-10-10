@@ -1,0 +1,193 @@
+/* Nib, the guide: a green whiteboard marker whose barrel stays light in both modes. */
+.nib {
+  --nib-body: light-dark(#ffffff, #eceef1);
+  --nib-line: light-dark(#1b1d22, #121418);
+  --nib-shine: rgb(255 255 255 / 0.55);
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  overflow: visible;
+}
+.shadow {
+  fill: var(--line);
+}
+.barrel {
+  fill: var(--nib-body);
+  stroke: var(--nib-line);
+  stroke-width: 3;
+  stroke-linejoin: round;
+}
+.cap {
+  fill: var(--guide);
+  stroke: var(--nib-line);
+  stroke-width: 3;
+}
+.felt {
+  fill: var(--guide);
+  stroke: var(--nib-line);
+  stroke-width: 2.4;
+  stroke-linejoin: round;
+}
+.shine {
+  fill: none;
+  stroke: var(--nib-shine);
+  stroke-width: 3.4;
+  stroke-linecap: round;
+}
+.stroke {
+  fill: none;
+  stroke: var(--nib-line);
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+.ink {
+  fill: var(--nib-line);
+}
+.limb {
+  fill: none;
+  stroke: var(--fg);
+  stroke-width: 3.4;
+  stroke-linecap: round;
+}
+.hand {
+  fill: var(--nib-body);
+  stroke: var(--fg);
+  stroke-width: 2.6;
+}
+.swoosh {
+  fill: none;
+  stroke: var(--guide);
+  stroke-width: 3.6;
+  stroke-linecap: round;
+  stroke-dasharray: 1 1;
+  stroke-dashoffset: 1;
+}
+.zing {
+  fill: none;
+  stroke: var(--fg);
+  stroke-width: 3.2;
+  stroke-linecap: round;
+  opacity: 0;
+}
+
+.all {
+  transform-box: view-box;
+  transform-origin: 60px 114px;
+}
+.capGroup {
+  transform-box: view-box;
+  transform-origin: 60px 31px;
+  transition: transform var(--dur-3) var(--ease-stick);
+}
+.arm {
+  transform-box: view-box;
+  transition: transform var(--dur-3) var(--ease-stick);
+}
+.armL {
+  transform-origin: 41px 77px;
+}
+.armR {
+  transform-origin: 79px 77px;
+}
+.face {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.nib[data-pose="explaining"] .capGroup {
+  transform: translate(-23px, -9px) rotate(-26deg);
+}
+.nib[data-pose="explaining"] .armR {
+  transform: rotate(-78deg);
+}
+.nib[data-pose="explaining"] .swoosh {
+  stroke-dashoffset: 0;
+}
+.nib[data-pose="surprised"] .capGroup {
+  transform: translate(2px, -24px) rotate(-9deg);
+}
+.nib[data-pose="surprised"] .armL {
+  transform: rotate(100deg);
+}
+.nib[data-pose="surprised"] .armR {
+  transform: rotate(-100deg);
+}
+.nib[data-pose="surprised"] .zing {
+  opacity: 1;
+}
+.nib[data-pose="pleased"] .armR {
+  transform: rotate(-34deg);
+}
+.nib[data-pose="pleased"] .armL {
+  transform: rotate(22deg);
+}
+
+/* Motion only when allowed; under reduced motion Nib holds still and its expressions still change. */
+.animate .eyes {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: blink 5.6s linear infinite;
+}
+.animate[data-pose="idle"] .all {
+  animation: sway 4.4s var(--ease-standard) infinite;
+}
+.animate[data-pose="explaining"] .swoosh {
+  animation: draw 0.6s var(--ease-draw) 0.25s both;
+}
+.animate[data-pose="explaining"] .talk {
+  animation: talk 0.42s ease-in-out infinite alternate;
+}
+.animate[data-pose="surprised"] .zing {
+  animation: pop var(--dur-3) var(--ease-stick) both;
+}
+.animate[data-pose="pleased"] .all {
+  animation: hop 0.62s var(--ease-stick) 1;
+}
+
+@keyframes sway {
+  0%,
+  100% {
+    transform: rotate(-1.4deg);
+  }
+  50% {
+    transform: rotate(1.4deg);
+  }
+}
+@keyframes hop {
+  40% {
+    transform: translateY(-6px);
+  }
+}
+@keyframes blink {
+  0%,
+  94%,
+  100% {
+    transform: scaleY(1);
+  }
+  97% {
+    transform: scaleY(0.12);
+  }
+}
+@keyframes talk {
+  to {
+    transform: scaleY(0.45);
+  }
+}
+@keyframes draw {
+  from {
+    stroke-dashoffset: 1;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes pop {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}

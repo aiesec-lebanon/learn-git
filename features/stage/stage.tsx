@@ -2,6 +2,7 @@
 
 import { useLayoutEffect, useMemo, useRef } from "react";
 import { describeGraph, type Session } from "@/engine";
+import { useSessionAnnouncer } from "@/features/announcer/announcer";
 import { CommitGraph, graphLayout } from "@/features/graph/graph";
 import { repoView } from "@/features/graph/view-model";
 import { motionTokens, useMotion } from "@/features/motion/policy";
@@ -36,6 +37,7 @@ function FileList({
 
 function StageAreas({ session }: { session: Session }) {
   const { world, latest } = useSession(session);
+  useSessionAnnouncer(session);
   const motion = useMotion();
   const files = useMemo(() => stageFiles(world), [world]);
   const repo = files.repo ? world.repos.get(files.repo) : undefined;

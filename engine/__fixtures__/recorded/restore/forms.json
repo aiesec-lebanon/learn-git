@@ -1,0 +1,604 @@
+{
+  "final": {
+    "config": {
+      "global": [
+        [
+          "user.name",
+          "Sam Lee"
+        ],
+        [
+          "user.email",
+          "sam@example.com"
+        ],
+        [
+          "init.defaultbranch",
+          "main"
+        ]
+      ],
+      "system": []
+    },
+    "dirs": [
+      "project",
+      "project/src"
+    ],
+    "files": {
+      "project/a.txt": "a\n2\n",
+      "project/b.txt": "b\n",
+      "project/n.txt": "new\n",
+      "project/src/c.txt": "c\n"
+    },
+    "repos": {
+      "project": {
+        "config": [
+          [
+            "core.repositoryformatversion",
+            "0"
+          ],
+          [
+            "core.filemode",
+            "false"
+          ],
+          [
+            "core.bare",
+            "false"
+          ],
+          [
+            "core.logallrefupdates",
+            "true"
+          ],
+          [
+            "core.symlinks",
+            "false"
+          ],
+          [
+            "core.ignorecase",
+            "true"
+          ]
+        ],
+        "head": {
+          "ref": "refs/heads/main"
+        },
+        "index": [
+          {
+            "mode": "100644",
+            "oid": "e9395445a3a5653629c61c1b0c489595136fa91c",
+            "path": "a.txt",
+            "stage": 0
+          },
+          {
+            "mode": "100644",
+            "oid": "61780798228d17af2d34fce4cfbdf35556832472",
+            "path": "b.txt",
+            "stage": 0
+          },
+          {
+            "mode": "100644",
+            "oid": "f2ad6c76f0115a6ba5b00456a849810e7ec0af20",
+            "path": "src/c.txt",
+            "stage": 0
+          }
+        ],
+        "objects": {
+          "0505b3b1df17e3fedbe98668cf073a5649215560": {
+            "body": "b\nx\n",
+            "type": "blob"
+          },
+          "05ef173fc2eefc51e2ced58b6435e561e83b1fb4": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "a.txt",
+                "oid": "78981922613b2afb6025042ff6bd878ac1994e85"
+              },
+              {
+                "mode": "100644",
+                "name": "b.txt",
+                "oid": "61780798228d17af2d34fce4cfbdf35556832472"
+              },
+              {
+                "mode": "40000",
+                "name": "src",
+                "oid": "cf67e9ef3a0fc6d858423fc177f2fbbe985a6f17"
+              }
+            ],
+            "type": "tree"
+          },
+          "0d8d8bfb56752f80cc7a8bcfaab50908904af2e7": {
+            "body": "tree 05ef173fc2eefc51e2ced58b6435e561e83b1fb4\nauthor Sam Lee <sam@example.com> 1767225900 +0000\ncommitter Sam Lee <sam@example.com> 1767225900 +0000\n\nFirst\n",
+            "type": "commit"
+          },
+          "1fb11a2e3f4620ae29a8b02664c01bffc5863360": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "a.txt",
+                "oid": "e9395445a3a5653629c61c1b0c489595136fa91c"
+              },
+              {
+                "mode": "100644",
+                "name": "b.txt",
+                "oid": "61780798228d17af2d34fce4cfbdf35556832472"
+              },
+              {
+                "mode": "40000",
+                "name": "src",
+                "oid": "cf67e9ef3a0fc6d858423fc177f2fbbe985a6f17"
+              }
+            ],
+            "type": "tree"
+          },
+          "3dccdde52cb0a1a8d5dc877f160a1bd36c709e9c": {
+            "body": "c\ny\n",
+            "type": "blob"
+          },
+          "3e757656cf36eca53338e520d134963a44f793f8": {
+            "body": "new\n",
+            "type": "blob"
+          },
+          "61780798228d17af2d34fce4cfbdf35556832472": {
+            "body": "b\n",
+            "type": "blob"
+          },
+          "78981922613b2afb6025042ff6bd878ac1994e85": {
+            "body": "a\n",
+            "type": "blob"
+          },
+          "cf67e9ef3a0fc6d858423fc177f2fbbe985a6f17": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "c.txt",
+                "oid": "f2ad6c76f0115a6ba5b00456a849810e7ec0af20"
+              }
+            ],
+            "type": "tree"
+          },
+          "d49c2e721b44b101b9b65c1e2847063a0f0c53b9": {
+            "body": "a\nmore\n",
+            "type": "blob"
+          },
+          "d7e4891200239e0b15f21653234dfa3e27e8d6d9": {
+            "body": "tree 1fb11a2e3f4620ae29a8b02664c01bffc5863360\nparent 0d8d8bfb56752f80cc7a8bcfaab50908904af2e7\nauthor Sam Lee <sam@example.com> 1767227520 +0000\ncommitter Sam Lee <sam@example.com> 1767227520 +0000\n\nSecond\n",
+            "type": "commit"
+          },
+          "e9395445a3a5653629c61c1b0c489595136fa91c": {
+            "body": "a\n2\n",
+            "type": "blob"
+          },
+          "f2ad6c76f0115a6ba5b00456a849810e7ec0af20": {
+            "body": "c\n",
+            "type": "blob"
+          }
+        },
+        "reflogs": {
+          "HEAD": [
+            "0000000000000000000000000000000000000000 0d8d8bfb56752f80cc7a8bcfaab50908904af2e7 Sam Lee <sam@example.com> 1767225900 +0000\tcommit (initial): First",
+            "0d8d8bfb56752f80cc7a8bcfaab50908904af2e7 d7e4891200239e0b15f21653234dfa3e27e8d6d9 Sam Lee <sam@example.com> 1767227520 +0000\tcommit: Second"
+          ],
+          "refs/heads/main": [
+            "0000000000000000000000000000000000000000 0d8d8bfb56752f80cc7a8bcfaab50908904af2e7 Sam Lee <sam@example.com> 1767225900 +0000\tcommit (initial): First",
+            "0d8d8bfb56752f80cc7a8bcfaab50908904af2e7 d7e4891200239e0b15f21653234dfa3e27e8d6d9 Sam Lee <sam@example.com> 1767227520 +0000\tcommit: Second"
+          ]
+        },
+        "refs": {
+          "refs/heads/main": "d7e4891200239e0b15f21653234dfa3e27e8d6d9"
+        }
+      }
+    }
+  },
+  "git": "2.45.1.windows.1",
+  "script": {
+    "steps": [
+      "git init -q",
+      "git add a.txt",
+      "git restore --staged a.txt",
+      "git restore a.txt",
+      "git add .",
+      "git commit -q -m \"First\"",
+      "echo more >> a.txt",
+      "git add a.txt",
+      "echo again >> a.txt",
+      "git restore a.txt",
+      "cat a.txt",
+      "git restore --staged a.txt",
+      "git status --short",
+      "git restore a.txt",
+      "git status --short",
+      "echo x >> b.txt",
+      "echo y >> src/c.txt",
+      "git add .",
+      "echo z >> b.txt",
+      "git restore --staged --worktree b.txt",
+      "git status --short",
+      "git restore -S -W src",
+      "git status --short",
+      "echo new > n.txt",
+      "git add n.txt",
+      "git restore --staged n.txt",
+      "git status --short",
+      "git restore n.txt",
+      "git restore",
+      "git restore --staged nope.txt",
+      "echo 2 >> a.txt",
+      "git add a.txt",
+      "git commit -q -m \"Second\"",
+      "git restore --source=HEAD~1 a.txt",
+      "git status --short",
+      "git restore --source HEAD a.txt",
+      "git restore -s HEAD~1 --staged a.txt",
+      "git status --short",
+      "git restore -s HEAD --staged --worktree .",
+      "git status --short",
+      "rm b.txt",
+      "git restore b.txt",
+      "cat b.txt",
+      "cd src",
+      "echo q >> c.txt",
+      "git restore c.txt",
+      "git restore ../a.txt",
+      "cd ..",
+      "git restore --source=nope a.txt",
+      "git restore --worktree --staged"
+    ],
+    "world": {
+      "cwd": "project",
+      "files": {
+        "project/a.txt": "a\n",
+        "project/b.txt": "b\n",
+        "project/src/c.txt": "c\n"
+      }
+    }
+  },
+  "steps": [
+    {
+      "cmd": "git init -q",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git add a.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git restore --staged a.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 128,
+      "stderr": "fatal: could not resolve HEAD\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git restore a.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git add .",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git commit -q -m \"First\"",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "echo more >> a.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git add a.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "echo again >> a.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git restore a.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "cat a.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "a\nmore\n"
+    },
+    {
+      "cmd": "git restore --staged a.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git status --short",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": " M a.txt\n"
+    },
+    {
+      "cmd": "git restore a.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git status --short",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "echo x >> b.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "echo y >> src/c.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git add .",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "echo z >> b.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git restore --staged --worktree b.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git status --short",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "M  src/c.txt\n"
+    },
+    {
+      "cmd": "git restore -S -W src",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git status --short",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "echo new > n.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git add n.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git restore --staged n.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git status --short",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "?? n.txt\n"
+    },
+    {
+      "cmd": "git restore n.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 1,
+      "stderr": "error: pathspec 'n.txt' did not match any file(s) known to git\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git restore",
+      "cwd": "/home/you/project",
+      "exitCode": 128,
+      "stderr": "fatal: you must specify path(s) to restore\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git restore --staged nope.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 1,
+      "stderr": "error: pathspec 'nope.txt' did not match any file(s) known to git\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "echo 2 >> a.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git add a.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git commit -q -m \"Second\"",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git restore --source=HEAD~1 a.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git status --short",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": " M a.txt\n?? n.txt\n"
+    },
+    {
+      "cmd": "git restore --source HEAD a.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git restore -s HEAD~1 --staged a.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git status --short",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "MM a.txt\n?? n.txt\n"
+    },
+    {
+      "cmd": "git restore -s HEAD --staged --worktree .",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git status --short",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "?? n.txt\n"
+    },
+    {
+      "cmd": "rm b.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git restore b.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "cat b.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "b\n"
+    },
+    {
+      "cmd": "cd src",
+      "cwd": "/home/you/project/src",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "echo q >> c.txt",
+      "cwd": "/home/you/project/src",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git restore c.txt",
+      "cwd": "/home/you/project/src",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git restore ../a.txt",
+      "cwd": "/home/you/project/src",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "cd ..",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git restore --source=nope a.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 128,
+      "stderr": "fatal: could not resolve nope\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git restore --worktree --staged",
+      "cwd": "/home/you/project",
+      "exitCode": 128,
+      "stderr": "fatal: you must specify path(s) to restore\n",
+      "stdout": ""
+    }
+  ]
+}

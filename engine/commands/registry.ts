@@ -40,6 +40,8 @@ export type GitCommand = {
   /** The synopsis block Git prints, starting with `usage: `. */
   readonly usage: string;
   readonly needsRepo: boolean;
+  /** An older form kept for habit; it runs a modern command and says which. */
+  readonly legacy?: boolean;
   readonly run: (ctx: GitContext) => CommandResult;
 };
 

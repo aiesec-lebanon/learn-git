@@ -120,6 +120,16 @@ export const VERBS: readonly ChipVerb[] = [
   },
   {
     program: "git",
+    name: "restore",
+    hint: "undo changes to files",
+    params: [
+      { kind: "flag", flag: "--staged", label: "unstage instead" },
+      { kind: "paths", label: "files", pick: "changed", required: true },
+    ],
+    ready: (s) => s.repo && (s.changed || s.staged),
+  },
+  {
+    program: "git",
     name: "show",
     hint: "show the last commit",
     params: [{ kind: "flag", flag: "--stat", label: "summary only" }],

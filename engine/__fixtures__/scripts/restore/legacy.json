@@ -1,0 +1,32 @@
+{
+  "world": {
+    "files": { "project/a.txt": "a\n", "project/b.txt": "b\n" },
+    "cwd": "project"
+  },
+  "steps": [
+    "git init -q",
+    "git add .",
+    "git commit -q -m \"First\"",
+    "echo more >> a.txt",
+    "echo more >> b.txt",
+    "git checkout -- a.txt",
+    "git checkout -- a.txt b.txt",
+    "git status --short",
+    "echo again >> a.txt",
+    "git add a.txt",
+    "git reset HEAD a.txt",
+    "git status --short",
+    "git add a.txt",
+    "echo b >> b.txt",
+    "git reset a.txt",
+    "git add a.txt",
+    "git reset -- a.txt",
+    "git reset -q HEAD a.txt",
+    "git checkout -- nope.txt",
+    "git reset HEAD nope.txt",
+    "git checkout -- .",
+    "git status --short",
+    "git reset HEAD",
+    "git checkout HEAD -- a.txt"
+  ]
+}

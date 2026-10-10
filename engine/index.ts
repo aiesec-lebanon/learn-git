@@ -23,6 +23,8 @@ export { listDir, worktreeFiles } from "./files/worktree";
 export { machineOf } from "./world/access";
 export { LIMITS } from "./limits";
 export { commands } from "./commands/info";
+export { overwrites } from "./restore/preview";
+export type { Overwrite } from "./restore/preview";
 export type { CommandInfo } from "./commands/info";
 export { displayRelative, resolvePath } from "./files/paths";
 export { shellQuote } from "./cli/tokenize";

@@ -21,7 +21,7 @@ const session = () =>
 describe("chip verbs", () => {
   it("cover every simulated command with flags from its definition", () => {
     const info = commands();
-    for (const c of info.filter((c) => c.program === "git"))
+    for (const c of info.filter((c) => c.program === "git" && !c.legacy))
       expect(
         VERBS.some((v) => v.program === "git" && v.name === c.name),
         c.name,

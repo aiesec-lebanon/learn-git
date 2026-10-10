@@ -7,6 +7,8 @@ export type CommandInfo = {
   readonly name: string;
   /** Counts toward par when it changes state. */
   readonly counted: boolean;
+  /** An older form (no chip; the reference maps it to the modern command). */
+  readonly legacy: boolean;
   /** Simulated option spellings, e.g. `-m` and `--message`. */
   readonly flags: readonly string[];
 };
@@ -17,6 +19,7 @@ export function commands(): readonly CommandInfo[] {
       program: "git" as const,
       name: c.name,
       counted: c.counted,
+      legacy: c.legacy === true,
       flags: c.options
         .filter((o) => !o.key.startsWith("x-"))
         .flatMap((o) => [
@@ -28,6 +31,7 @@ export function commands(): readonly CommandInfo[] {
       program: "shell" as const,
       name,
       counted: false,
+      legacy: false,
       flags: [],
     })),
   ];

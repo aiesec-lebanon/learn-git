@@ -1,6 +1,7 @@
 import { canonicalKey } from "../config/keys";
 import { EngineInvariantError } from "../errors";
 import { ancestors, resolvePath } from "../files/paths";
+import { runLine } from "../run";
 import type { ConfigFile, Machine, World, WorldSpec } from "../types";
 import { DEFAULT_GLOBAL_CONFIG, HOME, LEARNER } from "./defaults";
 
@@ -12,7 +13,7 @@ function configFrom(entries: Readonly<Record<string, string>>): ConfigFile {
   });
 }
 
-/** A fresh, deterministic world: the learner's machine with files and config, no repositories. */
+/** A fresh, deterministic world: the learner's machine with files and config, then the setup commands. */
 export function createWorld(spec: WorldSpec = {}): World {
   const files = new Map<string, string>();
   const dirs = new Set<string>([...ancestors(HOME), HOME]);
@@ -36,11 +37,19 @@ export function createWorld(spec: WorldSpec = {}): World {
     fs: { files, dirs },
     config: global.length ? global : null,
   };
-  return {
+  const world: World = {
     seq: 0,
     objects: new Map(),
     system: configFrom(spec.system ?? {}),
     machines: new Map([[machine.id, machine]]),
     repos: new Map(),
   };
+  return (spec.setup ?? []).reduce(setUp, world);
+}
+
+function setUp(world: World, line: string): World {
+  const ran = runLine(world, line);
+  if (ran.outcomes.some((o) => o.output.exitCode !== 0 || o.request))
+    throw new EngineInvariantError(`Setup failed: ${line}`);
+  return ran.world;
 }

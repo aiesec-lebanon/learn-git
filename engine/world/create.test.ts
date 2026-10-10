@@ -41,6 +41,27 @@ describe("createWorld", () => {
     expect(world.system).toEqual([{ key: "core.editor", value: "nano" }]);
   });
 
+  it("runs the setup commands after placing the files", () => {
+    const world = createWorld({
+      files: { "p/a.txt": "a\n" },
+      cwd: "p",
+      setup: [
+        "git init",
+        "git add .",
+        'git commit -m "First"',
+        "echo b > a.txt",
+      ],
+    });
+    expect(world.seq).toBe(4);
+    expect(world.repos.size).toBe(1);
+    expect(world.machines.get("you")?.fs.files.get("/home/you/p/a.txt")).toBe(
+      "b\n",
+    );
+    expect(() => createWorld({ setup: ["git commit"] })).toThrow(
+      EngineInvariantError,
+    );
+  });
+
   it("rejects config keys Git would reject", () => {
     expect(() => createWorld({ global: { nodot: "x" } })).toThrow(
       EngineInvariantError,

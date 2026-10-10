@@ -1,0 +1,51 @@
+<ColdOpen>
+  You fixed a typo in the README and started a new feature in the same hour. The
+  typo fix is ready to share; the feature is half done. Can you save one without
+  the other?
+</ColdOpen>
+
+<Beat id="zones" title="Three places">
+  Your work lives in three places. The <Term>working tree</Term> holds the files
+  you edit. The <Term>staging area</Term> holds the draft of the next commit.
+  The repository holds the commits. Right now all three agree: nothing has
+  changed since the first snapshot.
+</Beat>
+
+<Beat id="modified" title="An edit makes a file modified">
+  Add a line to `README.md` and it no longer matches the draft. `git status`
+  compares the places in pairs: "Changes to be committed" compares the staging
+  area with the last commit, and "Changes not staged for commit" compares the
+  working tree with the staging area.
+</Beat>
+
+<Beat id="add" title="git add copies into the draft">
+  `git add README.md` copies the file's current content into the staging area.
+  It does not move it: the file is still in your working tree, unchanged. The
+  draft now differs from the last commit, so `README.md` shows as staged.
+</Beat>
+
+<Beat id="both" title="Staged and modified at once">
+  Edit `README.md` again. The draft still holds the copy from `git add`, and
+  your working tree holds the newer one. `git status` lists the same file in
+  both sections: one version is staged, the other is not. A commit takes the
+  staged version.
+</Beat>
+
+<Beat id="commit" title="git commit records the draft">
+  `git commit` turns the draft into a commit. The staging area does not empty:
+  it still holds the full snapshot, now equal to the new commit. Your second
+  edit stays in the working tree, still modified, waiting for its own `git add`.
+</Beat>
+
+<Beat id="untracked" title="New files are untracked">
+  A new file such as `notes.txt` is <Term>untracked</Term>: Git sees it but has
+  never recorded it, so no commit includes it. It stays untracked until you `git
+  add` it.
+</Beat>
+
+<YourTurn />
+
+<Wrap commands={["git status", "git add", "git commit"]}>
+  The staging area is the draft of the next commit. `git add` copies a file's
+  current content into it, so you choose exactly what each commit records.
+</Wrap>

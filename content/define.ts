@@ -1,4 +1,4 @@
-import type { TargetSpec, WorldSpec } from "@/engine";
+import { shellQuote, type TargetSpec, type WorldSpec } from "@/engine";
 import type { ChapterId, LessonId } from "./registry";
 
 /** One story beat: the commands it runs on the lesson's world, in order. */
@@ -43,6 +43,17 @@ export type LessonScene = {
 export type CapstoneScene = Checkpoint & { readonly chapter: ChapterId };
 
 export const defineWorld = (spec: WorldSpec): WorldSpec => spec;
+
+/** A setup line that writes `text` to `path` exactly. */
+export const writeFile = (path: string, text: string): string =>
+  `echo -ne ${shellQuote(text.replace(/\\/g, "\\\\").replace(/\n/g, "\\n"))} > ${shellQuote(path)}`;
+
+/** The setup lines that record the folder as it is as the first commit. */
+export const FIRST_COMMIT = [
+  "git init",
+  "git add .",
+  'git commit -m "First snapshot"',
+] as const;
 
 export const defineLesson = (scene: LessonScene): LessonScene => scene;
 

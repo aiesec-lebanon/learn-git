@@ -114,6 +114,8 @@ export type WorldSpec = {
   readonly cwd?: string;
   readonly global?: Readonly<Record<string, string>>;
   readonly system?: Readonly<Record<string, string>>;
+  /** Commands run once the files exist, e.g. to record earlier commits. */
+  readonly setup?: readonly string[];
 };
 
 /** A shell word; `pattern` is set when it has unquoted `*`, `?` or `[`. */

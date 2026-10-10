@@ -1,4 +1,4 @@
-import { defineWorld } from "../define";
+import { defineWorld, FIRST_COMMIT } from "../define";
 
 /** The folder's starting files, by path from home. */
 export const recipeSiteFiles = {
@@ -18,4 +18,10 @@ export const recipeSite = defineWorld({
 export const recipeSiteWithIdentity = defineWorld({
   files: recipeSiteFiles,
   cwd: "recipe-site",
+});
+
+/** The folder recorded as its first commit, nothing changed since. */
+export const recipeSiteCommitted = defineWorld({
+  ...recipeSiteWithIdentity,
+  setup: FIRST_COMMIT,
 });

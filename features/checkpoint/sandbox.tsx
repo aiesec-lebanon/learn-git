@@ -11,7 +11,9 @@ import {
 } from "@/engine";
 import { useAnnounce } from "@/features/announcer/announcer";
 import { CommandChips } from "@/features/chips/chips";
+import type { Hints } from "@/content/define";
 import { Guide } from "@/features/guide/guide";
+import { HintLadder } from "@/features/guide/hint-ladder";
 import { progressStore, useProgress } from "@/features/progress/progress";
 import type { ResumePointer } from "@/features/progress/schema";
 import { EditorSheet } from "@/features/stage/editor-sheet";
@@ -36,6 +38,7 @@ export type SandboxProps = {
   /** Without a target the sandbox is free play: nothing to reach. */
   target?: TargetSpec;
   reached?: Reached;
+  hints?: Hints;
   /** A command typed before the sandbox loaded; it runs first. */
   queued: string | null;
   focus: boolean;
@@ -117,6 +120,7 @@ export function Sandbox({
   world,
   target,
   reached = NOTHING,
+  hints,
   queued,
   focus,
 }: SandboxProps) {
@@ -157,6 +161,7 @@ export function Sandbox({
         {report && target ? (
           <>
             <Check report={report} history={history} reached={reached} />
+            {hints ? <HintLadder session={session} hints={hints} /> : null}
             <TargetPanel target={target} />
           </>
         ) : null}

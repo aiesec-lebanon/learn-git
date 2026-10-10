@@ -7,12 +7,23 @@ export type BeatScript = {
   readonly run?: readonly string[];
 };
 
+/** The hint ladder, shown one step at a time on request (learning design 6). */
+export type Hints = {
+  /** A question that points attention. */
+  readonly nudge: string;
+  /** The concept to use. */
+  readonly pointer: string;
+  /** The command and why. */
+  readonly next: string;
+};
+
 /** A start world, a target state and a reference solution the content tests replay. */
 export type Checkpoint = {
   readonly goal: string;
   readonly world: WorldSpec;
   readonly target: TargetSpec;
   readonly solution: readonly string[];
+  readonly hints?: Hints;
 };
 
 export type Challenge = Checkpoint & { readonly par: number };

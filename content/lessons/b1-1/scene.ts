@@ -45,6 +45,12 @@ export default defineLesson({
       "git add .",
       'git commit -m "First snapshot"',
     ],
+    hints: {
+      nudge: "What does Git need before it can record anything in this folder?",
+      pointer:
+        "A repository starts with git init, and every commit records your name and email from git config.",
+      next: 'Run git init and set user.name and user.email with git config set --global. Then git add . stages every file, and git commit -m "First snapshot" records them.',
+    },
   },
   challenge: {
     goal: "Record one commit containing both files, leaving nothing to commit.",

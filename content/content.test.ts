@@ -147,6 +147,22 @@ for (const lesson of readyLessons()) {
   });
 }
 
+const checkpoints: [string, Checkpoint | undefined][] = [
+  ...readyLessons().map((l): [string, Checkpoint | undefined] => [
+    l.id,
+    SCENES[l.id]?.yourTurn,
+  ]),
+  ...Object.entries(CAPSTONES),
+];
+
+describe("hints", () => {
+  it.each(checkpoints)("%s has a ladder in the guide's voice", (_, c) => {
+    expect(c?.hints).toBeDefined();
+    for (const line of Object.values(c?.hints ?? {}))
+      expect(voiceProblems(line)).toEqual([]);
+  });
+});
+
 for (const [chapter, capstone] of Object.entries(CAPSTONES)) {
   describe(`capstone ${chapter}`, () => {
     it("belongs to its chapter and is reached by its solution, not before", () => {

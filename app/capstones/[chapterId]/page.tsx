@@ -58,6 +58,7 @@ export default async function CapstonePage({
         reached={{ finishes: chapter.id }}
         world={capstone.world}
         target={capstone.target}
+        hints={capstone.hints}
         start={stageFrame(createWorld(capstone.world), [])}
       />
       <CourseNav track={chapter.track} here={capstoneHref(chapter.id)} />

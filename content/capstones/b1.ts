@@ -42,4 +42,10 @@ export default defineCapstone({
     "git add index.html",
     'git commit -m "Tease more recipes"',
   ],
+  hints: {
+    nudge: "After you edit both files, which of them is in the staging area?",
+    pointer:
+      "git commit records only what is staged, and git add stages the files you name.",
+    next: "Commit the folder first. After editing both files, git add README.md and commit, then git add index.html and commit again.",
+  },
 });

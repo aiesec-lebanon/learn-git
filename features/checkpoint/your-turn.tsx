@@ -31,6 +31,7 @@ export function YourTurn({
         reached={reached}
         world={checkpoint.world}
         target={checkpoint.target}
+        hints={checkpoint.hints}
         start={stageFrame(createWorld(checkpoint.world), [])}
       />
     </section>

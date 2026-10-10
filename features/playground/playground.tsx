@@ -59,6 +59,7 @@ export function Playground() {
         sessionKey={sessionKey}
         world={choice.world}
         target={choice.prompt?.target}
+        hints={choice.prompt?.hints}
         queued={null}
         focus={false}
       />

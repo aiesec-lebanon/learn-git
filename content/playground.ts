@@ -1,5 +1,6 @@
 import type { Route } from "next";
 import type { TargetSpec, WorldSpec } from "@/engine";
+import type { Hints } from "./define";
 import { SCENES } from "./lessons";
 import { lessonCode, readyLessons } from "./registry";
 import { emptyFolder } from "./worlds/empty-folder";
@@ -28,6 +29,7 @@ export type PlaygroundPrompt = {
   readonly goal: string;
   readonly world: WorldSpec;
   readonly target: TargetSpec;
+  readonly hints?: Hints;
 };
 
 /** The Your turn prompt of every ready lesson, by lesson ID. */
@@ -42,6 +44,7 @@ export const PROMPTS: readonly PlaygroundPrompt[] = readyLessons().flatMap(
             goal: turn.goal,
             world: turn.world,
             target: turn.target,
+            hints: turn.hints,
           },
         ]
       : [];

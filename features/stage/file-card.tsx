@@ -26,7 +26,22 @@ const STATES: Record<FileState, { glyph: string; text: string; tone: string }> =
     },
   };
 
-/** A file with its state as a glyph and a word, never colour alone. */
+/** A file's state as a glyph and a word, never colour alone. */
+export function FileStateChip({ state }: { state: FileState }) {
+  const { glyph, text, tone } = STATES[state];
+  return (
+    <span
+      className={`ml-auto inline-flex shrink-0 items-center gap-1 rounded-xs px-1.5 text-xs font-semibold ${tone}`}
+    >
+      <span aria-hidden="true" className="font-mono">
+        {glyph}
+      </span>
+      {text}
+    </span>
+  );
+}
+
+/** A file with its state. */
 export function FileCard({
   file,
   area,
@@ -34,7 +49,6 @@ export function FileCard({
   file: Card;
   area: "worktree" | "index";
 }) {
-  const state = file.state ? STATES[file.state] : null;
   return (
     <li
       data-choreo={`file:${area}:${file.path}`}
@@ -43,16 +57,7 @@ export function FileCard({
       <code className="min-w-0 truncate text-sm">
         <bdi>{file.path}</bdi>
       </code>
-      {state ? (
-        <span
-          className={`ml-auto inline-flex shrink-0 items-center gap-1 rounded-xs px-1.5 text-xs font-semibold ${state.tone}`}
-        >
-          <span aria-hidden="true" className="font-mono">
-            {state.glyph}
-          </span>
-          {state.text}
-        </span>
-      ) : null}
+      {file.state ? <FileStateChip state={file.state} /> : null}
     </li>
   );
 }

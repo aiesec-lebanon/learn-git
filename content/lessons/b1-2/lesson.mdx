@@ -16,12 +16,16 @@
   compares the places in pairs: "Changes to be committed" compares the staging
   area with the last commit, and "Changes not staged for commit" compares the
   working tree with the staging area.
+
+  <Widget name="status-lens" />
 </Beat>
 
 <Beat id="add" title="git add copies into the draft">
   `git add README.md` copies the file's current content into the staging area.
   It does not move it: the file is still in your working tree, unchanged. The
   draft now differs from the last commit, so `README.md` shows as staged.
+
+  <Widget name="stage-files" />
 </Beat>
 
 <Beat id="both" title="Staged and modified at once">

@@ -2,6 +2,12 @@ import { describe, expect, it } from "vitest";
 import { identityCommands } from "./identity-form.model";
 import { WIDGET_NAMES } from "./names";
 import { snapshotAt, snapshotText } from "./snapshot-scrubber.model";
+import { carryable, dropCommand, STAGING } from "./stage-files.model";
+import { lensSections } from "./status-lens.model";
+import { createWorld, Session } from "@/engine";
+import { stageFiles } from "@/features/stage/files";
+import { typoAndFeature } from "@/content/worlds/typo-and-feature";
+import { recipeSite } from "@/content/worlds/recipe-site";
 
 const MDX = import.meta.glob<string>("../../content/lessons/*/lesson.mdx", {
   query: "?raw",
@@ -38,5 +44,33 @@ describe("widgets", () => {
     ]);
     expect(snapshotAt(9)).toEqual(snapshotAt(3));
     expect(snapshotText(1)).toBe("Snapshot 2 of 4: Add a README");
+  });
+
+  it("carry changed files and stage them with git add", () => {
+    const world = createWorld(typoAndFeature);
+    expect(carryable(stageFiles(world)).map((f) => f.path)).toEqual([
+      "README.md",
+      "app.js",
+      "notes.txt",
+    ]);
+    expect(carryable(stageFiles(createWorld(recipeSite)))).toEqual([]);
+    expect(dropCommand("my notes.txt", STAGING)).toBe("git add 'my notes.txt'");
+    expect(dropCommand("a", null)).toBeNull();
+  });
+
+  it("map each status section to the zones it compares", () => {
+    const session = new Session(createWorld(typoAndFeature));
+    session.run("git add README.md");
+    const sections = lensSections(session.getSnapshot().world);
+    expect(sections?.map((s) => [s.heading, s.zones, s.files])).toEqual([
+      ["Changes to be committed", ["index", "head"], ["modified: README.md"]],
+      [
+        "Changes not staged for commit",
+        ["worktree", "index"],
+        ["modified: app.js"],
+      ],
+      ["Untracked files", ["worktree"], ["notes.txt"]],
+    ]);
+    expect(lensSections(createWorld(recipeSite))).toBeNull();
   });
 });

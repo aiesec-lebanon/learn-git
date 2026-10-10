@@ -15,6 +15,12 @@ const WIDGETS: Record<WidgetName, ComponentType> = {
   "identity-form": lazy(() =>
     import("./identity-form").then((m) => ({ default: m.IdentityForm })),
   ),
+  "stage-files": lazy(() =>
+    import("./stage-files").then((m) => ({ default: m.StageFiles })),
+  ),
+  "status-lens": lazy(() =>
+    import("./status-lens").then((m) => ({ default: m.StatusLens })),
+  ),
 };
 
 /** A lesson widget by name, loaded with its own code (R3). */

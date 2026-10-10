@@ -7,7 +7,7 @@ export type CommandInfo = {
   readonly name: string;
   /** Counts toward par when it changes state. */
   readonly counted: boolean;
-  /** Option spellings, e.g. `-m` and `--message`. */
+  /** Simulated option spellings, e.g. `-m` and `--message`. */
   readonly flags: readonly string[];
 };
 
@@ -17,10 +17,12 @@ export function commands(): readonly CommandInfo[] {
       program: "git" as const,
       name: c.name,
       counted: c.counted,
-      flags: c.options.flatMap((o) => [
-        ...(o.short ? [`-${o.short}`] : []),
-        ...(o.long ? [`--${o.long}`] : []),
-      ]),
+      flags: c.options
+        .filter((o) => !o.key.startsWith("x-"))
+        .flatMap((o) => [
+          ...(o.short ? [`-${o.short}`] : []),
+          ...(o.long ? [`--${o.long}`] : []),
+        ]),
     })),
     ...[...SHELL_REGISTRY.keys()].map((name) => ({
       program: "shell" as const,

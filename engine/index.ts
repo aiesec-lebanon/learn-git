@@ -24,5 +24,5 @@ export { machineOf } from "./world/access";
 export { LIMITS } from "./limits";
 export { commands } from "./commands/info";
 export type { CommandInfo } from "./commands/info";
-export { resolvePath } from "./files/paths";
+export { displayRelative, resolvePath } from "./files/paths";
 export { shellQuote } from "./cli/tokenize";

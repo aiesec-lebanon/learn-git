@@ -1,0 +1,18 @@
+{
+  "world": { "dirs": ["project"], "cwd": "project" },
+  "steps": [
+    "git init -q",
+    "git status --foo",
+    "git status -x",
+    "git commit -m",
+    "git commit --message",
+    "git status --sho",
+    "git status --shor",
+    "git status --short=yes",
+    "git status --no-short",
+    "git status --no-foo",
+    "git status -sb",
+    "git commit -qm",
+    "git status -- -x"
+  ]
+}

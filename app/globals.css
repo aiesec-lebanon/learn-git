@@ -1,26 +1,115 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
+/* Theme values come from themes/active.ts (themeToCss); this file only maps them. */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-*: initial;
+  --color-transparent: transparent;
+  --color-current: currentColor;
+  --color-bg: var(--bg);
+  --color-bg-alt: var(--bg-alt);
+  --color-surface: var(--surface);
+  --color-sunk: var(--sunk);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-fg: var(--fg);
+  --color-fg-muted: var(--fg-muted);
+  --color-accent: var(--accent);
+  --color-accent-ink: var(--accent-ink);
+  --color-accent-fill: var(--accent-fill);
+  --color-accent-fill-hover: var(--accent-fill-hover);
+  --color-on-accent: var(--on-accent);
+  --color-accent-soft: var(--accent-soft);
+  --color-focus: var(--focus);
+  --color-hl: var(--hl);
+  --color-shadow: var(--shadow);
+  --color-sticky-shadow: var(--sticky-shadow);
+  --color-nav-bg: var(--nav-bg);
+  --color-guide: var(--guide);
+  --color-guide-ink: var(--guide-ink);
+  --color-st-untracked: var(--st-untracked);
+  --color-st-untracked-bg: var(--st-untracked-bg);
+  --color-st-modified: var(--st-modified);
+  --color-st-modified-bg: var(--st-modified-bg);
+  --color-st-staged: var(--st-staged);
+  --color-st-staged-bg: var(--st-staged-bg);
+  --color-st-added: var(--st-added);
+  --color-st-added-bg: var(--st-added-bg);
+  --color-st-deleted: var(--st-deleted);
+  --color-st-deleted-bg: var(--st-deleted-bg);
+  --color-st-conflict: var(--st-conflict);
+  --color-st-conflict-bg: var(--st-conflict-bg);
+  --color-g-bg: var(--g-bg);
+  --color-g-edge: var(--g-edge);
+  --color-g-node: var(--g-node);
+  --color-g-node-fill: var(--g-node-fill);
+  --color-g-text: var(--g-text);
+  --color-g-b0: var(--g-b0);
+  --color-g-b0-fg: var(--g-b0-fg);
+  --color-g-b1: var(--g-b1);
+  --color-g-b1-fg: var(--g-b1-fg);
+  --color-g-b2: var(--g-b2);
+  --color-g-b2-fg: var(--g-b2-fg);
+  --color-g-b3: var(--g-b3);
+  --color-g-b3-fg: var(--g-b3-fg);
+  --color-g-head: var(--g-head);
+  --color-g-head-fg: var(--g-head-fg);
+  --color-g-remote: var(--g-remote);
+  --color-g-dim: var(--g-dim);
+  --color-g-route: var(--g-route);
+  --color-term-bg: var(--term-bg);
+  --color-term-fg: var(--term-fg);
+  --color-term-muted: var(--term-muted);
+  --color-term-accent: var(--term-accent);
+  --color-term-err: var(--term-err);
+
+  --font-*: initial;
+  --font-display: var(--family-display), ui-rounded, system-ui, sans-serif;
+  --font-body: var(--family-body), system-ui, sans-serif;
+  --font-mono: var(--family-mono), ui-monospace, monospace;
+
+  --text-*: initial;
+  --text-xs: var(--size-xs);
+  --text-sm: var(--size-sm);
+  --text-base: var(--size-base);
+  --text-lg: var(--size-lg);
+  --text-xl: var(--size-xl);
+  --text-2xl: var(--size-2xl);
+  --text-3xl: var(--size-3xl);
+  --text-4xl: var(--size-4xl);
+  --text-display: var(--size-display);
+
+  --radius-*: initial;
+  --radius-xs: var(--round-xs);
+  --radius-sm: var(--round-sm);
+  --radius-md: var(--round-md);
+  --radius-lg: var(--round-lg);
+  --radius-pill: var(--round-pill);
+  --radius-btn: var(--round-btn);
+
+  --shadow-*: initial;
+  --shadow-1: var(--elev-1);
+  --shadow-2: var(--elev-2);
+  --shadow-3: var(--elev-3);
+
+  --ease-*: initial;
+  --ease-standard: var(--curve-standard);
+  --ease-draw: var(--curve-draw);
+  --ease-stick: var(--curve-stick);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  body {
+    @apply bg-bg font-body text-base/[1.6] text-fg;
   }
-}
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  h1,
+  h2,
+  h3 {
+    @apply font-display leading-[1.1] text-balance;
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--focus);
+    outline-offset: 2px;
+  }
 }

@@ -1,0 +1,32 @@
+{
+  "world": {
+    "files": {
+      "project/f.js": "header\nfunction alpha() {\n  one\n  two\n  three\n  four\n  five\n  six\n  seven\n}\n\nfunction beta() {\n  b1\n  b2\n  b3\n  b4\n  b5\n  b6\n  b7\n  b8\n}\n",
+      "project/n.txt": "1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15\n16\n17\n18\n19\n20\n",
+      "project/nonl.txt": "a\nb\nc",
+      "project/del.txt": "gone\ngone2\n",
+      "project/b.bin": "bin\u0000ary",
+      "project/empty.txt": "",
+      "project/src/deep/x.txt": "x\n"
+    },
+    "cwd": "project"
+  },
+  "steps": [
+    "git init -q",
+    "git add .",
+    "git commit -q -m base",
+    "git diff",
+    "echo -e 'header\nfunction alpha() {\n  one\n  two\n  three\n  FOUR\n  five\n  six\n  seven\n}\n\nfunction beta() {\n  b1\n  b2\n  b3\n  b4\n  b5\n  B6\n  b7\n  b8\n}' > f.js",
+    "echo -e '1\nTWO\n3\n4\n5\n6\n7\n8\n9\nTEN\n11\n12\n13\n14\n15\n16\n17\n18\nNINETEEN\n20' > n.txt",
+    "echo d >> nonl.txt",
+    "rm del.txt",
+    "echo -n 2 >> b.bin",
+    "rm empty.txt",
+    "echo y >> src/deep/x.txt",
+    "echo -n -e 'new\nfile' > new.txt",
+    "git diff",
+    "git add .",
+    "git diff",
+    "git diff --staged"
+  ]
+}

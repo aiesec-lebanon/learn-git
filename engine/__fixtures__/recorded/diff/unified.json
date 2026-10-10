@@ -1,0 +1,381 @@
+{
+  "final": {
+    "config": {
+      "global": [
+        [
+          "user.name",
+          "Sam Lee"
+        ],
+        [
+          "user.email",
+          "sam@example.com"
+        ],
+        [
+          "init.defaultbranch",
+          "main"
+        ]
+      ],
+      "system": []
+    },
+    "dirs": [
+      "project",
+      "project/src",
+      "project/src/deep"
+    ],
+    "files": {
+      "project/b.bin": "bin\u0000ary2",
+      "project/f.js": "header\nfunction alpha() {\n  one\n  two\n  three\n  FOUR\n  five\n  six\n  seven\n}\n\nfunction beta() {\n  b1\n  b2\n  b3\n  b4\n  b5\n  B6\n  b7\n  b8\n}\n",
+      "project/n.txt": "1\nTWO\n3\n4\n5\n6\n7\n8\n9\nTEN\n11\n12\n13\n14\n15\n16\n17\n18\nNINETEEN\n20\n",
+      "project/new.txt": "new\nfile",
+      "project/nonl.txt": "a\nb\ncd\n",
+      "project/src/deep/x.txt": "x\ny\n"
+    },
+    "repos": {
+      "project": {
+        "config": [
+          [
+            "core.repositoryformatversion",
+            "0"
+          ],
+          [
+            "core.filemode",
+            "false"
+          ],
+          [
+            "core.bare",
+            "false"
+          ],
+          [
+            "core.logallrefupdates",
+            "true"
+          ],
+          [
+            "core.symlinks",
+            "false"
+          ],
+          [
+            "core.ignorecase",
+            "true"
+          ]
+        ],
+        "head": {
+          "ref": "refs/heads/main"
+        },
+        "index": [
+          {
+            "mode": "100644",
+            "oid": "22f6b3b038c9c8f81e86f801c481bbf851e477fe",
+            "path": "b.bin",
+            "stage": 0
+          },
+          {
+            "mode": "100644",
+            "oid": "a5091bbb3045ae1c7e7ae701a71b238d509f5877",
+            "path": "f.js",
+            "stage": 0
+          },
+          {
+            "mode": "100644",
+            "oid": "e56404955923fa3d6eb7405b4f9caf4443cee2ec",
+            "path": "n.txt",
+            "stage": 0
+          },
+          {
+            "mode": "100644",
+            "oid": "9c38d10efd81e4a07a75aae7d09fd4489d280771",
+            "path": "new.txt",
+            "stage": 0
+          },
+          {
+            "mode": "100644",
+            "oid": "702e280d138978ae092858cfbf6823209ac12763",
+            "path": "nonl.txt",
+            "stage": 0
+          },
+          {
+            "mode": "100644",
+            "oid": "b77b4eb1d946f923f61785536da9ca5af6909f06",
+            "path": "src/deep/x.txt",
+            "stage": 0
+          }
+        ],
+        "objects": {
+          "0479003445f4e5a5ff25360c607ca79ffe4e4ea1": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "x.txt",
+                "oid": "587be6b4c3f93f93c489c0111bba5596147a26cb"
+              }
+            ],
+            "type": "tree"
+          },
+          "0ff3bbb9c8bba2291654cd64067fa417ff54c508": {
+            "body": "1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15\n16\n17\n18\n19\n20\n",
+            "type": "blob"
+          },
+          "1c943a98887754f364fafaa1da3ac56e0e0875a9": {
+            "body": "a\nb\nc",
+            "type": "blob"
+          },
+          "22f6b3b038c9c8f81e86f801c481bbf851e477fe": {
+            "body": "bin\u0000ary2",
+            "type": "blob"
+          },
+          "2597454a7bbdc4e4fea2eabf251b5111ff8f6e5f": {
+            "body": "gone\ngone2\n",
+            "type": "blob"
+          },
+          "587be6b4c3f93f93c489c0111bba5596147a26cb": {
+            "body": "x\n",
+            "type": "blob"
+          },
+          "702e280d138978ae092858cfbf6823209ac12763": {
+            "body": "a\nb\ncd\n",
+            "type": "blob"
+          },
+          "87ae6b695deceaf160611414f7dcd5c7366b2e79": {
+            "body": "bin\u0000ary",
+            "type": "blob"
+          },
+          "8945aa49e5d76bd4a979514c8e4e39012b32fb9c": {
+            "body": "header\nfunction alpha() {\n  one\n  two\n  three\n  four\n  five\n  six\n  seven\n}\n\nfunction beta() {\n  b1\n  b2\n  b3\n  b4\n  b5\n  b6\n  b7\n  b8\n}\n",
+            "type": "blob"
+          },
+          "8e928d874315959275da5b78e6ea69381c365269": {
+            "body": "tree ab6b9f20457f0b77a149d65a1b51706fac534861\nauthor Sam Lee <sam@example.com> 1767225720 +0000\ncommitter Sam Lee <sam@example.com> 1767225720 +0000\n\nbase\n",
+            "type": "commit"
+          },
+          "9bfaf919ad1df81fd55ff856c63bd11e8fcca004": {
+            "entries": [
+              {
+                "mode": "40000",
+                "name": "deep",
+                "oid": "0479003445f4e5a5ff25360c607ca79ffe4e4ea1"
+              }
+            ],
+            "type": "tree"
+          },
+          "9c38d10efd81e4a07a75aae7d09fd4489d280771": {
+            "body": "new\nfile",
+            "type": "blob"
+          },
+          "a5091bbb3045ae1c7e7ae701a71b238d509f5877": {
+            "body": "header\nfunction alpha() {\n  one\n  two\n  three\n  FOUR\n  five\n  six\n  seven\n}\n\nfunction beta() {\n  b1\n  b2\n  b3\n  b4\n  b5\n  B6\n  b7\n  b8\n}\n",
+            "type": "blob"
+          },
+          "ab6b9f20457f0b77a149d65a1b51706fac534861": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "b.bin",
+                "oid": "87ae6b695deceaf160611414f7dcd5c7366b2e79"
+              },
+              {
+                "mode": "100644",
+                "name": "del.txt",
+                "oid": "2597454a7bbdc4e4fea2eabf251b5111ff8f6e5f"
+              },
+              {
+                "mode": "100644",
+                "name": "empty.txt",
+                "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+              },
+              {
+                "mode": "100644",
+                "name": "f.js",
+                "oid": "8945aa49e5d76bd4a979514c8e4e39012b32fb9c"
+              },
+              {
+                "mode": "100644",
+                "name": "n.txt",
+                "oid": "0ff3bbb9c8bba2291654cd64067fa417ff54c508"
+              },
+              {
+                "mode": "100644",
+                "name": "nonl.txt",
+                "oid": "1c943a98887754f364fafaa1da3ac56e0e0875a9"
+              },
+              {
+                "mode": "40000",
+                "name": "src",
+                "oid": "9bfaf919ad1df81fd55ff856c63bd11e8fcca004"
+              }
+            ],
+            "type": "tree"
+          },
+          "b77b4eb1d946f923f61785536da9ca5af6909f06": {
+            "body": "x\ny\n",
+            "type": "blob"
+          },
+          "e56404955923fa3d6eb7405b4f9caf4443cee2ec": {
+            "body": "1\nTWO\n3\n4\n5\n6\n7\n8\n9\nTEN\n11\n12\n13\n14\n15\n16\n17\n18\nNINETEEN\n20\n",
+            "type": "blob"
+          },
+          "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391": {
+            "body": "",
+            "type": "blob"
+          }
+        },
+        "reflogs": {
+          "HEAD": [
+            "0000000000000000000000000000000000000000 8e928d874315959275da5b78e6ea69381c365269 Sam Lee <sam@example.com> 1767225720 +0000\tcommit (initial): base"
+          ],
+          "refs/heads/main": [
+            "0000000000000000000000000000000000000000 8e928d874315959275da5b78e6ea69381c365269 Sam Lee <sam@example.com> 1767225720 +0000\tcommit (initial): base"
+          ]
+        },
+        "refs": {
+          "refs/heads/main": "8e928d874315959275da5b78e6ea69381c365269"
+        }
+      }
+    }
+  },
+  "git": "2.45.1.windows.1",
+  "script": {
+    "steps": [
+      "git init -q",
+      "git add .",
+      "git commit -q -m base",
+      "git diff",
+      "echo -e 'header\nfunction alpha() {\n  one\n  two\n  three\n  FOUR\n  five\n  six\n  seven\n}\n\nfunction beta() {\n  b1\n  b2\n  b3\n  b4\n  b5\n  B6\n  b7\n  b8\n}' > f.js",
+      "echo -e '1\nTWO\n3\n4\n5\n6\n7\n8\n9\nTEN\n11\n12\n13\n14\n15\n16\n17\n18\nNINETEEN\n20' > n.txt",
+      "echo d >> nonl.txt",
+      "rm del.txt",
+      "echo -n 2 >> b.bin",
+      "rm empty.txt",
+      "echo y >> src/deep/x.txt",
+      "echo -n -e 'new\nfile' > new.txt",
+      "git diff",
+      "git add .",
+      "git diff",
+      "git diff --staged"
+    ],
+    "world": {
+      "cwd": "project",
+      "files": {
+        "project/b.bin": "bin\u0000ary",
+        "project/del.txt": "gone\ngone2\n",
+        "project/empty.txt": "",
+        "project/f.js": "header\nfunction alpha() {\n  one\n  two\n  three\n  four\n  five\n  six\n  seven\n}\n\nfunction beta() {\n  b1\n  b2\n  b3\n  b4\n  b5\n  b6\n  b7\n  b8\n}\n",
+        "project/n.txt": "1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15\n16\n17\n18\n19\n20\n",
+        "project/nonl.txt": "a\nb\nc",
+        "project/src/deep/x.txt": "x\n"
+      }
+    }
+  },
+  "steps": [
+    {
+      "cmd": "git init -q",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git add .",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git commit -q -m base",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git diff",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "echo -e 'header\nfunction alpha() {\n  one\n  two\n  three\n  FOUR\n  five\n  six\n  seven\n}\n\nfunction beta() {\n  b1\n  b2\n  b3\n  b4\n  b5\n  B6\n  b7\n  b8\n}' > f.js",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "echo -e '1\nTWO\n3\n4\n5\n6\n7\n8\n9\nTEN\n11\n12\n13\n14\n15\n16\n17\n18\nNINETEEN\n20' > n.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "echo d >> nonl.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "rm del.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "echo -n 2 >> b.bin",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "rm empty.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "echo y >> src/deep/x.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "echo -n -e 'new\nfile' > new.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git diff",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "diff --git a/b.bin b/b.bin\nindex 87ae6b6..22f6b3b 100644\nBinary files a/b.bin and b/b.bin differ\ndiff --git a/del.txt b/del.txt\ndeleted file mode 100644\nindex 2597454..0000000\n--- a/del.txt\n+++ /dev/null\n@@ -1,2 +0,0 @@\n-gone\n-gone2\ndiff --git a/empty.txt b/empty.txt\ndeleted file mode 100644\nindex e69de29..0000000\ndiff --git a/f.js b/f.js\nindex 8945aa4..a5091bb 100644\n--- a/f.js\n+++ b/f.js\n@@ -3,7 +3,7 @@ function alpha() {\n   one\n   two\n   three\n-  four\n+  FOUR\n   five\n   six\n   seven\n@@ -15,7 +15,7 @@ function beta() {\n   b3\n   b4\n   b5\n-  b6\n+  B6\n   b7\n   b8\n }\ndiff --git a/n.txt b/n.txt\nindex 0ff3bbb..e564049 100644\n--- a/n.txt\n+++ b/n.txt\n@@ -1,5 +1,5 @@\n 1\n-2\n+TWO\n 3\n 4\n 5\n@@ -7,7 +7,7 @@\n 7\n 8\n 9\n-10\n+TEN\n 11\n 12\n 13\n@@ -16,5 +16,5 @@\n 16\n 17\n 18\n-19\n+NINETEEN\n 20\ndiff --git a/nonl.txt b/nonl.txt\nindex 1c943a9..702e280 100644\n--- a/nonl.txt\n+++ b/nonl.txt\n@@ -1,3 +1,3 @@\n a\n b\n-c\n\\ No newline at end of file\n+cd\ndiff --git a/src/deep/x.txt b/src/deep/x.txt\nindex 587be6b..b77b4eb 100644\n--- a/src/deep/x.txt\n+++ b/src/deep/x.txt\n@@ -1 +1,2 @@\n x\n+y\n"
+    },
+    {
+      "cmd": "git add .",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git diff",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git diff --staged",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "diff --git a/b.bin b/b.bin\nindex 87ae6b6..22f6b3b 100644\nBinary files a/b.bin and b/b.bin differ\ndiff --git a/del.txt b/del.txt\ndeleted file mode 100644\nindex 2597454..0000000\n--- a/del.txt\n+++ /dev/null\n@@ -1,2 +0,0 @@\n-gone\n-gone2\ndiff --git a/empty.txt b/empty.txt\ndeleted file mode 100644\nindex e69de29..0000000\ndiff --git a/f.js b/f.js\nindex 8945aa4..a5091bb 100644\n--- a/f.js\n+++ b/f.js\n@@ -3,7 +3,7 @@ function alpha() {\n   one\n   two\n   three\n-  four\n+  FOUR\n   five\n   six\n   seven\n@@ -15,7 +15,7 @@ function beta() {\n   b3\n   b4\n   b5\n-  b6\n+  B6\n   b7\n   b8\n }\ndiff --git a/n.txt b/n.txt\nindex 0ff3bbb..e564049 100644\n--- a/n.txt\n+++ b/n.txt\n@@ -1,5 +1,5 @@\n 1\n-2\n+TWO\n 3\n 4\n 5\n@@ -7,7 +7,7 @@\n 7\n 8\n 9\n-10\n+TEN\n 11\n 12\n 13\n@@ -16,5 +16,5 @@\n 16\n 17\n 18\n-19\n+NINETEEN\n 20\ndiff --git a/new.txt b/new.txt\nnew file mode 100644\nindex 0000000..9c38d10\n--- /dev/null\n+++ b/new.txt\n@@ -0,0 +1,2 @@\n+new\n+file\n\\ No newline at end of file\ndiff --git a/nonl.txt b/nonl.txt\nindex 1c943a9..702e280 100644\n--- a/nonl.txt\n+++ b/nonl.txt\n@@ -1,3 +1,3 @@\n a\n b\n-c\n\\ No newline at end of file\n+cd\ndiff --git a/src/deep/x.txt b/src/deep/x.txt\nindex 587be6b..b77b4eb 100644\n--- a/src/deep/x.txt\n+++ b/src/deep/x.txt\n@@ -1 +1,2 @@\n x\n+y\n"
+    }
+  ]
+}

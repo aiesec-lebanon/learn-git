@@ -1,0 +1,27 @@
+{
+  "world": {
+    "dirs": ["project"],
+    "cwd": "project"
+  },
+  "steps": [
+    "git init -q",
+    "git config user.name \"Project Name\"",
+    "git config user.name",
+    "git config --global user.name",
+    "git config --local --list",
+    "git config --list",
+    "git config --show-scope --list",
+    "git config --local user.email",
+    "git config --unset user.name",
+    "git config user.name",
+    "git config --system user.name x",
+    "git config --list --local",
+    "git config nodot value",
+    "git config user.1x value",
+    "git config --global --get nodot",
+    "git config --get",
+    "git config user.email \"proj@example.com\"",
+    "git config user.email \"second@example.com\"",
+    "git config --local --list"
+  ]
+}

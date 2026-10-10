@@ -11,6 +11,7 @@ import { indexEntries } from "../staging/index";
 import type { ConfigFile, GitObject, Invocation, World } from "../types";
 import { machineOf } from "../world/access";
 import { createWorld } from "../world/create";
+import { fixtureScripts } from "./fixtures";
 import type {
   RecordedFixture,
   RecordedObject,
@@ -68,7 +69,10 @@ export function dumpWorld(world: World): Final {
   return {
     files,
     dirs,
-    config: { system: pairs(world.system), global: pairs(machine.config) },
+    config: {
+      system: pairs(world.system),
+      global: pairs(machine.config ?? []),
+    },
     repos,
   };
 }
@@ -122,7 +126,9 @@ export function replayFixture(fixture: RecordedFixture): {
   final: Final;
   world: World;
 } {
-  let world = createWorld(fixture.script.world);
+  let world = createWorld(
+    (fixtureScripts.get(fixture.id) ?? fixture.script).world,
+  );
   const steps = fixture.steps.map((expected) => {
     const outcome = execute(world, singleInvocation(world, expected.cmd));
     world = outcome.world;

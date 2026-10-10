@@ -1,0 +1,231 @@
+{
+  "final": {
+    "config": {
+      "global": [
+        [
+          "user.name",
+          "Sam Lee"
+        ],
+        [
+          "user.email",
+          "sam@example.com"
+        ],
+        [
+          "init.defaultbranch",
+          "main"
+        ]
+      ],
+      "system": []
+    },
+    "dirs": [
+      "project"
+    ],
+    "files": {},
+    "repos": {
+      "project": {
+        "config": [
+          [
+            "core.repositoryformatversion",
+            "0"
+          ],
+          [
+            "core.filemode",
+            "false"
+          ],
+          [
+            "core.bare",
+            "false"
+          ],
+          [
+            "core.logallrefupdates",
+            "true"
+          ],
+          [
+            "core.symlinks",
+            "false"
+          ],
+          [
+            "core.ignorecase",
+            "true"
+          ],
+          [
+            "user.email",
+            "second@example.com"
+          ]
+        ],
+        "head": {
+          "ref": "refs/heads/main"
+        },
+        "index": [],
+        "objects": {},
+        "reflogs": {},
+        "refs": {}
+      }
+    }
+  },
+  "git": "2.45.1.windows.1",
+  "script": {
+    "steps": [
+      "git init -q",
+      "git config user.name \"Project Name\"",
+      "git config user.name",
+      "git config --global user.name",
+      "git config --local --list",
+      "git config --list",
+      "git config --show-scope --list",
+      "git config --local user.email",
+      "git config --unset user.name",
+      "git config user.name",
+      "git config --system user.name x",
+      "git config --list --local",
+      "git config nodot value",
+      "git config user.1x value",
+      "git config --global --get nodot",
+      "git config --get",
+      "git config user.email \"proj@example.com\"",
+      "git config user.email \"second@example.com\"",
+      "git config --local --list"
+    ],
+    "world": {
+      "cwd": "project",
+      "dirs": [
+        "project"
+      ]
+    }
+  },
+  "steps": [
+    {
+      "cmd": "git init -q",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git config user.name \"Project Name\"",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git config user.name",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "Project Name\n"
+    },
+    {
+      "cmd": "git config --global user.name",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "Sam Lee\n"
+    },
+    {
+      "cmd": "git config --local --list",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "core.repositoryformatversion=0\ncore.filemode=false\ncore.bare=false\ncore.logallrefupdates=true\ncore.symlinks=false\ncore.ignorecase=true\nuser.name=Project Name\n"
+    },
+    {
+      "cmd": "git config --list",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "user.name=Sam Lee\nuser.email=sam@example.com\ninit.defaultbranch=main\ncore.repositoryformatversion=0\ncore.filemode=false\ncore.bare=false\ncore.logallrefupdates=true\ncore.symlinks=false\ncore.ignorecase=true\nuser.name=Project Name\n"
+    },
+    {
+      "cmd": "git config --show-scope --list",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "global\tuser.name=Sam Lee\nglobal\tuser.email=sam@example.com\nglobal\tinit.defaultbranch=main\nlocal\tcore.repositoryformatversion=0\nlocal\tcore.filemode=false\nlocal\tcore.bare=false\nlocal\tcore.logallrefupdates=true\nlocal\tcore.symlinks=false\nlocal\tcore.ignorecase=true\nlocal\tuser.name=Project Name\n"
+    },
+    {
+      "cmd": "git config --local user.email",
+      "cwd": "/home/you/project",
+      "exitCode": 1,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git config --unset user.name",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git config user.name",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "Sam Lee\n"
+    },
+    {
+      "cmd": "git config --system user.name x",
+      "cwd": "/home/you/project",
+      "exitCode": 255,
+      "stderr": "error: could not lock config file C:/Program Files/Git/etc/gitconfig: Permission denied\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git config --list --local",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "core.repositoryformatversion=0\ncore.filemode=false\ncore.bare=false\ncore.logallrefupdates=true\ncore.symlinks=false\ncore.ignorecase=true\n"
+    },
+    {
+      "cmd": "git config nodot value",
+      "cwd": "/home/you/project",
+      "exitCode": 2,
+      "stderr": "error: key does not contain a section: nodot\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git config user.1x value",
+      "cwd": "/home/you/project",
+      "exitCode": 1,
+      "stderr": "error: invalid key: user.1x\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git config --global --get nodot",
+      "cwd": "/home/you/project",
+      "exitCode": 1,
+      "stderr": "error: key does not contain a section: nodot\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git config --get",
+      "cwd": "/home/you/project",
+      "exitCode": 129,
+      "stderr": "error: wrong number of arguments, should be from 1 to 2\nusage: git config [<options>]\n\nConfig file location\n    --[no-]global         use global config file\n    --[no-]system         use system config file\n    --[no-]local          use repository config file\n    --[no-]worktree       use per-worktree config file\n    -f, --[no-]file <file>\n                          use given config file\n    --[no-]blob <blob-id> read config from given blob object\n\nAction\n    --[no-]get            get value: name [value-pattern]\n    --[no-]get-all        get all values: key [value-pattern]\n    --[no-]get-regexp     get values for regexp: name-regex [value-pattern]\n    --[no-]get-urlmatch   get value specific for the URL: section[.var] URL\n    --[no-]replace-all    replace all matching variables: name value [value-pattern]\n    --[no-]add            add a new variable: name value\n    --[no-]unset          remove a variable: name [value-pattern]\n    --[no-]unset-all      remove all matches: name [value-pattern]\n    --[no-]rename-section rename section: old-name new-name\n    --[no-]remove-section remove a section: name\n    -l, --[no-]list       list all\n    --[no-]fixed-value    use string equality when comparing values to 'value-pattern'\n    -e, --[no-]edit       open an editor\n    --[no-]get-color      find the color configured: slot [default]\n    --[no-]get-colorbool  find the color setting: slot [stdout-is-tty]\n\nType\n    -t, --[no-]type <type>\n                          value is given this type\n    --bool                value is \"true\" or \"false\"\n    --int                 value is decimal number\n    --bool-or-int         value is --bool or --int\n    --bool-or-str         value is --bool or string\n    --path                value is a path (file or directory name)\n    --expiry-date         value is an expiry date\n\nOther\n    -z, --[no-]null       terminate values with NUL byte\n    --[no-]name-only      show variable names only\n    --[no-]includes       respect include directives on lookup\n    --[no-]show-origin    show origin of config (file, standard input, blob, command line)\n    --[no-]show-scope     show scope of config (worktree, local, global, system, command)\n    --[no-]default <value>\n                          with --get, use default value when missing entry\n    --[no-]comment <value>\n                          human-readable comment string (# will be prepended as needed)\n\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git config user.email \"proj@example.com\"",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git config user.email \"second@example.com\"",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git config --local --list",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "core.repositoryformatversion=0\ncore.filemode=false\ncore.bare=false\ncore.logallrefupdates=true\ncore.symlinks=false\ncore.ignorecase=true\nuser.email=second@example.com\n"
+    }
+  ]
+}

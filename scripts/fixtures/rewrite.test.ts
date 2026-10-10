@@ -10,6 +10,7 @@ const tmpDir = "C:\\Users\\Ada\\AppData\\Local\\Temp\\lg-fx-abc";
 const rewrite = createRewriter({
   tmpDir,
   hostname: "DESKTOP-42",
+  username: "Ada",
   aliases: ["/tmp/lg-fx-abc"],
 });
 
@@ -38,6 +39,7 @@ describe("fixture rewriting", () => {
       "bash: cd: nope: No such file or directory\n",
     ],
     ["you@DESKTOP-42.(none)", "you@laptop.(none)"],
+    ["(got 'Ada@DESKTOP-42.(none)')", "(got 'you@laptop.(none)')"],
     ["/tmp/lg-fx-abc/home/you/p\n", "/home/you/p\n"],
     [
       "/usr/bin/bash: line 2: cd: x: Not a directory\n",

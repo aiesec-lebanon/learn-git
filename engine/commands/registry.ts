@@ -35,8 +35,8 @@ export type GitCommand = {
   /** Whether the command counts toward par (LD section 6). */
   readonly counted: boolean;
   readonly options: readonly OptionSpec[];
-  /** Synopsis lines, printed after `usage: ` and `   or: `. */
-  readonly usage: readonly string[];
+  /** The synopsis block Git prints, starting with `usage: `. */
+  readonly usage: string;
   readonly needsRepo: boolean;
   readonly run: (ctx: GitContext) => CommandResult;
 };

@@ -142,6 +142,7 @@ function record(tools, rel) {
     const rewrite = createRewriter({
       tmpDir: tmp,
       hostname: os.hostname(),
+      username: os.userInfo().username,
       aliases: [`/tmp/${path.basename(tmp)}`],
     });
     const fixture = rewriteDeep(

@@ -1,0 +1,117 @@
+{
+  "final": {
+    "config": {
+      "global": [
+        [
+          "user.name",
+          "Sam Lee"
+        ],
+        [
+          "user.email",
+          "sam@example.com"
+        ],
+        [
+          "init.defaultbranch",
+          "main"
+        ]
+      ],
+      "system": []
+    },
+    "dirs": [
+      "project"
+    ],
+    "files": {
+      "project/notes.txt": "draft\n"
+    },
+    "repos": {
+      "project": {
+        "config": [
+          [
+            "core.repositoryformatversion",
+            "0"
+          ],
+          [
+            "core.filemode",
+            "false"
+          ],
+          [
+            "core.bare",
+            "false"
+          ],
+          [
+            "core.logallrefupdates",
+            "true"
+          ],
+          [
+            "core.symlinks",
+            "false"
+          ],
+          [
+            "core.ignorecase",
+            "true"
+          ]
+        ],
+        "head": {
+          "ref": "refs/heads/main"
+        },
+        "index": [],
+        "objects": {},
+        "reflogs": {},
+        "refs": {}
+      }
+    }
+  },
+  "git": "2.45.1.windows.1",
+  "script": {
+    "steps": [
+      "git init",
+      "ls -a",
+      "git init",
+      "git init -b trunk",
+      "git init -q"
+    ],
+    "world": {
+      "cwd": "project",
+      "files": {
+        "project/notes.txt": "draft\n"
+      }
+    }
+  },
+  "steps": [
+    {
+      "cmd": "git init",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "Initialized empty Git repository in /home/you/project/.git/\n"
+    },
+    {
+      "cmd": "ls -a",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ".\n..\n.git\nnotes.txt\n"
+    },
+    {
+      "cmd": "git init",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "Reinitialized existing Git repository in /home/you/project/.git/\n"
+    },
+    {
+      "cmd": "git init -b trunk",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "warning: re-init: ignored --initial-branch=trunk\n",
+      "stdout": "Reinitialized existing Git repository in /home/you/project/.git/\n"
+    },
+    {
+      "cmd": "git init -q",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    }
+  ]
+}

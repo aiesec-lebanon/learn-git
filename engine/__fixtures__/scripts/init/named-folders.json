@@ -1,0 +1,12 @@
+{
+  "steps": [
+    "git init demo",
+    "git init -b trunk other",
+    "git init --initial-branch=dev third",
+    "git init -q quiet",
+    "git init nested/deeper/repo",
+    "git init -b 'bad..name' bad",
+    "git init -b",
+    "ls"
+  ]
+}

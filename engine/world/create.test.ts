@@ -37,7 +37,7 @@ describe("createWorld", () => {
     expect(you?.fs.dirs.has("/home/you/p")).toBe(true);
     expect(you?.fs.dirs.has("/home/you/empty")).toBe(true);
     expect(you?.cwd).toBe("/home/you/p/src");
-    expect(you?.config).toEqual([]);
+    expect(you?.config).toBeNull();
     expect(world.system).toEqual([{ key: "core.editor", value: "nano" }]);
   });
 

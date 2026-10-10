@@ -1,5 +1,4 @@
 import type { OptionError } from "../cli/options";
-import { usageBlock } from "./git";
 
 /**
  * Git's option errors (exit 129). Git also prints the full option table
@@ -8,9 +7,9 @@ import { usageBlock } from "./git";
  */
 export function optionErrorOutput(
   error: Exclude<OptionError, { kind: "help" }>,
-  usage: readonly string[],
+  usage: string,
 ): { stdout: string; stderr: string } {
-  const synopsis = `${usageBlock(usage)}\n`;
+  const synopsis = `${usage}\n\n`;
   switch (error.kind) {
     case "unknown-option":
       return {

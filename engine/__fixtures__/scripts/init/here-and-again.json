@@ -1,0 +1,4 @@
+{
+  "world": { "files": { "project/notes.txt": "draft\n" }, "cwd": "project" },
+  "steps": ["git init", "ls -a", "git init", "git init -b trunk", "git init -q"]
+}

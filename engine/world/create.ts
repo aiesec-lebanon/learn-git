@@ -27,13 +27,14 @@ export function createWorld(spec: WorldSpec = {}): World {
     files.set(path, content);
   }
   const cwd = resolvePath(HOME, spec.cwd ?? "");
+  const global = configFrom(spec.global ?? DEFAULT_GLOBAL_CONFIG);
   addDir(cwd);
   const machine: Machine = {
     id: LEARNER,
     home: HOME,
     cwd,
     fs: { files, dirs },
-    config: configFrom(spec.global ?? DEFAULT_GLOBAL_CONFIG),
+    config: global.length ? global : null,
   };
   return {
     seq: 0,

@@ -1,0 +1,280 @@
+{
+  "final": {
+    "config": {
+      "global": [
+        [
+          "user.name",
+          "Sam Lee"
+        ],
+        [
+          "user.email",
+          "sam@example.com"
+        ],
+        [
+          "init.defaultbranch",
+          "main"
+        ]
+      ],
+      "system": []
+    },
+    "dirs": [
+      "bad",
+      "demo",
+      "nested",
+      "nested/deeper",
+      "nested/deeper/repo",
+      "other",
+      "quiet",
+      "third"
+    ],
+    "files": {},
+    "repos": {
+      "demo": {
+        "config": [
+          [
+            "core.repositoryformatversion",
+            "0"
+          ],
+          [
+            "core.filemode",
+            "false"
+          ],
+          [
+            "core.bare",
+            "false"
+          ],
+          [
+            "core.logallrefupdates",
+            "true"
+          ],
+          [
+            "core.symlinks",
+            "false"
+          ],
+          [
+            "core.ignorecase",
+            "true"
+          ]
+        ],
+        "head": {
+          "ref": "refs/heads/main"
+        },
+        "index": [],
+        "objects": {},
+        "reflogs": {},
+        "refs": {}
+      },
+      "nested/deeper/repo": {
+        "config": [
+          [
+            "core.repositoryformatversion",
+            "0"
+          ],
+          [
+            "core.filemode",
+            "false"
+          ],
+          [
+            "core.bare",
+            "false"
+          ],
+          [
+            "core.logallrefupdates",
+            "true"
+          ],
+          [
+            "core.symlinks",
+            "false"
+          ],
+          [
+            "core.ignorecase",
+            "true"
+          ]
+        ],
+        "head": {
+          "ref": "refs/heads/main"
+        },
+        "index": [],
+        "objects": {},
+        "reflogs": {},
+        "refs": {}
+      },
+      "other": {
+        "config": [
+          [
+            "core.repositoryformatversion",
+            "0"
+          ],
+          [
+            "core.filemode",
+            "false"
+          ],
+          [
+            "core.bare",
+            "false"
+          ],
+          [
+            "core.logallrefupdates",
+            "true"
+          ],
+          [
+            "core.symlinks",
+            "false"
+          ],
+          [
+            "core.ignorecase",
+            "true"
+          ]
+        ],
+        "head": {
+          "ref": "refs/heads/trunk"
+        },
+        "index": [],
+        "objects": {},
+        "reflogs": {},
+        "refs": {}
+      },
+      "quiet": {
+        "config": [
+          [
+            "core.repositoryformatversion",
+            "0"
+          ],
+          [
+            "core.filemode",
+            "false"
+          ],
+          [
+            "core.bare",
+            "false"
+          ],
+          [
+            "core.logallrefupdates",
+            "true"
+          ],
+          [
+            "core.symlinks",
+            "false"
+          ],
+          [
+            "core.ignorecase",
+            "true"
+          ]
+        ],
+        "head": {
+          "ref": "refs/heads/main"
+        },
+        "index": [],
+        "objects": {},
+        "reflogs": {},
+        "refs": {}
+      },
+      "third": {
+        "config": [
+          [
+            "core.repositoryformatversion",
+            "0"
+          ],
+          [
+            "core.filemode",
+            "false"
+          ],
+          [
+            "core.bare",
+            "false"
+          ],
+          [
+            "core.logallrefupdates",
+            "true"
+          ],
+          [
+            "core.symlinks",
+            "false"
+          ],
+          [
+            "core.ignorecase",
+            "true"
+          ]
+        ],
+        "head": {
+          "ref": "refs/heads/dev"
+        },
+        "index": [],
+        "objects": {},
+        "reflogs": {},
+        "refs": {}
+      }
+    }
+  },
+  "git": "2.45.1.windows.1",
+  "script": {
+    "steps": [
+      "git init demo",
+      "git init -b trunk other",
+      "git init --initial-branch=dev third",
+      "git init -q quiet",
+      "git init nested/deeper/repo",
+      "git init -b 'bad..name' bad",
+      "git init -b",
+      "ls"
+    ]
+  },
+  "steps": [
+    {
+      "cmd": "git init demo",
+      "cwd": "/home/you",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "Initialized empty Git repository in /home/you/demo/.git/\n"
+    },
+    {
+      "cmd": "git init -b trunk other",
+      "cwd": "/home/you",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "Initialized empty Git repository in /home/you/other/.git/\n"
+    },
+    {
+      "cmd": "git init --initial-branch=dev third",
+      "cwd": "/home/you",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "Initialized empty Git repository in /home/you/third/.git/\n"
+    },
+    {
+      "cmd": "git init -q quiet",
+      "cwd": "/home/you",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git init nested/deeper/repo",
+      "cwd": "/home/you",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "Initialized empty Git repository in /home/you/nested/deeper/repo/.git/\n"
+    },
+    {
+      "cmd": "git init -b 'bad..name' bad",
+      "cwd": "/home/you",
+      "exitCode": 128,
+      "stderr": "fatal: invalid initial branch name: 'bad..name'\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git init -b",
+      "cwd": "/home/you",
+      "exitCode": 129,
+      "stderr": "error: switch `b' requires a value\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "ls",
+      "cwd": "/home/you",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "bad\ndemo\nnested\nother\nquiet\nthird\n"
+    }
+  ]
+}

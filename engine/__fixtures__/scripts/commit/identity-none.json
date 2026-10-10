@@ -1,0 +1,16 @@
+{
+  "world": {
+    "global": {},
+    "files": { "project/a.txt": "a\n" },
+    "cwd": "project"
+  },
+  "steps": [
+    "git init -q -b main",
+    "git add a.txt",
+    "git commit -m \"First\"",
+    "git config user.name \"Repo Name\"",
+    "git config user.email repo@example.com",
+    "git commit -m \"First\"",
+    "git config --global --list"
+  ]
+}

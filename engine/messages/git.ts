@@ -35,7 +35,3 @@ export const noDirectoryForC = () =>
 /** Simulator remark for anything this sandbox does not model. */
 export const notSimulated = (what: string, gitWould?: string) =>
   `not simulated here: ${what}${gitWould ? ` (in Git: ${gitWould})` : ""}\n`;
-
-/** `usage: ...` then `   or: ...` lines, as Git prints a command's synopsis. */
-export const usageBlock = (lines: readonly string[]) =>
-  lines.map((l, i) => `${i === 0 ? "usage: " : "   or: "}${l}\n`).join("");

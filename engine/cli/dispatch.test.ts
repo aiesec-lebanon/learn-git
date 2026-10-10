@@ -11,7 +11,7 @@ const where = defineCommand({
   name: "where",
   counted: true,
   needsRepo: true,
-  usage: ["git where [-v]"],
+  usage: "usage: git where [-v]",
   options: [{ key: "verbose", short: "v", long: "verbose" }],
   run: ({ repo, machine, options }) => ({
     stdout: `${repo.workdir} ${machine.cwd} ${String(lastValue(options, "verbose") ?? false)}\n`,
@@ -21,7 +21,7 @@ const touch = defineCommand({
   name: "touchy",
   counted: false,
   needsRepo: false,
-  usage: ["git touchy"],
+  usage: "usage: git touchy",
   options: [],
   run: ({ world, machine }) => ({
     world: { ...world, machines: new Map([[machine.id, machine]]) },

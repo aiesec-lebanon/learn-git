@@ -16,6 +16,7 @@ export function pathForms(nativeDir) {
 export function createRewriter({
   tmpDir,
   hostname,
+  username,
   aliases = /** @type {string[]} */ ([]),
 }) {
   const forms = [...pathForms(tmpDir), ...aliases];
@@ -26,6 +27,7 @@ export function createRewriter({
       out = out.split(form).join("");
     }
     if (hostname) out = out.split(hostname).join("laptop");
+    if (username) out = out.split(`${username}@laptop`).join("you@laptop");
     return out
       .replace(/^(?:\/usr\/bin\/)?bash: line \d+: /gm, "bash: ")
       .replace(COMMAND_SCOPE_LINE, "");

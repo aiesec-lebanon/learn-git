@@ -57,7 +57,8 @@ export type Machine = {
   readonly home: string;
   readonly cwd: string;
   readonly fs: Fs;
-  readonly config: ConfigFile;
+  /** `~/.gitconfig`; null while the file does not exist. */
+  readonly config: ConfigFile | null;
 };
 
 export type Head =

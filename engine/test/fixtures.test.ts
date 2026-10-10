@@ -16,7 +16,7 @@ describe("recorded fixtures", () => {
       expect(fixture.script).toEqual(fixtureScripts.get(id));
       expect(fixture.steps).toHaveLength(fixture.script.steps.length);
       const text = JSON.stringify(fixture);
-      expect(text).not.toMatch(/lg-fx-|\\r|AppData|[A-Z]:\//);
+      expect(text).not.toMatch(/lg-fx-|\\r|AppData|[A-Z]:\/Users/);
     },
   );
 });

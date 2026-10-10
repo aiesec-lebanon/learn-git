@@ -1,0 +1,8 @@
+{
+  "world": {
+    "global": { "user.name": "Sam Lee", "user.email": "sam@example.com" },
+    "dirs": ["project"],
+    "cwd": "project"
+  },
+  "steps": ["git init"]
+}

@@ -1,0 +1,21 @@
+{
+  "steps": [
+    "git config user.name",
+    "git config --global user.name",
+    "git config --global --get user.email",
+    "git config --global user.name \"Ada Lovelace\"",
+    "git config --global core.editor nano",
+    "git config --global --list",
+    "git config --list",
+    "git config -l --show-scope",
+    "git config --global --unset core.editor",
+    "git config --global --unset core.editor",
+    "git config --global core.editor",
+    "git config user.name Local",
+    "git config --local user.name",
+    "git config nodot value",
+    "git config user.1x value",
+    "git config --global init.defaultBranch",
+    "git config --get init.defaultbranch"
+  ]
+}

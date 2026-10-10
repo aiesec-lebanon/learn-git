@@ -1,0 +1,167 @@
+{
+  "final": {
+    "config": {
+      "global": [
+        [
+          "user.name",
+          "Ada Lovelace"
+        ],
+        [
+          "user.email",
+          "sam@example.com"
+        ],
+        [
+          "init.defaultbranch",
+          "main"
+        ]
+      ],
+      "system": []
+    },
+    "dirs": [],
+    "files": {},
+    "repos": {}
+  },
+  "git": "2.45.1.windows.1",
+  "script": {
+    "steps": [
+      "git config user.name",
+      "git config --global user.name",
+      "git config --global --get user.email",
+      "git config --global user.name \"Ada Lovelace\"",
+      "git config --global core.editor nano",
+      "git config --global --list",
+      "git config --list",
+      "git config -l --show-scope",
+      "git config --global --unset core.editor",
+      "git config --global --unset core.editor",
+      "git config --global core.editor",
+      "git config user.name Local",
+      "git config --local user.name",
+      "git config nodot value",
+      "git config user.1x value",
+      "git config --global init.defaultBranch",
+      "git config --get init.defaultbranch"
+    ]
+  },
+  "steps": [
+    {
+      "cmd": "git config user.name",
+      "cwd": "/home/you",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "Sam Lee\n"
+    },
+    {
+      "cmd": "git config --global user.name",
+      "cwd": "/home/you",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "Sam Lee\n"
+    },
+    {
+      "cmd": "git config --global --get user.email",
+      "cwd": "/home/you",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "sam@example.com\n"
+    },
+    {
+      "cmd": "git config --global user.name \"Ada Lovelace\"",
+      "cwd": "/home/you",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git config --global core.editor nano",
+      "cwd": "/home/you",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git config --global --list",
+      "cwd": "/home/you",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "user.name=Ada Lovelace\nuser.email=sam@example.com\ninit.defaultbranch=main\ncore.editor=nano\n"
+    },
+    {
+      "cmd": "git config --list",
+      "cwd": "/home/you",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "user.name=Ada Lovelace\nuser.email=sam@example.com\ninit.defaultbranch=main\ncore.editor=nano\n"
+    },
+    {
+      "cmd": "git config -l --show-scope",
+      "cwd": "/home/you",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "global\tuser.name=Ada Lovelace\nglobal\tuser.email=sam@example.com\nglobal\tinit.defaultbranch=main\nglobal\tcore.editor=nano\n"
+    },
+    {
+      "cmd": "git config --global --unset core.editor",
+      "cwd": "/home/you",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git config --global --unset core.editor",
+      "cwd": "/home/you",
+      "exitCode": 5,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git config --global core.editor",
+      "cwd": "/home/you",
+      "exitCode": 1,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git config user.name Local",
+      "cwd": "/home/you",
+      "exitCode": 128,
+      "stderr": "fatal: not in a git directory\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git config --local user.name",
+      "cwd": "/home/you",
+      "exitCode": 128,
+      "stderr": "fatal: --local can only be used inside a git repository\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git config nodot value",
+      "cwd": "/home/you",
+      "exitCode": 128,
+      "stderr": "fatal: not in a git directory\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git config user.1x value",
+      "cwd": "/home/you",
+      "exitCode": 128,
+      "stderr": "fatal: not in a git directory\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git config --global init.defaultBranch",
+      "cwd": "/home/you",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "main\n"
+    },
+    {
+      "cmd": "git config --get init.defaultbranch",
+      "cwd": "/home/you",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "main\n"
+    }
+  ]
+}

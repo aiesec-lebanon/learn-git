@@ -34,12 +34,12 @@ function findRepos(root) {
   const visit = (rel, full, isDir) => {
     if (!isDir) return;
     if (rel.split("/").at(-1) === ".git") {
-      repos.push(path.dirname(full));
+      if (existsSync(path.join(full, "HEAD"))) repos.push(path.dirname(full));
       return;
     }
     walk(full, visit, rel);
   };
-  if (existsSync(path.join(root, ".git"))) repos.push(root);
+  if (existsSync(path.join(root, ".git", "HEAD"))) repos.push(root);
   walk(root, visit);
   return [...new Set(repos)];
 }

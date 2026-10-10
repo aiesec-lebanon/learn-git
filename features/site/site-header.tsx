@@ -12,6 +12,14 @@ export function SiteHeader() {
           <Logo className="size-7" />
           Learn Git
         </Link>
+        <nav aria-label="Site" className="ml-auto">
+          <Link
+            href="/settings"
+            className="inline-flex min-h-11 items-center px-2 font-semibold text-accent-ink"
+          >
+            Settings
+          </Link>
+        </nav>
       </div>
     </header>
   );

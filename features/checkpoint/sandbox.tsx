@@ -12,7 +12,7 @@ import {
 import { useAnnounce } from "@/features/announcer/announcer";
 import { CommandChips } from "@/features/chips/chips";
 import { Guide } from "@/features/guide/guide";
-import { progressStore } from "@/features/progress/progress";
+import { progressStore, useProgress } from "@/features/progress/progress";
 import type { ResumePointer } from "@/features/progress/schema";
 import { Rewind } from "@/features/stage/rewind";
 import { sandboxFor } from "@/features/stage/session-registry";
@@ -114,6 +114,7 @@ export function Sandbox({
   );
   const { world: now, history } = useSession(session);
   const report = useMemo(() => match(now, target), [now, target]);
+  const { guide } = useProgress().prefs;
   const ran = useRef(false);
   useEffect(() => {
     if (queued && !ran.current) session.run(queued);
@@ -123,7 +124,7 @@ export function Sandbox({
   return (
     <div className="grid gap-6 lg:grid-cols-[minmax(0,1.3fr)_minmax(0,1fr)]">
       <div className="grid content-start gap-4">
-        <Guide session={session} verbosity="light" achieved={report.ok} />
+        <Guide session={session} verbosity={guide} achieved={report.ok} />
         <Stage session={session} />
       </div>
       <div className="grid content-start gap-4">

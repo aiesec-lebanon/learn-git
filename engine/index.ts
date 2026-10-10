@@ -10,3 +10,6 @@ export { describeGraph } from "./narration/describe";
 export { narrate } from "./narration/narrate";
 export type { Narration } from "./narration/narrate";
 export { REFUSAL_FACTS } from "./narration/refusals";
+export { match } from "./matcher/match";
+export type * from "./matcher/target";
+export { countPar } from "./par";

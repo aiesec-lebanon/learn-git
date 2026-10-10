@@ -33,7 +33,16 @@ export default defineConfig({
         "engine/__fixtures__/**",
         "engine/test/**",
       ],
-      thresholds: { lines: 90, branches: 90 },
+      thresholds: {
+        lines: 90,
+        branches: 90,
+        ...Object.fromEntries(
+          ["objects", "cli", "diff", "matcher"].map((dir) => [
+            `engine/${dir}/**`,
+            { lines: 95, branches: 90 },
+          ]),
+        ),
+      },
     },
   },
 });

@@ -113,9 +113,12 @@ export type WorldSpec = {
   readonly system?: Readonly<Record<string, string>>;
 };
 
-export type Redirect = { readonly op: ">" | ">>"; readonly target: string };
+/** A shell word; `pattern` is set when it has unquoted `*`, `?` or `[`. */
+export type Word = { readonly text: string; readonly pattern?: string };
+export type Redirect = { readonly op: ">" | ">>"; readonly target: Word };
+/** One simple command as the shell parsed it. */
 export type Invocation = {
-  readonly argv: readonly string[];
+  readonly words: readonly Word[];
   readonly redirect?: Redirect;
   readonly machine?: MachineId;
 };

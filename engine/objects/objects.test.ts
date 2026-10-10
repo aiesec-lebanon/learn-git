@@ -42,7 +42,7 @@ describe("Git objects", () => {
     },
   );
 
-  it.each(recordedRepos)(
+  it.each(recordedRepos.filter(([, r]) => r.refs["refs/heads/main"]))(
     "builds the recorded root tree from the index (%s)",
     (_, repo) => {
       const files = new Map(

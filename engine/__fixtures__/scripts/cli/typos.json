@@ -1,0 +1,19 @@
+{
+  "world": { "dirs": ["project"], "cwd": "project" },
+  "steps": [
+    "git comit",
+    "git stauts",
+    "git satus",
+    "git ad .",
+    "git lgo",
+    "git foo",
+    "git chekout main",
+    "git brnch",
+    "git pul",
+    "git psuh",
+    "git",
+    "git --version",
+    "git -C nowhere status",
+    "git status"
+  ]
+}

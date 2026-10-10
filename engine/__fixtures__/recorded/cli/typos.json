@@ -1,0 +1,151 @@
+{
+  "final": {
+    "config": {
+      "global": [
+        [
+          "user.name",
+          "Sam Lee"
+        ],
+        [
+          "user.email",
+          "sam@example.com"
+        ],
+        [
+          "init.defaultbranch",
+          "main"
+        ]
+      ],
+      "system": []
+    },
+    "dirs": [
+      "project"
+    ],
+    "files": {},
+    "repos": {}
+  },
+  "git": "2.45.1.windows.1",
+  "script": {
+    "steps": [
+      "git comit",
+      "git stauts",
+      "git satus",
+      "git ad .",
+      "git lgo",
+      "git foo",
+      "git chekout main",
+      "git brnch",
+      "git pul",
+      "git psuh",
+      "git",
+      "git --version",
+      "git -C nowhere status",
+      "git status"
+    ],
+    "world": {
+      "cwd": "project",
+      "dirs": [
+        "project"
+      ]
+    }
+  },
+  "steps": [
+    {
+      "cmd": "git comit",
+      "cwd": "/home/you/project",
+      "exitCode": 1,
+      "stderr": "git: 'comit' is not a git command. See 'git --help'.\n\nThe most similar command is\n\tcommit\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git stauts",
+      "cwd": "/home/you/project",
+      "exitCode": 1,
+      "stderr": "git: 'stauts' is not a git command. See 'git --help'.\n\nThe most similar command is\n\tstatus\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git satus",
+      "cwd": "/home/you/project",
+      "exitCode": 1,
+      "stderr": "git: 'satus' is not a git command. See 'git --help'.\n\nThe most similar command is\n\tstatus\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git ad .",
+      "cwd": "/home/you/project",
+      "exitCode": 1,
+      "stderr": "git: 'ad' is not a git command. See 'git --help'.\n\nThe most similar commands are\n\tadd\n\tam\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git lgo",
+      "cwd": "/home/you/project",
+      "exitCode": 1,
+      "stderr": "git: 'lgo' is not a git command. See 'git --help'.\n\nThe most similar command is\n\tlog\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git foo",
+      "cwd": "/home/you/project",
+      "exitCode": 1,
+      "stderr": "git: 'foo' is not a git command. See 'git --help'.\n\nThe most similar commands are\n\tflow\n\thook\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git chekout main",
+      "cwd": "/home/you/project",
+      "exitCode": 1,
+      "stderr": "git: 'chekout' is not a git command. See 'git --help'.\n\nThe most similar command is\n\tcheckout\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git brnch",
+      "cwd": "/home/you/project",
+      "exitCode": 1,
+      "stderr": "git: 'brnch' is not a git command. See 'git --help'.\n\nThe most similar command is\n\tbranch\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git pul",
+      "cwd": "/home/you/project",
+      "exitCode": 1,
+      "stderr": "git: 'pul' is not a git command. See 'git --help'.\n\nThe most similar commands are\n\tpull\n\tpush\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git psuh",
+      "cwd": "/home/you/project",
+      "exitCode": 1,
+      "stderr": "git: 'psuh' is not a git command. See 'git --help'.\n\nThe most similar command is\n\tpush\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git",
+      "cwd": "/home/you/project",
+      "exitCode": 1,
+      "stderr": "",
+      "stdout": "usage: git [-v | --version] [-h | --help] [-C <path>] [-c <name>=<value>]\n           [--exec-path[=<path>]] [--html-path] [--man-path] [--info-path]\n           [-p | --paginate | -P | --no-pager] [--no-replace-objects] [--bare]\n           [--git-dir=<path>] [--work-tree=<path>] [--namespace=<name>]\n           [--config-env=<name>=<envvar>] <command> [<args>]\n\nThese are common Git commands used in various situations:\n\nstart a working area (see also: git help tutorial)\n   clone     Clone a repository into a new directory\n   init      Create an empty Git repository or reinitialize an existing one\n\nwork on the current change (see also: git help everyday)\n   add       Add file contents to the index\n   mv        Move or rename a file, a directory, or a symlink\n   restore   Restore working tree files\n   rm        Remove files from the working tree and from the index\n\nexamine the history and state (see also: git help revisions)\n   bisect    Use binary search to find the commit that introduced a bug\n   diff      Show changes between commits, commit and working tree, etc\n   grep      Print lines matching a pattern\n   log       Show commit logs\n   show      Show various types of objects\n   status    Show the working tree status\n\ngrow, mark and tweak your common history\n   branch    List, create, or delete branches\n   commit    Record changes to the repository\n   merge     Join two or more development histories together\n   rebase    Reapply commits on top of another base tip\n   reset     Reset current HEAD to the specified state\n   switch    Switch branches\n   tag       Create, list, delete or verify a tag object signed with GPG\n\ncollaborate (see also: git help workflows)\n   fetch     Download objects and refs from another repository\n   pull      Fetch from and integrate with another repository or a local branch\n   push      Update remote refs along with associated objects\n\n'git help -a' and 'git help -g' list available subcommands and some\nconcept guides. See 'git help <command>' or 'git help <concept>'\nto read about a specific subcommand or concept.\nSee 'git help git' for an overview of the system.\n"
+    },
+    {
+      "cmd": "git --version",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "git version 2.45.1.windows.1\n"
+    },
+    {
+      "cmd": "git -C nowhere status",
+      "cwd": "/home/you/project",
+      "exitCode": 128,
+      "stderr": "fatal: cannot change to 'nowhere': No such file or directory\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git status",
+      "cwd": "/home/you/project",
+      "exitCode": 128,
+      "stderr": "fatal: not a git repository (or any of the parent directories): .git\n",
+      "stdout": ""
+    }
+  ]
+}

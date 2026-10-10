@@ -1,12 +1,7 @@
 import { LIMITS } from "../limits";
+import type { Invocation, Word } from "../types";
 
-/** A shell word; `pattern` is set when it has unquoted `*`, `?` or `[`. */
-export type Word = { readonly text: string; readonly pattern?: string };
-
-export type SimpleCommand = {
-  readonly words: readonly Word[];
-  readonly redirect?: { readonly op: ">" | ">>"; readonly target: Word };
-};
+type SimpleCommand = Omit<Invocation, "machine">;
 
 export type CommandStep = {
   readonly command: SimpleCommand;

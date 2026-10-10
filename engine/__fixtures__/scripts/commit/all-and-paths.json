@@ -1,0 +1,49 @@
+{
+  "world": {
+    "files": {
+      "project/a.txt": "a\n",
+      "project/b.txt": "b\n",
+      "project/src/c.txt": "c\n"
+    },
+    "cwd": "project"
+  },
+  "steps": [
+    "git init -q",
+    "git commit -m \"Early\" a.txt",
+    "git add a.txt b.txt",
+    "git commit -m \"Only a\" a.txt",
+    "git status --short",
+    "git commit -m \"Rest\"",
+    "echo more >> a.txt",
+    "echo more >> b.txt",
+    "echo new > new.txt",
+    "git commit -a -m \"All tracked\"",
+    "git status --short",
+    "rm b.txt",
+    "echo again >> a.txt",
+    "git commit -am \"Delete and change\"",
+    "git add src",
+    "echo more >> a.txt",
+    "echo extra >> src/c.txt",
+    "git add src/c.txt",
+    "echo later >> src/c.txt",
+    "git commit -m \"Just a\" a.txt",
+    "git status --short",
+    "git diff --staged",
+    "git commit -m \"Folder\" src",
+    "git status --short",
+    "git commit -m \"Nope\" missing.txt",
+    "git commit -m \"Untracked\" new.txt",
+    "git commit -m \"Unchanged\" a.txt",
+    "git commit -a -m \"Mixed\" a.txt",
+    "git commit -a -m \"Nothing\"",
+    "cd src",
+    "echo sub >> c.txt",
+    "git commit -m \"From a folder\" c.txt",
+    "echo top >> ../a.txt",
+    "git commit -m \"Up\" -- ../a.txt",
+    "git commit -m \"Outside\" ../../x",
+    "cd ..",
+    "git log --oneline"
+  ]
+}

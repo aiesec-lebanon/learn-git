@@ -63,9 +63,8 @@ describe("git commit", () => {
   });
 
   it.each([
-    ["git commit -a -m x", "not simulated here: git commit --all\n"],
     ["git commit --amend -m x", "not simulated here: git commit --amend\n"],
-    ["git commit -m x a.txt", "not simulated here: git commit with paths\n"],
+    ["git commit -i -m x a.txt", "not simulated here: git commit --include\n"],
     [
       "git commit",
       "not simulated here: git commit without -m (the message editor)\n",

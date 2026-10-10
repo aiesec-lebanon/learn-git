@@ -1,13 +1,20 @@
 import { flag, stringValues, type OptionSpec } from "../cli/options";
 import { cleanupMessage, subjectOf } from "../commit/message";
+import {
+  prepareAll,
+  prepareOnly,
+  type PreparedCommit,
+} from "../commit/prepare";
 import { commitSummary } from "../commit/summary";
 import { resolveIdentity } from "../config/identity";
 import { LIMITS } from "../limits";
+import { addMessages } from "../messages/add";
 import { notSimulated } from "../messages/git";
 import { abbreviate } from "../objects/abbrev";
 import { readObject } from "../objects/pool";
 import { buildTree, flattenTree, type TreeFile } from "../objects/tree";
 import { writeObjects } from "../objects/write";
+import { parsePathspecs } from "../pathspec";
 import { shortRefName } from "../refs/names";
 import { appendReflog } from "../refs/reflog";
 import { resolveHead, updateRef } from "../refs/refs";
@@ -28,7 +35,7 @@ const x = (long: string, short?: string, value?: "required" | "optional") => ({
 const OPTIONS: readonly OptionSpec[] = [
   { key: "message", short: "m", long: "message", value: "required" },
   { key: "quiet", short: "q", long: "quiet" },
-  x("all", "a"),
+  { key: "all", short: "a", long: "all" },
   x("file", "F", "required"),
   x("amend"),
   x("allow-empty"),
@@ -83,11 +90,13 @@ export const commit = defineCommand({
         1,
       );
     }
-    if (options.args.length) {
-      return refuse("not-simulated", notSimulated("git commit with paths"), 1);
+    const all = flag(options, "all");
+    if (all && options.args.length) {
+      return refuse(
+        "usage",
+        `fatal: paths '${options.args[0]} ...' with -a does not make sense\n`,
+      );
     }
-    const identity = resolveIdentity(world, machine, repo);
-    if (!identity.ok) return refuse("identity-unknown", identity.stderr);
     const parent = resolveHead(repo);
     const before: ReadonlyMap<RepoPath, TreeFile> = parent
       ? flattenTree(
@@ -95,7 +104,39 @@ export const commit = defineCommand({
           readObject(world.objects, parent, "commit").tree,
         )
       : new Map();
-    const after = stagedFiles(repo.index);
+    let prepared: PreparedCommit = {
+      files: stagedFiles(repo.index),
+      index: repo.index,
+      blobs: [],
+      changes: [],
+    };
+    if (all) prepared = prepareAll(repo, machine.fs);
+    if (options.args.length) {
+      const parsed = parsePathspecs(options.args, repo.workdir, machine.cwd);
+      if (!parsed.ok) {
+        return refuse(
+          "outside-repository",
+          addMessages.outside(parsed.outside, repo.workdir),
+        );
+      }
+      const only = prepareOnly(repo, machine.fs, before, parsed.specs);
+      if ("unmatched" in only) {
+        return refuse(
+          "pathspec-no-match",
+          only.unmatched
+            .map(
+              (s) =>
+                `error: pathspec '${s.original}' did not match any file(s) known to git\n`,
+            )
+            .join(""),
+          1,
+        );
+      }
+      prepared = only;
+    }
+    const identity = resolveIdentity(world, machine, repo);
+    if (!identity.ok) return refuse("identity-unknown", identity.stderr);
+    const after = prepared.files;
     const { root, trees } = buildTree(after);
     const unchanged = parent
       ? readObject(world.objects, parent, "commit").tree === root
@@ -140,13 +181,31 @@ export const commit = defineCommand({
       committer: who,
       message,
     };
-    const written = writeObjects(world, repo.id, [...trees, object]);
+    const written = writeObjects(world, repo.id, [
+      ...prepared.blobs,
+      ...trees,
+      ...(options.args.length
+        ? buildTree(stagedFiles(prepared.index)).trees
+        : []),
+      object,
+    ]);
     const oid = written.oids.at(-1) ?? root;
     const subject = subjectOf(message);
     const firstLine = (message.split("\n")[0] ?? "").trimStart();
     const reflog = `commit${parent ? "" : " (initial)"}: ${firstLine}`;
     const effects: Effect[] = [...written.effects];
-    let next: Repo = { ...repo, arrival: [...repo.arrival, oid] };
+    if (prepared.changes.length) {
+      effects.push({
+        kind: "index-changed",
+        repo: repo.id,
+        changes: prepared.changes,
+      });
+    }
+    let next: Repo = {
+      ...repo,
+      index: prepared.index,
+      arrival: [...repo.arrival, oid],
+    };
     if (repo.head.kind === "symbolic") {
       const moved = updateRef(next, repo.head.ref, oid, who, reflog);
       next = moved.repo;

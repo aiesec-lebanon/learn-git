@@ -1,0 +1,641 @@
+{
+  "final": {
+    "config": {
+      "global": [
+        [
+          "user.name",
+          "Sam Lee"
+        ],
+        [
+          "user.email",
+          "sam@example.com"
+        ],
+        [
+          "init.defaultbranch",
+          "main"
+        ]
+      ],
+      "system": []
+    },
+    "dirs": [
+      "project",
+      "project/src"
+    ],
+    "files": {
+      "project/a.txt": "a\nmore\nagain\nmore\ntop\n",
+      "project/new.txt": "new\n",
+      "project/src/c.txt": "c\nextra\nlater\nsub\n"
+    },
+    "repos": {
+      "project": {
+        "config": [
+          [
+            "core.repositoryformatversion",
+            "0"
+          ],
+          [
+            "core.filemode",
+            "false"
+          ],
+          [
+            "core.bare",
+            "false"
+          ],
+          [
+            "core.logallrefupdates",
+            "true"
+          ],
+          [
+            "core.symlinks",
+            "false"
+          ],
+          [
+            "core.ignorecase",
+            "true"
+          ]
+        ],
+        "head": {
+          "ref": "refs/heads/main"
+        },
+        "index": [
+          {
+            "mode": "100644",
+            "oid": "167a2b9e6a772f0222def9e2d0c8d36e91a7ea69",
+            "path": "a.txt",
+            "stage": 0
+          },
+          {
+            "mode": "100644",
+            "oid": "0559f886ff4eebf518afd28573585e4f1cffc82c",
+            "path": "src/c.txt",
+            "stage": 0
+          }
+        ],
+        "objects": {
+          "0559f886ff4eebf518afd28573585e4f1cffc82c": {
+            "body": "c\nextra\nlater\nsub\n",
+            "type": "blob"
+          },
+          "08585692ce06452da6f82ae66b90d98b55536fca": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "a.txt",
+                "oid": "78981922613b2afb6025042ff6bd878ac1994e85"
+              }
+            ],
+            "type": "tree"
+          },
+          "167a2b9e6a772f0222def9e2d0c8d36e91a7ea69": {
+            "body": "a\nmore\nagain\nmore\ntop\n",
+            "type": "blob"
+          },
+          "1d654c89dfddad3326f868de045babb3806fc2aa": {
+            "body": "tree 08585692ce06452da6f82ae66b90d98b55536fca\nauthor Sam Lee <sam@example.com> 1767225780 +0000\ncommitter Sam Lee <sam@example.com> 1767225780 +0000\n\nOnly a\n",
+            "type": "commit"
+          },
+          "1e885591607c7dfad4c0bdcad5853a993475210c": {
+            "body": "c\nextra\nlater\n",
+            "type": "blob"
+          },
+          "24414e00bd26dc3ab600b386547743f2c09cdad9": {
+            "body": "a\nmore\nagain\n",
+            "type": "blob"
+          },
+          "311f7519a6ae667cf8d0e14a9325bb3dcda6382d": {
+            "body": "tree ff5dc3942e841704c8e7f0fd7b0263e8db77f791\nparent d653659cdbda33830f15500aa50bf6f2cdaa00c1\nauthor Sam Lee <sam@example.com> 1767226740 +0000\ncommitter Sam Lee <sam@example.com> 1767226740 +0000\n\nJust a\n",
+            "type": "commit"
+          },
+          "3346428693c2e64377b66c4a61b355f36082053f": {
+            "body": "tree f9e478cd0de863be50dd6eb42c30a0021aa75bd4\nparent b7a8ed1d0a7d09ca3ace9960107b635fb32d77ae\nauthor Sam Lee <sam@example.com> 1767227460 +0000\ncommitter Sam Lee <sam@example.com> 1767227460 +0000\n\nFrom a folder\n",
+            "type": "commit"
+          },
+          "3d40bf9dab9efbc2c633c0cf53199aa583adc0a5": {
+            "body": "c\nextra\n",
+            "type": "blob"
+          },
+          "4996cfc62e61e6442b68ceb359b98995412e9f19": {
+            "body": "a\nmore\nagain\nmore\n",
+            "type": "blob"
+          },
+          "4d4cb397daf22a508c3b11232d1f1f7a743ee872": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "a.txt",
+                "oid": "4996cfc62e61e6442b68ceb359b98995412e9f19"
+              },
+              {
+                "mode": "40000",
+                "name": "src",
+                "oid": "d560e62287dc5ebfb323b1d50c869e7ad7d2a96a"
+              }
+            ],
+            "type": "tree"
+          },
+          "54dfbf7553d5d5de2b04f6d1f0726c1c0e7890c6": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "a.txt",
+                "oid": "167a2b9e6a772f0222def9e2d0c8d36e91a7ea69"
+              },
+              {
+                "mode": "40000",
+                "name": "src",
+                "oid": "8bddc022cff8013e999240cb2bbc9bbefc54d0a7"
+              }
+            ],
+            "type": "tree"
+          },
+          "61780798228d17af2d34fce4cfbdf35556832472": {
+            "body": "b\n",
+            "type": "blob"
+          },
+          "71838d1defd92a89201e95a87fd5374bac035dcb": {
+            "body": "b\nmore\n",
+            "type": "blob"
+          },
+          "78981922613b2afb6025042ff6bd878ac1994e85": {
+            "body": "a\n",
+            "type": "blob"
+          },
+          "8bddc022cff8013e999240cb2bbc9bbefc54d0a7": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "c.txt",
+                "oid": "0559f886ff4eebf518afd28573585e4f1cffc82c"
+              }
+            ],
+            "type": "tree"
+          },
+          "ad483216bc560bcb2521d2ed987d697cb4f229fa": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "c.txt",
+                "oid": "1e885591607c7dfad4c0bdcad5853a993475210c"
+              }
+            ],
+            "type": "tree"
+          },
+          "b2f769f6133ea9041ab32bf1bdc254c6aad232b0": {
+            "body": "tree 54dfbf7553d5d5de2b04f6d1f0726c1c0e7890c6\nparent 3346428693c2e64377b66c4a61b355f36082053f\nauthor Sam Lee <sam@example.com> 1767227580 +0000\ncommitter Sam Lee <sam@example.com> 1767227580 +0000\n\nUp\n",
+            "type": "commit"
+          },
+          "b7a8ed1d0a7d09ca3ace9960107b635fb32d77ae": {
+            "body": "tree ec3bd129dbc4d483dc506580675496e887b2522c\nparent 311f7519a6ae667cf8d0e14a9325bb3dcda6382d\nauthor Sam Lee <sam@example.com> 1767226920 +0000\ncommitter Sam Lee <sam@example.com> 1767226920 +0000\n\nFolder\n",
+            "type": "commit"
+          },
+          "d49c2e721b44b101b9b65c1e2847063a0f0c53b9": {
+            "body": "a\nmore\n",
+            "type": "blob"
+          },
+          "d4c483142ae1978f334cf593735c400119060248": {
+            "body": "tree fe4cabb405eaf8d6eab0ae3a3fab551635fb6580\nparent d775a320c731ad41c376228fac5b2b4c1c97a60b\nauthor Sam Lee <sam@example.com> 1767226140 +0000\ncommitter Sam Lee <sam@example.com> 1767226140 +0000\n\nAll tracked\n",
+            "type": "commit"
+          },
+          "d560e62287dc5ebfb323b1d50c869e7ad7d2a96a": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "c.txt",
+                "oid": "3d40bf9dab9efbc2c633c0cf53199aa583adc0a5"
+              }
+            ],
+            "type": "tree"
+          },
+          "d653659cdbda33830f15500aa50bf6f2cdaa00c1": {
+            "body": "tree fe8213668b3227b4142c5fbff47cba0fe1d14405\nparent d4c483142ae1978f334cf593735c400119060248\nauthor Sam Lee <sam@example.com> 1767226380 +0000\ncommitter Sam Lee <sam@example.com> 1767226380 +0000\n\nDelete and change\n",
+            "type": "commit"
+          },
+          "d775a320c731ad41c376228fac5b2b4c1c97a60b": {
+            "body": "tree f4b354863caa9cea99b95422c9dab70465757d87\nparent 1d654c89dfddad3326f868de045babb3806fc2aa\nauthor Sam Lee <sam@example.com> 1767225900 +0000\ncommitter Sam Lee <sam@example.com> 1767225900 +0000\n\nRest\n",
+            "type": "commit"
+          },
+          "ec3bd129dbc4d483dc506580675496e887b2522c": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "a.txt",
+                "oid": "4996cfc62e61e6442b68ceb359b98995412e9f19"
+              },
+              {
+                "mode": "40000",
+                "name": "src",
+                "oid": "ad483216bc560bcb2521d2ed987d697cb4f229fa"
+              }
+            ],
+            "type": "tree"
+          },
+          "f2ad6c76f0115a6ba5b00456a849810e7ec0af20": {
+            "body": "c\n",
+            "type": "blob"
+          },
+          "f4b354863caa9cea99b95422c9dab70465757d87": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "a.txt",
+                "oid": "78981922613b2afb6025042ff6bd878ac1994e85"
+              },
+              {
+                "mode": "100644",
+                "name": "b.txt",
+                "oid": "61780798228d17af2d34fce4cfbdf35556832472"
+              }
+            ],
+            "type": "tree"
+          },
+          "f9e478cd0de863be50dd6eb42c30a0021aa75bd4": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "a.txt",
+                "oid": "4996cfc62e61e6442b68ceb359b98995412e9f19"
+              },
+              {
+                "mode": "40000",
+                "name": "src",
+                "oid": "8bddc022cff8013e999240cb2bbc9bbefc54d0a7"
+              }
+            ],
+            "type": "tree"
+          },
+          "fe4cabb405eaf8d6eab0ae3a3fab551635fb6580": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "a.txt",
+                "oid": "d49c2e721b44b101b9b65c1e2847063a0f0c53b9"
+              },
+              {
+                "mode": "100644",
+                "name": "b.txt",
+                "oid": "71838d1defd92a89201e95a87fd5374bac035dcb"
+              }
+            ],
+            "type": "tree"
+          },
+          "fe8213668b3227b4142c5fbff47cba0fe1d14405": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "a.txt",
+                "oid": "24414e00bd26dc3ab600b386547743f2c09cdad9"
+              }
+            ],
+            "type": "tree"
+          },
+          "ff5dc3942e841704c8e7f0fd7b0263e8db77f791": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "a.txt",
+                "oid": "4996cfc62e61e6442b68ceb359b98995412e9f19"
+              }
+            ],
+            "type": "tree"
+          }
+        },
+        "reflogs": {
+          "HEAD": [
+            "0000000000000000000000000000000000000000 1d654c89dfddad3326f868de045babb3806fc2aa Sam Lee <sam@example.com> 1767225780 +0000\tcommit (initial): Only a",
+            "1d654c89dfddad3326f868de045babb3806fc2aa d775a320c731ad41c376228fac5b2b4c1c97a60b Sam Lee <sam@example.com> 1767225900 +0000\tcommit: Rest",
+            "d775a320c731ad41c376228fac5b2b4c1c97a60b d4c483142ae1978f334cf593735c400119060248 Sam Lee <sam@example.com> 1767226140 +0000\tcommit: All tracked",
+            "d4c483142ae1978f334cf593735c400119060248 d653659cdbda33830f15500aa50bf6f2cdaa00c1 Sam Lee <sam@example.com> 1767226380 +0000\tcommit: Delete and change",
+            "d653659cdbda33830f15500aa50bf6f2cdaa00c1 311f7519a6ae667cf8d0e14a9325bb3dcda6382d Sam Lee <sam@example.com> 1767226740 +0000\tcommit: Just a",
+            "311f7519a6ae667cf8d0e14a9325bb3dcda6382d b7a8ed1d0a7d09ca3ace9960107b635fb32d77ae Sam Lee <sam@example.com> 1767226920 +0000\tcommit: Folder",
+            "b7a8ed1d0a7d09ca3ace9960107b635fb32d77ae 3346428693c2e64377b66c4a61b355f36082053f Sam Lee <sam@example.com> 1767227460 +0000\tcommit: From a folder",
+            "3346428693c2e64377b66c4a61b355f36082053f b2f769f6133ea9041ab32bf1bdc254c6aad232b0 Sam Lee <sam@example.com> 1767227580 +0000\tcommit: Up"
+          ],
+          "refs/heads/main": [
+            "0000000000000000000000000000000000000000 1d654c89dfddad3326f868de045babb3806fc2aa Sam Lee <sam@example.com> 1767225780 +0000\tcommit (initial): Only a",
+            "1d654c89dfddad3326f868de045babb3806fc2aa d775a320c731ad41c376228fac5b2b4c1c97a60b Sam Lee <sam@example.com> 1767225900 +0000\tcommit: Rest",
+            "d775a320c731ad41c376228fac5b2b4c1c97a60b d4c483142ae1978f334cf593735c400119060248 Sam Lee <sam@example.com> 1767226140 +0000\tcommit: All tracked",
+            "d4c483142ae1978f334cf593735c400119060248 d653659cdbda33830f15500aa50bf6f2cdaa00c1 Sam Lee <sam@example.com> 1767226380 +0000\tcommit: Delete and change",
+            "d653659cdbda33830f15500aa50bf6f2cdaa00c1 311f7519a6ae667cf8d0e14a9325bb3dcda6382d Sam Lee <sam@example.com> 1767226740 +0000\tcommit: Just a",
+            "311f7519a6ae667cf8d0e14a9325bb3dcda6382d b7a8ed1d0a7d09ca3ace9960107b635fb32d77ae Sam Lee <sam@example.com> 1767226920 +0000\tcommit: Folder",
+            "b7a8ed1d0a7d09ca3ace9960107b635fb32d77ae 3346428693c2e64377b66c4a61b355f36082053f Sam Lee <sam@example.com> 1767227460 +0000\tcommit: From a folder",
+            "3346428693c2e64377b66c4a61b355f36082053f b2f769f6133ea9041ab32bf1bdc254c6aad232b0 Sam Lee <sam@example.com> 1767227580 +0000\tcommit: Up"
+          ]
+        },
+        "refs": {
+          "refs/heads/main": "b2f769f6133ea9041ab32bf1bdc254c6aad232b0"
+        }
+      }
+    }
+  },
+  "git": "2.45.1.windows.1",
+  "script": {
+    "steps": [
+      "git init -q",
+      "git commit -m \"Early\" a.txt",
+      "git add a.txt b.txt",
+      "git commit -m \"Only a\" a.txt",
+      "git status --short",
+      "git commit -m \"Rest\"",
+      "echo more >> a.txt",
+      "echo more >> b.txt",
+      "echo new > new.txt",
+      "git commit -a -m \"All tracked\"",
+      "git status --short",
+      "rm b.txt",
+      "echo again >> a.txt",
+      "git commit -am \"Delete and change\"",
+      "git add src",
+      "echo more >> a.txt",
+      "echo extra >> src/c.txt",
+      "git add src/c.txt",
+      "echo later >> src/c.txt",
+      "git commit -m \"Just a\" a.txt",
+      "git status --short",
+      "git diff --staged",
+      "git commit -m \"Folder\" src",
+      "git status --short",
+      "git commit -m \"Nope\" missing.txt",
+      "git commit -m \"Untracked\" new.txt",
+      "git commit -m \"Unchanged\" a.txt",
+      "git commit -a -m \"Mixed\" a.txt",
+      "git commit -a -m \"Nothing\"",
+      "cd src",
+      "echo sub >> c.txt",
+      "git commit -m \"From a folder\" c.txt",
+      "echo top >> ../a.txt",
+      "git commit -m \"Up\" -- ../a.txt",
+      "git commit -m \"Outside\" ../../x",
+      "cd ..",
+      "git log --oneline"
+    ],
+    "world": {
+      "cwd": "project",
+      "files": {
+        "project/a.txt": "a\n",
+        "project/b.txt": "b\n",
+        "project/src/c.txt": "c\n"
+      }
+    }
+  },
+  "steps": [
+    {
+      "cmd": "git init -q",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git commit -m \"Early\" a.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 1,
+      "stderr": "error: pathspec 'a.txt' did not match any file(s) known to git\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git add a.txt b.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git commit -m \"Only a\" a.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "[main (root-commit) 1d654c8] Only a\n 1 file changed, 1 insertion(+)\n create mode 100644 a.txt\n"
+    },
+    {
+      "cmd": "git status --short",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "A  b.txt\n?? src/\n"
+    },
+    {
+      "cmd": "git commit -m \"Rest\"",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "[main d775a32] Rest\n 1 file changed, 1 insertion(+)\n create mode 100644 b.txt\n"
+    },
+    {
+      "cmd": "echo more >> a.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "echo more >> b.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "echo new > new.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git commit -a -m \"All tracked\"",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "[main d4c4831] All tracked\n 2 files changed, 2 insertions(+)\n"
+    },
+    {
+      "cmd": "git status --short",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "?? new.txt\n?? src/\n"
+    },
+    {
+      "cmd": "rm b.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "echo again >> a.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git commit -am \"Delete and change\"",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "[main d653659] Delete and change\n 2 files changed, 1 insertion(+), 2 deletions(-)\n delete mode 100644 b.txt\n"
+    },
+    {
+      "cmd": "git add src",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "echo more >> a.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "echo extra >> src/c.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git add src/c.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "echo later >> src/c.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git commit -m \"Just a\" a.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "[main 311f751] Just a\n 1 file changed, 1 insertion(+)\n"
+    },
+    {
+      "cmd": "git status --short",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "AM src/c.txt\n?? new.txt\n"
+    },
+    {
+      "cmd": "git diff --staged",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "diff --git a/src/c.txt b/src/c.txt\nnew file mode 100644\nindex 0000000..3d40bf9\n--- /dev/null\n+++ b/src/c.txt\n@@ -0,0 +1,2 @@\n+c\n+extra\n"
+    },
+    {
+      "cmd": "git commit -m \"Folder\" src",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "[main b7a8ed1] Folder\n 1 file changed, 3 insertions(+)\n create mode 100644 src/c.txt\n"
+    },
+    {
+      "cmd": "git status --short",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "?? new.txt\n"
+    },
+    {
+      "cmd": "git commit -m \"Nope\" missing.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 1,
+      "stderr": "error: pathspec 'missing.txt' did not match any file(s) known to git\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git commit -m \"Untracked\" new.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 1,
+      "stderr": "error: pathspec 'new.txt' did not match any file(s) known to git\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git commit -m \"Unchanged\" a.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 1,
+      "stderr": "",
+      "stdout": "On branch main\nUntracked files:\n  (use \"git add <file>...\" to include in what will be committed)\n\tnew.txt\n\nnothing added to commit but untracked files present (use \"git add\" to track)\n"
+    },
+    {
+      "cmd": "git commit -a -m \"Mixed\" a.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 128,
+      "stderr": "fatal: paths 'a.txt ...' with -a does not make sense\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git commit -a -m \"Nothing\"",
+      "cwd": "/home/you/project",
+      "exitCode": 1,
+      "stderr": "",
+      "stdout": "On branch main\nUntracked files:\n  (use \"git add <file>...\" to include in what will be committed)\n\tnew.txt\n\nnothing added to commit but untracked files present (use \"git add\" to track)\n"
+    },
+    {
+      "cmd": "cd src",
+      "cwd": "/home/you/project/src",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "echo sub >> c.txt",
+      "cwd": "/home/you/project/src",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git commit -m \"From a folder\" c.txt",
+      "cwd": "/home/you/project/src",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "[main 3346428] From a folder\n 1 file changed, 1 insertion(+)\n"
+    },
+    {
+      "cmd": "echo top >> ../a.txt",
+      "cwd": "/home/you/project/src",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git commit -m \"Up\" -- ../a.txt",
+      "cwd": "/home/you/project/src",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "[main b2f769f] Up\n 1 file changed, 1 insertion(+)\n"
+    },
+    {
+      "cmd": "git commit -m \"Outside\" ../../x",
+      "cwd": "/home/you/project/src",
+      "exitCode": 128,
+      "stderr": "fatal: ../../x: '../../x' is outside repository at '/home/you/project'\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "cd ..",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git log --oneline",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "b2f769f (HEAD -> main) Up\n3346428 From a folder\nb7a8ed1 Folder\n311f751 Just a\nd653659 Delete and change\nd4c4831 All tracked\nd775a32 Rest\n1d654c8 Only a\n"
+    }
+  ]
+}

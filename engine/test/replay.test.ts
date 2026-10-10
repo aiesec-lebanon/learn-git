@@ -9,8 +9,10 @@ describe("fixture replay", () => {
       `${fixture.id}${pending ? ` (${pending})` : ""}`,
       () => {
         const { steps, final } = replayFixture(fixture);
-        for (const { expected, actual } of steps)
+        for (const { expected, actual, changes } of steps) {
           expect(actual).toEqual(expected);
+          expect(changes.emitted, expected.cmd).toEqual(changes.derived);
+        }
         expect(final).toEqual(fixture.final);
       },
     );

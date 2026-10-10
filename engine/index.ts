@@ -1,6 +1,8 @@
 export { EngineInvariantError } from "./errors";
 export { execute } from "./execute";
-export { runLine } from "./run";
+export { invocationText, runLine } from "./run";
+export { Session } from "./session";
+export type { HistoryEntry, SessionSnapshot } from "./session";
 export { createWorld } from "./world/create";
 export { timeAt } from "./world/clock";
 export type * from "./types";

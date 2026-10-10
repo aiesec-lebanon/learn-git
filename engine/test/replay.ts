@@ -11,6 +11,7 @@ import { indexEntries } from "../staging/index";
 import type { ConfigFile, GitObject, Invocation, World } from "../types";
 import { machineOf } from "../world/access";
 import { createWorld } from "../world/create";
+import { effectChanges, stateChanges } from "./effects-match-state";
 import { fixtureScripts } from "./fixtures";
 import type {
   RecordedFixture,
@@ -118,7 +119,12 @@ export function pendingReason(fixture: RecordedFixture): string | null {
   return null;
 }
 
-export type ReplayedStep = { expected: RecordedStep; actual: RecordedStep };
+export type ReplayedStep = {
+  expected: RecordedStep;
+  actual: RecordedStep;
+  /** State changes derived from the worlds and from the emitted effects. */
+  changes: { derived: string[]; emitted: string[] };
+};
 
 /** Replays every step from the fixture's starting world (mode `full`). */
 export function replayFixture(fixture: RecordedFixture): {
@@ -130,8 +136,13 @@ export function replayFixture(fixture: RecordedFixture): {
     (fixtureScripts.get(fixture.id) ?? fixture.script).world,
   );
   const steps = fixture.steps.map((expected) => {
+    const before = world;
     const outcome = execute(world, singleInvocation(world, expected.cmd));
     world = outcome.world;
+    const changes = {
+      derived: stateChanges(before, world),
+      emitted: effectChanges(outcome.effects),
+    };
     const strip = (s: string) =>
       outcome.output.exitCode === 129 ? withoutOptionTable(s) : s;
     const actual: RecordedStep = {
@@ -151,7 +162,7 @@ export function replayFixture(fixture: RecordedFixture): {
         : expected;
     const comparable: RecordedStep = { ...normalized };
     delete comparable.editor;
-    return { expected: comparable, actual };
+    return { expected: comparable, actual, changes };
   });
   return { steps, final: dumpWorld(world), world };
 }

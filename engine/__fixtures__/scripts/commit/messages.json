@@ -1,0 +1,20 @@
+{
+  "world": { "files": { "project/a.txt": "a\n" }, "cwd": "project" },
+  "steps": [
+    "git init -q",
+    "git add a.txt",
+    "git commit -m \"\"",
+    "git commit -m \"   \"",
+    "git commit -m \"Title\" -m \"Body line one\" -m \"Body two\"",
+    "echo 2 >> a.txt",
+    "git add a.txt",
+    "git commit -m \"  Spaced title   \n\n\n\nBody\t \n# kept with -m\n\n\"",
+    "echo 3 >> a.txt",
+    "git add a.txt",
+    "git commit -m \"line one\nline two\" -m \"para\"",
+    "echo 4 >> a.txt",
+    "git add a.txt",
+    "git commit --message=\"Long option\"",
+    "git commit"
+  ]
+}

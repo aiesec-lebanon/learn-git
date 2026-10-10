@@ -1,0 +1,23 @@
+{
+  "world": {
+    "files": { "project/a.txt": "a\n", "project/src/b.txt": "b\n" },
+    "cwd": "project"
+  },
+  "steps": [
+    "git init -q",
+    "git commit -m \"Untracked only, unborn\"",
+    "git add a.txt",
+    "git commit -q -m \"First\"",
+    "git commit -m \"Untracked only\"",
+    "echo more >> a.txt",
+    "git commit -m \"Unstaged\"",
+    "cd src",
+    "git commit -m \"From a folder\"",
+    "cd ..",
+    "rm a.txt",
+    "git commit -m \"Deleted\"",
+    "git add -A",
+    "git commit -m \"Now it works\"",
+    "git commit -m \"Clean\""
+  ]
+}

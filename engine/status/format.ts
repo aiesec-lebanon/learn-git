@@ -41,12 +41,15 @@ function filtered(view: StatusView) {
 const branchName = (repo: Repo) =>
   repo.head.kind === "symbolic" ? shortRefName(repo.head.ref) : "HEAD";
 
-/** `git status` in the long format. */
-export function longStatus(view: StatusView): string {
+/** `git status` in the long format; `git commit` titles an unborn branch "Initial commit". */
+export function longStatus(
+  view: StatusView,
+  unbornTitle = m.noCommitsYet(),
+): string {
   const { staged, unstaged, untracked } = filtered(view);
   const { unborn } = view.data;
   let out = `On branch ${branchName(view.repo)}\n`;
-  if (unborn) out += `\n${m.noCommitsYet()}\n\n`;
+  if (unborn) out += `\n${unbornTitle}\n\n`;
   const entry = (c: FileChange) =>
     `\t${LABELS[c.kind].padEnd(12)}${shown(view, c.path)}\n`;
   if (staged.length) {

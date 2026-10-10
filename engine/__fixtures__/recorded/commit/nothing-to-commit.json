@@ -1,0 +1,268 @@
+{
+  "final": {
+    "config": {
+      "global": [
+        [
+          "user.name",
+          "Sam Lee"
+        ],
+        [
+          "user.email",
+          "sam@example.com"
+        ],
+        [
+          "init.defaultbranch",
+          "main"
+        ]
+      ],
+      "system": []
+    },
+    "dirs": [
+      "project",
+      "project/src"
+    ],
+    "files": {
+      "project/src/b.txt": "b\n"
+    },
+    "repos": {
+      "project": {
+        "config": [
+          [
+            "core.repositoryformatversion",
+            "0"
+          ],
+          [
+            "core.filemode",
+            "false"
+          ],
+          [
+            "core.bare",
+            "false"
+          ],
+          [
+            "core.logallrefupdates",
+            "true"
+          ],
+          [
+            "core.symlinks",
+            "false"
+          ],
+          [
+            "core.ignorecase",
+            "true"
+          ]
+        ],
+        "head": {
+          "ref": "refs/heads/main"
+        },
+        "index": [
+          {
+            "mode": "100644",
+            "oid": "61780798228d17af2d34fce4cfbdf35556832472",
+            "path": "src/b.txt",
+            "stage": 0
+          }
+        ],
+        "objects": {
+          "08585692ce06452da6f82ae66b90d98b55536fca": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "a.txt",
+                "oid": "78981922613b2afb6025042ff6bd878ac1994e85"
+              }
+            ],
+            "type": "tree"
+          },
+          "0ced03ee504c1e1d30a7ecd8e9ea92b04b4129d8": {
+            "entries": [
+              {
+                "mode": "40000",
+                "name": "src",
+                "oid": "f8f7aefc2900a3d737cea9eee45729fd55761e1a"
+              }
+            ],
+            "type": "tree"
+          },
+          "4b825dc642cb6eb9a060e54bf8d69288fbee4904": {
+            "entries": [],
+            "type": "tree"
+          },
+          "4fdc8bef8b20c760033fc2d2bf884671369169fb": {
+            "body": "tree 08585692ce06452da6f82ae66b90d98b55536fca\nauthor Sam Lee <sam@example.com> 1767225780 +0000\ncommitter Sam Lee <sam@example.com> 1767225780 +0000\n\nFirst\n",
+            "type": "commit"
+          },
+          "61780798228d17af2d34fce4cfbdf35556832472": {
+            "body": "b\n",
+            "type": "blob"
+          },
+          "78981922613b2afb6025042ff6bd878ac1994e85": {
+            "body": "a\n",
+            "type": "blob"
+          },
+          "f8f7aefc2900a3d737cea9eee45729fd55761e1a": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "b.txt",
+                "oid": "61780798228d17af2d34fce4cfbdf35556832472"
+              }
+            ],
+            "type": "tree"
+          },
+          "fdfc2c80c26fc6e8953520350ca0c05c226676d1": {
+            "body": "tree 0ced03ee504c1e1d30a7ecd8e9ea92b04b4129d8\nparent 4fdc8bef8b20c760033fc2d2bf884671369169fb\nauthor Sam Lee <sam@example.com> 1767226380 +0000\ncommitter Sam Lee <sam@example.com> 1767226380 +0000\n\nNow it works\n",
+            "type": "commit"
+          }
+        },
+        "reflogs": {
+          "HEAD": [
+            "0000000000000000000000000000000000000000 4fdc8bef8b20c760033fc2d2bf884671369169fb Sam Lee <sam@example.com> 1767225780 +0000\tcommit (initial): First",
+            "4fdc8bef8b20c760033fc2d2bf884671369169fb fdfc2c80c26fc6e8953520350ca0c05c226676d1 Sam Lee <sam@example.com> 1767226380 +0000\tcommit: Now it works"
+          ],
+          "refs/heads/main": [
+            "0000000000000000000000000000000000000000 4fdc8bef8b20c760033fc2d2bf884671369169fb Sam Lee <sam@example.com> 1767225780 +0000\tcommit (initial): First",
+            "4fdc8bef8b20c760033fc2d2bf884671369169fb fdfc2c80c26fc6e8953520350ca0c05c226676d1 Sam Lee <sam@example.com> 1767226380 +0000\tcommit: Now it works"
+          ]
+        },
+        "refs": {
+          "refs/heads/main": "fdfc2c80c26fc6e8953520350ca0c05c226676d1"
+        }
+      }
+    }
+  },
+  "git": "2.45.1.windows.1",
+  "script": {
+    "steps": [
+      "git init -q",
+      "git commit -m \"Untracked only, unborn\"",
+      "git add a.txt",
+      "git commit -q -m \"First\"",
+      "git commit -m \"Untracked only\"",
+      "echo more >> a.txt",
+      "git commit -m \"Unstaged\"",
+      "cd src",
+      "git commit -m \"From a folder\"",
+      "cd ..",
+      "rm a.txt",
+      "git commit -m \"Deleted\"",
+      "git add -A",
+      "git commit -m \"Now it works\"",
+      "git commit -m \"Clean\""
+    ],
+    "world": {
+      "cwd": "project",
+      "files": {
+        "project/a.txt": "a\n",
+        "project/src/b.txt": "b\n"
+      }
+    }
+  },
+  "steps": [
+    {
+      "cmd": "git init -q",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git commit -m \"Untracked only, unborn\"",
+      "cwd": "/home/you/project",
+      "exitCode": 1,
+      "stderr": "",
+      "stdout": "On branch main\n\nInitial commit\n\nUntracked files:\n  (use \"git add <file>...\" to include in what will be committed)\n\ta.txt\n\tsrc/\n\nnothing added to commit but untracked files present (use \"git add\" to track)\n"
+    },
+    {
+      "cmd": "git add a.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git commit -q -m \"First\"",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git commit -m \"Untracked only\"",
+      "cwd": "/home/you/project",
+      "exitCode": 1,
+      "stderr": "",
+      "stdout": "On branch main\nUntracked files:\n  (use \"git add <file>...\" to include in what will be committed)\n\tsrc/\n\nnothing added to commit but untracked files present (use \"git add\" to track)\n"
+    },
+    {
+      "cmd": "echo more >> a.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git commit -m \"Unstaged\"",
+      "cwd": "/home/you/project",
+      "exitCode": 1,
+      "stderr": "",
+      "stdout": "On branch main\nChanges not staged for commit:\n  (use \"git add <file>...\" to update what will be committed)\n  (use \"git restore <file>...\" to discard changes in working directory)\n\tmodified:   a.txt\n\nUntracked files:\n  (use \"git add <file>...\" to include in what will be committed)\n\tsrc/\n\nno changes added to commit (use \"git add\" and/or \"git commit -a\")\n"
+    },
+    {
+      "cmd": "cd src",
+      "cwd": "/home/you/project/src",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git commit -m \"From a folder\"",
+      "cwd": "/home/you/project/src",
+      "exitCode": 1,
+      "stderr": "",
+      "stdout": "On branch main\nChanges not staged for commit:\n  (use \"git add <file>...\" to update what will be committed)\n  (use \"git restore <file>...\" to discard changes in working directory)\n\tmodified:   ../a.txt\n\nUntracked files:\n  (use \"git add <file>...\" to include in what will be committed)\n\t./\n\nno changes added to commit (use \"git add\" and/or \"git commit -a\")\n"
+    },
+    {
+      "cmd": "cd ..",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "rm a.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git commit -m \"Deleted\"",
+      "cwd": "/home/you/project",
+      "exitCode": 1,
+      "stderr": "",
+      "stdout": "On branch main\nChanges not staged for commit:\n  (use \"git add/rm <file>...\" to update what will be committed)\n  (use \"git restore <file>...\" to discard changes in working directory)\n\tdeleted:    a.txt\n\nUntracked files:\n  (use \"git add <file>...\" to include in what will be committed)\n\tsrc/\n\nno changes added to commit (use \"git add\" and/or \"git commit -a\")\n"
+    },
+    {
+      "cmd": "git add -A",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git commit -m \"Now it works\"",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "[main fdfc2c8] Now it works\n 2 files changed, 1 insertion(+), 1 deletion(-)\n delete mode 100644 a.txt\n create mode 100644 src/b.txt\n"
+    },
+    {
+      "cmd": "git commit -m \"Clean\"",
+      "cwd": "/home/you/project",
+      "exitCode": 1,
+      "stderr": "",
+      "stdout": "On branch main\nnothing to commit, working tree clean\n"
+    }
+  ]
+}

@@ -1,0 +1,292 @@
+{
+  "final": {
+    "config": {
+      "global": [
+        [
+          "user.name",
+          "Sam Lee"
+        ],
+        [
+          "user.email",
+          "sam@example.com"
+        ],
+        [
+          "init.defaultbranch",
+          "main"
+        ]
+      ],
+      "system": []
+    },
+    "dirs": [
+      "project"
+    ],
+    "files": {
+      "project/a.txt": "a\n2\n3\n4\n"
+    },
+    "repos": {
+      "project": {
+        "config": [
+          [
+            "core.repositoryformatversion",
+            "0"
+          ],
+          [
+            "core.filemode",
+            "false"
+          ],
+          [
+            "core.bare",
+            "false"
+          ],
+          [
+            "core.logallrefupdates",
+            "true"
+          ],
+          [
+            "core.symlinks",
+            "false"
+          ],
+          [
+            "core.ignorecase",
+            "true"
+          ]
+        ],
+        "head": {
+          "ref": "refs/heads/main"
+        },
+        "index": [
+          {
+            "mode": "100644",
+            "oid": "b823d727814afa813c9ef9f0e0c5f5a70a79ffad",
+            "path": "a.txt",
+            "stage": 0
+          }
+        ],
+        "objects": {
+          "08585692ce06452da6f82ae66b90d98b55536fca": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "a.txt",
+                "oid": "78981922613b2afb6025042ff6bd878ac1994e85"
+              }
+            ],
+            "type": "tree"
+          },
+          "129305647c1371c1933206f7f5f28f28ca905d58": {
+            "body": "tree ce25972973faeda8a2cc8fcfed88cc9d332d4499\nparent 978b042fa02c128cc409a2d9c388d8b197a14e05\nauthor Sam Lee <sam@example.com> 1767226200 +0000\ncommitter Sam Lee <sam@example.com> 1767226200 +0000\n\nline one\nline two\n\npara\n",
+            "type": "commit"
+          },
+          "6c82127d9245552401ef773babfc1586c1294341": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "a.txt",
+                "oid": "b823d727814afa813c9ef9f0e0c5f5a70a79ffad"
+              }
+            ],
+            "type": "tree"
+          },
+          "78981922613b2afb6025042ff6bd878ac1994e85": {
+            "body": "a\n",
+            "type": "blob"
+          },
+          "953f403deb49ebb9e7b6c865f6ccff772aca8469": {
+            "body": "tree 08585692ce06452da6f82ae66b90d98b55536fca\nauthor Sam Lee <sam@example.com> 1767225840 +0000\ncommitter Sam Lee <sam@example.com> 1767225840 +0000\n\nTitle\n\nBody line one\n\nBody two\n",
+            "type": "commit"
+          },
+          "978b042fa02c128cc409a2d9c388d8b197a14e05": {
+            "body": "tree abb510b2d5cbf28d5eb0ebc9f9c8e39bd4f7ac32\nparent 953f403deb49ebb9e7b6c865f6ccff772aca8469\nauthor Sam Lee <sam@example.com> 1767226020 +0000\ncommitter Sam Lee <sam@example.com> 1767226020 +0000\n\n  Spaced title\n\nBody\n# kept with -m\n",
+            "type": "commit"
+          },
+          "abb510b2d5cbf28d5eb0ebc9f9c8e39bd4f7ac32": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "a.txt",
+                "oid": "e9395445a3a5653629c61c1b0c489595136fa91c"
+              }
+            ],
+            "type": "tree"
+          },
+          "b823d727814afa813c9ef9f0e0c5f5a70a79ffad": {
+            "body": "a\n2\n3\n4\n",
+            "type": "blob"
+          },
+          "ce25972973faeda8a2cc8fcfed88cc9d332d4499": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "a.txt",
+                "oid": "d50ad2dec9110a519e789a7403bc4b763e572387"
+              }
+            ],
+            "type": "tree"
+          },
+          "d272fcf409d668781bbf769bc2ba249ced6606d3": {
+            "body": "tree 6c82127d9245552401ef773babfc1586c1294341\nparent 129305647c1371c1933206f7f5f28f28ca905d58\nauthor Sam Lee <sam@example.com> 1767226380 +0000\ncommitter Sam Lee <sam@example.com> 1767226380 +0000\n\nLong option\n",
+            "type": "commit"
+          },
+          "d50ad2dec9110a519e789a7403bc4b763e572387": {
+            "body": "a\n2\n3\n",
+            "type": "blob"
+          },
+          "e9395445a3a5653629c61c1b0c489595136fa91c": {
+            "body": "a\n2\n",
+            "type": "blob"
+          }
+        },
+        "reflogs": {
+          "HEAD": [
+            "0000000000000000000000000000000000000000 953f403deb49ebb9e7b6c865f6ccff772aca8469 Sam Lee <sam@example.com> 1767225840 +0000\tcommit (initial): Title",
+            "953f403deb49ebb9e7b6c865f6ccff772aca8469 978b042fa02c128cc409a2d9c388d8b197a14e05 Sam Lee <sam@example.com> 1767226020 +0000\tcommit: Spaced title",
+            "978b042fa02c128cc409a2d9c388d8b197a14e05 129305647c1371c1933206f7f5f28f28ca905d58 Sam Lee <sam@example.com> 1767226200 +0000\tcommit: line one",
+            "129305647c1371c1933206f7f5f28f28ca905d58 d272fcf409d668781bbf769bc2ba249ced6606d3 Sam Lee <sam@example.com> 1767226380 +0000\tcommit: Long option"
+          ],
+          "refs/heads/main": [
+            "0000000000000000000000000000000000000000 953f403deb49ebb9e7b6c865f6ccff772aca8469 Sam Lee <sam@example.com> 1767225840 +0000\tcommit (initial): Title",
+            "953f403deb49ebb9e7b6c865f6ccff772aca8469 978b042fa02c128cc409a2d9c388d8b197a14e05 Sam Lee <sam@example.com> 1767226020 +0000\tcommit: Spaced title",
+            "978b042fa02c128cc409a2d9c388d8b197a14e05 129305647c1371c1933206f7f5f28f28ca905d58 Sam Lee <sam@example.com> 1767226200 +0000\tcommit: line one",
+            "129305647c1371c1933206f7f5f28f28ca905d58 d272fcf409d668781bbf769bc2ba249ced6606d3 Sam Lee <sam@example.com> 1767226380 +0000\tcommit: Long option"
+          ]
+        },
+        "refs": {
+          "refs/heads/main": "d272fcf409d668781bbf769bc2ba249ced6606d3"
+        }
+      }
+    }
+  },
+  "git": "2.45.1.windows.1",
+  "script": {
+    "steps": [
+      "git init -q",
+      "git add a.txt",
+      "git commit -m \"\"",
+      "git commit -m \"   \"",
+      "git commit -m \"Title\" -m \"Body line one\" -m \"Body two\"",
+      "echo 2 >> a.txt",
+      "git add a.txt",
+      "git commit -m \"  Spaced title   \n\n\n\nBody\t \n# kept with -m\n\n\"",
+      "echo 3 >> a.txt",
+      "git add a.txt",
+      "git commit -m \"line one\nline two\" -m \"para\"",
+      "echo 4 >> a.txt",
+      "git add a.txt",
+      "git commit --message=\"Long option\"",
+      "git commit"
+    ],
+    "world": {
+      "cwd": "project",
+      "files": {
+        "project/a.txt": "a\n"
+      }
+    }
+  },
+  "steps": [
+    {
+      "cmd": "git init -q",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git add a.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git commit -m \"\"",
+      "cwd": "/home/you/project",
+      "exitCode": 1,
+      "stderr": "Aborting commit due to empty commit message.\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git commit -m \"   \"",
+      "cwd": "/home/you/project",
+      "exitCode": 1,
+      "stderr": "Aborting commit due to empty commit message.\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git commit -m \"Title\" -m \"Body line one\" -m \"Body two\"",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "[main (root-commit) 953f403] Title\n 1 file changed, 1 insertion(+)\n create mode 100644 a.txt\n"
+    },
+    {
+      "cmd": "echo 2 >> a.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git add a.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git commit -m \"  Spaced title   \n\n\n\nBody\t \n# kept with -m\n\n\"",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "[main 978b042]   Spaced title\n 1 file changed, 1 insertion(+)\n"
+    },
+    {
+      "cmd": "echo 3 >> a.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git add a.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git commit -m \"line one\nline two\" -m \"para\"",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "[main 1293056] line one line two\n 1 file changed, 1 insertion(+)\n"
+    },
+    {
+      "cmd": "echo 4 >> a.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git add a.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git commit --message=\"Long option\"",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "[main d272fcf] Long option\n 1 file changed, 1 insertion(+)\n"
+    },
+    {
+      "cmd": "git commit",
+      "cwd": "/home/you/project",
+      "exitCode": 1,
+      "stderr": "",
+      "stdout": "On branch main\nnothing to commit, working tree clean\n"
+    }
+  ]
+}

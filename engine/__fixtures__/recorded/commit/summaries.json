@@ -1,0 +1,450 @@
+{
+  "final": {
+    "config": {
+      "global": [
+        [
+          "user.name",
+          "Sam Lee"
+        ],
+        [
+          "user.email",
+          "sam@example.com"
+        ],
+        [
+          "init.defaultbranch",
+          "main"
+        ]
+      ],
+      "system": []
+    },
+    "dirs": [
+      "project"
+    ],
+    "files": {
+      "project/a.txt": "changed\n",
+      "project/c.txt": "c\n",
+      "project/d.txt": "d\n",
+      "project/empty.txt": ""
+    },
+    "repos": {
+      "project": {
+        "config": [
+          [
+            "core.repositoryformatversion",
+            "0"
+          ],
+          [
+            "core.filemode",
+            "false"
+          ],
+          [
+            "core.bare",
+            "false"
+          ],
+          [
+            "core.logallrefupdates",
+            "true"
+          ],
+          [
+            "core.symlinks",
+            "false"
+          ],
+          [
+            "core.ignorecase",
+            "true"
+          ]
+        ],
+        "head": {
+          "ref": "refs/heads/main"
+        },
+        "index": [
+          {
+            "mode": "100644",
+            "oid": "5ea2ed416fbd4a4cbe227b75fe255dd7fa6bd4d6",
+            "path": "a.txt",
+            "stage": 0
+          },
+          {
+            "mode": "100644",
+            "oid": "f2ad6c76f0115a6ba5b00456a849810e7ec0af20",
+            "path": "c.txt",
+            "stage": 0
+          },
+          {
+            "mode": "100644",
+            "oid": "4bcfe98e640c8284511312660fb8709b0afa888e",
+            "path": "d.txt",
+            "stage": 0
+          },
+          {
+            "mode": "100644",
+            "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+            "path": "empty.txt",
+            "stage": 0
+          }
+        ],
+        "objects": {
+          "03022a24260db3953a7479d75b0ee979e0dac3eb": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "a.txt",
+                "oid": "5ea2ed416fbd4a4cbe227b75fe255dd7fa6bd4d6"
+              },
+              {
+                "mode": "100644",
+                "name": "c.txt",
+                "oid": "f2ad6c76f0115a6ba5b00456a849810e7ec0af20"
+              },
+              {
+                "mode": "100644",
+                "name": "d.txt",
+                "oid": "4bcfe98e640c8284511312660fb8709b0afa888e"
+              },
+              {
+                "mode": "100644",
+                "name": "empty.txt",
+                "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+              }
+            ],
+            "type": "tree"
+          },
+          "0f190e5bd516cb7ab09b2f830731cf9e9792e094": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "a.txt",
+                "oid": "5ea2ed416fbd4a4cbe227b75fe255dd7fa6bd4d6"
+              },
+              {
+                "mode": "100644",
+                "name": "c.txt",
+                "oid": "f2ad6c76f0115a6ba5b00456a849810e7ec0af20"
+              }
+            ],
+            "type": "tree"
+          },
+          "1a5218ad6b5f7eca2763cc14989569ab54f5638c": {
+            "body": "tree 6bb38efc5fb31003df41ccea94d876e3ab3e4880\nauthor Sam Lee <sam@example.com> 1767225780 +0000\ncommitter Sam Lee <sam@example.com> 1767225780 +0000\n\nFirst\n",
+            "type": "commit"
+          },
+          "4b825dc642cb6eb9a060e54bf8d69288fbee4904": {
+            "entries": [],
+            "type": "tree"
+          },
+          "4bcfe98e640c8284511312660fb8709b0afa888e": {
+            "body": "d\n",
+            "type": "blob"
+          },
+          "4c626d1d0942ae2c2a1587bc6fb5842a7e359949": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "a.txt",
+                "oid": "d49c2e721b44b101b9b65c1e2847063a0f0c53b9"
+              },
+              {
+                "mode": "100644",
+                "name": "b.txt",
+                "oid": "b89df23defe5ae95cfb2ff7408d90afd689b8c43"
+              }
+            ],
+            "type": "tree"
+          },
+          "50e93c386e1681b40b7f5d9b7de2d669c6877c54": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "a.txt",
+                "oid": "d49c2e721b44b101b9b65c1e2847063a0f0c53b9"
+              }
+            ],
+            "type": "tree"
+          },
+          "5ea2ed416fbd4a4cbe227b75fe255dd7fa6bd4d6": {
+            "body": "changed\n",
+            "type": "blob"
+          },
+          "642f5719a74850e5f8b729e97bb0a3c2d925bd00": {
+            "body": "tree 0f190e5bd516cb7ab09b2f830731cf9e9792e094\nparent 72050af12ff21df9faaccf225df730565b12ebb5\nauthor Sam Lee <sam@example.com> 1767226380 +0000\ncommitter Sam Lee <sam@example.com> 1767226380 +0000\n\nMixed\n",
+            "type": "commit"
+          },
+          "6bb38efc5fb31003df41ccea94d876e3ab3e4880": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "a.txt",
+                "oid": "78981922613b2afb6025042ff6bd878ac1994e85"
+              },
+              {
+                "mode": "100644",
+                "name": "b.txt",
+                "oid": "b89df23defe5ae95cfb2ff7408d90afd689b8c43"
+              }
+            ],
+            "type": "tree"
+          },
+          "72050af12ff21df9faaccf225df730565b12ebb5": {
+            "body": "tree 50e93c386e1681b40b7f5d9b7de2d669c6877c54\nparent dce6ef1fc26993203d63a9cd40a09225daf7cdee\nauthor Sam Lee <sam@example.com> 1767226140 +0000\ncommitter Sam Lee <sam@example.com> 1767226140 +0000\n\nRemove b\n",
+            "type": "commit"
+          },
+          "78981922613b2afb6025042ff6bd878ac1994e85": {
+            "body": "a\n",
+            "type": "blob"
+          },
+          "9045d7cefefa89b330e70ec4ddcb253620e3873a": {
+            "body": "tree df953931049c44f84a0917bec10ff5a21453886c\nparent 642f5719a74850e5f8b729e97bb0a3c2d925bd00\nauthor Sam Lee <sam@example.com> 1767226560 +0000\ncommitter Sam Lee <sam@example.com> 1767226560 +0000\n\nEmpty file\n",
+            "type": "commit"
+          },
+          "b89df23defe5ae95cfb2ff7408d90afd689b8c43": {
+            "body": "b\nb2\n",
+            "type": "blob"
+          },
+          "d49c2e721b44b101b9b65c1e2847063a0f0c53b9": {
+            "body": "a\nmore\n",
+            "type": "blob"
+          },
+          "dce6ef1fc26993203d63a9cd40a09225daf7cdee": {
+            "body": "tree 4c626d1d0942ae2c2a1587bc6fb5842a7e359949\nparent 1a5218ad6b5f7eca2763cc14989569ab54f5638c\nauthor Sam Lee <sam@example.com> 1767225960 +0000\ncommitter Sam Lee <sam@example.com> 1767225960 +0000\n\nSecond\n",
+            "type": "commit"
+          },
+          "df953931049c44f84a0917bec10ff5a21453886c": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "a.txt",
+                "oid": "5ea2ed416fbd4a4cbe227b75fe255dd7fa6bd4d6"
+              },
+              {
+                "mode": "100644",
+                "name": "c.txt",
+                "oid": "f2ad6c76f0115a6ba5b00456a849810e7ec0af20"
+              },
+              {
+                "mode": "100644",
+                "name": "empty.txt",
+                "oid": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+              }
+            ],
+            "type": "tree"
+          },
+          "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391": {
+            "body": "",
+            "type": "blob"
+          },
+          "f2ad6c76f0115a6ba5b00456a849810e7ec0af20": {
+            "body": "c\n",
+            "type": "blob"
+          },
+          "f92a8bf05140ef30a1337a05227aa7bd60a99f03": {
+            "body": "tree 03022a24260db3953a7479d75b0ee979e0dac3eb\nparent 9045d7cefefa89b330e70ec4ddcb253620e3873a\nauthor Sam Lee <sam@example.com> 1767226740 +0000\ncommitter Sam Lee <sam@example.com> 1767226740 +0000\n\nQuiet\n",
+            "type": "commit"
+          }
+        },
+        "reflogs": {
+          "HEAD": [
+            "0000000000000000000000000000000000000000 1a5218ad6b5f7eca2763cc14989569ab54f5638c Sam Lee <sam@example.com> 1767225780 +0000\tcommit (initial): First",
+            "1a5218ad6b5f7eca2763cc14989569ab54f5638c dce6ef1fc26993203d63a9cd40a09225daf7cdee Sam Lee <sam@example.com> 1767225960 +0000\tcommit: Second",
+            "dce6ef1fc26993203d63a9cd40a09225daf7cdee 72050af12ff21df9faaccf225df730565b12ebb5 Sam Lee <sam@example.com> 1767226140 +0000\tcommit: Remove b",
+            "72050af12ff21df9faaccf225df730565b12ebb5 642f5719a74850e5f8b729e97bb0a3c2d925bd00 Sam Lee <sam@example.com> 1767226380 +0000\tcommit: Mixed",
+            "642f5719a74850e5f8b729e97bb0a3c2d925bd00 9045d7cefefa89b330e70ec4ddcb253620e3873a Sam Lee <sam@example.com> 1767226560 +0000\tcommit: Empty file",
+            "9045d7cefefa89b330e70ec4ddcb253620e3873a f92a8bf05140ef30a1337a05227aa7bd60a99f03 Sam Lee <sam@example.com> 1767226740 +0000\tcommit: Quiet"
+          ],
+          "refs/heads/main": [
+            "0000000000000000000000000000000000000000 1a5218ad6b5f7eca2763cc14989569ab54f5638c Sam Lee <sam@example.com> 1767225780 +0000\tcommit (initial): First",
+            "1a5218ad6b5f7eca2763cc14989569ab54f5638c dce6ef1fc26993203d63a9cd40a09225daf7cdee Sam Lee <sam@example.com> 1767225960 +0000\tcommit: Second",
+            "dce6ef1fc26993203d63a9cd40a09225daf7cdee 72050af12ff21df9faaccf225df730565b12ebb5 Sam Lee <sam@example.com> 1767226140 +0000\tcommit: Remove b",
+            "72050af12ff21df9faaccf225df730565b12ebb5 642f5719a74850e5f8b729e97bb0a3c2d925bd00 Sam Lee <sam@example.com> 1767226380 +0000\tcommit: Mixed",
+            "642f5719a74850e5f8b729e97bb0a3c2d925bd00 9045d7cefefa89b330e70ec4ddcb253620e3873a Sam Lee <sam@example.com> 1767226560 +0000\tcommit: Empty file",
+            "9045d7cefefa89b330e70ec4ddcb253620e3873a f92a8bf05140ef30a1337a05227aa7bd60a99f03 Sam Lee <sam@example.com> 1767226740 +0000\tcommit: Quiet"
+          ]
+        },
+        "refs": {
+          "refs/heads/main": "f92a8bf05140ef30a1337a05227aa7bd60a99f03"
+        }
+      }
+    }
+  },
+  "git": "2.45.1.windows.1",
+  "script": {
+    "steps": [
+      "git init -q",
+      "git commit -m \"Nothing yet\"",
+      "git add .",
+      "git commit -m \"First\"",
+      "echo more >> a.txt",
+      "git add a.txt",
+      "git commit -m \"Second\"",
+      "rm b.txt",
+      "git add b.txt",
+      "git commit -m \"Remove b\"",
+      "echo c > c.txt",
+      "echo changed > a.txt",
+      "git add .",
+      "git commit -m \"Mixed\"",
+      "touch empty.txt",
+      "git add empty.txt",
+      "git commit -m \"Empty file\"",
+      "echo d > d.txt",
+      "git add d.txt",
+      "git commit -q -m \"Quiet\"",
+      "git commit -m \"Clean\""
+    ],
+    "world": {
+      "cwd": "project",
+      "files": {
+        "project/a.txt": "a\n",
+        "project/b.txt": "b\nb2\n"
+      }
+    }
+  },
+  "steps": [
+    {
+      "cmd": "git init -q",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git commit -m \"Nothing yet\"",
+      "cwd": "/home/you/project",
+      "exitCode": 1,
+      "stderr": "",
+      "stdout": "On branch main\n\nInitial commit\n\nUntracked files:\n  (use \"git add <file>...\" to include in what will be committed)\n\ta.txt\n\tb.txt\n\nnothing added to commit but untracked files present (use \"git add\" to track)\n"
+    },
+    {
+      "cmd": "git add .",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git commit -m \"First\"",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "[main (root-commit) 1a5218a] First\n 2 files changed, 3 insertions(+)\n create mode 100644 a.txt\n create mode 100644 b.txt\n"
+    },
+    {
+      "cmd": "echo more >> a.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git add a.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git commit -m \"Second\"",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "[main dce6ef1] Second\n 1 file changed, 1 insertion(+)\n"
+    },
+    {
+      "cmd": "rm b.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git add b.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git commit -m \"Remove b\"",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "[main 72050af] Remove b\n 1 file changed, 2 deletions(-)\n delete mode 100644 b.txt\n"
+    },
+    {
+      "cmd": "echo c > c.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "echo changed > a.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git add .",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git commit -m \"Mixed\"",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "[main 642f571] Mixed\n 2 files changed, 2 insertions(+), 2 deletions(-)\n create mode 100644 c.txt\n"
+    },
+    {
+      "cmd": "touch empty.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git add empty.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git commit -m \"Empty file\"",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "[main 9045d7c] Empty file\n 1 file changed, 0 insertions(+), 0 deletions(-)\n create mode 100644 empty.txt\n"
+    },
+    {
+      "cmd": "echo d > d.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git add d.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git commit -q -m \"Quiet\"",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git commit -m \"Clean\"",
+      "cwd": "/home/you/project",
+      "exitCode": 1,
+      "stderr": "",
+      "stdout": "On branch main\nnothing to commit, working tree clean\n"
+    }
+  ]
+}

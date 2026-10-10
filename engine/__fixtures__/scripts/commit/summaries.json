@@ -1,0 +1,29 @@
+{
+  "world": {
+    "files": { "project/a.txt": "a\n", "project/b.txt": "b\nb2\n" },
+    "cwd": "project"
+  },
+  "steps": [
+    "git init -q",
+    "git commit -m \"Nothing yet\"",
+    "git add .",
+    "git commit -m \"First\"",
+    "echo more >> a.txt",
+    "git add a.txt",
+    "git commit -m \"Second\"",
+    "rm b.txt",
+    "git add b.txt",
+    "git commit -m \"Remove b\"",
+    "echo c > c.txt",
+    "echo changed > a.txt",
+    "git add .",
+    "git commit -m \"Mixed\"",
+    "touch empty.txt",
+    "git add empty.txt",
+    "git commit -m \"Empty file\"",
+    "echo d > d.txt",
+    "git add d.txt",
+    "git commit -q -m \"Quiet\"",
+    "git commit -m \"Clean\""
+  ]
+}

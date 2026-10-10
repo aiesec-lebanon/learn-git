@@ -15,6 +15,10 @@ export type FilePair = {
   readonly path: string;
   readonly before: DiffFile | null;
   readonly after: DiffFile | null;
+  /** The old path when Git pairs a deletion with an addition as a rename. */
+  readonly from?: string;
+  /** The rename's similarity, in percent. */
+  readonly similarity?: number;
 };
 
 export type HunkLine = {
@@ -128,7 +132,8 @@ const ZERO = "0".repeat(MIN_ABBREV);
 /** One file's section of `git diff` output, as Git prints it. */
 export function unifiedDiff(pool: ObjectPool, pair: FilePair): string {
   const { path, before, after } = pair;
-  const a = quotePath(`a/${path}`);
+  const old = pair.from;
+  const a = quotePath(`a/${old ?? path}`);
   const b = quotePath(`b/${path}`);
   const id = (file: DiffFile | null) =>
     file ? abbreviate(pool, file.oid) : ZERO;
@@ -138,6 +143,12 @@ export function unifiedDiff(pool: ObjectPool, pair: FilePair): string {
   const sameMode = before && after && before.mode === after.mode;
   if (before && after && !sameMode) {
     out += `old mode ${before.mode}\nnew mode ${after.mode}\n`;
+  }
+  if (old !== undefined) {
+    out += `similarity index ${pair.similarity}%
+rename from ${quotePath(old)}
+rename to ${quotePath(path)}
+`;
   }
   if (before?.oid === after?.oid) return out;
   out += `index ${id(before)}..${id(after)}${sameMode ? ` ${before.mode}` : ""}\n`;

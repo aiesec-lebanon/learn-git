@@ -1,3 +1,4 @@
+import { detectRenames } from "./renames";
 import { worktreeFiles } from "../files/worktree";
 import { hashObject } from "../objects/hash";
 import { readObject } from "../objects/pool";
@@ -76,7 +77,7 @@ export function worktreeSnapshot(repo: Repo, fs: Fs): Snapshot {
   return out;
 }
 
-/** Changed files between two snapshots in path order, limited by pathspecs. */
+/** Changed files between two snapshots in path order, limited by pathspecs, renames paired. */
 export function changedPairs(
   before: Snapshot,
   after: Snapshot,
@@ -93,5 +94,5 @@ export function changedPairs(
     if (a?.oid === b?.oid && a?.mode === b?.mode) continue;
     pairs.push({ path, before: a, after: b });
   }
-  return pairs;
+  return detectRenames(pairs);
 }

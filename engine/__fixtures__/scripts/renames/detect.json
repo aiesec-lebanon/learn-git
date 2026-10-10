@@ -1,0 +1,48 @@
+{
+  "world": {
+    "files": {
+      "project/a.txt": "alpha\nbeta\ngamma\ndelta\nepsilon\nzeta\neta\ntheta\n",
+      "project/b.txt": "one\ntwo\nthree\nfour\n",
+      "project/c.txt": "short\n",
+      "project/docs/guide.md": "# Guide\n\nRead me first.\n",
+      "project/docs/faq.md": "# FAQ\n\nAsk away.\n",
+      "project/src/app.js": "const x = 1;\nconst y = 2;\nconsole.log(x + y);\n"
+    },
+    "cwd": "project"
+  },
+  "steps": [
+    "git init -q",
+    "git add .",
+    "git commit -q -m \"First\"",
+    "git mv a.txt renamed.txt",
+    "git status",
+    "git status --short",
+    "git diff --cached",
+    "git diff --cached --stat",
+    "git commit -m \"Rename a\"",
+    "git show --stat",
+    "git mv docs archive",
+    "git commit -m \"Archive docs\"",
+    "git log --oneline --stat -1",
+    "git show",
+    "mv b.txt numbers.txt",
+    "echo five >> numbers.txt",
+    "git add -A",
+    "git status --short",
+    "git diff --cached",
+    "git commit -m \"Numbers\"",
+    "mv c.txt tiny.txt",
+    "echo totally different >> tiny.txt",
+    "git add -A",
+    "git status --short",
+    "git commit -q -m \"Tiny\"",
+    "git mv src/app.js src/main.js",
+    "echo \"// edited\" >> src/main.js",
+    "git status --short",
+    "git status",
+    "git commit -m \"Main\"",
+    "git log --stat --oneline -1",
+    "git diff HEAD~3 HEAD --stat",
+    "git diff HEAD~3 HEAD --name-only"
+  ]
+}

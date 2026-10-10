@@ -1,0 +1,681 @@
+{
+  "final": {
+    "config": {
+      "global": [
+        [
+          "user.name",
+          "Sam Lee"
+        ],
+        [
+          "user.email",
+          "sam@example.com"
+        ],
+        [
+          "init.defaultbranch",
+          "main"
+        ]
+      ],
+      "system": []
+    },
+    "dirs": [
+      "project",
+      "project/archive",
+      "project/src"
+    ],
+    "files": {
+      "project/archive/faq.md": "# FAQ\n\nAsk away.\n",
+      "project/archive/guide.md": "# Guide\n\nRead me first.\n",
+      "project/numbers.txt": "one\ntwo\nthree\nfour\nfive\n",
+      "project/renamed.txt": "alpha\nbeta\ngamma\ndelta\nepsilon\nzeta\neta\ntheta\n",
+      "project/src/main.js": "const x = 1;\nconst y = 2;\nconsole.log(x + y);\n// edited\n",
+      "project/tiny.txt": "short\ntotally different\n"
+    },
+    "repos": {
+      "project": {
+        "config": [
+          [
+            "core.repositoryformatversion",
+            "0"
+          ],
+          [
+            "core.filemode",
+            "false"
+          ],
+          [
+            "core.bare",
+            "false"
+          ],
+          [
+            "core.logallrefupdates",
+            "true"
+          ],
+          [
+            "core.symlinks",
+            "false"
+          ],
+          [
+            "core.ignorecase",
+            "true"
+          ]
+        ],
+        "head": {
+          "ref": "refs/heads/main"
+        },
+        "index": [
+          {
+            "mode": "100644",
+            "oid": "032d3a9cc9bb1b1430fa3b7816a1e7e3851aaca4",
+            "path": "archive/faq.md",
+            "stage": 0
+          },
+          {
+            "mode": "100644",
+            "oid": "ffca49d8d0c02129588bf62aace32ef3afa067ba",
+            "path": "archive/guide.md",
+            "stage": 0
+          },
+          {
+            "mode": "100644",
+            "oid": "b2f931a67315c95c5daab3aac6de62e534808476",
+            "path": "numbers.txt",
+            "stage": 0
+          },
+          {
+            "mode": "100644",
+            "oid": "1e395f2a2cc7a4eb70a20ce75a277933f71a968b",
+            "path": "renamed.txt",
+            "stage": 0
+          },
+          {
+            "mode": "100644",
+            "oid": "b2c01498b8d796019904972ba849f9c7a7d4b16c",
+            "path": "src/main.js",
+            "stage": 0
+          },
+          {
+            "mode": "100644",
+            "oid": "e24fafbda285093d7a12c30e7b3dcec674aba599",
+            "path": "tiny.txt",
+            "stage": 0
+          }
+        ],
+        "objects": {
+          "032d3a9cc9bb1b1430fa3b7816a1e7e3851aaca4": {
+            "body": "# FAQ\n\nAsk away.\n",
+            "type": "blob"
+          },
+          "1d3aaf18909062b31aeeeb3b683f1c2fad3e304e": {
+            "body": "short\n",
+            "type": "blob"
+          },
+          "1e395f2a2cc7a4eb70a20ce75a277933f71a968b": {
+            "body": "alpha\nbeta\ngamma\ndelta\nepsilon\nzeta\neta\ntheta\n",
+            "type": "blob"
+          },
+          "3af7db31e36234afb04e8495eabb774e03e76730": {
+            "entries": [
+              {
+                "mode": "40000",
+                "name": "archive",
+                "oid": "530723565627c0426577582a7c1ba6db7c4b33ed"
+              },
+              {
+                "mode": "100644",
+                "name": "c.txt",
+                "oid": "1d3aaf18909062b31aeeeb3b683f1c2fad3e304e"
+              },
+              {
+                "mode": "100644",
+                "name": "numbers.txt",
+                "oid": "b2f931a67315c95c5daab3aac6de62e534808476"
+              },
+              {
+                "mode": "100644",
+                "name": "renamed.txt",
+                "oid": "1e395f2a2cc7a4eb70a20ce75a277933f71a968b"
+              },
+              {
+                "mode": "40000",
+                "name": "src",
+                "oid": "5cf2a8e376b72bc033221ef3a7a1719c32c56c80"
+              }
+            ],
+            "type": "tree"
+          },
+          "3c7929b0cc0a33f813591ab664cf3384199a88c2": {
+            "entries": [
+              {
+                "mode": "40000",
+                "name": "archive",
+                "oid": "530723565627c0426577582a7c1ba6db7c4b33ed"
+              },
+              {
+                "mode": "100644",
+                "name": "numbers.txt",
+                "oid": "b2f931a67315c95c5daab3aac6de62e534808476"
+              },
+              {
+                "mode": "100644",
+                "name": "renamed.txt",
+                "oid": "1e395f2a2cc7a4eb70a20ce75a277933f71a968b"
+              },
+              {
+                "mode": "40000",
+                "name": "src",
+                "oid": "a5cb1a93b8f9d800244cc5f462521e0f7905d5be"
+              },
+              {
+                "mode": "100644",
+                "name": "tiny.txt",
+                "oid": "e24fafbda285093d7a12c30e7b3dcec674aba599"
+              }
+            ],
+            "type": "tree"
+          },
+          "4f3be81b77ef5d63516888b0f7d68ec81e42ee69": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "a.txt",
+                "oid": "1e395f2a2cc7a4eb70a20ce75a277933f71a968b"
+              },
+              {
+                "mode": "100644",
+                "name": "b.txt",
+                "oid": "f384549cbeb481e437091320de6d1f2e15e11b4a"
+              },
+              {
+                "mode": "100644",
+                "name": "c.txt",
+                "oid": "1d3aaf18909062b31aeeeb3b683f1c2fad3e304e"
+              },
+              {
+                "mode": "40000",
+                "name": "docs",
+                "oid": "530723565627c0426577582a7c1ba6db7c4b33ed"
+              },
+              {
+                "mode": "40000",
+                "name": "src",
+                "oid": "5cf2a8e376b72bc033221ef3a7a1719c32c56c80"
+              }
+            ],
+            "type": "tree"
+          },
+          "530723565627c0426577582a7c1ba6db7c4b33ed": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "faq.md",
+                "oid": "032d3a9cc9bb1b1430fa3b7816a1e7e3851aaca4"
+              },
+              {
+                "mode": "100644",
+                "name": "guide.md",
+                "oid": "ffca49d8d0c02129588bf62aace32ef3afa067ba"
+              }
+            ],
+            "type": "tree"
+          },
+          "5cf2a8e376b72bc033221ef3a7a1719c32c56c80": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "app.js",
+                "oid": "b2c01498b8d796019904972ba849f9c7a7d4b16c"
+              }
+            ],
+            "type": "tree"
+          },
+          "609cca94afb6f95d880968879abc6fde74229138": {
+            "entries": [
+              {
+                "mode": "40000",
+                "name": "archive",
+                "oid": "530723565627c0426577582a7c1ba6db7c4b33ed"
+              },
+              {
+                "mode": "100644",
+                "name": "numbers.txt",
+                "oid": "b2f931a67315c95c5daab3aac6de62e534808476"
+              },
+              {
+                "mode": "100644",
+                "name": "renamed.txt",
+                "oid": "1e395f2a2cc7a4eb70a20ce75a277933f71a968b"
+              },
+              {
+                "mode": "40000",
+                "name": "src",
+                "oid": "5cf2a8e376b72bc033221ef3a7a1719c32c56c80"
+              },
+              {
+                "mode": "100644",
+                "name": "tiny.txt",
+                "oid": "e24fafbda285093d7a12c30e7b3dcec674aba599"
+              }
+            ],
+            "type": "tree"
+          },
+          "787d36fca181aca179355e01c3b2f3183d3f17d2": {
+            "body": "tree 609cca94afb6f95d880968879abc6fde74229138\nparent ef28e6a5075eac764ea79572e4d99d324b24ff9e\nauthor Sam Lee <sam@example.com> 1767227040 +0000\ncommitter Sam Lee <sam@example.com> 1767227040 +0000\n\nTiny\n",
+            "type": "commit"
+          },
+          "a5cb1a93b8f9d800244cc5f462521e0f7905d5be": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "main.js",
+                "oid": "b2c01498b8d796019904972ba849f9c7a7d4b16c"
+              }
+            ],
+            "type": "tree"
+          },
+          "ad8f4f54dccf366061479a4a687094fc2df55115": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "b.txt",
+                "oid": "f384549cbeb481e437091320de6d1f2e15e11b4a"
+              },
+              {
+                "mode": "100644",
+                "name": "c.txt",
+                "oid": "1d3aaf18909062b31aeeeb3b683f1c2fad3e304e"
+              },
+              {
+                "mode": "40000",
+                "name": "docs",
+                "oid": "530723565627c0426577582a7c1ba6db7c4b33ed"
+              },
+              {
+                "mode": "100644",
+                "name": "renamed.txt",
+                "oid": "1e395f2a2cc7a4eb70a20ce75a277933f71a968b"
+              },
+              {
+                "mode": "40000",
+                "name": "src",
+                "oid": "5cf2a8e376b72bc033221ef3a7a1719c32c56c80"
+              }
+            ],
+            "type": "tree"
+          },
+          "b2c01498b8d796019904972ba849f9c7a7d4b16c": {
+            "body": "const x = 1;\nconst y = 2;\nconsole.log(x + y);\n",
+            "type": "blob"
+          },
+          "b2f931a67315c95c5daab3aac6de62e534808476": {
+            "body": "one\ntwo\nthree\nfour\nfive\n",
+            "type": "blob"
+          },
+          "b41cbe716d6e6f5cc32617e5e53beddc4e291262": {
+            "body": "tree 4f3be81b77ef5d63516888b0f7d68ec81e42ee69\nauthor Sam Lee <sam@example.com> 1767225720 +0000\ncommitter Sam Lee <sam@example.com> 1767225720 +0000\n\nFirst\n",
+            "type": "commit"
+          },
+          "b737436867d8ebc73f732763dcd0e33a53d51c31": {
+            "body": "tree ad8f4f54dccf366061479a4a687094fc2df55115\nparent b41cbe716d6e6f5cc32617e5e53beddc4e291262\nauthor Sam Lee <sam@example.com> 1767226080 +0000\ncommitter Sam Lee <sam@example.com> 1767226080 +0000\n\nRename a\n",
+            "type": "commit"
+          },
+          "bdb60193f1c4c498f8b1cd8ccc7577af504c818f": {
+            "entries": [
+              {
+                "mode": "40000",
+                "name": "archive",
+                "oid": "530723565627c0426577582a7c1ba6db7c4b33ed"
+              },
+              {
+                "mode": "100644",
+                "name": "b.txt",
+                "oid": "f384549cbeb481e437091320de6d1f2e15e11b4a"
+              },
+              {
+                "mode": "100644",
+                "name": "c.txt",
+                "oid": "1d3aaf18909062b31aeeeb3b683f1c2fad3e304e"
+              },
+              {
+                "mode": "100644",
+                "name": "renamed.txt",
+                "oid": "1e395f2a2cc7a4eb70a20ce75a277933f71a968b"
+              },
+              {
+                "mode": "40000",
+                "name": "src",
+                "oid": "5cf2a8e376b72bc033221ef3a7a1719c32c56c80"
+              }
+            ],
+            "type": "tree"
+          },
+          "d83adfa5dfa703fa0be8d419c09fcd77108fe3dd": {
+            "body": "tree bdb60193f1c4c498f8b1cd8ccc7577af504c818f\nparent b737436867d8ebc73f732763dcd0e33a53d51c31\nauthor Sam Lee <sam@example.com> 1767226260 +0000\ncommitter Sam Lee <sam@example.com> 1767226260 +0000\n\nArchive docs\n",
+            "type": "commit"
+          },
+          "e24fafbda285093d7a12c30e7b3dcec674aba599": {
+            "body": "short\ntotally different\n",
+            "type": "blob"
+          },
+          "ef28e6a5075eac764ea79572e4d99d324b24ff9e": {
+            "body": "tree 3af7db31e36234afb04e8495eabb774e03e76730\nparent d83adfa5dfa703fa0be8d419c09fcd77108fe3dd\nauthor Sam Lee <sam@example.com> 1767226740 +0000\ncommitter Sam Lee <sam@example.com> 1767226740 +0000\n\nNumbers\n",
+            "type": "commit"
+          },
+          "f384549cbeb481e437091320de6d1f2e15e11b4a": {
+            "body": "one\ntwo\nthree\nfour\n",
+            "type": "blob"
+          },
+          "f44342adc1eca94aa669104fe26f20764b80bbd5": {
+            "body": "tree 3c7929b0cc0a33f813591ab664cf3384199a88c2\nparent 787d36fca181aca179355e01c3b2f3183d3f17d2\nauthor Sam Lee <sam@example.com> 1767227340 +0000\ncommitter Sam Lee <sam@example.com> 1767227340 +0000\n\nMain\n",
+            "type": "commit"
+          },
+          "ffca49d8d0c02129588bf62aace32ef3afa067ba": {
+            "body": "# Guide\n\nRead me first.\n",
+            "type": "blob"
+          }
+        },
+        "reflogs": {
+          "HEAD": [
+            "0000000000000000000000000000000000000000 b41cbe716d6e6f5cc32617e5e53beddc4e291262 Sam Lee <sam@example.com> 1767225720 +0000\tcommit (initial): First",
+            "b41cbe716d6e6f5cc32617e5e53beddc4e291262 b737436867d8ebc73f732763dcd0e33a53d51c31 Sam Lee <sam@example.com> 1767226080 +0000\tcommit: Rename a",
+            "b737436867d8ebc73f732763dcd0e33a53d51c31 d83adfa5dfa703fa0be8d419c09fcd77108fe3dd Sam Lee <sam@example.com> 1767226260 +0000\tcommit: Archive docs",
+            "d83adfa5dfa703fa0be8d419c09fcd77108fe3dd ef28e6a5075eac764ea79572e4d99d324b24ff9e Sam Lee <sam@example.com> 1767226740 +0000\tcommit: Numbers",
+            "ef28e6a5075eac764ea79572e4d99d324b24ff9e 787d36fca181aca179355e01c3b2f3183d3f17d2 Sam Lee <sam@example.com> 1767227040 +0000\tcommit: Tiny",
+            "787d36fca181aca179355e01c3b2f3183d3f17d2 f44342adc1eca94aa669104fe26f20764b80bbd5 Sam Lee <sam@example.com> 1767227340 +0000\tcommit: Main"
+          ],
+          "refs/heads/main": [
+            "0000000000000000000000000000000000000000 b41cbe716d6e6f5cc32617e5e53beddc4e291262 Sam Lee <sam@example.com> 1767225720 +0000\tcommit (initial): First",
+            "b41cbe716d6e6f5cc32617e5e53beddc4e291262 b737436867d8ebc73f732763dcd0e33a53d51c31 Sam Lee <sam@example.com> 1767226080 +0000\tcommit: Rename a",
+            "b737436867d8ebc73f732763dcd0e33a53d51c31 d83adfa5dfa703fa0be8d419c09fcd77108fe3dd Sam Lee <sam@example.com> 1767226260 +0000\tcommit: Archive docs",
+            "d83adfa5dfa703fa0be8d419c09fcd77108fe3dd ef28e6a5075eac764ea79572e4d99d324b24ff9e Sam Lee <sam@example.com> 1767226740 +0000\tcommit: Numbers",
+            "ef28e6a5075eac764ea79572e4d99d324b24ff9e 787d36fca181aca179355e01c3b2f3183d3f17d2 Sam Lee <sam@example.com> 1767227040 +0000\tcommit: Tiny",
+            "787d36fca181aca179355e01c3b2f3183d3f17d2 f44342adc1eca94aa669104fe26f20764b80bbd5 Sam Lee <sam@example.com> 1767227340 +0000\tcommit: Main"
+          ]
+        },
+        "refs": {
+          "refs/heads/main": "f44342adc1eca94aa669104fe26f20764b80bbd5"
+        }
+      }
+    }
+  },
+  "git": "2.45.1.windows.1",
+  "script": {
+    "steps": [
+      "git init -q",
+      "git add .",
+      "git commit -q -m \"First\"",
+      "git mv a.txt renamed.txt",
+      "git status",
+      "git status --short",
+      "git diff --cached",
+      "git diff --cached --stat",
+      "git commit -m \"Rename a\"",
+      "git show --stat",
+      "git mv docs archive",
+      "git commit -m \"Archive docs\"",
+      "git log --oneline --stat -1",
+      "git show",
+      "mv b.txt numbers.txt",
+      "echo five >> numbers.txt",
+      "git add -A",
+      "git status --short",
+      "git diff --cached",
+      "git commit -m \"Numbers\"",
+      "mv c.txt tiny.txt",
+      "echo totally different >> tiny.txt",
+      "git add -A",
+      "git status --short",
+      "git commit -q -m \"Tiny\"",
+      "git mv src/app.js src/main.js",
+      "echo \"// edited\" >> src/main.js",
+      "git status --short",
+      "git status",
+      "git commit -m \"Main\"",
+      "git log --stat --oneline -1",
+      "git diff HEAD~3 HEAD --stat",
+      "git diff HEAD~3 HEAD --name-only"
+    ],
+    "world": {
+      "cwd": "project",
+      "files": {
+        "project/a.txt": "alpha\nbeta\ngamma\ndelta\nepsilon\nzeta\neta\ntheta\n",
+        "project/b.txt": "one\ntwo\nthree\nfour\n",
+        "project/c.txt": "short\n",
+        "project/docs/faq.md": "# FAQ\n\nAsk away.\n",
+        "project/docs/guide.md": "# Guide\n\nRead me first.\n",
+        "project/src/app.js": "const x = 1;\nconst y = 2;\nconsole.log(x + y);\n"
+      }
+    }
+  },
+  "steps": [
+    {
+      "cmd": "git init -q",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git add .",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git commit -q -m \"First\"",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git mv a.txt renamed.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git status",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "On branch main\nChanges to be committed:\n  (use \"git restore --staged <file>...\" to unstage)\n\trenamed:    a.txt -> renamed.txt\n\n"
+    },
+    {
+      "cmd": "git status --short",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "R  a.txt -> renamed.txt\n"
+    },
+    {
+      "cmd": "git diff --cached",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "diff --git a/a.txt b/renamed.txt\nsimilarity index 100%\nrename from a.txt\nrename to renamed.txt\n"
+    },
+    {
+      "cmd": "git diff --cached --stat",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": " a.txt => renamed.txt | 0\n 1 file changed, 0 insertions(+), 0 deletions(-)\n"
+    },
+    {
+      "cmd": "git commit -m \"Rename a\"",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "[main b737436] Rename a\n 1 file changed, 0 insertions(+), 0 deletions(-)\n rename a.txt => renamed.txt (100%)\n"
+    },
+    {
+      "cmd": "git show --stat",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "commit b737436867d8ebc73f732763dcd0e33a53d51c31 (HEAD -> main)\nAuthor: Sam Lee <sam@example.com>\nDate:   Thu Jan 1 00:08:00 2026 +0000\n\n    Rename a\n\n a.txt => renamed.txt | 0\n 1 file changed, 0 insertions(+), 0 deletions(-)\n"
+    },
+    {
+      "cmd": "git mv docs archive",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git commit -m \"Archive docs\"",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "[main d83adfa] Archive docs\n 2 files changed, 0 insertions(+), 0 deletions(-)\n rename {docs => archive}/faq.md (100%)\n rename {docs => archive}/guide.md (100%)\n"
+    },
+    {
+      "cmd": "git log --oneline --stat -1",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "d83adfa (HEAD -> main) Archive docs\n {docs => archive}/faq.md   | 0\n {docs => archive}/guide.md | 0\n 2 files changed, 0 insertions(+), 0 deletions(-)\n"
+    },
+    {
+      "cmd": "git show",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "commit d83adfa5dfa703fa0be8d419c09fcd77108fe3dd (HEAD -> main)\nAuthor: Sam Lee <sam@example.com>\nDate:   Thu Jan 1 00:11:00 2026 +0000\n\n    Archive docs\n\ndiff --git a/docs/faq.md b/archive/faq.md\nsimilarity index 100%\nrename from docs/faq.md\nrename to archive/faq.md\ndiff --git a/docs/guide.md b/archive/guide.md\nsimilarity index 100%\nrename from docs/guide.md\nrename to archive/guide.md\n"
+    },
+    {
+      "cmd": "mv b.txt numbers.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "echo five >> numbers.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git add -A",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git status --short",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "R  b.txt -> numbers.txt\n"
+    },
+    {
+      "cmd": "git diff --cached",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "diff --git a/b.txt b/numbers.txt\nsimilarity index 79%\nrename from b.txt\nrename to numbers.txt\nindex f384549..b2f931a 100644\n--- a/b.txt\n+++ b/numbers.txt\n@@ -2,3 +2,4 @@ one\n two\n three\n four\n+five\n"
+    },
+    {
+      "cmd": "git commit -m \"Numbers\"",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "[main ef28e6a] Numbers\n 1 file changed, 1 insertion(+)\n rename b.txt => numbers.txt (79%)\n"
+    },
+    {
+      "cmd": "mv c.txt tiny.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "echo totally different >> tiny.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git add -A",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git status --short",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "D  c.txt\nA  tiny.txt\n"
+    },
+    {
+      "cmd": "git commit -q -m \"Tiny\"",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git mv src/app.js src/main.js",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "echo \"// edited\" >> src/main.js",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git status --short",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "RM src/app.js -> src/main.js\n"
+    },
+    {
+      "cmd": "git status",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "On branch main\nChanges to be committed:\n  (use \"git restore --staged <file>...\" to unstage)\n\trenamed:    src/app.js -> src/main.js\n\nChanges not staged for commit:\n  (use \"git add <file>...\" to update what will be committed)\n  (use \"git restore <file>...\" to discard changes in working directory)\n\tmodified:   src/main.js\n\n"
+    },
+    {
+      "cmd": "git commit -m \"Main\"",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "[main f44342a] Main\n 1 file changed, 0 insertions(+), 0 deletions(-)\n rename src/{app.js => main.js} (100%)\n"
+    },
+    {
+      "cmd": "git log --stat --oneline -1",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "f44342a (HEAD -> main) Main\n src/{app.js => main.js} | 0\n 1 file changed, 0 insertions(+), 0 deletions(-)\n"
+    },
+    {
+      "cmd": "git diff HEAD~3 HEAD --stat",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": " c.txt                   | 1 -\n b.txt => numbers.txt    | 1 +\n src/{app.js => main.js} | 0\n tiny.txt                | 2 ++\n 4 files changed, 3 insertions(+), 1 deletion(-)\n"
+    },
+    {
+      "cmd": "git diff HEAD~3 HEAD --name-only",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "c.txt\nnumbers.txt\nsrc/main.js\ntiny.txt\n"
+    }
+  ]
+}

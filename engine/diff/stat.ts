@@ -1,5 +1,6 @@
 import { quotePath } from "../files/quote";
 import { isBinary, numstat } from "./numstat";
+import { renameName } from "./renames";
 import type { FilePair } from "./unified";
 
 const WIDTH = 80;
@@ -38,12 +39,15 @@ const size = (content: string | undefined) =>
 /** `git diff --stat` at 80 columns: names shortened with `...`, bars scaled, then the totals. */
 export function diffStat(pairs: readonly FilePair[]): string {
   if (pairs.length === 0) return "";
-  const rows: Row[] = pairs.map(({ path, before, after }) => {
+  const rows: Row[] = pairs.map(({ path, before, after, from }) => {
     const binary =
       isBinary(before?.content ?? "") || isBinary(after?.content ?? "");
     const stat = numstat(before?.content ?? null, after?.content ?? null);
     return {
-      name: quotePath(path),
+      name:
+        from === undefined
+          ? quotePath(path)
+          : renameName(quotePath(from), quotePath(path)),
       added: stat.added,
       deleted: stat.deleted,
       bytes: binary ? [size(before?.content), size(after?.content)] : null,

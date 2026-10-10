@@ -15,7 +15,15 @@ export type StatusView = {
   readonly keep: (path: string) => boolean;
 };
 
-const LABELS: Readonly<Record<FileChange["kind"], string>> = {
+/** A change as status shows it: staged renames folded in. */
+type Entry = {
+  readonly kind: FileChange["kind"] | "renamed";
+  readonly path: string;
+  readonly from?: string;
+};
+
+const LABELS: Readonly<Record<Entry["kind"], string>> = {
+  renamed: "renamed:",
   added: "new file:",
   modified: "modified:",
   deleted: "deleted:",
@@ -29,10 +37,28 @@ function shown(view: StatusView, path: string): string {
   return quotePath(text);
 }
 
+function stagedEntries({ staged, renames }: StatusData): Entry[] {
+  const from = new Map<string, string>(renames.map((r) => [r.to, r.from]));
+  const gone = new Set<string>(renames.map((r) => r.from));
+  return staged
+    .filter((c) => !gone.has(c.path))
+    .map((c) => {
+      const old = from.get(c.path);
+      return old === undefined
+        ? c
+        : { kind: "renamed", path: c.path, from: old };
+    });
+}
+
+function named(view: StatusView, c: Entry): string {
+  const to = shown(view, c.path);
+  return c.from === undefined ? to : `${shown(view, c.from)} -> ${to}`;
+}
+
 function filtered(view: StatusView) {
   const { data, repo, keep } = view;
   return {
-    staged: data.staged.filter((c) => keep(c.path)),
+    staged: stagedEntries(data).filter((c) => keep(c.path)),
     unstaged: data.unstaged.filter((c) => keep(c.path)),
     untracked: collapseUntracked(data.untracked.filter(keep), repo.index),
   };
@@ -50,8 +76,8 @@ export function longStatus(
   const { unborn } = view.data;
   let out = `On branch ${branchName(view.repo)}\n`;
   if (unborn) out += `\n${unbornTitle}\n\n`;
-  const entry = (c: FileChange) =>
-    `\t${LABELS[c.kind].padEnd(12)}${shown(view, c.path)}\n`;
+  const entry = (c: Entry) =>
+    `\t${LABELS[c.kind].padEnd(12)}${named(view, c)}\n`;
   if (staged.length) {
     out += `${m.stagedTitle()}\n${unborn ? m.unstageUnborn() : m.unstage()}\n`;
     out += `${staged.map(entry).join("")}\n`;
@@ -71,7 +97,8 @@ export function longStatus(
   return `${out}${unborn ? m.nothingUnborn() : m.clean()}\n`;
 }
 
-const CODES: Readonly<Record<FileChange["kind"], string>> = {
+const CODES: Readonly<Record<Entry["kind"], string>> = {
+  renamed: "R",
   added: "A",
   modified: "M",
   deleted: "D",
@@ -85,16 +112,17 @@ export function shortStatus(view: StatusView, branch: boolean): string {
     : view.data.unborn
       ? `## No commits yet on ${branchName(view.repo)}\n`
       : `## ${branchName(view.repo)}\n`;
-  const index = new Map(staged.map((c) => [c.path as string, c.kind]));
+  const index = new Map(staged.map((c) => [c.path, c]));
   const tree = new Map(unstaged.map((c) => [c.path as string, c.kind]));
   const paths = [...new Set([...index.keys(), ...tree.keys()])].sort(
     compareBytes,
   );
-  const code = (kind: FileChange["kind"] | undefined) =>
-    kind ? CODES[kind] : " ";
-  const tracked = paths.map(
-    (p) => `${code(index.get(p))}${code(tree.get(p))} ${shown(view, p)}\n`,
-  );
+  const code = (kind: Entry["kind"] | undefined) => (kind ? CODES[kind] : " ");
+  const tracked = paths.map((p) => {
+    const change = index.get(p);
+    const name = change ? named(view, change) : shown(view, p);
+    return `${code(change?.kind)}${code(tree.get(p))} ${name}\n`;
+  });
   const others = untracked.map((p) => `?? ${shown(view, p)}\n`);
   return header + tracked.join("") + others.join("");
 }
@@ -102,8 +130,7 @@ export function shortStatus(view: StatusView, branch: boolean): string {
 /** The status Git puts in the commit message template, as `#` comment lines. */
 export function commitTemplate(view: StatusView): string {
   const { staged, unstaged, untracked } = filtered(view);
-  const entry = (c: FileChange) =>
-    `\t${LABELS[c.kind].padEnd(12)}${shown(view, c.path)}`;
+  const entry = (c: Entry) => `\t${LABELS[c.kind].padEnd(12)}${named(view, c)}`;
   const lines = [
     "Please enter the commit message for your changes. Lines starting",
     "with '#' will be ignored, and an empty message aborts the commit.",

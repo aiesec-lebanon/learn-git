@@ -1,3 +1,4 @@
+import { detectRenames } from "../diff/renames";
 import { worktreeFiles } from "../files/worktree";
 import { hashObject } from "../objects/hash";
 import { readObject } from "../objects/pool";
@@ -19,7 +20,34 @@ export type StatusData = {
   /** The index against the working tree. */
   readonly unstaged: readonly FileChange[];
   readonly untracked: readonly RepoPath[];
+  /** Staged deletions and additions Git shows as renames. */
+  readonly renames: readonly {
+    readonly from: RepoPath;
+    readonly to: RepoPath;
+  }[];
 };
+
+function stagedRenames(
+  pool: ObjectPool,
+  head: ReadonlyMap<RepoPath, TreeFile>,
+  staged: ReadonlyMap<RepoPath, TreeFile>,
+  changes: readonly FileChange[],
+): StatusData["renames"] {
+  const file = (t: TreeFile | undefined) =>
+    t ? { ...t, content: readObject(pool, t.oid, "blob").content } : null;
+  const pairs = changes
+    .filter((c) => c.kind !== "modified")
+    .map((c) => ({
+      path: c.path,
+      before: c.kind === "deleted" ? file(head.get(c.path)) : null,
+      after: c.kind === "added" ? file(staged.get(c.path)) : null,
+    }));
+  return detectRenames(pairs).flatMap((p) =>
+    p.from === undefined
+      ? []
+      : [{ from: p.from as RepoPath, to: p.path as RepoPath }],
+  );
+}
 
 function compare(
   before: ReadonlyMap<RepoPath, TreeFile>,
@@ -75,11 +103,13 @@ export function computeStatus(
       unstaged.push({ path, kind: "modified" });
     }
   }
+  const changes = compare(headFiles, staged);
   const result: StatusData = {
     unborn: head === null,
-    staged: compare(headFiles, staged),
+    staged: changes,
     unstaged,
     untracked: [...files.keys()].filter((p) => !repo.index.has(p)),
+    renames: stagedRenames(pool, headFiles, staged, changes),
   };
   byKey.set(key, result);
   return result;

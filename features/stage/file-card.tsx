@@ -27,10 +27,19 @@ const STATES: Record<FileState, { glyph: string; text: string; tone: string }> =
   };
 
 /** A file with its state as a glyph and a word, never colour alone. */
-export function FileCard({ file }: { file: Card }) {
+export function FileCard({
+  file,
+  area,
+}: {
+  file: Card;
+  area: "worktree" | "index";
+}) {
   const state = file.state ? STATES[file.state] : null;
   return (
-    <li className="flex min-h-7 min-w-0 items-center gap-2">
+    <li
+      data-choreo={`file:${area}:${file.path}`}
+      className="flex min-h-7 min-w-0 items-center gap-2"
+    >
       <code className="min-w-0 truncate text-sm">
         <bdi>{file.path}</bdi>
       </code>

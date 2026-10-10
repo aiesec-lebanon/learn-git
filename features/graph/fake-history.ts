@@ -15,7 +15,9 @@ export function fakeView(parents: readonly (readonly number[])[]): RepoView {
   return {
     id: "fake",
     commits,
-    labels: last ? [{ name: "main", kind: "branch", target: last }] : [],
+    labels: last
+      ? [{ ref: "refs/heads/main", name: "main", kind: "branch", target: last }]
+      : [],
     head: { kind: "branch", branch: "main", target: last },
   };
 }

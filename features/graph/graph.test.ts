@@ -4,7 +4,7 @@ import { describe, expect, it } from "vitest";
 import { createWorld, Session, type Oid } from "@/engine";
 import { commitName } from "./describe";
 import { fakeView } from "./fake-history";
-import { CommitGraph } from "./graph";
+import { CommitGraph, graphLayout } from "./graph";
 import { layoutGraph } from "./layout";
 import { nextFocus } from "./keyboard";
 import { repoView, type RepoView } from "./view-model";
@@ -38,7 +38,12 @@ describe("commit names", () => {
     const detached: RepoView = {
       ...merge,
       labels: [
-        { name: "v1", kind: "tag", target: merge.commits[3]?.oid as Oid },
+        {
+          ref: "refs/tags/v1",
+          name: "v1",
+          kind: "tag",
+          target: merge.commits[3]?.oid as Oid,
+        },
       ],
       head: { kind: "detached", target: merge.commits[3]?.oid as Oid },
       commits: merge.commits.map((c, i) => (i === 2 ? { ...c, ghost: 2 } : c)),
@@ -81,6 +86,7 @@ describe("CommitGraph", () => {
     const html = renderToStaticMarkup(
       createElement(CommitGraph, {
         view,
+        layout: graphLayout(view),
         label: "Your repository",
         describe: () => "x",
       }),
@@ -96,7 +102,11 @@ describe("CommitGraph", () => {
     expect(html).toContain("Describe this graph");
     expect(
       renderToStaticMarkup(
-        createElement(CommitGraph, { view: fakeView([]), label: "Empty" }),
+        createElement(CommitGraph, {
+          view: fakeView([]),
+          layout: graphLayout(fakeView([])),
+          label: "Empty",
+        }),
       ),
     ).toContain("No commits yet.");
   });

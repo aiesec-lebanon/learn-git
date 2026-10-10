@@ -99,7 +99,12 @@ describe("repoView", () => {
     ]);
     const [first, second] = view.commits;
     expect(view.labels).toEqual([
-      { name: "main", kind: "branch", target: second?.oid },
+      {
+        ref: "refs/heads/main",
+        name: "main",
+        kind: "branch",
+        target: second?.oid,
+      },
     ]);
     expect(view.head).toEqual({
       kind: "branch",

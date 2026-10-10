@@ -22,6 +22,8 @@ export type CommitView = {
 };
 
 export type LabelView = {
+  /** The full ref name, e.g. `refs/heads/main`. */
+  readonly ref: string;
   readonly name: string;
   readonly kind: "branch" | "remote" | "tag";
   readonly target: Oid;
@@ -85,7 +87,7 @@ export function repoView(world: World, repo: Repo): RepoView {
   const labels: LabelView[] = [];
   for (const [ref, target] of repo.refs) {
     const kind = KINDS.find(([prefix]) => ref.startsWith(prefix))?.[1];
-    if (kind) labels.push({ name: shortRefName(ref), kind, target });
+    if (kind) labels.push({ ref, name: shortRefName(ref), kind, target });
   }
   return {
     id: repo.id,

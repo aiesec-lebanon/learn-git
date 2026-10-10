@@ -1,20 +1,13 @@
 "use client";
 
-import {
-  type KeyboardEvent,
-  useEffect,
-  useId,
-  useMemo,
-  useRef,
-  useState,
-} from "react";
+import { type KeyboardEvent, useEffect, useId, useRef, useState } from "react";
 import type { Oid } from "@/engine";
 import { skin } from "@/themes/active";
 import type { SkinLabel } from "@/themes/contract";
 import { Button } from "@/ui/button";
 import { commitNameParts, headAt, labelsAt } from "./describe";
 import { nextFocus } from "./keyboard";
-import { layoutGraph } from "./layout";
+import { layoutGraph, type Layout } from "./layout";
 import type { CommitView, RepoView } from "./view-model";
 
 const DEFAULT_BRANCHES = new Set(["main", "master"]);
@@ -27,13 +20,15 @@ function slotOf(name: string): SkinLabel["slot"] {
 }
 
 function stacks(view: RepoView, commit: CommitView) {
-  const above: SkinLabel[] = [];
-  const below: SkinLabel[] = [];
+  type Keyed = SkinLabel & { key: string };
+  const above: Keyed[] = [];
+  const below: Keyed[] = [];
   const headHere = headAt(view, commit.oid);
   const onBranch = view.head.kind === "branch" ? view.head.branch : null;
   for (const label of labelsAt(view, commit.oid)) {
     const current = label.kind === "branch" && label.name === onBranch;
-    const skinLabel: SkinLabel = {
+    const skinLabel: Keyed = {
+      key: label.ref,
       text: label.name,
       kind: label.kind,
       current,
@@ -43,23 +38,34 @@ function stacks(view: RepoView, commit: CommitView) {
     else below.push(skinLabel);
   }
   if (headHere)
-    above.push({ text: "HEAD", kind: "head", current: true, slot: 0 });
+    above.push({
+      key: "HEAD",
+      text: "HEAD",
+      kind: "head",
+      current: true,
+      slot: 0,
+    });
   return { above, below };
 }
+
+/** The layout with the active theme's metrics. */
+export const graphLayout = (view: RepoView): Layout =>
+  layoutGraph(view, skin.graph);
 
 /** The commit graph: an ordered list of commits over one SVG of edges (ADR-003). */
 export function CommitGraph({
   view,
+  layout,
   label,
   describe,
 }: {
   view: RepoView;
+  layout: Layout;
   label: string;
   /** "Describe this graph": an engine summary of the repository. */
   describe?: () => string;
 }) {
   const g = skin.graph;
-  const layout = useMemo(() => layoutGraph(view, g), [view, g]);
   const [focused, setFocused] = useState<Oid | null>(null);
   const [described, setDescribed] = useState<{
     view: RepoView;
@@ -119,6 +125,7 @@ export function CommitGraph({
               return (
                 <path
                   key={edge.key}
+                  data-choreo={`edge:${edge.key}`}
                   d={skin.edgePath({ ...edge, ghost })}
                   fill="none"
                   stroke={ghost ? "var(--g-dim)" : "var(--g-edge)"}
@@ -152,11 +159,14 @@ export function CommitGraph({
                     className="absolute bottom-6 left-0 flex -translate-x-1/2 flex-col-reverse items-center gap-1.5"
                   >
                     {above.map((l) => (
-                      <skin.Label key={`${l.kind}:${l.text}`} label={l} />
+                      <span key={l.key} data-choreo={`label:${l.key}`}>
+                        <skin.Label label={l} />
+                      </span>
                     ))}
                   </div>
                   <button
                     type="button"
+                    data-choreo={`commit:${commit.oid}`}
                     ref={(el) => {
                       if (el) buttons.current.set(commit.oid, el);
                       else buttons.current.delete(commit.oid);
@@ -189,7 +199,9 @@ export function CommitGraph({
                     className="absolute top-8 left-0 flex -translate-x-1/2 flex-col items-center gap-1"
                   >
                     {below.map((l) => (
-                      <skin.Label key={`${l.kind}:${l.text}`} label={l} />
+                      <span key={l.key} data-choreo={`label:${l.key}`}>
+                        <skin.Label label={l} />
+                      </span>
                     ))}
                   </div>
                 </li>

@@ -1,3 +1,5 @@
+import type { ReactNode } from "react";
+
 export const TOKEN_NAMES = [
   "bg",
   "bg-alt",
@@ -77,3 +79,47 @@ export type ThemeScale = Readonly<{
 }>;
 
 export type ThemeCopy = Readonly<{ name: string; tagline: string }>;
+
+export type SkinPoint = Readonly<{ x: number; y: number }>;
+export type SkinEdge = Readonly<{
+  key: string;
+  from: SkinPoint;
+  to: SkinPoint;
+  merge: boolean;
+  ghost: boolean;
+}>;
+/** Ghost 1: reachable only through the reflog; 2: unreachable. */
+export type SkinNode = Readonly<{
+  id: string;
+  short: string;
+  merge: boolean;
+  root: boolean;
+  ghost: 0 | 1 | 2;
+}>;
+export type SkinLabel = Readonly<{
+  text: string;
+  kind: "branch" | "remote" | "tag" | "head";
+  /** The branch HEAD is on (or HEAD itself when detached). */
+  current: boolean;
+  /** Note colour slot: 0 for the default branch, 1 to 3 for others. */
+  slot: 0 | 1 | 2 | 3;
+}>;
+
+/** How a theme draws the commit graph; it sees view data only (ADR-007). */
+export type ThemeSkin = Readonly<{
+  graph: Readonly<{
+    column: number;
+    lane: number;
+    /** Average label glyph width in px (layout estimates, no measuring). */
+    glyph: number;
+    pad: number;
+    /** Commit radius in px. */
+    node: number;
+    /** Room for stacked labels above and below the commits. */
+    top: number;
+    bottom: number;
+  }>;
+  edgePath: (edge: SkinEdge) => string;
+  Node: (props: { node: SkinNode }) => ReactNode;
+  Label: (props: { label: SkinLabel }) => ReactNode;
+}>;

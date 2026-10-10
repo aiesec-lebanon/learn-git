@@ -16,6 +16,7 @@
     "fixtures:record": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/record-fixtures.mjs"
   },
   "dependencies": {
+    "@noble/hashes": "2.4.0",
     "next": "16.4.0",
     "react": "19.3.0",
     "react-dom": "19.3.0"

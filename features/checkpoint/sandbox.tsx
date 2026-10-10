@@ -24,9 +24,15 @@ import { Terminal } from "@/features/terminal/terminal";
 import { Button } from "@/ui/button";
 import { TargetPanel } from "./target-panel";
 
+/** What reaching the target records: the resume point, the finished chapter. */
+export type Reached = {
+  readonly resume?: ResumePointer;
+  readonly finishes?: string;
+};
+
 export type SandboxProps = {
   sessionKey: string;
-  resume: ResumePointer;
+  reached: Reached;
   world: WorldSpec;
   target: TargetSpec;
   /** A command typed before the sandbox loaded; it runs first. */
@@ -58,11 +64,11 @@ function YourPath({ history }: { history: readonly HistoryEntry[] }) {
 function Check({
   report,
   history,
-  resume,
+  reached,
 }: {
   report: MatchReport;
   history: readonly HistoryEntry[];
-  resume: ResumePointer;
+  reached: Reached;
 }) {
   const [open, setOpen] = useState(false);
   const say = useAnnounce();
@@ -70,10 +76,12 @@ function Check({
   useEffect(() => {
     if (report.ok && !was.current) {
       say("Your repository now matches the target.");
-      progressStore().setResume(resume);
+      const store = progressStore();
+      if (reached.resume) store.setResume(reached.resume);
+      if (reached.finishes) store.finishChapter(reached.finishes);
     }
     was.current = report.ok;
-  }, [report.ok, say, resume]);
+  }, [report.ok, say, reached]);
 
   if (report.ok)
     return (
@@ -103,7 +111,7 @@ function Check({
 /** The live sandbox of a checkpoint; loaded only when the learner gets near it. */
 export function Sandbox({
   sessionKey,
-  resume,
+  reached,
   world,
   target,
   queued,
@@ -136,7 +144,7 @@ export function Sandbox({
           <CommandChips session={session} />
         </div>
         <Rewind session={session} />
-        <Check report={report} history={history} resume={resume} />
+        <Check report={report} history={history} reached={reached} />
         <TargetPanel target={target} />
         <WhatHappened session={session} />
         <EditorSheet session={session} />

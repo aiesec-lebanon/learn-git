@@ -1,5 +1,5 @@
 import type { TargetSpec, WorldSpec } from "@/engine";
-import type { LessonId } from "./registry";
+import type { ChapterId, LessonId } from "./registry";
 
 /** One story beat: the commands it runs on the lesson's world, in order. */
 export type BeatScript = {
@@ -26,6 +26,11 @@ export type LessonScene = {
   readonly challenge?: Challenge;
 };
 
+/** A chapter's unguided checkpoint; reaching its target finishes the chapter. */
+export type CapstoneScene = Checkpoint & { readonly chapter: ChapterId };
+
 export const defineWorld = (spec: WorldSpec): WorldSpec => spec;
 
 export const defineLesson = (scene: LessonScene): LessonScene => scene;
+
+export const defineCapstone = (scene: CapstoneScene): CapstoneScene => scene;

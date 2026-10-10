@@ -9,16 +9,15 @@ import {
   type FormEvent,
 } from "react";
 import type { TargetSpec, WorldSpec } from "@/engine";
-import type { ResumePointer } from "@/features/progress/schema";
 import type { StageFrame } from "@/features/stage/frame";
 import { StageView } from "@/features/stage/stage";
 import { onIdle } from "@/lib/idle";
-import type { SandboxProps } from "./sandbox";
+import type { Reached, SandboxProps } from "./sandbox";
 import { TargetPanel } from "./target-panel";
 
 type Props = {
   sessionKey: string;
-  resume: ResumePointer;
+  reached: Reached;
   world: WorldSpec;
   target: TargetSpec;
   /** The start state, built on the server: the page shows it before the engine loads. */
@@ -81,7 +80,7 @@ type Loaded = { readonly Sandbox: ComponentType<SandboxProps> };
  */
 export function Checkpoint({
   sessionKey,
-  resume,
+  reached,
   world,
   target,
   start,
@@ -127,7 +126,7 @@ export function Checkpoint({
       {loaded ? (
         <loaded.Sandbox
           sessionKey={sessionKey}
-          resume={resume}
+          reached={reached}
           world={world}
           target={target}
           queued={queued}

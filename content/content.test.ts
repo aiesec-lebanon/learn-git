@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { countPar, createWorld, match, Session } from "@/engine";
+import { CAPSTONES } from "./capstones";
 import type { Checkpoint } from "./define";
 import { voiceProblems } from "./guide/voice";
 import { SCENES } from "./lessons";
@@ -142,6 +143,22 @@ for (const lesson of readyLessons()) {
       const end = replay(challenge);
       expect(match(end.world, challenge.target).differences).toEqual([]);
       expect(countPar(end.history)).toBe(challenge.par);
+    });
+  });
+}
+
+for (const [chapter, capstone] of Object.entries(CAPSTONES)) {
+  describe(`capstone ${chapter}`, () => {
+    it("belongs to its chapter and is reached by its solution, not before", () => {
+      if (!capstone) throw new Error("no capstone");
+      expect(capstone.chapter).toBe(chapter);
+      expect(match(createWorld(capstone.world), capstone.target).ok).toBe(
+        false,
+      );
+      const end = replay(capstone);
+      for (const entry of end.history)
+        expect(entry.outcome.output.exitCode, entry.text).toBe(0);
+      expect(match(end.world, capstone.target).differences).toEqual([]);
     });
   });
 }

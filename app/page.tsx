@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Suspense } from "react";
-import { lessonHref } from "@/content/routes";
+import { lessonHref, trackHref } from "@/content/routes";
 import { ContinueCard } from "@/features/progress/continue-card";
 import { copy } from "@/themes/active";
 import { buttonClass } from "@/ui/button";
@@ -23,6 +23,9 @@ export default function Home() {
       <div className="mt-8 flex flex-wrap gap-3">
         <Link href={lessonHref("b1-1")} className={buttonClass("primary")}>
           New to Git? Start here
+        </Link>
+        <Link href={trackHref("beginner")} className={buttonClass("secondary")}>
+          See the Beginner track
         </Link>
       </div>
     </div>

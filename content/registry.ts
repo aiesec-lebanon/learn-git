@@ -64,6 +64,19 @@ export const readyLessons = (): readonly Lesson[] =>
 export const lessonById = (id: string): Lesson | undefined =>
   LESSONS.find((lesson) => lesson.id === id);
 
+export const trackById = (id: string) => TRACKS.find((t) => t.id === id);
+
+export const chapterById = (id: string) => CHAPTERS.find((c) => c.id === id);
+
+export const chaptersOf = (track: TrackId) =>
+  CHAPTERS.filter((c) => c.track === track);
+
+export const lessonsOf = (chapter: ChapterId): readonly Lesson[] =>
+  LESSONS.filter((lesson) => lesson.chapter === chapter);
+
+/** The chapter's code as the curriculum writes it, e.g. "B1". */
+export const chapterCode = (id: ChapterId): string => id.toUpperCase();
+
 /** The lesson's code as the curriculum writes it, e.g. "B1.1". */
 export const lessonCode = (id: LessonId): string =>
   id.toUpperCase().replace("-", ".");

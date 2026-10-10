@@ -8,10 +8,12 @@ import {
   lessonCode,
   readyLessons,
 } from "@/content/registry";
+import { trackHref } from "@/content/routes";
 import { YourTurn } from "@/features/checkpoint/your-turn";
 import { beatFrames } from "@/features/lesson/frames";
 import { LessonSandboxProvider } from "@/features/lesson/lesson-sandbox";
 import { LessonScroller } from "@/features/lesson/scroller";
+import { AppLink } from "@/ui/link";
 
 /** The prose renders twice: the beats beside the pinned stage, then the rest. */
 const Nothing = () => null;
@@ -52,7 +54,8 @@ export default async function LessonPage({
       <article className="mx-auto w-full max-w-[1200px] px-4 py-8 sm:px-6 sm:py-12">
         <header className="mb-8 max-w-prose">
           <p className="m-0 font-display text-sm font-semibold text-fg-muted">
-            Beginner · {chapter?.title} · {lesson.minutes} min
+            <AppLink href={trackHref("beginner")}>Beginner</AppLink> ·{" "}
+            {chapter?.title} · {lesson.minutes} min
           </p>
           <h1 className="m-0 mt-2 text-3xl font-bold">
             {lessonCode(lesson.id)} {lesson.title}
@@ -69,10 +72,12 @@ export default async function LessonPage({
               <YourTurn
                 sessionKey={sessionKey}
                 checkpoint={scene.yourTurn}
-                resume={{
-                  kind: "lesson",
-                  id: lesson.id,
-                  step: scene.beats.length,
+                reached={{
+                  resume: {
+                    kind: "lesson",
+                    id: lesson.id,
+                    step: scene.beats.length,
+                  },
                 }}
               />
             ),

@@ -1,0 +1,31 @@
+import type { TargetSpec, WorldSpec } from "@/engine";
+import type { LessonId } from "./registry";
+
+/** One story beat: the commands it runs on the lesson's world, in order. */
+export type BeatScript = {
+  readonly id: string;
+  readonly run?: readonly string[];
+};
+
+/** A start world, a target state and a reference solution the content tests replay. */
+export type Checkpoint = {
+  readonly goal: string;
+  readonly world: WorldSpec;
+  readonly target: TargetSpec;
+  readonly solution: readonly string[];
+};
+
+export type Challenge = Checkpoint & { readonly par: number };
+
+export type LessonScene = {
+  readonly id: LessonId;
+  readonly world: WorldSpec;
+  readonly beats: readonly BeatScript[];
+  readonly yourTurn: Checkpoint;
+  /** Shown only when challenge mode is on (I6). */
+  readonly challenge?: Challenge;
+};
+
+export const defineWorld = (spec: WorldSpec): WorldSpec => spec;
+
+export const defineLesson = (scene: LessonScene): LessonScene => scene;

@@ -1,0 +1,6 @@
+.next
+coverage
+playwright-report
+test-results
+engine/__fixtures__/recorded
+package-lock.json

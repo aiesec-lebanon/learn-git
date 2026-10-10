@@ -100,7 +100,7 @@ export function LessonScroller({
   };
 
   useEffect(() => {
-    const step = /^#step-(d+)$/.exec(location.hash)?.[1];
+    const step = /^#step-(\d+)$/.exec(location.hash)?.[1];
     if (step === undefined) return;
     const n = Number(step);
     // A resume link (#step-n) opens the lesson at that beat, or at Your turn.

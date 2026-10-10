@@ -16,6 +16,7 @@ import { Guide } from "@/features/guide/guide";
 import { HintLadder } from "@/features/guide/hint-ladder";
 import { progressStore, useProgress } from "@/features/progress/progress";
 import type { ResumePointer } from "@/features/progress/schema";
+import { ReferenceSheet } from "@/features/reference/reference-sheet";
 import { EditorSheet } from "@/features/stage/editor-sheet";
 import { Rewind } from "@/features/stage/rewind";
 import { sandboxFor } from "@/features/stage/session-registry";
@@ -167,6 +168,7 @@ export function Sandbox({
         ) : null}
         <WhatHappened session={session} />
         <EditorSheet session={session} />
+        <ReferenceSheet session={session} />
       </div>
     </div>
   );

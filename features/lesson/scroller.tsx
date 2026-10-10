@@ -14,7 +14,8 @@ import type { StageFrame } from "@/features/stage/frame";
 import { StageView } from "@/features/stage/stage";
 import { Button } from "@/ui/button";
 import { beatHeadingId } from "./content";
-import type { BeatFrame, TranscriptLine } from "./frames";
+import { Transcript } from "@/features/stage/transcript";
+import type { BeatFrame } from "./frames";
 
 /** The beat crossing this line is the active one: below the pinned stage on phones. */
 const readingLine = () => {
@@ -37,32 +38,6 @@ const moveTo =
     if (p.index === next || !frame) return p;
     return { index: next, play: next === p.index + 1, frame: { ...frame } };
   };
-
-function Transcript({ lines }: { lines: readonly TranscriptLine[] }) {
-  if (!lines.length) return null;
-  return (
-    <div className="rounded-sm bg-term-bg p-3 font-mono text-sm text-term-fg">
-      {lines.map((line, i) => (
-        <div key={i}>
-          <pre className="m-0 whitespace-pre-wrap break-words text-term-accent">
-            <span aria-hidden="true">$ </span>
-            {line.command}
-          </pre>
-          {line.stdout ? (
-            <pre className="m-0 whitespace-pre-wrap break-words">
-              {line.stdout}
-            </pre>
-          ) : null}
-          {line.stderr ? (
-            <pre className="m-0 whitespace-pre-wrap break-words text-term-err">
-              {line.stderr}
-            </pre>
-          ) : null}
-        </div>
-      ))}
-    </div>
-  );
-}
 
 /**
  * Scroll-told beats beside a pinned stage (ADR-004). With reduced motion the

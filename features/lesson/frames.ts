@@ -1,12 +1,7 @@
 import { createWorld, Session } from "@/engine";
 import type { LessonScene } from "@/content/define";
 import { stageFrame, type StageFrame } from "@/features/stage/frame";
-
-export type TranscriptLine = {
-  readonly command: string;
-  readonly stdout: string;
-  readonly stderr: string;
-};
+import { transcriptOf, type TranscriptLine } from "@/features/stage/transcript";
 
 /** What the pinned stage shows for one beat, as plain JSON. */
 export type BeatFrame = {
@@ -26,11 +21,7 @@ export function beatFrames(scene: LessonScene): BeatFrame[] {
         session.getSnapshot().world,
         entries.flatMap((e) => e.outcome.effects),
       ),
-      transcript: entries.map((e) => ({
-        command: e.text,
-        stdout: e.outcome.output.stdout,
-        stderr: e.outcome.output.stderr,
-      })),
+      transcript: transcriptOf(entries),
     };
   });
 }

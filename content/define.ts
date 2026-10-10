@@ -45,3 +45,40 @@ export const defineWorld = (spec: WorldSpec): WorldSpec => spec;
 export const defineLesson = (scene: LessonScene): LessonScene => scene;
 
 export const defineCapstone = (scene: CapstoneScene): CapstoneScene => scene;
+
+/** A starting state for a reference entry: a world plus commands that set it up. */
+export type ReferencePreset = {
+  readonly id: string;
+  readonly label: string;
+  readonly world: WorldSpec;
+  readonly setup?: readonly string[];
+};
+
+/** One form of the command; content tests check its claim on the first preset. */
+export type ReferenceVariant = {
+  readonly id: string;
+  readonly command: string;
+  /** The state the command reaches (and the preset does not). */
+  readonly after?: TargetSpec;
+  /** Text the command prints. */
+  readonly shows?: string;
+};
+
+export type ReferenceEntry = {
+  /** The name `git <cmd> -h` asks for, e.g. "init". */
+  readonly id: string;
+  readonly title: string;
+  readonly summary: string;
+  readonly presets: readonly [ReferencePreset, ...ReferencePreset[]];
+  readonly variants: readonly [ReferenceVariant, ...ReferenceVariant[]];
+  /** Up to three. */
+  readonly gotchas: readonly string[];
+  readonly legacy?: readonly {
+    readonly older: string;
+    readonly today: string;
+  }[];
+  readonly lessons: readonly LessonId[];
+};
+
+export const defineReferenceEntry = (entry: ReferenceEntry): ReferenceEntry =>
+  entry;

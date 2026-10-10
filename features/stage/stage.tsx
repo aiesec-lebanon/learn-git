@@ -39,9 +39,12 @@ function FileList({
 export function StageView({
   frame,
   animate = true,
+  at,
 }: {
   frame: StageFrame;
   animate?: boolean;
+  /** Holds the animation at this point (0 to 1) instead of playing it. */
+  at?: number;
 }) {
   const motion = useMotion();
   const { files, view } = frame;
@@ -79,6 +82,13 @@ export function StageView({
     }
     shown.current = graph;
   }, [frame, graph, files.root, animate, motion]);
+
+  useLayoutEffect(() => {
+    const t = timeline.current;
+    if (at === undefined || !t) return;
+    t.pause();
+    t.seek(at * t.duration);
+  }, [at, frame]);
 
   useLayoutEffect(() => () => timeline.current?.finish(), []);
 

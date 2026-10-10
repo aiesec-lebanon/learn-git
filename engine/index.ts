@@ -28,3 +28,7 @@ export type { Overwrite } from "./restore/preview";
 export type { CommandInfo } from "./commands/info";
 export { displayRelative, resolvePath } from "./files/paths";
 export { shellQuote } from "./cli/tokenize";
+export { commitSnapshot, firstParentChain } from "./preview/chain";
+export type { CommitSnapshot, SnapshotFile } from "./preview/chain";
+export { rewriteMessage } from "./preview/rewrite-message";
+export type { Rewritten } from "./preview/rewrite-message";

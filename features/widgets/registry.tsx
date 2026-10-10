@@ -21,6 +21,12 @@ const WIDGETS: Record<WidgetName, ComponentType> = {
   "status-lens": lazy(() =>
     import("./status-lens").then((m) => ({ default: m.StatusLens })),
   ),
+  "history-scrubber": lazy(() =>
+    import("./history-scrubber").then((m) => ({ default: m.HistoryScrubber })),
+  ),
+  "hash-chain": lazy(() =>
+    import("./hash-chain").then((m) => ({ default: m.HashChain })),
+  ),
 };
 
 /** A lesson widget by name, loaded with its own code (R3). */

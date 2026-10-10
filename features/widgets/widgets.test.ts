@@ -4,6 +4,11 @@ import { WIDGET_NAMES } from "./names";
 import { snapshotAt, snapshotText } from "./snapshot-scrubber.model";
 import { carryable, dropCommand, STAGING } from "./stage-files.model";
 import { lensSections } from "./status-lens.model";
+import {
+  historySnapshots,
+  ripple,
+  snapshotLabel,
+} from "./recipe-history.model";
 import { createWorld, Session } from "@/engine";
 import { stageFiles } from "@/features/stage/files";
 import { typoAndFeature } from "@/content/worlds/typo-and-feature";
@@ -72,5 +77,20 @@ describe("widgets", () => {
       ["Untracked files", ["worktree"], ["notes.txt"]],
     ]);
     expect(lensSections(createWorld(recipeSite))).toBeNull();
+  });
+
+  it("show the recipe history and ripple a new first message", () => {
+    expect(historySnapshots().map((s) => s.subject)).toEqual([
+      "First snapshot",
+      "Add the soup recipe",
+      "Mention the soup in the README",
+    ]);
+    expect(snapshotLabel(1)).toMatch(
+      /^Commit 2 of 3: [0-9a-f]{7} Add the soup/,
+    );
+    expect(ripple("First snapshot").every((r) => r.old === r.new)).toBe(true);
+    const rows = ripple("Start the site");
+    expect(rows.map((r) => r.old !== r.new)).toEqual([true, true, true]);
+    expect(rows[0]?.subject).toBe("Start the site");
   });
 });

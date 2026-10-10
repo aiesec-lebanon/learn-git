@@ -12,6 +12,7 @@ export const REFUSAL_FACTS: Readonly<Record<RefusalCode, string>> = {
   "nothing-to-commit": "The staging area matches the last commit.",
   "empty-message": "A commit needs a message.",
   "unborn-branch": "The branch has no commits yet.",
+  "unknown-revision": "Git found no commit or file by that name.",
   "outside-repository": "That path is outside the repository.",
   "shell-error": "The shell could not run that line.",
 };

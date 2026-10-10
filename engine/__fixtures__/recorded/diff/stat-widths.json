@@ -1,0 +1,321 @@
+{
+  "final": {
+    "config": {
+      "global": [
+        [
+          "user.name",
+          "Sam Lee"
+        ],
+        [
+          "user.email",
+          "sam@example.com"
+        ],
+        [
+          "init.defaultbranch",
+          "main"
+        ]
+      ],
+      "system": []
+    },
+    "dirs": [
+      "project",
+      "project/docs",
+      "project/docs/a-very-long-folder-name-for-the-stat-column"
+    ],
+    "files": {
+      "project/a.txt": "1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15\n16\n17\n18\n19\n20\n21\n22\n23\n24\n25\n26\n27\n28\n29\n30\n31\n32\n33\n34\n35\n36\n37\n38\n39\n40\n41\n42\n43\n44\n45\n46\n47\n48\n49\n50\n51\n52\n53\n54\n55\n56\n57\n58\n59\n60\n",
+      "project/b.bin": "bin\u0000arymore",
+      "project/docs/a-very-long-folder-name-for-the-stat-column/and-an-even-longer-file-name-here.txt": "one\ntwo\n",
+      "project/new.bin": "x"
+    },
+    "repos": {
+      "project": {
+        "config": [
+          [
+            "core.repositoryformatversion",
+            "0"
+          ],
+          [
+            "core.filemode",
+            "false"
+          ],
+          [
+            "core.bare",
+            "false"
+          ],
+          [
+            "core.logallrefupdates",
+            "true"
+          ],
+          [
+            "core.symlinks",
+            "false"
+          ],
+          [
+            "core.ignorecase",
+            "true"
+          ]
+        ],
+        "head": {
+          "ref": "refs/heads/main"
+        },
+        "index": [
+          {
+            "mode": "100644",
+            "oid": "fcd87345e00673ff10adeb5c83e620d50bb0d62a",
+            "path": "a.txt",
+            "stage": 0
+          },
+          {
+            "mode": "100644",
+            "oid": "7d3876288dcf32a0ef0d80bfde0003f9a9813160",
+            "path": "b.bin",
+            "stage": 0
+          },
+          {
+            "mode": "100644",
+            "oid": "814f4a422927b82f5f8a43f8fab6d3839e3983f2",
+            "path": "docs/a-very-long-folder-name-for-the-stat-column/and-an-even-longer-file-name-here.txt",
+            "stage": 0
+          },
+          {
+            "mode": "100644",
+            "oid": "c1b0730e0133447badcfd47fd144e254807b06e1",
+            "path": "new.bin",
+            "stage": 0
+          }
+        ],
+        "objects": {
+          "01e79c32a8c99c557f0757da7cb6d65b3414466d": {
+            "body": "1\n2\n3\n",
+            "type": "blob"
+          },
+          "422c2b7ab3b3c668038da977e4e93a5fc623169c": {
+            "body": "a\nb\n",
+            "type": "blob"
+          },
+          "4f62c5dc0ef617ffa551be5bcc9a117d598addfc": {
+            "body": "tree c57da6aa5496d8c0ac5e48cd959a9625f06d379b\nauthor Sam Lee <sam@example.com> 1767225720 +0000\ncommitter Sam Lee <sam@example.com> 1767225720 +0000\n\nbase\n",
+            "type": "commit"
+          },
+          "5626abf0f72e58d7a153368ba57db4c673c0e171": {
+            "body": "one\n",
+            "type": "blob"
+          },
+          "61b81648d124080b360b4234abb8a58dc5f06121": {
+            "entries": [
+              {
+                "mode": "40000",
+                "name": "a-very-long-folder-name-for-the-stat-column",
+                "oid": "8f75b49eccc02cf16ca4d00e36e057bcf7909ec9"
+              }
+            ],
+            "type": "tree"
+          },
+          "7d3876288dcf32a0ef0d80bfde0003f9a9813160": {
+            "body": "bin\u0000arymore",
+            "type": "blob"
+          },
+          "814f4a422927b82f5f8a43f8fab6d3839e3983f2": {
+            "body": "one\ntwo\n",
+            "type": "blob"
+          },
+          "87ae6b695deceaf160611414f7dcd5c7366b2e79": {
+            "body": "bin\u0000ary",
+            "type": "blob"
+          },
+          "8f75b49eccc02cf16ca4d00e36e057bcf7909ec9": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "and-an-even-longer-file-name-here.txt",
+                "oid": "5626abf0f72e58d7a153368ba57db4c673c0e171"
+              }
+            ],
+            "type": "tree"
+          },
+          "c1b0730e0133447badcfd47fd144e254807b06e1": {
+            "body": "x",
+            "type": "blob"
+          },
+          "c57da6aa5496d8c0ac5e48cd959a9625f06d379b": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "a.txt",
+                "oid": "01e79c32a8c99c557f0757da7cb6d65b3414466d"
+              },
+              {
+                "mode": "100644",
+                "name": "b.bin",
+                "oid": "87ae6b695deceaf160611414f7dcd5c7366b2e79"
+              },
+              {
+                "mode": "40000",
+                "name": "docs",
+                "oid": "61b81648d124080b360b4234abb8a58dc5f06121"
+              },
+              {
+                "mode": "100644",
+                "name": "gone.txt",
+                "oid": "422c2b7ab3b3c668038da977e4e93a5fc623169c"
+              }
+            ],
+            "type": "tree"
+          },
+          "fcd87345e00673ff10adeb5c83e620d50bb0d62a": {
+            "body": "1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15\n16\n17\n18\n19\n20\n21\n22\n23\n24\n25\n26\n27\n28\n29\n30\n31\n32\n33\n34\n35\n36\n37\n38\n39\n40\n41\n42\n43\n44\n45\n46\n47\n48\n49\n50\n51\n52\n53\n54\n55\n56\n57\n58\n59\n60\n",
+            "type": "blob"
+          }
+        },
+        "reflogs": {
+          "HEAD": [
+            "0000000000000000000000000000000000000000 4f62c5dc0ef617ffa551be5bcc9a117d598addfc Sam Lee <sam@example.com> 1767225720 +0000\tcommit (initial): base"
+          ],
+          "refs/heads/main": [
+            "0000000000000000000000000000000000000000 4f62c5dc0ef617ffa551be5bcc9a117d598addfc Sam Lee <sam@example.com> 1767225720 +0000\tcommit (initial): base"
+          ]
+        },
+        "refs": {
+          "refs/heads/main": "4f62c5dc0ef617ffa551be5bcc9a117d598addfc"
+        }
+      }
+    }
+  },
+  "git": "2.45.1.windows.1",
+  "script": {
+    "steps": [
+      "git init -q",
+      "git add .",
+      "git commit -q -m base",
+      "echo -e '1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15\n16\n17\n18\n19\n20\n21\n22\n23\n24\n25\n26\n27\n28\n29\n30\n31\n32\n33\n34\n35\n36\n37\n38\n39\n40\n41\n42\n43\n44\n45\n46\n47\n48\n49\n50\n51\n52\n53\n54\n55\n56\n57\n58\n59\n60' > a.txt",
+      "git diff --stat",
+      "echo two >> docs/a-very-long-folder-name-for-the-stat-column/and-an-even-longer-file-name-here.txt",
+      "echo -n more >> b.bin",
+      "rm gone.txt",
+      "git diff --stat",
+      "git add .",
+      "git diff --staged --stat",
+      "echo -n x > new.bin",
+      "git add new.bin",
+      "git diff --staged --stat -- b.bin new.bin",
+      "git diff --staged --stat -- gone.txt"
+    ],
+    "world": {
+      "cwd": "project",
+      "files": {
+        "project/a.txt": "1\n2\n3\n",
+        "project/b.bin": "bin\u0000ary",
+        "project/docs/a-very-long-folder-name-for-the-stat-column/and-an-even-longer-file-name-here.txt": "one\n",
+        "project/gone.txt": "a\nb\n"
+      }
+    }
+  },
+  "steps": [
+    {
+      "cmd": "git init -q",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git add .",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git commit -q -m base",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "echo -e '1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15\n16\n17\n18\n19\n20\n21\n22\n23\n24\n25\n26\n27\n28\n29\n30\n31\n32\n33\n34\n35\n36\n37\n38\n39\n40\n41\n42\n43\n44\n45\n46\n47\n48\n49\n50\n51\n52\n53\n54\n55\n56\n57\n58\n59\n60' > a.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git diff --stat",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": " a.txt | 57 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n 1 file changed, 57 insertions(+)\n"
+    },
+    {
+      "cmd": "echo two >> docs/a-very-long-folder-name-for-the-stat-column/and-an-even-longer-file-name-here.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "echo -n more >> b.bin",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "rm gone.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git diff --stat",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": " a.txt                                              |  57 +++++++++++++++++++++\n b.bin                                              | Bin 7 -> 11 bytes\n .../and-an-even-longer-file-name-here.txt          |   1 +\n gone.txt                                           |   2 -\n 4 files changed, 58 insertions(+), 2 deletions(-)\n"
+    },
+    {
+      "cmd": "git add .",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git diff --staged --stat",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": " a.txt                                              |  57 +++++++++++++++++++++\n b.bin                                              | Bin 7 -> 11 bytes\n .../and-an-even-longer-file-name-here.txt          |   1 +\n gone.txt                                           |   2 -\n 4 files changed, 58 insertions(+), 2 deletions(-)\n"
+    },
+    {
+      "cmd": "echo -n x > new.bin",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git add new.bin",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git diff --staged --stat -- b.bin new.bin",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": " b.bin   | Bin 7 -> 11 bytes\n new.bin |   1 +\n 2 files changed, 1 insertion(+)\n"
+    },
+    {
+      "cmd": "git diff --staged --stat -- gone.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": " gone.txt | 2 --\n 1 file changed, 2 deletions(-)\n"
+    }
+  ]
+}

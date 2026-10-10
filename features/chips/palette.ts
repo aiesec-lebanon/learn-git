@@ -109,6 +109,23 @@ export const VERBS: readonly ChipVerb[] = [
     ready: (s) => s.commits,
   },
   {
+    program: "git",
+    name: "diff",
+    hint: "see changed lines",
+    params: [
+      { kind: "flag", flag: "--staged", label: "staged changes" },
+      { kind: "flag", flag: "--stat", label: "summary only" },
+    ],
+    ready: (s) => s.repo && (s.changed || s.staged),
+  },
+  {
+    program: "git",
+    name: "show",
+    hint: "show the last commit",
+    params: [{ kind: "flag", flag: "--stat", label: "summary only" }],
+    ready: (s) => s.commits,
+  },
+  {
     program: "shell",
     name: "ls",
     hint: "list files",

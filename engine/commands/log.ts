@@ -1,60 +1,16 @@
-import { lastValue, type OptionSpec } from "../cli/options";
-import { subjectOf } from "../commit/message";
-import { decorations } from "../format/decorate";
-import { formatGitDate } from "../format/date";
+import { flag, lastValue, type OptionSpec } from "../cli/options";
+import {
+  commitHeader,
+  HEADER_OPTIONS,
+  headerStyle,
+  unbornRefusal,
+} from "../log/format";
 import { walkCommits } from "../log/walk";
 import { notSimulated } from "../messages/git";
-import { abbreviate } from "../objects/abbrev";
-import { shortRefName } from "../refs/names";
 import { resolveHead } from "../refs/refs";
 import type { LineRef } from "../types";
 import { defineCommand, refuse } from "./registry";
-
-const UNSIMULATED = [
-  ["graph"],
-  ["all"],
-  ["stat"],
-  ["shortstat"],
-  ["numstat"],
-  ["name-only"],
-  ["name-status"],
-  ["patch", "p"],
-  ["u", "u"],
-  ["author", undefined, true],
-  ["committer", undefined, true],
-  ["grep", undefined, true],
-  ["since", undefined, true],
-  ["until", undefined, true],
-  ["after", undefined, true],
-  ["before", undefined, true],
-  ["S", "S", true],
-  ["G", "G", true],
-  ["L", "L", true],
-  ["follow"],
-  ["first-parent"],
-  ["reverse"],
-  ["pretty", undefined, "optional"],
-  ["format", undefined, true],
-  ["abbrev-commit"],
-  ["abbrev", undefined, "optional"],
-  ["date", undefined, true],
-  ["merges"],
-  ["no-merges"],
-  ["branches", undefined, "optional"],
-  ["tags", undefined, "optional"],
-  ["remotes", undefined, "optional"],
-  ["source"],
-  ["color", undefined, "optional"],
-  ["topo-order"],
-  ["date-order"],
-  ["walk-reflogs", "g"],
-  ["skip", undefined, true],
-  ["relative-date"],
-  ["parents"],
-  ["raw"],
-  ["word-diff", undefined, "optional"],
-  ["show-signature"],
-] as const;
+import { refuseUnsimulated, unsimulated as x } from "./unsimulated";
 
 const OPTIONS: readonly OptionSpec[] = [
   {
@@ -64,29 +20,61 @@ const OPTIONS: readonly OptionSpec[] = [
     value: "required",
     numeric: true,
   },
-  { key: "oneline", long: "oneline", negatable: false },
-  { key: "decorate", long: "decorate", value: "optional" },
-  ...UNSIMULATED.map(([long, short, value]) => ({
-    key: `x-${long}`,
-    ...(long.length > 1 ? { long } : {}),
-    ...(short ? { short } : {}),
-    ...(value
-      ? {
-          value:
-            value === "optional"
-              ? ("optional" as const)
-              : ("required" as const),
-        }
-      : {}),
-  })),
+  ...HEADER_OPTIONS,
+  { key: "graph", long: "graph", negatable: false },
+  x("all"),
+  x("stat"),
+  x("shortstat"),
+  x("numstat"),
+  x("name-only"),
+  x("name-status"),
+  x("patch", "p"),
+  x("u", "u"),
+  x("author", undefined, "required"),
+  x("committer", undefined, "required"),
+  x("grep", undefined, "required"),
+  x("since", undefined, "required"),
+  x("until", undefined, "required"),
+  x("after", undefined, "required"),
+  x("before", undefined, "required"),
+  x("S", "S", "required"),
+  x("G", "G", "required"),
+  x("L", "L", "required"),
+  x("follow"),
+  x("first-parent"),
+  x("reverse"),
+  x("pretty", undefined, "optional"),
+  x("format", undefined, "required"),
+  x("abbrev-commit"),
+  x("abbrev", undefined, "optional"),
+  x("date", undefined, "required"),
+  x("merges"),
+  x("no-merges"),
+  x("branches", undefined, "optional"),
+  x("tags", undefined, "optional"),
+  x("remotes", undefined, "optional"),
+  x("source"),
+  x("color", undefined, "optional"),
+  x("topo-order"),
+  x("date-order"),
+  x("walk-reflogs", "g"),
+  x("skip", undefined, "required"),
+  x("relative-date"),
+  x("parents"),
+  x("raw"),
+  x("word-diff", undefined, "optional"),
+  x("show-signature"),
 ];
 
-const indent = (message: string) =>
-  message
+/** Linear `--graph`: `* ` on the commit line, `| ` below it while a parent follows. */
+function linearGraph(block: string, hasParent: boolean): string {
+  const rail = hasParent ? "| " : "  ";
+  return block
     .replace(/\n$/, "")
     .split("\n")
-    .map((line) => `    ${line}\n`)
+    .map((row, i) => `${i === 0 ? "* " : rail}${row}\n`)
     .join("");
+}
 
 export const log = defineCommand({
   name: "log",
@@ -96,17 +84,8 @@ export const log = defineCommand({
    or: git show [<options>] <object>...`,
   options: OPTIONS,
   run: ({ world, repo, options }) => {
-    const unsupported = [...options.values.keys()].find((k) =>
-      k.startsWith("x-"),
-    );
-    if (unsupported) {
-      const name = unsupported.slice(2);
-      return refuse(
-        "not-simulated",
-        notSimulated(`git log ${name.length > 1 ? "--" : "-"}${name}`),
-        1,
-      );
-    }
+    const unsupported = refuseUnsimulated("log", options);
+    if (unsupported) return unsupported;
     if (options.args.length) {
       return refuse(
         "not-simulated",
@@ -124,45 +103,28 @@ export const log = defineCommand({
       limit = n < 0 ? Infinity : n;
     }
     const head = resolveHead(repo);
-    if (!head) {
-      const branch =
-        repo.head.kind === "symbolic" ? shortRefName(repo.head.ref) : "HEAD";
-      return refuse(
-        "unborn-branch",
-        `fatal: your current branch '${branch}' does not have any commits yet\n`,
-      );
-    }
-    const decorate = lastValue(options, "decorate");
-    if (
-      typeof decorate === "string" &&
-      decorate !== "short" &&
-      decorate !== "no"
-    ) {
+    if (!head) return unbornRefusal(repo);
+    const style = headerStyle("log", options);
+    if (!("oneline" in style)) return style;
+    const walked = walkCommits(world.objects, [head], repo.arrival, limit);
+    const graph = flag(options, "graph");
+    if (graph && walked.some((w) => w.commit.parents.length > 1)) {
       return refuse(
         "not-simulated",
-        notSimulated(`git log --decorate=${decorate}`),
+        notSimulated("git log --graph with merges"),
         1,
       );
     }
-    const decorated = decorate !== false && decorate !== "no";
-    const oneline = lastValue(options, "oneline") === true;
-    const label = (oid: Parameters<typeof decorations>[1]) => {
-      const names = decorated ? decorations(repo, oid) : [];
-      return names.length ? ` (${names.join(", ")})` : "";
-    };
     const lines: LineRef[] = [];
     let row = 0;
-    const blocks = walkCommits(world.objects, [head], repo.arrival, limit).map(
-      ({ oid, commit }) => {
-        lines.push({ line: row, oid });
-        const subject = subjectOf(commit.message);
-        const text = oneline
-          ? `${abbreviate(world.objects, oid)}${label(oid)} ${subject}\n`
-          : `commit ${oid}${label(oid)}\nAuthor: ${commit.author.name} <${commit.author.email}>\nDate:   ${formatGitDate(commit.author.time, commit.author.tz)}\n\n${indent(commit.message)}`;
-        row += text.split("\n").length - 1 + (oneline ? 0 : 1);
-        return text;
-      },
-    );
-    return { stdout: blocks.join(oneline ? "" : "\n"), lines };
+    const blocks = walked.map(({ oid, commit }, i) => {
+      lines.push({ line: row, oid });
+      let text = commitHeader(world.objects, repo, oid, commit, style);
+      if (!style.oneline && i < walked.length - 1) text += "\n";
+      if (graph) text = linearGraph(text, commit.parents.length > 0);
+      row += text.split("\n").length - 1;
+      return text;
+    });
+    return { stdout: blocks.join(""), lines };
   },
 });

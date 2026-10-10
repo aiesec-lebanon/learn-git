@@ -220,6 +220,7 @@ export type RefusalCode =
   | "nothing-to-commit"
   | "empty-message"
   | "unborn-branch"
+  | "unknown-revision"
   | "outside-repository"
   | "shell-error";
 

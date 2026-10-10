@@ -1,0 +1,17 @@
+{
+  "world": { "files": { "project/a.txt": "a\n" }, "cwd": "project" },
+  "steps": [
+    "git init -q",
+    "git add a.txt",
+    "git commit -q -m \"First\"",
+    "echo b >> a.txt",
+    "git add a.txt",
+    "git commit -q -m \"Second\" -m \"Body line.\"",
+    "echo c >> a.txt",
+    "git add a.txt",
+    "git commit -q -m \"Third\"",
+    "git log --graph",
+    "git log --graph --oneline",
+    "git log --graph -n 2"
+  ]
+}

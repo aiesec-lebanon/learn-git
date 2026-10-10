@@ -1,0 +1,248 @@
+{
+  "final": {
+    "config": {
+      "global": [
+        [
+          "user.name",
+          "Sam Lee"
+        ],
+        [
+          "user.email",
+          "sam@example.com"
+        ],
+        [
+          "init.defaultbranch",
+          "main"
+        ]
+      ],
+      "system": []
+    },
+    "dirs": [
+      "project"
+    ],
+    "files": {
+      "project/a.txt": "a\nb\nc\n"
+    },
+    "repos": {
+      "project": {
+        "config": [
+          [
+            "core.repositoryformatversion",
+            "0"
+          ],
+          [
+            "core.filemode",
+            "false"
+          ],
+          [
+            "core.bare",
+            "false"
+          ],
+          [
+            "core.logallrefupdates",
+            "true"
+          ],
+          [
+            "core.symlinks",
+            "false"
+          ],
+          [
+            "core.ignorecase",
+            "true"
+          ]
+        ],
+        "head": {
+          "ref": "refs/heads/main"
+        },
+        "index": [
+          {
+            "mode": "100644",
+            "oid": "de980441c3ab03a8c07dda1ad27b8a11f39deb1e",
+            "path": "a.txt",
+            "stage": 0
+          }
+        ],
+        "objects": {
+          "0021683b27ff1d1813a311f0a11a877ea86d914e": {
+            "body": "tree 5eb56f37d65808cb4cec9d09269ecad72aa06c9b\nparent 1d8d9d1ed33248cede04183e67a7b41648003d74\nauthor Sam Lee <sam@example.com> 1767226080 +0000\ncommitter Sam Lee <sam@example.com> 1767226080 +0000\n\nThird\n",
+            "type": "commit"
+          },
+          "08585692ce06452da6f82ae66b90d98b55536fca": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "a.txt",
+                "oid": "78981922613b2afb6025042ff6bd878ac1994e85"
+              }
+            ],
+            "type": "tree"
+          },
+          "187438d7d3fbee49dba13a50af1a6af1f1c7c17c": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "a.txt",
+                "oid": "422c2b7ab3b3c668038da977e4e93a5fc623169c"
+              }
+            ],
+            "type": "tree"
+          },
+          "1d8d9d1ed33248cede04183e67a7b41648003d74": {
+            "body": "tree 187438d7d3fbee49dba13a50af1a6af1f1c7c17c\nparent 9dfff969b0901d208fdbe2963bc3dd66d77b686e\nauthor Sam Lee <sam@example.com> 1767225900 +0000\ncommitter Sam Lee <sam@example.com> 1767225900 +0000\n\nSecond\n\nBody line.\n",
+            "type": "commit"
+          },
+          "422c2b7ab3b3c668038da977e4e93a5fc623169c": {
+            "body": "a\nb\n",
+            "type": "blob"
+          },
+          "5eb56f37d65808cb4cec9d09269ecad72aa06c9b": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "a.txt",
+                "oid": "de980441c3ab03a8c07dda1ad27b8a11f39deb1e"
+              }
+            ],
+            "type": "tree"
+          },
+          "78981922613b2afb6025042ff6bd878ac1994e85": {
+            "body": "a\n",
+            "type": "blob"
+          },
+          "9dfff969b0901d208fdbe2963bc3dd66d77b686e": {
+            "body": "tree 08585692ce06452da6f82ae66b90d98b55536fca\nauthor Sam Lee <sam@example.com> 1767225720 +0000\ncommitter Sam Lee <sam@example.com> 1767225720 +0000\n\nFirst\n",
+            "type": "commit"
+          },
+          "de980441c3ab03a8c07dda1ad27b8a11f39deb1e": {
+            "body": "a\nb\nc\n",
+            "type": "blob"
+          }
+        },
+        "reflogs": {
+          "HEAD": [
+            "0000000000000000000000000000000000000000 9dfff969b0901d208fdbe2963bc3dd66d77b686e Sam Lee <sam@example.com> 1767225720 +0000\tcommit (initial): First",
+            "9dfff969b0901d208fdbe2963bc3dd66d77b686e 1d8d9d1ed33248cede04183e67a7b41648003d74 Sam Lee <sam@example.com> 1767225900 +0000\tcommit: Second",
+            "1d8d9d1ed33248cede04183e67a7b41648003d74 0021683b27ff1d1813a311f0a11a877ea86d914e Sam Lee <sam@example.com> 1767226080 +0000\tcommit: Third"
+          ],
+          "refs/heads/main": [
+            "0000000000000000000000000000000000000000 9dfff969b0901d208fdbe2963bc3dd66d77b686e Sam Lee <sam@example.com> 1767225720 +0000\tcommit (initial): First",
+            "9dfff969b0901d208fdbe2963bc3dd66d77b686e 1d8d9d1ed33248cede04183e67a7b41648003d74 Sam Lee <sam@example.com> 1767225900 +0000\tcommit: Second",
+            "1d8d9d1ed33248cede04183e67a7b41648003d74 0021683b27ff1d1813a311f0a11a877ea86d914e Sam Lee <sam@example.com> 1767226080 +0000\tcommit: Third"
+          ]
+        },
+        "refs": {
+          "refs/heads/main": "0021683b27ff1d1813a311f0a11a877ea86d914e"
+        }
+      }
+    }
+  },
+  "git": "2.45.1.windows.1",
+  "script": {
+    "steps": [
+      "git init -q",
+      "git add a.txt",
+      "git commit -q -m \"First\"",
+      "echo b >> a.txt",
+      "git add a.txt",
+      "git commit -q -m \"Second\" -m \"Body line.\"",
+      "echo c >> a.txt",
+      "git add a.txt",
+      "git commit -q -m \"Third\"",
+      "git log --graph",
+      "git log --graph --oneline",
+      "git log --graph -n 2"
+    ],
+    "world": {
+      "cwd": "project",
+      "files": {
+        "project/a.txt": "a\n"
+      }
+    }
+  },
+  "steps": [
+    {
+      "cmd": "git init -q",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git add a.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git commit -q -m \"First\"",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "echo b >> a.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git add a.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git commit -q -m \"Second\" -m \"Body line.\"",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "echo c >> a.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git add a.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git commit -q -m \"Third\"",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git log --graph",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "* commit 0021683b27ff1d1813a311f0a11a877ea86d914e (HEAD -> main)\n| Author: Sam Lee <sam@example.com>\n| Date:   Thu Jan 1 00:08:00 2026 +0000\n| \n|     Third\n| \n* commit 1d8d9d1ed33248cede04183e67a7b41648003d74\n| Author: Sam Lee <sam@example.com>\n| Date:   Thu Jan 1 00:05:00 2026 +0000\n| \n|     Second\n|     \n|     Body line.\n| \n* commit 9dfff969b0901d208fdbe2963bc3dd66d77b686e\n  Author: Sam Lee <sam@example.com>\n  Date:   Thu Jan 1 00:02:00 2026 +0000\n  \n      First\n"
+    },
+    {
+      "cmd": "git log --graph --oneline",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "* 0021683 (HEAD -> main) Third\n* 1d8d9d1 Second\n* 9dfff96 First\n"
+    },
+    {
+      "cmd": "git log --graph -n 2",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "* commit 0021683b27ff1d1813a311f0a11a877ea86d914e (HEAD -> main)\n| Author: Sam Lee <sam@example.com>\n| Date:   Thu Jan 1 00:08:00 2026 +0000\n| \n|     Third\n| \n* commit 1d8d9d1ed33248cede04183e67a7b41648003d74\n| Author: Sam Lee <sam@example.com>\n| Date:   Thu Jan 1 00:05:00 2026 +0000\n| \n|     Second\n|     \n|     Body line.\n"
+    }
+  ]
+}

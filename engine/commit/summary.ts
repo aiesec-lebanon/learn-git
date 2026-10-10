@@ -1,12 +1,10 @@
 import { numstat } from "../diff/numstat";
+import { statTotals } from "../diff/stat";
 import { quotePath } from "../files/quote";
 import { readObject } from "../objects/pool";
 import type { TreeFile } from "../objects/tree";
 import type { ObjectPool, RepoPath } from "../types";
 import { compareBytes } from "../util/compare";
-
-const plural = (n: number, one: string, many: string) =>
-  `${n} ${n === 1 ? one : many}`;
 
 /**
  * The diffstat summary Git prints after a commit: the totals line plus
@@ -37,10 +35,5 @@ export function commitSummary(
     if (!a && b) modes.push(` create mode ${b.mode} ${quotePath(path)}\n`);
     if (a && !b) modes.push(` delete mode ${a.mode} ${quotePath(path)}\n`);
   }
-  const parts = [` ${plural(files, "file changed", "files changed")}`];
-  if (added || !deleted)
-    parts.push(plural(added, "insertion(+)", "insertions(+)"));
-  if (deleted || !added)
-    parts.push(plural(deleted, "deletion(-)", "deletions(-)"));
-  return `${parts.join(", ")}\n${modes.join("")}`;
+  return statTotals(files, added, deleted) + modes.join("");
 }

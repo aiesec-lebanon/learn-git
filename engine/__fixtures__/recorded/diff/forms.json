@@ -1,0 +1,473 @@
+{
+  "final": {
+    "config": {
+      "global": [
+        [
+          "user.name",
+          "Sam Lee"
+        ],
+        [
+          "user.email",
+          "sam@example.com"
+        ],
+        [
+          "init.defaultbranch",
+          "main"
+        ]
+      ],
+      "system": []
+    },
+    "dirs": [
+      "project",
+      "project/notes"
+    ],
+    "files": {
+      "project/index.html": "<h1>Recipes</h1>\n<p>Pancakes</p>\n<p>Waffles</p>\n",
+      "project/notes/todo.txt": "buy flour\nbuy eggs\n"
+    },
+    "repos": {
+      "project": {
+        "config": [
+          [
+            "core.repositoryformatversion",
+            "0"
+          ],
+          [
+            "core.filemode",
+            "false"
+          ],
+          [
+            "core.bare",
+            "false"
+          ],
+          [
+            "core.logallrefupdates",
+            "true"
+          ],
+          [
+            "core.symlinks",
+            "false"
+          ],
+          [
+            "core.ignorecase",
+            "true"
+          ]
+        ],
+        "head": {
+          "ref": "refs/heads/main"
+        },
+        "index": [
+          {
+            "mode": "100644",
+            "oid": "2a8b1730b2b2de58aa643ed790c64628de761363",
+            "path": "index.html",
+            "stage": 0
+          },
+          {
+            "mode": "100644",
+            "oid": "228a72749748c22ef4ff089c5ea308180c74653b",
+            "path": "notes/todo.txt",
+            "stage": 0
+          }
+        ],
+        "objects": {
+          "137cbe594ef8fe5cde3fd20078eaf9a9bb5ba631": {
+            "body": "tree fa861e8547b2baf45c8c2d32115476c7d9bbab56\nparent 335fc8514923a917f7f046fbd28bc7477cf170fa\nauthor Sam Lee <sam@example.com> 1767226200 +0000\ncommitter Sam Lee <sam@example.com> 1767226200 +0000\n\nAdd pancakes\n",
+            "type": "commit"
+          },
+          "228a72749748c22ef4ff089c5ea308180c74653b": {
+            "body": "buy flour\nbuy eggs\n",
+            "type": "blob"
+          },
+          "2a8b1730b2b2de58aa643ed790c64628de761363": {
+            "body": "<h1>Recipes</h1>\n<p>Pancakes</p>\n",
+            "type": "blob"
+          },
+          "335fc8514923a917f7f046fbd28bc7477cf170fa": {
+            "body": "tree ee0b91e5df77ee7eea865670a3915f0a58536510\nauthor Sam Lee <sam@example.com> 1767226020 +0000\ncommitter Sam Lee <sam@example.com> 1767226020 +0000\n\nFirst recipe page\n",
+            "type": "commit"
+          },
+          "3aa2619e59baa9b685f8d31a061fbe747101817b": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "todo.txt",
+                "oid": "970771393ed900d5ccd6f1604ee8a00341539884"
+              }
+            ],
+            "type": "tree"
+          },
+          "5ab67a1facb804ea781e79dbd420559e34e839cf": {
+            "body": "<h1>Recipes</h1>\n",
+            "type": "blob"
+          },
+          "970771393ed900d5ccd6f1604ee8a00341539884": {
+            "body": "buy flour\n",
+            "type": "blob"
+          },
+          "ee0b91e5df77ee7eea865670a3915f0a58536510": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "index.html",
+                "oid": "5ab67a1facb804ea781e79dbd420559e34e839cf"
+              },
+              {
+                "mode": "40000",
+                "name": "notes",
+                "oid": "3aa2619e59baa9b685f8d31a061fbe747101817b"
+              }
+            ],
+            "type": "tree"
+          },
+          "fa861e8547b2baf45c8c2d32115476c7d9bbab56": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "index.html",
+                "oid": "2a8b1730b2b2de58aa643ed790c64628de761363"
+              },
+              {
+                "mode": "40000",
+                "name": "notes",
+                "oid": "3aa2619e59baa9b685f8d31a061fbe747101817b"
+              }
+            ],
+            "type": "tree"
+          }
+        },
+        "reflogs": {
+          "HEAD": [
+            "0000000000000000000000000000000000000000 335fc8514923a917f7f046fbd28bc7477cf170fa Sam Lee <sam@example.com> 1767226020 +0000\tcommit (initial): First recipe page",
+            "335fc8514923a917f7f046fbd28bc7477cf170fa 137cbe594ef8fe5cde3fd20078eaf9a9bb5ba631 Sam Lee <sam@example.com> 1767226200 +0000\tcommit: Add pancakes"
+          ],
+          "refs/heads/main": [
+            "0000000000000000000000000000000000000000 335fc8514923a917f7f046fbd28bc7477cf170fa Sam Lee <sam@example.com> 1767226020 +0000\tcommit (initial): First recipe page",
+            "335fc8514923a917f7f046fbd28bc7477cf170fa 137cbe594ef8fe5cde3fd20078eaf9a9bb5ba631 Sam Lee <sam@example.com> 1767226200 +0000\tcommit: Add pancakes"
+          ]
+        },
+        "refs": {
+          "refs/heads/main": "137cbe594ef8fe5cde3fd20078eaf9a9bb5ba631"
+        }
+      }
+    }
+  },
+  "git": "2.45.1.windows.1",
+  "script": {
+    "steps": [
+      "git init -q",
+      "git diff",
+      "git diff --staged",
+      "git diff HEAD",
+      "git add .",
+      "git diff --staged",
+      "git diff --cached --name-only",
+      "git commit -q -m \"First recipe page\"",
+      "echo '<p>Pancakes</p>' >> index.html",
+      "git add index.html",
+      "git commit -q -m \"Add pancakes\"",
+      "echo '<p>Waffles</p>' >> index.html",
+      "echo 'buy eggs' >> notes/todo.txt",
+      "git diff",
+      "git add notes/todo.txt",
+      "git diff",
+      "git diff --staged",
+      "git diff HEAD",
+      "git diff HEAD~1",
+      "git diff HEAD~1 HEAD",
+      "git diff HEAD HEAD~1",
+      "git diff HEAD~1 HEAD --name-only",
+      "git diff HEAD --stat",
+      "git diff --staged HEAD~1",
+      "git diff -- notes",
+      "git diff HEAD -- index.html",
+      "git diff index.html",
+      "git diff nope",
+      "git diff HEAD~5",
+      "git diff nope --",
+      "cd notes",
+      "git diff",
+      "git diff --name-only",
+      "git diff HEAD -- .",
+      "git diff -- ../index.html",
+      "cd ..",
+      "git diff HEAD~1 HEAD index.html",
+      "git diff --name-only --stat"
+    ],
+    "world": {
+      "cwd": "project",
+      "files": {
+        "project/index.html": "<h1>Recipes</h1>\n",
+        "project/notes/todo.txt": "buy flour\n"
+      }
+    }
+  },
+  "steps": [
+    {
+      "cmd": "git init -q",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git diff",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git diff --staged",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git diff HEAD",
+      "cwd": "/home/you/project",
+      "exitCode": 128,
+      "stderr": "fatal: ambiguous argument 'HEAD': unknown revision or path not in the working tree.\nUse '--' to separate paths from revisions, like this:\n'git <command> [<revision>...] -- [<file>...]'\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git add .",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git diff --staged",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "diff --git a/index.html b/index.html\nnew file mode 100644\nindex 0000000..5ab67a1\n--- /dev/null\n+++ b/index.html\n@@ -0,0 +1 @@\n+<h1>Recipes</h1>\ndiff --git a/notes/todo.txt b/notes/todo.txt\nnew file mode 100644\nindex 0000000..9707713\n--- /dev/null\n+++ b/notes/todo.txt\n@@ -0,0 +1 @@\n+buy flour\n"
+    },
+    {
+      "cmd": "git diff --cached --name-only",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "index.html\nnotes/todo.txt\n"
+    },
+    {
+      "cmd": "git commit -q -m \"First recipe page\"",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "echo '<p>Pancakes</p>' >> index.html",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git add index.html",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git commit -q -m \"Add pancakes\"",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "echo '<p>Waffles</p>' >> index.html",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "echo 'buy eggs' >> notes/todo.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git diff",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "diff --git a/index.html b/index.html\nindex 2a8b173..35ff26e 100644\n--- a/index.html\n+++ b/index.html\n@@ -1,2 +1,3 @@\n <h1>Recipes</h1>\n <p>Pancakes</p>\n+<p>Waffles</p>\ndiff --git a/notes/todo.txt b/notes/todo.txt\nindex 9707713..228a727 100644\n--- a/notes/todo.txt\n+++ b/notes/todo.txt\n@@ -1 +1,2 @@\n buy flour\n+buy eggs\n"
+    },
+    {
+      "cmd": "git add notes/todo.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git diff",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "diff --git a/index.html b/index.html\nindex 2a8b173..35ff26e 100644\n--- a/index.html\n+++ b/index.html\n@@ -1,2 +1,3 @@\n <h1>Recipes</h1>\n <p>Pancakes</p>\n+<p>Waffles</p>\n"
+    },
+    {
+      "cmd": "git diff --staged",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "diff --git a/notes/todo.txt b/notes/todo.txt\nindex 9707713..228a727 100644\n--- a/notes/todo.txt\n+++ b/notes/todo.txt\n@@ -1 +1,2 @@\n buy flour\n+buy eggs\n"
+    },
+    {
+      "cmd": "git diff HEAD",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "diff --git a/index.html b/index.html\nindex 2a8b173..35ff26e 100644\n--- a/index.html\n+++ b/index.html\n@@ -1,2 +1,3 @@\n <h1>Recipes</h1>\n <p>Pancakes</p>\n+<p>Waffles</p>\ndiff --git a/notes/todo.txt b/notes/todo.txt\nindex 9707713..228a727 100644\n--- a/notes/todo.txt\n+++ b/notes/todo.txt\n@@ -1 +1,2 @@\n buy flour\n+buy eggs\n"
+    },
+    {
+      "cmd": "git diff HEAD~1",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "diff --git a/index.html b/index.html\nindex 5ab67a1..35ff26e 100644\n--- a/index.html\n+++ b/index.html\n@@ -1 +1,3 @@\n <h1>Recipes</h1>\n+<p>Pancakes</p>\n+<p>Waffles</p>\ndiff --git a/notes/todo.txt b/notes/todo.txt\nindex 9707713..228a727 100644\n--- a/notes/todo.txt\n+++ b/notes/todo.txt\n@@ -1 +1,2 @@\n buy flour\n+buy eggs\n"
+    },
+    {
+      "cmd": "git diff HEAD~1 HEAD",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "diff --git a/index.html b/index.html\nindex 5ab67a1..2a8b173 100644\n--- a/index.html\n+++ b/index.html\n@@ -1 +1,2 @@\n <h1>Recipes</h1>\n+<p>Pancakes</p>\n"
+    },
+    {
+      "cmd": "git diff HEAD HEAD~1",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "diff --git a/index.html b/index.html\nindex 2a8b173..5ab67a1 100644\n--- a/index.html\n+++ b/index.html\n@@ -1,2 +1 @@\n <h1>Recipes</h1>\n-<p>Pancakes</p>\n"
+    },
+    {
+      "cmd": "git diff HEAD~1 HEAD --name-only",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "index.html\n"
+    },
+    {
+      "cmd": "git diff HEAD --stat",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": " index.html     | 1 +\n notes/todo.txt | 1 +\n 2 files changed, 2 insertions(+)\n"
+    },
+    {
+      "cmd": "git diff --staged HEAD~1",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "diff --git a/index.html b/index.html\nindex 5ab67a1..2a8b173 100644\n--- a/index.html\n+++ b/index.html\n@@ -1 +1,2 @@\n <h1>Recipes</h1>\n+<p>Pancakes</p>\ndiff --git a/notes/todo.txt b/notes/todo.txt\nindex 9707713..228a727 100644\n--- a/notes/todo.txt\n+++ b/notes/todo.txt\n@@ -1 +1,2 @@\n buy flour\n+buy eggs\n"
+    },
+    {
+      "cmd": "git diff -- notes",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git diff HEAD -- index.html",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "diff --git a/index.html b/index.html\nindex 2a8b173..35ff26e 100644\n--- a/index.html\n+++ b/index.html\n@@ -1,2 +1,3 @@\n <h1>Recipes</h1>\n <p>Pancakes</p>\n+<p>Waffles</p>\n"
+    },
+    {
+      "cmd": "git diff index.html",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "diff --git a/index.html b/index.html\nindex 2a8b173..35ff26e 100644\n--- a/index.html\n+++ b/index.html\n@@ -1,2 +1,3 @@\n <h1>Recipes</h1>\n <p>Pancakes</p>\n+<p>Waffles</p>\n"
+    },
+    {
+      "cmd": "git diff nope",
+      "cwd": "/home/you/project",
+      "exitCode": 128,
+      "stderr": "fatal: ambiguous argument 'nope': unknown revision or path not in the working tree.\nUse '--' to separate paths from revisions, like this:\n'git <command> [<revision>...] -- [<file>...]'\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git diff HEAD~5",
+      "cwd": "/home/you/project",
+      "exitCode": 128,
+      "stderr": "fatal: ambiguous argument 'HEAD~5': unknown revision or path not in the working tree.\nUse '--' to separate paths from revisions, like this:\n'git <command> [<revision>...] -- [<file>...]'\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git diff nope --",
+      "cwd": "/home/you/project",
+      "exitCode": 128,
+      "stderr": "fatal: bad revision 'nope'\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "cd notes",
+      "cwd": "/home/you/project/notes",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git diff",
+      "cwd": "/home/you/project/notes",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "diff --git a/index.html b/index.html\nindex 2a8b173..35ff26e 100644\n--- a/index.html\n+++ b/index.html\n@@ -1,2 +1,3 @@\n <h1>Recipes</h1>\n <p>Pancakes</p>\n+<p>Waffles</p>\n"
+    },
+    {
+      "cmd": "git diff --name-only",
+      "cwd": "/home/you/project/notes",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "index.html\n"
+    },
+    {
+      "cmd": "git diff HEAD -- .",
+      "cwd": "/home/you/project/notes",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "diff --git a/notes/todo.txt b/notes/todo.txt\nindex 9707713..228a727 100644\n--- a/notes/todo.txt\n+++ b/notes/todo.txt\n@@ -1 +1,2 @@\n buy flour\n+buy eggs\n"
+    },
+    {
+      "cmd": "git diff -- ../index.html",
+      "cwd": "/home/you/project/notes",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "diff --git a/index.html b/index.html\nindex 2a8b173..35ff26e 100644\n--- a/index.html\n+++ b/index.html\n@@ -1,2 +1,3 @@\n <h1>Recipes</h1>\n <p>Pancakes</p>\n+<p>Waffles</p>\n"
+    },
+    {
+      "cmd": "cd ..",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git diff HEAD~1 HEAD index.html",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "diff --git a/index.html b/index.html\nindex 5ab67a1..2a8b173 100644\n--- a/index.html\n+++ b/index.html\n@@ -1 +1,2 @@\n <h1>Recipes</h1>\n+<p>Pancakes</p>\n"
+    },
+    {
+      "cmd": "git diff --name-only --stat",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "index.html\n"
+    }
+  ]
+}

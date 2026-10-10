@@ -1,6 +1,9 @@
 import type { ParsedOptions } from "../cli/options";
+import { refuse, type CommandResult } from "../commands/registry";
 import { resolvePath } from "../files/paths";
+import { addMessages } from "../messages/add";
 import { revisionMessages as m } from "../messages/revisions";
+import { parsePathspecs, type Pathspec } from "../pathspec";
 import type { Machine, ObjectPool, Oid, Repo } from "../types";
 import { resolveRevision } from "./resolve";
 
@@ -59,4 +62,28 @@ export function revisionArgs(
     revisions.push({ text, oid: resolved.oid });
   }
   return { ok: true, revisions, paths: args.slice(revisionEnd) };
+}
+
+export type RevisionInput = {
+  readonly revisions: readonly { text: string; oid: Oid }[];
+  readonly specs: readonly Pathspec[];
+};
+
+/** Revisions and pathspecs for `diff`, `show` and `log`, or Git's refusal. */
+export function revisionInput(
+  pool: ObjectPool,
+  repo: Repo,
+  machine: Machine,
+  options: ParsedOptions,
+): RevisionInput | CommandResult {
+  const split = revisionArgs(pool, repo, machine, options);
+  if (!split.ok) return refuse("unknown-revision", split.stderr);
+  const parsed = parsePathspecs(split.paths, repo.workdir, machine.cwd);
+  if (!parsed.ok) {
+    return refuse(
+      "outside-repository",
+      addMessages.outside(parsed.outside, repo.workdir),
+    );
+  }
+  return { revisions: split.revisions, specs: parsed.specs };
 }

@@ -13,3 +13,6 @@ export const revisionMessages = {
   badObject: (arg: string) => `fatal: bad object ${arg}\n`,
   ambiguousId: (arg: string) => `error: short object ID ${arg} is ambiguous\n`,
 };
+
+export const noCommitsYet = (branch: string) =>
+  `fatal: your current branch '${branch}' does not have any commits yet\n`;

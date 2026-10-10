@@ -20,6 +20,8 @@ export const REFUSAL_GUIDE: Readonly<Record<RefusalCode, string>> = {
     "Git stops when a commit has no message. Add one with -m and a short sentence.",
   "unborn-branch":
     "This branch has no commits yet, so there is nothing to show. Make the first commit, then try again.",
+  "unknown-revision":
+    "Git found no commit and no file by that name. git log --oneline lists the commits you can name, and ls lists the files.",
   "outside-repository":
     "That path is outside this repository, so Git leaves it alone. Use a path inside the repository folder.",
   "shell-error":

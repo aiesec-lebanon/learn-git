@@ -1,0 +1,301 @@
+{
+  "final": {
+    "config": {
+      "global": [
+        [
+          "user.name",
+          "Sam Lee"
+        ],
+        [
+          "user.email",
+          "sam@example.com"
+        ],
+        [
+          "init.defaultbranch",
+          "main"
+        ]
+      ],
+      "system": []
+    },
+    "dirs": [
+      "project",
+      "project/sub"
+    ],
+    "files": {
+      "project/a.txt": "a\nc\n",
+      "project/sub/b.txt": "b\n"
+    },
+    "repos": {
+      "project": {
+        "config": [
+          [
+            "core.repositoryformatversion",
+            "0"
+          ],
+          [
+            "core.filemode",
+            "false"
+          ],
+          [
+            "core.bare",
+            "false"
+          ],
+          [
+            "core.logallrefupdates",
+            "true"
+          ],
+          [
+            "core.symlinks",
+            "false"
+          ],
+          [
+            "core.ignorecase",
+            "true"
+          ]
+        ],
+        "head": {
+          "ref": "refs/heads/main"
+        },
+        "index": [
+          {
+            "mode": "100644",
+            "oid": "0f7bc766052a5a0ee28a393d51d2370f96d8ceb8",
+            "path": "a.txt",
+            "stage": 0
+          },
+          {
+            "mode": "100644",
+            "oid": "61780798228d17af2d34fce4cfbdf35556832472",
+            "path": "sub/b.txt",
+            "stage": 0
+          }
+        ],
+        "objects": {
+          "092bf4201a1cbcb834e28f7f2febe27cef356b45": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "a.txt",
+                "oid": "0f7bc766052a5a0ee28a393d51d2370f96d8ceb8"
+              },
+              {
+                "mode": "40000",
+                "name": "sub",
+                "oid": "f8f7aefc2900a3d737cea9eee45729fd55761e1a"
+              }
+            ],
+            "type": "tree"
+          },
+          "0f7bc766052a5a0ee28a393d51d2370f96d8ceb8": {
+            "body": "a\nc\n",
+            "type": "blob"
+          },
+          "61780798228d17af2d34fce4cfbdf35556832472": {
+            "body": "b\n",
+            "type": "blob"
+          },
+          "78981922613b2afb6025042ff6bd878ac1994e85": {
+            "body": "a\n",
+            "type": "blob"
+          },
+          "972b5b8f25e6b64dc9a3033af8cb531ff783879a": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "a.txt",
+                "oid": "78981922613b2afb6025042ff6bd878ac1994e85"
+              },
+              {
+                "mode": "40000",
+                "name": "sub",
+                "oid": "f8f7aefc2900a3d737cea9eee45729fd55761e1a"
+              }
+            ],
+            "type": "tree"
+          },
+          "c1ccc4bf4c54d1c97a0d7addfccf2a16d29630ba": {
+            "body": "tree 972b5b8f25e6b64dc9a3033af8cb531ff783879a\nauthor Sam Lee <sam@example.com> 1767225780 +0000\ncommitter Sam Lee <sam@example.com> 1767225780 +0000\n\nFirst\n\nWith a body.\n",
+            "type": "commit"
+          },
+          "d88896ea8d1093f153c2b68b5c69878cc6f023c7": {
+            "body": "tree 092bf4201a1cbcb834e28f7f2febe27cef356b45\nparent c1ccc4bf4c54d1c97a0d7addfccf2a16d29630ba\nauthor Sam Lee <sam@example.com> 1767226020 +0000\ncommitter Sam Lee <sam@example.com> 1767226020 +0000\n\nSecond\n",
+            "type": "commit"
+          },
+          "f8f7aefc2900a3d737cea9eee45729fd55761e1a": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "b.txt",
+                "oid": "61780798228d17af2d34fce4cfbdf35556832472"
+              }
+            ],
+            "type": "tree"
+          }
+        },
+        "reflogs": {
+          "HEAD": [
+            "0000000000000000000000000000000000000000 c1ccc4bf4c54d1c97a0d7addfccf2a16d29630ba Sam Lee <sam@example.com> 1767225780 +0000\tcommit (initial): First",
+            "c1ccc4bf4c54d1c97a0d7addfccf2a16d29630ba d88896ea8d1093f153c2b68b5c69878cc6f023c7 Sam Lee <sam@example.com> 1767226020 +0000\tcommit: Second"
+          ],
+          "refs/heads/main": [
+            "0000000000000000000000000000000000000000 c1ccc4bf4c54d1c97a0d7addfccf2a16d29630ba Sam Lee <sam@example.com> 1767225780 +0000\tcommit (initial): First",
+            "c1ccc4bf4c54d1c97a0d7addfccf2a16d29630ba d88896ea8d1093f153c2b68b5c69878cc6f023c7 Sam Lee <sam@example.com> 1767226020 +0000\tcommit: Second"
+          ]
+        },
+        "refs": {
+          "refs/heads/main": "d88896ea8d1093f153c2b68b5c69878cc6f023c7"
+        }
+      }
+    }
+  },
+  "git": "2.45.1.windows.1",
+  "script": {
+    "steps": [
+      "git init -q",
+      "git show",
+      "git add .",
+      "git commit -q -m \"First\" -m \"With a body.\"",
+      "git show",
+      "echo c >> a.txt",
+      "git add a.txt",
+      "git commit -q -m \"Second\"",
+      "git show",
+      "git show HEAD~1",
+      "git show HEAD~1 HEAD",
+      "git show --stat",
+      "git show --name-only HEAD~1",
+      "git show --oneline",
+      "git show -- sub",
+      "git show nope",
+      "git show --no-patch"
+    ],
+    "world": {
+      "cwd": "project",
+      "files": {
+        "project/a.txt": "a\n",
+        "project/sub/b.txt": "b\n"
+      }
+    }
+  },
+  "steps": [
+    {
+      "cmd": "git init -q",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git show",
+      "cwd": "/home/you/project",
+      "exitCode": 128,
+      "stderr": "fatal: your current branch 'main' does not have any commits yet\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git add .",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git commit -q -m \"First\" -m \"With a body.\"",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git show",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "commit c1ccc4bf4c54d1c97a0d7addfccf2a16d29630ba (HEAD -> main)\nAuthor: Sam Lee <sam@example.com>\nDate:   Thu Jan 1 00:03:00 2026 +0000\n\n    First\n    \n    With a body.\n\ndiff --git a/a.txt b/a.txt\nnew file mode 100644\nindex 0000000..7898192\n--- /dev/null\n+++ b/a.txt\n@@ -0,0 +1 @@\n+a\ndiff --git a/sub/b.txt b/sub/b.txt\nnew file mode 100644\nindex 0000000..6178079\n--- /dev/null\n+++ b/sub/b.txt\n@@ -0,0 +1 @@\n+b\n"
+    },
+    {
+      "cmd": "echo c >> a.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git add a.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git commit -q -m \"Second\"",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git show",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "commit d88896ea8d1093f153c2b68b5c69878cc6f023c7 (HEAD -> main)\nAuthor: Sam Lee <sam@example.com>\nDate:   Thu Jan 1 00:07:00 2026 +0000\n\n    Second\n\ndiff --git a/a.txt b/a.txt\nindex 7898192..0f7bc76 100644\n--- a/a.txt\n+++ b/a.txt\n@@ -1 +1,2 @@\n a\n+c\n"
+    },
+    {
+      "cmd": "git show HEAD~1",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "commit c1ccc4bf4c54d1c97a0d7addfccf2a16d29630ba\nAuthor: Sam Lee <sam@example.com>\nDate:   Thu Jan 1 00:03:00 2026 +0000\n\n    First\n    \n    With a body.\n\ndiff --git a/a.txt b/a.txt\nnew file mode 100644\nindex 0000000..7898192\n--- /dev/null\n+++ b/a.txt\n@@ -0,0 +1 @@\n+a\ndiff --git a/sub/b.txt b/sub/b.txt\nnew file mode 100644\nindex 0000000..6178079\n--- /dev/null\n+++ b/sub/b.txt\n@@ -0,0 +1 @@\n+b\n"
+    },
+    {
+      "cmd": "git show HEAD~1 HEAD",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "commit c1ccc4bf4c54d1c97a0d7addfccf2a16d29630ba\nAuthor: Sam Lee <sam@example.com>\nDate:   Thu Jan 1 00:03:00 2026 +0000\n\n    First\n    \n    With a body.\n\ndiff --git a/a.txt b/a.txt\nnew file mode 100644\nindex 0000000..7898192\n--- /dev/null\n+++ b/a.txt\n@@ -0,0 +1 @@\n+a\ndiff --git a/sub/b.txt b/sub/b.txt\nnew file mode 100644\nindex 0000000..6178079\n--- /dev/null\n+++ b/sub/b.txt\n@@ -0,0 +1 @@\n+b\n\ncommit d88896ea8d1093f153c2b68b5c69878cc6f023c7 (HEAD -> main)\nAuthor: Sam Lee <sam@example.com>\nDate:   Thu Jan 1 00:07:00 2026 +0000\n\n    Second\n\ndiff --git a/a.txt b/a.txt\nindex 7898192..0f7bc76 100644\n--- a/a.txt\n+++ b/a.txt\n@@ -1 +1,2 @@\n a\n+c\n"
+    },
+    {
+      "cmd": "git show --stat",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "commit d88896ea8d1093f153c2b68b5c69878cc6f023c7 (HEAD -> main)\nAuthor: Sam Lee <sam@example.com>\nDate:   Thu Jan 1 00:07:00 2026 +0000\n\n    Second\n\n a.txt | 1 +\n 1 file changed, 1 insertion(+)\n"
+    },
+    {
+      "cmd": "git show --name-only HEAD~1",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "commit c1ccc4bf4c54d1c97a0d7addfccf2a16d29630ba\nAuthor: Sam Lee <sam@example.com>\nDate:   Thu Jan 1 00:03:00 2026 +0000\n\n    First\n    \n    With a body.\n\na.txt\nsub/b.txt\n"
+    },
+    {
+      "cmd": "git show --oneline",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "d88896e (HEAD -> main) Second\ndiff --git a/a.txt b/a.txt\nindex 7898192..0f7bc76 100644\n--- a/a.txt\n+++ b/a.txt\n@@ -1 +1,2 @@\n a\n+c\n"
+    },
+    {
+      "cmd": "git show -- sub",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git show nope",
+      "cwd": "/home/you/project",
+      "exitCode": 128,
+      "stderr": "fatal: ambiguous argument 'nope': unknown revision or path not in the working tree.\nUse '--' to separate paths from revisions, like this:\n'git <command> [<revision>...] -- [<file>...]'\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git show --no-patch",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "commit d88896ea8d1093f153c2b68b5c69878cc6f023c7 (HEAD -> main)\nAuthor: Sam Lee <sam@example.com>\nDate:   Thu Jan 1 00:07:00 2026 +0000\n\n    Second\n"
+    }
+  ]
+}

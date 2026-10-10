@@ -39,7 +39,7 @@ describe("git log", () => {
   });
 
   it.each([
-    ["git log --graph", "not simulated here: git log --graph\n"],
+    ["git log --all", "not simulated here: git log --all\n"],
     ["git log -p", "not simulated here: git log --patch\n"],
     ["git log main", "not simulated here: git log with revisions or paths\n"],
     [
@@ -48,6 +48,30 @@ describe("git log", () => {
     ],
   ])("%s", (line, out) => {
     expect(run(history(1), line).last?.output.stderr).toBe(out);
+  });
+
+  it("answers --graph and show for merges as not simulated", () => {
+    const world = history(2);
+    const repo = repoOf(world, ID);
+    const head = resolveHead(repo) as Oid;
+    const tip = world.objects.get(head) as Commit;
+    const merge: Commit = { ...tip, parents: [head, ...tip.parents] };
+    const { pool } = addObjects(world.objects, [merge]);
+    const merged = {
+      ...world,
+      objects: pool,
+      repos: new Map(world.repos).set(ID, {
+        ...repo,
+        head: { kind: "detached" as const, oid: hashObject(merge) },
+      }),
+    };
+    expect(run(merged, "git log --graph").last?.output.stderr).toBe(
+      "not simulated here: git log --graph with merges\n",
+    );
+    expect(run(merged, "git show").last?.output.stderr).toBe(
+      "not simulated here: git show for merge commits\n",
+    );
+    expect(run(merged, "git log --oneline -1").last?.output.exitCode).toBe(0);
   });
 
   it("decorates other branches, tags and a detached HEAD", () => {

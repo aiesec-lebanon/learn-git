@@ -1,0 +1,25 @@
+{
+  "world": {
+    "files": { "project/a.txt": "a\n", "project/sub/b.txt": "b\n" },
+    "cwd": "project"
+  },
+  "steps": [
+    "git init -q",
+    "git show",
+    "git add .",
+    "git commit -q -m \"First\" -m \"With a body.\"",
+    "git show",
+    "echo c >> a.txt",
+    "git add a.txt",
+    "git commit -q -m \"Second\"",
+    "git show",
+    "git show HEAD~1",
+    "git show HEAD~1 HEAD",
+    "git show --stat",
+    "git show --name-only HEAD~1",
+    "git show --oneline",
+    "git show -- sub",
+    "git show nope",
+    "git show --no-patch"
+  ]
+}

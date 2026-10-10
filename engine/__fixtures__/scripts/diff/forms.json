@@ -1,0 +1,49 @@
+{
+  "world": {
+    "files": {
+      "project/index.html": "<h1>Recipes</h1>\n",
+      "project/notes/todo.txt": "buy flour\n"
+    },
+    "cwd": "project"
+  },
+  "steps": [
+    "git init -q",
+    "git diff",
+    "git diff --staged",
+    "git diff HEAD",
+    "git add .",
+    "git diff --staged",
+    "git diff --cached --name-only",
+    "git commit -q -m \"First recipe page\"",
+    "echo '<p>Pancakes</p>' >> index.html",
+    "git add index.html",
+    "git commit -q -m \"Add pancakes\"",
+    "echo '<p>Waffles</p>' >> index.html",
+    "echo 'buy eggs' >> notes/todo.txt",
+    "git diff",
+    "git add notes/todo.txt",
+    "git diff",
+    "git diff --staged",
+    "git diff HEAD",
+    "git diff HEAD~1",
+    "git diff HEAD~1 HEAD",
+    "git diff HEAD HEAD~1",
+    "git diff HEAD~1 HEAD --name-only",
+    "git diff HEAD --stat",
+    "git diff --staged HEAD~1",
+    "git diff -- notes",
+    "git diff HEAD -- index.html",
+    "git diff index.html",
+    "git diff nope",
+    "git diff HEAD~5",
+    "git diff nope --",
+    "cd notes",
+    "git diff",
+    "git diff --name-only",
+    "git diff HEAD -- .",
+    "git diff -- ../index.html",
+    "cd ..",
+    "git diff HEAD~1 HEAD index.html",
+    "git diff --name-only --stat"
+  ]
+}

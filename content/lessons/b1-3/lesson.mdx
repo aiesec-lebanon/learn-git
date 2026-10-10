@@ -1,0 +1,41 @@
+<ColdOpen>
+  The soup page worked yesterday and looks wrong today. Three commits sit
+  between then and now. How do you read what each one recorded?
+</ColdOpen>
+
+<Beat id="chain" title="Three commits in a chain">
+  Each commit names its <Term>parent</Term>, the commit that came before it. The
+  arrows point from child to parent, the way Git stores them, so the newest
+  commit leads back through the whole history to the root commit.
+</Beat>
+
+<Beat id="log" title="git log walks the chain">
+  `git log` starts at the commit `HEAD` points to and follows parents backwards,
+  newest first. Each entry shows the full commit ID, the author, the date and
+  the message.
+</Beat>
+
+<Beat id="graph" title="One line per commit">
+  `git log --oneline --graph` prints the short ID and the subject of each
+  commit, with a `*` for every commit on the line it belongs to. With one branch
+  the graph is a straight line; it branches out in chapter B3.
+</Beat>
+
+<Beat id="show" title="git show opens a commit">
+  `git show` prints the newest commit and the changes it made. Git stores a full
+  snapshot in every commit, not the changes: it works out the diff by comparing
+  the snapshot with its parent's when you ask.
+</Beat>
+
+<Beat id="what-if" title="Change the past, change every ID">
+  A commit ID is a hash of everything in the commit, the parent's ID included.
+  Edit the first commit's message here and watch every later ID change. This is
+  a preview only: your history stays as it is.
+</Beat>
+
+<YourTurn />
+
+<Wrap commands={["git log", "git show"]}>
+  History is a chain of snapshots, each pointing to its parent. Change any old
+  commit and every commit after it gets a new ID.
+</Wrap>

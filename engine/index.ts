@@ -17,3 +17,8 @@ export { abbreviate } from "./objects/abbrev";
 export { subjectOf } from "./commit/message";
 export { shortRefName } from "./refs/names";
 export { resolveHead } from "./refs/refs";
+export { discoverRepo } from "./repo/discover";
+export { computeStatus } from "./status/compute";
+export { worktreeFiles } from "./files/worktree";
+export { machineOf } from "./world/access";
+export { LIMITS } from "./limits";

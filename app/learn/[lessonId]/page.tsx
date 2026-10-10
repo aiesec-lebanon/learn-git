@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import type { MDXContent } from "mdx/types";
+import type { ComponentProps } from "react";
 import { SCENES } from "@/content/lessons";
+import { playgroundHref } from "@/content/playground";
 import {
   CHAPTERS,
   lessonById,
@@ -12,6 +14,7 @@ import { lessonHref, trackHref } from "@/content/routes";
 import { YourTurn } from "@/features/checkpoint/your-turn";
 import { beatFrames } from "@/features/lesson/frames";
 import { LessonSandboxProvider } from "@/features/lesson/lesson-sandbox";
+import { Wrap } from "@/features/lesson/content";
 import { LessonScroller } from "@/features/lesson/scroller";
 import { CourseNav } from "@/features/site/course-nav";
 import { NAV_BACK } from "@/features/site/page-transition";
@@ -72,6 +75,12 @@ export default async function LessonPage({
           components={{
             ColdOpen: Nothing,
             Beat: Nothing,
+            Wrap: (props: ComponentProps<typeof Wrap>) => (
+              <Wrap
+                {...props}
+                playground={playgroundHref({ prompt: lesson.id })}
+              />
+            ),
             YourTurn: () => (
               <YourTurn
                 sessionKey={sessionKey}

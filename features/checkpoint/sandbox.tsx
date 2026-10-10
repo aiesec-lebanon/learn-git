@@ -32,9 +32,10 @@ export type Reached = {
 
 export type SandboxProps = {
   sessionKey: string;
-  reached: Reached;
   world: WorldSpec;
-  target: TargetSpec;
+  /** Without a target the sandbox is free play: nothing to reach. */
+  target?: TargetSpec;
+  reached?: Reached;
   /** A command typed before the sandbox loaded; it runs first. */
   queued: string | null;
   focus: boolean;
@@ -108,12 +109,14 @@ function Check({
   );
 }
 
-/** The live sandbox of a checkpoint; loaded only when the learner gets near it. */
+const NOTHING: Reached = {};
+
+/** The live sandbox of a checkpoint or the playground. */
 export function Sandbox({
   sessionKey,
-  reached,
   world,
   target,
+  reached = NOTHING,
   queued,
   focus,
 }: SandboxProps) {
@@ -122,7 +125,10 @@ export function Sandbox({
     [sessionKey, world],
   );
   const { world: now, history } = useSession(session);
-  const report = useMemo(() => match(now, target), [now, target]);
+  const report = useMemo(
+    () => (target ? match(now, target) : null),
+    [now, target],
+  );
   const { guide } = useProgress().prefs;
   const ran = useRef(false);
   useEffect(() => {
@@ -133,7 +139,11 @@ export function Sandbox({
   return (
     <div className="grid gap-6 lg:grid-cols-[minmax(0,1.3fr)_minmax(0,1fr)]">
       <div className="grid content-start gap-4">
-        <Guide session={session} verbosity={guide} achieved={report.ok} />
+        <Guide
+          session={session}
+          verbosity={guide}
+          achieved={report?.ok ?? false}
+        />
         <Stage session={session} />
       </div>
       <div className="grid content-start gap-4">
@@ -144,8 +154,12 @@ export function Sandbox({
           <CommandChips session={session} />
         </div>
         <Rewind session={session} />
-        <Check report={report} history={history} reached={reached} />
-        <TargetPanel target={target} />
+        {report && target ? (
+          <>
+            <Check report={report} history={history} reached={reached} />
+            <TargetPanel target={target} />
+          </>
+        ) : null}
         <WhatHappened session={session} />
         <EditorSheet session={session} />
       </div>

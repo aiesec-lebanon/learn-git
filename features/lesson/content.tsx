@@ -1,4 +1,6 @@
+import type { Route } from "next";
 import type { ReactNode } from "react";
+import { AppLink } from "@/ui/link";
 
 /** The opening situation and its question (learning design 1.5). */
 export function ColdOpen({ children }: { children: ReactNode }) {
@@ -42,9 +44,12 @@ export function Beat({
 /** The takeaway and the commands the lesson used. */
 export function Wrap({
   commands,
+  playground,
   children,
 }: {
   commands: readonly string[];
+  /** "Continue in playground" with this lesson's prompt. */
+  playground?: Route;
   children: ReactNode;
 }) {
   return (
@@ -63,6 +68,11 @@ export function Wrap({
           </li>
         ))}
       </ul>
+      {playground ? (
+        <p>
+          <AppLink href={playground}>Continue in playground</AppLink>
+        </p>
+      ) : null}
     </section>
   );
 }

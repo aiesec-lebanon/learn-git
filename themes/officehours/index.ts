@@ -1,5 +1,6 @@
 import type { ThemeCopy } from "../contract";
 
+export { Logo } from "./logo";
 export { pairs } from "./pairs";
 export { scale } from "./scale";
 export { tokens } from "./tokens";

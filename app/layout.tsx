@@ -1,4 +1,7 @@
 import type { Metadata } from "next";
+import { bootstrapScript } from "@/features/preferences/bootstrap";
+import { InlineScript } from "@/features/preferences/inline-script";
+import { ThemeController } from "@/features/preferences/theme-controller";
 import { fontClassName } from "@/themes/active-fonts";
 import "./globals.css";
 
@@ -11,8 +14,18 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${fontClassName} h-full antialiased`}>
-      <body className="min-h-full flex flex-col">{children}</body>
+    <html
+      lang="en"
+      className={`${fontClassName} h-full antialiased`}
+      suppressHydrationWarning
+    >
+      <head>
+        <InlineScript html={bootstrapScript} />
+      </head>
+      <body className="min-h-full flex flex-col">
+        <ThemeController />
+        {children}
+      </body>
     </html>
   );
 }

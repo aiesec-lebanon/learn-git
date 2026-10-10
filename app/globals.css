@@ -97,6 +97,23 @@
   --ease-stick: var(--curve-stick);
 }
 
+/* Reduced motion: the system setting or the learner's override (data-motion). */
+@media (prefers-reduced-motion: reduce) {
+  html:root {
+    --dur-1: 0s;
+    --dur-2: 0s;
+    --dur-3: 0s;
+    --dur-4: 0s;
+  }
+}
+
+html:root[data-motion="reduce"] {
+  --dur-1: 0s;
+  --dur-2: 0s;
+  --dur-3: 0s;
+  --dur-4: 0s;
+}
+
 @layer base {
   body {
     @apply bg-bg font-body text-base/[1.6] text-fg;

@@ -14,6 +14,8 @@ import {
 import { useAnnounce } from "@/features/announcer/announcer";
 import { CommandChips } from "@/features/chips/chips";
 import { Guide } from "@/features/guide/guide";
+import { progressStore } from "@/features/progress/progress";
+import type { ResumePointer } from "@/features/progress/schema";
 import { Rewind } from "@/features/stage/rewind";
 import { sessions } from "@/features/stage/session-registry";
 import { Stage } from "@/features/stage/stage";
@@ -25,6 +27,7 @@ import { TargetPanel } from "./target-panel";
 
 export type SandboxProps = {
   sessionKey: string;
+  resume: ResumePointer;
   world: WorldSpec;
   target: TargetSpec;
   /** A command typed before the sandbox loaded; it runs first. */
@@ -56,18 +59,22 @@ function YourPath({ history }: { history: readonly HistoryEntry[] }) {
 function Check({
   report,
   history,
+  resume,
 }: {
   report: MatchReport;
   history: readonly HistoryEntry[];
+  resume: ResumePointer;
 }) {
   const [open, setOpen] = useState(false);
   const say = useAnnounce();
   const was = useRef(report.ok);
   useEffect(() => {
-    if (report.ok && !was.current)
+    if (report.ok && !was.current) {
       say("Your repository now matches the target.");
+      progressStore().setResume(resume);
+    }
     was.current = report.ok;
-  }, [report.ok, say]);
+  }, [report.ok, say, resume]);
 
   if (report.ok)
     return (
@@ -97,6 +104,7 @@ function Check({
 /** The live sandbox of a checkpoint; loaded only when the learner gets near it. */
 export function Sandbox({
   sessionKey,
+  resume,
   world,
   target,
   queued,
@@ -128,7 +136,7 @@ export function Sandbox({
           <CommandChips session={session} />
         </div>
         <Rewind session={session} />
-        <Check report={report} history={history} />
+        <Check report={report} history={history} resume={resume} />
         <TargetPanel target={target} />
         <WhatHappened session={session} />
       </div>

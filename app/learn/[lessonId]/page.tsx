@@ -55,7 +55,7 @@ export default async function LessonPage({
           {lessonCode(lesson.id)} {lesson.title}
         </h1>
       </header>
-      <LessonScroller frames={beatFrames(scene)}>
+      <LessonScroller lessonId={lesson.id} frames={beatFrames(scene)}>
         <Prose components={{ YourTurn: Nothing, Wrap: Nothing }} />
       </LessonScroller>
       <Prose
@@ -66,6 +66,11 @@ export default async function LessonPage({
             <YourTurn
               sessionKey={`lesson:${lesson.id}`}
               checkpoint={scene.yourTurn}
+              resume={{
+                kind: "lesson",
+                id: lesson.id,
+                step: scene.beats.length,
+              }}
             />
           ),
         }}

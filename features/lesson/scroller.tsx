@@ -9,6 +9,7 @@ import {
   type ReactNode,
 } from "react";
 import { useMotion } from "@/features/motion/policy";
+import { progressStore } from "@/features/progress/progress";
 import type { StageFrame } from "@/features/stage/frame";
 import { StageView } from "@/features/stage/stage";
 import { Button } from "@/ui/button";
@@ -68,9 +69,11 @@ function Transcript({ lines }: { lines: readonly TranscriptLine[] }) {
  * beats become steps: one at a time, moved by Previous and Next.
  */
 export function LessonScroller({
+  lessonId,
   frames,
   children,
 }: {
+  lessonId: string;
   frames: readonly BeatFrame[];
   children: ReactNode;
 }) {
@@ -95,6 +98,28 @@ export function LessonScroller({
     focusPending.current = true;
     show(next);
   };
+
+  useEffect(() => {
+    const step = /^#step-(d+)$/.exec(location.hash)?.[1];
+    if (step === undefined) return;
+    const n = Number(step);
+    // A resume link (#step-n) opens the lesson at that beat, or at Your turn.
+    const id = requestAnimationFrame(() => {
+      if (n >= frames.length) document.getElementById("your-turn")?.focus();
+      else if (n > 0) {
+        focusPending.current = true;
+        setPosition(moveTo(frames, n));
+      }
+    });
+    return () => cancelAnimationFrame(id);
+  }, [frames]);
+
+  const visited = useRef(index);
+  useEffect(() => {
+    if (visited.current === index) return;
+    visited.current = index;
+    progressStore().setResume({ kind: "lesson", id: lessonId, step: index });
+  }, [lessonId, index]);
 
   useEffect(() => {
     const root = prose.current;

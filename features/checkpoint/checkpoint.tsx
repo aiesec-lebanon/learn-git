@@ -9,6 +9,7 @@ import {
   type FormEvent,
 } from "react";
 import type { TargetSpec, WorldSpec } from "@/engine";
+import type { ResumePointer } from "@/features/progress/schema";
 import type { StageFrame } from "@/features/stage/frame";
 import { StageView } from "@/features/stage/stage";
 import { onIdle } from "@/lib/idle";
@@ -17,6 +18,7 @@ import { TargetPanel } from "./target-panel";
 
 type Props = {
   sessionKey: string;
+  resume: ResumePointer;
   world: WorldSpec;
   target: TargetSpec;
   /** The start state, built on the server: the page shows it before the engine loads. */
@@ -77,7 +79,13 @@ type Loaded = { readonly Sandbox: ComponentType<SandboxProps> };
  * A Your turn checkpoint (X-06). The engine loads on the first pointer, key or
  * focus inside it, or when the browser is idle; a command typed before then waits.
  */
-export function Checkpoint({ sessionKey, world, target, start }: Props) {
+export function Checkpoint({
+  sessionKey,
+  resume,
+  world,
+  target,
+  start,
+}: Props) {
   const root = useRef<HTMLDivElement>(null);
   const [wanted, setWanted] = useState(false);
   const [loaded, setLoaded] = useState<Loaded | null>(null);
@@ -119,6 +127,7 @@ export function Checkpoint({ sessionKey, world, target, start }: Props) {
       {loaded ? (
         <loaded.Sandbox
           sessionKey={sessionKey}
+          resume={resume}
           world={world}
           target={target}
           queued={queued}

@@ -1,5 +1,7 @@
 import Link from "next/link";
+import { Suspense } from "react";
 import { lessonHref } from "@/content/routes";
+import { ContinueCard } from "@/features/progress/continue-card";
 import { copy } from "@/themes/active";
 import { buttonClass } from "@/ui/button";
 
@@ -13,6 +15,11 @@ export default function Home() {
         as it happens and explained in plain words, in a playground you
         can&apos;t break.
       </p>
+      <div className="mt-8 max-w-md empty:hidden">
+        <Suspense fallback={null}>
+          <ContinueCard />
+        </Suspense>
+      </div>
       <div className="mt-8 flex flex-wrap gap-3">
         <Link href={lessonHref("b1-1")} className={buttonClass("primary")}>
           New to Git? Start here

@@ -11,7 +11,7 @@ export const REFUSAL_GUIDE: Readonly<Record<RefusalCode, string>> = {
   "not-a-repository":
     "This folder isn't a repository, so Git has nowhere to look. Run git init here, or cd into a repository.",
   "identity-unknown":
-    "Every commit records an author, and Git doesn't know yours yet. Set user.name and user.email with git config, then commit again.",
+    "Every commit records an author, and Git doesn't know yours yet. Set it with git config set --global user.name and user.email, then commit again.",
   "pathspec-no-match":
     "No file here matches that path. ls lists the files in this folder.",
   "nothing-to-commit":

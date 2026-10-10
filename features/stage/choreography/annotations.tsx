@@ -29,7 +29,9 @@ export function annotate(
           out.push(
             c.change === "deleted"
               ? `${c.path}: out of the staging area`
-              : `${c.path} → staging area`,
+              : e.from === "worktree"
+                ? `${c.path}: copied into the staging area`
+                : `${c.path} → staging area`,
           );
         break;
       case "object-written":

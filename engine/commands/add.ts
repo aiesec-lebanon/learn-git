@@ -108,7 +108,12 @@ export const add = defineCommand({
     const written = writeObjects(world, repo.id, blobs);
     const effects: Effect[] = [...written.effects];
     if (changes.length)
-      effects.push({ kind: "index-changed", repo: repo.id, changes });
+      effects.push({
+        kind: "index-changed",
+        repo: repo.id,
+        from: "worktree",
+        changes,
+      });
     return { world: withRepo(written.world, { ...repo, index }), effects };
   },
 });

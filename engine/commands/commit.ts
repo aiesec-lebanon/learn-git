@@ -206,6 +206,7 @@ export const commit = defineCommand({
       effects.push({
         kind: "index-changed",
         repo: repo.id,
+        from: "worktree",
         changes: prepared.changes,
       });
     }

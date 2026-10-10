@@ -1,7 +1,29 @@
+import type { Point } from "@/features/graph/layout";
 import type { ChoreoStep } from "./plan";
 
-function keyframes(step: ChoreoStep): Keyframe[] {
+/** Where `from` sits relative to `el`, so a copy can start there. */
+function offsetFrom(root: ParentNode, el: Element, from?: string) {
+  const source = from
+    ? root.querySelector(`[data-choreo="${CSS.escape(from)}"]`)
+    : null;
+  if (!source) return null;
+  const a = source.getBoundingClientRect();
+  const b = el.getBoundingClientRect();
+  return { x: a.left - b.left, y: a.top - b.top };
+}
+
+function keyframes(step: ChoreoStep, offset: Point | null): Keyframe[] {
   switch (step.kind) {
+    case "copy":
+      return offset
+        ? [
+            {
+              opacity: 0.5,
+              transform: `translate(${offset.x}px, ${offset.y}px)`,
+            },
+            { opacity: 1, transform: "none" },
+          ]
+        : keyframes({ ...step, kind: "enter" }, null);
     case "enter":
       return [
         { opacity: 0, transform: "scale(0.85)" },
@@ -46,7 +68,7 @@ export function playChoreography(
     const el = root.querySelector(`[data-choreo="${CSS.escape(step.key)}"]`);
     if (!el) continue;
     animations.push(
-      el.animate(keyframes(step), {
+      el.animate(keyframes(step, offsetFrom(root, el, step.from)), {
         delay: step.delay,
         duration: step.duration,
         easing: step.easing,

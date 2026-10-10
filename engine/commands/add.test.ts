@@ -26,6 +26,7 @@ describe("git add", () => {
       {
         kind: "index-changed",
         repo: "you:/home/you/p",
+        from: "worktree",
         changes: [{ path: "a.txt", change: "added" }],
       },
     ]);

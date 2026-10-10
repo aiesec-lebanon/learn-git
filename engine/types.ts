@@ -165,6 +165,8 @@ export type Effect =
   | {
       readonly kind: "index-changed";
       readonly repo: RepoId;
+      /** Where the new entries were copied from. */
+      readonly from: "worktree" | "commit";
       readonly changes: readonly PathChange[];
     }
   | {

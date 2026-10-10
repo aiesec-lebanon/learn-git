@@ -13,6 +13,8 @@ export type FileState =
 export type FileCard = {
   readonly path: string;
   readonly state: FileState | null;
+  /** Staged, then edited again: the staging area and the working tree hold different versions. */
+  readonly split?: true;
 };
 
 export type StageFiles = {
@@ -56,6 +58,10 @@ export function stageFiles(world: World): StageFiles {
     status.staged.map((c) => [c.path, c.kind]),
   );
   const untracked = new Set<string>(status.untracked);
+  const split = (path: string) =>
+    staged.has(path) && unstaged.get(path) === "modified"
+      ? { split: true as const }
+      : {};
 
   const worktree: FileCard[] = [...files.keys()].map((path) => ({
     path,
@@ -66,6 +72,7 @@ export function stageFiles(world: World): StageFiles {
         : unstaged.has(path)
           ? "modified"
           : "unmodified",
+    ...split(path),
   }));
   for (const [path, kind] of unstaged) {
     if (kind === "deleted") worktree.push({ path, state: "deleted" });
@@ -81,6 +88,7 @@ export function stageFiles(world: World): StageFiles {
           : kind === "modified"
             ? "modified"
             : "unmodified",
+      ...split(path),
     };
   });
   for (const [path, kind] of staged) {

@@ -5,7 +5,9 @@ import type { MotionTokens } from "@/features/motion/policy";
 export type ChoreoStep = {
   /** `commit:<oid>`, `edge:<child>:<parent>`, `label:<ref>`, `label:HEAD`, `file:<area>:<path>`. */
   readonly key: string;
-  readonly kind: "enter" | "move" | "pulse";
+  readonly kind: "enter" | "move" | "pulse" | "copy";
+  /** For a copy: the key of the element it is copied from. */
+  readonly from?: string;
   /** For a move: where the element was, relative to where it is now (FLIP). */
   readonly offset?: Point;
   readonly delay: number;
@@ -83,7 +85,17 @@ export function planChoreography(
     } else if (e.kind === "index-changed") {
       for (const c of e.changes) {
         const step = fileStep("index", c.path, c.change, motion);
-        if (step) phases[1]?.push(step);
+        if (!step) continue;
+        phases[1]?.push(
+          e.from === "worktree"
+            ? {
+                ...step,
+                kind: "copy",
+                from: `file:worktree:${c.path}`,
+                duration: motion.draw,
+              }
+            : step,
+        );
       }
     } else if (e.kind === "object-written" && e.type === "commit") {
       if (!here(e.oid, after)) continue;

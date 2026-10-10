@@ -1,14 +1,6 @@
-import type { Locator, Page } from "@playwright/test";
 import { expect, test } from "./fixtures";
 import { confirmation, terminal, YOUR_TURN } from "./b1-1";
-
-async function tabTo(page: Page, target: Locator, limit = 80) {
-  for (let i = 0; i < limit; i++) {
-    if (await target.evaluate((el) => el === document.activeElement)) return;
-    await page.keyboard.press("Tab");
-  }
-  throw new Error("Tab never reached the target");
-}
+import { tabTo } from "./keys";
 
 test("B1.1 can be finished by keyboard alone", async ({ page }) => {
   await page.goto("/");

@@ -149,6 +149,7 @@ describe("narrate", () => {
       {
         kind: "index-changed",
         repo: REPO,
+        from: "worktree",
         changes: [{ path: "a.txt", change: "deleted" }],
       },
       { kind: "screen-cleared" },

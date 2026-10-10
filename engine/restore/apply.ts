@@ -80,7 +80,12 @@ export function applyRestore(
       }
     }
     if (changes.length)
-      effects.push({ kind: "index-changed", repo: repo.id, changes });
+      effects.push({
+        kind: "index-changed",
+        repo: repo.id,
+        from: "commit",
+        changes,
+      });
   }
   let fs = machine.fs;
   if (plan.worktree) {

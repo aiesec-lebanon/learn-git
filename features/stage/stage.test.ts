@@ -66,4 +66,21 @@ describe("stageFiles", () => {
       { path: "b.txt", state: "deleted" },
     ]);
   });
+
+  it("marks a file staged and then edited again as split", () => {
+    const files = run(
+      "git init && git add . && git commit -m one",
+      "echo x >> a.txt; git add a.txt; echo y >> a.txt",
+    );
+    expect(files.worktree[0]).toEqual({
+      path: "a.txt",
+      state: "modified",
+      split: true,
+    });
+    expect(files.index?.[0]).toEqual({
+      path: "a.txt",
+      state: "modified",
+      split: true,
+    });
+  });
 });

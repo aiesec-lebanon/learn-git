@@ -58,6 +58,11 @@ export function FileCard({
         <bdi>{file.path}</bdi>
       </code>
       {file.state ? <FileStateChip state={file.state} /> : null}
+      {file.split ? (
+        <span className="shrink-0 rounded-xs bg-hl px-1.5 text-xs font-semibold text-fg">
+          {area === "index" ? "older than your file" : "newer than staged"}
+        </span>
+      ) : null}
     </li>
   );
 }

@@ -11,7 +11,7 @@ import {
 import type { TargetSpec, WorldSpec } from "@/engine";
 import type { Hints, ScenarioScene } from "@/content/define";
 import type { StageFrame } from "@/features/stage/frame";
-import { StageView } from "@/features/stage/stage";
+import { StageView } from "@/features/stage/stage-view";
 import { onIdle } from "@/lib/idle";
 import type { Reached, SandboxProps } from "./sandbox";
 import { TargetPanel } from "./target-panel";

@@ -6,7 +6,7 @@ import type { Session } from "@/engine";
 import { CommitGraph } from "@/features/graph/graph";
 import { commitTarget, splitTarget } from "@/features/graph/drag/targets";
 import { useSandboxView } from "@/features/graph/use-sandbox-view";
-import { useLessonSession } from "@/features/lesson/lesson-sandbox";
+import { useLessonSession } from "@/features/lesson/lesson-session";
 import { useProgress } from "@/features/progress/progress";
 import { Button } from "@/ui/button";
 import {

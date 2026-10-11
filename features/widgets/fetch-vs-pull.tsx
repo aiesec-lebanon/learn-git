@@ -3,7 +3,7 @@
 import { useMemo, useState } from "react";
 import type { Session } from "@/engine";
 import { CommitGraph, graphLayout } from "@/features/graph/graph";
-import { useLessonSession } from "@/features/lesson/lesson-sandbox";
+import { useLessonSession } from "@/features/lesson/lesson-session";
 import { useSession } from "@/features/stage/use-session";
 import { Button } from "@/ui/button";
 import {

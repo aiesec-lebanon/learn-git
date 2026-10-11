@@ -2,7 +2,7 @@
 
 import { useId, useMemo, useState } from "react";
 import type { Session } from "@/engine";
-import { useLessonSession } from "@/features/lesson/lesson-sandbox";
+import { useLessonSession } from "@/features/lesson/lesson-session";
 import { useSession } from "@/features/stage/use-session";
 import {
   diffLines,

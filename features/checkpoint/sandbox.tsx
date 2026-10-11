@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { lazy, Suspense, useEffect, useMemo, useRef, useState } from "react";
 import {
   countPar,
   match,
@@ -20,7 +20,6 @@ import { HintLadder } from "@/features/guide/hint-ladder";
 import { StageAndHub } from "@/features/hub/hub-and-stage";
 import { progressStore, useProgress } from "@/features/progress/progress";
 import type { ResumePointer } from "@/features/progress/schema";
-import { ReferenceSheet } from "@/features/reference/reference-sheet";
 import { ScenarioPanel } from "@/features/scenario/scenario-panel";
 import { useActsReached } from "@/features/scenario/use-acts";
 import { useSoundCues } from "@/features/sound/service";
@@ -109,6 +108,12 @@ function Check({
   );
 }
 
+const ReferenceSheet = lazy(() =>
+  import("@/features/reference/reference-sheet").then((m) => ({
+    default: m.ReferenceSheet,
+  })),
+);
+
 const NOTHING: Reached = {};
 
 /** The live sandbox of a checkpoint or the playground. */
@@ -127,7 +132,9 @@ export function Sandbox({
     () => sandboxFor(sessionKey, world),
     [sessionKey, world],
   );
-  const { world: now, history } = useSession(session);
+  const { world: now, history, pending } = useSession(session);
+  const [sheet, setSheet] = useState(false);
+  if (!sheet && pending?.kind === "open-reference") setSheet(true);
   const report = useMemo(
     () => (target ? match(now, target) : null),
     [now, target],
@@ -180,7 +187,11 @@ export function Sandbox({
         ) : null}
         <WhatHappened session={session} />
         <EditorSheet session={session} />
-        <ReferenceSheet session={session} />
+        {sheet ? (
+          <Suspense fallback={null}>
+            <ReferenceSheet session={session} />
+          </Suspense>
+        ) : null}
       </div>
       {challenge && report?.ok ? (
         <div className="lg:col-span-2">

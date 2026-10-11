@@ -66,7 +66,7 @@ Rules: AIESEC blue is 3.98:1 on white, so it is used only where 3:1 suffices (gr
 | `text-sm`      | JetBrains Mono 500 | 14 px               | Commands and hashes, never handwritten |
 | `text-xs`      | Shantell Sans 600  | 12 px               | Notes in the margin                    |
 
-Fonts are self-hosted with `next/font` (Latin subset, `swap`; only Shantell Sans is preloaded, with its Informal axis). Shantell Sans writes the board (titles, notes, Nib's lines), Figtree sets everything read at length, JetBrains Mono sets every command and hash: nothing a learner might type is handwritten. All three use the SIL Open Font License.
+Fonts are self-hosted with `next/font` (Latin subset, `swap`; only Shantell Sans is preloaded; weight axes only, which keeps the three families under 150 KB). Shantell Sans writes the board (titles, notes, Nib's lines), Figtree sets everything read at length, JetBrains Mono sets every command and hash: nothing a learner might type is handwritten. All three use the SIL Open Font License.
 
 ## Spacing, radii, elevation
 

@@ -4,7 +4,7 @@ import { useMemo, useState } from "react";
 import type { Oid, Session } from "@/engine";
 import { CommitGraph, graphLayout } from "@/features/graph/graph";
 import { useSandboxView } from "@/features/graph/use-sandbox-view";
-import { useLessonSession } from "@/features/lesson/lesson-sandbox";
+import { useLessonSession } from "@/features/lesson/lesson-session";
 import { hubSide, twoRootsView } from "./hub-split.model";
 
 const row =

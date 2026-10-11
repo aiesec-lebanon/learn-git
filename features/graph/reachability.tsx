@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import type { Session } from "@/engine";
-import { useLessonSession } from "@/features/lesson/lesson-sandbox";
+import { useLessonSession } from "@/features/lesson/lesson-session";
 import { CommitGraph } from "./graph";
 import { reachedFrom } from "./reach";
 import { useSandboxView } from "./use-sandbox-view";

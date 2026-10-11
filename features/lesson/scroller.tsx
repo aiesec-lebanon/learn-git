@@ -11,9 +11,9 @@ import {
 import { useMotion } from "@/features/motion/policy";
 import { progressStore } from "@/features/progress/progress";
 import type { StageFrame } from "@/features/stage/frame";
-import { StageView } from "@/features/stage/stage";
+import { StageView } from "@/features/stage/stage-view";
 import { Button } from "@/ui/button";
-import { beatHeadingId } from "./content";
+import { beatHeadingId } from "./beat-id";
 import { Transcript } from "@/features/stage/transcript";
 import type { BeatFrame } from "./frames";
 

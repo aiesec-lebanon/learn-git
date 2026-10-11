@@ -2,7 +2,7 @@
 
 import { useMemo } from "react";
 import type { Session } from "@/engine";
-import { useLessonSession } from "@/features/lesson/lesson-sandbox";
+import { useLessonSession } from "@/features/lesson/lesson-session";
 import { FileStateChip } from "@/features/stage/file-card";
 import { stageFiles } from "@/features/stage/files";
 import { useSession } from "@/features/stage/use-session";

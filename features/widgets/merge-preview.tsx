@@ -5,7 +5,7 @@ import { previewMerge, shellQuote, type Session, type World } from "@/engine";
 import { CommitGraph } from "@/features/graph/graph";
 import { useSandboxView } from "@/features/graph/use-sandbox-view";
 import type { RepoView } from "@/features/graph/view-model";
-import { useLessonSession } from "@/features/lesson/lesson-sandbox";
+import { useLessonSession } from "@/features/lesson/lesson-session";
 import { broughtIn, outcomeText, type MergeNames } from "./merge-preview.model";
 
 export const chip =

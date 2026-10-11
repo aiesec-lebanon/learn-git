@@ -3,6 +3,7 @@ import type { ReactNode } from "react";
 import { referenceById } from "@/content/reference/registry";
 import { referenceHref } from "@/content/routes";
 import { AppLink } from "@/ui/link";
+import { beatHeadingId } from "./beat-id";
 
 /** The opening situation and its question (learning design 1.5). */
 export function ColdOpen({ children }: { children: ReactNode }) {
@@ -12,8 +13,6 @@ export function ColdOpen({ children }: { children: ReactNode }) {
     </div>
   );
 }
-
-export const beatHeadingId = (id: string) => `beat-${id}`;
 
 /** One story beat; the scroller finds it by `data-beat` and focuses its heading. */
 export function Beat({

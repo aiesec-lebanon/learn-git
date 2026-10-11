@@ -4,7 +4,7 @@ import type { Session } from "@/engine";
 import { CommitGraph } from "@/features/graph/graph";
 import { lostIfLeaving } from "@/features/graph/reach";
 import { useSandboxView } from "@/features/graph/use-sandbox-view";
-import { useLessonSession } from "@/features/lesson/lesson-sandbox";
+import { useLessonSession } from "@/features/lesson/lesson-session";
 
 /** While HEAD is detached: the commits that become unreachable if you leave now (B3.3). */
 export function LeavePreview() {

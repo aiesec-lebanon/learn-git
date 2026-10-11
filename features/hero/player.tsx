@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { useMotion } from "@/features/motion/policy";
-import { StageView } from "@/features/stage/stage";
+import { StageView } from "@/features/stage/stage-view";
 import { Hero } from "@/themes/active";
 import { Button } from "@/ui/button";
 import type { HeroFrame } from "./film";

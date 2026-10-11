@@ -3,7 +3,7 @@
 import { useState } from "react";
 import type { FilePreview, Session } from "@/engine";
 import { useSandboxView } from "@/features/graph/use-sandbox-view";
-import { useLessonSession } from "@/features/lesson/lesson-sandbox";
+import { useLessonSession } from "@/features/lesson/lesson-session";
 import {
   BranchChips,
   mergeCandidates,

@@ -3,7 +3,7 @@
 import { useId, useState } from "react";
 import type { Session } from "@/engine";
 import { useSandboxView } from "@/features/graph/use-sandbox-view";
-import { useLessonSession } from "@/features/lesson/lesson-sandbox";
+import { useLessonSession } from "@/features/lesson/lesson-session";
 import { cx } from "@/lib/cx";
 import {
   linkLines,

@@ -3,7 +3,7 @@
 import { useId, useMemo, useRef, useState, type KeyboardEvent } from "react";
 import type { Session } from "@/engine";
 import { useAnnounce } from "@/features/announcer/announcer";
-import { useLessonSession } from "@/features/lesson/lesson-sandbox";
+import { useLessonSession } from "@/features/lesson/lesson-session";
 import { FileStateChip } from "@/features/stage/file-card";
 import { stageFiles } from "@/features/stage/files";
 import {

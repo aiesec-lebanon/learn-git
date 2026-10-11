@@ -2,7 +2,7 @@
 
 import { useId, useState } from "react";
 import type { StageFrame } from "@/features/stage/frame";
-import { StageView } from "@/features/stage/stage";
+import { StageView } from "@/features/stage/stage-view";
 import type { PathStep } from "./model";
 
 function Path({

@@ -5,7 +5,7 @@ import type { Session } from "@/engine";
 import { CommitGraph } from "@/features/graph/graph";
 import { lostIfDeleted } from "@/features/graph/reach";
 import { useSandboxView } from "@/features/graph/use-sandbox-view";
-import { useLessonSession } from "@/features/lesson/lesson-sandbox";
+import { useLessonSession } from "@/features/lesson/lesson-session";
 
 const chip =
   "inline-flex min-h-11 items-center rounded-sm border-2 border-line-strong bg-surface px-3 font-mono text-sm aria-pressed:border-accent aria-pressed:bg-accent-soft";

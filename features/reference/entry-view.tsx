@@ -4,7 +4,7 @@ import { useId, useMemo, useState, type ReactNode } from "react";
 import type { World } from "@/engine";
 import type { Step } from "@/content/define";
 import { useMotion } from "@/features/motion/policy";
-import { StageView } from "@/features/stage/stage";
+import { StageView } from "@/features/stage/stage-view";
 import { Transcript } from "@/features/stage/transcript";
 import { Button } from "@/ui/button";
 import type { ReferenceFrame } from "./frames";

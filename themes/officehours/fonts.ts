@@ -3,7 +3,6 @@ import { Figtree, JetBrains_Mono, Shantell_Sans } from "next/font/google";
 const display = Shantell_Sans({
   subsets: ["latin"],
   display: "swap",
-  axes: ["INFM"],
   variable: "--family-display",
 });
 

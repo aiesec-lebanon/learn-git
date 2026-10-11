@@ -1,14 +1,17 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { lazy, Suspense, useRef, useState } from "react";
 import type { Session } from "@/engine";
 import type { Hints } from "@/content/define";
 import { useSession } from "@/features/stage/use-session";
-import { referenceById } from "@/content/reference/registry";
-import { referenceHref } from "@/content/routes";
 import { Button } from "@/ui/button";
-import { AppLink } from "@/ui/link";
 import { HINT_LABELS, HINT_STEPS, nudgeDue } from "./hints";
+
+const ReferenceLink = lazy(() =>
+  import("@/features/reference/reference-link").then((m) => ({
+    default: m.ReferenceLink,
+  })),
+);
 
 type Offer = "waiting" | "open" | "closed";
 
@@ -71,11 +74,9 @@ export function HintLadder({
                 {step === "pointer" && hints.reference ? (
                   <>
                     {" "}
-                    <AppLink href={referenceHref(hints.reference)}>
-                      Reference:{" "}
-                      {referenceById(hints.reference)?.title ??
-                        `git ${hints.reference}`}
-                    </AppLink>
+                    <Suspense fallback={null}>
+                      <ReferenceLink id={hints.reference} />
+                    </Suspense>
                   </>
                 ) : null}
               </dd>

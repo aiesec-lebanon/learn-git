@@ -4,7 +4,7 @@ import { useState } from "react";
 import type { Oid, Session } from "@/engine";
 import { CommitGraph } from "@/features/graph/graph";
 import { useSandboxView } from "@/features/graph/use-sandbox-view";
-import { useLessonSession } from "@/features/lesson/lesson-sandbox";
+import { useLessonSession } from "@/features/lesson/lesson-session";
 import { parentLines } from "./three-way-view.model";
 
 /** Point at or focus a commit to list its parents in order; HEAD's by default (B4.2). */

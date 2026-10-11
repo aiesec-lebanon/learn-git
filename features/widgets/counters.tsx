@@ -1,7 +1,7 @@
 "use client";
 
 import type { Session } from "@/engine";
-import { useLessonSession } from "@/features/lesson/lesson-sandbox";
+import { useLessonSession } from "@/features/lesson/lesson-session";
 import { useSession } from "@/features/stage/use-session";
 import { branchCounters, type CommitLine } from "./counters.model";
 

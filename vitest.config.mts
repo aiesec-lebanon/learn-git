@@ -37,7 +37,7 @@ export default defineConfig({
         lines: 90,
         branches: 90,
         ...Object.fromEntries(
-          ["objects", "cli", "diff", "matcher"].map((dir) => [
+          ["objects", "cli", "diff", "matcher", "merge"].map((dir) => [
             `engine/${dir}/**`,
             { lines: 95, branches: 90 },
           ]),

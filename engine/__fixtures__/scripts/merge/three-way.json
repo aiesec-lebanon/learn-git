@@ -1,0 +1,46 @@
+{
+  "world": {
+    "files": {
+      "project/a.txt": "1\n2\n3\n4\n5\n6\n7\n8\n",
+      "project/b.txt": "b\n",
+      "project/c.txt": "c\n",
+      "v/a-main.txt": "1\nA\n3\n4\n5\n6\n7\n8\n",
+      "v/a-topic.txt": "1\n2\n3\n4\n5\n6\nB\n8\n"
+    },
+    "cwd": "project"
+  },
+  "steps": [
+    "git init -q",
+    "git add .",
+    "git commit -q -m \"Base\"",
+    "git switch -q -c topic",
+    "cat ../v/a-topic.txt > a.txt",
+    "echo t >> b.txt",
+    "echo n > new.txt",
+    "git add .",
+    "git commit -q -m \"Topic\"",
+    "git rm -q c.txt",
+    "git commit -q -m \"Drop c\"",
+    "git switch -q main",
+    "cat ../v/a-main.txt > a.txt",
+    "echo m > main.txt",
+    "git add .",
+    "git commit -q -m \"Main\"",
+    "echo x >> b.txt",
+    "git merge topic",
+    "git restore b.txt",
+    "echo s >> main.txt",
+    "git add main.txt",
+    "git merge topic",
+    "git restore --staged main.txt",
+    "git restore main.txt",
+    "echo u > new.txt",
+    "git merge topic",
+    "rm new.txt",
+    "echo local > other.txt",
+    "echo y >> main.txt",
+    "git merge topic",
+    "git log --oneline --graph",
+    "git merge topic"
+  ]
+}

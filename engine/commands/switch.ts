@@ -1,6 +1,7 @@
 import { flag, lastValue, type OptionSpec } from "../cli/options";
 import { moveHead, type HeadTarget } from "../checkout/move-head";
 import { branchMessages } from "../messages/branch";
+import { mergeMessages } from "../messages/merge";
 import { SWITCH_USAGE, checkoutMessages as m } from "../messages/checkout";
 import { branchRef, isValidBranchName } from "../refs/names";
 import { resolveHead } from "../refs/refs";
@@ -67,6 +68,7 @@ export const switchCommand = defineCommand({
   run: ({ world, machine, repo, options, time }) => {
     const unsupported = refuseUnsimulated("switch", options);
     if (unsupported) return unsupported;
+    if (repo.op) return refuse("usage", mergeMessages.switchWhileMerging());
     const pool = world.objects;
     const { args } = options;
     const created =

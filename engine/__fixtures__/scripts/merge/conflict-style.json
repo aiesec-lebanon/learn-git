@@ -1,0 +1,32 @@
+{
+  "world": {
+    "files": {
+      "project/a.txt": "1\n2\n3\n4\n5\n",
+      "v/a-main.txt": "1\nX\nA\nZ\n5\n",
+      "v/a-topic.txt": "1\nX\nB\nZ\n5\n"
+    },
+    "cwd": "project"
+  },
+  "steps": [
+    "git init -q",
+    "git config merge.conflictStyle zdiff3",
+    "git add .",
+    "git commit -q -m \"Base\"",
+    "git switch -q -c topic",
+    "cat ../v/a-topic.txt > a.txt",
+    "echo topic > both.txt",
+    "git add .",
+    "git commit -q -m \"Topic\"",
+    "git switch -q -c side main",
+    "echo side > both.txt",
+    "git add .",
+    "git commit -q -m \"Side\"",
+    "git switch -q main",
+    "cat ../v/a-main.txt > a.txt",
+    "git commit -q -a -m \"Main\"",
+    "git merge -q topic",
+    "git config merge.conflictStyle diff3",
+    "git switch -q side",
+    "git merge -m \"Take topic\" topic"
+  ]
+}

@@ -1,31 +1,18 @@
 import { flag, lastValue, stringValues, type OptionSpec } from "../cli/options";
-import { twoWayCheckout } from "../checkout/two-way";
+import { twoWayUpdate } from "../checkout/two-way";
 import { cleanupMessage } from "../commit/message";
-import { summaryLines } from "../commit/summary";
-import { reflogWho, resolveIdentity } from "../config/identity";
-import { changedPairs, commitSnapshot } from "../diff/forms";
-import { diffStat } from "../diff/stat";
+import { reflogWho } from "../config/identity";
 import { ancestorsOf } from "../merge/base";
+import { advanceHead, mergeStat } from "../merge/conclude";
+import { commitFiles, threeWayMerge } from "../merge/three-way";
 import { notSimulated } from "../messages/git";
 import { MERGE_USAGE, mergeMessages as m } from "../messages/merge";
 import { abbreviate } from "../objects/abbrev";
-import { readObject } from "../objects/pool";
-import { writeObjects } from "../objects/write";
 import { shortRefName } from "../refs/names";
-import { appendReflog } from "../refs/reflog";
-import { headBranch, resolveHead, updateRef } from "../refs/refs";
+import { headBranch, resolveHead } from "../refs/refs";
 import { upstreamOf } from "../refs/upstream";
-import { dwimRefs } from "../revisions/resolve";
-import type {
-  Commit,
-  Effect,
-  Fs,
-  Machine,
-  ObjectPool,
-  Oid,
-  Repo,
-  World,
-} from "../types";
+import { conflictedPaths } from "../staging/index";
+import type { Oid, Repo } from "../types";
 import { withMachine, withRepo } from "../world/access";
 import {
   defineCommand,
@@ -42,9 +29,9 @@ const OPTIONS: readonly OptionSpec[] = [
   { key: "message", short: "m", long: "message", value: "required" },
   { key: "quiet", short: "q", long: "quiet" },
   { key: "edit", short: "e", long: "edit" },
+  { key: "allow-unrelated-histories", long: "allow-unrelated-histories" },
   x("abort"),
   x("continue"),
-  x("allow-unrelated-histories"),
   x("squash"),
   x("commit"),
   x("strategy", "s", "required"),
@@ -66,76 +53,6 @@ const OPTIONS: readonly OptionSpec[] = [
 
 type MergeContext = GitContext & { readonly repo: Repo };
 
-/** Git's default merge message (`fmt-merge-msg`) for one merged name. */
-export function defaultMergeMessage(repo: Repo, typed: string): string {
-  const [ref] = dwimRefs(repo, typed);
-  const what = ref?.startsWith("refs/heads/")
-    ? `branch '${shortRefName(ref)}'`
-    : ref?.startsWith("refs/remotes/")
-      ? `remote-tracking branch '${shortRefName(ref)}'`
-      : `commit '${typed}'`;
-  const branch = headBranch(repo);
-  const current = branch ? shortRefName(branch) : "HEAD";
-  const into = ["main", "master"].includes(current) ? "" : ` into ${current}`;
-  return `Merge ${what}${into}\n`;
-}
-
-/** The diffstat and summary Git prints after a merge moves HEAD. */
-function mergeStat(pool: ObjectPool, from: Oid, to: Oid): string {
-  const pairs = changedPairs(
-    commitSnapshot(pool, from),
-    commitSnapshot(pool, to),
-  );
-  return diffStat(pairs) + summaryLines(pairs);
-}
-
-/** Moves the current branch (or a detached HEAD) to `to` with a reflog entry. */
-export function advanceHead(
-  repo: Repo,
-  to: Oid,
-  who: ReturnType<typeof reflogWho>,
-  message: string,
-): { repo: Repo; effect: Effect } {
-  if (repo.head.kind === "symbolic") {
-    return updateRef(repo, repo.head.ref, to, who, message);
-  }
-  const from = repo.head;
-  const next = appendReflog(
-    { ...repo, head: { kind: "detached", oid: to } },
-    "HEAD",
-    { old: from.oid, new: to, who, message },
-  );
-  return {
-    repo: next,
-    effect: { kind: "head-changed", repo: repo.id, from, to: next.head },
-  };
-}
-
-const withFiles = (world: World, machine: Machine, fs: Fs) =>
-  fs === machine.fs ? world : withMachine(world, { ...machine, fs });
-
-/** Moves HEAD and the files to `to` after a merge, or refuses with Git's error. */
-function land(
-  ctx: MergeContext,
-  world: World,
-  repo: Repo,
-  to: Oid,
-  reflog: string,
-  effects: readonly Effect[],
-):
-  | { ok: true; world: World; effects: Effect[] }
-  | { ok: false; result: CommandResult } {
-  const moved = twoWayCheckout(world, repo, ctx.machine, to, "merge");
-  if (!moved.ok) return { ok: false, result: moved.refusal };
-  const who = reflogWho(world, ctx.machine, repo, ctx.time);
-  const advanced = advanceHead(moved.repo, to, who, reflog);
-  return {
-    ok: true,
-    world: withFiles(withRepo(world, advanced.repo), ctx.machine, moved.fs),
-    effects: [...effects, ...moved.effects, advanced.effect],
-  };
-}
-
 function fastForward(
   ctx: MergeContext,
   repo: Repo,
@@ -143,78 +60,39 @@ function fastForward(
   theirs: Oid,
   typed: string,
 ): CommandResult {
-  const { world, options } = ctx;
+  const { world, machine, options, time } = ctx;
   const quiet = flag(options, "quiet");
   const pool = world.objects;
   const updating = quiet
     ? ""
     : m.updating(abbreviate(pool, head), abbreviate(pool, theirs));
-  const landed = land(
-    ctx,
+  const moved = twoWayUpdate(
     world,
     repo,
-    theirs,
-    `merge ${typed}: Fast-forward`,
-    [],
+    machine,
+    commitFiles(pool, theirs),
+    "merge",
   );
-  if (!landed.ok) {
-    return {
-      ...landed.result,
-      world: withRepo(world, repo),
-      stdout: updating,
-    };
+  if (!moved.ok) {
+    return { ...moved.refusal, world: withRepo(world, repo), stdout: updating };
   }
+  const who = reflogWho(world, machine, repo, time);
+  const advanced = advanceHead(
+    moved.repo,
+    theirs,
+    who,
+    `merge ${typed}: Fast-forward`,
+  );
+  const next = withRepo(world, advanced.repo);
   return {
-    world: landed.world,
+    world:
+      moved.fs === machine.fs
+        ? next
+        : withMachine(next, { ...machine, fs: moved.fs }),
     stdout: quiet
       ? ""
       : updating + m.fastForward() + mergeStat(pool, head, theirs),
-    effects: landed.effects,
-  };
-}
-
-/** Records a merge commit of HEAD and `theirs` with the merged `tree`. */
-function commitMerge(
-  ctx: MergeContext,
-  repo: Repo,
-  head: Oid,
-  theirs: Oid,
-  typed: string,
-  tree: Oid,
-): CommandResult {
-  const { machine, options, time } = ctx;
-  const identity = resolveIdentity(ctx.world, machine, repo);
-  if (!identity.ok) return refuse("identity-unknown", identity.stderr);
-  const paragraphs = stringValues(options, "message");
-  const who = { ...identity.ident, time, tz: "+0000" };
-  const object: Commit = {
-    type: "commit",
-    tree,
-    parents: [head, theirs],
-    author: who,
-    committer: who,
-    message: paragraphs.length
-      ? cleanupMessage(paragraphs)
-      : defaultMergeMessage(repo, typed),
-  };
-  const written = writeObjects(ctx.world, repo.id, [object]);
-  const oid = written.oids[0] as Oid;
-  const landed = land(
-    ctx,
-    written.world,
-    { ...repo, arrival: [...repo.arrival, oid] },
-    oid,
-    `merge ${typed}: Merge made by the 'ort' strategy.`,
-    written.effects,
-  );
-  if (!landed.ok) return { ...landed.result, world: withRepo(ctx.world, repo) };
-  const pool = landed.world.objects;
-  return {
-    world: landed.world,
-    stdout: flag(options, "quiet")
-      ? ""
-      : m.madeBy() + mergeStat(pool, head, oid),
-    effects: landed.effects,
+    effects: [...moved.effects, advanced.effect],
   };
 }
 
@@ -225,12 +103,16 @@ export const merge = defineCommand({
   usage: MERGE_USAGE,
   options: OPTIONS,
   run: (ctx) => {
-    const { world, machine, repo, options } = ctx;
+    const { world, machine, repo, options, time } = ctx;
     const unsupported = refuseUnsimulated("merge", options);
     if (unsupported) return unsupported;
     if (flag(options, "edit")) {
       return refuse("not-simulated", notSimulated("git merge --edit"), 1);
     }
+    if (conflictedPaths(repo.index).length) {
+      return refuse("usage", m.unmerged("Merging"));
+    }
+    if (repo.op) return refuse("usage", m.notConcluded());
     const pool = world.objects;
     let names = options.args;
     if (!names.length) {
@@ -265,8 +147,10 @@ export const merge = defineCommand({
         1,
       );
     }
-    if (ancestorsOf(pool, head).has(theirs)) return { stdout: m.upToDate() };
     const marked: Repo = { ...repo, origHead: head };
+    if (ancestorsOf(pool, head).has(theirs)) {
+      return { world: withRepo(world, marked), stdout: m.upToDate() };
+    }
     const ff = lastValue(options, "ff");
     if (ff !== false && ancestorsOf(pool, theirs).has(head)) {
       return fastForward(ctx, marked, head, theirs, typed);
@@ -277,10 +161,18 @@ export const merge = defineCommand({
         world: withRepo(world, marked),
       };
     }
-    if (ancestorsOf(pool, theirs).has(head)) {
-      const tree = readObject(pool, theirs, "commit").tree;
-      return commitMerge(ctx, marked, head, theirs, typed, tree);
-    }
-    return refuse("not-simulated", notSimulated("three-way merges"), 1);
+    const paragraphs = stringValues(options, "message");
+    return threeWayMerge({
+      world,
+      machine,
+      repo: marked,
+      time,
+      head,
+      theirs,
+      typed,
+      message: paragraphs.length ? cleanupMessage(paragraphs) : null,
+      quiet: flag(options, "quiet"),
+      allowUnrelated: flag(options, "allow-unrelated-histories"),
+    });
   },
 });

@@ -1,0 +1,36 @@
+{
+  "world": {
+    "files": {
+      "project/a.txt": "1\n2\n3\n4\n5\n",
+      "project/b.txt": "b\n",
+      "project/d.txt": "d\n",
+      "project/e.txt": "e\n",
+      "v/a-main.txt": "1\nA\n3\n4\n5\n",
+      "v/a-topic.txt": "1\nB\n3\n4\n5\n"
+    },
+    "cwd": "project"
+  },
+  "steps": [
+    "git init -q",
+    "git add .",
+    "git commit -q -m \"Base\"",
+    "git switch -q -c topic",
+    "cat ../v/a-topic.txt > a.txt",
+    "echo topic > both.txt",
+    "echo t >> d.txt",
+    "git rm -q e.txt",
+    "echo same > same.txt",
+    "echo tb >> b.txt",
+    "git add .",
+    "git commit -q -m \"Topic\"",
+    "git switch -q main",
+    "cat ../v/a-main.txt > a.txt",
+    "echo main > both.txt",
+    "git rm -q d.txt",
+    "echo m >> e.txt",
+    "echo same > same.txt",
+    "git add .",
+    "git commit -q -m \"Main\"",
+    "git merge topic"
+  ]
+}

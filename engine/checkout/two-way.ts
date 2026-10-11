@@ -49,11 +49,20 @@ export function twoWayCheckout(
   repo: Repo,
   machine: Machine,
   target: Oid,
+): TwoWay {
+  return twoWayUpdate(world, repo, machine, treeOf(world.objects, target));
+}
+
+/** The same move to a set of files (a merge result) instead of a commit. */
+export function twoWayUpdate(
+  world: World,
+  repo: Repo,
+  machine: Machine,
+  next: Files,
   action: "checkout" | "merge" = "checkout",
 ): TwoWay {
   const pool = world.objects;
   const head = treeOf(pool, resolveHead(repo));
-  const next = treeOf(pool, target);
   const index = stagedFiles(repo.index);
   const files = worktreeFiles(machine.fs, repo.workdir);
   const status = computeStatus(pool, repo, machine.fs);

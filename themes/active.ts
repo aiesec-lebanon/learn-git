@@ -1,6 +1,7 @@
 export {
   copy,
   GuideCharacter,
+  Hero,
   Icon,
   Logo,
   pairs,

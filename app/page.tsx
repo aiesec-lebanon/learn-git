@@ -3,6 +3,8 @@ import type { Route } from "next";
 import { Suspense } from "react";
 import { chaptersOf, LESSONS, readyScenarios } from "@/content/registry";
 import { orientationHref, trackHref } from "@/content/routes";
+import { heroFilm } from "@/features/hero/film";
+import { HeroPlayer } from "@/features/hero/player";
 import { ContinueCard } from "@/features/progress/continue-card";
 import { NAV_FORWARD } from "@/features/site/page-transition";
 import { copy } from "@/themes/active";
@@ -58,6 +60,10 @@ export default function Home() {
         >
           What can you already do?
         </Link>
+      </div>
+
+      <div className="mt-12">
+        <HeroPlayer frames={heroFilm()} />
       </div>
 
       <section aria-labelledby="tracks" className="mt-16">

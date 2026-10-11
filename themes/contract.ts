@@ -184,3 +184,25 @@ export type SoundRecipe = (play: SoundInstruments, t: number) => void;
 
 /** The theme's sound recipes, one per cue; played only when sound is on. */
 export type ThemeSounds = Readonly<Record<SoundCue, SoundRecipe>>;
+
+/** What the home film shows at one moment, in words. */
+export type HeroShot = Readonly<{
+  who: string;
+  command: string;
+  say: string;
+  mood: GuidePose;
+}>;
+
+/** The theme's home hero: it lays out a film the app plays (ADR-007, ADR-014). */
+export type ThemeHero = (props: {
+  shot: HeroShot;
+  /** Every shot's command in order, for the step list. */
+  commands: readonly string[];
+  at: number;
+  /** The stage for this shot, drawn by the app. */
+  stage: ReactNode;
+  /** Play or pause. */
+  controls: ReactNode;
+  playing: boolean;
+  animate: boolean;
+}) => ReactNode;

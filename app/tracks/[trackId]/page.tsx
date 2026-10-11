@@ -29,8 +29,7 @@ export async function generateMetadata({
   return track
     ? {
         title: `${track.title} track`,
-        description:
-          "Six chapters from your first commit to a merged pull request: snapshots, undoing changes, branches, merging, remotes and the GitHub flow.",
+        description: track.description,
       }
     : {};
 }

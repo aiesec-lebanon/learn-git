@@ -10,5 +10,7 @@ describe("site map", () => {
     expect(paths.filter((p) => p.startsWith("/scenarios/"))).toHaveLength(4);
     expect(paths.filter((p) => p.startsWith("/reference/"))).toHaveLength(26);
     expect(paths).not.toContain("/settings");
+    expect(paths).toContain("/tracks/intermediate");
+    expect(paths).not.toContain("/learn/i1-1");
   });
 });

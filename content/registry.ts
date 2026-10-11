@@ -1,6 +1,22 @@
 /** Everything the site can link to, by stable ID (ADR-005). */
 
-export const TRACKS = [{ id: "beginner", title: "Beginner" }] as const;
+export const TRACKS = [
+  {
+    id: "beginner",
+    title: "Beginner",
+    summary: "Snapshots, branches, merging, remotes and the GitHub flow.",
+    description:
+      "Six chapters from your first commit to a merged pull request: snapshots, undoing changes, branches, merging, remotes and the GitHub flow.",
+  },
+  {
+    id: "intermediate",
+    title: "Intermediate",
+    summary:
+      "Rewrite history safely: amend, reset, revert, rebase, stash, forks and reviews.",
+    description:
+      "Seven chapters on working with others: undoing commits, rebasing, work in progress, remotes, code review and investigating history.",
+  },
+] as const;
 
 export const CHAPTERS = [
   { id: "b1", track: "beginner", title: "Snapshots: what Git keeps" },
@@ -9,6 +25,13 @@ export const CHAPTERS = [
   { id: "b4", track: "beginner", title: "Merging" },
   { id: "b5", track: "beginner", title: "Remotes" },
   { id: "b6", track: "beginner", title: "GitHub flow" },
+  { id: "i1", track: "intermediate", title: "Undoing commits" },
+  { id: "i2", track: "intermediate", title: "Rebase" },
+  { id: "i3", track: "intermediate", title: "Interactive rebase" },
+  { id: "i4", track: "intermediate", title: "Work in progress" },
+  { id: "i5", track: "intermediate", title: "Collaborating through remotes" },
+  { id: "i6", track: "intermediate", title: "Code review on GitHub" },
+  { id: "i7", track: "intermediate", title: "Investigating history" },
 ] as const;
 
 export type TrackId = (typeof TRACKS)[number]["id"];
@@ -42,6 +65,29 @@ export const LESSONS = [
   l("b6-1", "b6", "Your repository on GitHub", 10, true),
   l("b6-2", "b6", "Pull requests: propose, review, merge", 15, true),
   l("b6-3", "b6", "Issues and linking work", 8, true),
+  l("i1-1", "i1", "Amend the last commit", 8),
+  l("i1-2", "i1", "reset: move the branch, choose how far it ripples", 15),
+  l("i1-3", "i1", "revert: undo by adding", 10),
+  l("i1-4", "i1", "Choosing the right undo", 8),
+  l("i2-1", "i2", "Rebase replays your commits", 12),
+  l("i2-2", "i2", "Rebase conflicts", 12),
+  l("i2-3", "i2", "Merge or rebase? Pulling with rebase", 10),
+  l("i3-1", "i3", "Edit history with the todo list", 12),
+  l("i3-2", "i3", "Squash and fixup", 12),
+  l("i3-3", "i3", "Split a commit", 10),
+  l("i4-1", "i4", "Stash: park your work", 10),
+  l("i4-2", "i4", "Craft focused commits: partial staging", 10),
+  l("i4-3", "i4", "Cherry-pick: copy a commit", 10),
+  l("i5-1", "i5", "Remote-tracking branches, precisely", 10),
+  l("i5-2", "i5", "Forks and upstream", 12),
+  l("i5-3", "i5", "Rewriting a pushed branch safely", 10),
+  l("i5-4", "i5", "Tags and releases", 10),
+  l("i6-1", "i6", "Reviewing and being reviewed", 12),
+  l("i6-2", "i6", "Merge methods and your history", 10),
+  l("i6-3", "i6", "Protected branches and checks", 12),
+  l("i7-1", "i7", "Searching history", 10),
+  l("i7-2", "i7", "Who changed this line?", 8),
+  l("i7-3", "i7", "Reflog: your safety net", 12),
 ] as const;
 
 function l<const I extends string>(
@@ -71,23 +117,39 @@ export const chapterById = (id: string) => CHAPTERS.find((c) => c.id === id);
 export const chaptersOf = (track: TrackId) =>
   CHAPTERS.filter((c) => c.track === track);
 
+export const lessonsOfTrack = (track: TrackId): readonly Lesson[] =>
+  LESSONS.filter((lesson) => chapterById(lesson.chapter)?.track === track);
+
+/** The track a lesson belongs to. */
+export const trackOfLesson = (lesson: Lesson): TrackId =>
+  chapterById(lesson.chapter)?.track ?? "beginner";
+
 export const lessonsOf = (chapter: ChapterId): readonly Lesson[] =>
   LESSONS.filter((lesson) => lesson.chapter === chapter);
 
 export const SCENARIOS = [
-  s("s-b1", "First contribution", 15, true),
-  s("s-b2", "Wrong branch, uncommitted work", 8, true),
-  s("s-b3", "Monday-morning push", 12, true),
-  s("s-b4", "Conflict on your PR", 15, true),
+  s("s-b1", "beginner", "First contribution", 15, true),
+  s("s-b2", "beginner", "Wrong branch, uncommitted work", 8, true),
+  s("s-b3", "beginner", "Monday-morning push", 12, true),
+  s("s-b4", "beginner", "Conflict on your PR", 15, true),
+  s("s-i1", "intermediate", "Committed to main by accident", 10),
+  s("s-i2", "intermediate", "Hotfix while mid-feature", 15),
+  s("s-i3", "intermediate", "Bad commit on main", 12),
+  s("s-i4", "intermediate", "Clean up before review", 15),
+  s("s-i5", "intermediate", "First open-source contribution", 20),
+  s("s-i6", "intermediate", "Backport to a release", 15),
+  s("s-i7", "intermediate", "Red CI on Friday", 12),
+  s("s-i8", "intermediate", "The vanishing commits", 12),
 ] as const;
 
 function s<const I extends string>(
   id: I,
+  track: TrackId,
   title: string,
   minutes: number,
   ready = false,
 ) {
-  return { id, track: "beginner" as TrackId, title, minutes, ready };
+  return { id, track, title, minutes, ready };
 }
 
 export type ScenarioId = (typeof SCENARIOS)[number]["id"];

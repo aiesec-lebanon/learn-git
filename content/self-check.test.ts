@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { voiceProblems } from "./guide/voice";
-import { CHAPTERS } from "./registry";
+import { chaptersOf } from "./registry";
 import { SELF_CHECK, suggest } from "./self-check";
 
 const beginner = SELF_CHECK[0].statements.map((s) => s.id);
@@ -8,7 +8,7 @@ const all = SELF_CHECK.flatMap((t) => t.statements.map((s) => s.id));
 
 describe("self-check", () => {
   it("has one statement per Beginner chapter, in order, in the guide's voice", () => {
-    expect(beginner).toEqual(CHAPTERS.map((c) => c.id));
+    expect(beginner).toEqual(chaptersOf("beginner").map((c) => c.id));
     for (const { text } of SELF_CHECK.flatMap((t) => t.statements))
       expect(voiceProblems(text)).toEqual([]);
   });

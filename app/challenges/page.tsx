@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
 import { puzzlesOf } from "@/content/puzzles";
-import { chapterCode, chaptersOf, lessonCode } from "@/content/registry";
+import { CHAPTERS, chapterCode, lessonCode } from "@/content/registry";
 import { puzzleHref } from "@/content/routes";
 import {
   PuzzleList,
@@ -15,19 +15,17 @@ export const metadata: Metadata = {
     "Optional puzzles for each lesson: reach a target repository in as few steps as you can.",
 };
 
-const chapters: readonly PuzzleChapter[] = chaptersOf("beginner").map(
-  (chapter) => ({
-    id: chapter.id,
-    title: `${chapterCode(chapter.id)} ${chapter.title}`,
-    puzzles: puzzlesOf(chapter.id).map(({ lesson, challenge }) => ({
-      id: lesson.id,
-      title: `${lessonCode(lesson.id)} ${lesson.title}`,
-      href: puzzleHref(lesson.id),
-      goal: challenge.goal,
-      par: challenge.par,
-    })),
-  }),
-);
+const chapters: readonly PuzzleChapter[] = CHAPTERS.map((chapter) => ({
+  id: chapter.id,
+  title: `${chapterCode(chapter.id)} ${chapter.title}`,
+  puzzles: puzzlesOf(chapter.id).map(({ lesson, challenge }) => ({
+    id: lesson.id,
+    title: `${lessonCode(lesson.id)} ${lesson.title}`,
+    href: puzzleHref(lesson.id),
+    goal: challenge.goal,
+    par: challenge.par,
+  })),
+})).filter((chapter) => chapter.puzzles.length > 0);
 
 const off = (
   <p className="m-0 max-w-prose">

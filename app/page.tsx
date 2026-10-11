@@ -1,6 +1,12 @@
 import Link from "next/link";
 import { Suspense } from "react";
-import { chaptersOf, LESSONS, readyScenarios } from "@/content/registry";
+import {
+  chaptersOf,
+  lessonsOfTrack,
+  readyScenarios,
+  TRACKS,
+  type TrackId,
+} from "@/content/registry";
 import { orientationHref, startHref, trackHref } from "@/content/routes";
 import { heroFilm } from "@/features/hero/film";
 import { HeroPlayer } from "@/features/hero/player";
@@ -10,22 +16,28 @@ import { copy } from "@/themes/active";
 import { buttonClass } from "@/ui/button";
 import { AppLink } from "@/ui/link";
 
-const beginnerHours = Math.round(
-  LESSONS.reduce((sum, lesson) => sum + lesson.minutes, 0) / 60,
-);
+function trackStats(track: TrackId) {
+  const lessons = lessonsOfTrack(track);
+  const hours = Math.round(
+    lessons.reduce((sum, lesson) => sum + lesson.minutes, 0) / 60,
+  );
+  const scenarios = readyScenarios().filter((s) => s.track === track).length;
+  return `${chaptersOf(track).length} chapters · ${lessons.length} lessons · ${scenarios} scenarios · about ${hours} h of lessons`;
+}
+
+const isOpen = (track: TrackId) =>
+  lessonsOfTrack(track).some((lesson) => lesson.ready);
+
+const OPEN = TRACKS.filter((track) => isOpen(track.id));
 
 const COMING = [
-  {
-    title: "Intermediate",
-    summary:
-      "Rewrite history safely: amend, reset, revert, rebase, stash, forks and reviews.",
-  },
+  ...TRACKS.filter((track) => !isOpen(track.id)),
   {
     title: "Pro",
     summary:
       "Under the hood: objects and refs, advanced merging, bisect, worktrees and automation.",
   },
-] as const;
+];
 
 export default function Home() {
   return (
@@ -68,24 +80,25 @@ export default function Home() {
           Tracks
         </h2>
         <ul className="m-0 mt-6 grid list-none gap-4 p-0 md:grid-cols-3">
-          <li className="grid content-start gap-2 rounded-sm border border-line bg-surface p-5 shadow-2">
-            <h3 className="m-0 text-xl font-bold">
-              <AppLink
-                href={trackHref("beginner")}
-                transitionTypes={NAV_FORWARD}
-              >
-                Beginner
-              </AppLink>
-            </h3>
-            <p className="m-0">
-              Snapshots, branches, merging, remotes and the GitHub flow.
-            </p>
-            <p className="m-0 text-sm text-fg-muted">
-              {chaptersOf("beginner").length} chapters · {LESSONS.length}{" "}
-              lessons · {readyScenarios().length} scenarios · about{" "}
-              {beginnerHours} h of lessons
-            </p>
-          </li>
+          {OPEN.map((track) => (
+            <li
+              key={track.id}
+              className="grid content-start gap-2 rounded-sm border border-line bg-surface p-5 shadow-2"
+            >
+              <h3 className="m-0 text-xl font-bold">
+                <AppLink
+                  href={trackHref(track.id)}
+                  transitionTypes={NAV_FORWARD}
+                >
+                  {track.title}
+                </AppLink>
+              </h3>
+              <p className="m-0">{track.summary}</p>
+              <p className="m-0 text-sm text-fg-muted">
+                {trackStats(track.id)}
+              </p>
+            </li>
+          ))}
           {COMING.map((track) => (
             <li
               key={track.title}

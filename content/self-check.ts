@@ -1,4 +1,4 @@
-import { CHAPTERS, type ChapterId } from "./registry";
+import { CHAPTERS, lessonsOf, type ChapterId } from "./registry";
 
 /** "What can you already do?" (learning design 2.2): one statement per chapter, all tracks. */
 export const SELF_CHECK = [
@@ -95,8 +95,11 @@ function s(id: string, text: string): Statement {
 
 const ALL: readonly Statement[] = SELF_CHECK.flatMap((t) => t.statements);
 
+/** A chapter with a published lesson; the others are "coming next". */
 const isChapter = (id: string): id is ChapterId =>
-  CHAPTERS.some((c) => c.id === id);
+  CHAPTERS.some(
+    (c) => c.id === id && lessonsOf(c.id).some((lesson) => lesson.ready),
+  );
 
 export type Suggestion =
   /** A chapter that exists: start it, or prove it with its capstone. */

@@ -5,10 +5,12 @@ import type { ComponentProps } from "react";
 import { SCENES } from "@/content/lessons";
 import { playgroundHref } from "@/content/playground";
 import {
-  CHAPTERS,
+  chapterById,
   lessonById,
   lessonCode,
   readyLessons,
+  trackById,
+  trackOfLesson,
 } from "@/content/registry";
 import { lessonHref, trackHref } from "@/content/routes";
 import { Puzzle } from "@/features/challenge/puzzle";
@@ -52,7 +54,8 @@ export default async function LessonPage({
   const found = find((await params).lessonId);
   if (!found) notFound();
   const { lesson, scene } = found;
-  const chapter = CHAPTERS.find((c) => c.id === lesson.chapter);
+  const chapter = chapterById(lesson.chapter);
+  const track = trackOfLesson(lesson);
   const { default: Prose } = (await import(
     `@/content/lessons/${lesson.id}/lesson.mdx`
   )) as { default: MDXContent };
@@ -63,8 +66,8 @@ export default async function LessonPage({
       <article className="mx-auto w-full max-w-[1200px] px-4 py-8 sm:px-6 sm:py-12">
         <header className="mb-8 max-w-prose">
           <p className="m-0 font-display text-sm font-semibold text-fg-muted">
-            <AppLink href={trackHref("beginner")} transitionTypes={NAV_BACK}>
-              Beginner
+            <AppLink href={trackHref(track)} transitionTypes={NAV_BACK}>
+              {trackById(track)?.title}
             </AppLink>{" "}
             · {chapter?.title} · {lesson.minutes} min
           </p>
@@ -105,7 +108,7 @@ export default async function LessonPage({
             ),
           }}
         />
-        <CourseNav track="beginner" here={lessonHref(lesson.id)} />
+        <CourseNav track={track} here={lessonHref(lesson.id)} />
       </article>
     </LessonSandboxProvider>
   );

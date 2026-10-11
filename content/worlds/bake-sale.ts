@@ -83,3 +83,23 @@ export const bakeSaleSecrets = defineWorld({
     'echo "build finished" > app.log',
   ],
 });
+
+export const README_BAG = `${README}Bring your own bag.\n`;
+export const INDEX_DRAFT = INDEX.replace("</p>", " Closed if it rains.</p>");
+
+/** One commit; then two good edits, a broken stylesheet, a staged draft and generated files. */
+export const bakeSaleMessy = defineWorld({
+  files: { ...files, "bake-sale/style.css": STYLE },
+  cwd: "bake-sale",
+  setup: [
+    ...FIRST_COMMIT,
+    writeFile("README.md", README_BAG),
+    writeFile("menu.html", MENU_FIXED),
+    writeFile("style.css", STYLE.replace("; }", ";")),
+    writeFile("index.html", INDEX_DRAFT),
+    "git add index.html",
+    "mkdir dist",
+    'echo "<h1>Menu</h1>" > dist/menu.min.html',
+    'echo "build finished" > build.log',
+  ],
+});

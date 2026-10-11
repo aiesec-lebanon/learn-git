@@ -22,6 +22,8 @@ export const WIDGET_NAMES = [
   "predict-reveal",
   "three-way-view",
   "parent-inspector",
+  "counters",
+  "would-lose",
 ] as const;
 
 export type WidgetName = (typeof WIDGET_NAMES)[number];

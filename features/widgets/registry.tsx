@@ -83,6 +83,12 @@ const WIDGETS: Record<WidgetName, ComponentType> = {
   "parent-inspector": lazy(() =>
     import("./parent-inspector").then((m) => ({ default: m.ParentInspector })),
   ),
+  counters: lazy(() =>
+    import("./counters").then((m) => ({ default: m.Counters })),
+  ),
+  "would-lose": lazy(() =>
+    import("./would-lose").then((m) => ({ default: m.WouldLose })),
+  ),
 };
 
 /** A lesson widget by name, loaded with its own code (R3). */

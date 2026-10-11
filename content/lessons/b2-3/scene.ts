@@ -74,7 +74,7 @@ export default defineLesson({
       nudge: "Which of the three files does Git already track?",
       pointer:
         ".gitignore only hides untracked files. A tracked file needs git rm --cached to leave the staging area while it stays on disk.",
-      reference: "status",
+      reference: "rm",
       next: 'Write .env, dist/ and *.log into .gitignore with echo, run git rm --cached .env, then git add .gitignore and git commit -m "Ignore secrets and build output".',
     },
   },

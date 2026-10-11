@@ -46,6 +46,16 @@ export const PRESETS = {
       'echo "Vegan friendly." >> README.md',
     ],
   },
+  ignoring: {
+    id: "ignoring",
+    label: "A .gitignore for *.log, app.log new",
+    world: recipeSiteWithIdentity,
+    setup: [
+      ...firstCommit,
+      'echo "*.log" > .gitignore',
+      'echo "build finished" > app.log',
+    ],
+  },
   noIdentity: {
     id: "no-identity",
     label: "A new repository, no name or email",

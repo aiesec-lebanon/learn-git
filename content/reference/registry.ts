@@ -3,9 +3,12 @@ import add from "./git-add";
 import commit from "./git-commit";
 import config from "./git-config";
 import diff from "./git-diff";
+import gitignore from "./gitignore";
 import init from "./git-init";
 import log from "./git-log";
+import mv from "./git-mv";
 import restore from "./git-restore";
+import rm from "./git-rm";
 import show from "./git-show";
 import status from "./git-status";
 
@@ -20,6 +23,9 @@ export const REFERENCE: readonly ReferenceEntry[] = [
   show,
   diff,
   restore,
+  rm,
+  mv,
+  gitignore,
 ];
 
 export const referenceById = (id: string): ReferenceEntry | undefined =>

@@ -14,6 +14,7 @@ import { Icon } from "@/themes/active";
 import { Button } from "@/ui/button";
 import { DiffView } from "./diff-view";
 import { HubMarkdown } from "./markdown";
+import { MergeBox, ReviewFiles } from "./pr-review";
 import { actOn, at, field, HubLink, Refusal, type HubPageProps } from "./parts";
 import { RepoShell } from "./repo-pages";
 
@@ -500,7 +501,13 @@ export function PullPage({
         ))}
       </nav>
       {tab === "files" ? (
-        <DiffView files={compared?.files ?? []} />
+        <ReviewFiles
+          world={world}
+          session={session}
+          go={go}
+          repo={repo}
+          pull={pull}
+        />
       ) : (
         <>
           <ol className="m-0 grid list-none gap-4 p-0">
@@ -508,6 +515,13 @@ export function PullPage({
               <TimelineEntry key={i} item={item} head={pull.head} />
             ))}
           </ol>
+          <MergeBox
+            world={world}
+            session={session}
+            go={go}
+            repo={repo}
+            pull={pull}
+          />
           <CommentForm
             world={world}
             session={session}

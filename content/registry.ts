@@ -27,7 +27,7 @@ export const LESSONS = [
   l("b1-1", "b1", "Save points for a whole project", 10, true),
   l("b1-2", "b1", "Three places your work lives", 12, true),
   l("b1-3", "b1", "History is a chain of snapshots", 10, true),
-  l("b2-1", "b2", "What changed? Reading diffs", 10),
+  l("b2-1", "b2", "What changed? Reading diffs", 10, true),
   l("b2-2", "b2", "Undo before you commit", 10),
   l("b2-3", "b2", "Tracked, untracked, ignored", 10),
   l("b3-1", "b3", "A branch is a pointer", 12),

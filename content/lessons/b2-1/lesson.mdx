@@ -1,0 +1,39 @@
+<ColdOpen>
+  Someone says the lemon cake price on the bake sale site is wrong, and three
+  files have changed since the last commit. Which change fixes the price, and
+  which ones are something else?
+</ColdOpen>
+
+<Beat id="anatomy" title="Reading a diff">
+  A <Term>diff</Term> lists what differs between two versions of a file. The
+  hunk header `@@ -1,3 +1,4 @@` says where the change sits. Lines starting with
+  `-` were removed, lines starting with `+` were added, and plain lines are the
+  context around them.
+</Beat>
+
+<Beat id="lens" title="Any two snapshots">
+  Every diff compares two snapshots. Plain `git diff` compares your working tree
+  with the staging area, not with the last commit. `git diff --staged` compares
+  the staging area with the last commit, and `git diff HEAD` compares your files
+  with the last commit.
+</Beat>
+
+<Beat id="staged" title="git add moves the diff">
+  After `git add README.md`, plain `git diff` goes quiet: your file now matches
+  the staging area. The change did not vanish. It moved: `git diff --staged`
+  shows it, because the draft of the next commit now differs from the last
+  commit.
+</Beat>
+
+<Beat id="commits" title="Diffs between commits">
+  `git diff HEAD~1 HEAD` compares two commits, here the cookies added to the
+  menu. Git stores snapshots, so it can compare any two. `git show` does the
+  same for one commit: its diff against its parent.
+</Beat>
+
+<YourTurn />
+
+<Wrap commands={["git diff", "git show"]}>
+  A diff always compares two snapshots. Plain `git diff` shows what you have not
+  staged yet; `--staged` shows what the next commit will record.
+</Wrap>

@@ -1,6 +1,6 @@
 import { hashObject } from "../objects/hash";
 import { readObject } from "../objects/pool";
-import type { TreeFile } from "../objects/tree";
+import { sameFile as same, type Files, type TreeFile } from "../objects/tree";
 import type { Blob, ObjectPool, RepoPath, Stage } from "../types";
 import { compareBytes } from "../util/compare";
 import {
@@ -11,7 +11,7 @@ import {
   type MergeLabels,
 } from "./file";
 
-export type Files = ReadonlyMap<RepoPath, TreeFile>;
+export type { Files } from "../objects/tree";
 
 /** One path's outcome: a resolved file (null = absent) or conflict stages. */
 export type PathOutcome =
@@ -35,9 +35,6 @@ export type TreeMerge =
       readonly blobs: readonly Blob[];
     }
   | { readonly ok: false; readonly tooLarge: RepoPath };
-
-const same = (a: TreeFile | undefined, b: TreeFile | undefined) =>
-  a?.oid === b?.oid && a?.mode === b?.mode;
 
 const content = (pool: ObjectPool, file: TreeFile | undefined) =>
   file ? readObject(pool, file.oid, "blob").content : "";

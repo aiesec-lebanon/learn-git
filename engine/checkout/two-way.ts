@@ -5,7 +5,7 @@ import { removeFilePruning, worktreeFiles, writeFile } from "../files/worktree";
 import { checkoutMessages as m } from "../messages/checkout";
 import { hashObject } from "../objects/hash";
 import { readObject } from "../objects/pool";
-import { flattenTree, type TreeFile } from "../objects/tree";
+import { flattenTree, sameFile as same, type Files } from "../objects/tree";
 import { resolveHead } from "../refs/refs";
 import { stageEntry, stagedFiles, unstagePath } from "../staging/index";
 import { computeStatus } from "../status/compute";
@@ -22,13 +22,8 @@ import type {
 } from "../types";
 import { compareBytes } from "../util/compare";
 
-export type Files = ReadonlyMap<RepoPath, TreeFile>;
-
 const treeOf = (pool: ObjectPool, oid: Oid | null): Files =>
   oid ? flattenTree(pool, readObject(pool, oid, "commit").tree) : new Map();
-
-const same = (a: TreeFile | undefined, b: TreeFile | undefined) =>
-  a?.oid === b?.oid && a?.mode === b?.mode;
 
 export type TwoWay =
   | {

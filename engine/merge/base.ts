@@ -1,5 +1,5 @@
 import { reachableFrom } from "../reachability";
-import type { ObjectPool, Oid } from "../types";
+import type { Commit, ObjectPool, Oid } from "../types";
 
 const memo = new WeakMap<ObjectPool, Map<Oid, ReadonlySet<Oid>>>();
 
@@ -25,10 +25,7 @@ export function ancestorsOf(pool: ObjectPool, oid: Oid): ReadonlySet<Oid> {
 export function mergeBases(pool: ObjectPool, a: Oid, b: Oid): Oid[] {
   const theirs = ancestorsOf(pool, b);
   const common = [...ancestorsOf(pool, a)].filter((oid) => theirs.has(oid));
-  const parents = common.flatMap((oid) => {
-    const commit = pool.get(oid);
-    return commit?.type === "commit" ? commit.parents : [];
-  });
+  const parents = common.flatMap((oid) => (pool.get(oid) as Commit).parents);
   const older = reachableFrom(pool, parents);
   return common.filter((oid) => !older.has(oid));
 }

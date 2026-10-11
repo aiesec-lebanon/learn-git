@@ -1,3 +1,5 @@
+import { slideDown } from "../diff/compact";
+import { diffLines } from "../diff/myers";
 import { diffContents } from "../diff/numstat";
 
 export type ConflictStyle = "merge" | "diff3" | "zdiff3";
@@ -45,10 +47,11 @@ type Region = {
 type Lines = readonly string[];
 type Diff = { a: Lines; b: Lines; changes: Change[] };
 
-function editScript(before: string, after: string): Diff | FileMerge {
-  const diff = diffContents(before, after);
-  if (diff.kind !== "text") return { kind: diff.kind };
-  const { a, b, keptA, keptB } = diff;
+/** Change blocks between two line lists, as `xdl_build_script` lists them. */
+function changesOf(a: Lines, b: Lines): Change[] {
+  const { keptA, keptB } = diffLines(a, b);
+  slideDown(a, keptA);
+  slideDown(b, keptB);
   const changes: Change[] = [];
   let i = 0;
   let j = 0;
@@ -63,7 +66,13 @@ function editScript(before: string, after: string): Diff | FileMerge {
     while (j < b.length && !keptB[j]) j++;
     changes.push({ ...start, chg1: i - start.i1, chg2: j - start.i2 });
   }
-  return { a, b, changes };
+  return changes;
+}
+
+function editScript(before: string, after: string): Diff | FileMerge {
+  const diff = diffContents(before, after);
+  if (diff.kind !== "text") return { kind: diff.kind };
+  return { a: diff.a, b: diff.b, changes: changesOf(diff.a, diff.b) };
 }
 
 const sameLines = (a: Lines, i: number, b: Lines, j: number, n: number) => {
@@ -71,28 +80,26 @@ const sameLines = (a: Lines, i: number, b: Lines, j: number, n: number) => {
   return true;
 };
 
+/** Adds a region, joining it to the last one when they touch (`xdl_append_merge`). */
 function append(
   list: Region[],
   mode: 0 | 1 | 2,
-  [i0, chg0, i1, chg1, i2, chg2]: readonly number[],
+  i0: number,
+  chg0: number,
+  i1: number,
+  chg1: number,
+  i2: number,
+  chg2: number,
 ) {
   const m = list.at(-1);
-  if (m && ((i1 ?? 0) <= m.i1 + m.chg1 || (i2 ?? 0) <= m.i2 + m.chg2)) {
+  if (m && (i1 <= m.i1 + m.chg1 || i2 <= m.i2 + m.chg2)) {
     if (mode !== m.mode) m.mode = 0;
-    m.chg0 = (i0 ?? 0) + (chg0 ?? 0) - m.i0;
-    m.chg1 = (i1 ?? 0) + (chg1 ?? 0) - m.i1;
-    m.chg2 = (i2 ?? 0) + (chg2 ?? 0) - m.i2;
+    m.chg0 = i0 + chg0 - m.i0;
+    m.chg1 = i1 + chg1 - m.i1;
+    m.chg2 = i2 + chg2 - m.i2;
     return;
   }
-  list.push({
-    mode,
-    i0: i0 ?? 0,
-    chg0: chg0 ?? 0,
-    i1: i1 ?? 0,
-    chg1: chg1 ?? 0,
-    i2: i2 ?? 0,
-    chg2: chg2 ?? 0,
-  });
+  list.push({ mode, i0, chg0, i1, chg1, i2, chg2 });
 }
 
 /** Pairs the two edit scripts into regions (xdiff's `xdl_do_merge`). */
@@ -107,13 +114,13 @@ function regionsOf(base: Lines, one: Diff, two: Diff): Region[] {
     const c2 = x2[b] as Change;
     if (c1.i1 + c1.chg1 < c2.i1) {
       const i2 = c2.i2 - c2.i1 + c1.i1;
-      append(list, 1, [c1.i1, c1.chg1, c1.i2, c1.chg2, i2, c1.chg1]);
+      append(list, 1, c1.i1, c1.chg1, c1.i2, c1.chg2, i2, c1.chg1);
       a++;
       continue;
     }
     if (c2.i1 + c2.chg1 < c1.i1) {
       const i1 = c1.i2 - c1.i1 + c2.i1;
-      append(list, 2, [c2.i1, c2.chg1, i1, c2.chg1, c2.i2, c2.chg2]);
+      append(list, 2, c2.i1, c2.chg1, i1, c2.chg1, c2.i2, c2.chg2);
       b++;
       continue;
     }
@@ -139,7 +146,7 @@ function regionsOf(base: Lines, one: Diff, two: Diff): Region[] {
         chg0 -= ffo;
         chg1 -= ffo;
       } else chg2 += ffo;
-      append(list, 0, [i0, chg0, i1, chg1, i2, chg2]);
+      append(list, 0, i0, chg0, i1, chg1, i2, chg2);
     }
     const end1 = c1.i1 + c1.chg1;
     const end2 = c2.i1 + c2.chg1;
@@ -149,12 +156,12 @@ function regionsOf(base: Lines, one: Diff, two: Diff): Region[] {
   for (; a < x1.length; a++) {
     const c = x1[a] as Change;
     const i2 = c.i1 + two.b.length - base.length;
-    append(list, 1, [c.i1, c.chg1, c.i2, c.chg2, i2, c.chg1]);
+    append(list, 1, c.i1, c.chg1, c.i2, c.chg2, i2, c.chg1);
   }
   for (; b < x2.length; b++) {
     const c = x2[b] as Change;
     const i1 = c.i1 + one.b.length - base.length;
-    append(list, 2, [c.i1, c.chg1, i1, c.chg1, c.i2, c.chg2]);
+    append(list, 2, c.i1, c.chg1, i1, c.chg1, c.i2, c.chg2);
   }
   return list;
 }
@@ -167,15 +174,15 @@ function refine(regions: Region[], ours: Lines, theirs: Lines): Region[] {
       out.push(m);
       continue;
     }
-    const inner = editScript(
-      ours.slice(m.i1, m.i1 + m.chg1).join(""),
-      theirs.slice(m.i2, m.i2 + m.chg2).join(""),
+    const inner = changesOf(
+      ours.slice(m.i1, m.i1 + m.chg1),
+      theirs.slice(m.i2, m.i2 + m.chg2),
     );
-    if (!("changes" in inner) || inner.changes.length === 0) {
+    if (!inner.length) {
       out.push({ ...m, mode: 4 });
       continue;
     }
-    inner.changes.forEach((c, n) =>
+    inner.forEach((c, n) =>
       out.push({
         mode: 0,
         i0: n === 0 ? m.i0 : 0,

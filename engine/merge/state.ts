@@ -4,6 +4,7 @@ import { reflogWho } from "../config/identity";
 import { appendReflog } from "../refs/reflog";
 import { resolveHead } from "../refs/refs";
 import { conflictedPaths, stagedFiles } from "../staging/index";
+import { sameFile } from "../objects/tree";
 import type { Machine, Oid, Repo, World } from "../types";
 import { compareBytes } from "../util/compare";
 import { withMachine, withRepo } from "../world/access";
@@ -34,11 +35,11 @@ export function abortMerge(
   const staged = stagedFiles(repo.index);
   const conflicted = new Set<string>(conflictedPaths(repo.index));
   const paths = [...new Set([...headFiles.keys(), ...repo.index.keys()])]
-    .filter((path) => {
-      const a = headFiles.get(path);
-      const b = staged.get(path);
-      return conflicted.has(path) || a?.oid !== b?.oid || a?.mode !== b?.mode;
-    })
+    .filter(
+      (path) =>
+        conflicted.has(path) ||
+        !sameFile(headFiles.get(path), staged.get(path)),
+    )
     .sort(compareBytes);
   const reset = checkoutPaths(pool, repo, machine, headFiles, paths);
   const who = reflogWho(world, machine, repo, time);
@@ -47,12 +48,8 @@ export function abortMerge(
     "HEAD",
     { old: head, new: head, who, message: "reset: moving to HEAD" },
   );
-  const updated = withRepo(world, next);
   return {
-    world:
-      reset.fs === machine.fs
-        ? updated
-        : withMachine(updated, { ...machine, fs: reset.fs }),
+    world: withMachine(withRepo(world, next), { ...machine, fs: reset.fs }),
     effects: [
       ...reset.effects,
       {

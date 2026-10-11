@@ -7,14 +7,18 @@ import { notSimulated } from "../messages/git";
 import { mergeMessages as m } from "../messages/merge";
 import { abbreviate } from "../objects/abbrev";
 import { readObject } from "../objects/pool";
-import { buildTree, flattenTree, type TreeFile } from "../objects/tree";
+import {
+  buildTree,
+  flattenTree,
+  sameFile,
+  type TreeFile,
+} from "../objects/tree";
 import { writeObjects } from "../objects/write";
 import { appendReflog } from "../refs/reflog";
 import { conflictedPaths, stagedFiles } from "../staging/index";
 import type {
   Commit,
   Effect,
-  Fs,
   Index,
   IndexEntry,
   Machine,
@@ -57,11 +61,7 @@ export function stagedChanges(index: Index, head: Files): RepoPath[] {
   const conflicted = new Set(conflictedPaths(index));
   const paths = new Set([...head.keys(), ...staged.keys(), ...conflicted]);
   return [...paths]
-    .filter((p) => {
-      const a = head.get(p);
-      const b = staged.get(p);
-      return conflicted.has(p) || a?.oid !== b?.oid || a?.mode !== b?.mode;
-    })
+    .filter((p) => conflicted.has(p) || !sameFile(head.get(p), staged.get(p)))
     .sort(compareBytes);
 }
 
@@ -125,9 +125,8 @@ export function applyTreeMerge(
   );
   if (!moved.ok) return { ok: false, result: moved.refusal };
   let index = moved.repo.index;
-  for (const path of merged.conflicts) {
-    const outcome = merged.outcomes.get(path);
-    if (outcome?.kind !== "conflict") continue;
+  for (const [path, outcome] of merged.outcomes) {
+    if (outcome.kind === "clean") continue;
     const entries: IndexEntry[] = [...outcome.stages].map(([stage, file]) => ({
       path,
       ...file,
@@ -151,13 +150,12 @@ export function applyTreeMerge(
     );
   }
   const next = { ...moved.repo, index };
-  const nextWorld = withRepo(written.world, next);
   return {
     ok: true,
-    world:
-      moved.fs === machine.fs
-        ? nextWorld
-        : withMachine(nextWorld, { ...machine, fs: moved.fs as Fs }),
+    world: withMachine(withRepo(written.world, next), {
+      ...machine,
+      fs: moved.fs,
+    }),
     repo: next,
     effects,
     lines: merged.lines.join(""),
@@ -204,13 +202,11 @@ export function threeWayMerge(req: MergeRequest): CommandResult {
   const saved = createStash(req.world, req.repo, req.machine, req.time);
   const world = saved?.world ?? req.world;
   const result = mergeOnto({ ...req, world }, bases[0] ?? null);
-  return saved
-    ? {
-        ...result,
-        world: result.world ?? world,
-        effects: [...saved.effects, ...(result.effects ?? [])],
-      }
-    : result;
+  return {
+    world,
+    ...result,
+    effects: [...(saved?.effects ?? []), ...(result.effects ?? [])],
+  };
 }
 
 function mergeOnto(req: MergeRequest, base: Oid | null): CommandResult {

@@ -4,7 +4,12 @@ import { worktreeFiles } from "../files/worktree";
 import { abbreviate } from "../objects/abbrev";
 import { hashObject } from "../objects/hash";
 import { readObject } from "../objects/pool";
-import { buildTree, flattenTree, type TreeFile } from "../objects/tree";
+import {
+  buildTree,
+  flattenTree,
+  sameFiles,
+  type TreeFile,
+} from "../objects/tree";
 import { writeObjects } from "../objects/write";
 import { shortRefName } from "../refs/names";
 import { headBranch, resolveHead } from "../refs/refs";
@@ -19,14 +24,6 @@ import type {
   RepoPath,
   World,
 } from "../types";
-
-type Files = ReadonlyMap<RepoPath, TreeFile>;
-
-const sameFiles = (a: Files, b: Files) =>
-  a.size === b.size &&
-  [...a].every(
-    ([p, f]) => b.get(p)?.oid === f.oid && b.get(p)?.mode === f.mode,
-  );
 
 export type CreatedStash = {
   readonly world: World;

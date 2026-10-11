@@ -11,6 +11,14 @@ import { hashObject } from "./hash";
 import { readObject } from "./pool";
 
 export type TreeFile = { readonly oid: Oid; readonly mode: FileMode };
+export type Files = ReadonlyMap<RepoPath, TreeFile>;
+
+/** Same blob and mode (absent equals absent). */
+export const sameFile = (a?: TreeFile, b?: TreeFile) =>
+  a?.oid === b?.oid && a?.mode === b?.mode;
+
+export const sameFiles = (a: Files, b: Files) =>
+  a.size === b.size && [...a].every(([path, f]) => sameFile(f, b.get(path)));
 
 const sortName = (e: TreeEntry) => (e.mode === "40000" ? `${e.name}/` : e.name);
 

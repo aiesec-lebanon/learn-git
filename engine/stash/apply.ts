@@ -1,7 +1,7 @@
 import type { CommandResult } from "../commands/registry";
 import { applyTreeMerge, commitFiles } from "../merge/three-way";
 import { readObject } from "../objects/pool";
-import { flattenTree } from "../objects/tree";
+import { flattenTree, sameFiles } from "../objects/tree";
 import { indexChanges, stagedFiles } from "../staging/index";
 import type {
   Effect,
@@ -25,15 +25,6 @@ export type Applied =
       readonly conflicted: boolean;
     }
   | { readonly ok: false; readonly result: CommandResult };
-
-const sameFiles = (
-  a: ReturnType<typeof stagedFiles>,
-  b: ReturnType<typeof stagedFiles>,
-) =>
-  a.size === b.size &&
-  [...a].every(
-    ([p, f]) => b.get(p)?.oid === f.oid && b.get(p)?.mode === f.mode,
-  );
 
 /**
  * `git stash apply`: merges the stash's working-tree commit into the index

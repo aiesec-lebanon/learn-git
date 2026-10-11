@@ -175,6 +175,21 @@ export type HostedRepo = {
   readonly owner: string;
   readonly repo: RepoId;
   readonly rules: readonly BranchRule[];
+  readonly pulls: readonly PullRequest[];
+};
+
+/** A pull request: a proposal to merge `head` into `base` in the same repository. */
+export type PullRequest = {
+  /** Shared with issues: one number sequence per repository. */
+  readonly number: number;
+  readonly title: string;
+  /** Markdown. */
+  readonly body: string;
+  readonly author: string;
+  readonly base: string;
+  readonly head: string;
+  readonly opened: number;
+  readonly state: "open" | "closed" | "merged";
 };
 
 /** The Hub's own state (ADR-009); Git data stays in the bare repositories. */
@@ -187,13 +202,23 @@ export type HubState = {
 export type GitignoreTemplate = "node" | "python";
 
 /** Something a person (or a scripted teammate) does on the Hub. */
-export type HubAction = {
-  readonly type: "create-repository";
-  readonly name: string;
-  readonly readme?: boolean;
-  readonly gitignore?: GitignoreTemplate;
-  readonly license?: "mit";
-};
+export type HubAction =
+  | {
+      readonly type: "create-repository";
+      readonly name: string;
+      readonly readme?: boolean;
+      readonly gitignore?: GitignoreTemplate;
+      readonly license?: "mit";
+    }
+  | {
+      readonly type: "open-pull-request";
+      /** `<owner>/<name>`. */
+      readonly repo: string;
+      readonly base: string;
+      readonly head: string;
+      readonly title: string;
+      readonly body?: string;
+    };
 
 /** A Hub action as an invocation: `actor` is the account that acts. */
 export type HubInvocation = {
@@ -203,10 +228,14 @@ export type HubInvocation = {
 };
 
 /** What a Hub action changed on the Hub (Git changes are separate effects). */
-export type HubEvent = {
-  readonly type: "repository-created";
-  readonly repo: string;
-};
+export type HubEvent =
+  | { readonly type: "repository-created"; readonly repo: string }
+  | {
+      readonly type: "pull-request-opened";
+      readonly repo: string;
+      readonly number: number;
+      readonly title: string;
+    };
 
 export type WorldSpec = MachineSpec & {
   readonly system?: Readonly<Record<string, string>>;

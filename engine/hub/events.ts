@@ -9,8 +9,10 @@ export function hubEventSentence(actor: string, event: HubEvent): string {
   switch (event.type) {
     case "repository-created":
       return `${who(actor)} created ${event.repo} on the Hub.`;
+    case "pull-request-opened":
+      return `${who(actor)} opened pull request #${event.number} "${event.title}" on ${event.repo}.`;
     default: {
-      const never: never = event.type;
+      const never: never = event;
       return never;
     }
   }

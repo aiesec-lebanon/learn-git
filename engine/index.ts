@@ -47,3 +47,11 @@ export type { MergeChunk } from "./merge/file";
 export { act, hubActionText } from "./hub/actions";
 export * from "./hub/views";
 export type * from "./hub/diff";
+export {
+  closesIssues,
+  compareBranches,
+  compareCommits,
+  findPull,
+} from "./hub/pulls";
+export type { CompareResult, CompareView, Mergeability } from "./hub/pulls";
+export { closingIssues } from "./hub/keywords";

@@ -12,6 +12,7 @@ import type {
 import { timeAt } from "../world/clock";
 import { hostedRepoId } from "../world/network";
 import { hubCommit, setHubBranch } from "./commit";
+import { openPullRequest } from "./pulls";
 import { refuseHub, type HubContext, type HubResult } from "./result";
 import { addHostedRepo } from "./state";
 import { GITIGNORE, mitLicense, readmeFor } from "./templates";
@@ -85,8 +86,10 @@ function perform(ctx: HubContext, action: HubAction): HubResult {
   switch (action.type) {
     case "create-repository":
       return createRepository(ctx, action);
+    case "open-pull-request":
+      return openPullRequest(ctx, action);
     default: {
-      const never: never = action.type;
+      const never: never = action;
       return never;
     }
   }
@@ -97,8 +100,10 @@ export function hubActionText(action: HubAction): string {
   switch (action.type) {
     case "create-repository":
       return `Hub: create repository ${action.name}`;
+    case "open-pull-request":
+      return `Hub: open a pull request from ${action.head} into ${action.base}`;
     default: {
-      const never: never = action.type;
+      const never: never = action;
       return never;
     }
   }

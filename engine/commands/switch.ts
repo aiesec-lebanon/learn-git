@@ -91,7 +91,13 @@ export const switchCommand = defineCommand({
       const named = expandPrevious(repo, start);
       const oid = named === null ? null : commitOf(pool, repo, named);
       if (!oid && (args.length || resolveHead(repo))) return invalid(start);
-      return move({ kind: "create", name: created, start, oid, reset });
+      return move({
+        kind: "create",
+        name: created,
+        start: named ?? start,
+        oid,
+        reset,
+      });
     }
     if (args.length > 1) return refuse("usage", m.oneReference());
     const [typed] = args;

@@ -53,11 +53,11 @@ function createBranch(ctx: Ctx, name: string, reset: boolean): CommandResult {
   if (!oid && (options.args.length || resolveHead(repo))) {
     return refuse("unknown-revision", m.invalidReference(start));
   }
-  return moveTo(ctx, { kind: "create", name, start, oid, reset }, [
-    reset ? "-C" : "-c",
-    name,
-    ...options.args,
-  ]);
+  return moveTo(
+    ctx,
+    { kind: "create", name, start: named ?? start, oid, reset },
+    [reset ? "-C" : "-c", name, ...options.args],
+  );
 }
 
 /** A branch name switches to it; any other commit detaches HEAD there. */

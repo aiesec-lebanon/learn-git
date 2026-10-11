@@ -1,0 +1,16 @@
+{
+  "world": { "files": { "project/a.txt": "a\n" }, "cwd": "project" },
+  "steps": [
+    "git init -q",
+    "git add a.txt",
+    "git commit -q -m \"First\"",
+    "git switch --detach",
+    "echo x >> a.txt",
+    "git commit -q -am \"Try\"",
+    "git switch -q main",
+    "git switch -c experiment -",
+    "git switch -",
+    "git switch -",
+    "git branch -v"
+  ]
+}

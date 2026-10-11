@@ -96,6 +96,7 @@ export function CommitGraph({
   drop,
   highlight,
   onLabelHover,
+  onCommitHover,
 }: {
   view: RepoView;
   layout: Layout;
@@ -105,6 +106,8 @@ export function CommitGraph({
   highlight?: Highlight | null;
   /** Pointer over a branch label (its name) or off it (null). */
   onLabelHover?: (name: string | null) => void;
+  /** Pointer or focus on a commit (its ID) or off it (null). */
+  onCommitHover?: (oid: Oid | null) => void;
   /** "Describe this graph": an engine summary of the repository. */
   describe?: () => string;
 }) {
@@ -235,7 +238,13 @@ export function CommitGraph({
                       else buttons.current.delete(commit.oid);
                     }}
                     tabIndex={commit.oid === active ? 0 : -1}
-                    onFocus={() => setFocused(commit.oid)}
+                    onFocus={() => {
+                      setFocused(commit.oid);
+                      onCommitHover?.(commit.oid);
+                    }}
+                    onBlur={() => onCommitHover?.(null)}
+                    onPointerEnter={() => onCommitHover?.(commit.oid)}
+                    onPointerLeave={() => onCommitHover?.(null)}
                     {...dropProps(drop, commitTarget(commit.oid))}
                     {...marks(highlight, commit.oid)}
                     onKeyDown={onKeyDown}

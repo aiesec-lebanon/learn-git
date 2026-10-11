@@ -17,6 +17,7 @@ export const WIDGET_NAMES = [
   "reachability",
   "lost-preview",
   "leave-preview",
+  "text-graph",
 ] as const;
 
 export type WidgetName = (typeof WIDGET_NAMES)[number];

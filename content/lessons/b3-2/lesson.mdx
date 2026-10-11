@@ -1,0 +1,53 @@
+<ColdOpen>
+  Halfway through the dark theme, someone spots a mistake on the live site. The
+  fix can't wait for your experiment. Can two lines of work grow side by side?
+</ColdOpen>
+
+<Beat id="fork" title="The fork">
+  Commit on `dark-mode`, switch to `main`, and commit a fix there. Both branches
+  started from the same commit, and now each has a commit the other lacks: the
+  history forks.
+</Beat>
+
+<Beat id="contains" title="What a branch contains">
+  A branch <Term>contains</Term> every commit you can reach by following
+  parents back from its label. Point at each label: the shared history lights
+  up for both, and each new commit belongs to one branch only.
+
+  <Widget name="reachability" />
+</Beat>
+
+<Beat id="text" title="The fork in text">
+  `git log --oneline --graph --all` draws the same fork in the terminal. Each
+  `*` is a commit, `|` keeps a line going, and `|/` shows where two lines meet.
+  `--all` includes every branch, not only the one you are on.
+
+  <Widget name="text-graph" />
+</Beat>
+
+<Beat id="rename" title="Renaming">
+  `git branch -m dark-mode night-mode` renames a label. The commits stay as they
+  were; only the name changes.
+</Beat>
+
+<Beat id="delete" title="Deleting safely">
+  `git branch -d` refuses to delete a branch whose commits no other label
+  reaches, because they would become unreachable. `-D` deletes it anyway, and
+  the commit fades. Check what you would lose first.
+
+  <Widget name="lost-preview" />
+</Beat>
+
+<YourTurn />
+
+<Wrap
+  commands={[
+    "git log --oneline --graph --all",
+    "git branch -d",
+    "git branch -m",
+  ]}
+>
+  Each branch contains the commits its label reaches. Once both have new
+  commits, neither contains the other's work, and `git branch -d` protects work
+  only one label reaches.
+</Wrap>

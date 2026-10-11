@@ -63,6 +63,9 @@ const WIDGETS: Record<WidgetName, ComponentType> = {
   "leave-preview": lazy(() =>
     import("./leave-preview").then((m) => ({ default: m.LeavePreview })),
   ),
+  "text-graph": lazy(() =>
+    import("./text-graph").then((m) => ({ default: m.TextGraph })),
+  ),
   "destructive-preview": lazy(() =>
     import("./destructive-preview").then((m) => ({
       default: m.DestructivePreview,

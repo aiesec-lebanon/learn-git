@@ -45,6 +45,20 @@ export const recipeSiteBranched = defineWorld({
   setup: [...(recipeSiteHistory.setup ?? []), "git branch dark-mode"],
 });
 
+export const DARK_CSS = "body { background: #222; color: #eee; }\n";
+
+/** The history plus a dark-mode branch with one commit on it; HEAD on dark-mode. */
+export const recipeSiteDarkMode = defineWorld({
+  ...recipeSiteHistory,
+  setup: [
+    ...(recipeSiteHistory.setup ?? []),
+    "git switch -c dark-mode",
+    `echo "${DARK_CSS.trim()}" > dark.css`,
+    "git add dark.css",
+    'git commit -m "Add a dark stylesheet"',
+  ],
+});
+
 /** One commit; then README.md edited to link a new, untracked dessert.html. */
 export const recipeSiteDessert = defineWorld({
   ...recipeSiteWithIdentity,

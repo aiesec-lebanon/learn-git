@@ -44,3 +44,6 @@ export type { Reachability } from "./reachability";
 export { previewMerge } from "./merge/preview";
 export type { FilePreview, MergePreview } from "./merge/preview";
 export type { MergeChunk } from "./merge/file";
+export { act, hubActionText } from "./hub/actions";
+export * from "./hub/views";
+export type * from "./hub/diff";

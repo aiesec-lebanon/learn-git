@@ -3,12 +3,19 @@ import { dispatchGit } from "./cli/dispatch";
 import { GIT_REGISTRY } from "./commands";
 import type { CommandResult } from "./commands/registry";
 import { invariant } from "./errors";
+import { act } from "./hub/actions";
 import { shellMessages } from "./messages/shell";
 import { SHELL_REGISTRY } from "./shell";
 import { expandWord } from "./shell/glob";
 import { closeRedirect, openRedirect } from "./shell/redirect";
 import { shellFail } from "./shell/registry";
-import type { Invocation, Machine, Outcome, World } from "./types";
+import type {
+  HubInvocation,
+  Invocation,
+  Machine,
+  Outcome,
+  World,
+} from "./types";
 import { machineOf } from "./world/access";
 import { timeAt } from "./world/clock";
 
@@ -55,8 +62,12 @@ function toOutcome(result: Dispatched, world: World): Outcome {
   };
 }
 
-/** Runs one simple command. Pure: the input world is never changed. */
-export function execute(world: World, invocation: Invocation): Outcome {
+/** Runs one simple command or Hub action. Pure: the input world is never changed. */
+export function execute(
+  world: World,
+  invocation: Invocation | HubInvocation,
+): Outcome {
+  if ("kind" in invocation) return act(world, invocation);
   const time = timeAt(world.seq);
   let current: World = { ...world, seq: world.seq + 1, pending: undefined };
   const machine = machineOf(current, invocation.machine);

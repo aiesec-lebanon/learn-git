@@ -61,6 +61,8 @@ export const REFUSAL_GUIDE: Readonly<Record<RefusalCode, string>> = {
   "operation-in-progress":
     "A merge is paused. Finish it with git commit once every conflict is resolved, or undo it with git merge --abort.",
   "no-operation": "There's no paused merge to continue or abort right now.",
+  "hub-refused":
+    "The Hub said no; its message says why. Fix that first, then try the button again.",
   "shell-error":
     "The shell couldn't run that line. The message above says why.",
 };

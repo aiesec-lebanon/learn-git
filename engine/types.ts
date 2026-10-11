@@ -179,9 +179,33 @@ export type HostedRepo = {
 
 /** The Hub's own state (ADR-009); Git data stays in the bare repositories. */
 export type HubState = {
-  /** Account logins: the learner (`you`) and every repository owner. */
+  /** Account logins: the learner (`you`), every repository owner and every other machine. */
   readonly accounts: readonly string[];
   readonly repos: ReadonlyMap<string, HostedRepo>;
+};
+
+export type GitignoreTemplate = "node" | "python";
+
+/** Something a person (or a scripted teammate) does on the Hub. */
+export type HubAction = {
+  readonly type: "create-repository";
+  readonly name: string;
+  readonly readme?: boolean;
+  readonly gitignore?: GitignoreTemplate;
+  readonly license?: "mit";
+};
+
+/** A Hub action as an invocation: `actor` is the account that acts. */
+export type HubInvocation = {
+  readonly kind: "hub";
+  readonly actor: string;
+  readonly action: HubAction;
+};
+
+/** What a Hub action changed on the Hub (Git changes are separate effects). */
+export type HubEvent = {
+  readonly type: "repository-created";
+  readonly repo: string;
 };
 
 export type WorldSpec = MachineSpec & {
@@ -327,6 +351,7 @@ export type Effect =
       /** The script's sentence for narration, on its last command. */
       readonly says?: string;
     }
+  | { readonly kind: "hub"; readonly actor: string; readonly event: HubEvent }
   | { readonly kind: "screen-cleared" };
 
 export type RefusalCode =
@@ -360,6 +385,7 @@ export type RefusalCode =
   | "push-rejected"
   | "divergent-branches"
   | "remote-rejected"
+  | "hub-refused"
   | "shell-error";
 
 export type EditorRequest = {

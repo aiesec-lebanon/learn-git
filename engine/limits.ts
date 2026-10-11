@@ -7,6 +7,7 @@ export const LIMITS = {
   files: 500,
   pathDepth: 20,
   messageChars: 10_000,
+  hubTextChars: 10_000,
   historySnapshots: 500,
   sandboxes: 5,
   diffLines: 2000,

@@ -38,5 +38,6 @@ export const REFUSAL_FACTS: Readonly<Record<RefusalCode, string>> = {
     "Both sides have new commits, and Git needs to know how to combine them.",
   "push-rejected":
     "The remote has commits the push would remove, so nothing moved there.",
+  "hub-refused": "The Hub did not allow that, so nothing changed there.",
   "shell-error": "The shell could not run that line.",
 };

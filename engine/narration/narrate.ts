@@ -1,6 +1,7 @@
 import { subjectOf } from "../commit/message";
 import { displayRelative, relativeTo } from "../files/paths";
 import { isGitPath } from "../files/worktree";
+import { hubEventSentence } from "../hub/events";
 import { abbreviate } from "../objects/abbrev";
 import { readObject } from "../objects/pool";
 import { shortRefName } from "../refs/names";
@@ -162,6 +163,9 @@ export function narrate(effects: readonly Effect[], world: World): Narration {
       case "actor":
         lines.push(e.says ?? `${e.actor} acted.`);
         break;
+      case "hub":
+        lines.push(hubEventSentence(e.actor, e.event));
+        break;
       default: {
         const never: never = e;
         return never;
@@ -185,6 +189,10 @@ function announce(
   if (actor?.kind === "actor") {
     return clip(actor.says ?? `${actor.actor} acted.`, MAX_WORDS);
   }
+  const hub = effects.flatMap((e) =>
+    e.kind === "hub" ? [hubEventSentence(e.actor, e.event)] : [],
+  );
+  if (hub.length) return clip(hub.join(" "), MAX_WORDS);
   const commit = effects.find(
     (e) => e.kind === "object-written" && e.type === "commit",
   );

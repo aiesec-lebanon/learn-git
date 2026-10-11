@@ -11,6 +11,7 @@ import {
 } from "@/engine";
 import { useAnnounce } from "@/features/announcer/announcer";
 import { CommandChips } from "@/features/chips/chips";
+import { ConflictResolver } from "@/features/conflict/resolver";
 import type { Hints } from "@/content/define";
 import { Guide } from "@/features/guide/guide";
 import { HintLadder } from "@/features/guide/hint-ladder";
@@ -150,6 +151,7 @@ export function Sandbox({
           achieved={report?.ok ?? false}
         />
         <Stage session={session} />
+        <ConflictResolver session={session} />
       </div>
       <div className="grid content-start gap-4">
         <div className="hidden md:block">

@@ -123,3 +123,23 @@ export const bakeSalePriceClash = defineWorld({
     'git commit -am "Lower the lemon cake price"',
   ],
 });
+
+/** Three branches off the first snapshot: bags (ahead), hours (also lowers the price), pricing (raises it). HEAD on main. */
+export const bakeSaleThreeBranches = defineWorld({
+  files,
+  cwd: "bake-sale",
+  setup: [
+    ...FIRST_COMMIT,
+    "git switch -c bags",
+    writeFile("README.md", README_BAG),
+    'git commit -am "Ask for bags"',
+    "git switch -c hours main",
+    writeFile("index.html", INDEX_LATER),
+    writeFile("menu.html", MENU_YOURS),
+    'git commit -am "Open longer, lower the lemon cake price"',
+    "git switch -c pricing main",
+    writeFile("menu.html", MENU_SAM),
+    'git commit -am "Raise the lemon cake price"',
+    "git switch main",
+  ],
+});

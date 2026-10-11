@@ -3,6 +3,7 @@ import type { TargetSpec, WorldSpec } from "@/engine";
 import type { Hints } from "./define";
 import { SCENES } from "./lessons";
 import { lessonCode, readyLessons } from "./registry";
+import { conflictKit } from "./worlds/conflict-kit";
 import { emptyFolder } from "./worlds/empty-folder";
 import { recipeSiteWithIdentity } from "./worlds/recipe-site";
 
@@ -21,6 +22,7 @@ const EMPTY: StarterWorld = {
 export const STARTER_WORLDS: readonly StarterWorld[] = [
   EMPTY,
   { id: "recipe-site", title: "Recipe site", world: recipeSiteWithIdentity },
+  { id: "conflict-kit", title: "Conflict kit", world: conflictKit },
 ];
 
 export type PlaygroundPrompt = {

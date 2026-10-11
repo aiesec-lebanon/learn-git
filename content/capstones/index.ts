@@ -3,12 +3,14 @@ import type { ChapterId } from "../registry";
 import b1 from "./b1";
 import b2 from "./b2";
 import b3 from "./b3";
+import b4 from "./b4";
 
 /** Capstones that are written; a chapter without one shows none. */
 export const CAPSTONES: Partial<Record<ChapterId, CapstoneScene>> = {
   b1,
   b2,
   b3,
+  b4,
 };
 
 export const readyCapstones = (): readonly CapstoneScene[] =>

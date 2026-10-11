@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+import { createWorld, Session } from "@/engine";
 import { choosePlayground, playgroundHref, PROMPTS } from "./playground";
 import { readyLessons } from "./registry";
 
@@ -16,6 +17,18 @@ describe("playground query", () => {
       "B1.3 History is a chain of snapshots",
     );
     expect(choosePlayground(null, "b1-2").prompt?.goal).toContain("typo fix");
+  });
+
+  it("offers the Conflict kit: notes fast-forwards, pricing conflicts", () => {
+    const kit = choosePlayground("conflict-kit", null);
+    expect(kit.starter?.title).toBe("Conflict kit");
+    const session = new Session(createWorld(kit.world));
+    expect(session.run("git merge notes")[0]?.outcome.output.stdout).toContain(
+      "Fast-forward",
+    );
+    expect(
+      session.run("git merge pricing")[0]?.outcome.output.stdout,
+    ).toContain("CONFLICT (content): Merge conflict in menu.html");
   });
 
   it("falls back to the empty folder for anything else", () => {

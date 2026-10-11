@@ -153,6 +153,8 @@ export function pullCompare(
   fullName: string,
   pull: PullRequest,
 ): CompareView | null {
+  if (pull.merged)
+    return compareCommits(world, fullName, pull.merged.base, pull.merged.head);
   const { refs } = repoOf(world, hostedRepo(world, fullName).repo);
   const base = refs.get(branchRef(pull.base));
   const head = refs.get(branchRef(pull.head));
@@ -200,6 +202,7 @@ export function openPullRequest(
     state: "open",
     comments: [],
     reviews: [],
+    branchEvents: [],
   };
   return {
     ok: true,

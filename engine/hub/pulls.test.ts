@@ -53,6 +53,7 @@ describe("opening a pull request", () => {
       state: "open",
       comments: [],
       reviews: [],
+      branchEvents: [],
     });
     const second = hub(
       runLine(

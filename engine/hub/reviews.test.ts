@@ -165,7 +165,7 @@ describe("the pull request timeline", () => {
           ? `commit ${item.subject} by ${item.author}`
           : item.kind === "review"
             ? `review ${item.review.state} by ${item.review.author}`
-            : `${item.kind} by ${item.author}`,
+            : `${item.kind} by ${"author" in item ? item.author : item.by}`,
       ),
     ).toEqual([
       "opened by you",

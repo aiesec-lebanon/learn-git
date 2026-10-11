@@ -59,3 +59,4 @@ export { pullCompare } from "./hub/pulls";
 export { reviewDecision } from "./hub/reviews";
 export { pullTimeline } from "./hub/timeline";
 export type { TimelineItem } from "./hub/timeline";
+export { mergeBlockers } from "./hub/merge";

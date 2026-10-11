@@ -162,6 +162,8 @@ export type BranchRule = {
   readonly branch: string;
   /** Changes arrive only through pull requests (direct pushes refused). */
   readonly requirePullRequest: boolean;
+  /** Approving reviews a pull request needs before it merges (no open change requests either). */
+  readonly requiredApprovals?: number;
 };
 
 export type HostedRepoSpec = {
@@ -192,6 +194,24 @@ export type PullRequest = {
   readonly state: "open" | "closed" | "merged";
   readonly comments: readonly HubComment[];
   readonly reviews: readonly Review[];
+  readonly merged?: PullMerge;
+  /** Deletions and restorations of the head branch, oldest first. */
+  readonly branchEvents: readonly BranchEvent[];
+};
+
+/** How a pull request merged: who, when, the merge commit and the tips it joined. */
+export type PullMerge = {
+  readonly by: string;
+  readonly time: number;
+  readonly commit: Oid;
+  readonly base: Oid;
+  readonly head: Oid;
+};
+
+export type BranchEvent = {
+  readonly kind: "deleted" | "restored";
+  readonly by: string;
+  readonly time: number;
 };
 
 /** A conversation comment (Markdown). */
@@ -261,6 +281,11 @@ export type HubAction =
       readonly state: ReviewState;
       readonly body?: string;
       readonly comments?: readonly LineComment[];
+    }
+  | {
+      readonly type: "merge-pull-request" | "delete-branch" | "restore-branch";
+      readonly repo: string;
+      readonly number: number;
     };
 
 /** A Hub action as an invocation: `actor` is the account that acts. */
@@ -289,6 +314,17 @@ export type HubEvent =
       readonly repo: string;
       readonly number: number;
       readonly state: ReviewState;
+    }
+  | {
+      readonly type: "pull-request-merged";
+      readonly repo: string;
+      readonly number: number;
+      readonly base: string;
+    }
+  | {
+      readonly type: "branch-deleted" | "branch-restored";
+      readonly repo: string;
+      readonly branch: string;
     };
 
 export type WorldSpec = MachineSpec & {

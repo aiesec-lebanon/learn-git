@@ -12,6 +12,7 @@ import type {
 import { timeAt } from "../world/clock";
 import { hostedRepoId } from "../world/network";
 import { hubCommit, setHubBranch } from "./commit";
+import { runPullAction } from "./merge";
 import { openPullRequest } from "./pulls";
 import { refuseHub, type HubContext, type HubResult } from "./result";
 import { commentOnPull, reviewPull } from "./reviews";
@@ -99,6 +100,10 @@ function perform(ctx: HubContext, action: HubAction): HubResult {
       return commentOnPull(ctx, action);
     case "review":
       return reviewPull(ctx, action);
+    case "merge-pull-request":
+    case "delete-branch":
+    case "restore-branch":
+      return runPullAction(ctx, action);
     default: {
       const never: never = action;
       return never;
@@ -117,6 +122,12 @@ export function hubActionText(action: HubAction): string {
       return `Hub: comment on #${action.number}`;
     case "review":
       return `Hub: ${REVIEW_WORDS[action.state]} #${action.number}`;
+    case "merge-pull-request":
+      return `Hub: merge pull request #${action.number}`;
+    case "delete-branch":
+      return `Hub: delete the branch of #${action.number}`;
+    case "restore-branch":
+      return `Hub: restore the branch of #${action.number}`;
     default: {
       const never: never = action;
       return never;

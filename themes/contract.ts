@@ -103,6 +103,8 @@ export type SkinLabel = Readonly<{
   current: boolean;
   /** Note colour slot: 0 for the default branch, 1 to 3 for others. */
   slot: 0 | 1 | 2 | 3;
+  /** Small print under the label (counters, last contact). */
+  note?: string;
 }>;
 
 /** How a theme draws the commit graph; it sees view data only (ADR-007). */

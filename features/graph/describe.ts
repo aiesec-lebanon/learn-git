@@ -33,10 +33,10 @@ export function commitNameParts(
           ? `parent ${parents[0]}`
           : `parents ${parents.join(" and ")}`,
     ),
-    ...labelsAt(view, commit.oid).map((l) => ({
-      text: l.kind === "tag" ? `tag ${l.name}` : l.name,
-      isolate: true,
-    })),
+    ...labelsAt(view, commit.oid).flatMap((l) => [
+      { text: l.kind === "tag" ? `tag ${l.name}` : l.name, isolate: true },
+      ...(l.note ? [plain(l.note)] : []),
+    ]),
   ];
   if (headAt(view, commit.oid))
     parts.push(plain(view.head.kind === "detached" ? "detached HEAD" : "HEAD"));

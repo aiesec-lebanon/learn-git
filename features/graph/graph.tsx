@@ -43,6 +43,7 @@ function stacks(view: RepoView, commit: CommitView) {
       kind: label.kind,
       current,
       slot: slotOf(label.name),
+      ...(label.note ? { note: label.note } : {}),
     };
     if (label.kind === "branch") above.push(skinLabel);
     else below.push(skinLabel);
@@ -97,7 +98,10 @@ export function CommitGraph({
   highlight,
   onLabelHover,
   onCommitHover,
+  scope = "",
 }: {
+  /** Prefix for choreography keys when several graphs share a stage. */
+  scope?: string;
   view: RepoView;
   layout: Layout;
   label: string;
@@ -171,7 +175,7 @@ export function CommitGraph({
               return (
                 <path
                   key={edge.key}
-                  data-choreo={`edge:${edge.key}`}
+                  data-choreo={`${scope}edge:${edge.key}`}
                   d={skin.edgePath({ ...edge, ghost })}
                   fill="none"
                   stroke={ghost ? "var(--g-dim)" : "var(--g-edge)"}
@@ -207,7 +211,7 @@ export function CommitGraph({
                     {above.map((l) => (
                       <span
                         key={l.key}
-                        data-choreo={`label:${l.key}`}
+                        data-choreo={`${scope}label:${l.key}`}
                         {...(l.kind === "branch"
                           ? dropProps(drop, branchTarget(l.text))
                           : {})}
@@ -232,7 +236,7 @@ export function CommitGraph({
                   </div>
                   <button
                     type="button"
-                    data-choreo={`commit:${commit.oid}`}
+                    data-choreo={`${scope}commit:${commit.oid}`}
                     ref={(el) => {
                       if (el) buttons.current.set(commit.oid, el);
                       else buttons.current.delete(commit.oid);
@@ -273,7 +277,7 @@ export function CommitGraph({
                     className="absolute top-8 left-0 flex -translate-x-1/2 flex-col items-center gap-1"
                   >
                     {below.map((l) => (
-                      <span key={l.key} data-choreo={`label:${l.key}`}>
+                      <span key={l.key} data-choreo={`${scope}label:${l.key}`}>
                         <skin.Label label={l} />
                       </span>
                     ))}

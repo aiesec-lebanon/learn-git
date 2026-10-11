@@ -4,8 +4,10 @@ import {
   resolveHead,
   shortRefName,
   subjectOf,
+  trackingOf,
   type Commit,
   type Oid,
+  type RefName,
   type Repo,
   type RepoId,
   type World,
@@ -28,6 +30,8 @@ export type LabelView = {
   readonly name: string;
   readonly kind: "branch" | "remote" | "tag";
   readonly target: Oid;
+  /** Small print under the label: `ahead 1 · behind 2`, `last contact 00:12`. */
+  readonly note?: string;
 };
 
 export type HeadView =
@@ -53,6 +57,45 @@ const KINDS = [
   ["refs/tags/", "tag"],
 ] as const;
 
+/** `00:12`: the simulated clock (UTC) at `time`. */
+export const clockTime = (time: number) =>
+  new Date(time * 1000).toISOString().slice(11, 16);
+
+/**
+ * When this repository last talked to the remote about `ref`: its newest
+ * reflog entry, else the clone (Git logs no entry for refs a clone writes).
+ */
+export function lastContact(repo: Repo, ref: string): number | null {
+  const own = repo.reflogs.get(ref)?.at(-1)?.who.time;
+  if (own !== undefined) return own;
+  const cloned = repo.reflogs
+    .get("HEAD")
+    ?.find((e) => e.message.startsWith("clone: "));
+  return cloned?.who.time ?? null;
+}
+
+function labelNote(
+  world: World,
+  repo: Repo,
+  ref: RefName,
+  kind: LabelView["kind"],
+): string | undefined {
+  if (kind === "remote") {
+    const time = lastContact(repo, ref);
+    return time === null ? undefined : `last contact ${clockTime(time)}`;
+  }
+  if (kind !== "branch") return undefined;
+  const machine = world.machines.get(repo.machine);
+  const t = machine && trackingOf(world, machine, repo, ref);
+  if (!t) return undefined;
+  if (t.gone) return "upstream gone";
+  const parts = [
+    ...(t.ahead ? [`ahead ${t.ahead}`] : []),
+    ...(t.behind ? [`behind ${t.behind}`] : []),
+  ];
+  return parts.length ? parts.join(" · ") : undefined;
+}
+
 export function repoView(world: World, repo: Repo): RepoView {
   const head = resolveHead(repo);
   const { live, logged } = reachability(world.objects, repo);
@@ -69,7 +112,15 @@ export function repoView(world: World, repo: Repo): RepoView {
   const labels: LabelView[] = [];
   for (const [ref, target] of repo.refs) {
     const kind = KINDS.find(([prefix]) => ref.startsWith(prefix))?.[1];
-    if (kind) labels.push({ ref, name: shortRefName(ref), kind, target });
+    if (!kind) continue;
+    const note = repo.bare ? undefined : labelNote(world, repo, ref, kind);
+    labels.push({
+      ref,
+      name: shortRefName(ref),
+      kind,
+      target,
+      ...(note ? { note } : {}),
+    });
   }
   return {
     id: repo.id,
@@ -78,6 +129,11 @@ export function repoView(world: World, repo: Repo): RepoView {
     head:
       repo.head.kind === "detached"
         ? { kind: "detached", target: repo.head.oid }
-        : { kind: "branch", branch: shortRefName(repo.head.ref), target: head },
+        : {
+            kind: "branch",
+            branch: shortRefName(repo.head.ref),
+            // A bare repository has no checkout, so no HEAD is drawn.
+            target: repo.bare ? null : head,
+          },
   };
 }

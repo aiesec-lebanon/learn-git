@@ -4,12 +4,15 @@ import { useLayoutEffect, useMemo, useRef } from "react";
 import type { Session } from "@/engine";
 import { useSessionAnnouncer } from "@/features/announcer/announcer";
 import { CommitGraph, graphLayout } from "@/features/graph/graph";
+import type { Layout } from "@/features/graph/layout";
 import { motionTokens, useMotion } from "@/features/motion/policy";
 import { Area } from "./area";
 import { Annotations } from "./choreography/annotations";
 import { planChoreography, type GraphFrame } from "./choreography/plan";
 import { playChoreography, type Timeline } from "./choreography/runner";
 import { FileCard } from "./file-card";
+import { RepoPanels } from "./multi-repo/panels";
+import { planTransfers, type ScopedGraph } from "./multi-repo/transfer";
 import type { FileCard as Card } from "./files";
 import { stageFrame, type StageFrame } from "./frame";
 import { StageBoundary } from "./stage-boundary";
@@ -47,13 +50,18 @@ export function StageView({
   at?: number;
 }) {
   const motion = useMotion();
-  const { files, view } = frame;
+  const { files, view, panels } = frame;
   const graph = useMemo<GraphFrame | null>(
     () => (view ? { layout: graphLayout(view), head: view.head.target } : null),
     [view],
   );
+  const panelLayouts = useMemo(
+    () => new Map(panels.map((p) => [p.id, graphLayout(p.view)])),
+    [panels],
+  );
   const root = useRef<HTMLDivElement>(null);
   const shown = useRef<GraphFrame | null>(null);
+  const shownPanels = useRef<ReadonlyMap<string, Layout>>(new Map());
   const timeline = useRef<Timeline | null>(null);
   const played = useRef(frame);
 
@@ -69,19 +77,48 @@ export function StageView({
       frame.effects.length &&
       root.current
     ) {
-      const steps = planChoreography(
+      const main = view?.id ?? null;
+      const local = planChoreography(
         {
-          effects: frame.effects,
+          effects: frame.effects.filter(
+            (e) => !("repo" in e) || e.repo === main,
+          ),
           before: shown.current,
           after: graph,
           root: files.root,
         },
         motionTokens,
       );
-      timeline.current = playChoreography(root.current, steps);
+      const graphs = new Map<string, ScopedGraph>(
+        panels.map((p) => [
+          p.id,
+          {
+            scope: p.scope,
+            before: shownPanels.current.get(p.id) ?? null,
+            after: panelLayouts.get(p.id) ?? null,
+          },
+        ]),
+      );
+      if (main) {
+        graphs.set(main, {
+          scope: "",
+          before: shown.current?.layout ?? null,
+          after: graph?.layout ?? null,
+        });
+      }
+      const end = Math.max(0, ...local.map((s) => s.delay + s.duration));
+      const network = planTransfers(
+        frame.effects,
+        graphs,
+        main,
+        end,
+        motionTokens,
+      );
+      timeline.current = playChoreography(root.current, [...local, ...network]);
     }
     shown.current = graph;
-  }, [frame, graph, files.root, animate, motion]);
+    shownPanels.current = panelLayouts;
+  }, [frame, graph, files.root, animate, motion, panels, panelLayouts, view]);
 
   useLayoutEffect(() => {
     const t = timeline.current;
@@ -95,7 +132,17 @@ export function StageView({
   return (
     <div ref={root} className="grid gap-4">
       {motion === "reduce" ? <Annotations notes={frame.notes} /> : null}
-      <Area title="Repository" hint={view ? "inside .git" : undefined}>
+      <RepoPanels panels={panels} layouts={panelLayouts} />
+      <Area
+        title="Repository"
+        hint={
+          view
+            ? panels.length
+              ? "your clone, inside .git"
+              : "inside .git"
+            : undefined
+        }
+      >
         {view && graph ? (
           <CommitGraph
             view={view}

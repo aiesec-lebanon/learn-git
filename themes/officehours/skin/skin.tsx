@@ -62,8 +62,21 @@ function Node({ node }: { node: SkinNode }) {
   );
 }
 
-/** Branches are sticky notes, HEAD is circled in red, remote-tracking labels are dashed. */
+/** A label with its small print (counters, last contact) underneath. */
 function Label({ label }: { label: SkinLabel }) {
+  if (!label.note) return <LabelBody label={label} />;
+  return (
+    <span className="inline-flex flex-col items-center gap-0.5">
+      <LabelBody label={label} />
+      <span className="font-display text-[11px] leading-3 whitespace-nowrap text-g-text">
+        {label.note}
+      </span>
+    </span>
+  );
+}
+
+/** Branches are sticky notes, HEAD is circled in red, remote-tracking labels are dashed. */
+function LabelBody({ label }: { label: SkinLabel }) {
   const text = <bdi>{label.text}</bdi>;
   if (label.kind === "head") {
     const w = Math.round(label.text.length * 8.3 + 30);

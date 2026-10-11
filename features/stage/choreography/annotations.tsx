@@ -15,6 +15,14 @@ export function annotate(
   const id = (oid: Oid | null) =>
     oid ? abbreviate(world.objects, oid) : "none";
   const prefix = root === "/" ? "/" : `${root}/`;
+  const place = (repo: string) => {
+    const found = world.repos.get(repo);
+    if (found?.bare) return "the Hub";
+    if (!found || found.machine === "you") return "your repository";
+    return `${found.machine}'s clone`;
+  };
+  const where = (repo: string) =>
+    world.repos.get(repo)?.bare ? " on the Hub" : "";
   const verbs = { added: "created", modified: "changed", deleted: "deleted" };
   const out: string[] = [];
   for (const e of effects) {
@@ -38,7 +46,20 @@ export function annotate(
         if (e.type === "commit") out.push(`new commit ${id(e.oid)}`);
         break;
       case "ref-updated":
-        out.push(`${shortRefName(e.ref)}: ${id(e.from)} → ${id(e.to)}`);
+        out.push(
+          `${shortRefName(e.ref)}${where(e.repo)}: ${id(e.from)} → ${id(e.to)}`,
+        );
+        break;
+      case "transfer": {
+        const n = e.oids.filter(
+          (oid) => world.objects.get(oid)?.type === "commit",
+        ).length;
+        if (n)
+          out.push(`${n} commit${n === 1 ? "" : "s"} copied to ${place(e.to)}`);
+        break;
+      }
+      case "actor":
+        out.push(e.says ?? `${e.actor} acted`);
         break;
       case "head-changed":
         out.push(

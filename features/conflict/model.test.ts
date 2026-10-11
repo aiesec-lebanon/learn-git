@@ -82,7 +82,10 @@ describe("conflict model", () => {
   });
 
   it("names a stopped rebase by the pick it replays", () => {
-    const world = runLine(start, "git switch -q pricing; git rebase main").world;
+    const world = runLine(
+      start,
+      "git switch -q pricing; git rebase main",
+    ).world;
     const paused = pausedMerge(world);
     expect(paused?.kind).toBe("rebase");
     expect(paused?.message).toMatch(/^\w{7} Raise the cake price$/);

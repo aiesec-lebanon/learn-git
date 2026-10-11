@@ -27,6 +27,12 @@ const WIDGETS: Record<WidgetName, ComponentType> = {
   "hash-chain": lazy(() =>
     import("./hash-chain").then((m) => ({ default: m.HashChain })),
   ),
+  "diff-anatomy": lazy(() =>
+    import("./diff-anatomy").then((m) => ({ default: m.DiffAnatomy })),
+  ),
+  "diff-lens": lazy(() =>
+    import("./diff-lens").then((m) => ({ default: m.DiffLens })),
+  ),
 };
 
 /** A lesson widget by name, loaded with its own code (R3). */

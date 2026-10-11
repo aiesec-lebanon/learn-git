@@ -6,6 +6,8 @@ export const WIDGET_NAMES = [
   "status-lens",
   "history-scrubber",
   "hash-chain",
+  "diff-anatomy",
+  "diff-lens",
 ] as const;
 
 export type WidgetName = (typeof WIDGET_NAMES)[number];

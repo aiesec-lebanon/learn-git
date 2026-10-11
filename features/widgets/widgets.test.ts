@@ -1,6 +1,13 @@
 import { describe, expect, it } from "vitest";
 import { identityCommands } from "./identity-form.model";
 import { WIDGET_NAMES } from "./names";
+import {
+  anatomySample,
+  diffLines,
+  lensCommand,
+  lensSnapshots,
+} from "./diff-lens.model";
+import { bakeSaleHistory } from "@/content/worlds/bake-sale";
 import { snapshotAt, snapshotText } from "./snapshot-scrubber.model";
 import { carryable, dropCommand, STAGING } from "./stage-files.model";
 import { lensSections } from "./status-lens.model";
@@ -18,6 +25,48 @@ const MDX = import.meta.glob<string>("../../content/lessons/*/lesson.mdx", {
   query: "?raw",
   import: "default",
   eager: true,
+});
+
+describe("diff widgets", () => {
+  it("offer each commit, the staging area and the working tree, oldest first", () => {
+    const snapshots = lensSnapshots(createWorld(bakeSaleHistory));
+    expect(snapshots?.map((s) => s.label)).toEqual([
+      "HEAD~1: First snapshot",
+      "HEAD: Add cookies to the menu",
+      "Staging area",
+      "Working tree",
+    ]);
+    expect(lensSnapshots(createWorld(recipeSite))).toBeNull();
+  });
+
+  it("print the git diff form for any two snapshots, older side first", () => {
+    const snapshots = lensSnapshots(createWorld(bakeSaleHistory)) ?? [];
+    const cmd = (a: string, b: string) => lensCommand(snapshots, a, b);
+    expect(cmd("index", "worktree")).toBe("git diff");
+    expect(cmd("worktree", "index")).toBe("git diff");
+    expect(cmd("HEAD", "index")).toBe("git diff --staged");
+    expect(cmd("HEAD~1", "index")).toBe("git diff --staged HEAD~1");
+    expect(cmd("HEAD", "worktree")).toBe("git diff HEAD");
+    expect(cmd("HEAD", "HEAD~1")).toBe("git diff HEAD~1 HEAD");
+    expect(cmd("index", "index")).toBeNull();
+  });
+
+  it("label every line of a diff with its part", () => {
+    expect(diffLines("")).toEqual([]);
+    expect(anatomySample().map((l) => l.part)).toEqual([
+      "header",
+      "header",
+      "header",
+      "header",
+      "hunk",
+      "context",
+      "context",
+      "removed",
+      "added",
+      "context",
+      "context",
+    ]);
+  });
 });
 
 describe("widgets", () => {

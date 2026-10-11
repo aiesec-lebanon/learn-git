@@ -29,6 +29,8 @@ export type { CommandInfo } from "./commands/info";
 export { displayRelative, resolvePath } from "./files/paths";
 export { shellQuote } from "./cli/tokenize";
 export { commitSnapshot, firstParentChain } from "./preview/chain";
+export { DIFF_FORMS } from "./diff/forms";
+export type { DiffArea } from "./diff/forms";
 export type { CommitSnapshot, SnapshotFile } from "./preview/chain";
 export { rewriteMessage } from "./preview/rewrite-message";
 export type { Rewritten } from "./preview/rewrite-message";

@@ -135,6 +135,8 @@ export type World = {
   readonly system: ConfigFile;
   readonly machines: ReadonlyMap<MachineId, Machine>;
   readonly repos: ReadonlyMap<RepoId, Repo>;
+  /** Scripted teammates and which of their scripts already acted. */
+  readonly actors?: ActorSchedule;
   /** Present when the world has a Hub. */
   readonly hub?: HubState;
   /** The objects each repository has (the pool is shared; transfers move availability). */
@@ -190,6 +192,34 @@ export type WorldSpec = MachineSpec & {
   readonly hub?: Readonly<Record<string, HostedRepoSpec>>;
   /** Commands run once the files exist, e.g. to record earlier commits. */
   readonly setup?: readonly SetupStep[];
+};
+
+/** When a scripted actor acts (each script acts once). */
+export type Trigger =
+  /** After the learner's `step`-th command in this timeline. */
+  | { readonly kind: "after-step"; readonly step: number }
+  /** After a learner command whose text matches `pattern` (a regular expression). */
+  | { readonly kind: "after-command"; readonly pattern: string }
+  /** Once the simulated clock reaches `time` (seconds since the epoch). */
+  | { readonly kind: "at-time"; readonly time: number };
+
+/** A teammate's scripted action: lines run in their machine's shell. */
+export type ActorScript = {
+  readonly id: string;
+  /** The machine the lines run on, e.g. `sam`. */
+  readonly machine: MachineId;
+  /** The name narration and the timeline show, e.g. `Sam`. */
+  readonly name: string;
+  readonly trigger: Trigger;
+  readonly run: readonly string[];
+  /** One sentence for "What happened" and the announcer. */
+  readonly says?: string;
+};
+
+/** The schedule a world carries, and the scripts that already acted (so Rewind undoes them). */
+export type ActorSchedule = {
+  readonly scripts: readonly ActorScript[];
+  readonly fired: readonly string[];
 };
 
 /** A shell word; `pattern` is set when it has unquoted `*`, `?` or `[`. */
@@ -287,7 +317,12 @@ export type Effect =
       readonly code: RefusalCode;
       readonly subject?: string;
     }
-  | { readonly kind: "actor"; readonly actor: string }
+  | {
+      readonly kind: "actor";
+      readonly actor: string;
+      /** The script's sentence for narration, on its last command. */
+      readonly says?: string;
+    }
   | { readonly kind: "screen-cleared" };
 
 export type RefusalCode =

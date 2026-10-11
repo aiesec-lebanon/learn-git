@@ -1,0 +1,88 @@
+import { runLine } from "../run";
+import type { ActorScript, Outcome, World } from "../types";
+import { timeAt } from "./clock";
+
+/** What the learner just did, as the triggers see it. */
+export type LearnerMove = {
+  /** Learner commands run so far in this timeline. */
+  readonly step: number;
+  /** The commands of the line just run. */
+  readonly texts: readonly string[];
+};
+
+/** One actor action: its lines' outcomes, each with the `actor` effect first. */
+export type ActorRun = {
+  readonly script: ActorScript;
+  readonly texts: readonly string[];
+  readonly outcomes: readonly Outcome[];
+};
+
+function due(world: World, script: ActorScript, move: LearnerMove): boolean {
+  const { trigger } = script;
+  switch (trigger.kind) {
+    case "after-step":
+      return move.step >= trigger.step;
+    case "after-command":
+      return move.texts.some((t) => new RegExp(trigger.pattern).test(t));
+    case "at-time":
+      return timeAt(world.seq) >= trigger.time;
+  }
+}
+
+/** Adds a schedule to a world (content worlds attach their teammates here). */
+export function withActors(
+  world: World,
+  scripts: readonly ActorScript[],
+): World {
+  return { ...world, actors: { scripts, fired: [] } };
+}
+
+/**
+ * Runs every script that is due after `move`, in schedule order; a script
+ * that fires can make a later one due (one pass, deterministic). Actor
+ * outcomes are never counted toward par.
+ */
+export function runActors(
+  world: World,
+  move: LearnerMove,
+): { world: World; runs: readonly ActorRun[] } {
+  let current = world;
+  const runs: ActorRun[] = [];
+  for (const script of world.actors?.scripts ?? []) {
+    const schedule = current.actors;
+    if (!schedule || schedule.fired.includes(script.id)) continue;
+    if (!due(current, script, move)) continue;
+    const outcomes: Outcome[] = [];
+    const texts: string[] = [];
+    for (const line of script.run) {
+      const ran = runLine(current, line, script.machine);
+      ran.outcomes.forEach((outcome, i) => {
+        outcomes.push({
+          ...outcome,
+          effects: [{ kind: "actor", actor: script.name }, ...outcome.effects],
+          meta: { ...outcome.meta, counted: false },
+        });
+        texts.push(ran.texts[i] ?? "");
+      });
+      current = ran.world;
+    }
+    const said = outcomes.at(-1);
+    if (said && script.says) {
+      outcomes[outcomes.length - 1] = {
+        ...said,
+        effects: [
+          { kind: "actor", actor: script.name, says: script.says },
+          ...said.effects.slice(1),
+        ],
+      };
+    }
+    current = {
+      ...current,
+      actors: { ...schedule, fired: [...schedule.fired, script.id] },
+    };
+    const last = outcomes.at(-1);
+    if (last) outcomes[outcomes.length - 1] = { ...last, world: current };
+    runs.push({ script, texts, outcomes });
+  }
+  return { world: current, runs };
+}

@@ -46,8 +46,10 @@ export function narrate(effects: readonly Effect[], world: World): Narration {
   };
   const here = (path: string) => displayRelative(machine.cwd, path) || ".";
   const repoName = (repo: RepoId) => {
-    const workdir = world.repos.get(repo)?.workdir;
-    return workdir ? home(workdir) : repo;
+    const found = world.repos.get(repo);
+    if (found?.bare)
+      return `the Hub (${found.workdir.slice(1).replace(/\.git$/, "")})`;
+    return found ? home(found.workdir) : repo;
   };
   const inRepo = (repo: RepoId, path: string) =>
     here(`${world.repos.get(repo)?.workdir ?? ""}/${path}`);
@@ -87,7 +89,10 @@ export function narrate(effects: readonly Effect[], world: World): Narration {
         );
         break;
       case "ref-updated": {
-        const name = shortRefName(e.ref);
+        const hosted = world.repos.get(e.repo);
+        const name = hosted?.bare
+          ? `${shortRefName(e.ref)} on the Hub (${hosted.workdir.slice(1).replace(/\.git$/, "")})`
+          : shortRefName(e.ref);
         if (e.from === null && e.to !== null)
           lines.push(`${name} now points at ${id(e.to)}.`);
         else if (e.to === null && e.from !== null)
@@ -155,7 +160,7 @@ export function narrate(effects: readonly Effect[], world: World): Narration {
         lines.push(`Nothing changed. ${REFUSAL_FACTS[e.code]}`);
         break;
       case "actor":
-        lines.push(`${e.actor} acted.`);
+        lines.push(e.says ?? `${e.actor} acted.`);
         break;
       default: {
         const never: never = e;
@@ -176,6 +181,10 @@ function announce(
   id: (oid: Oid) => string,
   subject: (oid: Oid) => string,
 ): string {
+  const actor = effects.find((e) => e.kind === "actor");
+  if (actor?.kind === "actor") {
+    return clip(actor.says ?? `${actor.actor} acted.`, MAX_WORDS);
+  }
   const commit = effects.find(
     (e) => e.kind === "object-written" && e.type === "commit",
   );

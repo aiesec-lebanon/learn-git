@@ -1,10 +1,16 @@
 import { LIMITS } from "./limits";
 import { mergeOutcomes, resume } from "./execute";
 import { runLine } from "./run";
+import { runActors } from "./world/actors";
 import type { InteractionRequest, Outcome, World } from "./types";
 
-/** One command the learner ran, as text, with what it did. */
-export type HistoryEntry = { readonly text: string; readonly outcome: Outcome };
+/** One command the learner (or, with `actor`, a scripted teammate) ran, as text, with what it did. */
+export type HistoryEntry = {
+  readonly text: string;
+  readonly outcome: Outcome;
+  /** The teammate's name when a scripted actor ran it. */
+  readonly actor?: string;
+};
 
 export type SessionSnapshot = {
   readonly world: World;
@@ -43,10 +49,21 @@ export class Session {
     this.cap = options.historyCap ?? LIMITS.historySnapshots;
   }
 
-  /** Runs a typed line; one history entry per command it ran. */
+  /** Runs a typed line; one history entry per command it ran, then any teammate it triggers. */
   run(line: string): readonly HistoryEntry[] {
-    const ran = entriesOf(this.world, line);
-    for (const entry of ran) {
+    const mine = entriesOf(this.world, line);
+    this.record(mine);
+    const waiting = mine.some((e) => e.outcome.request?.kind === "editor");
+    const acted = waiting ? [] : this.actorsAfter(mine.map((e) => e.text));
+    this.record(acted);
+    const ran = [...mine, ...acted];
+    this.latest = ran;
+    this.changed();
+    return ran;
+  }
+
+  private record(entries: readonly HistoryEntry[]): void {
+    for (const entry of entries) {
       this.entries.push(entry);
       this.worlds.push(entry.outcome.world);
     }
@@ -56,9 +73,18 @@ export class Session {
       this.worlds.splice(0, excess);
       this.floor += excess;
     }
-    this.latest = ran;
-    this.changed();
-    return ran;
+  }
+
+  /** Teammates whose triggers the learner's last commands met, as entries. */
+  private actorsAfter(texts: readonly string[]): HistoryEntry[] {
+    const step = this.entries.filter((e) => !e.actor).length;
+    return runActors(this.world, { step, texts }).runs.flatMap((run) =>
+      run.outcomes.map((outcome, i): HistoryEntry => ({
+        text: run.texts[i] ?? "",
+        outcome,
+        actor: run.script.name,
+      })),
+    );
   }
 
   /** Answers the editor the last command waits for (null = closed unsaved). */
@@ -71,7 +97,9 @@ export class Session {
     };
     this.entries[this.entries.length - 1] = entry;
     this.worlds[this.worlds.length - 1] = entry.outcome.world;
-    this.latest = [entry];
+    const acted = entry.outcome.request ? [] : this.actorsAfter([entry.text]);
+    this.record(acted);
+    this.latest = [entry, ...acted];
     this.changed();
   }
 

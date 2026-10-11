@@ -1,8 +1,20 @@
-/** Markdown from the Hub (READMEs, descriptions, comments), shown as plain text for now. */
+import { lazy, Suspense } from "react";
+
+const MarkdownRender = lazy(() =>
+  import("./markdown-render").then((m) => ({ default: m.MarkdownRender })),
+);
+
+/** Hub Markdown (READMEs, descriptions, comments); plain text until the renderer loads. */
 export function HubMarkdown({ text }: { text: string }) {
   return (
-    <div className="whitespace-pre-wrap">
-      <bdi>{text}</bdi>
-    </div>
+    <Suspense
+      fallback={
+        <div className="whitespace-pre-wrap">
+          <bdi>{text}</bdi>
+        </div>
+      }
+    >
+      <MarkdownRender text={text} />
+    </Suspense>
   );
 }

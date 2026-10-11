@@ -102,6 +102,14 @@ describe("compose", () => {
     );
     expect(compose(verb("log"), [true, "  "])).toBe("git log --oneline");
     expect(compose(verb("ls"), [])).toBe("ls");
+    expect(
+      compose(verb("remote"), [
+        false,
+        "add",
+        "origin",
+        "https://hub.test/you/recipes.git",
+      ]),
+    ).toBe("git remote add origin https://hub.test/you/recipes.git");
   });
 
   it("names the first missing required parameter", () => {

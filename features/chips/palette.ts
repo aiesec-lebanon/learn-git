@@ -249,8 +249,13 @@ export const VERBS: readonly ChipVerb[] = [
   {
     program: "git",
     name: "remote",
-    hint: "list the repositories this one talks to",
-    params: [{ kind: "flag", flag: "-v", label: "with addresses" }],
+    hint: "list the repositories this one talks to, or add one",
+    params: [
+      { kind: "flag", flag: "-v", label: "with addresses" },
+      { kind: "value", label: "action", choices: ["add"] },
+      { kind: "value", label: "name" },
+      { kind: "value", label: "address" },
+    ],
     ready: inRepo,
   },
   {

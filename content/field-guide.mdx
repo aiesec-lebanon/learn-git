@@ -1,0 +1,62 @@
+## Install Git
+
+- **Windows:** install Git for Windows from git-scm.com. It brings Git Bash, a terminal where the commands from the lessons work as written, and Git Credential Manager.
+- **macOS:** run `xcode-select --install` for Apple's command line tools, which include Git, or install it with Homebrew: `brew install git`.
+- **Linux:** use your package manager, for example `sudo apt install git` on Debian and Ubuntu or `sudo dnf install git` on Fedora.
+
+Then check that it runs:
+
+```sh
+git --version
+```
+
+## Tell Git who you are
+
+Every commit records a name and an email. Set them once for your account, and make new repositories start on `main`:
+
+```sh
+git config set --global user.name "Your Name"
+git config set --global user.email "you@example.com"
+git config set --global init.defaultBranch main
+```
+
+`git config set` needs Git 2.46 or later; the lessons teach it. With an older Git, leave out `set`:
+
+```sh
+git config --global user.name "Your Name"
+git config --global user.email "you@example.com"
+git config --global init.defaultBranch main
+```
+
+On GitHub, the email decides which account a commit belongs to. To keep your address private, use the `noreply` address from your GitHub email settings.
+
+## Choose an editor
+
+Git opens an editor when it needs a message and you gave none, for example `git commit` without `-m` or a merge that asks for one. Pick one you know:
+
+```sh
+git config set --global core.editor "code --wait"
+git config set --global core.editor nano
+```
+
+The first is Visual Studio Code: `--wait` makes Git wait until you close the file. Save and close the file to carry on; an empty message stops the commit.
+
+## Sign in to GitHub
+
+GitHub does not take your password on the command line. Choose one of two ways:
+
+- **HTTPS with a credential manager.** Git Credential Manager comes with Git for Windows and installs separately on macOS and Linux. The first `git push` opens a browser to sign in, and the manager keeps the token. The GitHub CLI does the same with `gh auth login`.
+- **SSH keys.** Make a key, add the public half (`~/.ssh/id_ed25519.pub`) under SSH and GPG keys in your GitHub settings, then test the connection. Repositories then use addresses like `git@github.com:owner/repo.git`.
+
+```sh
+ssh-keygen -t ed25519 -C "you@example.com"
+ssh -T git@github.com
+```
+
+## Where the sandbox differs
+
+- Nothing leaves your browser. The Hub is a simulated GitHub at `hub.test`, and its teammates follow a script.
+- There is no editor: give commit messages with `-m`, and edit files with `echo` or the file cards.
+- Clocks and identities are fixed, so the same steps give the same commit IDs every time.
+- The sandbox has the commands the lessons need. Anything else answers with a short note instead of running.
+- No sign-in is needed: the simulated Hub trusts every push your lessons allow.

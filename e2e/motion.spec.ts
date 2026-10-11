@@ -17,7 +17,13 @@ test.describe("with motion", () => {
     for (let i = 0; i < 4; i++) await next(page).click();
     await expect(page.getByText("Beat 5 of 5")).toBeVisible();
     await page.waitForFunction(() =>
-      document.getAnimations().every((a) => a.playState !== "running"),
+      document
+        .getAnimations()
+        .every(
+          (a) =>
+            a.playState !== "running" ||
+            a.effect?.getTiming().iterations === Infinity,
+        ),
     );
     const stage = page.getByRole("region", { name: "Lesson stage" });
     await expect(

@@ -1,6 +1,6 @@
 "use client";
 
-import { useId, useState, type ReactNode } from "react";
+import { useEffect, useId, useRef, useState, type ReactNode } from "react";
 import { Button } from "@/ui/button";
 import { chosenText, type Choice, type Hunk } from "./model";
 
@@ -53,6 +53,11 @@ export function HunkView({
   const [withBase, setWithBase] = useState(false);
   const [editing, setEditing] = useState<string | null>(null);
   const editId = useId();
+  const box = useRef<HTMLTextAreaElement>(null);
+  const isEditing = editing !== null;
+  useEffect(() => {
+    if (isEditing) box.current?.focus();
+  }, [isEditing]);
   const panes: [PaneId, string][] = [
     ["ours", `Ours: ${hunk.labels.ours} (${sides.ours})`],
     ...(withBase
@@ -139,6 +144,7 @@ export function HunkView({
           </label>
           <textarea
             id={editId}
+            ref={box}
             value={editing}
             onChange={(event) => setEditing(event.target.value)}
             rows={5}

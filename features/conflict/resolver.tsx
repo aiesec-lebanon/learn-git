@@ -1,6 +1,6 @@
 "use client";
 
-import { useId, useMemo, useState } from "react";
+import { useId, useMemo, useRef, useState } from "react";
 import { shellQuote, type Session } from "@/engine";
 import { useSession } from "@/features/stage/use-session";
 import { Button } from "@/ui/button";
@@ -58,6 +58,7 @@ function FileResolver({
   const [at, setAt] = useState(0);
   const [raw, setRaw] = useState(false);
   const headingId = useId();
+  const top = useRef<HTMLDivElement>(null);
   const text = file.text;
   const segments = useMemo(() => parseConflicts(text ?? ""), [text]);
   const hunks = hunksOf(segments);
@@ -68,6 +69,7 @@ function FileResolver({
   const apply = (replacement: string) => {
     session.run(`edit ${arg}`);
     session.resume(replaceHunk(segments, index, replacement));
+    requestAnimationFrame(() => top.current?.focus());
   };
 
   if (text === null)
@@ -84,7 +86,7 @@ function FileResolver({
     );
 
   return (
-    <div className="grid gap-3">
+    <div ref={top} tabIndex={-1} className="grid gap-3 outline-none">
       {hunk ? (
         <>
           <div className="flex flex-wrap items-center gap-2">

@@ -1,7 +1,9 @@
 import { expect, test } from "./fixtures";
 
 const current = (page: import("@playwright/test").Page) =>
-  page.getByRole("figure").locator('li[aria-current="step"]');
+  page
+    .getByRole("figure", { name: "An example that runs by itself" })
+    .locator('li[aria-current="step"]');
 
 test("the hero holds a still frame under reduced motion until asked to play", async ({
   page,
@@ -28,4 +30,15 @@ test("the hero loops with motion and stops on Pause", async ({ page }) => {
   await expect(
     page.getByRole("button", { name: "Play the example" }),
   ).toBeVisible();
+});
+
+test("home fits a phone without sideways scroll @phone", async ({ page }) => {
+  await page.goto("/");
+  await expect(
+    page.getByRole("figure", { name: "An example that runs by itself" }),
+  ).toBeVisible();
+  const overflow = await page.evaluate(
+    () => document.documentElement.scrollWidth - window.innerWidth,
+  );
+  expect(overflow).toBeLessThanOrEqual(0);
 });

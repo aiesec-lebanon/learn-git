@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { edgePath, handRing, tilt } from "./strokes";
+import { edgePath, handLine, handRing, tilt } from "./strokes";
 
 const edge = (to: [number, number], from: [number, number], merge = false) => ({
   key: `${to}:${from}`,
@@ -14,6 +14,14 @@ describe("hand-drawn strokes", () => {
     expect(handRing(11, 11, 42)).toBe(handRing(11, 11, 42));
     expect(handRing(11, 11, 42)).not.toBe(handRing(11, 11, 43));
     expect(handRing(11, 11, 42)).toMatch(/^M-?[\d.]+ -?[\d.]+(C[-\d. ]+){5}$/);
+  });
+
+  it("draws the same underline for the same seed, across the width", () => {
+    expect(handLine(200, 7)).toBe(handLine(200, 7));
+    expect(handLine(200, 7)).not.toBe(handLine(200, 8));
+    expect(handLine(200, 7)).toMatch(
+      /^M0 [\d.]+C[-\d. ]+S[-\d. ]+ 200 [\d.]+$/,
+    );
   });
 
   it("keeps note tilts small", () => {

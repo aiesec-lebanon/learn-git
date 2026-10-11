@@ -46,6 +46,14 @@ export function handRing(rx: number, ry: number, seed: number, over = 0.55) {
   );
 }
 
+/** A line drawn by hand across `width`: gentle wobbles and a lifted end. */
+export function handLine(width: number, seed: number): string {
+  const r = rng(seed);
+  const y = () => f(2 + (r() - 0.5) * 2.4);
+  const third = width / 3;
+  return `M0 ${y()}C${f(third * 0.5)} ${y()} ${f(third)} ${y()} ${f(third * 1.5)} ${y()}S${f(width * 0.85)} ${y()} ${f(width)} ${f(0.6 + r())}`;
+}
+
 /** Each note keeps its own small tilt, -2.2 to 2.2 degrees. */
 export const tilt = (name: string) => ((hashStr(name) % 9) - 4) * 0.55;
 

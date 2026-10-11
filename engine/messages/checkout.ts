@@ -43,8 +43,29 @@ to do so with:
 
 `;
   },
-  andMore: (count: number) => ` ... and ${count} more.
+  andMore: (count: number) => ` ... and ${count} more.\n`,
+  detachAdvice: (name: string) => `Note: switching to '${name}'.
+
+You are in 'detached HEAD' state. You can look around, make experimental
+changes and commit them, and you can discard any commits you make in this
+state without impacting any branches by switching back to a branch.
+
+If you want to create a new branch to retain commits you create, you may
+do so (now or later) by using -c with the switch command. Example:
+
+  git switch -c <new-branch-name>
+
+Or undo this operation with:
+
+  git switch -
+
+Turn off this advice by setting config variable advice.detachedHead to false
+
 `,
+  updatedPaths: (count: number, from: string) =>
+    `Updated ${count} path${count === 1 ? "" : "s"} from ${from}\n`,
+  referencesGiven: (count: number) =>
+    `fatal: only one reference expected, ${count} given.\n`,
   previousPosition: (short: string, subject: string) =>
     `Previous HEAD position was ${short} ${subject}\n`,
 };

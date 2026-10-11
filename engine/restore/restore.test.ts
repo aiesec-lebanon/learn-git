@@ -27,9 +27,7 @@ const last = (world: World, line: string) =>
 
 describe("restore and its legacy forms", () => {
   it.each([
-    ["git checkout main", "git checkout of a branch or commit (yet)"],
-    ["git checkout", "git checkout of a branch or commit (yet)"],
-    ["git checkout -b topic", "git checkout -b"],
+    ["git checkout -f main", "git checkout --force"],
     ["git reset HEAD~1", "git reset to another commit (yet)"],
     ["git reset --hard", "git reset --hard"],
     ["git restore -p a.txt", "git restore --patch"],
@@ -59,8 +57,8 @@ describe("restore and its legacy forms", () => {
 
   it("refuses unknown commits and paths outside the repository", () => {
     const world = committed();
-    expect(last(world, "git checkout nope -- a.txt")?.output.stderr).toMatch(
-      /^fatal: ambiguous argument 'nope': unknown revision/,
+    expect(last(world, "git checkout nope -- a.txt")?.output.stderr).toBe(
+      "fatal: invalid reference: nope\n",
     );
     expect(last(world, "git reset nope --")?.output.exitCode).toBe(128);
     for (const line of [

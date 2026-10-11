@@ -24,7 +24,13 @@ export type HeadTarget =
       readonly oid: Oid | null;
       readonly reset: boolean;
     }
-  | { readonly kind: "detach"; readonly label: string; readonly oid: Oid };
+  | {
+      readonly kind: "detach";
+      readonly label: string;
+      readonly oid: Oid;
+      /** Legacy `checkout` explains detached HEAD when it leaves a branch. */
+      readonly advise?: boolean;
+    };
 
 export type MoveContext = {
   readonly world: World;
@@ -78,7 +84,10 @@ function arrival(
   sameHead: boolean,
   before: Repo,
 ): string {
-  if (target.kind === "detach") return m.headNowAt(...line(world, target.oid));
+  if (target.kind === "detach") {
+    const advice = target.advise ? m.detachAdvice(target.label) : "";
+    return advice + m.headNowAt(...line(world, target.oid));
+  }
   const reset = target.kind === "create" && target.reset;
   if (sameHead) {
     return reset ? m.resetBranch(target.name) : m.alreadyOn(target.name);

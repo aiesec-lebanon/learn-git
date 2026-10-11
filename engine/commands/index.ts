@@ -1,4 +1,5 @@
-import { checkout, reset } from "../cli/legacy";
+import { reset } from "../cli/legacy";
+import { checkout } from "./checkout";
 import { branch } from "./branch";
 import { add } from "./add";
 import { commit } from "./commit";

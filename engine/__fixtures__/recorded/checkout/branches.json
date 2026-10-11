@@ -1,0 +1,608 @@
+{
+  "final": {
+    "config": {
+      "global": [
+        [
+          "user.name",
+          "Sam Lee"
+        ],
+        [
+          "user.email",
+          "sam@example.com"
+        ],
+        [
+          "init.defaultbranch",
+          "main"
+        ]
+      ],
+      "system": []
+    },
+    "dirs": [
+      "project"
+    ],
+    "files": {
+      "project/a.txt": "a\n",
+      "project/b.txt": "b\n",
+      "project/topic": "x\n"
+    },
+    "repos": {
+      "project": {
+        "config": [
+          [
+            "core.repositoryformatversion",
+            "0"
+          ],
+          [
+            "core.filemode",
+            "false"
+          ],
+          [
+            "core.bare",
+            "false"
+          ],
+          [
+            "core.logallrefupdates",
+            "true"
+          ],
+          [
+            "core.symlinks",
+            "false"
+          ],
+          [
+            "core.ignorecase",
+            "true"
+          ]
+        ],
+        "head": {
+          "ref": "refs/heads/main"
+        },
+        "index": [
+          {
+            "mode": "100644",
+            "oid": "78981922613b2afb6025042ff6bd878ac1994e85",
+            "path": "a.txt",
+            "stage": 0
+          },
+          {
+            "mode": "100644",
+            "oid": "61780798228d17af2d34fce4cfbdf35556832472",
+            "path": "b.txt",
+            "stage": 0
+          },
+          {
+            "mode": "100644",
+            "oid": "587be6b4c3f93f93c489c0111bba5596147a26cb",
+            "path": "topic",
+            "stage": 0
+          }
+        ],
+        "objects": {
+          "0699144ea48e30d1aeabbf8af6b9d6f2029f4cd8": {
+            "body": "tree 7ed9a090537734ba8b1300d024d965bbfba21450\nparent 6d6226188cf81c17f0e278d7ff1ea8a75e56a7ab\nauthor Sam Lee <sam@example.com> 1767225900 +0000\ncommitter Sam Lee <sam@example.com> 1767225900 +0000\n\nTopic\n",
+            "type": "commit"
+          },
+          "460179c1a32aa73db4c62a342f48408d4bbc209d": {
+            "body": "tree cfc4295d32fed370109b96e907f3d34c4b3ceba8\nparent 6d6226188cf81c17f0e278d7ff1ea8a75e56a7ab\nauthor Sam Lee <sam@example.com> 1767227640 +0000\ncommitter Sam Lee <sam@example.com> 1767227640 +0000\n\nAdd topic file\n",
+            "type": "commit"
+          },
+          "587be6b4c3f93f93c489c0111bba5596147a26cb": {
+            "body": "x\n",
+            "type": "blob"
+          },
+          "61780798228d17af2d34fce4cfbdf35556832472": {
+            "body": "b\n",
+            "type": "blob"
+          },
+          "6d6226188cf81c17f0e278d7ff1ea8a75e56a7ab": {
+            "body": "tree f4b354863caa9cea99b95422c9dab70465757d87\nauthor Sam Lee <sam@example.com> 1767225720 +0000\ncommitter Sam Lee <sam@example.com> 1767225720 +0000\n\nFirst\n",
+            "type": "commit"
+          },
+          "78981922613b2afb6025042ff6bd878ac1994e85": {
+            "body": "a\n",
+            "type": "blob"
+          },
+          "7ed9a090537734ba8b1300d024d965bbfba21450": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "a.txt",
+                "oid": "87bb4758f46a6745a72a73198ad017ad4609d3c5"
+              },
+              {
+                "mode": "100644",
+                "name": "b.txt",
+                "oid": "61780798228d17af2d34fce4cfbdf35556832472"
+              }
+            ],
+            "type": "tree"
+          },
+          "87bb4758f46a6745a72a73198ad017ad4609d3c5": {
+            "body": "a\nt\n",
+            "type": "blob"
+          },
+          "cfc4295d32fed370109b96e907f3d34c4b3ceba8": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "a.txt",
+                "oid": "78981922613b2afb6025042ff6bd878ac1994e85"
+              },
+              {
+                "mode": "100644",
+                "name": "b.txt",
+                "oid": "61780798228d17af2d34fce4cfbdf35556832472"
+              },
+              {
+                "mode": "100644",
+                "name": "topic",
+                "oid": "587be6b4c3f93f93c489c0111bba5596147a26cb"
+              }
+            ],
+            "type": "tree"
+          },
+          "f4b354863caa9cea99b95422c9dab70465757d87": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "a.txt",
+                "oid": "78981922613b2afb6025042ff6bd878ac1994e85"
+              },
+              {
+                "mode": "100644",
+                "name": "b.txt",
+                "oid": "61780798228d17af2d34fce4cfbdf35556832472"
+              }
+            ],
+            "type": "tree"
+          }
+        },
+        "reflogs": {
+          "HEAD": [
+            "0000000000000000000000000000000000000000 6d6226188cf81c17f0e278d7ff1ea8a75e56a7ab Sam Lee <sam@example.com> 1767225720 +0000\tcommit (initial): First",
+            "6d6226188cf81c17f0e278d7ff1ea8a75e56a7ab 6d6226188cf81c17f0e278d7ff1ea8a75e56a7ab Sam Lee <sam@example.com> 1767225780 +0000\tcheckout: moving from main to topic",
+            "6d6226188cf81c17f0e278d7ff1ea8a75e56a7ab 0699144ea48e30d1aeabbf8af6b9d6f2029f4cd8 Sam Lee <sam@example.com> 1767225900 +0000\tcommit: Topic",
+            "0699144ea48e30d1aeabbf8af6b9d6f2029f4cd8 6d6226188cf81c17f0e278d7ff1ea8a75e56a7ab Sam Lee <sam@example.com> 1767225960 +0000\tcheckout: moving from topic to main",
+            "6d6226188cf81c17f0e278d7ff1ea8a75e56a7ab 0699144ea48e30d1aeabbf8af6b9d6f2029f4cd8 Sam Lee <sam@example.com> 1767226020 +0000\tcheckout: moving from main to topic",
+            "0699144ea48e30d1aeabbf8af6b9d6f2029f4cd8 6d6226188cf81c17f0e278d7ff1ea8a75e56a7ab Sam Lee <sam@example.com> 1767226080 +0000\tcheckout: moving from topic to main",
+            "6d6226188cf81c17f0e278d7ff1ea8a75e56a7ab 0699144ea48e30d1aeabbf8af6b9d6f2029f4cd8 Sam Lee <sam@example.com> 1767226320 +0000\tcheckout: moving from main to topic",
+            "0699144ea48e30d1aeabbf8af6b9d6f2029f4cd8 6d6226188cf81c17f0e278d7ff1ea8a75e56a7ab Sam Lee <sam@example.com> 1767226380 +0000\tcheckout: moving from topic to main",
+            "6d6226188cf81c17f0e278d7ff1ea8a75e56a7ab 6d6226188cf81c17f0e278d7ff1ea8a75e56a7ab Sam Lee <sam@example.com> 1767226440 +0000\tcheckout: moving from main to topic~1",
+            "6d6226188cf81c17f0e278d7ff1ea8a75e56a7ab 6d6226188cf81c17f0e278d7ff1ea8a75e56a7ab Sam Lee <sam@example.com> 1767226560 +0000\tcheckout: moving from 6d6226188cf81c17f0e278d7ff1ea8a75e56a7ab to main",
+            "6d6226188cf81c17f0e278d7ff1ea8a75e56a7ab 6d6226188cf81c17f0e278d7ff1ea8a75e56a7ab Sam Lee <sam@example.com> 1767226680 +0000\tcheckout: moving from main to topic",
+            "6d6226188cf81c17f0e278d7ff1ea8a75e56a7ab 6d6226188cf81c17f0e278d7ff1ea8a75e56a7ab Sam Lee <sam@example.com> 1767226740 +0000\tcheckout: moving from topic to side",
+            "6d6226188cf81c17f0e278d7ff1ea8a75e56a7ab 6d6226188cf81c17f0e278d7ff1ea8a75e56a7ab Sam Lee <sam@example.com> 1767226800 +0000\tcheckout: moving from side to main",
+            "6d6226188cf81c17f0e278d7ff1ea8a75e56a7ab 6d6226188cf81c17f0e278d7ff1ea8a75e56a7ab Sam Lee <sam@example.com> 1767226980 +0000\tcheckout: moving from main to topic",
+            "6d6226188cf81c17f0e278d7ff1ea8a75e56a7ab 6d6226188cf81c17f0e278d7ff1ea8a75e56a7ab Sam Lee <sam@example.com> 1767227040 +0000\tcheckout: moving from topic to topic",
+            "6d6226188cf81c17f0e278d7ff1ea8a75e56a7ab 6d6226188cf81c17f0e278d7ff1ea8a75e56a7ab Sam Lee <sam@example.com> 1767227100 +0000\tcheckout: moving from topic to main",
+            "6d6226188cf81c17f0e278d7ff1ea8a75e56a7ab 6d6226188cf81c17f0e278d7ff1ea8a75e56a7ab Sam Lee <sam@example.com> 1767227160 +0000\tcheckout: moving from main to HEAD",
+            "6d6226188cf81c17f0e278d7ff1ea8a75e56a7ab 6d6226188cf81c17f0e278d7ff1ea8a75e56a7ab Sam Lee <sam@example.com> 1767227520 +0000\tcheckout: moving from 6d6226188cf81c17f0e278d7ff1ea8a75e56a7ab to main",
+            "6d6226188cf81c17f0e278d7ff1ea8a75e56a7ab 460179c1a32aa73db4c62a342f48408d4bbc209d Sam Lee <sam@example.com> 1767227640 +0000\tcommit: Add topic file"
+          ],
+          "refs/heads/main": [
+            "0000000000000000000000000000000000000000 6d6226188cf81c17f0e278d7ff1ea8a75e56a7ab Sam Lee <sam@example.com> 1767225720 +0000\tcommit (initial): First",
+            "6d6226188cf81c17f0e278d7ff1ea8a75e56a7ab 460179c1a32aa73db4c62a342f48408d4bbc209d Sam Lee <sam@example.com> 1767227640 +0000\tcommit: Add topic file"
+          ],
+          "refs/heads/side": [
+            "0000000000000000000000000000000000000000 6d6226188cf81c17f0e278d7ff1ea8a75e56a7ab Sam Lee <sam@example.com> 1767226740 +0000\tbranch: Created from topic"
+          ],
+          "refs/heads/topic": [
+            "0000000000000000000000000000000000000000 6d6226188cf81c17f0e278d7ff1ea8a75e56a7ab Sam Lee <sam@example.com> 1767225780 +0000\tbranch: Created from HEAD",
+            "6d6226188cf81c17f0e278d7ff1ea8a75e56a7ab 0699144ea48e30d1aeabbf8af6b9d6f2029f4cd8 Sam Lee <sam@example.com> 1767225900 +0000\tcommit: Topic",
+            "0699144ea48e30d1aeabbf8af6b9d6f2029f4cd8 6d6226188cf81c17f0e278d7ff1ea8a75e56a7ab Sam Lee <sam@example.com> 1767226680 +0000\tbranch: Reset to HEAD"
+          ]
+        },
+        "refs": {
+          "refs/heads/main": "460179c1a32aa73db4c62a342f48408d4bbc209d",
+          "refs/heads/side": "6d6226188cf81c17f0e278d7ff1ea8a75e56a7ab",
+          "refs/heads/topic": "6d6226188cf81c17f0e278d7ff1ea8a75e56a7ab"
+        }
+      }
+    }
+  },
+  "git": "2.45.1.windows.1",
+  "script": {
+    "steps": [
+      "git init -q",
+      "git add .",
+      "git commit -q -m \"First\"",
+      "git checkout -b topic",
+      "echo t >> a.txt",
+      "git commit -q -a -m \"Topic\"",
+      "git checkout main",
+      "git checkout -",
+      "git checkout main",
+      "git checkout",
+      "echo m >> b.txt",
+      "git checkout",
+      "git checkout topic",
+      "git checkout main",
+      "git checkout topic~1",
+      "git status",
+      "git checkout main",
+      "git checkout -b topic",
+      "git checkout -B topic",
+      "git checkout -b side topic",
+      "git checkout -q main",
+      "git checkout nope",
+      "echo x > topic",
+      "git checkout topic",
+      "git checkout topic --",
+      "git checkout main",
+      "git checkout --detach",
+      "git checkout --detach topic",
+      "git checkout -b \"a b\"",
+      "git checkout -b x --detach",
+      "git checkout main -- a.txt",
+      "git branch -v",
+      "git checkout -q main",
+      "git add topic",
+      "git commit -q -m \"Add topic file\"",
+      "echo y > topic",
+      "git checkout topic",
+      "echo z >> a.txt",
+      "git checkout a.txt",
+      "git checkout -- topic",
+      "git checkout nope.txt b.txt",
+      "git status --short",
+      "echo q >> a.txt",
+      "git checkout main a.txt",
+      "git checkout topic a.txt",
+      "git checkout HEAD b.txt nope",
+      "git checkout b.txt",
+      "git checkout b.txt",
+      "git checkout HEAD ."
+    ],
+    "world": {
+      "cwd": "project",
+      "files": {
+        "project/a.txt": "a\n",
+        "project/b.txt": "b\n"
+      }
+    }
+  },
+  "steps": [
+    {
+      "cmd": "git init -q",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git add .",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git commit -q -m \"First\"",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git checkout -b topic",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "Switched to a new branch 'topic'\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "echo t >> a.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git commit -q -a -m \"Topic\"",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git checkout main",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "Switched to branch 'main'\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git checkout -",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "Switched to branch 'topic'\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git checkout main",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "Switched to branch 'main'\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git checkout",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "echo m >> b.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git checkout",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "M\tb.txt\n"
+    },
+    {
+      "cmd": "git checkout topic",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "Switched to branch 'topic'\n",
+      "stdout": "M\tb.txt\n"
+    },
+    {
+      "cmd": "git checkout main",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "Switched to branch 'main'\n",
+      "stdout": "M\tb.txt\n"
+    },
+    {
+      "cmd": "git checkout topic~1",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "Note: switching to 'topic~1'.\n\nYou are in 'detached HEAD' state. You can look around, make experimental\nchanges and commit them, and you can discard any commits you make in this\nstate without impacting any branches by switching back to a branch.\n\nIf you want to create a new branch to retain commits you create, you may\ndo so (now or later) by using -c with the switch command. Example:\n\n  git switch -c <new-branch-name>\n\nOr undo this operation with:\n\n  git switch -\n\nTurn off this advice by setting config variable advice.detachedHead to false\n\nHEAD is now at 6d62261 First\n",
+      "stdout": "M\tb.txt\n"
+    },
+    {
+      "cmd": "git status",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "HEAD detached at 6d62261\nChanges not staged for commit:\n  (use \"git add <file>...\" to update what will be committed)\n  (use \"git restore <file>...\" to discard changes in working directory)\n\tmodified:   b.txt\n\nno changes added to commit (use \"git add\" and/or \"git commit -a\")\n"
+    },
+    {
+      "cmd": "git checkout main",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "Switched to branch 'main'\n",
+      "stdout": "M\tb.txt\n"
+    },
+    {
+      "cmd": "git checkout -b topic",
+      "cwd": "/home/you/project",
+      "exitCode": 128,
+      "stderr": "fatal: a branch named 'topic' already exists\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git checkout -B topic",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "Switched to and reset branch 'topic'\n",
+      "stdout": "M\tb.txt\n"
+    },
+    {
+      "cmd": "git checkout -b side topic",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "Switched to a new branch 'side'\n",
+      "stdout": "M\tb.txt\n"
+    },
+    {
+      "cmd": "git checkout -q main",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git checkout nope",
+      "cwd": "/home/you/project",
+      "exitCode": 1,
+      "stderr": "error: pathspec 'nope' did not match any file(s) known to git\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "echo x > topic",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git checkout topic",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "Switched to branch 'topic'\n",
+      "stdout": "M\tb.txt\n"
+    },
+    {
+      "cmd": "git checkout topic --",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "Already on 'topic'\n",
+      "stdout": "M\tb.txt\n"
+    },
+    {
+      "cmd": "git checkout main",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "Switched to branch 'main'\n",
+      "stdout": "M\tb.txt\n"
+    },
+    {
+      "cmd": "git checkout --detach",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "HEAD is now at 6d62261 First\n",
+      "stdout": "M\tb.txt\n"
+    },
+    {
+      "cmd": "git checkout --detach topic",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "HEAD is now at 6d62261 First\n",
+      "stdout": "M\tb.txt\n"
+    },
+    {
+      "cmd": "git checkout -b \"a b\"",
+      "cwd": "/home/you/project",
+      "exitCode": 128,
+      "stderr": "fatal: 'a b' is not a valid branch name\nhint: See `man git check-ref-format`\nhint: Disable this message with \"git config advice.refSyntax false\"\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git checkout -b x --detach",
+      "cwd": "/home/you/project",
+      "exitCode": 128,
+      "stderr": "fatal: '--detach' cannot be used with '-b/-B/--orphan'\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git checkout main -- a.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git branch -v",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "* (HEAD detached at 6d62261) 6d62261 First\n  main                       6d62261 First\n  side                       6d62261 First\n  topic                      6d62261 First\n"
+    },
+    {
+      "cmd": "git checkout -q main",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git add topic",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git commit -q -m \"Add topic file\"",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "echo y > topic",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git checkout topic",
+      "cwd": "/home/you/project",
+      "exitCode": 1,
+      "stderr": "error: Your local changes to the following files would be overwritten by checkout:\n\ttopic\nPlease commit your changes or stash them before you switch branches.\nAborting\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "echo z >> a.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git checkout a.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "Updated 1 path from the index\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git checkout -- topic",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git checkout nope.txt b.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 1,
+      "stderr": "error: pathspec 'nope.txt' did not match any file(s) known to git\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git status --short",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": " M b.txt\n"
+    },
+    {
+      "cmd": "echo q >> a.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git checkout main a.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "Updated 1 path from cfc4295\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git checkout topic a.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 128,
+      "stderr": "fatal: ambiguous argument 'topic': both revision and filename\nUse '--' to separate paths from revisions, like this:\n'git <command> [<revision>...] -- [<file>...]'\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git checkout HEAD b.txt nope",
+      "cwd": "/home/you/project",
+      "exitCode": 1,
+      "stderr": "error: pathspec 'nope' did not match any file(s) known to git\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git checkout b.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "Updated 1 path from the index\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git checkout b.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "Updated 0 paths from the index\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git checkout HEAD .",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "Updated 0 paths from cfc4295\n",
+      "stdout": ""
+    }
+  ]
+}

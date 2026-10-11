@@ -17,7 +17,7 @@ import { repoOf, withRepo } from "../world/access";
 import { flag, type ParsedOptions } from "./options";
 import { shellQuote } from "./tokenize";
 
-const older = (modern: string, paths: readonly string[]) =>
+export const older = (modern: string, paths: readonly string[]) =>
   `Older form of: git restore ${modern}${paths.map(shellQuote).join(" ") || "."}`;
 
 /** `[<commit>] [--] <paths>`: the commit when the first argument names one. */
@@ -41,7 +41,11 @@ function commitAndPaths(
   return { commit: null, paths: args };
 }
 
-function specsFor(repo: Repo, machine: Machine, paths: readonly string[]) {
+export function specsFor(
+  repo: Repo,
+  machine: Machine,
+  paths: readonly string[],
+) {
   return parsePathspecs(
     paths.length ? paths : [repo.workdir],
     repo.workdir,
@@ -49,68 +53,8 @@ function specsFor(repo: Repo, machine: Machine, paths: readonly string[]) {
   );
 }
 
-const outside = (repo: Repo, arg: string) =>
+export const outside = (repo: Repo, arg: string) =>
   refuse("outside-repository", addMessages.outside(arg, repo.workdir));
-
-/** Legacy `git checkout [<commit>] -- <paths>` (branch forms come with `switch`). */
-export const checkout = defineCommand({
-  name: "checkout",
-  counted: true,
-  needsRepo: true,
-  legacy: true,
-  usage: `usage: git checkout [<options>] <branch>
-   or: git checkout [<options>] [<branch>] -- <file>...`,
-  options: [
-    { key: "quiet", short: "q", long: "quiet" },
-    x("b", "b", "required"),
-    x("B", "B", "required"),
-    x("detach"),
-    x("force", "f"),
-    x("merge", "m"),
-    x("patch", "p"),
-    x("ours", "2"),
-    x("theirs", "3"),
-    x("orphan", undefined, "required"),
-    x("track", "t", "optional"),
-    x("conflict", undefined, "required"),
-    x("overlay"),
-  ],
-  run: ({ world, machine, repo, options }) => {
-    const unsupported = refuseUnsimulated("checkout", options);
-    if (unsupported) return unsupported;
-    const { commit, paths } = commitAndPaths(world, repo, machine, options);
-    const branchForm = options.afterDashDash === null && commit !== null;
-    if (!paths.length || branchForm || (options.afterDashDash ?? 0) > 1) {
-      return refuse(
-        "not-simulated",
-        notSimulated("git checkout of a branch or commit (yet)"),
-        1,
-      );
-    }
-    let source: ReturnType<typeof sourceFiles> = null;
-    if (commit !== null) {
-      const resolved = resolveRevision(world.objects, repo, commit);
-      source = resolved.ok ? sourceFiles(world, resolved.oid) : null;
-      if (!source) {
-        return refuse("unknown-revision", revisionMessages.unknown(commit));
-      }
-    }
-    const parsed = specsFor(repo, machine, paths);
-    if (!parsed.ok) return outside(repo, parsed.outside);
-    const result = applyRestore(world, repo, machine, {
-      source,
-      staged: source !== null,
-      worktree: true,
-      overlay: true,
-      strict: true,
-      specs: parsed.specs,
-    });
-    const modern = commit ? `--source=${commit} --staged --worktree ` : "";
-    return result.exitCode
-      ? result
-      : { ...result, notes: [older(modern, paths)] };
-  },
-});
 
 /** Legacy `git reset [-q] [HEAD] [--] [<paths>]`: unstage, like `restore --staged`. */
 export const reset = defineCommand({

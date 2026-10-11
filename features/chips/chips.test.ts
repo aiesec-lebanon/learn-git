@@ -33,7 +33,9 @@ describe("chip verbs", () => {
       expect(def, v.name).toBeDefined();
       for (const p of v.params)
         if (p.kind === "flag" || (p.kind === "value" && p.flag))
-          expect(def?.flags, `${v.name} ${p.flag}`).toContain(p.flag);
+          expect(def?.flags, `${v.name} ${p.flag}`).toContain(
+            p.flag?.replace(/^--no-/, "--"),
+          );
     }
   });
 });

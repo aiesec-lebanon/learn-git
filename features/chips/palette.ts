@@ -8,8 +8,8 @@ import {
 } from "@/engine";
 import { stageFiles } from "@/features/stage/files";
 
-/** What a path parameter offers: changed files, files or folders here. */
-export type PathPick = "changed" | "files" | "dirs";
+/** What a path parameter offers: changed files, changed or staged files, files or folders here. */
+export type PathPick = "changed" | "touched" | "files" | "dirs";
 
 export type Param =
   | { readonly kind: "flag"; readonly flag: string; readonly label: string }
@@ -104,6 +104,8 @@ export const VERBS: readonly ChipVerb[] = [
     hint: "list commits",
     params: [
       { kind: "flag", flag: "--oneline", label: "one line each" },
+      { kind: "flag", flag: "--graph", label: "draw the graph" },
+      { kind: "flag", flag: "--all", label: "every branch" },
       { kind: "value", flag: "-n", label: "how many" },
     ],
     ready: (s) => s.commits,
@@ -124,7 +126,7 @@ export const VERBS: readonly ChipVerb[] = [
     hint: "undo changes to files",
     params: [
       { kind: "flag", flag: "--staged", label: "unstage instead" },
-      { kind: "paths", label: "files", pick: "changed", required: true },
+      { kind: "paths", label: "files", pick: "touched", required: true },
     ],
     ready: (s) => s.repo && (s.changed || s.staged),
   },
@@ -165,8 +167,11 @@ export const VERBS: readonly ChipVerb[] = [
   {
     program: "git",
     name: "branch",
-    hint: "list branches, or make one here",
-    params: [{ kind: "value", label: "new branch name" }],
+    hint: "list branches, make one here, or delete one",
+    params: [
+      { kind: "flag", flag: "-d", label: "delete it" },
+      { kind: "value", label: "branch name" },
+    ],
     ready: (s) => s.commits,
   },
   {
@@ -175,7 +180,9 @@ export const VERBS: readonly ChipVerb[] = [
     hint: "move HEAD to a branch",
     params: [
       { kind: "flag", flag: "-c", label: "make the branch first" },
+      { kind: "flag", flag: "--detach", label: "look around without a branch" },
       { kind: "value", label: "branch", required: true },
+      { kind: "value", label: "start from" },
     ],
     ready: (s) => s.commits,
   },
@@ -230,7 +237,8 @@ export const VERBS: readonly ChipVerb[] = [
     name: "pull",
     hint: "fetch, then bring the remote's commits into your branch",
     params: [
-      { kind: "flag", flag: "--no-ff", label: "merge if both sides moved" },
+      { kind: "flag", flag: "--no-rebase", label: "merge if both sides moved" },
+      { kind: "flag", flag: "--no-ff", label: "always make a merge commit" },
       { kind: "flag", flag: "--ff-only", label: "only if nothing to combine" },
     ],
     ready: (s) => s.commits,
@@ -381,11 +389,19 @@ export function rank(state: ChipState): readonly ChipVerb[] {
 /** Candidates for a path parameter, relative to the current folder. */
 export function pathChoices(world: World, pick: PathPick): readonly string[] {
   const machine = machineOf(world);
-  if (pick === "changed") {
+  if (pick === "changed" || pick === "touched") {
     const stage = stageFiles(world);
-    const changed = stage.worktree
-      .filter((f) => f.state && f.state !== "unmodified")
-      .map((f) => displayRelative(machine.cwd, `${stage.root}/${f.path}`));
+    const cards =
+      pick === "touched"
+        ? [...stage.worktree, ...(stage.index ?? [])]
+        : stage.worktree;
+    const changed = [
+      ...new Set(
+        cards
+          .filter((f) => f.state && f.state !== "unmodified")
+          .map((f) => displayRelative(machine.cwd, `${stage.root}/${f.path}`)),
+      ),
+    ];
     return changed.length ? [".", ...changed] : [];
   }
   const entries = listDir(machine.fs, machine.cwd).filter(

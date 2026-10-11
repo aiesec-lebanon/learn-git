@@ -129,20 +129,28 @@ export const merge = defineCommand({
     if (flag(options, "edit")) {
       return refuse("not-simulated", notSimulated("git merge --edit"), 1);
     }
+    const merging = repo.op?.kind === "merge";
     if (flag(options, "abort")) {
-      return repo.op
+      return merging
         ? abortMerge(world, repo, machine, time)
         : refuse("no-operation", m.noMergeToAbort());
     }
     if (flag(options, "continue")) {
-      return repo.op
+      return merging
         ? commit.run({ ...ctx, options: NO_OPTIONS })
         : refuse("no-operation", m.noMergeInProgress());
     }
     if (conflictedPaths(repo.index).length) {
       return refuse("unmerged-paths", m.unmerged("Merging"));
     }
-    if (repo.op) return refuse("operation-in-progress", m.notConcluded());
+    if (merging) return refuse("operation-in-progress", m.notConcluded());
+    if (repo.op) {
+      return refuse(
+        "not-simulated",
+        notSimulated("merging during a rebase"),
+        1,
+      );
+    }
     const pool = world.objects;
     let names = options.args;
     if (!names.length) {

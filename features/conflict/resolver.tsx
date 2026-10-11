@@ -10,14 +10,13 @@ import {
   markerLines,
   parseConflicts,
   pausedMerge,
+  SIDES,
   replaceHunk,
   type ConflictFile,
   type Segment,
 } from "./model";
 import { RawView } from "./raw-view";
 import { Ribbon } from "./ribbon";
-
-const SIDES = { ours: "the branch you are on", theirs: "the branch merged in" };
 
 const chip =
   "inline-flex min-h-11 items-center rounded-sm border-2 border-line-strong bg-surface px-3 font-mono text-sm aria-pressed:border-accent aria-pressed:bg-accent-soft";
@@ -51,9 +50,11 @@ function ResultText({
 function FileResolver({
   session,
   file,
+  sides,
 }: {
   session: Session;
   file: ConflictFile;
+  sides: { readonly ours: string; readonly theirs: string };
 }) {
   const [at, setAt] = useState(0);
   const [raw, setRaw] = useState(false);
@@ -114,7 +115,7 @@ function FileResolver({
           <HunkView
             key={`${file.path}:${index}:${hunk.raw}`}
             hunk={hunk}
-            sides={SIDES}
+            sides={sides}
             result={<ResultText segments={segments} current={index} />}
             onApply={apply}
           />
@@ -162,7 +163,7 @@ export function ConflictResolver({ session }: { session: Session }) {
       className="grid gap-3 rounded-sm border border-line bg-surface p-4 shadow-1"
     >
       <h2 id={titleId} className="m-0 text-lg font-bold">
-        Resolve the merge
+        Resolve the {paused.kind}
       </h2>
       <Ribbon session={session} paused={paused} />
       {paused.files.length > 1 ? (
@@ -181,7 +182,12 @@ export function ConflictResolver({ session }: { session: Session }) {
         </div>
       ) : null}
       {file ? (
-        <FileResolver key={file.path} session={session} file={file} />
+        <FileResolver
+          key={file.path}
+          session={session}
+          file={file}
+          sides={SIDES[paused.kind]}
+        />
       ) : null}
     </section>
   );

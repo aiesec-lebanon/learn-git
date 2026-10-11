@@ -13,6 +13,7 @@ import type { Machine, Oid, Repo, World } from "../types";
 import { repoOf } from "../world/access";
 import { defaultRemote, fetchRemote } from "./fetch";
 import { integrate, type Integration } from "./merge";
+import { startRebase } from "./rebase";
 import { defineCommand, refuse, type CommandResult } from "./registry";
 import { refuseUnsimulated, unsimulated as x } from "./unsimulated";
 
@@ -133,9 +134,6 @@ export const pull = defineCommand({
         1,
       );
     }
-    if (mode === "rebase") {
-      return refuse("not-simulated", notSimulated("git pull --rebase"), 1);
-    }
     const fetched = fetchRemote({
       world: ctx.world,
       machine,
@@ -183,13 +181,29 @@ export const pull = defineCommand({
     if (mode === undefined && ff === undefined && diverged) {
       return done(refuse("divergent-branches", m.divergent()));
     }
+    const canFastForward = head === null || ancestorsOf(pool, theirs).has(head);
+    if (mode === "rebase" && !canFastForward) {
+      return done(
+        startRebase(
+          { ...ctx, world, repo },
+          {
+            upstream: theirs,
+            onto: theirs,
+            ontoName: theirs,
+            branch: null,
+            quiet,
+            action,
+          },
+        ),
+      );
+    }
     return done(
       integrate(
         { world, machine, repo, time },
         {
           theirs,
           typed: theirs,
-          ff,
+          ff: mode === "rebase" ? "only" : ff,
           message: pullMergeMessage(repo, chosen.branch, displayUrl(url)),
           quiet,
           allowUnrelated: false,

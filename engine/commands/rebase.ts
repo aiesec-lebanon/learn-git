@@ -10,7 +10,21 @@ import { appendReflog } from "../refs/reflog";
 import { headBranch, resolveHead } from "../refs/refs";
 import { upstreamOf } from "../refs/upstream";
 import { rebaseTodo } from "../sequencer/todo";
-import { runRebase } from "../sequencer/run";
+import {
+  commitPick,
+  rebaseEffect,
+  runRebase,
+  type SequencerContext,
+} from "../sequencer/run";
+import { checkoutPaths } from "../checkout/two-way";
+import { stripMessage } from "../commit/message";
+import { commitFiles } from "../merge/three-way";
+import { withoutOperation } from "../merge/state";
+import { readObject } from "../objects/pool";
+import { buildTree, sameFile } from "../objects/tree";
+import { conflictedPaths, stagedFiles } from "../staging/index";
+import { commitTemplate } from "../status/format";
+import { compareBytes } from "../util/compare";
 import { computeStatus } from "../status/compute";
 import type { Effect, Oid, RebaseOperation, RefName, Repo } from "../types";
 import { withMachine, withRepo } from "../world/access";
@@ -134,7 +148,6 @@ export function startRebase(ctx: Ctx, req: RebaseRequest): CommandResult {
     onto: req.onto,
     done: [],
     todo: todo.picks,
-    action: req.action,
   };
   const started: Effect[] = [
     ...moved.effects,
@@ -146,15 +159,143 @@ export function startRebase(ctx: Ctx, req: RebaseRequest): CommandResult {
     fs: moved.fs,
   });
   const result = runRebase(
-    { world: next, machine, time },
+    { world: next, machine, time, action: req.action, quiet: req.quiet },
     detached,
     op,
-    req.quiet,
   );
   return {
     ...result,
     stderr: warnings + (result.stderr ?? ""),
     effects: [...started, ...(result.effects ?? [])],
+  };
+}
+
+const resumed = (ctx: Ctx, quiet = false): SequencerContext => ({
+  world: ctx.world,
+  machine: ctx.machine,
+  time: ctx.time,
+  action: "rebase",
+  quiet,
+});
+
+/** Index and working tree back to `to`'s files for every path that differs (`reset --hard`). */
+function resetTo(ctx: Ctx, repo: Repo, to: Oid) {
+  const pool = ctx.world.objects;
+  const files = commitFiles(pool, to);
+  const staged = stagedFiles(repo.index);
+  const conflicted = new Set<string>(conflictedPaths(repo.index));
+  const paths = [...new Set([...files.keys(), ...repo.index.keys()])]
+    .filter((p) => conflicted.has(p) || !sameFile(files.get(p), staged.get(p)))
+    .sort(compareBytes);
+  return checkoutPaths(pool, repo, ctx.machine, files, paths);
+}
+
+/** `--continue`: commit the resolved pick (through the editor), then the rest. */
+function continueRebase(ctx: Ctx, op: RebaseOperation): CommandResult {
+  const { world, machine, repo } = ctx;
+  const unmerged = conflictedPaths(repo.index);
+  if (unmerged.length) {
+    return {
+      ...refuse("unmerged-paths", "", 1),
+      stdout: m.needsMerge(unmerged),
+    };
+  }
+  const stopped = op.done.at(-1);
+  const head = resolveHead(repo) as Oid;
+  const { root } = buildTree(stagedFiles(repo.index));
+  const changed =
+    stopped !== undefined &&
+    readObject(world.objects, head, "commit").tree !== root;
+  let current: Repo = repo;
+  let next = world;
+  let stdout = "";
+  const effects: Effect[] = [rebaseEffect(repo, "resumed")];
+  if (changed) {
+    if (ctx.answer === undefined) {
+      const original = readObject(world.objects, stopped, "commit").message;
+      const data = computeStatus(world.objects, repo, machine.fs);
+      const template = commitTemplate({
+        data,
+        repo,
+        pool: world.objects,
+        from: machine.cwd,
+        keep: () => true,
+      });
+      return {
+        request: {
+          kind: "editor",
+          purpose: "commit-message",
+          file: ".git/COMMIT_EDITMSG",
+          initial: original + template,
+        },
+      };
+    }
+    const message = stripMessage(ctx.answer);
+    if (message === "") {
+      return refuse(
+        "empty-message",
+        "Aborting commit due to empty commit message.\n",
+        1,
+      );
+    }
+    const picked = commitPick(resumed(ctx), repo, stopped, message);
+    if (!picked.ok) return picked.result;
+    current = picked.repo;
+    next = picked.world;
+    stdout = picked.stdout;
+    effects.push(...picked.effects);
+  }
+  const result = runRebase({ ...resumed(ctx), world: next }, current, op);
+  return {
+    ...result,
+    stdout: stdout + (result.stdout ?? ""),
+    effects: [...effects, ...(result.effects ?? [])],
+  };
+}
+
+/** `--skip`: drop the stopped pick's changes and go on with the rest. */
+function skipRebase(ctx: Ctx, op: RebaseOperation): CommandResult {
+  const reset = resetTo(ctx, ctx.repo, resolveHead(ctx.repo) as Oid);
+  const world = withMachine(withRepo(ctx.world, reset.repo), {
+    ...ctx.machine,
+    fs: reset.fs,
+  });
+  const result = runRebase(
+    { ...resumed(ctx), world, machine: { ...ctx.machine, fs: reset.fs } },
+    reset.repo,
+    op,
+  );
+  return {
+    ...result,
+    effects: [
+      rebaseEffect(ctx.repo, "resumed"),
+      ...reset.effects,
+      ...(result.effects ?? []),
+    ],
+  };
+}
+
+/** `--abort`: back to the branch where it was, files and all. */
+function abortRebase(ctx: Ctx, op: RebaseOperation): CommandResult {
+  const { world, machine, repo, time } = ctx;
+  const reset = resetTo(ctx, repo, op.head);
+  const who = reflogWho(world, machine, repo, time);
+  const head = op.branch
+    ? ({ kind: "symbolic", ref: op.branch } as const)
+    : ({ kind: "detached", oid: op.head } as const);
+  const back = appendReflog(withoutOperation({ ...reset.repo, head }), "HEAD", {
+    old: resolveHead(repo),
+    new: op.head,
+    who,
+    message: `rebase (abort): returning to ${op.branch ?? op.head}`,
+  });
+  return {
+    world: withMachine(withRepo(world, back), { ...machine, fs: reset.fs }),
+    effects: [
+      ...reset.effects,
+      { kind: "head-changed", repo: repo.id, from: repo.head, to: head },
+      rebaseEffect(repo, "aborted"),
+    ],
   };
 }
 
@@ -170,7 +311,10 @@ export const rebase = defineCommand({
     if (unsupported) return unsupported;
     const resume = ["continue", "skip", "abort"].find((k) => flag(options, k));
     if (resume) {
-      return refuse("not-simulated", notSimulated(`git rebase --${resume}`), 1);
+      const op = repo.op?.kind === "rebase" ? repo.op : null;
+      if (!op) return refuse("no-operation", m.noRebase());
+      if (resume === "abort") return abortRebase(ctx, op);
+      return resume === "skip" ? skipRebase(ctx, op) : continueRebase(ctx, op);
     }
     if (repo.op) return refuse("operation-in-progress", m.inProgress());
     const [named, branchName, ...rest] = options.args;

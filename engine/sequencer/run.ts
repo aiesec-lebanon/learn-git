@@ -1,6 +1,7 @@
 import { twoWayCheckout } from "../checkout/two-way";
 import { refuse, type CommandResult } from "../commands/registry";
 import { subjectOf } from "../commit/message";
+import { commitSummary } from "../commit/summary";
 import { reflogWho, resolveIdentity } from "../config/identity";
 import { advanceHead } from "../merge/conclude";
 import { applyTreeMerge, commitFiles } from "../merge/three-way";
@@ -18,6 +19,7 @@ import type {
   Effect,
   Machine,
   Oid,
+  OperationPhase,
   RebaseOperation,
   Repo,
   World,
@@ -28,44 +30,57 @@ export type SequencerContext = {
   readonly world: World;
   readonly machine: Machine;
   readonly time: number;
+  /** What reflog entries start with: `rebase`, or `pull --rebase` while pull runs it. */
+  readonly action: string;
+  readonly quiet: boolean;
 };
 
-type Step = {
-  world: World;
-  effects: Effect[];
-  stdout: string;
-};
+export const rebaseEffect = (repo: Repo, phase: OperationPhase): Effect => ({
+  kind: "operation",
+  repo: repo.id,
+  operation: "rebase",
+  phase,
+});
 
-const operation = (
-  repo: Repo,
-  phase: "started" | "paused" | "resumed" | "finished" | "aborted",
-): Effect => ({ kind: "operation", repo: repo.id, operation: "rebase", phase });
-
-/** `743d676 (Mine)`: how conflict markers and messages name a pick. */
+/** `743d676 (Mine)`: how conflict markers name a pick. */
 export function pickLabel(world: World, oid: Oid): string {
   const commit = readObject(world.objects, oid, "commit");
   return `${abbreviate(world.objects, oid)} (${subjectOf(commit.message)})`;
 }
 
-/** Records the rebased commit for `oid` on top of HEAD (detached), or drops it when it changes nothing. */
+type Picked =
+  | {
+      readonly ok: true;
+      readonly world: World;
+      readonly repo: Repo;
+      readonly effects: readonly Effect[];
+      readonly stdout: string;
+    }
+  | { readonly ok: false; readonly result: CommandResult };
+
+/**
+ * Records the index as the rebased copy of `oid` on the detached HEAD,
+ * keeping its author; a pick that changes nothing is dropped. `message`
+ * is set when `--continue` committed an edited message.
+ */
 export function commitPick(
   ctx: SequencerContext,
   repo: Repo,
   oid: Oid,
-  op: RebaseOperation,
   message?: string,
-): { ok: true; step: Step; repo: Repo } | { ok: false; result: CommandResult } {
+): Picked {
   const { world, machine, time } = ctx;
   const pool = world.objects;
-  const original = readObject(pool, oid, "commit");
   const head = resolveHead(repo) as Oid;
   const { root, trees } = buildTree(stagedFiles(repo.index));
   if (readObject(pool, head, "commit").tree === root) {
-    return { ok: true, step: { world, effects: [], stdout: "" }, repo };
+    return { ok: true, world, repo, effects: [], stdout: "" };
   }
   const identity = resolveIdentity(world, machine, repo);
-  if (!identity.ok)
+  if (!identity.ok) {
     return { ok: false, result: refuse("identity-unknown", identity.stderr) };
+  }
+  const original = readObject(pool, oid, "commit");
   const text = message ?? original.message;
   const commit: Commit = {
     type: "commit",
@@ -77,26 +92,36 @@ export function commitPick(
   };
   const written = writeObjects(world, repo.id, [...trees, commit]);
   const created = written.oids.at(-1) as Oid;
-  const kind = message === undefined ? "pick" : "continue";
   const advanced = advanceHead(
     { ...repo, arrival: [...repo.arrival, created] },
     created,
     reflogWho(world, machine, repo, time),
-    `${op.action} (${kind}): ${subjectOf(text)}`,
+    `${ctx.action} (${message === undefined ? "pick" : "continue"}): ${subjectOf(text)}`,
   );
+  const stdout =
+    message === undefined || ctx.quiet
+      ? ""
+      : `[detached HEAD ${abbreviate(written.world.objects, created)}] ${subjectOf(text)}\n` +
+        commitSummary(
+          written.world.objects,
+          commitFiles(pool, head),
+          stagedFiles(repo.index),
+        );
   return {
     ok: true,
-    step: {
-      world: withRepo(written.world, advanced.repo),
-      effects: [...written.effects, advanced.effect],
-      stdout: "",
-    },
+    world: withRepo(written.world, advanced.repo),
     repo: advanced.repo,
+    effects: [...written.effects, advanced.effect],
+    stdout,
   };
 }
 
 /** Moves the branch to the result, reattaches HEAD and drops the rebase state. */
-function finish(ctx: SequencerContext, repo: Repo, op: RebaseOperation): Step {
+function finish(
+  ctx: SequencerContext,
+  repo: Repo,
+  op: RebaseOperation,
+): { world: World; effects: Effect[] } {
   const who = reflogWho(ctx.world, ctx.machine, repo, ctx.time);
   const final = resolveHead(repo) as Oid;
   let next = withoutOperation(repo);
@@ -107,7 +132,7 @@ function finish(ctx: SequencerContext, repo: Repo, op: RebaseOperation): Step {
       op.branch,
       final,
       who,
-      `${op.action} (finish): ${op.branch} onto ${op.onto}`,
+      `${ctx.action} (finish): ${op.branch} onto ${op.onto}`,
     );
     next = appendReflog(
       { ...moved.repo, head: { kind: "symbolic", ref: op.branch } },
@@ -116,7 +141,7 @@ function finish(ctx: SequencerContext, repo: Repo, op: RebaseOperation): Step {
         old: final,
         new: final,
         who,
-        message: `${op.action} (finish): returning to ${op.branch}`,
+        message: `${ctx.action} (finish): returning to ${op.branch}`,
       },
     );
     effects.push(moved.effect, {
@@ -126,29 +151,28 @@ function finish(ctx: SequencerContext, repo: Repo, op: RebaseOperation): Step {
       to: next.head,
     });
   }
-  effects.push(operation(repo, "finished"));
-  return { world: withRepo(ctx.world, next), effects, stdout: "" };
+  effects.push(rebaseEffect(repo, "finished"));
+  return { world: withRepo(ctx.world, next), effects };
 }
 
 /**
  * Replays `op.todo` on the detached HEAD: each pick is a three-way merge
- * of the commit onto HEAD (rebase labels: ours = HEAD, the new base side).
- * Stops on a conflict with the operation saved; finishes otherwise.
+ * of the commit onto HEAD (ours = HEAD, the new base side; theirs = the
+ * commit replayed). Stops on a conflict with the operation saved on the
+ * repository; finishes otherwise.
  */
 export function runRebase(
   ctx: SequencerContext,
   start: Repo,
   op: RebaseOperation,
-  quiet: boolean,
 ): CommandResult {
   let world = ctx.world;
   let repo = start;
   let state = op;
   const effects: Effect[] = [];
-  let stdout = "";
+  const stdout = "";
   for (const oid of op.todo) {
     const machine = machineOf(world, ctx.machine.id);
-    const here = { ...ctx, world, machine };
     const head = resolveHead(repo) as Oid;
     const commit = readObject(world.objects, oid, "commit");
     const parent = commit.parents[0] ?? null;
@@ -191,21 +215,20 @@ export function runRebase(
         stdout: stdout + applied.lines,
         stderr: m.couldNotApply(short),
         exitCode: 1,
-        effects: [...effects, operation(repo, "paused")],
+        effects: [...effects, rebaseEffect(repo, "paused")],
       };
     }
-    const picked = commitPick({ ...here, world }, repo, oid, state);
+    const picked = commitPick({ ...ctx, world, machine }, repo, oid);
     if (!picked.ok) return picked.result;
-    world = picked.step.world;
+    world = picked.world;
     repo = picked.repo;
-    effects.push(...picked.step.effects);
-    stdout += picked.step.stdout;
+    effects.push(...picked.effects);
   }
   const done = finish({ ...ctx, world }, repo, state);
   return {
     world: done.world,
     stdout,
-    stderr: quiet ? "" : m.success(state.branch),
+    stderr: ctx.quiet ? "" : m.success(state.branch),
     effects: [...effects, ...done.effects],
   };
 }

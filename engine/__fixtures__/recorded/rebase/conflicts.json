@@ -1,0 +1,757 @@
+{
+  "final": {
+    "config": {
+      "global": [
+        [
+          "user.name",
+          "Sam Lee"
+        ],
+        [
+          "user.email",
+          "sam@example.com"
+        ],
+        [
+          "init.defaultbranch",
+          "main"
+        ]
+      ],
+      "system": []
+    },
+    "dirs": [
+      "project"
+    ],
+    "files": {
+      "project/b.txt": "b\n",
+      "project/list.txt": "both\n",
+      "project/u.txt": "u\n"
+    },
+    "repos": {
+      "project": {
+        "config": [
+          [
+            "core.repositoryformatversion",
+            "0"
+          ],
+          [
+            "core.filemode",
+            "false"
+          ],
+          [
+            "core.bare",
+            "false"
+          ],
+          [
+            "core.logallrefupdates",
+            "true"
+          ],
+          [
+            "core.symlinks",
+            "false"
+          ],
+          [
+            "core.ignorecase",
+            "true"
+          ]
+        ],
+        "head": {
+          "ref": "refs/heads/again"
+        },
+        "index": [
+          {
+            "mode": "100644",
+            "oid": "61780798228d17af2d34fce4cfbdf35556832472",
+            "path": "b.txt",
+            "stage": 0
+          },
+          {
+            "mode": "100644",
+            "oid": "49f33a8c6e8bb31f5d7c68f9c298cac55ec7cd85",
+            "path": "list.txt",
+            "stage": 0
+          },
+          {
+            "mode": "100644",
+            "oid": "4ae8ef021bf6fcfff43a13be5abfa52bb6fb5dbc",
+            "path": "u.txt",
+            "stage": 0
+          }
+        ],
+        "objects": {
+          "08372e2cbd34885d5de83e904968a10e90040b3a": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "b.txt",
+                "oid": "61780798228d17af2d34fce4cfbdf35556832472"
+              },
+              {
+                "mode": "100644",
+                "name": "list.txt",
+                "oid": "49f33a8c6e8bb31f5d7c68f9c298cac55ec7cd85"
+              },
+              {
+                "mode": "100644",
+                "name": "u.txt",
+                "oid": "4ae8ef021bf6fcfff43a13be5abfa52bb6fb5dbc"
+              }
+            ],
+            "type": "tree"
+          },
+          "1ea3c69985de871716026f8c48cd4773f50d9baa": {
+            "body": "<<<<<<< HEAD\ntheirs\n=======\nmine2\n>>>>>>> 7e20aa6 (Mine again)\n",
+            "type": "blob"
+          },
+          "351be5bf6e17c59ea560546d69654115ecb2fd8d": {
+            "body": "mine\n",
+            "type": "blob"
+          },
+          "49f33a8c6e8bb31f5d7c68f9c298cac55ec7cd85": {
+            "body": "both\n",
+            "type": "blob"
+          },
+          "4ae8ef021bf6fcfff43a13be5abfa52bb6fb5dbc": {
+            "body": "u\n",
+            "type": "blob"
+          },
+          "50da85f3598b081a039484096c777433f3c92369": {
+            "body": "tree dbbf78eec3498cb3a2a8880453bc7e98a7575ee1\nparent b2d75b4593f8fb7f23d4b94a5301d18c73bb987d\nauthor Sam Lee <sam@example.com> 1767226260 +0000\ncommitter Sam Lee <sam@example.com> 1767226260 +0000\n\nTheirs\n",
+            "type": "commit"
+          },
+          "55e4545a20ee11288f11682f8f4a6b383df0248c": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "b.txt",
+                "oid": "61780798228d17af2d34fce4cfbdf35556832472"
+              },
+              {
+                "mode": "100644",
+                "name": "list.txt",
+                "oid": "78981922613b2afb6025042ff6bd878ac1994e85"
+              }
+            ],
+            "type": "tree"
+          },
+          "61780798228d17af2d34fce4cfbdf35556832472": {
+            "body": "b\n",
+            "type": "blob"
+          },
+          "6691c9a4a793c5c23f8ba97d63d20c4b25a1667c": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "b.txt",
+                "oid": "61780798228d17af2d34fce4cfbdf35556832472"
+              },
+              {
+                "mode": "100644",
+                "name": "list.txt",
+                "oid": "351be5bf6e17c59ea560546d69654115ecb2fd8d"
+              }
+            ],
+            "type": "tree"
+          },
+          "698552c4373ff4dbfe1225ff02eb04e75fc396ba": {
+            "body": "tree e8c4b32021db3ba45f624d480d1ddf4bec9cebfe\nparent 50da85f3598b081a039484096c777433f3c92369\nauthor Sam Lee <sam@example.com> 1767227400 +0000\ncommitter Sam Lee <sam@example.com> 1767227940 +0000\n\nMine, merged\n",
+            "type": "commit"
+          },
+          "6c7bc59ecd5fe88b1809002c7fbe765729339996": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "b.txt",
+                "oid": "61780798228d17af2d34fce4cfbdf35556832472"
+              },
+              {
+                "mode": "100644",
+                "name": "list.txt",
+                "oid": "f763403b41d5bab8f3bfd57bcbcc235126443fd2"
+              }
+            ],
+            "type": "tree"
+          },
+          "718f4d2ff533cf8ead8d3556cf43912bd245fbc4": {
+            "body": "t\n",
+            "type": "blob"
+          },
+          "743d676037e9bf7b86ef129b0a6e708387aa6c54": {
+            "body": "tree 6691c9a4a793c5c23f8ba97d63d20c4b25a1667c\nparent b2d75b4593f8fb7f23d4b94a5301d18c73bb987d\nauthor Sam Lee <sam@example.com> 1767225900 +0000\ncommitter Sam Lee <sam@example.com> 1767225900 +0000\n\nMine\n",
+            "type": "commit"
+          },
+          "78981922613b2afb6025042ff6bd878ac1994e85": {
+            "body": "a\n",
+            "type": "blob"
+          },
+          "7e20aa6d56caa222a369273033642ae990d11f6b": {
+            "body": "tree bad55c02fb0ed61605767411e0c03bb0935e9590\nparent b2d75b4593f8fb7f23d4b94a5301d18c73bb987d\nauthor Sam Lee <sam@example.com> 1767227400 +0000\ncommitter Sam Lee <sam@example.com> 1767227400 +0000\n\nMine again\n",
+            "type": "commit"
+          },
+          "7ed909bd729db446f0dd039375630636c8b7c7f4": {
+            "body": "tree c6d11642a78c9a2912e9fa76c1e16b941b726c29\nparent 743d676037e9bf7b86ef129b0a6e708387aa6c54\nauthor Sam Lee <sam@example.com> 1767226080 +0000\ncommitter Sam Lee <sam@example.com> 1767226080 +0000\n\nTopic two\n",
+            "type": "commit"
+          },
+          "81fb29afbc5d4e8def3bb920f50289673feccf12": {
+            "body": "tree a67ce46666fcc310b0291771c99f30264af551e0\nparent 50da85f3598b081a039484096c777433f3c92369\nauthor Sam Lee <sam@example.com> 1767226080 +0000\ncommitter Sam Lee <sam@example.com> 1767227040 +0000\n\nTopic two\n",
+            "type": "commit"
+          },
+          "936d1b919fa5f663c8ba75bf72ab03d077b94b2c": {
+            "body": "tree c4ce9d9c9734e9a6f4836ea6d18cb39ab1c2a492\nparent 7e20aa6d56caa222a369273033642ae990d11f6b\nauthor Sam Lee <sam@example.com> 1767227580 +0000\ncommitter Sam Lee <sam@example.com> 1767227580 +0000\n\nUntouched\n",
+            "type": "commit"
+          },
+          "950b81b7eee953d050aa05a641f8e056c85dd1bd": {
+            "body": "theirs\n",
+            "type": "blob"
+          },
+          "9b5a88831e83be0fbe5e9de0a84c56cc0310b57f": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "b.txt",
+                "oid": "61780798228d17af2d34fce4cfbdf35556832472"
+              },
+              {
+                "mode": "100644",
+                "name": "list.txt",
+                "oid": "1ea3c69985de871716026f8c48cd4773f50d9baa"
+              }
+            ],
+            "type": "tree"
+          },
+          "a22d9b1369414d7d96171ff2a0bf679f3c7751f5": {
+            "body": "mine2\n",
+            "type": "blob"
+          },
+          "a67ce46666fcc310b0291771c99f30264af551e0": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "b.txt",
+                "oid": "61780798228d17af2d34fce4cfbdf35556832472"
+              },
+              {
+                "mode": "100644",
+                "name": "list.txt",
+                "oid": "950b81b7eee953d050aa05a641f8e056c85dd1bd"
+              },
+              {
+                "mode": "100644",
+                "name": "t.txt",
+                "oid": "718f4d2ff533cf8ead8d3556cf43912bd245fbc4"
+              }
+            ],
+            "type": "tree"
+          },
+          "b2d75b4593f8fb7f23d4b94a5301d18c73bb987d": {
+            "body": "tree 55e4545a20ee11288f11682f8f4a6b383df0248c\nauthor Sam Lee <sam@example.com> 1767225720 +0000\ncommitter Sam Lee <sam@example.com> 1767225720 +0000\n\nFirst\n",
+            "type": "commit"
+          },
+          "bad55c02fb0ed61605767411e0c03bb0935e9590": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "b.txt",
+                "oid": "61780798228d17af2d34fce4cfbdf35556832472"
+              },
+              {
+                "mode": "100644",
+                "name": "list.txt",
+                "oid": "a22d9b1369414d7d96171ff2a0bf679f3c7751f5"
+              }
+            ],
+            "type": "tree"
+          },
+          "c4ce9d9c9734e9a6f4836ea6d18cb39ab1c2a492": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "b.txt",
+                "oid": "61780798228d17af2d34fce4cfbdf35556832472"
+              },
+              {
+                "mode": "100644",
+                "name": "list.txt",
+                "oid": "a22d9b1369414d7d96171ff2a0bf679f3c7751f5"
+              },
+              {
+                "mode": "100644",
+                "name": "u.txt",
+                "oid": "4ae8ef021bf6fcfff43a13be5abfa52bb6fb5dbc"
+              }
+            ],
+            "type": "tree"
+          },
+          "c6d11642a78c9a2912e9fa76c1e16b941b726c29": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "b.txt",
+                "oid": "61780798228d17af2d34fce4cfbdf35556832472"
+              },
+              {
+                "mode": "100644",
+                "name": "list.txt",
+                "oid": "351be5bf6e17c59ea560546d69654115ecb2fd8d"
+              },
+              {
+                "mode": "100644",
+                "name": "t.txt",
+                "oid": "718f4d2ff533cf8ead8d3556cf43912bd245fbc4"
+              }
+            ],
+            "type": "tree"
+          },
+          "dbbf78eec3498cb3a2a8880453bc7e98a7575ee1": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "b.txt",
+                "oid": "61780798228d17af2d34fce4cfbdf35556832472"
+              },
+              {
+                "mode": "100644",
+                "name": "list.txt",
+                "oid": "950b81b7eee953d050aa05a641f8e056c85dd1bd"
+              }
+            ],
+            "type": "tree"
+          },
+          "e8c4b32021db3ba45f624d480d1ddf4bec9cebfe": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "b.txt",
+                "oid": "61780798228d17af2d34fce4cfbdf35556832472"
+              },
+              {
+                "mode": "100644",
+                "name": "list.txt",
+                "oid": "49f33a8c6e8bb31f5d7c68f9c298cac55ec7cd85"
+              }
+            ],
+            "type": "tree"
+          },
+          "f1946851b3723777bbfb35b70155e4f3c9039bab": {
+            "body": "tree 08372e2cbd34885d5de83e904968a10e90040b3a\nparent 698552c4373ff4dbfe1225ff02eb04e75fc396ba\nauthor Sam Lee <sam@example.com> 1767227580 +0000\ncommitter Sam Lee <sam@example.com> 1767227940 +0000\n\nUntouched\n",
+            "type": "commit"
+          },
+          "f763403b41d5bab8f3bfd57bcbcc235126443fd2": {
+            "body": "<<<<<<< HEAD\ntheirs\n=======\nmine\n>>>>>>> 743d676 (Mine)\n",
+            "type": "blob"
+          }
+        },
+        "pseudo": {
+          "ORIG_HEAD": "936d1b919fa5f663c8ba75bf72ab03d077b94b2c\n"
+        },
+        "reflogs": {
+          "HEAD": [
+            "0000000000000000000000000000000000000000 b2d75b4593f8fb7f23d4b94a5301d18c73bb987d Sam Lee <sam@example.com> 1767225720 +0000\tcommit (initial): First",
+            "b2d75b4593f8fb7f23d4b94a5301d18c73bb987d b2d75b4593f8fb7f23d4b94a5301d18c73bb987d Sam Lee <sam@example.com> 1767225780 +0000\tcheckout: moving from main to topic",
+            "b2d75b4593f8fb7f23d4b94a5301d18c73bb987d 743d676037e9bf7b86ef129b0a6e708387aa6c54 Sam Lee <sam@example.com> 1767225900 +0000\tcommit: Mine",
+            "743d676037e9bf7b86ef129b0a6e708387aa6c54 7ed909bd729db446f0dd039375630636c8b7c7f4 Sam Lee <sam@example.com> 1767226080 +0000\tcommit: Topic two",
+            "7ed909bd729db446f0dd039375630636c8b7c7f4 b2d75b4593f8fb7f23d4b94a5301d18c73bb987d Sam Lee <sam@example.com> 1767226140 +0000\tcheckout: moving from topic to main",
+            "b2d75b4593f8fb7f23d4b94a5301d18c73bb987d 50da85f3598b081a039484096c777433f3c92369 Sam Lee <sam@example.com> 1767226260 +0000\tcommit: Theirs",
+            "50da85f3598b081a039484096c777433f3c92369 7ed909bd729db446f0dd039375630636c8b7c7f4 Sam Lee <sam@example.com> 1767226320 +0000\tcheckout: moving from main to topic",
+            "7ed909bd729db446f0dd039375630636c8b7c7f4 50da85f3598b081a039484096c777433f3c92369 Sam Lee <sam@example.com> 1767226380 +0000\trebase (start): checkout main",
+            "50da85f3598b081a039484096c777433f3c92369 7ed909bd729db446f0dd039375630636c8b7c7f4 Sam Lee <sam@example.com> 1767226800 +0000\trebase (abort): returning to refs/heads/topic",
+            "7ed909bd729db446f0dd039375630636c8b7c7f4 50da85f3598b081a039484096c777433f3c92369 Sam Lee <sam@example.com> 1767226980 +0000\trebase (start): checkout main",
+            "50da85f3598b081a039484096c777433f3c92369 81fb29afbc5d4e8def3bb920f50289673feccf12 Sam Lee <sam@example.com> 1767227040 +0000\trebase (pick): Topic two",
+            "81fb29afbc5d4e8def3bb920f50289673feccf12 81fb29afbc5d4e8def3bb920f50289673feccf12 Sam Lee <sam@example.com> 1767227040 +0000\trebase (finish): returning to refs/heads/topic",
+            "81fb29afbc5d4e8def3bb920f50289673feccf12 b2d75b4593f8fb7f23d4b94a5301d18c73bb987d Sam Lee <sam@example.com> 1767227280 +0000\tcheckout: moving from topic to again",
+            "b2d75b4593f8fb7f23d4b94a5301d18c73bb987d 7e20aa6d56caa222a369273033642ae990d11f6b Sam Lee <sam@example.com> 1767227400 +0000\tcommit: Mine again",
+            "7e20aa6d56caa222a369273033642ae990d11f6b 936d1b919fa5f663c8ba75bf72ab03d077b94b2c Sam Lee <sam@example.com> 1767227580 +0000\tcommit: Untouched",
+            "936d1b919fa5f663c8ba75bf72ab03d077b94b2c 50da85f3598b081a039484096c777433f3c92369 Sam Lee <sam@example.com> 1767227640 +0000\trebase (start): checkout main",
+            "50da85f3598b081a039484096c777433f3c92369 698552c4373ff4dbfe1225ff02eb04e75fc396ba Sam Lee <sam@example.com> 1767227940 +0000\trebase (continue): Mine, merged",
+            "698552c4373ff4dbfe1225ff02eb04e75fc396ba f1946851b3723777bbfb35b70155e4f3c9039bab Sam Lee <sam@example.com> 1767227940 +0000\trebase (pick): Untouched",
+            "f1946851b3723777bbfb35b70155e4f3c9039bab f1946851b3723777bbfb35b70155e4f3c9039bab Sam Lee <sam@example.com> 1767227940 +0000\trebase (finish): returning to refs/heads/again"
+          ],
+          "refs/heads/again": [
+            "0000000000000000000000000000000000000000 b2d75b4593f8fb7f23d4b94a5301d18c73bb987d Sam Lee <sam@example.com> 1767227280 +0000\tbranch: Created from main~1",
+            "b2d75b4593f8fb7f23d4b94a5301d18c73bb987d 7e20aa6d56caa222a369273033642ae990d11f6b Sam Lee <sam@example.com> 1767227400 +0000\tcommit: Mine again",
+            "7e20aa6d56caa222a369273033642ae990d11f6b 936d1b919fa5f663c8ba75bf72ab03d077b94b2c Sam Lee <sam@example.com> 1767227580 +0000\tcommit: Untouched",
+            "936d1b919fa5f663c8ba75bf72ab03d077b94b2c f1946851b3723777bbfb35b70155e4f3c9039bab Sam Lee <sam@example.com> 1767227940 +0000\trebase (finish): refs/heads/again onto 50da85f3598b081a039484096c777433f3c92369"
+          ],
+          "refs/heads/main": [
+            "0000000000000000000000000000000000000000 b2d75b4593f8fb7f23d4b94a5301d18c73bb987d Sam Lee <sam@example.com> 1767225720 +0000\tcommit (initial): First",
+            "b2d75b4593f8fb7f23d4b94a5301d18c73bb987d 50da85f3598b081a039484096c777433f3c92369 Sam Lee <sam@example.com> 1767226260 +0000\tcommit: Theirs"
+          ],
+          "refs/heads/topic": [
+            "0000000000000000000000000000000000000000 b2d75b4593f8fb7f23d4b94a5301d18c73bb987d Sam Lee <sam@example.com> 1767225780 +0000\tbranch: Created from HEAD",
+            "b2d75b4593f8fb7f23d4b94a5301d18c73bb987d 743d676037e9bf7b86ef129b0a6e708387aa6c54 Sam Lee <sam@example.com> 1767225900 +0000\tcommit: Mine",
+            "743d676037e9bf7b86ef129b0a6e708387aa6c54 7ed909bd729db446f0dd039375630636c8b7c7f4 Sam Lee <sam@example.com> 1767226080 +0000\tcommit: Topic two",
+            "7ed909bd729db446f0dd039375630636c8b7c7f4 81fb29afbc5d4e8def3bb920f50289673feccf12 Sam Lee <sam@example.com> 1767227040 +0000\trebase (finish): refs/heads/topic onto 50da85f3598b081a039484096c777433f3c92369"
+          ]
+        },
+        "refs": {
+          "refs/heads/again": "f1946851b3723777bbfb35b70155e4f3c9039bab",
+          "refs/heads/main": "50da85f3598b081a039484096c777433f3c92369",
+          "refs/heads/topic": "81fb29afbc5d4e8def3bb920f50289673feccf12"
+        }
+      }
+    }
+  },
+  "git": "2.45.1.windows.1",
+  "script": {
+    "steps": [
+      "git init -q",
+      "git add .",
+      "git commit -q -m \"First\"",
+      "git switch -q -c topic",
+      "echo mine > list.txt",
+      "git commit -q -a -m \"Mine\"",
+      "echo t > t.txt",
+      "git add t.txt",
+      "git commit -q -m \"Topic two\"",
+      "git switch -q main",
+      "echo theirs > list.txt",
+      "git commit -q -a -m \"Theirs\"",
+      "git switch -q topic",
+      "git rebase main",
+      "git status",
+      "cat list.txt",
+      "git rebase main",
+      "git switch main",
+      "git commit -m \"Nope\"",
+      "git rebase --continue",
+      "git rebase --abort",
+      "git status",
+      "git log --oneline",
+      "git rebase main",
+      "git rebase --skip",
+      "git log --oneline",
+      "git status",
+      "git rebase --continue",
+      "git switch -q -c again main~1",
+      "echo mine2 > list.txt",
+      "git commit -q -a -m \"Mine again\"",
+      "echo u > u.txt",
+      "git add u.txt",
+      "git commit -q -m \"Untouched\"",
+      "git rebase main",
+      "echo both > list.txt",
+      "git rebase --continue",
+      "git add list.txt",
+      "git status",
+      {
+        "cmd": "git rebase --continue",
+        "editor": "Mine, merged\n"
+      },
+      "git log --oneline",
+      "git status",
+      "git rebase --abort"
+    ],
+    "world": {
+      "cwd": "project",
+      "files": {
+        "project/b.txt": "b\n",
+        "project/list.txt": "a\n"
+      }
+    }
+  },
+  "steps": [
+    {
+      "cmd": "git init -q",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git add .",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git commit -q -m \"First\"",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git switch -q -c topic",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "echo mine > list.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git commit -q -a -m \"Mine\"",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "echo t > t.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git add t.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git commit -q -m \"Topic two\"",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git switch -q main",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "echo theirs > list.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git commit -q -a -m \"Theirs\"",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git switch -q topic",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git rebase main",
+      "cwd": "/home/you/project",
+      "exitCode": 1,
+      "stderr": "error: could not apply 743d676... Mine\nhint: Resolve all conflicts manually, mark them as resolved with\nhint: \"git add/rm <conflicted_files>\", then run \"git rebase --continue\".\nhint: You can instead skip this commit: run \"git rebase --skip\".\nhint: To abort and get back to the state before \"git rebase\", run \"git rebase --abort\".\nhint: Disable this message with \"git config advice.mergeConflict false\"\nCould not apply 743d676... Mine\n",
+      "stdout": "Auto-merging list.txt\nCONFLICT (content): Merge conflict in list.txt\n"
+    },
+    {
+      "cmd": "git status",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "interactive rebase in progress; onto 50da85f\nLast command done (1 command done):\n   pick 743d676 Mine\nNext command to do (1 remaining command):\n   pick 7ed909b Topic two\n  (use \"git rebase --edit-todo\" to view and edit)\nYou are currently rebasing branch 'topic' on '50da85f'.\n  (fix conflicts and then run \"git rebase --continue\")\n  (use \"git rebase --skip\" to skip this patch)\n  (use \"git rebase --abort\" to check out the original branch)\n\nUnmerged paths:\n  (use \"git restore --staged <file>...\" to unstage)\n  (use \"git add <file>...\" to mark resolution)\n\tboth modified:   list.txt\n\nno changes added to commit (use \"git add\" and/or \"git commit -a\")\n"
+    },
+    {
+      "cmd": "cat list.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "<<<<<<< HEAD\ntheirs\n=======\nmine\n>>>>>>> 743d676 (Mine)\n"
+    },
+    {
+      "cmd": "git rebase main",
+      "cwd": "/home/you/project",
+      "exitCode": 128,
+      "stderr": "fatal: It seems that there is already a rebase-merge directory, and\nI wonder if you are in the middle of another rebase.  If that is the\ncase, please try\n\tgit rebase (--continue | --abort | --skip)\nIf that is not the case, please\n\trm -fr \".git/rebase-merge\"\nand run me again.  I am stopping in case you still have something\nvaluable there.\n\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git switch main",
+      "cwd": "/home/you/project",
+      "exitCode": 128,
+      "stderr": "fatal: cannot switch branch while rebasing\nConsider \"git rebase --quit\" or \"git worktree add\".\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git commit -m \"Nope\"",
+      "cwd": "/home/you/project",
+      "exitCode": 128,
+      "stderr": "error: Committing is not possible because you have unmerged files.\nhint: Fix them up in the work tree, and then use 'git add/rm <file>'\nhint: as appropriate to mark resolution and make a commit.\nfatal: Exiting because of an unresolved conflict.\n",
+      "stdout": "U\tlist.txt\n"
+    },
+    {
+      "cmd": "git rebase --continue",
+      "cwd": "/home/you/project",
+      "exitCode": 1,
+      "stderr": "",
+      "stdout": "list.txt: needs merge\nYou must edit all merge conflicts and then\nmark them as resolved using git add\n"
+    },
+    {
+      "cmd": "git rebase --abort",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git status",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "On branch topic\nnothing to commit, working tree clean\n"
+    },
+    {
+      "cmd": "git log --oneline",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "7ed909b (HEAD -> topic) Topic two\n743d676 Mine\nb2d75b4 First\n"
+    },
+    {
+      "cmd": "git rebase main",
+      "cwd": "/home/you/project",
+      "exitCode": 1,
+      "stderr": "error: could not apply 743d676... Mine\nhint: Resolve all conflicts manually, mark them as resolved with\nhint: \"git add/rm <conflicted_files>\", then run \"git rebase --continue\".\nhint: You can instead skip this commit: run \"git rebase --skip\".\nhint: To abort and get back to the state before \"git rebase\", run \"git rebase --abort\".\nhint: Disable this message with \"git config advice.mergeConflict false\"\nCould not apply 743d676... Mine\n",
+      "stdout": "Auto-merging list.txt\nCONFLICT (content): Merge conflict in list.txt\n"
+    },
+    {
+      "cmd": "git rebase --skip",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "Successfully rebased and updated refs/heads/topic.\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git log --oneline",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "81fb29a (HEAD -> topic) Topic two\n50da85f (main) Theirs\nb2d75b4 First\n"
+    },
+    {
+      "cmd": "git status",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "On branch topic\nnothing to commit, working tree clean\n"
+    },
+    {
+      "cmd": "git rebase --continue",
+      "cwd": "/home/you/project",
+      "exitCode": 128,
+      "stderr": "fatal: no rebase in progress\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git switch -q -c again main~1",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "echo mine2 > list.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git commit -q -a -m \"Mine again\"",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "echo u > u.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git add u.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git commit -q -m \"Untouched\"",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git rebase main",
+      "cwd": "/home/you/project",
+      "exitCode": 1,
+      "stderr": "error: could not apply 7e20aa6... Mine again\nhint: Resolve all conflicts manually, mark them as resolved with\nhint: \"git add/rm <conflicted_files>\", then run \"git rebase --continue\".\nhint: You can instead skip this commit: run \"git rebase --skip\".\nhint: To abort and get back to the state before \"git rebase\", run \"git rebase --abort\".\nhint: Disable this message with \"git config advice.mergeConflict false\"\nCould not apply 7e20aa6... Mine again\n",
+      "stdout": "Auto-merging list.txt\nCONFLICT (content): Merge conflict in list.txt\n"
+    },
+    {
+      "cmd": "echo both > list.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git rebase --continue",
+      "cwd": "/home/you/project",
+      "exitCode": 1,
+      "stderr": "",
+      "stdout": "list.txt: needs merge\nYou must edit all merge conflicts and then\nmark them as resolved using git add\n"
+    },
+    {
+      "cmd": "git add list.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git status",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "interactive rebase in progress; onto 50da85f\nLast command done (1 command done):\n   pick 7e20aa6 Mine again\nNext command to do (1 remaining command):\n   pick 936d1b9 Untouched\n  (use \"git rebase --edit-todo\" to view and edit)\nYou are currently rebasing branch 'again' on '50da85f'.\n  (all conflicts fixed: run \"git rebase --continue\")\n\nChanges to be committed:\n  (use \"git restore --staged <file>...\" to unstage)\n\tmodified:   list.txt\n\n"
+    },
+    {
+      "cmd": "git rebase --continue",
+      "cwd": "/home/you/project",
+      "editor": {
+        "received": "Mine again\n\n# Please enter the commit message for your changes. Lines starting\n# with '#' will be ignored, and an empty message aborts the commit.\n#\n# interactive rebase in progress; onto 50da85f\n# Last command done (1 command done):\n#    pick 7e20aa6 Mine again\n# Next command to do (1 remaining command):\n#    pick 936d1b9 Untouched\n# You are currently rebasing branch 'again' on '50da85f'.\n#\n# Changes to be committed:\n#\tmodified:   list.txt\n#\n",
+        "wrote": "Mine, merged\n"
+      },
+      "exitCode": 0,
+      "stderr": "Successfully rebased and updated refs/heads/again.\n",
+      "stdout": "[detached HEAD 698552c] Mine, merged\n 1 file changed, 1 insertion(+), 1 deletion(-)\n"
+    },
+    {
+      "cmd": "git log --oneline",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "f194685 (HEAD -> again) Untouched\n698552c Mine, merged\n50da85f (main) Theirs\nb2d75b4 First\n"
+    },
+    {
+      "cmd": "git status",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "On branch again\nnothing to commit, working tree clean\n"
+    },
+    {
+      "cmd": "git rebase --abort",
+      "cwd": "/home/you/project",
+      "exitCode": 128,
+      "stderr": "fatal: no rebase in progress\n",
+      "stdout": ""
+    }
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "world": {
+    "machines": {
+      "sam": {
+        "global": {
+          "user.name": "Sam Rivera",
+          "user.email": "sam@team.test",
+          "init.defaultBranch": "main"
+        }
+      }
+    },
+    "hub": {
+      "sam/team": {}
+    }
+  },
+  "steps": [
+    { "cmd": "git clone -q https://hub.test/sam/team.git", "machine": "sam" },
+    { "cmd": "cd team", "machine": "sam" },
+    { "cmd": "echo b > list.txt", "machine": "sam" },
+    { "cmd": "echo \"# Team\" > README.md", "machine": "sam" },
+    { "cmd": "git add .", "machine": "sam" },
+    { "cmd": "git commit -q -m \"Add README\"", "machine": "sam" },
+    { "cmd": "git push -q", "machine": "sam" },
+    "git clone -q https://hub.test/sam/team.git",
+    "cd team",
+    { "cmd": "echo Fridays >> README.md", "machine": "sam" },
+    { "cmd": "git commit -q -a -m \"Meet on Fridays\"", "machine": "sam" },
+    { "cmd": "git push -q", "machine": "sam" },
+    "echo mine > mine.txt",
+    "git add mine.txt",
+    "git commit -q -m \"Add mine\"",
+    "git pull --rebase",
+    "git log --oneline --graph --all",
+    "git status",
+    "git config pull.rebase true",
+    { "cmd": "echo B > list.txt", "machine": "sam" },
+    { "cmd": "git commit -q -a -m \"Capital B\"", "machine": "sam" },
+    { "cmd": "git push -q", "machine": "sam" },
+    "echo bee > list.txt",
+    "git commit -q -a -m \"Spell bee\"",
+    "git pull",
+    "git status",
+    "echo B > list.txt",
+    "git add list.txt",
+    { "cmd": "git rebase --continue", "editor": "Spell it B\n" },
+    "git log --oneline",
+    "git status",
+    "git push -q",
+    "git pull"
+  ]
+}

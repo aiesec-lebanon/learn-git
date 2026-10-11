@@ -1,5 +1,8 @@
 import {
+  abbreviate,
   discoverRepo,
+  subjectOf,
+  type Operation,
   displayRelative,
   machineOf,
   resolvePath,
@@ -141,16 +144,38 @@ export type ConflictFile = {
 };
 
 export type PausedMerge = {
+  /** A merge, or a rebase stopped on one of its picks. */
+  readonly kind: "merge" | "rebase";
+  /** The merge message's first line, or the stopped pick (`743d676 Mine`). */
   readonly message: string;
   /** Unmerged paths, in index order. */
   readonly files: readonly ConflictFile[];
 };
 
-/** The merge in progress in the current folder's repository, or null. */
+/** Plain names for the two sides; a rebase replays your commit onto the other side. */
+export const SIDES = {
+  merge: { ours: "the branch you are on", theirs: "the branch merged in" },
+  rebase: {
+    ours: "the new base you are replaying onto",
+    theirs: "your commit being replayed",
+  },
+} as const;
+
+function opMessage(world: World, op: Operation): string {
+  if (op.kind === "merge") return op.message.split("\n")[0] ?? "";
+  const stopped = op.done.at(-1);
+  const commit = stopped ? world.objects.get(stopped) : undefined;
+  return stopped && commit?.type === "commit"
+    ? `${abbreviate(world.objects, stopped)} ${subjectOf(commit.message)}`
+    : "";
+}
+
+/** The merge or rebase paused in the current folder's repository, or null. */
 export function pausedMerge(world: World): PausedMerge | null {
   const machine = machineOf(world);
   const repo = discoverRepo(world, machine);
-  if (repo?.op?.kind !== "merge") return null;
+  const op = repo?.op;
+  if (!repo || !op) return null;
   const tree = worktreeFiles(machine.fs, repo.workdir);
   const files = [...repo.index]
     .filter(([, entries]) => entries.some((e) => e.stage > 0))
@@ -159,5 +184,5 @@ export function pausedMerge(world: World): PausedMerge | null {
       arg: displayRelative(machine.cwd, resolvePath(repo.workdir, path)),
       text: tree.get(path) ?? null,
     }));
-  return { message: repo.op.message.split("\n")[0] ?? "", files };
+  return { kind: op.kind, message: opMessage(world, op), files };
 }

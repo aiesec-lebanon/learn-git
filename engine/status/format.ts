@@ -3,6 +3,7 @@ import { quotePath } from "../files/quote";
 import { shortRefName } from "../refs/names";
 import { statusMessages as m } from "../messages/status";
 import { detachedHead } from "../refs/detached";
+import { rebaseStatusLines } from "../sequencer/state";
 import type { ObjectPool, Repo } from "../types";
 import { compareBytes } from "../util/compare";
 import type { FileChange, StatusData, UnmergedCode } from "./compute";
@@ -87,7 +88,7 @@ const UNMERGED_LABELS: Readonly<Record<UnmergedCode, string>> = {
 
 /** The merge-in-progress lines after the branch line (long format and template). */
 function mergeState(view: StatusView, hints: boolean): string[] {
-  if (!view.repo.op) return [];
+  if (view.repo.op?.kind !== "merge") return [];
   return view.data.unmerged.length
     ? [m.unmergedHere(), ...(hints ? [m.fixAndCommit(), m.abortMerge()] : [])]
     : [m.allFixed(), ...(hints ? [m.concludeMerge()] : [])];
@@ -120,16 +121,19 @@ export function longStatus(
 ): string {
   const { staged, unstaged, unmerged, untracked, ignored } = filtered(view);
   const { unborn } = view.data;
-  let out = `${headLine(view)}\n`;
+  const { op } = view.repo;
+  let out =
+    op?.kind === "rebase"
+      ? `${rebaseStatusLines(view.pool, op, unmerged.length ? "conflicts" : "fixed").join("\n")}\n\n`
+      : `${headLine(view)}\n`;
   if (view.tracking) out += `${trackingLines(view.tracking).join("\n")}\n\n`;
   const state = mergeState(view, true);
   if (state.length) out += `${state.join("\n")}\n\n`;
   if (unborn) out += `\n${unbornTitle}\n\n`;
   const entry = (c: Entry) =>
     `\t${LABELS[c.kind].padEnd(12)}${named(view, c)}\n`;
-  const unstageHint = view.repo.op
-    ? ""
-    : `${unborn ? m.unstageUnborn() : m.unstage()}\n`;
+  const unstageHint =
+    op?.kind === "merge" ? "" : `${unborn ? m.unstageUnborn() : m.unstage()}\n`;
   if (staged.length) {
     out += `${m.stagedTitle()}\n${unstageHint}${staged.map(entry).join("")}\n`;
   }
@@ -212,8 +216,14 @@ export function commitTemplate(view: StatusView): string {
     "Please enter the commit message for your changes. Lines starting",
     "with '#' will be ignored, and an empty message aborts the commit.",
     "",
-    headLine(view),
-    ...(view.tracking ? [...trackingLines(view.tracking, false), ""] : []),
+    ...(view.repo.op?.kind === "rebase"
+      ? [...rebaseStatusLines(view.pool, view.repo.op, null), ""]
+      : [
+          headLine(view),
+          ...(view.tracking
+            ? [...trackingLines(view.tracking, false), ""]
+            : []),
+        ]),
   ];
   const state = mergeState(view, false);
   if (state.length) lines.push(...state, "");

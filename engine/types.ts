@@ -100,8 +100,6 @@ export type RebaseOperation = {
   /** Picks applied so far, the stopped one last. */
   readonly done: readonly Oid[];
   readonly todo: readonly Oid[];
-  /** What reflog entries start with: `rebase` or `pull --rebase`. */
-  readonly action: string;
 };
 
 export type Operation = MergeOperation | RebaseOperation;

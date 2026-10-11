@@ -3,6 +3,8 @@ import { test as base, expect, type Page } from "@playwright/test";
 
 const ownProtocols = new Set(["data:", "blob:"]);
 const failedLoad = "Failed to load resource";
+/** WebKit reports a route prefetch cut off by a full navigation this way. */
+const abortedPrefetch = /\?_rsc=\S+ due to access control checks\.$/;
 
 export const test = base.extend<{ guard: void }>({
   guard: [
@@ -28,9 +30,11 @@ export const test = base.extend<{ guard: void }>({
           problems.push(`HTTP ${response.status()}: ${response.url()}`);
         }
       });
-      page.on("pageerror", (error) =>
-        problems.push(`page error: ${error.message}`),
-      );
+      page.on("pageerror", (error) => {
+        if (!abortedPrefetch.test(error.message)) {
+          problems.push(`page error: ${error.message}`);
+        }
+      });
       page.on("request", (request) => {
         const url = new URL(request.url());
         if (!ownProtocols.has(url.protocol) && url.origin !== origin) {

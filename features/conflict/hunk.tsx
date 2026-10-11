@@ -30,7 +30,7 @@ function Pane({
 }
 
 const Code = ({ text }: { text: string | null }) => (
-  <pre className="m-0 min-h-11 overflow-x-auto rounded-sm border border-line bg-sunk p-2 font-mono text-xs whitespace-pre">
+  <pre className="m-0 min-h-11 rounded-sm border border-line bg-sunk p-2 font-mono text-xs wrap-anywhere whitespace-pre-wrap">
     {text === null ? "(not in the file)" : text || "(empty)"}
   </pre>
 );

@@ -32,7 +32,7 @@ function ResultText({
     (_, i) => segments.slice(0, i).filter((s) => s.kind === "hunk").length,
   );
   return (
-    <pre className="m-0 min-h-11 overflow-x-auto rounded-sm border border-line bg-sunk p-2 font-mono text-xs whitespace-pre">
+    <pre className="m-0 min-h-11 rounded-sm border border-line bg-sunk p-2 font-mono text-xs wrap-anywhere whitespace-pre-wrap">
       {segments.map((s, i) => {
         if (s.kind === "text") return s.text;
         const n = hunkNumber[i] ?? 0;

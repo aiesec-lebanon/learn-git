@@ -23,7 +23,7 @@ function Pane({ title, text }: { title: string; text: string | null }) {
   return (
     <div className="grid min-w-0 content-start gap-1">
       <p className="m-0 text-xs font-semibold text-fg-muted">{title}</p>
-      <pre className="m-0 min-h-11 overflow-x-auto rounded-sm border border-line bg-sunk p-2 font-mono text-xs whitespace-pre">
+      <pre className="m-0 min-h-11 rounded-sm border border-line bg-sunk p-2 font-mono text-xs wrap-anywhere whitespace-pre-wrap">
         {text ?? "(no file)"}
       </pre>
     </div>

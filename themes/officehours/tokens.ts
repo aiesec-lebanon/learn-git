@@ -22,7 +22,7 @@ export const tokens: ThemeTokens = {
     hl: "#FFE14D",
     shadow: "rgba(27,29,34,0.14)",
     "sticky-shadow": "rgba(27,29,34,0.18)",
-    "nav-bg": "rgba(250,251,252,0.9)",
+    "nav-bg": "rgba(250,251,252,0.95)",
     guide: "#178246",
     "guide-ink": "#178246",
     "st-untracked": "#4B515A",

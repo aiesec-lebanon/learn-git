@@ -104,6 +104,7 @@ Reduced motion (system setting or `data-motion="reduce"`): every `--dur-*` becom
 - **Links** (`ui/link.tsx`): `AppLink` for routes (typed), `ExternalLink` opens a new tab and says so to screen readers. Blue ink, underlined.
 - **Skip link**, **visually hidden**, **switch** (`role="switch"`, label is its text, blue track when on).
 - **Focus:** a 3 px AIESEC-blue ring with a 2 px gap on every focusable element; it reads on the board, paper, notes and the slate.
+- **Hub** (`features/hub/`): a simulated browser window (marker-bordered, address bar on the sunk band, `hub.test/...`) with in-sandbox Back and Forward. Repository sections are buttons with `aria-current="page"` that scroll sideways on phones; on phones the stage and the Hub show one at a time. Icons come from the theme (`themes/officehours/icons.tsx`, hand-drawn strokes, `aria-hidden`), always next to words. States read in words (Open, Merged, Closed, "This branch has conflicts that must be resolved"). Diffs pair `+`/`−` with tinted rows and spoken words; Markdown renders without raw HTML.
 - **Shell:** translucent sticky header with the logo (two commits, the arrow back, main's note), one `main`, footer credit "Learn Git by AIESEC Lebanon".
 
 ## Nib, the guide

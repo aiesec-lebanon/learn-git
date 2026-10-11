@@ -7,6 +7,7 @@ import { config } from "./config";
 import { diff } from "./diff";
 import { init } from "./init";
 import { log } from "./log";
+import { merge } from "./merge";
 import { mv } from "./mv";
 import { createRegistry } from "./registry";
 import { restore } from "./restore";
@@ -31,5 +32,6 @@ export const GIT_REGISTRY = createRegistry([
   branch,
   switchCommand,
   checkout,
+  merge,
   reset,
 ]);

@@ -29,6 +29,8 @@ export type RecordedRepo = {
   index: { mode: string; oid: string; stage: number; path: string }[];
   config: [string, string | null][];
   reflogs: Record<string, string[]>;
+  /** `ORIG_HEAD`, `MERGE_HEAD` and `MERGE_MSG` as files, when present. */
+  pseudo?: Record<string, string>;
 };
 
 export type RecordedStep = {

@@ -4,16 +4,27 @@ const listed = (paths: readonly string[]) =>
 export const SWITCH_USAGE = `usage: git switch [<options>] [<branch>]`;
 
 export const checkoutMessages = {
-  wouldOverwrite: (local: readonly string[], untracked: readonly string[]) =>
-    `${
+  wouldOverwrite: (
+    local: readonly string[],
+    untracked: readonly string[],
+    action: "checkout" | "merge" = "checkout",
+  ) => {
+    const then = action === "merge" ? "merge" : "switch branches";
+    return `${
       local.length
-        ? `error: Your local changes to the following files would be overwritten by checkout:\n${listed(local)}Please commit your changes or stash them before you switch branches.\n`
+        ? `error: Your local changes to the following files would be overwritten by ${action}:
+${listed(local)}Please commit your changes or stash them before you ${then}.
+`
         : ""
     }${
       untracked.length
-        ? `error: The following untracked working tree files would be overwritten by checkout:\n${listed(untracked)}Please move or remove them before you switch branches.\n`
+        ? `error: The following untracked working tree files would be overwritten by ${action}:
+${listed(untracked)}Please move or remove them before you ${then}.
+`
         : ""
-    }Aborting\n`,
+    }Aborting
+`;
+  },
   invalidReference: (name: string) => `fatal: invalid reference: ${name}\n`,
   missingArgument: () => "fatal: missing branch or commit argument\n",
   oneReference: () => "fatal: only one reference expected\n",

@@ -1,0 +1,38 @@
+{
+  "world": {
+    "files": {
+      "project/a.txt": "a\n",
+      "project/b.txt": "b\n"
+    },
+    "cwd": "project"
+  },
+  "steps": [
+    "git init -q",
+    "git add .",
+    "git commit -q -m \"First\"",
+    "git switch -q -c topic",
+    "echo t >> a.txt",
+    "git commit -q -a -m \"Topic\"",
+    "git switch -q -c side main",
+    "echo s >> b.txt",
+    "git commit -q -a -m \"Side\"",
+    "git switch -q main",
+    "git merge --ff-only topic",
+    "git merge --ff-only side",
+    "git switch -q side",
+    "git switch -q -c later",
+    "echo l >> b.txt",
+    "git commit -q -a -m \"Later\"",
+    "git switch -q side",
+    "git merge --ff-only --no-ff later",
+    "git merge --no-ff later",
+    "git switch -q -c more later",
+    "echo m >> a.txt",
+    "git commit -q -a -m \"More\"",
+    "git switch -q later",
+    "git merge --ff --no-ff -m \"Bring in more\" more",
+    "git switch -q main",
+    "git merge --no-ff --ff-only side",
+    "git log --oneline --graph --all"
+  ]
+}

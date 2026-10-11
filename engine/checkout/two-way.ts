@@ -49,6 +49,7 @@ export function twoWayCheckout(
   repo: Repo,
   machine: Machine,
   target: Oid,
+  action: "checkout" | "merge" = "checkout",
 ): TwoWay {
   const pool = world.objects;
   const head = treeOf(pool, resolveHead(repo));
@@ -84,7 +85,7 @@ export function twoWayCheckout(
       ok: false,
       refusal: refuse(
         "would-lose-changes",
-        m.wouldOverwrite(local, blocking),
+        m.wouldOverwrite(local, blocking, action),
         1,
       ),
     };

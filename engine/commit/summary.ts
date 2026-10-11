@@ -4,6 +4,7 @@ import { statTotals } from "../diff/stat";
 import { quotePath } from "../files/quote";
 import { readObject } from "../objects/pool";
 import type { TreeFile } from "../objects/tree";
+import type { FilePair } from "../diff/unified";
 import type { ObjectPool, RepoPath } from "../types";
 import { compareBytes } from "../util/compare";
 
@@ -36,17 +37,23 @@ export function commitSummary(
   );
   let added = 0;
   let deleted = 0;
-  const modes: string[] = [];
-  for (const { path, before: a, after: b, from, similarity } of pairs) {
+  for (const { before: a, after: b } of pairs) {
     const stat = numstat(a?.content ?? null, b?.content ?? null);
     added += stat.added;
     deleted += stat.deleted;
-    if (from !== undefined)
-      modes.push(
-        ` rename ${renameName(quotePath(from), quotePath(path))} (${similarity}%)\n`,
-      );
-    else if (!a && b) modes.push(` create mode ${b.mode} ${quotePath(path)}\n`);
-    else if (a && !b) modes.push(` delete mode ${a.mode} ${quotePath(path)}\n`);
   }
-  return statTotals(pairs.length, added, deleted) + modes.join("");
+  return statTotals(pairs.length, added, deleted) + summaryLines(pairs);
+}
+
+/** `--summary`: `create mode`, `delete mode` and `rename` lines in path order. */
+export function summaryLines(pairs: readonly FilePair[]): string {
+  return pairs
+    .map(({ path, before: a, after: b, from, similarity }) => {
+      if (from !== undefined)
+        return ` rename ${renameName(quotePath(from), quotePath(path))} (${similarity}%)\n`;
+      if (!a && b) return ` create mode ${b.mode} ${quotePath(path)}\n`;
+      if (a && !b) return ` delete mode ${a.mode} ${quotePath(path)}\n`;
+      return "";
+    })
+    .join("");
 }

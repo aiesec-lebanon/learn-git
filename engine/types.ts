@@ -82,6 +82,13 @@ export type IndexEntry = {
 /** Entries per path: one at stage 0, or up to three at stages 1 to 3. */
 export type Index = ReadonlyMap<RepoPath, readonly IndexEntry[]>;
 
+/** A merge paused on conflicts (`MERGE_HEAD` and `MERGE_MSG`). */
+export type MergeOperation = {
+  readonly kind: "merge";
+  readonly head: Oid;
+  readonly message: string;
+};
+
 export type Repo = {
   readonly id: RepoId;
   readonly machine: MachineId;
@@ -94,6 +101,10 @@ export type Repo = {
   readonly config: ConfigFile;
   /** Commits in the order this repository received them (stable layout). */
   readonly arrival: readonly Oid[];
+  /** `ORIG_HEAD`: where HEAD was before the last merge. */
+  readonly origHead?: Oid;
+  /** The operation in progress, if any. */
+  readonly op?: MergeOperation;
 };
 
 export type World = {

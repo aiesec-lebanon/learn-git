@@ -1,0 +1,487 @@
+{
+  "final": {
+    "config": {
+      "global": [
+        [
+          "user.name",
+          "Sam Lee"
+        ],
+        [
+          "user.email",
+          "sam@example.com"
+        ],
+        [
+          "init.defaultbranch",
+          "main"
+        ]
+      ],
+      "system": []
+    },
+    "dirs": [
+      "project"
+    ],
+    "files": {
+      "project/a.txt": "a\nt\n",
+      "project/b.txt": "b\n"
+    },
+    "repos": {
+      "project": {
+        "config": [
+          [
+            "core.repositoryformatversion",
+            "0"
+          ],
+          [
+            "core.filemode",
+            "false"
+          ],
+          [
+            "core.bare",
+            "false"
+          ],
+          [
+            "core.logallrefupdates",
+            "true"
+          ],
+          [
+            "core.symlinks",
+            "false"
+          ],
+          [
+            "core.ignorecase",
+            "true"
+          ]
+        ],
+        "head": {
+          "ref": "refs/heads/main"
+        },
+        "index": [
+          {
+            "mode": "100644",
+            "oid": "87bb4758f46a6745a72a73198ad017ad4609d3c5",
+            "path": "a.txt",
+            "stage": 0
+          },
+          {
+            "mode": "100644",
+            "oid": "61780798228d17af2d34fce4cfbdf35556832472",
+            "path": "b.txt",
+            "stage": 0
+          }
+        ],
+        "objects": {
+          "00a57cb89c2f7f377c15a2691a117b86743c8207": {
+            "body": "b\ns\nl\n",
+            "type": "blob"
+          },
+          "0587c793b4be111720c116c3fde699f578753081": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "a.txt",
+                "oid": "78981922613b2afb6025042ff6bd878ac1994e85"
+              },
+              {
+                "mode": "100644",
+                "name": "b.txt",
+                "oid": "7de6a6c57c99b6582bb692bf533458081438d396"
+              }
+            ],
+            "type": "tree"
+          },
+          "0699144ea48e30d1aeabbf8af6b9d6f2029f4cd8": {
+            "body": "tree 7ed9a090537734ba8b1300d024d965bbfba21450\nparent 6d6226188cf81c17f0e278d7ff1ea8a75e56a7ab\nauthor Sam Lee <sam@example.com> 1767225900 +0000\ncommitter Sam Lee <sam@example.com> 1767225900 +0000\n\nTopic\n",
+            "type": "commit"
+          },
+          "0b38ac414bee63dc134207b82de288816ff093db": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "a.txt",
+                "oid": "9327e295f637fe6fd721999358fd4aa194024d19"
+              },
+              {
+                "mode": "100644",
+                "name": "b.txt",
+                "oid": "00a57cb89c2f7f377c15a2691a117b86743c8207"
+              }
+            ],
+            "type": "tree"
+          },
+          "5580fe29e20b95693e99442c33a2b73f8a3aef50": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "a.txt",
+                "oid": "78981922613b2afb6025042ff6bd878ac1994e85"
+              },
+              {
+                "mode": "100644",
+                "name": "b.txt",
+                "oid": "00a57cb89c2f7f377c15a2691a117b86743c8207"
+              }
+            ],
+            "type": "tree"
+          },
+          "61780798228d17af2d34fce4cfbdf35556832472": {
+            "body": "b\n",
+            "type": "blob"
+          },
+          "6d6226188cf81c17f0e278d7ff1ea8a75e56a7ab": {
+            "body": "tree f4b354863caa9cea99b95422c9dab70465757d87\nauthor Sam Lee <sam@example.com> 1767225720 +0000\ncommitter Sam Lee <sam@example.com> 1767225720 +0000\n\nFirst\n",
+            "type": "commit"
+          },
+          "78981922613b2afb6025042ff6bd878ac1994e85": {
+            "body": "a\n",
+            "type": "blob"
+          },
+          "7a3988dce946a9de0622beb5e43ca8a6f7b61c59": {
+            "body": "tree 0b38ac414bee63dc134207b82de288816ff093db\nparent eb8443ddd0c999ed122f31408803c3493217e008\nauthor Sam Lee <sam@example.com> 1767226860 +0000\ncommitter Sam Lee <sam@example.com> 1767226860 +0000\n\nMore\n",
+            "type": "commit"
+          },
+          "7de6a6c57c99b6582bb692bf533458081438d396": {
+            "body": "b\ns\n",
+            "type": "blob"
+          },
+          "7ed9a090537734ba8b1300d024d965bbfba21450": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "a.txt",
+                "oid": "87bb4758f46a6745a72a73198ad017ad4609d3c5"
+              },
+              {
+                "mode": "100644",
+                "name": "b.txt",
+                "oid": "61780798228d17af2d34fce4cfbdf35556832472"
+              }
+            ],
+            "type": "tree"
+          },
+          "87bb4758f46a6745a72a73198ad017ad4609d3c5": {
+            "body": "a\nt\n",
+            "type": "blob"
+          },
+          "9327e295f637fe6fd721999358fd4aa194024d19": {
+            "body": "a\nm\n",
+            "type": "blob"
+          },
+          "aa767c236e9a9eac642c408126deccc808aff4a3": {
+            "body": "tree 0b38ac414bee63dc134207b82de288816ff093db\nparent eb8443ddd0c999ed122f31408803c3493217e008\nparent 7a3988dce946a9de0622beb5e43ca8a6f7b61c59\nauthor Sam Lee <sam@example.com> 1767226980 +0000\ncommitter Sam Lee <sam@example.com> 1767226980 +0000\n\nBring in more\n",
+            "type": "commit"
+          },
+          "ab385ef6aa64f25e97c55e930c81f2afc82995f4": {
+            "body": "tree 0587c793b4be111720c116c3fde699f578753081\nparent 6d6226188cf81c17f0e278d7ff1ea8a75e56a7ab\nauthor Sam Lee <sam@example.com> 1767226080 +0000\ncommitter Sam Lee <sam@example.com> 1767226080 +0000\n\nSide\n",
+            "type": "commit"
+          },
+          "eb8443ddd0c999ed122f31408803c3493217e008": {
+            "body": "tree 5580fe29e20b95693e99442c33a2b73f8a3aef50\nparent ab385ef6aa64f25e97c55e930c81f2afc82995f4\nauthor Sam Lee <sam@example.com> 1767226500 +0000\ncommitter Sam Lee <sam@example.com> 1767226500 +0000\n\nLater\n",
+            "type": "commit"
+          },
+          "f4b354863caa9cea99b95422c9dab70465757d87": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "a.txt",
+                "oid": "78981922613b2afb6025042ff6bd878ac1994e85"
+              },
+              {
+                "mode": "100644",
+                "name": "b.txt",
+                "oid": "61780798228d17af2d34fce4cfbdf35556832472"
+              }
+            ],
+            "type": "tree"
+          },
+          "f909854ef82c31b176b319d284f890a1d2b04676": {
+            "body": "tree 5580fe29e20b95693e99442c33a2b73f8a3aef50\nparent ab385ef6aa64f25e97c55e930c81f2afc82995f4\nparent eb8443ddd0c999ed122f31408803c3493217e008\nauthor Sam Lee <sam@example.com> 1767226620 +0000\ncommitter Sam Lee <sam@example.com> 1767226620 +0000\n\nMerge branch 'later' into side\n",
+            "type": "commit"
+          }
+        },
+        "pseudo": {
+          "ORIG_HEAD": "0699144ea48e30d1aeabbf8af6b9d6f2029f4cd8\n"
+        },
+        "reflogs": {
+          "HEAD": [
+            "0000000000000000000000000000000000000000 6d6226188cf81c17f0e278d7ff1ea8a75e56a7ab Sam Lee <sam@example.com> 1767225720 +0000\tcommit (initial): First",
+            "6d6226188cf81c17f0e278d7ff1ea8a75e56a7ab 6d6226188cf81c17f0e278d7ff1ea8a75e56a7ab Sam Lee <sam@example.com> 1767225780 +0000\tcheckout: moving from main to topic",
+            "6d6226188cf81c17f0e278d7ff1ea8a75e56a7ab 0699144ea48e30d1aeabbf8af6b9d6f2029f4cd8 Sam Lee <sam@example.com> 1767225900 +0000\tcommit: Topic",
+            "0699144ea48e30d1aeabbf8af6b9d6f2029f4cd8 6d6226188cf81c17f0e278d7ff1ea8a75e56a7ab Sam Lee <sam@example.com> 1767225960 +0000\tcheckout: moving from topic to side",
+            "6d6226188cf81c17f0e278d7ff1ea8a75e56a7ab ab385ef6aa64f25e97c55e930c81f2afc82995f4 Sam Lee <sam@example.com> 1767226080 +0000\tcommit: Side",
+            "ab385ef6aa64f25e97c55e930c81f2afc82995f4 6d6226188cf81c17f0e278d7ff1ea8a75e56a7ab Sam Lee <sam@example.com> 1767226140 +0000\tcheckout: moving from side to main",
+            "6d6226188cf81c17f0e278d7ff1ea8a75e56a7ab 0699144ea48e30d1aeabbf8af6b9d6f2029f4cd8 Sam Lee <sam@example.com> 1767226200 +0000\tmerge topic: Fast-forward",
+            "0699144ea48e30d1aeabbf8af6b9d6f2029f4cd8 ab385ef6aa64f25e97c55e930c81f2afc82995f4 Sam Lee <sam@example.com> 1767226320 +0000\tcheckout: moving from main to side",
+            "ab385ef6aa64f25e97c55e930c81f2afc82995f4 ab385ef6aa64f25e97c55e930c81f2afc82995f4 Sam Lee <sam@example.com> 1767226380 +0000\tcheckout: moving from side to later",
+            "ab385ef6aa64f25e97c55e930c81f2afc82995f4 eb8443ddd0c999ed122f31408803c3493217e008 Sam Lee <sam@example.com> 1767226500 +0000\tcommit: Later",
+            "eb8443ddd0c999ed122f31408803c3493217e008 ab385ef6aa64f25e97c55e930c81f2afc82995f4 Sam Lee <sam@example.com> 1767226560 +0000\tcheckout: moving from later to side",
+            "ab385ef6aa64f25e97c55e930c81f2afc82995f4 f909854ef82c31b176b319d284f890a1d2b04676 Sam Lee <sam@example.com> 1767226620 +0000\tmerge later: Merge made by the 'ort' strategy.",
+            "f909854ef82c31b176b319d284f890a1d2b04676 eb8443ddd0c999ed122f31408803c3493217e008 Sam Lee <sam@example.com> 1767226740 +0000\tcheckout: moving from side to more",
+            "eb8443ddd0c999ed122f31408803c3493217e008 7a3988dce946a9de0622beb5e43ca8a6f7b61c59 Sam Lee <sam@example.com> 1767226860 +0000\tcommit: More",
+            "7a3988dce946a9de0622beb5e43ca8a6f7b61c59 eb8443ddd0c999ed122f31408803c3493217e008 Sam Lee <sam@example.com> 1767226920 +0000\tcheckout: moving from more to later",
+            "eb8443ddd0c999ed122f31408803c3493217e008 aa767c236e9a9eac642c408126deccc808aff4a3 Sam Lee <sam@example.com> 1767226980 +0000\tmerge more: Merge made by the 'ort' strategy.",
+            "aa767c236e9a9eac642c408126deccc808aff4a3 0699144ea48e30d1aeabbf8af6b9d6f2029f4cd8 Sam Lee <sam@example.com> 1767227040 +0000\tcheckout: moving from later to main"
+          ],
+          "refs/heads/later": [
+            "0000000000000000000000000000000000000000 ab385ef6aa64f25e97c55e930c81f2afc82995f4 Sam Lee <sam@example.com> 1767226380 +0000\tbranch: Created from HEAD",
+            "ab385ef6aa64f25e97c55e930c81f2afc82995f4 eb8443ddd0c999ed122f31408803c3493217e008 Sam Lee <sam@example.com> 1767226500 +0000\tcommit: Later",
+            "eb8443ddd0c999ed122f31408803c3493217e008 aa767c236e9a9eac642c408126deccc808aff4a3 Sam Lee <sam@example.com> 1767226980 +0000\tmerge more: Merge made by the 'ort' strategy."
+          ],
+          "refs/heads/main": [
+            "0000000000000000000000000000000000000000 6d6226188cf81c17f0e278d7ff1ea8a75e56a7ab Sam Lee <sam@example.com> 1767225720 +0000\tcommit (initial): First",
+            "6d6226188cf81c17f0e278d7ff1ea8a75e56a7ab 0699144ea48e30d1aeabbf8af6b9d6f2029f4cd8 Sam Lee <sam@example.com> 1767226200 +0000\tmerge topic: Fast-forward"
+          ],
+          "refs/heads/more": [
+            "0000000000000000000000000000000000000000 eb8443ddd0c999ed122f31408803c3493217e008 Sam Lee <sam@example.com> 1767226740 +0000\tbranch: Created from later",
+            "eb8443ddd0c999ed122f31408803c3493217e008 7a3988dce946a9de0622beb5e43ca8a6f7b61c59 Sam Lee <sam@example.com> 1767226860 +0000\tcommit: More"
+          ],
+          "refs/heads/side": [
+            "0000000000000000000000000000000000000000 6d6226188cf81c17f0e278d7ff1ea8a75e56a7ab Sam Lee <sam@example.com> 1767225960 +0000\tbranch: Created from main",
+            "6d6226188cf81c17f0e278d7ff1ea8a75e56a7ab ab385ef6aa64f25e97c55e930c81f2afc82995f4 Sam Lee <sam@example.com> 1767226080 +0000\tcommit: Side",
+            "ab385ef6aa64f25e97c55e930c81f2afc82995f4 f909854ef82c31b176b319d284f890a1d2b04676 Sam Lee <sam@example.com> 1767226620 +0000\tmerge later: Merge made by the 'ort' strategy."
+          ],
+          "refs/heads/topic": [
+            "0000000000000000000000000000000000000000 6d6226188cf81c17f0e278d7ff1ea8a75e56a7ab Sam Lee <sam@example.com> 1767225780 +0000\tbranch: Created from HEAD",
+            "6d6226188cf81c17f0e278d7ff1ea8a75e56a7ab 0699144ea48e30d1aeabbf8af6b9d6f2029f4cd8 Sam Lee <sam@example.com> 1767225900 +0000\tcommit: Topic"
+          ]
+        },
+        "refs": {
+          "refs/heads/later": "aa767c236e9a9eac642c408126deccc808aff4a3",
+          "refs/heads/main": "0699144ea48e30d1aeabbf8af6b9d6f2029f4cd8",
+          "refs/heads/more": "7a3988dce946a9de0622beb5e43ca8a6f7b61c59",
+          "refs/heads/side": "f909854ef82c31b176b319d284f890a1d2b04676",
+          "refs/heads/topic": "0699144ea48e30d1aeabbf8af6b9d6f2029f4cd8"
+        }
+      }
+    }
+  },
+  "git": "2.45.1.windows.1",
+  "script": {
+    "steps": [
+      "git init -q",
+      "git add .",
+      "git commit -q -m \"First\"",
+      "git switch -q -c topic",
+      "echo t >> a.txt",
+      "git commit -q -a -m \"Topic\"",
+      "git switch -q -c side main",
+      "echo s >> b.txt",
+      "git commit -q -a -m \"Side\"",
+      "git switch -q main",
+      "git merge --ff-only topic",
+      "git merge --ff-only side",
+      "git switch -q side",
+      "git switch -q -c later",
+      "echo l >> b.txt",
+      "git commit -q -a -m \"Later\"",
+      "git switch -q side",
+      "git merge --ff-only --no-ff later",
+      "git merge --no-ff later",
+      "git switch -q -c more later",
+      "echo m >> a.txt",
+      "git commit -q -a -m \"More\"",
+      "git switch -q later",
+      "git merge --ff --no-ff -m \"Bring in more\" more",
+      "git switch -q main",
+      "git merge --no-ff --ff-only side",
+      "git log --oneline --graph --all"
+    ],
+    "world": {
+      "cwd": "project",
+      "files": {
+        "project/a.txt": "a\n",
+        "project/b.txt": "b\n"
+      }
+    }
+  },
+  "steps": [
+    {
+      "cmd": "git init -q",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git add .",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git commit -q -m \"First\"",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git switch -q -c topic",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "echo t >> a.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git commit -q -a -m \"Topic\"",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git switch -q -c side main",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "echo s >> b.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git commit -q -a -m \"Side\"",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git switch -q main",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git merge --ff-only topic",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "Updating 6d62261..0699144\nFast-forward\n a.txt | 1 +\n 1 file changed, 1 insertion(+)\n"
+    },
+    {
+      "cmd": "git merge --ff-only side",
+      "cwd": "/home/you/project",
+      "exitCode": 128,
+      "stderr": "hint: Diverging branches can't be fast-forwarded, you need to either:\nhint:\nhint: \tgit merge --no-ff\nhint:\nhint: or:\nhint:\nhint: \tgit rebase\nhint:\nhint: Disable this message with \"git config advice.diverging false\"\nfatal: Not possible to fast-forward, aborting.\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git switch -q side",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git switch -q -c later",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "echo l >> b.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git commit -q -a -m \"Later\"",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git switch -q side",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git merge --ff-only --no-ff later",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "Merge made by the 'ort' strategy.\n b.txt | 1 +\n 1 file changed, 1 insertion(+)\n"
+    },
+    {
+      "cmd": "git merge --no-ff later",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "Already up to date.\n"
+    },
+    {
+      "cmd": "git switch -q -c more later",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "echo m >> a.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git commit -q -a -m \"More\"",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git switch -q later",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git merge --ff --no-ff -m \"Bring in more\" more",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "Merge made by the 'ort' strategy.\n a.txt | 1 +\n 1 file changed, 1 insertion(+)\n"
+    },
+    {
+      "cmd": "git switch -q main",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git merge --no-ff --ff-only side",
+      "cwd": "/home/you/project",
+      "exitCode": 128,
+      "stderr": "hint: Diverging branches can't be fast-forwarded, you need to either:\nhint:\nhint: \tgit merge --no-ff\nhint:\nhint: or:\nhint:\nhint: \tgit rebase\nhint:\nhint: Disable this message with \"git config advice.diverging false\"\nfatal: Not possible to fast-forward, aborting.\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git log --oneline --graph --all",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "*   aa767c2 (later) Bring in more\n|\\  \n| * 7a3988d (more) More\n|/  \n| *   f909854 (side) Merge branch 'later' into side\n| |\\  \n| |/  \n|/|   \n* | eb8443d Later\n|/  \n* ab385ef Side\n| * 0699144 (HEAD -> main, topic) Topic\n|/  \n* 6d62261 First\n"
+    }
+  ]
+}

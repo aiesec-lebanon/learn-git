@@ -103,6 +103,22 @@ function dumpReflogs(gitDir) {
   return reflogs;
 }
 
+const PSEUDO = ["ORIG_HEAD", "MERGE_HEAD", "MERGE_MSG"];
+
+/** Pseudo-refs and operation files, only those that exist. */
+function dumpPseudo(gitDir) {
+  const found = PSEUDO.filter((name) => existsSync(path.join(gitDir, name)));
+  if (!found.length) return {};
+  return {
+    pseudo: Object.fromEntries(
+      found.map((name) => [
+        name,
+        readFileSync(path.join(gitDir, name), "utf8"),
+      ]),
+    ),
+  };
+}
+
 function dumpRepo(git, env, workdir) {
   const run = (args, encoding = "utf8") =>
     execFileSync(git, args, {
@@ -139,6 +155,7 @@ function dumpRepo(git, env, workdir) {
     index,
     config: configList(git, env, path.join(gitDir, "config")),
     reflogs: dumpReflogs(gitDir),
+    ...dumpPseudo(gitDir),
   };
 }
 

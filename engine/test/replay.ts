@@ -50,6 +50,20 @@ function dumpObject(object: GitObject): RecordedObject {
   }
 }
 
+/** Pseudo-ref and operation files as `.git` holds them. */
+function pseudoFiles(repo: Repo): Record<string, string> {
+  const out: Record<string, string> = {};
+  if (repo.op) {
+    out.MERGE_HEAD = `${repo.op.head}
+`;
+    out.MERGE_MSG = repo.op.message;
+  }
+  if (repo.origHead)
+    out.ORIG_HEAD = `${repo.origHead}
+`;
+  return out;
+}
+
 /** The world in the recorder's dump format, so final states compare directly. */
 export function dumpWorld(world: World): Final {
   const machine = machineOf(world);
@@ -65,6 +79,7 @@ export function dumpWorld(world: World): Final {
     .sort();
   const repos: Record<string, RecordedRepo> = {};
   for (const repo of world.repos.values()) {
+    const pseudo = pseudoFiles(repo);
     repos[rel(repo.workdir) ?? repo.workdir] = {
       head:
         repo.head.kind === "symbolic"
@@ -79,6 +94,7 @@ export function dumpWorld(world: World): Final {
       reflogs: Object.fromEntries(
         [...repo.reflogs].map(([k, log]) => [k, log.map(reflogLine)]),
       ),
+      ...(Object.keys(pseudo).length ? { pseudo } : {}),
     };
   }
   return {
@@ -159,6 +175,18 @@ const parseReflogLine = (line: string): ReflogEntry => {
   };
 };
 
+function seedPseudo(files: Record<string, string>): Partial<Repo> {
+  const oid = (text: string | undefined) => text?.trim() as Oid | undefined;
+  const origHead = oid(files.ORIG_HEAD);
+  const head = oid(files.MERGE_HEAD);
+  return {
+    ...(origHead ? { origHead } : {}),
+    ...(head
+      ? { op: { kind: "merge", head, message: files.MERGE_MSG ?? "" } }
+      : {}),
+  };
+}
+
 /** The world a recording ends in (mode `seeded`: built from `final`, not replayed). */
 export function seedWorld(fixture: RecordedFixture): World {
   const { final } = fixture;
@@ -214,6 +242,7 @@ export function seedWorld(fixture: RecordedFixture): World {
       index,
       config: config(recorded.config),
       arrival: commits.map(([oid]) => oid),
+      ...seedPseudo(recorded.pseudo ?? {}),
     });
   }
   const machine = {

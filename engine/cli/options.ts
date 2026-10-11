@@ -8,6 +8,8 @@ export type OptionSpec = {
   readonly negatable?: boolean;
   /** Also accepts `-<number>` (as `git log -3`). */
   readonly numeric?: boolean;
+  /** A flag that records this value instead of `true` (shares a key with others). */
+  readonly constant?: string;
 };
 
 /** `true` for a flag, `false` for `--no-<flag>`, a string for a value. */
@@ -101,7 +103,7 @@ export function parseOptions(
         if (match.negated || kind === "none") {
           if (eq >= 0)
             throw new Fail({ kind: "takes-no-value", name: match.name });
-          add(match.spec.key, !match.negated);
+          add(match.spec.key, !match.negated && (match.spec.constant ?? true));
         } else if (eq >= 0) {
           add(match.spec.key, arg.slice(eq + 1));
         } else if (kind === "optional") {
@@ -121,7 +123,7 @@ export function parseOptions(
           if (!spec) throw new Fail({ kind: "unknown-switch", name: letter });
           const kind = spec.value ?? "none";
           if (kind === "none") {
-            add(spec.key, true);
+            add(spec.key, spec.constant ?? true);
             continue;
           }
           const rest = arg.slice(j + 1);

@@ -26,8 +26,9 @@ import { commitOf } from "./switch";
 import { refuseUnsimulated, unsimulated as x } from "./unsimulated";
 
 const OPTIONS: readonly OptionSpec[] = [
-  { key: "ff", long: "ff" },
-  { key: "ff", long: "ff-only", constant: "only" },
+  { key: "ff", long: "ff", constant: "allow", negatable: false },
+  { key: "ff", long: "no-ff", constant: "no", negatable: false },
+  { key: "ff", long: "ff-only", constant: "only", negatable: false },
   { key: "message", short: "m", long: "message", value: "required" },
   { key: "quiet", short: "q", long: "quiet" },
   { key: "edit", short: "e", long: "edit" },
@@ -167,7 +168,7 @@ export const merge = defineCommand({
       return { world: withRepo(world, marked), stdout };
     }
     const ff = lastValue(options, "ff");
-    if (ff !== false && ancestorsOf(pool, theirs).has(head)) {
+    if (ff !== "no" && ancestorsOf(pool, theirs).has(head)) {
       return fastForward(ctx, marked, head, theirs, typed);
     }
     if (ff === "only") {

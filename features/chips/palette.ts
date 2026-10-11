@@ -180,6 +180,29 @@ export const VERBS: readonly ChipVerb[] = [
     ready: (s) => s.commits,
   },
   {
+    program: "git",
+    name: "merge",
+    hint: "bring another branch's work in",
+    params: [
+      { kind: "flag", flag: "--no-ff", label: "always make a merge commit" },
+      { kind: "value", label: "branch", required: true },
+    ],
+    ready: (s) => s.commits,
+  },
+  {
+    program: "git",
+    name: "stash",
+    hint: "shelve uncommitted changes",
+    params: [
+      {
+        kind: "value",
+        label: "action",
+        choices: ["push", "pop", "apply", "list", "drop"],
+      },
+    ],
+    ready: (s) => s.commits,
+  },
+  {
     program: "shell",
     name: "ls",
     hint: "list files",

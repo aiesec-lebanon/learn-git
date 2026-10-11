@@ -13,8 +13,8 @@ test("a pull request is opened from a compare and takes a comment", async ({
     .getByRole("button", { name: "Pull requests" })
     .click();
   await hub.getByRole("button", { name: "New pull request" }).click();
-  await expect(hub.getByLabel("Base")).toHaveValue("main");
-  await expect(hub.getByLabel("Compare")).toHaveValue("docs");
+  await expect(hub.getByLabel("Base", { exact: true })).toHaveValue("main");
+  await expect(hub.getByLabel("Compare", { exact: true })).toHaveValue("docs");
   await expect(hub.getByText("Able to merge")).toBeVisible();
   await expect(hub.getByLabel("Title")).toHaveValue("List the volunteers");
   await hub.getByLabel("Description").fill("Adds **the volunteers**.");
@@ -32,5 +32,7 @@ test("a pull request is opened from a compare and takes a comment", async ({
   await expect(hub.getByText("Ready for review")).toBeVisible();
   await hub.getByRole("button", { name: /^Files changed/ }).click();
   await expect(address).toHaveText("hub.test/sam/bake-sale/pull/1/files");
-  await expect(hub.getByText("docs/volunteers.md")).toBeVisible();
+  await expect(
+    hub.getByText("docs/volunteers.md", { exact: true }),
+  ).toBeVisible();
 });

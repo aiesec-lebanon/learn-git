@@ -13,7 +13,9 @@ test("the Hub browses a repository, goes back and creates one", async ({
   const repoNav = hub.getByRole("navigation", { name: "Repository" });
   await repoNav.getByRole("button", { name: "Branches" }).click();
   await expect(address).toHaveText("hub.test/sam/bake-sale/branches");
-  await expect(hub.getByRole("button", { name: "docs" })).toBeVisible();
+  await expect(
+    hub.getByRole("button", { name: "docs", exact: true }),
+  ).toBeVisible();
   await hub.getByRole("button", { name: "Back" }).click();
   await expect(address).toHaveText("hub.test/sam/bake-sale");
   await hub.getByRole("button", { name: "Forward" }).click();

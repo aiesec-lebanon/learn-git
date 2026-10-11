@@ -32,12 +32,23 @@ const chip =
  * Drag HEAD onto a label or a commit, or drop a new label on a commit: each
  * drop runs the command it stands for in the Your turn sandbox (X-03).
  */
-export function PointerDrag() {
+export function PointerDrag({ preview = false }: { preview?: boolean }) {
   const session = useLessonSession();
-  return session ? <PointerDragFor session={session} /> : null;
+  return session ? (
+    <PointerDragFor session={session} preview={preview} />
+  ) : null;
 }
 
-function PointerDragFor({ session }: { session: Session }) {
+/** The same interaction that only shows the command it would run (Orientation). */
+export const PointerPreview = () => <PointerDrag preview />;
+
+function PointerDragFor({
+  session,
+  preview,
+}: {
+  session: Session;
+  preview: boolean;
+}) {
   const { view, layout } = useSandboxView(session);
   const say = useAnnounce();
   const help = useId();
@@ -63,6 +74,11 @@ function PointerDragFor({ session }: { session: Session }) {
     if (!done.ok) {
       setResult(`Snapped back: ${done.reason}`);
       say(`Snapped back. ${done.reason}`);
+      return;
+    }
+    if (preview) {
+      setResult(`Would run: ${done.command}`);
+      say(`Would run ${done.command}. Nothing ran here.`);
       return;
     }
     session.run(done.command);

@@ -47,6 +47,11 @@ const WIDGETS: Record<WidgetName, ComponentType> = {
       default: m.PointerDrag,
     })),
   ),
+  "pointer-preview": lazy(() =>
+    import("@/features/graph/drag/pointer-drag").then((m) => ({
+      default: m.PointerPreview,
+    })),
+  ),
   reachability: lazy(() =>
     import("@/features/graph/reachability").then((m) => ({
       default: m.ReachabilityHighlighter,

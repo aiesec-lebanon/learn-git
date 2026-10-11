@@ -10,3 +10,5 @@ export const capstoneHref = (id: ChapterId): Route =>
   `/capstones/${id}` as Route;
 
 export const referenceHref = (id: string): Route => `/reference/${id}` as Route;
+
+export const orientationHref: Route = "/orientation";

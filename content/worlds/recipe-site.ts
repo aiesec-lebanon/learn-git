@@ -39,6 +39,12 @@ export const recipeSiteHistory = defineWorld({
   ],
 });
 
+/** The three-commit history with a second label, dark-mode, on the latest commit. */
+export const recipeSiteBranched = defineWorld({
+  ...recipeSiteHistory,
+  setup: [...(recipeSiteHistory.setup ?? []), "git branch dark-mode"],
+});
+
 /** One commit; then README.md edited to link a new, untracked dessert.html. */
 export const recipeSiteDessert = defineWorld({
   ...recipeSiteWithIdentity,

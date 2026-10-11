@@ -13,6 +13,7 @@ export const WIDGET_NAMES = [
   "file-state-map",
   "pattern-lab",
   "pointer-drag",
+  "pointer-preview",
   "reachability",
   "lost-preview",
   "leave-preview",

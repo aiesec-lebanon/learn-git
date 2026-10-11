@@ -1,5 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { createWorld, Session } from "@/engine";
+import { teamRepoPlayground } from "@/content/worlds/team-repo";
 import { announcementFor } from "./announcement";
 import { createAnnouncerQueue } from "./queue";
 
@@ -42,6 +43,14 @@ describe("announcementFor", () => {
     expect(announcementFor(s.run("git init"))).not.toContain("fatal");
     expect(announcementFor(s.run("edit notes.txt"))).toBe(
       "The editor opened for notes.txt.",
+    );
+  });
+
+  it("speaks a teammate's push once, not each of its steps", () => {
+    const s = new Session(createWorld(teamRepoPlayground));
+    s.run("git status");
+    expect(announcementFor(s.run("git log --oneline"))).toBe(
+      "Nothing changed. Sam pushed 1 commit to main on origin: Add the team meeting.",
     );
   });
 });

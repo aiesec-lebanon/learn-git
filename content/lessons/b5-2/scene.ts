@@ -86,7 +86,7 @@ export default defineLesson({
         "Your origin/main is a bookmark from before Sam pushed. What brings it up to date?",
       pointer:
         "git fetch moves origin/main to Sam's commit without touching your files. Merging origin/main then combines both commits; git pull --no-rebase does both steps at once.",
-      reference: "merge",
+      reference: "fetch",
       next: "Run git fetch, then git merge origin/main.",
     },
   },

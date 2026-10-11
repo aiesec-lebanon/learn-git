@@ -54,7 +54,7 @@ export default defineLesson({
         "After cloning, which branches do you have of your own, and which ones are only origin's?",
       pointer:
         "git clone copies every commit and gives you origin/* labels. Switching to a name that exists only as origin/docs creates a local docs that tracks it.",
-      reference: "switch",
+      reference: "clone",
       next: `Run ${CLONE}, then cd bake-sale and git switch docs.`,
     },
   },

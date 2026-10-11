@@ -2,14 +2,17 @@ import type { ReferenceEntry } from "../define";
 import add from "./git-add";
 import branch from "./git-branch";
 import checkout from "./git-checkout";
+import clone from "./git-clone";
 import commit from "./git-commit";
 import config from "./git-config";
 import diff from "./git-diff";
+import fetchCmd from "./git-fetch";
 import gitignore from "./gitignore";
 import init from "./git-init";
 import log from "./git-log";
 import merge from "./git-merge";
 import mv from "./git-mv";
+import remote from "./git-remote";
 import restore from "./git-restore";
 import rm from "./git-rm";
 import show from "./git-show";
@@ -34,6 +37,9 @@ export const REFERENCE: readonly ReferenceEntry[] = [
   switchCmd,
   checkout,
   merge,
+  clone,
+  remote,
+  fetchCmd,
 ];
 
 export const referenceById = (id: string): ReferenceEntry | undefined =>

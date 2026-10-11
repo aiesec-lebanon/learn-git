@@ -1,4 +1,5 @@
-import type { ReferencePreset } from "../define";
+import { writeFile, type ReferencePreset } from "../define";
+import { INDEX_LATER } from "../worlds/bake-sale";
 import { conflictKit } from "../worlds/conflict-kit";
 import {
   recipeSite,
@@ -6,6 +7,13 @@ import {
   recipeSiteMergeReady,
   recipeSiteWithIdentity,
 } from "../worlds/recipe-site";
+import {
+  teamRepo,
+  teamRepoBeforeClone,
+  teamRepoBehind,
+  teamRepoDarkMode,
+  teamRepoDiverged,
+} from "../worlds/team-repo";
 
 const firstCommit = ["git init", "git add .", 'git commit -m "First snapshot"'];
 const changes = [
@@ -85,5 +93,39 @@ export const PRESETS = {
     label: "Merge of pricing paused on a conflict",
     world: conflictKit,
     setup: ["git merge pricing"],
+  },
+  beforeClone: {
+    id: "before-clone",
+    label: "Sam's repository on the Hub, not cloned yet",
+    world: teamRepoBeforeClone,
+  },
+  cloned: {
+    id: "cloned",
+    label: "Your clone, up to date with origin",
+    world: teamRepo,
+  },
+  behind: {
+    id: "behind",
+    label: "Sam pushed a commit you have not fetched",
+    world: teamRepoBehind,
+  },
+  ahead: {
+    id: "ahead",
+    label: "Your main one commit ahead of origin",
+    world: teamRepo,
+    setup: [
+      writeFile("index.html", INDEX_LATER),
+      'git commit -am "Open until 15:00"',
+    ],
+  },
+  diverged: {
+    id: "diverged",
+    label: "Your commit and Sam's pushed one; not fetched",
+    world: teamRepoDiverged,
+  },
+  unpublished: {
+    id: "unpublished",
+    label: "dark-mode committed, not on origin",
+    world: teamRepoDarkMode,
   },
 } as const satisfies Record<string, ReferencePreset>;

@@ -72,6 +72,7 @@ export default defineScenario({
           "Origin's main has a commit you have never seen. Which command brings it over without touching your files?",
         pointer:
           "git fetch downloads origin's new commits and moves origin/main. Your main and your files stay as they are, and git status compares the two.",
+        reference: "fetch",
         next: "Run git fetch, then git status to see that main and origin/main have diverged.",
       },
     },

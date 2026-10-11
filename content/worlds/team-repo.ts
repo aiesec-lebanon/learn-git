@@ -92,6 +92,12 @@ export const teamRepoBeforeClone: WorldSpec = defineWorld({
 /** You cloned the team repository into `~/bake-sale`; Sam is about to push. */
 export const teamRepo: WorldSpec = defineWorld({ ...people, setup: CLONED });
 
+/** Your clone, with Sam's meeting commit on origin's main and not yet fetched. */
+export const teamRepoBehind: WorldSpec = defineWorld({
+  ...people,
+  setup: [...CLONED, sam(SAM_MEETING)],
+});
+
 /** The playground's Team repo: your clone, with Sam pushing twice while you work. */
 export const teamRepoPlayground: WorldSpec = defineWorld({
   ...teamRepo,

@@ -1,0 +1,57 @@
+{
+  "world": {
+    "machines": {
+      "sam": {
+        "global": {
+          "user.name": "Sam Rivera",
+          "user.email": "sam@team.test",
+          "init.defaultBranch": "main"
+        }
+      }
+    },
+    "hub": { "sam/team": {} }
+  },
+  "steps": [
+    { "cmd": "git clone -q https://hub.test/sam/team.git", "machine": "sam" },
+    { "cmd": "cd team", "machine": "sam" },
+    { "cmd": "echo \"# Team\" > README.md", "machine": "sam" },
+    { "cmd": "git add README.md", "machine": "sam" },
+    { "cmd": "git commit -q -m \"Add README\"", "machine": "sam" },
+    { "cmd": "git push -q", "machine": "sam" },
+    { "cmd": "git switch -q -c docs", "machine": "sam" },
+    { "cmd": "echo docs > docs.txt", "machine": "sam" },
+    { "cmd": "git add docs.txt", "machine": "sam" },
+    { "cmd": "git commit -q -m \"Add docs\"", "machine": "sam" },
+    { "cmd": "git push -q -u origin docs", "machine": "sam" },
+    { "cmd": "git switch -q main", "machine": "sam" },
+    "git clone -q https://hub.test/sam/team.git",
+    "cd team",
+    "git fetch",
+    { "cmd": "echo \"Meet on Fridays.\" >> README.md", "machine": "sam" },
+    { "cmd": "git commit -q -a -m \"Add meeting day\"", "machine": "sam" },
+    { "cmd": "git push -q", "machine": "sam" },
+    { "cmd": "git switch -q -c feature", "machine": "sam" },
+    { "cmd": "echo f > f.txt", "machine": "sam" },
+    { "cmd": "git add f.txt", "machine": "sam" },
+    { "cmd": "git commit -q -m \"Add feature\"", "machine": "sam" },
+    { "cmd": "git push -q -u origin feature", "machine": "sam" },
+    { "cmd": "git push -q origin --delete docs", "machine": "sam" },
+    "git status",
+    "git fetch",
+    "git status",
+    "git branch -r",
+    "git fetch --prune",
+    "git branch -r",
+    { "cmd": "echo \"Bring snacks.\" >> README.md", "machine": "sam" },
+    { "cmd": "git commit -q -a -m \"Ask for snacks\"", "machine": "sam" },
+    { "cmd": "git push -q", "machine": "sam" },
+    "git fetch origin main",
+    "git fetch origin",
+    "git fetch origin feature main",
+    "git fetch nope",
+    "git fetch origin nope",
+    "git fetch --all",
+    "git fetch -q",
+    "git log --oneline --all"
+  ]
+}

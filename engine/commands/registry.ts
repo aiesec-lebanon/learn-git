@@ -15,6 +15,8 @@ export type GitContext = {
   readonly machine: Machine;
   readonly repo: Repo | null;
   readonly options: ParsedOptions;
+  /** The arguments after the command name, as typed (reflog actions quote them). */
+  readonly argv?: readonly string[];
   /** Seconds since the epoch at which this invocation runs. */
   readonly time: number;
   /** What the editor returned when a waiting command resumes. */

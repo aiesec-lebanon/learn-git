@@ -62,6 +62,7 @@ function pseudoFiles(repo: Repo): Record<string, string> {
 `;
     out.MERGE_MSG = repo.op.message;
   }
+  if (repo.fetchHead !== undefined) out.FETCH_HEAD = repo.fetchHead;
   if (repo.origHead)
     out.ORIG_HEAD = `${repo.origHead}
 `;
@@ -220,6 +221,7 @@ function seedPseudo(files: Record<string, string>): Partial<Repo> {
   const origHead = oid(files.ORIG_HEAD);
   const head = oid(files.MERGE_HEAD);
   return {
+    ...(files.FETCH_HEAD === undefined ? {} : { fetchHead: files.FETCH_HEAD }),
     ...(origHead ? { origHead } : {}),
     ...(head
       ? { op: { kind: "merge", head, message: files.MERGE_MSG ?? "" } }

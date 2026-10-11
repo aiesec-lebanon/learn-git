@@ -103,7 +103,7 @@ function dumpReflogs(gitDir) {
   return reflogs;
 }
 
-const PSEUDO = ["ORIG_HEAD", "MERGE_HEAD", "MERGE_MSG"];
+const PSEUDO = ["ORIG_HEAD", "MERGE_HEAD", "MERGE_MSG", "FETCH_HEAD"];
 
 /** Pseudo-refs and operation files, only those that exist. */
 function dumpPseudo(gitDir) {

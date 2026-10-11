@@ -107,6 +107,8 @@ export type Repo = {
   readonly origHead?: Oid;
   /** The operation in progress, if any. */
   readonly op?: MergeOperation;
+  /** `FETCH_HEAD`: what the last fetch brought, as Git writes the file. */
+  readonly fetchHead?: string;
   /** A bare repository (no worktree, index or reflogs), as hosted on the Hub. */
   readonly bare?: boolean;
 };

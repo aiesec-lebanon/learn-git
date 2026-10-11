@@ -211,6 +211,15 @@ export const VERBS: readonly ChipVerb[] = [
   },
   {
     program: "git",
+    name: "fetch",
+    hint: "download what the remote has, without touching your branches",
+    params: [
+      { kind: "flag", flag: "--prune", label: "forget deleted branches" },
+    ],
+    ready: (s) => s.repo,
+  },
+  {
+    program: "git",
     name: "remote",
     hint: "list the repositories this one talks to",
     params: [{ kind: "flag", flag: "-v", label: "with addresses" }],

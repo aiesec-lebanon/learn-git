@@ -6,6 +6,7 @@ import { clone } from "./clone";
 import { commit } from "./commit";
 import { config } from "./config";
 import { diff } from "./diff";
+import { fetch } from "./fetch";
 import { init } from "./init";
 import { log } from "./log";
 import { merge } from "./merge";
@@ -40,4 +41,5 @@ export const GIT_REGISTRY = createRegistry([
   reset,
   remote,
   clone,
+  fetch,
 ]);

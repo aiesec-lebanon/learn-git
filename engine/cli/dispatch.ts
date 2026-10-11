@@ -144,6 +144,7 @@ export function dispatchGit(
       machine: located,
       repo,
       options: parsed.options,
+      argv: rest,
       time,
       ...(answer === undefined ? {} : { answer }),
     });

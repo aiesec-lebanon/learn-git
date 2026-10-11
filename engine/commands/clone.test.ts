@@ -1,38 +1,20 @@
 import { describe, expect, it } from "vitest";
 import { runLine } from "../run";
 import type { RefName, World } from "../types";
-import { repoIdFor, repoOf, withRepo } from "../world/access";
+import { asSam, publish, TEAM, TEAM_URL, teamWorld } from "../test/network";
+import { repoIdFor, repoOf } from "../world/access";
 import { createWorld } from "../world/create";
-import { hostedRepoId, transfer } from "../world/network";
 import { guessDir } from "./clone";
 
-const TEAM = hostedRepoId("sam/team");
-const URL = "https://hub.test/sam/team.git";
+const URL = TEAM_URL;
 
-/** Sam's history published on the Hub without `git push` (unit-test shortcut). */
-function published(): World {
-  const world = createWorld({
-    machines: {
-      sam: {
-        global: {
-          "user.name": "Sam",
-          "user.email": "sam@team.test",
-          "init.defaultBranch": "main",
-        },
-      },
-    },
-    hub: { "sam/team": {} },
-    setup: [
-      {
-        machine: "sam",
-        run: 'mkdir s && cd s && git init -q && echo "# Team" > README.md && git add . && git commit -q -m "Add README" && git switch -q -c docs && echo d > docs.txt && git add . && git commit -q -m "Add docs" && git switch -q main',
-      },
-    ],
-  });
-  const sam = repoOf(world, repoIdFor("sam", "/home/sam/s"));
-  const sent = transfer(world, sam.id, TEAM, [...sam.refs.values()], "push");
-  return withRepo(sent.world, { ...repoOf(sent.world, TEAM), refs: sam.refs });
-}
+const published = () =>
+  publish(
+    asSam(
+      teamWorld(),
+      'echo "# Team" > README.md && git add . && git commit -q -m "Add README" && git switch -q -c docs && echo d > docs.txt && git add . && git commit -q -m "Add docs" && git switch -q main',
+    ),
+  );
 
 const run = (world: World, line: string) => {
   const ran = runLine(world, line);

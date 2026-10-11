@@ -4,6 +4,7 @@ import b1 from "./b1";
 import b2 from "./b2";
 import b3 from "./b3";
 import b4 from "./b4";
+import b5 from "./b5";
 
 /** Capstones that are written; a chapter without one shows none. */
 export const CAPSTONES: Partial<Record<ChapterId, CapstoneScene>> = {
@@ -11,6 +12,7 @@ export const CAPSTONES: Partial<Record<ChapterId, CapstoneScene>> = {
   b2,
   b3,
   b4,
+  b5,
 };
 
 export const readyCapstones = (): readonly CapstoneScene[] =>

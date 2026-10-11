@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { createWorld, Session } from "@/engine";
+import { runStep } from "@/content/define";
 import { SCENES } from "@/content/lessons";
 import { stageFrame } from "@/features/stage/frame";
 import { beatFrames } from "./frames";
@@ -16,7 +17,7 @@ describe("beat frames", () => {
   it("equal the frames a live session builds for B1.1", () => {
     const session = new Session(createWorld(scene.world));
     const live = scene.beats.map((beat) => {
-      for (const line of beat.run ?? []) session.run(line);
+      for (const line of beat.run ?? []) runStep(session, line);
       const { world, history } = session.getSnapshot();
       const ran = history.slice(history.length - (beat.run?.length ?? 0));
       return stageFrame(

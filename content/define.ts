@@ -1,12 +1,33 @@
-import { shellQuote, type TargetSpec, type WorldSpec } from "@/engine";
+import {
+  hubActionText,
+  shellQuote,
+  type HistoryEntry,
+  type HubAction,
+  type Session,
+  type TargetSpec,
+  type WorldSpec,
+} from "@/engine";
 import type { ChapterId, LessonId, ScenarioId } from "./registry";
 
-/** One story beat: the commands it runs on the lesson's world, in order. */
+/** A typed line, or something the learner does on the Hub. */
+export type Step = string | HubAction;
+
+export const runStep = (
+  session: Session,
+  step: Step,
+): readonly HistoryEntry[] =>
+  typeof step === "string" ? session.run(step) : session.act(step);
+
+/** The step in words, as history shows it. */
+export const stepText = (step: Step): string =>
+  typeof step === "string" ? step : hubActionText(step);
+
+/** One story beat: the steps it runs on the lesson's world, in order. */
 export type BeatScript = {
   readonly id: string;
-  readonly run?: readonly string[];
-  /** Lines the beat shows Git refusing; content tests expect exactly these to fail. */
-  readonly refusals?: readonly string[];
+  readonly run?: readonly Step[];
+  /** Steps the beat shows refused; content tests expect exactly these to fail. */
+  readonly refusals?: readonly Step[];
 };
 
 /** The hint ladder, shown one step at a time on request (learning design 6). */
@@ -26,7 +47,7 @@ export type Checkpoint = {
   readonly goal: string;
   readonly world: WorldSpec;
   readonly target: TargetSpec;
-  readonly solution: readonly string[];
+  readonly solution: readonly Step[];
   readonly hints?: Hints;
 };
 
@@ -58,7 +79,7 @@ export type ScenarioAct = {
 /** A way an expert would solve the scenario, for the debrief. */
 export type ExpertPath = {
   readonly title: string;
-  readonly solution: readonly string[];
+  readonly solution: readonly Step[];
   readonly tradeoffs: string;
 };
 
@@ -74,7 +95,8 @@ export type ScenarioScene = {
   readonly experts: readonly [ExpertPath, ...ExpertPath[]];
 };
 
-export const defineScenario = (scene: ScenarioScene): ScenarioScene => scene;
+/** Keeps the scene's own types, so tests that replay plain lines see strings. */
+export const defineScenario = <S extends ScenarioScene>(scene: S): S => scene;
 
 export const defineWorld = (spec: WorldSpec): WorldSpec => spec;
 
@@ -89,9 +111,9 @@ export const FIRST_COMMIT = [
   'git commit -m "First snapshot"',
 ] as const;
 
-export const defineLesson = (scene: LessonScene): LessonScene => scene;
+export const defineLesson = <S extends LessonScene>(scene: S): S => scene;
 
-export const defineCapstone = (scene: CapstoneScene): CapstoneScene => scene;
+export const defineCapstone = <S extends CapstoneScene>(scene: S): S => scene;
 
 /** A starting state for a reference entry: a world plus commands that set it up. */
 export type ReferencePreset = {

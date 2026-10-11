@@ -39,7 +39,7 @@ export const LESSONS = [
   l("b5-1", "b5", "Clone: your copy and origin", 12, true),
   l("b5-2", "b5", "Fetch and pull: catching up", 12, true),
   l("b5-3", "b5", "Push and upstream", 12, true),
-  l("b6-1", "b6", "Your repository on GitHub", 10),
+  l("b6-1", "b6", "Your repository on GitHub", 10, true),
   l("b6-2", "b6", "Pull requests: propose, review, merge", 15),
   l("b6-3", "b6", "Issues and linking work", 8),
 ] as const;

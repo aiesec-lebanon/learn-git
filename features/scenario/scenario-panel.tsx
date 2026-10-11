@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import type { Session } from "@/engine";
-import type { ScenarioScene } from "@/content/define";
+import { runStep, type ScenarioScene } from "@/content/define";
 import { seedLines } from "@/content/scenarios/acts";
 import { useAnnounce } from "@/features/announcer/announcer";
 import { HintLadder } from "@/features/guide/hint-ladder";
@@ -29,7 +29,7 @@ function PickUp({
   return (
     <Button
       onClick={() => {
-        for (const line of seedLines(scene, step)) session.run(line);
+        for (const line of seedLines(scene, step)) runStep(session, line);
       }}
     >
       Pick up after act {step} of {scene.acts.length}

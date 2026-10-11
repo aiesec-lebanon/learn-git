@@ -7,7 +7,7 @@ import {
   type HistoryEntry,
 } from "@/engine";
 import { CAPSTONES } from "./capstones";
-import type { Checkpoint } from "./define";
+import { runStep, stepText, type Checkpoint, type Step } from "./define";
 import { voiceProblems } from "./guide/voice";
 import { referenceById } from "./reference/registry";
 import { SCENES } from "./lessons";
@@ -75,7 +75,7 @@ const refused = (entry: HistoryEntry) =>
 
 function replay(checkpoint: Checkpoint) {
   const session = new Session(createWorld(checkpoint.world));
-  for (const line of checkpoint.solution) session.run(line);
+  for (const step of checkpoint.solution) runStep(session, step);
   return session.getSnapshot();
 }
 
@@ -139,9 +139,9 @@ for (const lesson of readyLessons()) {
       const session = new Session(createWorld(scene?.world));
       for (const beat of scene?.beats ?? [])
         for (const line of beat.run ?? []) {
-          const entries = session.run(line);
+          const entries = runStep(session, line);
           const own = entries.filter((e) => !e.actor);
-          expect(own.some(refused), line).toBe(
+          expect(own.some(refused), stepText(line)).toBe(
             beat.refusals?.includes(line) ?? false,
           );
           for (const e of entries.filter((x) => x.actor))
@@ -216,11 +216,11 @@ describe("scenarios", () => {
 for (const [id, scene] of Object.entries(SCENARIO_SCENES)) {
   describe(`scenario ${id}`, () => {
     if (!scene) throw new Error("no scene");
-    const progress = (solution: readonly string[]) => {
+    const progress = (solution: readonly Step[]) => {
       const session = new Session(createWorld(scene.world));
       const counts = [actsReached(scene, session.getSnapshot().world)];
       for (const line of solution) {
-        session.run(line);
+        runStep(session, line);
         counts.push(actsReached(scene, session.getSnapshot().world));
       }
       return counts;

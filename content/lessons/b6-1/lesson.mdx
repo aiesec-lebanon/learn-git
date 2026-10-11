@@ -1,0 +1,38 @@
+<ColdOpen>
+  Your recipe site has three commits, all on your machine. GitHub can host one
+  more copy of the repository where others can reach it. In this course a
+  simulated site, the Hub, plays GitHub's part. How do your commits get there?
+</ColdOpen>
+
+<Beat id="readme-trap" title="A README makes a stranger">
+  You create `recipes-draft` on the Hub with a README. That README is a first
+  commit with no link to yours. `git push` is rejected "(fetch first)", and `-u`
+  links nothing. A plain `git pull draft main` stops to ask how to reconcile,
+  and with `--no-rebase` Git refuses to merge unrelated histories.
+</Beat>
+
+<Beat id="empty" title="Empty, then push">
+  With local commits, create the repository empty. `git remote add origin` names
+  its address, and `git push -u origin main` sends your three commits and makes
+  `origin/main` your main's upstream. Nothing else from your machine goes up.
+</Beat>
+
+<Beat id="page" title="The page is Git">
+  The repository page is a view of origin. Its branch menu lists origin's
+  branches, the commit list is origin's log (`git log origin/main` shows the
+  same), and a file view shows one commit's snapshot.
+</Beat>
+
+<Beat id="credentials" title="On a real machine">
+  The Hub never asks who you are. GitHub does: over HTTPS a credential manager
+  stores your sign-in, and over SSH you register a key once. Either way it is a
+  one-time setup per machine.
+</Beat>
+
+<YourTurn />
+
+<Wrap commands={["git remote add origin", "git push -u origin main"]}>
+  The hosted repository is one more copy of yours. Create it empty when you
+  already have commits, connect it with `git remote add`, and push. Only what
+  you push appears there.
+</Wrap>

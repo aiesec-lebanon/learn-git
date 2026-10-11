@@ -1,5 +1,5 @@
 import type { HistoryEntry } from "@/engine";
-import type { ScenarioScene } from "@/content/define";
+import { stepText, type ScenarioScene } from "@/content/define";
 import { YourPath } from "@/features/checkpoint/your-path";
 
 const WRITE = /^echo -ne '.*' > '?([^']+?)'?$/;
@@ -39,7 +39,7 @@ export function Debrief({
           <ol className="m-0 grid gap-1 pl-5">
             {expert.solution.map((line, i) => (
               <li key={i}>
-                <code className="font-mono">{shownLine(line)}</code>
+                <code className="font-mono">{shownLine(stepText(line))}</code>
               </li>
             ))}
           </ol>

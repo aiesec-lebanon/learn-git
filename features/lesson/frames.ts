@@ -1,5 +1,5 @@
 import { createWorld, Session } from "@/engine";
-import type { LessonScene } from "@/content/define";
+import { runStep, type LessonScene } from "@/content/define";
 import { stageFrame, type StageFrame } from "@/features/stage/frame";
 import { transcriptOf, type TranscriptLine } from "@/features/stage/transcript";
 
@@ -14,7 +14,7 @@ export type BeatFrame = {
 export function beatFrames(scene: LessonScene): BeatFrame[] {
   const session = new Session(createWorld(scene.world));
   return scene.beats.map((beat) => {
-    const entries = (beat.run ?? []).flatMap((line) => session.run(line));
+    const entries = (beat.run ?? []).flatMap((step) => runStep(session, step));
     return {
       id: beat.id,
       stage: stageFrame(

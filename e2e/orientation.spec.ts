@@ -9,8 +9,7 @@ test("Orientation previews the command a move stands for without running it", as
   ).toBeVisible();
 
   const head = page.getByRole("button", { name: "HEAD", exact: true });
-  await head.focus();
-  await page.keyboard.press("Space");
+  await head.click();
   await expect(head).toHaveAttribute("aria-pressed", "true");
   await expect(page.getByText(/^Will run: git switch --detach /)).toBeVisible();
   await page.keyboard.press("ArrowLeft");

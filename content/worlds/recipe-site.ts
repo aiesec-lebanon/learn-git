@@ -101,3 +101,38 @@ export const recipeSiteFeatureAhead = defineWorld({
     'git commit -am "Note the servings"',
   ],
 });
+
+export const FOOTER = "<footer>Made with care.</footer>";
+
+/** main and footer diverged from the README mention, each changing a different file; HEAD on main. */
+export const recipeSiteForked = defineWorld({
+  ...recipeSiteHistory,
+  setup: [
+    ...(recipeSiteHistory.setup ?? []),
+    "git switch -c footer",
+    `echo "${FOOTER}" >> index.html`,
+    'git commit -am "Add a footer"',
+    "git switch main",
+    'echo "Desserts are coming soon." >> README.md',
+    'git commit -am "Announce desserts"',
+  ],
+});
+
+/** main and feature diverged by two commits each in different files; HEAD on feature. */
+export const recipeSiteTwoByTwo = defineWorld({
+  ...recipeSiteHistory,
+  setup: [
+    ...(recipeSiteHistory.setup ?? []),
+    "git switch -c feature",
+    'echo "<p>Serves four.</p>" >> soup.html',
+    'git commit -am "Note the servings"',
+    'echo "<p>Ready in an hour.</p>" >> soup.html',
+    'git commit -am "Note the cooking time"',
+    "git switch main",
+    'echo "Desserts are coming soon." >> README.md',
+    'git commit -am "Announce desserts"',
+    `echo "${FOOTER}" >> index.html`,
+    'git commit -am "Add a footer"',
+    "git switch feature",
+  ],
+});

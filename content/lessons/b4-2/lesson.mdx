@@ -1,0 +1,42 @@
+<ColdOpen>
+  While you built a footer on its own branch, main gained a new note in the
+  README. Now both branches have work the other lacks. Sliding a label forward
+  can't bring them together, so what does Git do?
+</ColdOpen>
+
+<Beat id="fork" title="Two lines from one commit">
+  `git log --oneline --graph --all` draws the fork. The last commit both
+  branches share is their <Term>merge base</Term>: everything after it is new on
+  one side or the other.
+</Beat>
+
+<Beat id="three" title="Three snapshots">
+  Git compares three snapshots: the merge base, your branch's tip, called
+  <Term>ours</Term>, and the other tip, called <Term>theirs</Term>. A change
+  made on one side only is taken as it is. Here `README.md` changed on main and
+  `index.html` on footer, so nothing collides.
+</Beat>
+
+<Beat id="merge" title="A commit with two parents">
+  `git merge footer` combines the three snapshots and records a
+  <Term>merge commit</Term> with the message "Merge branch 'footer'". It has two
+  parents: main's previous tip first, then footer's tip. main moves onto it.
+</Beat>
+
+<Beat id="parents" title="Reading a merge commit">
+  `git show HEAD` prints a "Merge:" line with both parent IDs. The first parent
+  is where main was; the second is the branch that came in.
+</Beat>
+
+<Beat id="graph" title="main reaches both">
+  `git log --oneline --graph` now shows both lines joining at the merge commit.
+  main reaches every footer commit, so `git branch -d footer` deletes the label
+  without a warning.
+</Beat>
+
+<YourTurn />
+
+<Wrap commands={["git merge", "git show", "git log --graph"]}>
+  When both branches moved on, Git combines the merge base and both tips into a
+  merge commit with two parents. Changes in different places merge on their own.
+</Wrap>

@@ -12,6 +12,7 @@ export const WIDGET_NAMES = [
   "destructive-preview",
   "file-state-map",
   "pattern-lab",
+  "pointer-drag",
 ] as const;
 
 export type WidgetName = (typeof WIDGET_NAMES)[number];

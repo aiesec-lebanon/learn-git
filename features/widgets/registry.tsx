@@ -42,6 +42,11 @@ const WIDGETS: Record<WidgetName, ComponentType> = {
   "pattern-lab": lazy(() =>
     import("./pattern-lab").then((m) => ({ default: m.PatternLab })),
   ),
+  "pointer-drag": lazy(() =>
+    import("@/features/graph/drag/pointer-drag").then((m) => ({
+      default: m.PointerDrag,
+    })),
+  ),
   "destructive-preview": lazy(() =>
     import("./destructive-preview").then((m) => ({
       default: m.DestructivePreview,

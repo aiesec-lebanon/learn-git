@@ -1,11 +1,20 @@
 "use client";
 
-import { type KeyboardEvent, useEffect, useId, useRef, useState } from "react";
+import {
+  type HTMLAttributes,
+  type KeyboardEvent,
+  useEffect,
+  useId,
+  useRef,
+  useState,
+} from "react";
 import type { Oid } from "@/engine";
 import { skin } from "@/themes/active";
 import type { SkinLabel } from "@/themes/contract";
 import { Button } from "@/ui/button";
+import { DROP_ATTR } from "@/features/stage/manipulate/use-drag";
 import { commitNameParts, headAt, labelsAt } from "./describe";
+import { branchTarget, commitTarget } from "./drag/targets";
 import { nextFocus } from "./keyboard";
 import { layoutGraph, type Layout } from "./layout";
 import type { CommitView, RepoView } from "./view-model";
@@ -48,6 +57,24 @@ function stacks(view: RepoView, commit: CommitView) {
   return { above, below };
 }
 
+/** Direct manipulation on the graph: drop targets, the aimed one, a draggable HEAD. */
+export type GraphDrop = {
+  readonly aimed: string | null;
+  /** While carrying, a tap on a commit or label drops there. */
+  readonly onPress: ((target: string) => void) | null;
+  /** Pointer handlers that let HEAD be dragged straight off the graph. */
+  readonly head: HTMLAttributes<HTMLElement>;
+};
+
+const dropProps = (drop: GraphDrop | undefined, target: string) =>
+  drop
+    ? {
+        [DROP_ATTR]: target,
+        "data-aimed": drop.aimed === target ? "" : undefined,
+        onClick: drop.onPress ? () => drop.onPress?.(target) : undefined,
+      }
+    : {};
+
 /** The layout with the active theme's metrics. */
 export const graphLayout = (view: RepoView): Layout =>
   layoutGraph(view, skin.graph);
@@ -58,10 +85,12 @@ export function CommitGraph({
   layout,
   label,
   describe,
+  drop,
 }: {
   view: RepoView;
   layout: Layout;
   label: string;
+  drop?: GraphDrop;
   /** "Describe this graph": an engine summary of the repository. */
   describe?: () => string;
 }) {
@@ -159,7 +188,21 @@ export function CommitGraph({
                     className="absolute bottom-6 left-0 flex -translate-x-1/2 flex-col-reverse items-center gap-1.5"
                   >
                     {above.map((l) => (
-                      <span key={l.key} data-choreo={`label:${l.key}`}>
+                      <span
+                        key={l.key}
+                        data-choreo={`label:${l.key}`}
+                        {...(l.kind === "branch"
+                          ? dropProps(drop, branchTarget(l.text))
+                          : {})}
+                        {...(l.kind === "head" && drop ? drop.head : {})}
+                        className={
+                          !drop
+                            ? undefined
+                            : l.kind === "head"
+                              ? "pointer-events-auto cursor-grab touch-none select-none data-dragging:z-10 data-dragging:cursor-grabbing"
+                              : "rounded-sm data-aimed:outline-2 data-aimed:outline-offset-2 data-aimed:outline-focus"
+                        }
+                      >
                         <skin.Label label={l} />
                       </span>
                     ))}
@@ -173,8 +216,9 @@ export function CommitGraph({
                     }}
                     tabIndex={commit.oid === active ? 0 : -1}
                     onFocus={() => setFocused(commit.oid)}
+                    {...dropProps(drop, commitTarget(commit.oid))}
                     onKeyDown={onKeyDown}
-                    className="relative block -translate-x-1/2 -translate-y-1/2 rounded-full focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-focus"
+                    className="relative block -translate-x-1/2 -translate-y-1/2 rounded-full focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-focus data-aimed:outline-2 data-aimed:outline-offset-4 data-aimed:outline-focus"
                   >
                     <skin.Node
                       node={{

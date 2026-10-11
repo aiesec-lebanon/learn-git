@@ -11,6 +11,7 @@ import { computeStatus } from "../status/compute";
 import type { Commit, Oid, Repo, RepoPath, World } from "../types";
 import { compareBytes } from "../util/compare";
 import { machineOf } from "../world/access";
+import { resolveUrl } from "../world/network";
 import { report } from "./report";
 import type {
   CommitTarget,
@@ -115,6 +116,23 @@ export function match(world: World, target: TargetSpec): MatchReport {
     } else if (!oid) {
       differences.push(report.branchMissing(branch));
     } else bind(v, oid);
+  }
+  for (const [remote, branches] of Object.entries(target.remotes ?? {})) {
+    const url = configValue(
+      world,
+      machineOf(world, repo.machine),
+      repo,
+      `remote.${remote}.url`,
+    );
+    const hosted = url ? resolveUrl(world, url) : null;
+    for (const [branch, v] of Object.entries(branches)) {
+      const oid = hosted?.refs.get(branchRef(branch));
+      if (v === null) {
+        if (oid) differences.push(report.remoteBranchExtra(remote, branch));
+      } else if (!oid) {
+        differences.push(report.remoteBranchMissing(remote, branch));
+      } else bind(v, oid);
+    }
   }
   if (target.head && "detached" in target.head) {
     if (repo.head.kind === "detached")

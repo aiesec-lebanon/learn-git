@@ -1,0 +1,51 @@
+<ColdOpen>
+  Your dark theme is ready for Sam to look at, but it only exists in your
+  repository. Pushing sends it to origin. What does origin agree to, and what
+  does it refuse?
+</ColdOpen>
+
+<Beat id="no-upstream" title="Push to where?">
+  You commit a dark theme on a new `dark-mode` branch. `git push` stops: the
+  branch "has no upstream branch", so Git does not know which branch on origin
+  it belongs to. Nothing was sent.
+</Beat>
+
+<Beat id="publish" title="Publish and link">
+  `git push -u origin dark-mode` creates `dark-mode` on origin and makes
+  `origin/dark-mode` your branch's upstream. With `push.autoSetupRemote` set to
+  true, a plain `git push` does that linking for you.
+</Beat>
+
+<Beat id="ahead" title="Ahead by one">
+  After another commit, `git status` says you are ahead of `origin/dark-mode` by
+  1 commit. `git push` uploads it, origin's branch moves, and your hollow
+  `origin/dark-mode` label moves with it.
+</Beat>
+
+<Beat id="rejected" title="Sam pushed first">
+  Back on main you commit longer hours, but Sam pushed while you worked. Your
+  push is rejected "(fetch first)": origin only accepts moves that lose nothing,
+  and moving its main to your commit would drop Sam's.
+</Beat>
+
+<Beat id="integrate" title="Pull, then push">
+  `git pull --no-rebase` fetches Sam's commit and merges it with yours. Your
+  main now contains both, so origin's main can move forward to it without losing
+  anything, and `git push` goes through.
+</Beat>
+
+<Beat id="force" title="Why not force it">
+  `git push --force` tells origin to move anyway. It would succeed, and Sam's
+  commit would vanish from origin's main for everyone. Safer forms of forcing
+  come later (I5.3); for shared branches, integrate first.
+</Beat>
+
+<YourTurn />
+
+<Wrap
+  commands={["git push", "git push -u origin", "git branch -vv", "git status"]}
+>
+  Push uploads commits and asks origin to move its branch, and origin only
+  accepts moves that lose nothing. If someone pushed first, integrate their
+  work, then push.
+</Wrap>

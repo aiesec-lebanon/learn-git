@@ -38,3 +38,22 @@ describe("beat frames", () => {
     ]);
   });
 });
+
+describe("B5.3 frames", () => {
+  it("show what forcing the rejected push would remove, and only there", () => {
+    const scene = SCENES["b5-3"];
+    if (!scene) throw new Error("B5.3 has no scene");
+    const lost = beatFrames(scene).map((f) => [f.id, f.stage.lost]);
+    expect(lost.filter(([, l]) => l)).toEqual([
+      [
+        "rejected",
+        expect.objectContaining({
+          remote: "origin",
+          branch: "main",
+          lost: [expect.objectContaining({ subject: "Add the team meeting" })],
+        }),
+      ],
+    ]);
+    expect(JSON.parse(JSON.stringify(lost))).toEqual(lost);
+  });
+});

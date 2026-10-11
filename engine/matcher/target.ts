@@ -34,6 +34,14 @@ export type TargetSpec = {
   readonly exact?: boolean;
   /** Branch name to commit variable; `null` means the branch must not exist. */
   readonly branches?: Readonly<Record<string, string | null>>;
+  /**
+   * Branches on the repository a remote reaches, by remote name, e.g.
+   * `{ origin: { feature: "tip" } }`; `null` means absent there. Their
+   * commits must also be in this repository.
+   */
+  readonly remotes?: Readonly<
+    Record<string, Readonly<Record<string, string | null>>>
+  >;
   readonly head?: { readonly branch: string } | { readonly detached: string };
   readonly paths?: Readonly<Record<string, PathState>>;
   /** Nothing staged, modified or untracked. */

@@ -99,6 +99,13 @@ export function describeTarget(target: TargetSpec): string[] {
         ? `${branch} points to ${nameOf(commits, id)}.`
         : `There is no branch called ${branch}.`,
     );
+  for (const [remote, branches] of Object.entries(target.remotes ?? {}))
+    for (const [branch, id] of Object.entries(branches))
+      out.push(
+        id
+          ? `${remote} has ${branch} at ${nameOf(commits, id)}.`
+          : `${remote} has no branch called ${branch}.`,
+      );
   if (target.head)
     out.push(
       "branch" in target.head

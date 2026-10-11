@@ -171,6 +171,35 @@ describe("match", () => {
     ]);
   });
 
+  it("checks branches on the repository a remote reaches", () => {
+    const url = "https://hub.test/ana/site.git";
+    const s = play({ hub: { "ana/site": {} } }, [
+      `git clone -q ${url}`,
+      "cd site",
+      "echo hi > a.txt && git add a.txt && git commit -q -m one",
+      "git switch -q -c feature",
+    ]);
+    const target: TargetSpec = {
+      repo: "site",
+      commits: { one: { name: "your commit", parents: [] } },
+      branches: { feature: "one" },
+      remotes: { origin: { feature: "one", main: null }, upstream: {} },
+    };
+    expect(match(world(s), target).differences).toEqual([
+      "origin has no branch feature yet.",
+    ]);
+    s.run("git push -q -u origin feature");
+    expect(match(world(s), target).differences).toEqual([]);
+    s.run("git push -q origin main");
+    expect(match(world(s), target).differences).toEqual([
+      "origin should not have a branch main.",
+    ]);
+    expect(
+      match(world(s), { repo: "site", remotes: { upstream: { main: "x" } } })
+        .differences,
+    ).toEqual(["upstream has no branch main yet."]);
+  });
+
   it("names commits that collide or are reached two ways", () => {
     const s = play(B12, [
       "git init && git add . && git commit -m one",

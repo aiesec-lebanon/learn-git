@@ -3,6 +3,11 @@ import { repoView, type RepoView } from "@/features/graph/view-model";
 import { annotate } from "./choreography/annotations";
 import { stageFiles, type StageFiles } from "./files";
 import { repoPanels, type RepoPanel } from "./multi-repo/model";
+import {
+  pushRejected,
+  wouldLose,
+  type WouldLose,
+} from "@/features/widgets/counters.model";
 
 /** Everything the stage shows for one state, as plain JSON (built on the server or the client). */
 export type StageFrame = {
@@ -15,6 +20,8 @@ export type StageFrame = {
   readonly effects: readonly Effect[];
   /** Before → after notes for reduced motion. */
   readonly notes: readonly string[];
+  /** After a rejected push: what forcing it would remove from the remote. */
+  readonly lost: WouldLose | null;
 };
 
 export function stageFrame(
@@ -30,5 +37,6 @@ export function stageFrame(
     description: repo ? describeGraph(world, repo.id) : null,
     effects,
     notes: annotate(effects, world, files.root),
+    lost: pushRejected(effects) ? wouldLose(world) : null,
   };
 }

@@ -6,6 +6,8 @@ export const TEAM_URL = "https://hub.test/sam/bake-sale.git";
 export const MEETING = `${README}Team meeting: Fridays at 18:00.\n`;
 export const MEETING_BAGS = `${MEETING}Bring your own bag.\n`;
 export const MENU_RAISED = MENU.replace("$4", "$5");
+export const DARK_STYLE = "body { background: #222; color: #eee; }\n";
+export const DARK_HEADINGS = `${DARK_STYLE}h1 { color: #fc6; }\n`;
 export const VOLUNTEERS = "# Volunteers\n\nSam: setup. Ana: cash box.\n";
 
 const SAM = "/home/sam/bake-sale";
@@ -119,5 +121,30 @@ export const teamRepoDiverged: WorldSpec = defineWorld({
     sam(SAM_MEETING),
     writeFile("index.html", INDEX_LATER),
     'git commit -q -am "Open until 15:00"',
+  ],
+});
+
+const DARK_MODE: readonly SetupStep[] = [
+  writeFile("style.css", DARK_STYLE),
+  "git add style.css",
+  'git commit -q -m "Add a dark theme"',
+];
+
+/** Your clone with an unpublished `dark-mode` branch (one commit, HEAD on it). */
+export const teamRepoDarkMode: WorldSpec = defineWorld({
+  ...people,
+  setup: [...CLONED, "git switch -q -c dark-mode", ...DARK_MODE],
+});
+
+/** HEAD on an unpublished `feature` (two commits) while Sam's meeting commit waits on origin's main. */
+export const teamRepoFeature: WorldSpec = defineWorld({
+  ...people,
+  setup: [
+    ...CLONED,
+    "git switch -q -c feature",
+    ...DARK_MODE,
+    writeFile("style.css", DARK_HEADINGS),
+    'git commit -q -am "Colour the headings"',
+    sam(SAM_MEETING),
   ],
 });

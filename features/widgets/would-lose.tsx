@@ -1,13 +1,12 @@
 "use client";
 
-import type { Session, World } from "@/engine";
+import type { Session } from "@/engine";
 import { useLessonSession } from "@/features/lesson/lesson-sandbox";
 import { useSession } from "@/features/stage/use-session";
-import { wouldLose } from "./counters.model";
+import { wouldLose, type WouldLose as Found } from "./counters.model";
 
 /** The commits a forced push would remove from the remote, in plain words. */
-export function WouldLoseView({ world }: { world: World }) {
-  const found = wouldLose(world);
+export function WouldLoseView({ found }: { found: Found | null }) {
   if (!found) return null;
   const { remote, branch, lost } = found;
   const n = lost.length;
@@ -49,5 +48,5 @@ export function WouldLose() {
 
 function WouldLoseFor({ session }: { session: Session }) {
   const { world } = useSession(session);
-  return <WouldLoseView world={world} />;
+  return <WouldLoseView found={wouldLose(world)} />;
 }

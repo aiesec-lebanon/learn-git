@@ -11,7 +11,6 @@ import { Annotations } from "./choreography/annotations";
 import { planChoreography, type GraphFrame } from "./choreography/plan";
 import { playChoreography, type Timeline } from "./choreography/runner";
 import { FileCard } from "./file-card";
-import { pushRejected } from "@/features/widgets/counters.model";
 import { WouldLoseView } from "@/features/widgets/would-lose";
 import { ActorTimeline } from "./multi-repo/actor-timeline";
 import { RepoPanels } from "./multi-repo/panels";
@@ -136,6 +135,7 @@ export function StageView({
     <div ref={root} className="grid gap-4">
       {motion === "reduce" ? <Annotations notes={frame.notes} /> : null}
       <RepoPanels panels={panels} layouts={panelLayouts} />
+      <WouldLoseView found={frame.lost} />
       <Area
         title="Repository"
         hint={
@@ -188,14 +188,9 @@ function SessionStage({ session }: { session: Session }) {
       ),
     [world, latest],
   );
-  const rejected = useMemo(
-    () => pushRejected(latest.flatMap((e) => e.outcome.effects)),
-    [latest],
-  );
   return (
     <div className="grid gap-4">
       <StageView frame={frame} />
-      {rejected ? <WouldLoseView world={world} /> : null}
       <ActorTimeline session={session} />
     </div>
   );

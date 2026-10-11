@@ -19,6 +19,10 @@ export const report = {
     `There is no Git repository in ${folder} yet.`,
   branchMissing: (branch: string) => `The branch ${branch} does not exist yet.`,
   branchExtra: (branch: string) => `The branch ${branch} should not exist.`,
+  remoteBranchMissing: (remote: string, branch: string) =>
+    `${remote} has no branch ${branch} yet.`,
+  remoteBranchExtra: (remote: string, branch: string) =>
+    `${remote} should not have a branch ${branch}.`,
   noCommit: (name: string) => `No commit matches ${name} yet.`,
   sameCommit: (a: string, b: string) =>
     `${a} and ${b} should be different commits.`,

@@ -36,6 +36,16 @@ export const REFUSAL_GUIDE: Readonly<Record<RefusalCode, string>> = {
     "git mv doesn't create folders. Make the folder with mkdir first, then move the file.",
   "path-ignored":
     "A .gitignore rule tells Git to leave that path alone. Add -f to track it anyway, or change the rule.",
+  "invalid-ref-name":
+    "Branch names can't hold spaces, two dots in a row or ~ ^ : ? * [. Use letters, digits, dashes and slashes, like fix/typo.",
+  "branch-exists":
+    "That name is taken. git branch lists the branches; pick another name or use the one that exists.",
+  "no-such-branch":
+    "No branch has that name. git branch lists the ones you have.",
+  "branch-checked-out":
+    "HEAD is on that branch, so Git won't delete or replace it. Switch to another branch first.",
+  "not-fully-merged":
+    "Deleting that label would leave commits no branch reaches. Merge it first, or use -D if you really want those commits gone.",
   "shell-error":
     "The shell couldn't run that line. The message above says why.",
 };

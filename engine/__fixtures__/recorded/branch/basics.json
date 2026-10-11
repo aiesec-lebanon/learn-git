@@ -1,0 +1,544 @@
+{
+  "final": {
+    "config": {
+      "global": [
+        [
+          "user.name",
+          "Sam Lee"
+        ],
+        [
+          "user.email",
+          "sam@example.com"
+        ],
+        [
+          "init.defaultbranch",
+          "main"
+        ]
+      ],
+      "system": []
+    },
+    "dirs": [
+      "project"
+    ],
+    "files": {
+      "project/a.txt": "a\nb\n"
+    },
+    "repos": {
+      "project": {
+        "config": [
+          [
+            "core.repositoryformatversion",
+            "0"
+          ],
+          [
+            "core.filemode",
+            "false"
+          ],
+          [
+            "core.bare",
+            "false"
+          ],
+          [
+            "core.logallrefupdates",
+            "true"
+          ],
+          [
+            "core.symlinks",
+            "false"
+          ],
+          [
+            "core.ignorecase",
+            "true"
+          ]
+        ],
+        "head": {
+          "ref": "refs/heads/main"
+        },
+        "index": [
+          {
+            "mode": "100644",
+            "oid": "422c2b7ab3b3c668038da977e4e93a5fc623169c",
+            "path": "a.txt",
+            "stage": 0
+          }
+        ],
+        "objects": {
+          "08585692ce06452da6f82ae66b90d98b55536fca": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "a.txt",
+                "oid": "78981922613b2afb6025042ff6bd878ac1994e85"
+              }
+            ],
+            "type": "tree"
+          },
+          "187438d7d3fbee49dba13a50af1a6af1f1c7c17c": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "a.txt",
+                "oid": "422c2b7ab3b3c668038da977e4e93a5fc623169c"
+              }
+            ],
+            "type": "tree"
+          },
+          "422c2b7ab3b3c668038da977e4e93a5fc623169c": {
+            "body": "a\nb\n",
+            "type": "blob"
+          },
+          "78981922613b2afb6025042ff6bd878ac1994e85": {
+            "body": "a\n",
+            "type": "blob"
+          },
+          "b89ad0819aa05cb878da7fcfa2e4b9bfd2f96d63": {
+            "body": "tree 187438d7d3fbee49dba13a50af1a6af1f1c7c17c\nparent fe4d0531815dd68bae1018abae0de544bea26eb1\nauthor Sam Lee <sam@example.com> 1767226440 +0000\ncommitter Sam Lee <sam@example.com> 1767226440 +0000\n\nSecond\n",
+            "type": "commit"
+          },
+          "fe4d0531815dd68bae1018abae0de544bea26eb1": {
+            "body": "tree 08585692ce06452da6f82ae66b90d98b55536fca\nauthor Sam Lee <sam@example.com> 1767226140 +0000\ncommitter Sam Lee <sam@example.com> 1767226140 +0000\n\nFirst\n",
+            "type": "commit"
+          }
+        },
+        "reflogs": {
+          "HEAD": [
+            "0000000000000000000000000000000000000000 fe4d0531815dd68bae1018abae0de544bea26eb1 Sam Lee <sam@example.com> 1767226140 +0000\tcommit (initial): First",
+            "fe4d0531815dd68bae1018abae0de544bea26eb1 b89ad0819aa05cb878da7fcfa2e4b9bfd2f96d63 Sam Lee <sam@example.com> 1767226440 +0000\tcommit: Second",
+            "b89ad0819aa05cb878da7fcfa2e4b9bfd2f96d63 0000000000000000000000000000000000000000 Sam Lee <sam@example.com> 1767228000 +0000\tBranch: renamed refs/heads/main to refs/heads/trunk",
+            "0000000000000000000000000000000000000000 b89ad0819aa05cb878da7fcfa2e4b9bfd2f96d63 Sam Lee <sam@example.com> 1767228000 +0000\tBranch: renamed refs/heads/main to refs/heads/trunk",
+            "b89ad0819aa05cb878da7fcfa2e4b9bfd2f96d63 0000000000000000000000000000000000000000 Sam Lee <sam@example.com> 1767228060 +0000\tBranch: renamed refs/heads/trunk to refs/heads/renamed",
+            "0000000000000000000000000000000000000000 b89ad0819aa05cb878da7fcfa2e4b9bfd2f96d63 Sam Lee <sam@example.com> 1767228060 +0000\tBranch: renamed refs/heads/trunk to refs/heads/renamed",
+            "b89ad0819aa05cb878da7fcfa2e4b9bfd2f96d63 0000000000000000000000000000000000000000 Sam Lee <sam@example.com> 1767228120 +0000\tBranch: renamed refs/heads/renamed to refs/heads/renamed",
+            "b89ad0819aa05cb878da7fcfa2e4b9bfd2f96d63 b89ad0819aa05cb878da7fcfa2e4b9bfd2f96d63 Sam Lee <sam@example.com> 1767228120 +0000\tBranch: renamed refs/heads/renamed to refs/heads/renamed",
+            "b89ad0819aa05cb878da7fcfa2e4b9bfd2f96d63 0000000000000000000000000000000000000000 Sam Lee <sam@example.com> 1767228240 +0000\tBranch: renamed refs/heads/renamed to refs/heads/main",
+            "0000000000000000000000000000000000000000 b89ad0819aa05cb878da7fcfa2e4b9bfd2f96d63 Sam Lee <sam@example.com> 1767228240 +0000\tBranch: renamed refs/heads/renamed to refs/heads/main"
+          ],
+          "refs/heads/main": [
+            "0000000000000000000000000000000000000000 fe4d0531815dd68bae1018abae0de544bea26eb1 Sam Lee <sam@example.com> 1767226140 +0000\tcommit (initial): First",
+            "fe4d0531815dd68bae1018abae0de544bea26eb1 b89ad0819aa05cb878da7fcfa2e4b9bfd2f96d63 Sam Lee <sam@example.com> 1767226440 +0000\tcommit: Second",
+            "b89ad0819aa05cb878da7fcfa2e4b9bfd2f96d63 b89ad0819aa05cb878da7fcfa2e4b9bfd2f96d63 Sam Lee <sam@example.com> 1767228000 +0000\tBranch: renamed refs/heads/main to refs/heads/trunk",
+            "b89ad0819aa05cb878da7fcfa2e4b9bfd2f96d63 b89ad0819aa05cb878da7fcfa2e4b9bfd2f96d63 Sam Lee <sam@example.com> 1767228060 +0000\tBranch: renamed refs/heads/trunk to refs/heads/renamed",
+            "b89ad0819aa05cb878da7fcfa2e4b9bfd2f96d63 b89ad0819aa05cb878da7fcfa2e4b9bfd2f96d63 Sam Lee <sam@example.com> 1767228120 +0000\tBranch: renamed refs/heads/renamed to refs/heads/renamed",
+            "b89ad0819aa05cb878da7fcfa2e4b9bfd2f96d63 b89ad0819aa05cb878da7fcfa2e4b9bfd2f96d63 Sam Lee <sam@example.com> 1767228240 +0000\tBranch: renamed refs/heads/renamed to refs/heads/main"
+          ]
+        },
+        "refs": {
+          "refs/heads/main": "b89ad0819aa05cb878da7fcfa2e4b9bfd2f96d63"
+        }
+      }
+    }
+  },
+  "git": "2.45.1.windows.1",
+  "script": {
+    "steps": [
+      "git init -q",
+      "git branch",
+      "git branch topic",
+      "git branch -v",
+      "git branch -m trunk",
+      "git branch",
+      "git branch -M main",
+      "git branch new extra args",
+      "git add a.txt",
+      "git commit -q -m \"First\"",
+      "git branch",
+      "git branch topic",
+      "git branch --list",
+      "echo b >> a.txt",
+      "git commit -q -a -m \"Second\"",
+      "git branch old HEAD~1",
+      "git branch -v",
+      "git branch --verbose",
+      "git branch topic",
+      "git branch topic",
+      "git branch a..b",
+      "git branch -x",
+      "git branch \"a b\"",
+      "git branch HEAD",
+      "git branch new nope",
+      "git branch feature/login main",
+      "git branch feature",
+      "git branch feature/login/x",
+      "git branch",
+      "git branch -d old",
+      "git branch -d nope",
+      "git branch -d",
+      "git branch -d main",
+      "git branch -D topic feature/login",
+      "git branch -q side",
+      "git config branch.side.remote .",
+      "git config branch.side.merge refs/heads/main",
+      "git branch -m side topic",
+      "git branch -m topic main",
+      "git branch -m nope other",
+      "git branch -m main trunk",
+      "git branch -m renamed",
+      "git branch -m renamed",
+      "git branch -M topic renamed",
+      "git branch -M renamed main",
+      "git branch -m main a..b",
+      "git branch -m",
+      "git branch -v",
+      "git branch --list \"m*\" \"t*\"",
+      "git branch -q -d topic"
+    ],
+    "world": {
+      "cwd": "project",
+      "files": {
+        "project/a.txt": "a\n"
+      }
+    }
+  },
+  "steps": [
+    {
+      "cmd": "git init -q",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git branch",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git branch topic",
+      "cwd": "/home/you/project",
+      "exitCode": 128,
+      "stderr": "fatal: not a valid object name: 'main'\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git branch -v",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git branch -m trunk",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git branch",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git branch -M main",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git branch new extra args",
+      "cwd": "/home/you/project",
+      "exitCode": 129,
+      "stderr": "usage: git branch [<options>] [-r | -a] [--merged] [--no-merged]\n   or: git branch [<options>] [-f] [--recurse-submodules] <branch-name> [<start-point>]\n   or: git branch [<options>] [-l] [<pattern>...]\n   or: git branch [<options>] [-r] (-d | -D) <branch-name>...\n   or: git branch [<options>] (-m | -M) [<old-branch>] <new-branch>\n   or: git branch [<options>] (-c | -C) [<old-branch>] <new-branch>\n   or: git branch [<options>] [-r | -a] [--points-at]\n   or: git branch [<options>] [-r | -a] [--format]\n\nGeneric options\n    -v, --[no-]verbose    show hash and subject, give twice for upstream branch\n    -q, --[no-]quiet      suppress informational messages\n    -t, --[no-]track[=(direct|inherit)]\n                          set branch tracking configuration\n    -u, --[no-]set-upstream-to <upstream>\n                          change the upstream info\n    --[no-]unset-upstream unset the upstream info\n    --[no-]color[=<when>] use colored output\n    -r, --remotes         act on remote-tracking branches\n    --contains <commit>   print only branches that contain the commit\n    --no-contains <commit>\n                          print only branches that don't contain the commit\n    --[no-]abbrev[=<n>]   use <n> digits to display object names\n\nSpecific git-branch actions:\n    -a, --all             list both remote-tracking and local branches\n    -d, --[no-]delete     delete fully merged branch\n    -D                    delete branch (even if not merged)\n    -m, --[no-]move       move/rename a branch and its reflog\n    -M                    move/rename a branch, even if target exists\n    --[no-]omit-empty     do not output a newline after empty formatted refs\n    -c, --[no-]copy       copy a branch and its reflog\n    -C                    copy a branch, even if target exists\n    -l, --[no-]list       list branch names\n    --[no-]show-current   show current branch name\n    --[no-]create-reflog  create the branch's reflog\n    --[no-]edit-description\n                          edit the description for the branch\n    -f, --[no-]force      force creation, move/rename, deletion\n    --merged <commit>     print only branches that are merged\n    --no-merged <commit>  print only branches that are not merged\n    --[no-]column[=<style>]\n                          list branches in columns\n    --[no-]sort <key>     field name to sort on\n    --[no-]points-at <object>\n                          print only branches of the object\n    -i, --[no-]ignore-case\n                          sorting and filtering are case insensitive\n    --[no-]recurse-submodules\n                          recurse through submodules\n    --[no-]format <format>\n                          format to use for the output\n\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git add a.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git commit -q -m \"First\"",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git branch",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "* main\n"
+    },
+    {
+      "cmd": "git branch topic",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git branch --list",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "* main\n  topic\n"
+    },
+    {
+      "cmd": "echo b >> a.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git commit -q -a -m \"Second\"",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git branch old HEAD~1",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git branch -v",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "* main  b89ad08 Second\n  old   fe4d053 First\n  topic fe4d053 First\n"
+    },
+    {
+      "cmd": "git branch --verbose",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "* main  b89ad08 Second\n  old   fe4d053 First\n  topic fe4d053 First\n"
+    },
+    {
+      "cmd": "git branch topic",
+      "cwd": "/home/you/project",
+      "exitCode": 128,
+      "stderr": "fatal: a branch named 'topic' already exists\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git branch topic",
+      "cwd": "/home/you/project",
+      "exitCode": 128,
+      "stderr": "fatal: a branch named 'topic' already exists\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git branch a..b",
+      "cwd": "/home/you/project",
+      "exitCode": 128,
+      "stderr": "fatal: 'a..b' is not a valid branch name\nhint: See `man git check-ref-format`\nhint: Disable this message with \"git config advice.refSyntax false\"\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git branch -x",
+      "cwd": "/home/you/project",
+      "exitCode": 129,
+      "stderr": "error: unknown switch `x'\nusage: git branch [<options>] [-r | -a] [--merged] [--no-merged]\n   or: git branch [<options>] [-f] [--recurse-submodules] <branch-name> [<start-point>]\n   or: git branch [<options>] [-l] [<pattern>...]\n   or: git branch [<options>] [-r] (-d | -D) <branch-name>...\n   or: git branch [<options>] (-m | -M) [<old-branch>] <new-branch>\n   or: git branch [<options>] (-c | -C) [<old-branch>] <new-branch>\n   or: git branch [<options>] [-r | -a] [--points-at]\n   or: git branch [<options>] [-r | -a] [--format]\n\nGeneric options\n    -v, --[no-]verbose    show hash and subject, give twice for upstream branch\n    -q, --[no-]quiet      suppress informational messages\n    -t, --[no-]track[=(direct|inherit)]\n                          set branch tracking configuration\n    -u, --[no-]set-upstream-to <upstream>\n                          change the upstream info\n    --[no-]unset-upstream unset the upstream info\n    --[no-]color[=<when>] use colored output\n    -r, --remotes         act on remote-tracking branches\n    --contains <commit>   print only branches that contain the commit\n    --no-contains <commit>\n                          print only branches that don't contain the commit\n    --[no-]abbrev[=<n>]   use <n> digits to display object names\n\nSpecific git-branch actions:\n    -a, --all             list both remote-tracking and local branches\n    -d, --[no-]delete     delete fully merged branch\n    -D                    delete branch (even if not merged)\n    -m, --[no-]move       move/rename a branch and its reflog\n    -M                    move/rename a branch, even if target exists\n    --[no-]omit-empty     do not output a newline after empty formatted refs\n    -c, --[no-]copy       copy a branch and its reflog\n    -C                    copy a branch, even if target exists\n    -l, --[no-]list       list branch names\n    --[no-]show-current   show current branch name\n    --[no-]create-reflog  create the branch's reflog\n    --[no-]edit-description\n                          edit the description for the branch\n    -f, --[no-]force      force creation, move/rename, deletion\n    --merged <commit>     print only branches that are merged\n    --no-merged <commit>  print only branches that are not merged\n    --[no-]column[=<style>]\n                          list branches in columns\n    --[no-]sort <key>     field name to sort on\n    --[no-]points-at <object>\n                          print only branches of the object\n    -i, --[no-]ignore-case\n                          sorting and filtering are case insensitive\n    --[no-]recurse-submodules\n                          recurse through submodules\n    --[no-]format <format>\n                          format to use for the output\n\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git branch \"a b\"",
+      "cwd": "/home/you/project",
+      "exitCode": 128,
+      "stderr": "fatal: 'a b' is not a valid branch name\nhint: See `man git check-ref-format`\nhint: Disable this message with \"git config advice.refSyntax false\"\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git branch HEAD",
+      "cwd": "/home/you/project",
+      "exitCode": 128,
+      "stderr": "fatal: 'HEAD' is not a valid branch name\nhint: See `man git check-ref-format`\nhint: Disable this message with \"git config advice.refSyntax false\"\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git branch new nope",
+      "cwd": "/home/you/project",
+      "exitCode": 128,
+      "stderr": "fatal: not a valid object name: 'nope'\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git branch feature/login main",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git branch feature",
+      "cwd": "/home/you/project",
+      "exitCode": 128,
+      "stderr": "fatal: cannot lock ref 'refs/heads/feature': 'refs/heads/feature/login' exists; cannot create 'refs/heads/feature'\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git branch feature/login/x",
+      "cwd": "/home/you/project",
+      "exitCode": 128,
+      "stderr": "fatal: cannot lock ref 'refs/heads/feature/login/x': 'refs/heads/feature/login' exists; cannot create 'refs/heads/feature/login/x'\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git branch",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "  feature/login\n* main\n  old\n  topic\n"
+    },
+    {
+      "cmd": "git branch -d old",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "Deleted branch old (was fe4d053).\n"
+    },
+    {
+      "cmd": "git branch -d nope",
+      "cwd": "/home/you/project",
+      "exitCode": 1,
+      "stderr": "error: branch 'nope' not found\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git branch -d",
+      "cwd": "/home/you/project",
+      "exitCode": 128,
+      "stderr": "fatal: branch name required\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git branch -d main",
+      "cwd": "/home/you/project",
+      "exitCode": 1,
+      "stderr": "error: cannot delete branch 'main' used by worktree at '/home/you/project'\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git branch -D topic feature/login",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "Deleted branch topic (was fe4d053).\nDeleted branch feature/login (was b89ad08).\n"
+    },
+    {
+      "cmd": "git branch -q side",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git config branch.side.remote .",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git config branch.side.merge refs/heads/main",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git branch -m side topic",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git branch -m topic main",
+      "cwd": "/home/you/project",
+      "exitCode": 128,
+      "stderr": "fatal: a branch named 'main' already exists\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git branch -m nope other",
+      "cwd": "/home/you/project",
+      "exitCode": 128,
+      "stderr": "fatal: no branch named 'nope'\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git branch -m main trunk",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git branch -m renamed",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git branch -m renamed",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git branch -M topic renamed",
+      "cwd": "/home/you/project",
+      "exitCode": 128,
+      "stderr": "fatal: cannot force update the branch 'renamed' used by worktree at '/home/you/project'\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git branch -M renamed main",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git branch -m main a..b",
+      "cwd": "/home/you/project",
+      "exitCode": 128,
+      "stderr": "fatal: 'a..b' is not a valid branch name\nhint: See `man git check-ref-format`\nhint: Disable this message with \"git config advice.refSyntax false\"\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git branch -m",
+      "cwd": "/home/you/project",
+      "exitCode": 128,
+      "stderr": "fatal: branch name required\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git branch -v",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "* main  b89ad08 Second\n  topic b89ad08 Second\n"
+    },
+    {
+      "cmd": "git branch --list \"m*\" \"t*\"",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "* main\n  topic\n"
+    },
+    {
+      "cmd": "git branch -q -d topic",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    }
+  ]
+}

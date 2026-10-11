@@ -1,0 +1,22 @@
+{
+  "world": { "files": { "project/a.txt": "a\n" }, "cwd": "project" },
+  "steps": [
+    "git init -q",
+    "git add a.txt",
+    "git commit -q -m \"First\"",
+    "git switch -q -c side",
+    "echo s >> a.txt",
+    "git commit -q -a -m \"Side work\"",
+    "git switch -q main",
+    "git branch -d side",
+    "git config branch.side.remote .",
+    "git config branch.side.merge refs/heads/side",
+    "git branch -d side",
+    "git branch keep side",
+    "git config branch.keep.remote .",
+    "git config branch.keep.merge refs/heads/side",
+    "git branch -d keep",
+    "git branch -D side",
+    "git branch -v"
+  ]
+}

@@ -21,5 +21,11 @@ export const REFUSAL_FACTS: Readonly<Record<RefusalCode, string>> = {
   "destination-exists": "A file already has that name.",
   "no-such-directory": "The destination folder does not exist.",
   "path-ignored": "A .gitignore rule hides that path from git add.",
+  "invalid-ref-name": "Git does not allow that name for a branch.",
+  "branch-exists": "A branch already has that name.",
+  "no-such-branch": "No branch has that name.",
+  "branch-checked-out": "That branch is the one HEAD is on.",
+  "not-fully-merged":
+    "The branch holds commits that no other branch or HEAD reaches.",
   "shell-error": "The shell could not run that line.",
 };

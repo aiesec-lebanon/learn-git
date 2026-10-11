@@ -1,0 +1,277 @@
+{
+  "final": {
+    "config": {
+      "global": [
+        [
+          "user.name",
+          "Sam Lee"
+        ],
+        [
+          "user.email",
+          "sam@example.com"
+        ],
+        [
+          "init.defaultbranch",
+          "main"
+        ]
+      ],
+      "system": []
+    },
+    "dirs": [
+      "project"
+    ],
+    "files": {
+      "project/a.txt": "a\n"
+    },
+    "repos": {
+      "project": {
+        "config": [
+          [
+            "core.repositoryformatversion",
+            "0"
+          ],
+          [
+            "core.filemode",
+            "false"
+          ],
+          [
+            "core.bare",
+            "false"
+          ],
+          [
+            "core.logallrefupdates",
+            "true"
+          ],
+          [
+            "core.symlinks",
+            "false"
+          ],
+          [
+            "core.ignorecase",
+            "true"
+          ],
+          [
+            "branch.keep.remote",
+            "."
+          ],
+          [
+            "branch.keep.merge",
+            "refs/heads/side"
+          ]
+        ],
+        "head": {
+          "ref": "refs/heads/main"
+        },
+        "index": [
+          {
+            "mode": "100644",
+            "oid": "78981922613b2afb6025042ff6bd878ac1994e85",
+            "path": "a.txt",
+            "stage": 0
+          }
+        ],
+        "objects": {
+          "08585692ce06452da6f82ae66b90d98b55536fca": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "a.txt",
+                "oid": "78981922613b2afb6025042ff6bd878ac1994e85"
+              }
+            ],
+            "type": "tree"
+          },
+          "0f032e6efef078718e53845b5ff5c4f3d761189d": {
+            "body": "tree 2809e186c1bf707f9290def0cbc1fadbad81bb02\nparent 9dfff969b0901d208fdbe2963bc3dd66d77b686e\nauthor Sam Lee <sam@example.com> 1767225900 +0000\ncommitter Sam Lee <sam@example.com> 1767225900 +0000\n\nSide work\n",
+            "type": "commit"
+          },
+          "1d23ac51c376122527fe46a32f9264ed408c1c42": {
+            "body": "a\ns\n",
+            "type": "blob"
+          },
+          "2809e186c1bf707f9290def0cbc1fadbad81bb02": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "a.txt",
+                "oid": "1d23ac51c376122527fe46a32f9264ed408c1c42"
+              }
+            ],
+            "type": "tree"
+          },
+          "78981922613b2afb6025042ff6bd878ac1994e85": {
+            "body": "a\n",
+            "type": "blob"
+          },
+          "9dfff969b0901d208fdbe2963bc3dd66d77b686e": {
+            "body": "tree 08585692ce06452da6f82ae66b90d98b55536fca\nauthor Sam Lee <sam@example.com> 1767225720 +0000\ncommitter Sam Lee <sam@example.com> 1767225720 +0000\n\nFirst\n",
+            "type": "commit"
+          }
+        },
+        "reflogs": {
+          "HEAD": [
+            "0000000000000000000000000000000000000000 9dfff969b0901d208fdbe2963bc3dd66d77b686e Sam Lee <sam@example.com> 1767225720 +0000\tcommit (initial): First",
+            "9dfff969b0901d208fdbe2963bc3dd66d77b686e 9dfff969b0901d208fdbe2963bc3dd66d77b686e Sam Lee <sam@example.com> 1767225780 +0000\tcheckout: moving from main to side",
+            "9dfff969b0901d208fdbe2963bc3dd66d77b686e 0f032e6efef078718e53845b5ff5c4f3d761189d Sam Lee <sam@example.com> 1767225900 +0000\tcommit: Side work",
+            "0f032e6efef078718e53845b5ff5c4f3d761189d 9dfff969b0901d208fdbe2963bc3dd66d77b686e Sam Lee <sam@example.com> 1767225960 +0000\tcheckout: moving from side to main"
+          ],
+          "refs/heads/main": [
+            "0000000000000000000000000000000000000000 9dfff969b0901d208fdbe2963bc3dd66d77b686e Sam Lee <sam@example.com> 1767225720 +0000\tcommit (initial): First"
+          ]
+        },
+        "refs": {
+          "refs/heads/main": "9dfff969b0901d208fdbe2963bc3dd66d77b686e"
+        }
+      }
+    }
+  },
+  "git": "2.45.1.windows.1",
+  "script": {
+    "steps": [
+      "git init -q",
+      "git add a.txt",
+      "git commit -q -m \"First\"",
+      "git switch -q -c side",
+      "echo s >> a.txt",
+      "git commit -q -a -m \"Side work\"",
+      "git switch -q main",
+      "git branch -d side",
+      "git config branch.side.remote .",
+      "git config branch.side.merge refs/heads/side",
+      "git branch -d side",
+      "git branch keep side",
+      "git config branch.keep.remote .",
+      "git config branch.keep.merge refs/heads/side",
+      "git branch -d keep",
+      "git branch -D side",
+      "git branch -v"
+    ],
+    "world": {
+      "cwd": "project",
+      "files": {
+        "project/a.txt": "a\n"
+      }
+    }
+  },
+  "steps": [
+    {
+      "cmd": "git init -q",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git add a.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git commit -q -m \"First\"",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git switch -q -c side",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "echo s >> a.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git commit -q -a -m \"Side work\"",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git switch -q main",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git branch -d side",
+      "cwd": "/home/you/project",
+      "exitCode": 1,
+      "stderr": "error: the branch 'side' is not fully merged\nhint: If you are sure you want to delete it, run 'git branch -D side'\nhint: Disable this message with \"git config advice.forceDeleteBranch false\"\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git config branch.side.remote .",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git config branch.side.merge refs/heads/side",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git branch -d side",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "warning: deleting branch 'side' that has been merged to\n         'refs/heads/side', but not yet merged to HEAD\n",
+      "stdout": "Deleted branch side (was 0f032e6).\n"
+    },
+    {
+      "cmd": "git branch keep side",
+      "cwd": "/home/you/project",
+      "exitCode": 128,
+      "stderr": "fatal: not a valid object name: 'side'\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git config branch.keep.remote .",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git config branch.keep.merge refs/heads/side",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git branch -d keep",
+      "cwd": "/home/you/project",
+      "exitCode": 1,
+      "stderr": "error: branch 'keep' not found\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git branch -D side",
+      "cwd": "/home/you/project",
+      "exitCode": 1,
+      "stderr": "error: branch 'side' not found\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git branch -v",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "* main 9dfff96 First\n"
+    }
+  ]
+}

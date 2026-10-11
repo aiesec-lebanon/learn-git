@@ -1,4 +1,5 @@
 import { checkout, reset } from "../cli/legacy";
+import { branch } from "./branch";
 import { add } from "./add";
 import { commit } from "./commit";
 import { config } from "./config";
@@ -25,6 +26,7 @@ export const GIT_REGISTRY = createRegistry([
   restore,
   rm,
   mv,
+  branch,
   checkout,
   reset,
 ]);

@@ -163,6 +163,13 @@ export const VERBS: readonly ChipVerb[] = [
     ready: (s) => s.repo && s.files,
   },
   {
+    program: "git",
+    name: "branch",
+    hint: "list branches, or make one here",
+    params: [{ kind: "value", label: "new branch name" }],
+    ready: (s) => s.commits,
+  },
+  {
     program: "shell",
     name: "ls",
     hint: "list files",

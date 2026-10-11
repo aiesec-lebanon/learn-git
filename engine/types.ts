@@ -234,6 +234,11 @@ export type RefusalCode =
   | "destination-exists"
   | "no-such-directory"
   | "path-ignored"
+  | "invalid-ref-name"
+  | "branch-exists"
+  | "no-such-branch"
+  | "branch-checked-out"
+  | "not-fully-merged"
   | "shell-error";
 
 export type EditorRequest = {

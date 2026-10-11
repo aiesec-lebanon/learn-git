@@ -79,3 +79,46 @@ export function writeScope(
     effect: { kind: "config-changed", scope, target: machine.id, ...change },
   };
 }
+
+/**
+ * Renames (or with `to` null removes) a config section such as
+ * `branch.topic`, with one `config-changed` effect per key whose value changes.
+ */
+export function moveSection(
+  repo: Repo,
+  from: string,
+  to: string | null,
+): { repo: Repo; effects: Effect[] } {
+  const prefix = `${from}.`;
+  const inSection = (e: ConfigEntry) => e.key.startsWith(prefix);
+  const moved = repo.config.filter(inSection);
+  if (!moved.length) return { repo, effects: [] };
+  const config: ConfigFile =
+    to === null
+      ? repo.config.filter((e) => !inSection(e))
+      : repo.config.map((e) =>
+          inSection(e)
+            ? { ...e, key: `${to}.${e.key.slice(prefix.length)}` }
+            : e,
+        );
+  const last = (file: ConfigFile, key: string) =>
+    file.filter((e) => e.key === key).at(-1)?.value ?? null;
+  const keys = new Set([...repo.config, ...config].map((e) => e.key));
+  const effects: Effect[] = [...keys].flatMap((key) => {
+    const before = last(repo.config, key);
+    const after = last(config, key);
+    return before === after
+      ? []
+      : [
+          {
+            kind: "config-changed" as const,
+            scope: "local" as const,
+            target: repo.id,
+            key,
+            from: before,
+            to: after,
+          },
+        ];
+  });
+  return { repo: { ...repo, config }, effects };
+}

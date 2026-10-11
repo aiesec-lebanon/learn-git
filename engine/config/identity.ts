@@ -1,4 +1,4 @@
-import type { Ident, Machine, Repo, World } from "../types";
+import type { Ident, Machine, Repo, Signature, World } from "../types";
 import { configValue } from "./scopes";
 
 const unknownIdentity = (machine: Machine) => `Author identity unknown
@@ -29,4 +29,18 @@ export function resolveIdentity(
   if (!email) return { ok: false, stderr: unknownIdentity(machine) };
   const name = configValue(world, machine, repo, "user.name") || machine.id;
   return { ok: true, ident: { name, email } };
+}
+
+/** Who a reflog entry names: the identity, or Git's guess when none is set. */
+export function reflogWho(
+  world: World,
+  machine: Machine,
+  repo: Repo | null,
+  time: number,
+): Signature {
+  const identity = resolveIdentity(world, machine, repo);
+  const ident = identity.ok
+    ? identity.ident
+    : { name: machine.id, email: `${machine.id}@laptop.(none)` };
+  return { ...ident, time, tz: "+0000" };
 }

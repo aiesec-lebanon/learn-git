@@ -68,3 +68,14 @@ export const recipeSiteDessert = defineWorld({
     'echo "Desserts: see dessert.html." >> README.md',
   ],
 });
+
+/** An experiment on top of the soup commit, made with HEAD detached there. */
+export const recipeSiteDetached = defineWorld({
+  ...recipeSiteHistory,
+  setup: [
+    ...(recipeSiteHistory.setup ?? []),
+    "git switch --detach HEAD~1",
+    'echo "<p>Try the soup with bread.</p>" >> soup.html',
+    'git commit -am "Suggest bread with the soup"',
+  ],
+});

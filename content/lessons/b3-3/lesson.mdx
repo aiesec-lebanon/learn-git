@@ -1,0 +1,50 @@
+<ColdOpen>
+  A friend asks how the recipe site looked before the soup page. Git has every
+  snapshot, but HEAD always sits on a branch. Can you visit a commit no branch
+  points at, and is it safe?
+</ColdOpen>
+
+<Beat id="refuse" title="A branch is expected">
+  `git log --oneline` lists the commit IDs. `git switch` with one of them
+  refuses: it expects a branch, and Git suggests trying again with `--detach`.
+</Beat>
+
+<Beat id="detach" title="HEAD on a commit">
+  `git switch --detach HEAD~2` unhooks HEAD from `main` and puts it on the
+  commit itself. The working tree shows that old snapshot, and `git status`
+  reads "HEAD detached at" the commit. This is <Term>detached HEAD</Term>: not
+  an error, only HEAD without a branch.
+
+  <Widget name="pointer-drag" />
+</Beat>
+
+<Beat id="commit" title="Committing while detached">
+  You can still commit. HEAD moves to the new commit, but no label moves with
+  it, and `git status` now reads "HEAD detached from" the commit you started at.
+
+  <Widget name="leave-preview" />
+</Beat>
+
+<Beat id="leave" title="Leaving fades it">
+  `git switch main` warns that you are leaving one commit behind and prints its
+  ID. No label reaches that commit any more, so it fades: unreachable, but not
+  deleted yet.
+</Beat>
+
+<Beat id="rescue" title="Give it a name">
+  `git branch <name> <id>` or `git switch -c <name> <id>` puts a label back on
+  the faded commit, so it stays. Here `-` names the commit you left.
+  Naming it with `git switch -c` before you leave avoids the scare.
+</Beat>
+
+<Beat id="back" title="Back where you were">
+  `git switch -` goes back to the branch you were on before, like the back
+  button of a browser.
+</Beat>
+
+<YourTurn />
+
+<Wrap commands={["git switch --detach", "git switch -c", "git switch -"]}>
+  Detached HEAD means HEAD points at a commit instead of a branch. Commits made
+  there are kept only while something names them, so name them before you leave.
+</Wrap>

@@ -8,6 +8,7 @@ import b2_2 from "./b2-2/scene";
 import b2_3 from "./b2-3/scene";
 import b3_1 from "./b3-1/scene";
 import b3_2 from "./b3-2/scene";
+import b3_3 from "./b3-3/scene";
 
 /** Scene scripts of the ready lessons; the prose is `./<id>/lesson.mdx`. */
 export const SCENES: Partial<Record<LessonId, LessonScene>> = {
@@ -19,4 +20,5 @@ export const SCENES: Partial<Record<LessonId, LessonScene>> = {
   "b2-3": b2_3,
   "b3-1": b3_1,
   "b3-2": b3_2,
+  "b3-3": b3_3,
 };

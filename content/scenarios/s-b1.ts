@@ -22,7 +22,7 @@ const review = (state: "changes-requested" | "approved"): HubAction => ({
   number: PULL,
   state,
   ...(state === "approved"
-    ? { body: "Perfect. Welcome aboard." }
+    ? { body: "That's the right file now. Welcome aboard." }
     : {
         body: "Thanks for picking this up.",
         comments: [

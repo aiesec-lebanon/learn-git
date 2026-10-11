@@ -13,8 +13,8 @@ test("an entry switches forms and -h opens it from a sandbox", async ({
   ).toContainText("git init -b trunk");
 
   await page.goto("/playground");
-  await typeCommands(page, ["git init -h"]);
-  const sheet = page.getByRole("dialog", { name: "git init" });
+  await typeCommands(page, ["git commit -h"]);
+  const sheet = page.getByRole("dialog", { name: "git commit" });
   await expect(sheet).toBeVisible();
   await sheet.getByRole("button", { name: "Close" }).click();
   await expect(sheet).toBeHidden();

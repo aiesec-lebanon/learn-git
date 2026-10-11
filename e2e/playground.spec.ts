@@ -35,6 +35,15 @@ test("a lesson prompt shows its target; unknown queries fall back", async ({
     page.getByRole("button", { name: "Show differences" }),
   ).toBeVisible();
 
+  await typeCommands(page, ["git init"]);
+  await expect(page.getByText("Step 1", { exact: true })).toBeVisible();
+  await page.getByRole("button", { name: /^Rewind sandbox/ }).click();
+  await expect(page.getByText("Nothing to rewind yet.")).toBeVisible();
+  await page.getByRole("button", { name: "Show differences" }).click();
+  await expect(
+    page.getByRole("button", { name: "Hide differences" }),
+  ).toHaveAttribute("aria-expanded", "true");
+
   await page.goto("/playground?world=%3Cscript%3E&prompt=__proto__");
   await expect(
     page.getByRole("link", { name: "Empty folder", exact: true }),

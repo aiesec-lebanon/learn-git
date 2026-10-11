@@ -1,0 +1,26 @@
+{
+  "mode": "seeded",
+  "world": {
+    "files": {
+      "project/a.txt": "a\n",
+      "project/b.txt": "b\n",
+      "project/c.txt": "c\n"
+    },
+    "cwd": "project"
+  },
+  "steps": [
+    "git init -q",
+    "git add .",
+    "git commit -q -m \"Base\"",
+    "git switch -q -c topic",
+    "echo Topic >> b.txt",
+    "git add b.txt",
+    "git commit -q -m \"Topic\"",
+    "git switch -q main",
+    "echo Main >> a.txt",
+    "git add a.txt",
+    "git commit -q -m \"Main\"",
+    "git merge -q --no-edit topic",
+    "git log --graph --oneline -n 2"
+  ]
+}

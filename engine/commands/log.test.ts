@@ -39,7 +39,7 @@ describe("git log", () => {
   });
 
   it.each([
-    ["git log --all", "not simulated here: git log --all\n"],
+    ["git log --reverse", "not simulated here: git log --reverse\n"],
     ["git log --follow", "not simulated here: git log --follow\n"],
     ["git log main..HEAD", "not simulated here: revision ranges\n"],
     ["git log ^main", "not simulated here: revision ranges\n"],
@@ -51,12 +51,12 @@ describe("git log", () => {
     expect(run(history(1), line).last?.output.stderr).toBe(out);
   });
 
-  it("answers --graph and show for merges as not simulated", () => {
+  it("answers octopus graphs and show for merges as not simulated", () => {
     const world = history(2);
     const repo = repoOf(world, ID);
     const head = resolveHead(repo) as Oid;
     const tip = world.objects.get(head) as Commit;
-    const merge: Commit = { ...tip, parents: [head, ...tip.parents] };
+    const merge: Commit = { ...tip, parents: [head, head, ...tip.parents] };
     const { pool } = addObjects(world.objects, [merge]);
     const merged = {
       ...world,
@@ -67,7 +67,7 @@ describe("git log", () => {
       }),
     };
     expect(run(merged, "git log --graph").last?.output.stderr).toBe(
-      "not simulated here: git log --graph with merges\n",
+      "not simulated here: git log --graph with octopus merges\n",
     );
     expect(run(merged, "git show").last?.output.stderr).toBe(
       "not simulated here: git show for merge commits\n",

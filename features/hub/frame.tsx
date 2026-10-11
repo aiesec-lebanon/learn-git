@@ -11,6 +11,7 @@ import {
   type HubLocation,
 } from "./location";
 import type { HubPageProps } from "./parts";
+import { ComparePage, PullPage, PullsPage } from "./pr-pages";
 import {
   BranchesPage,
   CodePage,
@@ -55,18 +56,23 @@ function HubPage({ at, ...props }: HubPageProps & { at: HubLocation }) {
       return <CommitsPage {...repo} {...(at.ref ? { refName: at.ref } : {})} />;
     case "commit":
       return <CommitPage {...repo} oid={at.oid} />;
+    case "pulls":
+      return <PullsPage {...repo} />;
+    case "compare":
+      return (
+        <ComparePage
+          {...repo}
+          {...(at.base ? { base: at.base } : {})}
+          {...(at.head ? { head: at.head } : {})}
+        />
+      );
+    case "pull":
+      return (
+        <PullPage {...repo} number={at.number} tab={at.tab ?? "conversation"} />
+      );
     default:
       return (
-        <RepoShell
-          {...repo}
-          tab={
-            at.page === "issues" ||
-            at.page === "new-issue" ||
-            at.page === "issue"
-              ? "issues"
-              : "pulls"
-          }
-        >
+        <RepoShell {...repo} tab="issues">
           <p className="m-0 text-fg-muted">Nothing here yet.</p>
         </RepoShell>
       );

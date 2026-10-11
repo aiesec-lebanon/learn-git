@@ -305,9 +305,25 @@ export function BranchesPage({ world, repo, go, session }: RepoProps) {
                   default
                 </span>
               ) : (
-                <span className="text-sm text-fg-muted">
-                  {b.ahead} ahead · {b.behind} behind
-                </span>
+                <>
+                  <span className="text-sm text-fg-muted">
+                    {b.ahead} ahead · {b.behind} behind
+                  </span>
+                  {b.ahead ? (
+                    <HubLink
+                      go={go}
+                      to={{
+                        page: "compare",
+                        repo,
+                        base: defaultBranch(world, repo),
+                        head: b.name,
+                      }}
+                    >
+                      New pull request
+                      <span className="sr-only"> from {b.name}</span>
+                    </HubLink>
+                  ) : null}
+                </>
               )}
             </li>
           ))}

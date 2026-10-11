@@ -1,5 +1,9 @@
 import type { ReferencePreset } from "../define";
-import { recipeSite, recipeSiteWithIdentity } from "../worlds/recipe-site";
+import {
+  recipeSite,
+  recipeSiteHistory,
+  recipeSiteWithIdentity,
+} from "../worlds/recipe-site";
 
 const firstCommit = ["git init", "git add .", 'git commit -m "First snapshot"'];
 const changes = [
@@ -26,6 +30,21 @@ export const PRESETS = {
     label: "README.md staged, bread.html new",
     world: recipeSiteWithIdentity,
     setup: [...firstCommit, ...changes, "git add README.md"],
+  },
+  history: {
+    id: "history",
+    label: "Three commits, nothing changed",
+    world: recipeSiteHistory,
+  },
+  edited: {
+    id: "edited",
+    label: "Three commits; README.md staged, then edited again",
+    world: recipeSiteHistory,
+    setup: [
+      'echo "Serves four." >> README.md',
+      "git add README.md",
+      'echo "Vegan friendly." >> README.md',
+    ],
   },
   noIdentity: {
     id: "no-identity",

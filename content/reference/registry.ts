@@ -2,7 +2,11 @@ import type { ReferenceEntry } from "../define";
 import add from "./git-add";
 import commit from "./git-commit";
 import config from "./git-config";
+import diff from "./git-diff";
 import init from "./git-init";
+import log from "./git-log";
+import restore from "./git-restore";
+import show from "./git-show";
 import status from "./git-status";
 
 /** Reference entries in course order; IDs match `git <cmd> -h`. */
@@ -12,6 +16,10 @@ export const REFERENCE: readonly ReferenceEntry[] = [
   status,
   add,
   commit,
+  log,
+  show,
+  diff,
+  restore,
 ];
 
 export const referenceById = (id: string): ReferenceEntry | undefined =>

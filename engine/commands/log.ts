@@ -131,7 +131,7 @@ export const log = defineCommand({
     const format = diffFormat(options, "none");
     const texts = walked.map(({ oid, commit }) => {
       const changes =
-        commit.parents.length > 1
+        commit.parents.length > 1 || format === "none"
           ? ""
           : renderDiff(pool, commitChanges(pool, commit, input.specs), format);
       return commitEntry(pool, repo, { oid, commit }, style, changes);

@@ -13,7 +13,7 @@ export type { Narration } from "./narration/narrate";
 export { REFUSAL_FACTS } from "./narration/refusals";
 export { match } from "./matcher/match";
 export type * from "./matcher/target";
-export { countPar } from "./par";
+export { countPar, countsForPar } from "./par";
 export { abbreviate } from "./objects/abbrev";
 export { subjectOf } from "./commit/message";
 export { isValidBranchName, shortRefName } from "./refs/names";

@@ -51,7 +51,16 @@ export type Checkpoint = {
   readonly hints?: Hints;
 };
 
-export type Challenge = Checkpoint & { readonly par: number };
+/** A known path shorter than par, and why it works. */
+export type UnderPar = {
+  readonly solution: readonly Step[];
+  readonly why: string;
+};
+
+export type Challenge = Checkpoint & {
+  readonly par: number;
+  readonly underPar?: readonly UnderPar[];
+};
 
 export type LessonScene = {
   readonly id: LessonId;

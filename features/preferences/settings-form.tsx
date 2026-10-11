@@ -73,6 +73,39 @@ function Radios<K extends "theme" | "motion" | "guide">({
   );
 }
 
+type Flag = "predictions" | "challengeMode";
+
+function Toggle({
+  name,
+  legend,
+  label,
+  value,
+}: {
+  name: Flag;
+  legend: string;
+  label: string;
+  value: boolean;
+}) {
+  return (
+    <fieldset className="m-0 grid gap-1 border-0 p-0">
+      <legend className="mb-2 p-0 font-display text-xl font-bold">
+        {legend}
+      </legend>
+      <label className="flex min-h-11 cursor-pointer items-center gap-3">
+        <input
+          type="checkbox"
+          checked={value}
+          onChange={(event) =>
+            progressStore().setPrefs({ [name]: event.target.checked })
+          }
+          className="size-5 accent-accent-fill"
+        />
+        {label}
+      </label>
+    </fieldset>
+  );
+}
+
 /** Settings v1: applied at once and kept with progress (ADR-008). */
 export function SettingsForm() {
   use(browser("Settings live in localStorage."));
@@ -83,22 +116,18 @@ export function SettingsForm() {
       <Radios choice={THEME} value={prefs.theme} />
       <Radios choice={MOTION} value={prefs.motion} />
       <Radios choice={GUIDE} value={prefs.guide} />
-      <fieldset className="m-0 grid gap-1 border-0 p-0">
-        <legend className="mb-2 p-0 font-display text-xl font-bold">
-          Predictions
-        </legend>
-        <label className="flex min-h-11 cursor-pointer items-center gap-3">
-          <input
-            type="checkbox"
-            checked={prefs.predictions}
-            onChange={(event) =>
-              progressStore().setPrefs({ predictions: event.target.checked })
-            }
-            className="size-5 accent-accent-fill"
-          />
-          Offer a guess before key commands (never scored)
-        </label>
-      </fieldset>
+      <Toggle
+        name="predictions"
+        legend="Predictions"
+        label="Offer a guess before key commands (never scored)"
+        value={prefs.predictions}
+      />
+      <Toggle
+        name="challengeMode"
+        legend="Challenge mode"
+        label="Add a puzzle to each lesson: reach a target in as few steps as you can (results are not kept)"
+        value={prefs.challengeMode}
+      />
       <section
         aria-labelledby="reset"
         className="grid justify-items-start gap-2"

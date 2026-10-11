@@ -9,12 +9,13 @@ const changesState = (e: Effect) =>
 /** A merge that stops on a conflict still did its work: it counts. */
 const paused = (e: Effect) => e.kind === "operation" && e.phase === "paused";
 
-/** Par count (LD section 6): successful commands that changed the sandbox's state. */
+/** Whether the entry is a step par counts (LD section 6): the learner's, successful, and it changed the sandbox's state. */
+export const countsForPar = ({ outcome, actor }: HistoryEntry): boolean =>
+  actor === undefined &&
+  outcome.meta.counted &&
+  (outcome.output.exitCode === 0 || outcome.effects.some(paused)) &&
+  outcome.effects.some(changesState);
+
 export function countPar(history: readonly HistoryEntry[]): number {
-  return history.filter(
-    ({ outcome }) =>
-      outcome.meta.counted &&
-      (outcome.output.exitCode === 0 || outcome.effects.some(paused)) &&
-      outcome.effects.some(changesState),
-  ).length;
+  return history.filter(countsForPar).length;
 }

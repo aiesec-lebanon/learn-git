@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import {
+  countPar,
   match,
   type HistoryEntry,
   type MatchReport,
@@ -11,7 +12,9 @@ import {
 import { useAnnounce } from "@/features/announcer/announcer";
 import { CommandChips } from "@/features/chips/chips";
 import { ConflictResolver } from "@/features/conflict/resolver";
-import type { Hints, ScenarioScene } from "@/content/define";
+import type { Challenge, Hints, ScenarioScene } from "@/content/define";
+import { solvedLine } from "@/features/challenge/model";
+import { Solved } from "@/features/challenge/solved";
 import { Guide } from "@/features/guide/guide";
 import { HintLadder } from "@/features/guide/hint-ladder";
 import { StageAndHub } from "@/features/hub/hub-and-stage";
@@ -46,40 +49,47 @@ export type SandboxProps = {
   hints?: Hints;
   /** A scenario: its acts take the place of a single target. */
   scenario?: ScenarioScene;
+  /** A puzzle: solving it shows the step count against par; nothing is stored. */
+  challenge?: Challenge;
   /** A command typed before the sandbox loaded; it runs first. */
   queued: string | null;
   focus: boolean;
 };
 
+const MATCHED = "Your repository now matches the target.";
+
 function Check({
   report,
   history,
   reached,
+  challenge,
 }: {
   report: MatchReport;
   history: readonly HistoryEntry[];
   reached: Reached;
+  challenge?: Challenge;
 }) {
   const [open, setOpen] = useState(false);
   const say = useAnnounce();
   const was = useRef(report.ok);
+  const done = challenge
+    ? solvedLine(countPar(history), challenge.par)
+    : MATCHED;
   useEffect(() => {
     if (report.ok && !was.current) {
-      say("Your repository now matches the target.");
+      say(done);
       const store = progressStore();
       if (reached.resume) store.setResume(reached.resume);
       if (reached.finishes) store.finishChapter(reached.finishes);
     }
     was.current = report.ok;
-  }, [report.ok, say, reached]);
+  }, [report.ok, say, reached, done]);
 
   if (report.ok)
     return (
       <div className="grid gap-2 rounded-sm bg-accent-soft p-3">
-        <p className="m-0 font-display text-lg font-semibold">
-          Your repository now matches the target.
-        </p>
-        <YourPath history={history} />
+        <p className="m-0 font-display text-lg font-semibold">{done}</p>
+        {challenge ? null : <YourPath history={history} />}
       </div>
     );
   return (
@@ -108,6 +118,7 @@ export function Sandbox({
   reached = NOTHING,
   hints,
   scenario,
+  challenge,
   queued,
   focus,
 }: SandboxProps) {
@@ -155,7 +166,12 @@ export function Sandbox({
         ) : null}
         {report && target ? (
           <>
-            <Check report={report} history={history} reached={reached} />
+            <Check
+              report={report}
+              history={history}
+              reached={reached}
+              challenge={challenge}
+            />
             {hints ? <HintLadder session={session} hints={hints} /> : null}
             <TargetPanel target={target} />
           </>
@@ -164,6 +180,11 @@ export function Sandbox({
         <EditorSheet session={session} />
         <ReferenceSheet session={session} />
       </div>
+      {challenge && report?.ok ? (
+        <div className="lg:col-span-2">
+          <Solved challenge={challenge} history={history} />
+        </div>
+      ) : null}
     </div>
   );
 }

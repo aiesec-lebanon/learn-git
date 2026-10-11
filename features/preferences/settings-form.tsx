@@ -4,6 +4,7 @@ import { use, useRef } from "react";
 import { browser } from "react-dom";
 import { progressStore, useProgress } from "@/features/progress/progress";
 import type { Prefs } from "@/features/progress/schema";
+import { PuzzlesLink } from "@/features/challenge/puzzles-link";
 import { Button } from "@/ui/button";
 
 type Choice<K extends keyof Prefs> = {
@@ -128,6 +129,7 @@ export function SettingsForm() {
         label="Add a puzzle to each lesson: reach a target in as few steps as you can (results are not kept)"
         value={prefs.challengeMode}
       />
+      <PuzzlesLink />
       <section
         aria-labelledby="reset"
         className="grid justify-items-start gap-2"

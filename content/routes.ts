@@ -15,3 +15,9 @@ export const scenarioHref = (id: ScenarioId): Route =>
 export const referenceHref = (id: string): Route => `/reference/${id}` as Route;
 
 export const orientationHref: Route = "/orientation";
+
+export const challengesHref: Route = "/challenges";
+
+/** A lesson's puzzle, at the end of the lesson. */
+export const puzzleHref = (id: LessonId): Route =>
+  `/learn/${id}#puzzle` as Route;

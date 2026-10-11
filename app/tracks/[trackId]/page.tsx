@@ -13,6 +13,7 @@ import {
   trackById,
 } from "@/content/registry";
 import { capstoneHref, lessonHref, scenarioHref } from "@/content/routes";
+import { PuzzlesLink } from "@/features/challenge/puzzles-link";
 import { ChapterStatus } from "@/features/track/chapter-status";
 import { NAV_FORWARD } from "@/features/site/page-transition";
 import { AppLink } from "@/ui/link";
@@ -40,6 +41,9 @@ export default async function TrackPage({
         Take the chapters in order or start anywhere: nothing is locked. A
         chapter is finished when you reach its capstone target.
       </p>
+      <Suspense fallback={null}>
+        <PuzzlesLink />
+      </Suspense>
       <ol className="m-0 mt-8 grid list-none gap-6 p-0">
         {chaptersOf(track.id).map((chapter) => (
           <li

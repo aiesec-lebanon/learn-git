@@ -11,6 +11,7 @@ import {
   readyLessons,
 } from "@/content/registry";
 import { lessonHref, trackHref } from "@/content/routes";
+import { Puzzle } from "@/features/challenge/puzzle";
 import { YourTurn } from "@/features/checkpoint/your-turn";
 import { beatFrames } from "@/features/lesson/frames";
 import { LessonSandboxProvider } from "@/features/lesson/lesson-sandbox";
@@ -76,10 +77,15 @@ export default async function LessonPage({
             ColdOpen: Nothing,
             Beat: Nothing,
             Wrap: (props: ComponentProps<typeof Wrap>) => (
-              <Wrap
-                {...props}
-                playground={playgroundHref({ prompt: lesson.id })}
-              />
+              <>
+                <Wrap
+                  {...props}
+                  playground={playgroundHref({ prompt: lesson.id })}
+                />
+                {scene.challenge ? (
+                  <Puzzle id={lesson.id} challenge={scene.challenge} />
+                ) : null}
+              </>
             ),
             YourTurn: () => (
               <YourTurn

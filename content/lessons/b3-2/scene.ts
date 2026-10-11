@@ -77,6 +77,7 @@ export default defineLesson({
         "Which branch is HEAD on right now, and which one should get the fix?",
       pointer:
         "A commit moves the branch HEAD is on, so switch to main first. git log --oneline --graph --all then draws both lines of work.",
+      reference: "branch",
       next: 'Run git switch main, add a line to index.html with echo, git commit -am "Promise fresh recipes", then git log --oneline --graph --all.',
     },
   },

@@ -38,11 +38,15 @@ for (const entry of REFERENCE) {
 
     it.each(entry.variants)("$command does what it claims", (variant) => {
       expect(variant.after ?? variant.shows).toBeDefined();
-      const session = start(entry.presets[0]);
+      const preset =
+        entry.presets.find((p) => p.id === variant.preset) ?? entry.presets[0];
+      expect(preset.id).toBe(variant.preset ?? entry.presets[0].id);
+      const session = start(preset);
       const before = session.getSnapshot().world;
       const [result] = session.run(variant.command);
+      const output = result?.outcome.output;
       if (variant.shows)
-        expect(result?.outcome.output.stdout).toContain(variant.shows);
+        expect(`${output?.stdout}${output?.stderr}`).toContain(variant.shows);
       if (variant.after) {
         expect(match(before, variant.after).ok).toBe(false);
         const after = session.getSnapshot().world;

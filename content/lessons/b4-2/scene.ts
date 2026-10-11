@@ -55,6 +55,7 @@ export default defineLesson({
         "Neither branch reaches the other's new commit. Can Git still slide main forward?",
       pointer:
         "git merge combines the merge base and both tips in a new commit with two parents, and main moves onto it.",
+      reference: "merge",
       next: "Run git merge footer while HEAD is on main.",
     },
   },

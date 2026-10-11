@@ -64,6 +64,7 @@ export default defineLesson({
         "main has nothing dark-mode lacks. What does Git need to change to bring it in?",
       pointer:
         "git merge brings another branch into the one HEAD is on. When that branch is ahead on the same line, Git slides the label forward. git branch -d then removes the merged label.",
+      reference: "merge",
       next: "Run git merge dark-mode, then git branch -d dark-mode.",
     },
   },

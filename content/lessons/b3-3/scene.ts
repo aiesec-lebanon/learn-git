@@ -59,6 +59,7 @@ export default defineLesson({
       nudge: "How can HEAD sit on a commit that no branch points at?",
       pointer:
         "git switch --detach visits an old commit. A commit made there has no label, so give it one with git switch -c before you leave.",
+      reference: "switch",
       next: 'Run git switch --detach HEAD~2, add a line to README.md with echo, git commit -am "Try photos", then git switch -c experiment and git switch main.',
     },
   },

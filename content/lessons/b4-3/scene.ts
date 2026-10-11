@@ -62,6 +62,7 @@ export default defineLesson({
         "Both branches changed the same line. Who decides which price wins?",
       pointer:
         "A conflicted merge pauses. Edit the file so it reads the way you want, without markers, mark it resolved with git add, then git commit finishes the merge.",
+      reference: "merge",
       next: "Run git merge pricing, change the price line in menu.html to $4.50 and remove the markers, then git add menu.html and git commit.",
     },
   },

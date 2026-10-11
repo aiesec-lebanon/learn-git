@@ -68,6 +68,7 @@ export default defineLesson({
       nudge: "Which branch does a commit move: main, or the one HEAD is on?",
       pointer:
         "git switch -c makes a branch and puts HEAD on it in one step. A commit then moves only that branch, and git switch main takes HEAD back.",
+      reference: "switch",
       next: 'Run git switch -c dark-mode, write dark.css with echo, git add dark.css, git commit -m "Add a dark stylesheet", then git switch main.',
     },
   },

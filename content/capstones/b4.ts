@@ -50,6 +50,7 @@ export default defineCapstone({
       "Which of the three branches is ahead of main on the same line, and which ones moved on separately?",
     pointer:
       "bags fast-forwards and hours needs a merge commit. pricing then conflicts in menu.html: edit it, git add it and git commit to finish.",
+    reference: "merge",
     next: "Run git merge bags, git merge hours and git merge pricing. Set the price line in menu.html to $4.50 without markers, then git add menu.html and git commit -m \"Merge branch 'pricing'\".",
   },
 });

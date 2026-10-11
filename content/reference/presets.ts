@@ -1,7 +1,9 @@
 import type { ReferencePreset } from "../define";
+import { conflictKit } from "../worlds/conflict-kit";
 import {
   recipeSite,
   recipeSiteHistory,
+  recipeSiteMergeReady,
   recipeSiteWithIdentity,
 } from "../worlds/recipe-site";
 
@@ -61,5 +63,27 @@ export const PRESETS = {
     label: "A new repository, no name or email",
     world: recipeSite,
     setup: ["git init"],
+  },
+  branches: {
+    id: "branches",
+    label: "main, and dark-mode one commit ahead",
+    world: recipeSiteMergeReady,
+  },
+  branchesEdited: {
+    id: "branches-edited",
+    label: "main and dark-mode; README.md edited",
+    world: recipeSiteMergeReady,
+    setup: ['echo "Draft." >> README.md'],
+  },
+  kit: {
+    id: "kit",
+    label: "notes ahead of main; pricing conflicts with main",
+    world: conflictKit,
+  },
+  paused: {
+    id: "paused",
+    label: "Merge of pricing paused on a conflict",
+    world: conflictKit,
+    setup: ["git merge pricing"],
   },
 } as const satisfies Record<string, ReferencePreset>;

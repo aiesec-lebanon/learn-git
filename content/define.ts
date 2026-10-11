@@ -73,8 +73,10 @@ export type ReferenceVariant = {
   readonly command: string;
   /** The state the command reaches (and the preset does not). */
   readonly after?: TargetSpec;
-  /** Text the command prints. */
+  /** Text the command prints, on either stream. */
   readonly shows?: string;
+  /** The preset the claim is checked on; default the first. */
+  readonly preset?: string;
 };
 
 export type ReferenceEntry = {

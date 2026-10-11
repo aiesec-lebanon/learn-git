@@ -37,6 +37,7 @@ export default defineCapstone({
     nudge: "Which commit needs a name before HEAD leaves it?",
     pointer:
       "git switch -c <name> <start> makes a branch at any commit and moves HEAD onto it; main~2 names the commit two before main.",
+    reference: "switch",
     next: "Run git switch -c experiment first. Then git switch -c menu main, edit and commit; git switch -c photos main~2, edit and commit; finish with git switch main.",
   },
 });

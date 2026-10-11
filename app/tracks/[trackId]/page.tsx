@@ -26,7 +26,13 @@ export async function generateMetadata({
   params,
 }: PageProps<"/tracks/[trackId]">): Promise<Metadata> {
   const track = trackById((await params).trackId);
-  return track ? { title: `${track.title} track` } : {};
+  return track
+    ? {
+        title: `${track.title} track`,
+        description:
+          "Six chapters from your first commit to a merged pull request: snapshots, undoing changes, branches, merging, remotes and the GitHub flow.",
+      }
+    : {};
 }
 
 export default async function TrackPage({

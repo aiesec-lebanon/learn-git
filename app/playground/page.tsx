@@ -2,7 +2,11 @@ import type { Metadata } from "next";
 import { Suspense } from "react";
 import { Playground } from "@/features/playground/playground";
 
-export const metadata: Metadata = { title: "Playground" };
+export const metadata: Metadata = {
+  title: "Playground",
+  description:
+    "A Git sandbox you cannot break: pick a starting repository and try any command, drawn as it happens.",
+};
 
 export default function PlaygroundPage() {
   return (

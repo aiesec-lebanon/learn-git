@@ -1,8 +1,7 @@
 import Link from "next/link";
-import type { Route } from "next";
 import { Suspense } from "react";
 import { chaptersOf, LESSONS, readyScenarios } from "@/content/registry";
-import { orientationHref, trackHref } from "@/content/routes";
+import { orientationHref, startHref, trackHref } from "@/content/routes";
 import { heroFilm } from "@/features/hero/film";
 import { HeroPlayer } from "@/features/hero/player";
 import { ContinueCard } from "@/features/progress/continue-card";
@@ -10,8 +9,6 @@ import { NAV_FORWARD } from "@/features/site/page-transition";
 import { copy } from "@/themes/active";
 import { buttonClass } from "@/ui/button";
 import { AppLink } from "@/ui/link";
-
-const startHref: Route = "/start";
 
 const beginnerHours = Math.round(
   LESSONS.reduce((sum, lesson) => sum + lesson.minutes, 0) / 60,

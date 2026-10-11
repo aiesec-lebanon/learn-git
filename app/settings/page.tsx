@@ -2,7 +2,11 @@ import type { Metadata } from "next";
 import { Suspense } from "react";
 import { SettingsForm } from "@/features/preferences/settings-form";
 
-export const metadata: Metadata = { title: "Settings" };
+export const metadata: Metadata = {
+  title: "Settings",
+  description:
+    "Theme, motion, guide, sound, predictions and challenge mode, kept in this browser.",
+};
 
 export default function SettingsPage() {
   return (

@@ -21,3 +21,7 @@ export const challengesHref: Route = "/challenges";
 /** A lesson's puzzle, at the end of the lesson. */
 export const puzzleHref = (id: LessonId): Route =>
   `/learn/${id}#puzzle` as Route;
+
+export const fieldGuideHref: Route = "/field-guide";
+
+export const startHref: Route = "/start";

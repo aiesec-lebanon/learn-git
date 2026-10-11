@@ -39,7 +39,10 @@ export async function generateMetadata({
 }: PageProps<"/learn/[lessonId]">): Promise<Metadata> {
   const found = find((await params).lessonId);
   return found
-    ? { title: `${lessonCode(found.lesson.id)} ${found.lesson.title}` }
+    ? {
+        title: `${lessonCode(found.lesson.id)} ${found.lesson.title}`,
+        description: `A ${found.lesson.minutes}-minute interactive Git lesson. Your turn: ${found.scene.yourTurn.goal}`,
+      }
     : {};
 }
 

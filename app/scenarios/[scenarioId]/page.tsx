@@ -26,6 +26,7 @@ export async function generateMetadata({
   return found
     ? {
         title: `${scenarioCode(found.scenario.id)} ${found.scenario.title}`,
+        description: found.scene.goal,
       }
     : {};
 }

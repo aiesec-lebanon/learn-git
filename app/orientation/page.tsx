@@ -7,7 +7,11 @@ import { LessonSandboxProvider } from "@/features/lesson/lesson-sandbox";
 import { NAV_FORWARD } from "@/features/site/page-transition";
 import { buttonClass } from "@/ui/button";
 
-export const metadata: Metadata = { title: "Orientation" };
+export const metadata: Metadata = {
+  title: "Orientation",
+  description:
+    "How the stage works in two minutes: the graph, scrolling and scrubbing, dragging labels, the terminal and the chips.",
+};
 
 export default function OrientationPage() {
   return (

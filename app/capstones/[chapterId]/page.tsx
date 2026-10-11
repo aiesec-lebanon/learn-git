@@ -24,7 +24,12 @@ export async function generateMetadata({
   params,
 }: PageProps<"/capstones/[chapterId]">): Promise<Metadata> {
   const found = find((await params).chapterId);
-  return found ? { title: `Capstone ${chapterCode(found.chapter.id)}` } : {};
+  return found
+    ? {
+        title: `Capstone ${chapterCode(found.chapter.id)}`,
+        description: `Finish ${chapterCode(found.chapter.id)} ${found.chapter.title} in a sandbox: ${found.capstone.goal}`,
+      }
+    : {};
 }
 
 export default async function CapstonePage({

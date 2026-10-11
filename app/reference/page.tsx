@@ -6,7 +6,11 @@ import { NAV_FORWARD } from "@/features/site/page-transition";
 import { cx } from "@/lib/cx";
 import { AppLink } from "@/ui/link";
 
-export const metadata: Metadata = { title: "Reference" };
+export const metadata: Metadata = {
+  title: "Reference",
+  description:
+    "Git commands and Hub actions with replayable before-and-after pictures, flag by flag.",
+};
 
 export default function ReferenceIndex() {
   return (

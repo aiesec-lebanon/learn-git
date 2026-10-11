@@ -9,7 +9,11 @@ import {
 } from "@/features/challenge/puzzle-list";
 import { AppLink } from "@/ui/link";
 
-export const metadata: Metadata = { title: "Puzzles" };
+export const metadata: Metadata = {
+  title: "Puzzles",
+  description:
+    "Optional puzzles for each lesson: reach a target repository in as few steps as you can.",
+};
 
 const chapters: readonly PuzzleChapter[] = chaptersOf("beginner").map(
   (chapter) => ({

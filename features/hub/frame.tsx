@@ -11,6 +11,7 @@ import {
   type HubLocation,
 } from "./location";
 import type { HubPageProps } from "./parts";
+import { IssuePage, IssuesPage, NewIssuePage } from "./issue-pages";
 import { ComparePage, PullPage, PullsPage } from "./pr-pages";
 import {
   BranchesPage,
@@ -19,7 +20,6 @@ import {
   CommitsPage,
   HubHome,
   NewRepoPage,
-  RepoShell,
 } from "./repo-pages";
 
 /** Where the Hub opens: the only repository, else the list. */
@@ -70,12 +70,12 @@ function HubPage({ at, ...props }: HubPageProps & { at: HubLocation }) {
       return (
         <PullPage {...repo} number={at.number} tab={at.tab ?? "conversation"} />
       );
-    default:
-      return (
-        <RepoShell {...repo} tab="issues">
-          <p className="m-0 text-fg-muted">Nothing here yet.</p>
-        </RepoShell>
-      );
+    case "issues":
+      return <IssuesPage {...repo} />;
+    case "new-issue":
+      return <NewIssuePage {...repo} />;
+    case "issue":
+      return <IssuePage {...repo} number={at.number} />;
   }
 }
 

@@ -178,7 +178,7 @@ export const teamRepoMonday: WorldSpec = defineWorld({
 export const TEAM_REPO = "sam/bake-sale";
 
 /** Main takes one approving review before a pull request merges. */
-const reviewedMain = {
+export const REVIEWED_MAIN = {
   [TEAM_REPO]: {
     rules: [
       { branch: "main", requirePullRequest: false, requiredApprovals: 1 },
@@ -186,7 +186,7 @@ const reviewedMain = {
   },
 } as const;
 
-const PULL_OPENED = "^Hub: open a pull request";
+export const PULL_OPENED = "^Hub: open a pull request";
 
 /** Sam asks, on line 1 of style.css, for coloured headings once a pull request opens. */
 export const samAsksForHeadings: ActorScript = {
@@ -243,21 +243,21 @@ export const samApprovesOnOpen: ActorScript = {
 /** Your clone; main needs Sam's approval before a pull request merges, and Sam reviews (B6.2). */
 export const teamRepoReviewed: WorldSpec = defineWorld({
   ...teamRepo,
-  hub: reviewedMain,
+  hub: REVIEWED_MAIN,
   actors: [samAsksForHeadings, samApprovesAfterPush],
 });
 
 /** As teamRepoReviewed, starting with an unpublished dark-mode branch. */
 export const teamRepoDarkModeReviewed: WorldSpec = defineWorld({
   ...teamRepoDarkMode,
-  hub: reviewedMain,
+  hub: REVIEWED_MAIN,
   actors: [samAsksForHeadings, samApprovesAfterPush],
 });
 
 /** feature (two commits) pushed with upstream, no pull request yet; Sam approves any pull request. */
 export const teamRepoFeaturePushed: WorldSpec = defineWorld({
   ...people,
-  hub: reviewedMain,
+  hub: REVIEWED_MAIN,
   setup: [
     ...CLONED,
     "git switch -q -c feature",

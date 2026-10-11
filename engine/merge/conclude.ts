@@ -21,6 +21,18 @@ export function defaultMergeMessage(repo: Repo, typed: string): string {
   return `Merge ${what}${into}\n`;
 }
 
+/** The message of a merge `git pull` makes: `Merge branch 'main' of <url>`. */
+export function pullMergeMessage(
+  repo: Repo,
+  branch: string,
+  url: string,
+): string {
+  const current = headBranch(repo);
+  const name = current ? shortRefName(current) : "HEAD";
+  const into = ["main", "master"].includes(name) ? "" : ` into ${name}`;
+  return `Merge branch '${branch}' of ${url}${into}\n`;
+}
+
 /** `MERGE_MSG` while conflicts wait: the message plus the conflicted paths. */
 export const conflictMessage = (message: string, paths: readonly string[]) =>
   `${message}\n# Conflicts:\n${paths.map((p) => `#\t${p}\n`).join("")}`;

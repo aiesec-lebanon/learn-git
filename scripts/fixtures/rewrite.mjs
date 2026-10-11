@@ -1,5 +1,5 @@
 const COMMAND_SCOPE_LINE =
-  /^(?:command(?: line:)?\t)?(?:log\.decorate=short|url\..*\.insteadof=.*)\n/gm;
+  /^(?:command(?: line:)?\t)?(?:log\.decorate=short|url\..*\.insteadof=.*|core\.hookspath=.*)\n/gm;
 
 /** The spellings Git for Windows and Git Bash use for one directory. */
 export function pathForms(nativeDir) {

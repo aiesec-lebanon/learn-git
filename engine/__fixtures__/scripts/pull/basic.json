@@ -1,0 +1,74 @@
+{
+  "world": {
+    "machines": {
+      "sam": {
+        "global": {
+          "user.name": "Sam Rivera",
+          "user.email": "sam@team.test",
+          "init.defaultBranch": "main"
+        }
+      }
+    },
+    "hub": {
+      "sam/team": {}
+    }
+  },
+  "steps": [
+    { "cmd": "git clone -q https://hub.test/sam/team.git", "machine": "sam" },
+    { "cmd": "cd team", "machine": "sam" },
+    { "cmd": "echo b > list.txt", "machine": "sam" },
+    { "cmd": "echo \"# Team\" > README.md", "machine": "sam" },
+    { "cmd": "git add .", "machine": "sam" },
+    { "cmd": "git commit -q -m \"Add README\"", "machine": "sam" },
+    { "cmd": "git push -q", "machine": "sam" },
+    "git clone -q https://hub.test/sam/team.git",
+    "cd team",
+    "git pull",
+    { "cmd": "echo \"Fridays\" >> README.md", "machine": "sam" },
+    { "cmd": "git commit -q -a -m \"Meet on Fridays\"", "machine": "sam" },
+    { "cmd": "git push -q", "machine": "sam" },
+    "git pull",
+    "git log --oneline",
+    { "cmd": "echo \"Snacks\" >> README.md", "machine": "sam" },
+    { "cmd": "git commit -q -a -m \"Ask for snacks\"", "machine": "sam" },
+    { "cmd": "git push -q", "machine": "sam" },
+    "echo mine > mine.txt",
+    "git add mine.txt",
+    "git commit -q -m \"Add mine\"",
+    "git pull",
+    "git status -sb",
+    "git pull --ff-only",
+    "git pull --no-rebase",
+    "git log --oneline --graph",
+    "git status",
+    { "cmd": "echo B > list.txt", "machine": "sam" },
+    { "cmd": "git commit -q -a -m \"Capital B\"", "machine": "sam" },
+    { "cmd": "git push -q", "machine": "sam" },
+    "echo bee > list.txt",
+    "git commit -q -a -m \"Spell bee\"",
+    "git config pull.rebase false",
+    "git pull",
+    "git status",
+    "cat list.txt",
+    "echo B > list.txt",
+    "git add list.txt",
+    "git commit -q -m \"Take the capital B\"",
+    "git config --unset pull.rebase",
+    "git config pull.ff only",
+    { "cmd": "echo \"More\" >> README.md", "machine": "sam" },
+    { "cmd": "git commit -q -a -m \"More\"", "machine": "sam" },
+    { "cmd": "git push -q", "machine": "sam" },
+    "echo two >> mine.txt",
+    "git commit -q -a -m \"Mine two\"",
+    "git pull",
+    "git pull --no-ff",
+    "git switch -q -c local-only",
+    "git pull",
+    "git switch -q --detach",
+    "git pull",
+    "git switch -q main",
+    "git pull origin nope",
+    "git pull -q origin main",
+    "git log --oneline -3"
+  ]
+}

@@ -304,6 +304,7 @@ export type RefusalCode =
   | "no-remote"
   | "no-upstream"
   | "push-rejected"
+  | "divergent-branches"
   | "remote-rejected"
   | "shell-error";
 

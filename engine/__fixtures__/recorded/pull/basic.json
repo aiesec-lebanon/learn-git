@@ -1,0 +1,1389 @@
+{
+  "final": {
+    "config": {
+      "global": [
+        [
+          "user.name",
+          "Sam Lee"
+        ],
+        [
+          "user.email",
+          "sam@example.com"
+        ],
+        [
+          "init.defaultbranch",
+          "main"
+        ]
+      ],
+      "system": []
+    },
+    "dirs": [
+      "team"
+    ],
+    "files": {
+      "team/README.md": "# Team\nFridays\nSnacks\nMore\n",
+      "team/list.txt": "B\n",
+      "team/mine.txt": "mine\ntwo\n"
+    },
+    "hub": {
+      "sam/team.git": {
+        "config": [
+          [
+            "core.repositoryformatversion",
+            "0"
+          ],
+          [
+            "core.filemode",
+            "false"
+          ],
+          [
+            "core.bare",
+            "true"
+          ],
+          [
+            "core.symlinks",
+            "false"
+          ],
+          [
+            "core.ignorecase",
+            "true"
+          ]
+        ],
+        "head": {
+          "ref": "refs/heads/main"
+        },
+        "index": [],
+        "objects": {
+          "10b9141ac36d591fcbc659b88f3fd09b393dca41": {
+            "body": "# Team\nFridays\n",
+            "type": "blob"
+          },
+          "223b7836fb19fdf64ba2d3cd6173c6a283141f78": {
+            "body": "B\n",
+            "type": "blob"
+          },
+          "2711c843142e6c1ec5da362bc04876037e6a9195": {
+            "body": "tree 4e243c1f16fdd5a32de32ad588fcb565c7d22b98\nparent 28fae0809b1e49f8178177440c676afadbbebe9c\nauthor Sam Rivera <sam@team.test> 1767228120 +0000\ncommitter Sam Rivera <sam@team.test> 1767228120 +0000\n\nMore\n",
+            "type": "commit"
+          },
+          "28fae0809b1e49f8178177440c676afadbbebe9c": {
+            "body": "tree 87139dad4c899179fb69b5f001fb98cf5e200d48\nparent 6405d9c755a9958925dde1f48ef5a7301fd89c4d\nauthor Sam Rivera <sam@team.test> 1767227280 +0000\ncommitter Sam Rivera <sam@team.test> 1767227280 +0000\n\nCapital B\n",
+            "type": "commit"
+          },
+          "4e243c1f16fdd5a32de32ad588fcb565c7d22b98": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "README.md",
+                "oid": "62afaa5c9b242b7c72b85f26d14ab3089460bc86"
+              },
+              {
+                "mode": "100644",
+                "name": "list.txt",
+                "oid": "223b7836fb19fdf64ba2d3cd6173c6a283141f78"
+              }
+            ],
+            "type": "tree"
+          },
+          "5e1b0a401639faec623b321e5c864fa5bf4ec245": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "README.md",
+                "oid": "10b9141ac36d591fcbc659b88f3fd09b393dca41"
+              },
+              {
+                "mode": "100644",
+                "name": "list.txt",
+                "oid": "61780798228d17af2d34fce4cfbdf35556832472"
+              }
+            ],
+            "type": "tree"
+          },
+          "61780798228d17af2d34fce4cfbdf35556832472": {
+            "body": "b\n",
+            "type": "blob"
+          },
+          "62afaa5c9b242b7c72b85f26d14ab3089460bc86": {
+            "body": "# Team\nFridays\nSnacks\nMore\n",
+            "type": "blob"
+          },
+          "6405d9c755a9958925dde1f48ef5a7301fd89c4d": {
+            "body": "tree 96144db45ad15efc93dc84fc4779178f1083a0b1\nparent 9c8b1317c365a3cda303cebba1eed402ea4e792e\nauthor Sam Rivera <sam@team.test> 1767226560 +0000\ncommitter Sam Rivera <sam@team.test> 1767226560 +0000\n\nAsk for snacks\n",
+            "type": "commit"
+          },
+          "658a929ca22fd8384df6a22e4683c59b49b76a74": {
+            "body": "# Team\nFridays\nSnacks\n",
+            "type": "blob"
+          },
+          "82a3191a5061659c85d10ff8702b969bfe864dfb": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "README.md",
+                "oid": "d9aa0f3cbd9248e08f457c112a184e32319b2d3e"
+              },
+              {
+                "mode": "100644",
+                "name": "list.txt",
+                "oid": "61780798228d17af2d34fce4cfbdf35556832472"
+              }
+            ],
+            "type": "tree"
+          },
+          "87139dad4c899179fb69b5f001fb98cf5e200d48": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "README.md",
+                "oid": "658a929ca22fd8384df6a22e4683c59b49b76a74"
+              },
+              {
+                "mode": "100644",
+                "name": "list.txt",
+                "oid": "223b7836fb19fdf64ba2d3cd6173c6a283141f78"
+              }
+            ],
+            "type": "tree"
+          },
+          "96144db45ad15efc93dc84fc4779178f1083a0b1": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "README.md",
+                "oid": "658a929ca22fd8384df6a22e4683c59b49b76a74"
+              },
+              {
+                "mode": "100644",
+                "name": "list.txt",
+                "oid": "61780798228d17af2d34fce4cfbdf35556832472"
+              }
+            ],
+            "type": "tree"
+          },
+          "9c8b1317c365a3cda303cebba1eed402ea4e792e": {
+            "body": "tree 5e1b0a401639faec623b321e5c864fa5bf4ec245\nparent e022adddbc5e538f80f4f53f09d1ec154c318ab2\nauthor Sam Rivera <sam@team.test> 1767226260 +0000\ncommitter Sam Rivera <sam@team.test> 1767226260 +0000\n\nMeet on Fridays\n",
+            "type": "commit"
+          },
+          "d9aa0f3cbd9248e08f457c112a184e32319b2d3e": {
+            "body": "# Team\n",
+            "type": "blob"
+          },
+          "e022adddbc5e538f80f4f53f09d1ec154c318ab2": {
+            "body": "tree 82a3191a5061659c85d10ff8702b969bfe864dfb\nauthor Sam Rivera <sam@team.test> 1767225900 +0000\ncommitter Sam Rivera <sam@team.test> 1767225900 +0000\n\nAdd README\n",
+            "type": "commit"
+          }
+        },
+        "reflogs": {},
+        "refs": {
+          "refs/heads/main": "2711c843142e6c1ec5da362bc04876037e6a9195"
+        }
+      }
+    },
+    "machines": {
+      "sam": {
+        "config": {
+          "global": [
+            [
+              "user.name",
+              "Sam Rivera"
+            ],
+            [
+              "user.email",
+              "sam@team.test"
+            ],
+            [
+              "init.defaultbranch",
+              "main"
+            ]
+          ],
+          "system": []
+        },
+        "dirs": [
+          "team"
+        ],
+        "files": {
+          "team/README.md": "# Team\nFridays\nSnacks\nMore\n",
+          "team/list.txt": "B\n"
+        },
+        "repos": {
+          "team": {
+            "config": [
+              [
+                "core.repositoryformatversion",
+                "0"
+              ],
+              [
+                "core.filemode",
+                "false"
+              ],
+              [
+                "core.bare",
+                "false"
+              ],
+              [
+                "core.logallrefupdates",
+                "true"
+              ],
+              [
+                "core.symlinks",
+                "false"
+              ],
+              [
+                "core.ignorecase",
+                "true"
+              ],
+              [
+                "remote.origin.url",
+                "https://hub.test/sam/team.git"
+              ],
+              [
+                "remote.origin.fetch",
+                "+refs/heads/*:refs/remotes/origin/*"
+              ],
+              [
+                "branch.main.remote",
+                "origin"
+              ],
+              [
+                "branch.main.merge",
+                "refs/heads/main"
+              ]
+            ],
+            "head": {
+              "ref": "refs/heads/main"
+            },
+            "index": [
+              {
+                "mode": "100644",
+                "oid": "62afaa5c9b242b7c72b85f26d14ab3089460bc86",
+                "path": "README.md",
+                "stage": 0
+              },
+              {
+                "mode": "100644",
+                "oid": "223b7836fb19fdf64ba2d3cd6173c6a283141f78",
+                "path": "list.txt",
+                "stage": 0
+              }
+            ],
+            "objects": {
+              "10b9141ac36d591fcbc659b88f3fd09b393dca41": {
+                "body": "# Team\nFridays\n",
+                "type": "blob"
+              },
+              "223b7836fb19fdf64ba2d3cd6173c6a283141f78": {
+                "body": "B\n",
+                "type": "blob"
+              },
+              "2711c843142e6c1ec5da362bc04876037e6a9195": {
+                "body": "tree 4e243c1f16fdd5a32de32ad588fcb565c7d22b98\nparent 28fae0809b1e49f8178177440c676afadbbebe9c\nauthor Sam Rivera <sam@team.test> 1767228120 +0000\ncommitter Sam Rivera <sam@team.test> 1767228120 +0000\n\nMore\n",
+                "type": "commit"
+              },
+              "28fae0809b1e49f8178177440c676afadbbebe9c": {
+                "body": "tree 87139dad4c899179fb69b5f001fb98cf5e200d48\nparent 6405d9c755a9958925dde1f48ef5a7301fd89c4d\nauthor Sam Rivera <sam@team.test> 1767227280 +0000\ncommitter Sam Rivera <sam@team.test> 1767227280 +0000\n\nCapital B\n",
+                "type": "commit"
+              },
+              "4e243c1f16fdd5a32de32ad588fcb565c7d22b98": {
+                "entries": [
+                  {
+                    "mode": "100644",
+                    "name": "README.md",
+                    "oid": "62afaa5c9b242b7c72b85f26d14ab3089460bc86"
+                  },
+                  {
+                    "mode": "100644",
+                    "name": "list.txt",
+                    "oid": "223b7836fb19fdf64ba2d3cd6173c6a283141f78"
+                  }
+                ],
+                "type": "tree"
+              },
+              "5e1b0a401639faec623b321e5c864fa5bf4ec245": {
+                "entries": [
+                  {
+                    "mode": "100644",
+                    "name": "README.md",
+                    "oid": "10b9141ac36d591fcbc659b88f3fd09b393dca41"
+                  },
+                  {
+                    "mode": "100644",
+                    "name": "list.txt",
+                    "oid": "61780798228d17af2d34fce4cfbdf35556832472"
+                  }
+                ],
+                "type": "tree"
+              },
+              "61780798228d17af2d34fce4cfbdf35556832472": {
+                "body": "b\n",
+                "type": "blob"
+              },
+              "62afaa5c9b242b7c72b85f26d14ab3089460bc86": {
+                "body": "# Team\nFridays\nSnacks\nMore\n",
+                "type": "blob"
+              },
+              "6405d9c755a9958925dde1f48ef5a7301fd89c4d": {
+                "body": "tree 96144db45ad15efc93dc84fc4779178f1083a0b1\nparent 9c8b1317c365a3cda303cebba1eed402ea4e792e\nauthor Sam Rivera <sam@team.test> 1767226560 +0000\ncommitter Sam Rivera <sam@team.test> 1767226560 +0000\n\nAsk for snacks\n",
+                "type": "commit"
+              },
+              "658a929ca22fd8384df6a22e4683c59b49b76a74": {
+                "body": "# Team\nFridays\nSnacks\n",
+                "type": "blob"
+              },
+              "82a3191a5061659c85d10ff8702b969bfe864dfb": {
+                "entries": [
+                  {
+                    "mode": "100644",
+                    "name": "README.md",
+                    "oid": "d9aa0f3cbd9248e08f457c112a184e32319b2d3e"
+                  },
+                  {
+                    "mode": "100644",
+                    "name": "list.txt",
+                    "oid": "61780798228d17af2d34fce4cfbdf35556832472"
+                  }
+                ],
+                "type": "tree"
+              },
+              "87139dad4c899179fb69b5f001fb98cf5e200d48": {
+                "entries": [
+                  {
+                    "mode": "100644",
+                    "name": "README.md",
+                    "oid": "658a929ca22fd8384df6a22e4683c59b49b76a74"
+                  },
+                  {
+                    "mode": "100644",
+                    "name": "list.txt",
+                    "oid": "223b7836fb19fdf64ba2d3cd6173c6a283141f78"
+                  }
+                ],
+                "type": "tree"
+              },
+              "96144db45ad15efc93dc84fc4779178f1083a0b1": {
+                "entries": [
+                  {
+                    "mode": "100644",
+                    "name": "README.md",
+                    "oid": "658a929ca22fd8384df6a22e4683c59b49b76a74"
+                  },
+                  {
+                    "mode": "100644",
+                    "name": "list.txt",
+                    "oid": "61780798228d17af2d34fce4cfbdf35556832472"
+                  }
+                ],
+                "type": "tree"
+              },
+              "9c8b1317c365a3cda303cebba1eed402ea4e792e": {
+                "body": "tree 5e1b0a401639faec623b321e5c864fa5bf4ec245\nparent e022adddbc5e538f80f4f53f09d1ec154c318ab2\nauthor Sam Rivera <sam@team.test> 1767226260 +0000\ncommitter Sam Rivera <sam@team.test> 1767226260 +0000\n\nMeet on Fridays\n",
+                "type": "commit"
+              },
+              "d9aa0f3cbd9248e08f457c112a184e32319b2d3e": {
+                "body": "# Team\n",
+                "type": "blob"
+              },
+              "e022adddbc5e538f80f4f53f09d1ec154c318ab2": {
+                "body": "tree 82a3191a5061659c85d10ff8702b969bfe864dfb\nauthor Sam Rivera <sam@team.test> 1767225900 +0000\ncommitter Sam Rivera <sam@team.test> 1767225900 +0000\n\nAdd README\n",
+                "type": "commit"
+              }
+            },
+            "reflogs": {
+              "HEAD": [
+                "0000000000000000000000000000000000000000 e022adddbc5e538f80f4f53f09d1ec154c318ab2 Sam Rivera <sam@team.test> 1767225900 +0000\tcommit (initial): Add README",
+                "e022adddbc5e538f80f4f53f09d1ec154c318ab2 9c8b1317c365a3cda303cebba1eed402ea4e792e Sam Rivera <sam@team.test> 1767226260 +0000\tcommit: Meet on Fridays",
+                "9c8b1317c365a3cda303cebba1eed402ea4e792e 6405d9c755a9958925dde1f48ef5a7301fd89c4d Sam Rivera <sam@team.test> 1767226560 +0000\tcommit: Ask for snacks",
+                "6405d9c755a9958925dde1f48ef5a7301fd89c4d 28fae0809b1e49f8178177440c676afadbbebe9c Sam Rivera <sam@team.test> 1767227280 +0000\tcommit: Capital B",
+                "28fae0809b1e49f8178177440c676afadbbebe9c 2711c843142e6c1ec5da362bc04876037e6a9195 Sam Rivera <sam@team.test> 1767228120 +0000\tcommit: More"
+              ],
+              "refs/heads/main": [
+                "0000000000000000000000000000000000000000 e022adddbc5e538f80f4f53f09d1ec154c318ab2 Sam Rivera <sam@team.test> 1767225900 +0000\tcommit (initial): Add README",
+                "e022adddbc5e538f80f4f53f09d1ec154c318ab2 9c8b1317c365a3cda303cebba1eed402ea4e792e Sam Rivera <sam@team.test> 1767226260 +0000\tcommit: Meet on Fridays",
+                "9c8b1317c365a3cda303cebba1eed402ea4e792e 6405d9c755a9958925dde1f48ef5a7301fd89c4d Sam Rivera <sam@team.test> 1767226560 +0000\tcommit: Ask for snacks",
+                "6405d9c755a9958925dde1f48ef5a7301fd89c4d 28fae0809b1e49f8178177440c676afadbbebe9c Sam Rivera <sam@team.test> 1767227280 +0000\tcommit: Capital B",
+                "28fae0809b1e49f8178177440c676afadbbebe9c 2711c843142e6c1ec5da362bc04876037e6a9195 Sam Rivera <sam@team.test> 1767228120 +0000\tcommit: More"
+              ],
+              "refs/remotes/origin/main": [
+                "0000000000000000000000000000000000000000 e022adddbc5e538f80f4f53f09d1ec154c318ab2 Sam Rivera <sam@team.test> 1767225960 +0000\tupdate by push",
+                "e022adddbc5e538f80f4f53f09d1ec154c318ab2 9c8b1317c365a3cda303cebba1eed402ea4e792e Sam Rivera <sam@team.test> 1767226320 +0000\tupdate by push",
+                "9c8b1317c365a3cda303cebba1eed402ea4e792e 6405d9c755a9958925dde1f48ef5a7301fd89c4d Sam Rivera <sam@team.test> 1767226620 +0000\tupdate by push",
+                "6405d9c755a9958925dde1f48ef5a7301fd89c4d 28fae0809b1e49f8178177440c676afadbbebe9c Sam Rivera <sam@team.test> 1767227340 +0000\tupdate by push",
+                "28fae0809b1e49f8178177440c676afadbbebe9c 2711c843142e6c1ec5da362bc04876037e6a9195 Sam Rivera <sam@team.test> 1767228180 +0000\tupdate by push"
+              ]
+            },
+            "refs": {
+              "refs/heads/main": "2711c843142e6c1ec5da362bc04876037e6a9195",
+              "refs/remotes/origin/main": "2711c843142e6c1ec5da362bc04876037e6a9195"
+            }
+          }
+        }
+      }
+    },
+    "repos": {
+      "team": {
+        "config": [
+          [
+            "core.repositoryformatversion",
+            "0"
+          ],
+          [
+            "core.filemode",
+            "false"
+          ],
+          [
+            "core.bare",
+            "false"
+          ],
+          [
+            "core.logallrefupdates",
+            "true"
+          ],
+          [
+            "core.symlinks",
+            "false"
+          ],
+          [
+            "core.ignorecase",
+            "true"
+          ],
+          [
+            "remote.origin.url",
+            "https://hub.test/sam/team.git"
+          ],
+          [
+            "remote.origin.fetch",
+            "+refs/heads/*:refs/remotes/origin/*"
+          ],
+          [
+            "branch.main.remote",
+            "origin"
+          ],
+          [
+            "branch.main.merge",
+            "refs/heads/main"
+          ],
+          [
+            "pull.ff",
+            "only"
+          ]
+        ],
+        "head": {
+          "ref": "refs/heads/main"
+        },
+        "index": [
+          {
+            "mode": "100644",
+            "oid": "62afaa5c9b242b7c72b85f26d14ab3089460bc86",
+            "path": "README.md",
+            "stage": 0
+          },
+          {
+            "mode": "100644",
+            "oid": "223b7836fb19fdf64ba2d3cd6173c6a283141f78",
+            "path": "list.txt",
+            "stage": 0
+          },
+          {
+            "mode": "100644",
+            "oid": "aa001c1e205afe2d4f7808b82313d8b544338603",
+            "path": "mine.txt",
+            "stage": 0
+          }
+        ],
+        "objects": {
+          "10b9141ac36d591fcbc659b88f3fd09b393dca41": {
+            "body": "# Team\nFridays\n",
+            "type": "blob"
+          },
+          "16f341b233b3a25a78cdf5bff9a171b9d08e6a4d": {
+            "body": "tree 5710cb43a4ae51fdcca60b628acd1198579dbbfc\nparent 9c8b1317c365a3cda303cebba1eed402ea4e792e\nauthor Sam Lee <sam@example.com> 1767226800 +0000\ncommitter Sam Lee <sam@example.com> 1767226800 +0000\n\nAdd mine\n",
+            "type": "commit"
+          },
+          "223b7836fb19fdf64ba2d3cd6173c6a283141f78": {
+            "body": "B\n",
+            "type": "blob"
+          },
+          "2711c843142e6c1ec5da362bc04876037e6a9195": {
+            "body": "tree 4e243c1f16fdd5a32de32ad588fcb565c7d22b98\nparent 28fae0809b1e49f8178177440c676afadbbebe9c\nauthor Sam Rivera <sam@team.test> 1767228120 +0000\ncommitter Sam Rivera <sam@team.test> 1767228120 +0000\n\nMore\n",
+            "type": "commit"
+          },
+          "28fae0809b1e49f8178177440c676afadbbebe9c": {
+            "body": "tree 87139dad4c899179fb69b5f001fb98cf5e200d48\nparent 6405d9c755a9958925dde1f48ef5a7301fd89c4d\nauthor Sam Rivera <sam@team.test> 1767227280 +0000\ncommitter Sam Rivera <sam@team.test> 1767227280 +0000\n\nCapital B\n",
+            "type": "commit"
+          },
+          "351be5bf6e17c59ea560546d69654115ecb2fd8d": {
+            "body": "mine\n",
+            "type": "blob"
+          },
+          "40fbec7507ead88c4ce6049926eaa7f159a4b150": {
+            "body": "tree bd30ad361e509f86cd0fb1c8b682a202aeebfce3\nparent 16f341b233b3a25a78cdf5bff9a171b9d08e6a4d\nparent 6405d9c755a9958925dde1f48ef5a7301fd89c4d\nauthor Sam Lee <sam@example.com> 1767227040 +0000\ncommitter Sam Lee <sam@example.com> 1767227040 +0000\n\nMerge branch 'main' of https://hub.test/sam/team\n",
+            "type": "commit"
+          },
+          "447c9fce4a670112e906068e03a7dc8f1a4359e7": {
+            "body": "tree 7f53d89745e3f4038d9cf69fe188e6cd05635aaf\nparent 6958c9dc4d9103cf0622442e5f53cd8da47668b9\nparent 28fae0809b1e49f8178177440c676afadbbebe9c\nauthor Sam Lee <sam@example.com> 1767227880 +0000\ncommitter Sam Lee <sam@example.com> 1767227880 +0000\n\nTake the capital B\n",
+            "type": "commit"
+          },
+          "4e243c1f16fdd5a32de32ad588fcb565c7d22b98": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "README.md",
+                "oid": "62afaa5c9b242b7c72b85f26d14ab3089460bc86"
+              },
+              {
+                "mode": "100644",
+                "name": "list.txt",
+                "oid": "223b7836fb19fdf64ba2d3cd6173c6a283141f78"
+              }
+            ],
+            "type": "tree"
+          },
+          "5087d40622cc1335ec301e8adfb645f71e1b292a": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "README.md",
+                "oid": "658a929ca22fd8384df6a22e4683c59b49b76a74"
+              },
+              {
+                "mode": "100644",
+                "name": "list.txt",
+                "oid": "af9c6fd168ea28cf99aa2c2dd9057a8b720e2262"
+              },
+              {
+                "mode": "100644",
+                "name": "mine.txt",
+                "oid": "351be5bf6e17c59ea560546d69654115ecb2fd8d"
+              }
+            ],
+            "type": "tree"
+          },
+          "5710cb43a4ae51fdcca60b628acd1198579dbbfc": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "README.md",
+                "oid": "10b9141ac36d591fcbc659b88f3fd09b393dca41"
+              },
+              {
+                "mode": "100644",
+                "name": "list.txt",
+                "oid": "61780798228d17af2d34fce4cfbdf35556832472"
+              },
+              {
+                "mode": "100644",
+                "name": "mine.txt",
+                "oid": "351be5bf6e17c59ea560546d69654115ecb2fd8d"
+              }
+            ],
+            "type": "tree"
+          },
+          "5e1b0a401639faec623b321e5c864fa5bf4ec245": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "README.md",
+                "oid": "10b9141ac36d591fcbc659b88f3fd09b393dca41"
+              },
+              {
+                "mode": "100644",
+                "name": "list.txt",
+                "oid": "61780798228d17af2d34fce4cfbdf35556832472"
+              }
+            ],
+            "type": "tree"
+          },
+          "61780798228d17af2d34fce4cfbdf35556832472": {
+            "body": "b\n",
+            "type": "blob"
+          },
+          "62afaa5c9b242b7c72b85f26d14ab3089460bc86": {
+            "body": "# Team\nFridays\nSnacks\nMore\n",
+            "type": "blob"
+          },
+          "63cc9579550e4be7bb4c963e857dc45a2e93a5ab": {
+            "body": "tree 951808be677aa22a208734fd6653111f88a67a88\nparent 447c9fce4a670112e906068e03a7dc8f1a4359e7\nauthor Sam Lee <sam@example.com> 1767228300 +0000\ncommitter Sam Lee <sam@example.com> 1767228300 +0000\n\nMine two\n",
+            "type": "commit"
+          },
+          "6405d9c755a9958925dde1f48ef5a7301fd89c4d": {
+            "body": "tree 96144db45ad15efc93dc84fc4779178f1083a0b1\nparent 9c8b1317c365a3cda303cebba1eed402ea4e792e\nauthor Sam Rivera <sam@team.test> 1767226560 +0000\ncommitter Sam Rivera <sam@team.test> 1767226560 +0000\n\nAsk for snacks\n",
+            "type": "commit"
+          },
+          "658a929ca22fd8384df6a22e4683c59b49b76a74": {
+            "body": "# Team\nFridays\nSnacks\n",
+            "type": "blob"
+          },
+          "6958c9dc4d9103cf0622442e5f53cd8da47668b9": {
+            "body": "tree 5087d40622cc1335ec301e8adfb645f71e1b292a\nparent 40fbec7507ead88c4ce6049926eaa7f159a4b150\nauthor Sam Lee <sam@example.com> 1767227460 +0000\ncommitter Sam Lee <sam@example.com> 1767227460 +0000\n\nSpell bee\n",
+            "type": "commit"
+          },
+          "76b384860c0f5f78df01dfb71c5a0b63c0633737": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "README.md",
+                "oid": "658a929ca22fd8384df6a22e4683c59b49b76a74"
+              },
+              {
+                "mode": "100644",
+                "name": "list.txt",
+                "oid": "92308cac13bc1f92657f88a60279f045b503ddd1"
+              },
+              {
+                "mode": "100644",
+                "name": "mine.txt",
+                "oid": "351be5bf6e17c59ea560546d69654115ecb2fd8d"
+              }
+            ],
+            "type": "tree"
+          },
+          "7f53d89745e3f4038d9cf69fe188e6cd05635aaf": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "README.md",
+                "oid": "658a929ca22fd8384df6a22e4683c59b49b76a74"
+              },
+              {
+                "mode": "100644",
+                "name": "list.txt",
+                "oid": "223b7836fb19fdf64ba2d3cd6173c6a283141f78"
+              },
+              {
+                "mode": "100644",
+                "name": "mine.txt",
+                "oid": "351be5bf6e17c59ea560546d69654115ecb2fd8d"
+              }
+            ],
+            "type": "tree"
+          },
+          "82a3191a5061659c85d10ff8702b969bfe864dfb": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "README.md",
+                "oid": "d9aa0f3cbd9248e08f457c112a184e32319b2d3e"
+              },
+              {
+                "mode": "100644",
+                "name": "list.txt",
+                "oid": "61780798228d17af2d34fce4cfbdf35556832472"
+              }
+            ],
+            "type": "tree"
+          },
+          "87139dad4c899179fb69b5f001fb98cf5e200d48": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "README.md",
+                "oid": "658a929ca22fd8384df6a22e4683c59b49b76a74"
+              },
+              {
+                "mode": "100644",
+                "name": "list.txt",
+                "oid": "223b7836fb19fdf64ba2d3cd6173c6a283141f78"
+              }
+            ],
+            "type": "tree"
+          },
+          "92308cac13bc1f92657f88a60279f045b503ddd1": {
+            "body": "<<<<<<< HEAD\nbee\n=======\nB\n>>>>>>> 28fae0809b1e49f8178177440c676afadbbebe9c\n",
+            "type": "blob"
+          },
+          "951808be677aa22a208734fd6653111f88a67a88": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "README.md",
+                "oid": "658a929ca22fd8384df6a22e4683c59b49b76a74"
+              },
+              {
+                "mode": "100644",
+                "name": "list.txt",
+                "oid": "223b7836fb19fdf64ba2d3cd6173c6a283141f78"
+              },
+              {
+                "mode": "100644",
+                "name": "mine.txt",
+                "oid": "aa001c1e205afe2d4f7808b82313d8b544338603"
+              }
+            ],
+            "type": "tree"
+          },
+          "96144db45ad15efc93dc84fc4779178f1083a0b1": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "README.md",
+                "oid": "658a929ca22fd8384df6a22e4683c59b49b76a74"
+              },
+              {
+                "mode": "100644",
+                "name": "list.txt",
+                "oid": "61780798228d17af2d34fce4cfbdf35556832472"
+              }
+            ],
+            "type": "tree"
+          },
+          "9c8b1317c365a3cda303cebba1eed402ea4e792e": {
+            "body": "tree 5e1b0a401639faec623b321e5c864fa5bf4ec245\nparent e022adddbc5e538f80f4f53f09d1ec154c318ab2\nauthor Sam Rivera <sam@team.test> 1767226260 +0000\ncommitter Sam Rivera <sam@team.test> 1767226260 +0000\n\nMeet on Fridays\n",
+            "type": "commit"
+          },
+          "aa001c1e205afe2d4f7808b82313d8b544338603": {
+            "body": "mine\ntwo\n",
+            "type": "blob"
+          },
+          "af9c6fd168ea28cf99aa2c2dd9057a8b720e2262": {
+            "body": "bee\n",
+            "type": "blob"
+          },
+          "bd30ad361e509f86cd0fb1c8b682a202aeebfce3": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "README.md",
+                "oid": "658a929ca22fd8384df6a22e4683c59b49b76a74"
+              },
+              {
+                "mode": "100644",
+                "name": "list.txt",
+                "oid": "61780798228d17af2d34fce4cfbdf35556832472"
+              },
+              {
+                "mode": "100644",
+                "name": "mine.txt",
+                "oid": "351be5bf6e17c59ea560546d69654115ecb2fd8d"
+              }
+            ],
+            "type": "tree"
+          },
+          "d02ab6211501f8fa524a504b4e9e315b7c2d13ae": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "README.md",
+                "oid": "62afaa5c9b242b7c72b85f26d14ab3089460bc86"
+              },
+              {
+                "mode": "100644",
+                "name": "list.txt",
+                "oid": "223b7836fb19fdf64ba2d3cd6173c6a283141f78"
+              },
+              {
+                "mode": "100644",
+                "name": "mine.txt",
+                "oid": "aa001c1e205afe2d4f7808b82313d8b544338603"
+              }
+            ],
+            "type": "tree"
+          },
+          "d9aa0f3cbd9248e08f457c112a184e32319b2d3e": {
+            "body": "# Team\n",
+            "type": "blob"
+          },
+          "e022adddbc5e538f80f4f53f09d1ec154c318ab2": {
+            "body": "tree 82a3191a5061659c85d10ff8702b969bfe864dfb\nauthor Sam Rivera <sam@team.test> 1767225900 +0000\ncommitter Sam Rivera <sam@team.test> 1767225900 +0000\n\nAdd README\n",
+            "type": "commit"
+          },
+          "f04eb47a374ef43c8e922a40efbaba6187d86f51": {
+            "body": "tree d02ab6211501f8fa524a504b4e9e315b7c2d13ae\nparent 63cc9579550e4be7bb4c963e857dc45a2e93a5ab\nparent 2711c843142e6c1ec5da362bc04876037e6a9195\nauthor Sam Lee <sam@example.com> 1767228420 +0000\ncommitter Sam Lee <sam@example.com> 1767228420 +0000\n\nMerge branch 'main' of https://hub.test/sam/team\n",
+            "type": "commit"
+          }
+        },
+        "pseudo": {
+          "FETCH_HEAD": "2711c843142e6c1ec5da362bc04876037e6a9195\t\tbranch 'main' of https://hub.test/sam/team\n",
+          "ORIG_HEAD": "f04eb47a374ef43c8e922a40efbaba6187d86f51\n"
+        },
+        "reflogs": {
+          "HEAD": [
+            "0000000000000000000000000000000000000000 e022adddbc5e538f80f4f53f09d1ec154c318ab2 Sam Lee <sam@example.com> 1767226020 +0000\tclone: from https://hub.test/sam/team.git",
+            "e022adddbc5e538f80f4f53f09d1ec154c318ab2 9c8b1317c365a3cda303cebba1eed402ea4e792e Sam Lee <sam@example.com> 1767226380 +0000\tpull: Fast-forward",
+            "9c8b1317c365a3cda303cebba1eed402ea4e792e 16f341b233b3a25a78cdf5bff9a171b9d08e6a4d Sam Lee <sam@example.com> 1767226800 +0000\tcommit: Add mine",
+            "16f341b233b3a25a78cdf5bff9a171b9d08e6a4d 40fbec7507ead88c4ce6049926eaa7f159a4b150 Sam Lee <sam@example.com> 1767227040 +0000\tpull --no-rebase: Merge made by the 'ort' strategy.",
+            "40fbec7507ead88c4ce6049926eaa7f159a4b150 6958c9dc4d9103cf0622442e5f53cd8da47668b9 Sam Lee <sam@example.com> 1767227460 +0000\tcommit: Spell bee",
+            "6958c9dc4d9103cf0622442e5f53cd8da47668b9 447c9fce4a670112e906068e03a7dc8f1a4359e7 Sam Lee <sam@example.com> 1767227880 +0000\tcommit (merge): Take the capital B",
+            "447c9fce4a670112e906068e03a7dc8f1a4359e7 63cc9579550e4be7bb4c963e857dc45a2e93a5ab Sam Lee <sam@example.com> 1767228300 +0000\tcommit: Mine two",
+            "63cc9579550e4be7bb4c963e857dc45a2e93a5ab f04eb47a374ef43c8e922a40efbaba6187d86f51 Sam Lee <sam@example.com> 1767228420 +0000\tpull --no-ff: Merge made by the 'ort' strategy.",
+            "f04eb47a374ef43c8e922a40efbaba6187d86f51 f04eb47a374ef43c8e922a40efbaba6187d86f51 Sam Lee <sam@example.com> 1767228480 +0000\tcheckout: moving from main to local-only",
+            "f04eb47a374ef43c8e922a40efbaba6187d86f51 f04eb47a374ef43c8e922a40efbaba6187d86f51 Sam Lee <sam@example.com> 1767228600 +0000\tcheckout: moving from local-only to HEAD",
+            "f04eb47a374ef43c8e922a40efbaba6187d86f51 f04eb47a374ef43c8e922a40efbaba6187d86f51 Sam Lee <sam@example.com> 1767228720 +0000\tcheckout: moving from f04eb47a374ef43c8e922a40efbaba6187d86f51 to main"
+          ],
+          "refs/heads/local-only": [
+            "0000000000000000000000000000000000000000 f04eb47a374ef43c8e922a40efbaba6187d86f51 Sam Lee <sam@example.com> 1767228480 +0000\tbranch: Created from HEAD"
+          ],
+          "refs/heads/main": [
+            "0000000000000000000000000000000000000000 e022adddbc5e538f80f4f53f09d1ec154c318ab2 Sam Lee <sam@example.com> 1767226020 +0000\tclone: from https://hub.test/sam/team.git",
+            "e022adddbc5e538f80f4f53f09d1ec154c318ab2 9c8b1317c365a3cda303cebba1eed402ea4e792e Sam Lee <sam@example.com> 1767226380 +0000\tpull: Fast-forward",
+            "9c8b1317c365a3cda303cebba1eed402ea4e792e 16f341b233b3a25a78cdf5bff9a171b9d08e6a4d Sam Lee <sam@example.com> 1767226800 +0000\tcommit: Add mine",
+            "16f341b233b3a25a78cdf5bff9a171b9d08e6a4d 40fbec7507ead88c4ce6049926eaa7f159a4b150 Sam Lee <sam@example.com> 1767227040 +0000\tpull --no-rebase: Merge made by the 'ort' strategy.",
+            "40fbec7507ead88c4ce6049926eaa7f159a4b150 6958c9dc4d9103cf0622442e5f53cd8da47668b9 Sam Lee <sam@example.com> 1767227460 +0000\tcommit: Spell bee",
+            "6958c9dc4d9103cf0622442e5f53cd8da47668b9 447c9fce4a670112e906068e03a7dc8f1a4359e7 Sam Lee <sam@example.com> 1767227880 +0000\tcommit (merge): Take the capital B",
+            "447c9fce4a670112e906068e03a7dc8f1a4359e7 63cc9579550e4be7bb4c963e857dc45a2e93a5ab Sam Lee <sam@example.com> 1767228300 +0000\tcommit: Mine two",
+            "63cc9579550e4be7bb4c963e857dc45a2e93a5ab f04eb47a374ef43c8e922a40efbaba6187d86f51 Sam Lee <sam@example.com> 1767228420 +0000\tpull --no-ff: Merge made by the 'ort' strategy."
+          ],
+          "refs/remotes/origin/HEAD": [
+            "0000000000000000000000000000000000000000 e022adddbc5e538f80f4f53f09d1ec154c318ab2 Sam Lee <sam@example.com> 1767226020 +0000\tclone: from https://hub.test/sam/team.git"
+          ],
+          "refs/remotes/origin/main": [
+            "e022adddbc5e538f80f4f53f09d1ec154c318ab2 9c8b1317c365a3cda303cebba1eed402ea4e792e Sam Lee <sam@example.com> 1767226380 +0000\tpull: fast-forward",
+            "9c8b1317c365a3cda303cebba1eed402ea4e792e 6405d9c755a9958925dde1f48ef5a7301fd89c4d Sam Lee <sam@example.com> 1767226860 +0000\tpull: fast-forward",
+            "6405d9c755a9958925dde1f48ef5a7301fd89c4d 28fae0809b1e49f8178177440c676afadbbebe9c Sam Lee <sam@example.com> 1767227580 +0000\tpull: fast-forward",
+            "28fae0809b1e49f8178177440c676afadbbebe9c 2711c843142e6c1ec5da362bc04876037e6a9195 Sam Lee <sam@example.com> 1767228360 +0000\tpull: fast-forward"
+          ]
+        },
+        "refs": {
+          "refs/heads/local-only": "f04eb47a374ef43c8e922a40efbaba6187d86f51",
+          "refs/heads/main": "f04eb47a374ef43c8e922a40efbaba6187d86f51",
+          "refs/remotes/origin/HEAD": "2711c843142e6c1ec5da362bc04876037e6a9195",
+          "refs/remotes/origin/main": "2711c843142e6c1ec5da362bc04876037e6a9195"
+        }
+      }
+    }
+  },
+  "git": "2.45.1.windows.1",
+  "script": {
+    "steps": [
+      {
+        "cmd": "git clone -q https://hub.test/sam/team.git",
+        "machine": "sam"
+      },
+      {
+        "cmd": "cd team",
+        "machine": "sam"
+      },
+      {
+        "cmd": "echo b > list.txt",
+        "machine": "sam"
+      },
+      {
+        "cmd": "echo \"# Team\" > README.md",
+        "machine": "sam"
+      },
+      {
+        "cmd": "git add .",
+        "machine": "sam"
+      },
+      {
+        "cmd": "git commit -q -m \"Add README\"",
+        "machine": "sam"
+      },
+      {
+        "cmd": "git push -q",
+        "machine": "sam"
+      },
+      "git clone -q https://hub.test/sam/team.git",
+      "cd team",
+      "git pull",
+      {
+        "cmd": "echo \"Fridays\" >> README.md",
+        "machine": "sam"
+      },
+      {
+        "cmd": "git commit -q -a -m \"Meet on Fridays\"",
+        "machine": "sam"
+      },
+      {
+        "cmd": "git push -q",
+        "machine": "sam"
+      },
+      "git pull",
+      "git log --oneline",
+      {
+        "cmd": "echo \"Snacks\" >> README.md",
+        "machine": "sam"
+      },
+      {
+        "cmd": "git commit -q -a -m \"Ask for snacks\"",
+        "machine": "sam"
+      },
+      {
+        "cmd": "git push -q",
+        "machine": "sam"
+      },
+      "echo mine > mine.txt",
+      "git add mine.txt",
+      "git commit -q -m \"Add mine\"",
+      "git pull",
+      "git status -sb",
+      "git pull --ff-only",
+      "git pull --no-rebase",
+      "git log --oneline --graph",
+      "git status",
+      {
+        "cmd": "echo B > list.txt",
+        "machine": "sam"
+      },
+      {
+        "cmd": "git commit -q -a -m \"Capital B\"",
+        "machine": "sam"
+      },
+      {
+        "cmd": "git push -q",
+        "machine": "sam"
+      },
+      "echo bee > list.txt",
+      "git commit -q -a -m \"Spell bee\"",
+      "git config pull.rebase false",
+      "git pull",
+      "git status",
+      "cat list.txt",
+      "echo B > list.txt",
+      "git add list.txt",
+      "git commit -q -m \"Take the capital B\"",
+      "git config --unset pull.rebase",
+      "git config pull.ff only",
+      {
+        "cmd": "echo \"More\" >> README.md",
+        "machine": "sam"
+      },
+      {
+        "cmd": "git commit -q -a -m \"More\"",
+        "machine": "sam"
+      },
+      {
+        "cmd": "git push -q",
+        "machine": "sam"
+      },
+      "echo two >> mine.txt",
+      "git commit -q -a -m \"Mine two\"",
+      "git pull",
+      "git pull --no-ff",
+      "git switch -q -c local-only",
+      "git pull",
+      "git switch -q --detach",
+      "git pull",
+      "git switch -q main",
+      "git pull origin nope",
+      "git pull -q origin main",
+      "git log --oneline -3"
+    ],
+    "world": {
+      "hub": {
+        "sam/team": {}
+      },
+      "machines": {
+        "sam": {
+          "global": {
+            "init.defaultBranch": "main",
+            "user.email": "sam@team.test",
+            "user.name": "Sam Rivera"
+          }
+        }
+      }
+    }
+  },
+  "steps": [
+    {
+      "cmd": "git clone -q https://hub.test/sam/team.git",
+      "cwd": "/home/sam",
+      "exitCode": 0,
+      "machine": "sam",
+      "stderr": "warning: You appear to have cloned an empty repository.\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "cd team",
+      "cwd": "/home/sam/team",
+      "exitCode": 0,
+      "machine": "sam",
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "echo b > list.txt",
+      "cwd": "/home/sam/team",
+      "exitCode": 0,
+      "machine": "sam",
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "echo \"# Team\" > README.md",
+      "cwd": "/home/sam/team",
+      "exitCode": 0,
+      "machine": "sam",
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git add .",
+      "cwd": "/home/sam/team",
+      "exitCode": 0,
+      "machine": "sam",
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git commit -q -m \"Add README\"",
+      "cwd": "/home/sam/team",
+      "exitCode": 0,
+      "machine": "sam",
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git push -q",
+      "cwd": "/home/sam/team",
+      "exitCode": 0,
+      "machine": "sam",
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git clone -q https://hub.test/sam/team.git",
+      "cwd": "/home/you",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "cd team",
+      "cwd": "/home/you/team",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git pull",
+      "cwd": "/home/you/team",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "Already up to date.\n"
+    },
+    {
+      "cmd": "echo \"Fridays\" >> README.md",
+      "cwd": "/home/sam/team",
+      "exitCode": 0,
+      "machine": "sam",
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git commit -q -a -m \"Meet on Fridays\"",
+      "cwd": "/home/sam/team",
+      "exitCode": 0,
+      "machine": "sam",
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git push -q",
+      "cwd": "/home/sam/team",
+      "exitCode": 0,
+      "machine": "sam",
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git pull",
+      "cwd": "/home/you/team",
+      "exitCode": 0,
+      "stderr": "From https://hub.test/sam/team\n   e022add..9c8b131  main       -> origin/main\n",
+      "stdout": "Updating e022add..9c8b131\nFast-forward\n README.md | 1 +\n 1 file changed, 1 insertion(+)\n"
+    },
+    {
+      "cmd": "git log --oneline",
+      "cwd": "/home/you/team",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "9c8b131 (HEAD -> main, origin/main, origin/HEAD) Meet on Fridays\ne022add Add README\n"
+    },
+    {
+      "cmd": "echo \"Snacks\" >> README.md",
+      "cwd": "/home/sam/team",
+      "exitCode": 0,
+      "machine": "sam",
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git commit -q -a -m \"Ask for snacks\"",
+      "cwd": "/home/sam/team",
+      "exitCode": 0,
+      "machine": "sam",
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git push -q",
+      "cwd": "/home/sam/team",
+      "exitCode": 0,
+      "machine": "sam",
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "echo mine > mine.txt",
+      "cwd": "/home/you/team",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git add mine.txt",
+      "cwd": "/home/you/team",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git commit -q -m \"Add mine\"",
+      "cwd": "/home/you/team",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git pull",
+      "cwd": "/home/you/team",
+      "exitCode": 128,
+      "stderr": "From https://hub.test/sam/team\n   9c8b131..6405d9c  main       -> origin/main\nhint: You have divergent branches and need to specify how to reconcile them.\nhint: You can do so by running one of the following commands sometime before\nhint: your next pull:\nhint:\nhint:   git config pull.rebase false  # merge\nhint:   git config pull.rebase true   # rebase\nhint:   git config pull.ff only       # fast-forward only\nhint:\nhint: You can replace \"git config\" with \"git config --global\" to set a default\nhint: preference for all repositories. You can also pass --rebase, --no-rebase,\nhint: or --ff-only on the command line to override the configured default per\nhint: invocation.\nfatal: Need to specify how to reconcile divergent branches.\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git status -sb",
+      "cwd": "/home/you/team",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "## main...origin/main [ahead 1, behind 1]\n"
+    },
+    {
+      "cmd": "git pull --ff-only",
+      "cwd": "/home/you/team",
+      "exitCode": 128,
+      "stderr": "hint: Diverging branches can't be fast-forwarded, you need to either:\nhint:\nhint: \tgit merge --no-ff\nhint:\nhint: or:\nhint:\nhint: \tgit rebase\nhint:\nhint: Disable this message with \"git config advice.diverging false\"\nfatal: Not possible to fast-forward, aborting.\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git pull --no-rebase",
+      "cwd": "/home/you/team",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "Merge made by the 'ort' strategy.\n README.md | 1 +\n 1 file changed, 1 insertion(+)\n"
+    },
+    {
+      "cmd": "git log --oneline --graph",
+      "cwd": "/home/you/team",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "*   40fbec7 (HEAD -> main) Merge branch 'main' of https://hub.test/sam/team\n|\\  \n| * 6405d9c (origin/main, origin/HEAD) Ask for snacks\n* | 16f341b Add mine\n|/  \n* 9c8b131 Meet on Fridays\n* e022add Add README\n"
+    },
+    {
+      "cmd": "git status",
+      "cwd": "/home/you/team",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "On branch main\nYour branch is ahead of 'origin/main' by 2 commits.\n  (use \"git push\" to publish your local commits)\n\nnothing to commit, working tree clean\n"
+    },
+    {
+      "cmd": "echo B > list.txt",
+      "cwd": "/home/sam/team",
+      "exitCode": 0,
+      "machine": "sam",
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git commit -q -a -m \"Capital B\"",
+      "cwd": "/home/sam/team",
+      "exitCode": 0,
+      "machine": "sam",
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git push -q",
+      "cwd": "/home/sam/team",
+      "exitCode": 0,
+      "machine": "sam",
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "echo bee > list.txt",
+      "cwd": "/home/you/team",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git commit -q -a -m \"Spell bee\"",
+      "cwd": "/home/you/team",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git config pull.rebase false",
+      "cwd": "/home/you/team",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git pull",
+      "cwd": "/home/you/team",
+      "exitCode": 1,
+      "stderr": "From https://hub.test/sam/team\n   6405d9c..28fae08  main       -> origin/main\n",
+      "stdout": "Auto-merging list.txt\nCONFLICT (content): Merge conflict in list.txt\nAutomatic merge failed; fix conflicts and then commit the result.\n"
+    },
+    {
+      "cmd": "git status",
+      "cwd": "/home/you/team",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "On branch main\nYour branch and 'origin/main' have diverged,\nand have 3 and 1 different commits each, respectively.\n  (use \"git pull\" if you want to integrate the remote branch with yours)\n\nYou have unmerged paths.\n  (fix conflicts and run \"git commit\")\n  (use \"git merge --abort\" to abort the merge)\n\nUnmerged paths:\n  (use \"git add <file>...\" to mark resolution)\n\tboth modified:   list.txt\n\nno changes added to commit (use \"git add\" and/or \"git commit -a\")\n"
+    },
+    {
+      "cmd": "cat list.txt",
+      "cwd": "/home/you/team",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "<<<<<<< HEAD\nbee\n=======\nB\n>>>>>>> 28fae0809b1e49f8178177440c676afadbbebe9c\n"
+    },
+    {
+      "cmd": "echo B > list.txt",
+      "cwd": "/home/you/team",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git add list.txt",
+      "cwd": "/home/you/team",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git commit -q -m \"Take the capital B\"",
+      "cwd": "/home/you/team",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git config --unset pull.rebase",
+      "cwd": "/home/you/team",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git config pull.ff only",
+      "cwd": "/home/you/team",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "echo \"More\" >> README.md",
+      "cwd": "/home/sam/team",
+      "exitCode": 0,
+      "machine": "sam",
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git commit -q -a -m \"More\"",
+      "cwd": "/home/sam/team",
+      "exitCode": 0,
+      "machine": "sam",
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git push -q",
+      "cwd": "/home/sam/team",
+      "exitCode": 0,
+      "machine": "sam",
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "echo two >> mine.txt",
+      "cwd": "/home/you/team",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git commit -q -a -m \"Mine two\"",
+      "cwd": "/home/you/team",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git pull",
+      "cwd": "/home/you/team",
+      "exitCode": 128,
+      "stderr": "From https://hub.test/sam/team\n   28fae08..2711c84  main       -> origin/main\nhint: Diverging branches can't be fast-forwarded, you need to either:\nhint:\nhint: \tgit merge --no-ff\nhint:\nhint: or:\nhint:\nhint: \tgit rebase\nhint:\nhint: Disable this message with \"git config advice.diverging false\"\nfatal: Not possible to fast-forward, aborting.\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git pull --no-ff",
+      "cwd": "/home/you/team",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "Merge made by the 'ort' strategy.\n README.md | 1 +\n 1 file changed, 1 insertion(+)\n"
+    },
+    {
+      "cmd": "git switch -q -c local-only",
+      "cwd": "/home/you/team",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git pull",
+      "cwd": "/home/you/team",
+      "exitCode": 1,
+      "stderr": "There is no tracking information for the current branch.\nPlease specify which branch you want to merge with.\nSee git-pull(1) for details.\n\n    git pull <remote> <branch>\n\nIf you wish to set tracking information for this branch you can do so with:\n\n    git branch --set-upstream-to=origin/<branch> local-only\n\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git switch -q --detach",
+      "cwd": "/home/you/team",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git pull",
+      "cwd": "/home/you/team",
+      "exitCode": 1,
+      "stderr": "You are not currently on a branch.\nPlease specify which branch you want to merge with.\nSee git-pull(1) for details.\n\n    git pull <remote> <branch>\n\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git switch -q main",
+      "cwd": "/home/you/team",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git pull origin nope",
+      "cwd": "/home/you/team",
+      "exitCode": 1,
+      "stderr": "fatal: couldn't find remote ref nope\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git pull -q origin main",
+      "cwd": "/home/you/team",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git log --oneline -3",
+      "cwd": "/home/you/team",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "f04eb47 (HEAD -> main, local-only) Merge branch 'main' of https://hub.test/sam/team\n63cc957 Mine two\n2711c84 (origin/main, origin/HEAD) More\n"
+    }
+  ]
+}

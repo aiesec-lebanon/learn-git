@@ -176,6 +176,8 @@ export type MergeRequest = {
   readonly message: string | null;
   readonly quiet: boolean;
   readonly allowUnrelated: boolean;
+  /** What reflog entries start with; `merge <typed>` unless given (`pull`). */
+  readonly action?: string;
 };
 
 const FAILED = "Merge with strategy ort failed.\n";
@@ -220,7 +222,7 @@ function mergeOnto(req: MergeRequest, base: Oid | null): CommandResult {
       old: head,
       new: head,
       who,
-      message: `merge ${typed}: updating HEAD`,
+      message: `${req.action ?? `merge ${typed}`}: updating HEAD`,
     });
     return {
       ...refuse("would-lose-changes", m.indexHasChanges(staged) + FAILED, 2),
@@ -303,7 +305,7 @@ function mergeOnto(req: MergeRequest, base: Oid | null): CommandResult {
     { ...applied.repo, arrival: [...applied.repo.arrival, oid] },
     oid,
     who,
-    `merge ${typed}: Merge made by the 'ort' strategy.`,
+    `${req.action ?? `merge ${typed}`}: Merge made by the 'ort' strategy.`,
   );
   const summary = req.quiet
     ? ""

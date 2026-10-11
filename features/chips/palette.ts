@@ -220,6 +220,16 @@ export const VERBS: readonly ChipVerb[] = [
   },
   {
     program: "git",
+    name: "pull",
+    hint: "fetch, then bring the remote's commits into your branch",
+    params: [
+      { kind: "flag", flag: "--no-ff", label: "merge if both sides moved" },
+      { kind: "flag", flag: "--ff-only", label: "only if nothing to combine" },
+    ],
+    ready: (s) => s.commits,
+  },
+  {
+    program: "git",
     name: "push",
     hint: "send your commits to the remote",
     params: [

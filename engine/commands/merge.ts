@@ -54,19 +54,34 @@ const OPTIONS: readonly OptionSpec[] = [
   x("progress"),
 ];
 
-type MergeContext = GitContext & { readonly repo: Repo };
-
 const NO_OPTIONS = { values: new Map(), args: [], afterDashDash: null };
 
+/** How to bring `theirs` into the current branch (shared by `merge` and `pull`). */
+export type Integration = {
+  readonly theirs: Oid;
+  /** The name typed for `theirs`; it labels conflict markers. */
+  readonly typed: string;
+  readonly ff: "allow" | "no" | "only" | undefined;
+  /** null for Git's default message. */
+  readonly message: string | null;
+  readonly quiet: boolean;
+  readonly allowUnrelated: boolean;
+  /** What reflog entries start with, e.g. `pull --no-rebase`. */
+  readonly action: string;
+};
+
+type Ctx = Pick<GitContext, "world" | "machine" | "time"> & {
+  readonly repo: Repo;
+};
+
 function fastForward(
-  ctx: MergeContext,
+  ctx: Ctx,
   repo: Repo,
   head: Oid,
-  theirs: Oid,
-  typed: string,
+  how: Integration,
 ): CommandResult {
-  const { world, machine, options, time } = ctx;
-  const quiet = flag(options, "quiet");
+  const { world, machine, time } = ctx;
+  const { theirs, quiet } = how;
   const pool = world.objects;
   const updating = quiet
     ? ""
@@ -86,7 +101,7 @@ function fastForward(
     moved.repo,
     theirs,
     who,
-    `merge ${typed}: Fast-forward`,
+    `${how.action}: Fast-forward`,
   );
   const next = withRepo(world, advanced.repo);
   return {
@@ -154,41 +169,58 @@ export const merge = defineCommand({
         1,
       );
     }
-    const head = resolveHead(repo);
-    if (!head) {
-      return refuse(
-        "not-simulated",
-        notSimulated("merging into a branch with no commits yet"),
-        1,
-      );
-    }
-    const marked: Repo = { ...repo, origHead: head };
-    if (ancestorsOf(pool, head).has(theirs)) {
-      const stdout = flag(options, "quiet") ? "" : m.upToDate();
-      return { world: withRepo(world, marked), stdout };
-    }
-    const ff = lastValue(options, "ff");
-    if (ff !== "no" && ancestorsOf(pool, theirs).has(head)) {
-      return fastForward(ctx, marked, head, theirs, typed);
-    }
-    if (ff === "only") {
-      return {
-        ...refuse("usage", m.notPossibleToFastForward()),
-        world: withRepo(world, marked),
-      };
-    }
     const paragraphs = stringValues(options, "message");
-    return threeWayMerge({
-      world,
-      machine,
-      repo: marked,
-      time,
-      head,
+    const ff = lastValue(options, "ff");
+    return integrate(ctx, {
       theirs,
       typed,
+      ff: ff === "allow" || ff === "no" || ff === "only" ? ff : undefined,
       message: paragraphs.length ? cleanupMessage(paragraphs) : null,
       quiet: flag(options, "quiet"),
       allowUnrelated: flag(options, "allow-unrelated-histories"),
+      action: `merge ${typed}`,
     });
   },
 });
+
+/** Up to date, a fast-forward, or a true merge, as `git merge` decides. */
+export function integrate(ctx: Ctx, how: Integration): CommandResult {
+  const { world, machine, repo, time } = ctx;
+  const pool = world.objects;
+  const { theirs } = how;
+  const head = resolveHead(repo);
+  if (!head) {
+    return refuse(
+      "not-simulated",
+      notSimulated("merging into a branch with no commits yet"),
+      1,
+    );
+  }
+  const marked: Repo = { ...repo, origHead: head };
+  if (ancestorsOf(pool, head).has(theirs)) {
+    const stdout = how.quiet ? "" : m.upToDate();
+    return { world: withRepo(world, marked), stdout };
+  }
+  if (how.ff !== "no" && ancestorsOf(pool, theirs).has(head)) {
+    return fastForward(ctx, marked, head, how);
+  }
+  if (how.ff === "only") {
+    return {
+      ...refuse("usage", m.notPossibleToFastForward()),
+      world: withRepo(world, marked),
+    };
+  }
+  return threeWayMerge({
+    world,
+    machine,
+    repo: marked,
+    time,
+    head,
+    theirs,
+    typed: how.typed,
+    message: how.message,
+    quiet: how.quiet,
+    allowUnrelated: how.allowUnrelated,
+    action: how.action,
+  });
+}

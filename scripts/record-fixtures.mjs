@@ -94,13 +94,26 @@ function prepare(git, tmp, world) {
   };
 }
 
-/** Every machine reaches `https://hub.test/` through the bare repositories under `<tmp>/hub/`. */
+/**
+ * Every machine reaches `https://hub.test/` through the bare repositories
+ * under `<tmp>/hub/`. Git writes the rewritten `file://` URL into merge
+ * messages, so a hook puts the Hub URL back before the commit is hashed.
+ */
 function hubConfig(hub) {
   if (!hub) return {};
+  const hooks = path.join(path.dirname(hub), "hooks");
+  const fileUrl = `file:///${forward(hub)}/`;
+  mkdirSync(hooks, { recursive: true });
+  writeFileSync(
+    path.join(hooks, "prepare-commit-msg"),
+    `#!/bin/sh\nsed -i "s#${fileUrl}#https://hub.test/#g" "$1"\n`,
+  );
   return {
-    GIT_CONFIG_COUNT: "2",
-    GIT_CONFIG_KEY_1: `url.file:///${forward(hub)}/.insteadOf`,
+    GIT_CONFIG_COUNT: "3",
+    GIT_CONFIG_KEY_1: `url.${fileUrl}.insteadOf`,
     GIT_CONFIG_VALUE_1: "https://hub.test/",
+    GIT_CONFIG_KEY_2: "core.hooksPath",
+    GIT_CONFIG_VALUE_2: forward(hooks),
   };
 }
 

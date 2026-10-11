@@ -6,6 +6,7 @@ const STATE_TEXT: Readonly<Record<PathState, string>> = {
   modified: "modified and not staged",
   "staged-and-modified": "staged and modified again",
   untracked: "untracked",
+  ignored: "ignored",
   absent: "absent",
 };
 

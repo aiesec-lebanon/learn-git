@@ -8,7 +8,13 @@ import {
 } from "@/engine";
 
 export type FileState =
-  "unmodified" | "untracked" | "modified" | "added" | "deleted" | "conflict";
+  | "unmodified"
+  | "untracked"
+  | "ignored"
+  | "modified"
+  | "added"
+  | "deleted"
+  | "conflict";
 
 export type FileCard = {
   readonly path: string;
@@ -58,6 +64,7 @@ export function stageFiles(world: World): StageFiles {
     status.staged.map((c) => [c.path, c.kind]),
   );
   const untracked = new Set<string>(status.untracked);
+  const ignored = new Set<string>(status.ignored);
   const split = (path: string) =>
     staged.has(path) && unstaged.get(path) === "modified"
       ? { split: true as const }
@@ -69,9 +76,11 @@ export function stageFiles(world: World): StageFiles {
       ? "conflict"
       : untracked.has(path)
         ? "untracked"
-        : unstaged.has(path)
-          ? "modified"
-          : "unmodified",
+        : ignored.has(path)
+          ? "ignored"
+          : unstaged.has(path)
+            ? "modified"
+            : "unmodified",
     ...split(path),
   }));
   for (const [path, kind] of unstaged) {

@@ -10,7 +10,8 @@ export const carryable = (files: StageFiles): readonly FileCard[] =>
   files.index === null
     ? []
     : files.worktree.filter(
-        (f) => f.state !== null && f.state !== "unmodified",
+        (f) =>
+          f.state !== null && f.state !== "unmodified" && f.state !== "ignored",
       );
 
 /** The command a drop runs, or null when the target is not the staging area. */

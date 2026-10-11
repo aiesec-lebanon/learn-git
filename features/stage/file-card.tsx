@@ -8,6 +8,7 @@ const STATES: Record<FileState, { glyph: string; text: string; tone: string }> =
       text: "untracked",
       tone: "bg-st-untracked-bg text-st-untracked",
     },
+    ignored: { glyph: "!!", text: "ignored", tone: "bg-sunk text-fg-muted" },
     modified: {
       glyph: "M",
       text: "modified",

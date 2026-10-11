@@ -7,7 +7,12 @@ import {
   lensCommand,
   lensSnapshots,
 } from "./diff-lens.model";
-import { bakeSaleHistory, bakeSaleUndo } from "@/content/worlds/bake-sale";
+import {
+  bakeSaleHistory,
+  bakeSaleSecrets,
+  bakeSaleUndo,
+} from "@/content/worlds/bake-sale";
+import { labRows, LAB_START, stateGroups } from "./pattern-lab.model";
 import {
   discardable,
   discardPreview,
@@ -100,6 +105,39 @@ describe("restore widgets", () => {
     expect(preview.lost).toBe(true);
     expect(preview.lines.filter((l) => l.part === "removed")).toHaveLength(1);
     expect(discardable(world)).toEqual(["index.html", "style.css"]);
+  });
+});
+
+describe("ignore widgets", () => {
+  it("dim what the patterns hide and leave tracked files alone", () => {
+    const rows = labRows(`${LAB_START}.env
+`);
+    const of = (path: string) => rows.find((r) => r.path === path);
+    expect(of("app.log")).toMatchObject({ ignored: true });
+    expect(of("logs/debug.log")).toMatchObject({ ignored: true });
+    expect(of("keep.log")).toMatchObject({ ignored: false });
+    expect(of("dist/menu.min.html")).toMatchObject({ ignored: true });
+    expect(of(".env")).toMatchObject({ matched: true, ignored: false });
+    expect(labRows("").every((r) => !r.matched)).toBe(true);
+  });
+
+  it("group sandbox files as untracked, tracked and ignored", () => {
+    const session = new Session(createWorld(bakeSaleSecrets));
+    session.run('echo "*.log" > .gitignore');
+    session.run("git add .gitignore");
+    const groups = stateGroups(stageFiles(session.getSnapshot().world));
+    expect(groups?.map((g) => [g.id, g.files.map((f) => f.path)])).toEqual([
+      ["untracked", ["dist/menu.min.html"]],
+      [
+        "tracked",
+        [".env", ".gitignore", "README.md", "index.html", "menu.html"],
+      ],
+      ["ignored", ["app.log"]],
+    ]);
+    expect(
+      groups?.[1]?.files.find((f) => f.path === ".gitignore")?.staged,
+    ).toBe(true);
+    expect(stateGroups(stageFiles(createWorld(recipeSite)))).toBeNull();
   });
 });
 

@@ -36,6 +36,12 @@ const WIDGETS: Record<WidgetName, ComponentType> = {
   "restore-picker": lazy(() =>
     import("./restore-picker").then((m) => ({ default: m.RestorePicker })),
   ),
+  "file-state-map": lazy(() =>
+    import("./file-state-map").then((m) => ({ default: m.FileStateMap })),
+  ),
+  "pattern-lab": lazy(() =>
+    import("./pattern-lab").then((m) => ({ default: m.PatternLab })),
+  ),
   "destructive-preview": lazy(() =>
     import("./destructive-preview").then((m) => ({
       default: m.DestructivePreview,

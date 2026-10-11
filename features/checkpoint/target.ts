@@ -66,6 +66,7 @@ const STATES: Record<PathState, string> = {
   modified: "modified, not staged",
   "staged-and-modified": "staged, then modified again",
   untracked: "untracked",
+  ignored: "ignored by .gitignore",
   absent: "gone",
 };
 

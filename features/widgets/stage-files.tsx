@@ -130,7 +130,7 @@ function StageFilesFor({ session }: { session: Session }) {
                   <code className="min-w-0 truncate text-sm">
                     <bdi>{file.path}</bdi>
                   </code>
-                  <FileStateChip state="unmodified" />
+                  <FileStateChip state={file.state ?? "unmodified"} />
                 </li>
               ),
             )}

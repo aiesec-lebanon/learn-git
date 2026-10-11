@@ -30,6 +30,7 @@ export { displayRelative, resolvePath } from "./files/paths";
 export { shellQuote } from "./cli/tokenize";
 export { commitSnapshot, firstParentChain } from "./preview/chain";
 export { DIFF_FORMS } from "./diff/forms";
+export { ignoreRules } from "./ignore/rules";
 export type { DiffArea } from "./diff/forms";
 export type { CommitSnapshot, SnapshotFile } from "./preview/chain";
 export { rewriteMessage } from "./preview/rewrite-message";

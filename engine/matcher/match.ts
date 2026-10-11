@@ -196,8 +196,10 @@ function stateDifferences(
   const staged = new Set<string>(status.staged.map((c) => c.path));
   const unstaged = new Set<string>(status.unstaged.map((c) => c.path));
   const untracked = new Set<string>(status.untracked);
+  const ignored = new Set<string>(status.ignored);
   const stateOf = (path: string): PathState => {
     if (untracked.has(path)) return "untracked";
+    if (ignored.has(path)) return "ignored";
     if (staged.has(path) && unstaged.has(path)) return "staged-and-modified";
     if (staged.has(path)) return "staged";
     if (unstaged.has(path)) return "modified";

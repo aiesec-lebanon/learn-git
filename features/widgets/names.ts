@@ -10,6 +10,8 @@ export const WIDGET_NAMES = [
   "diff-lens",
   "restore-picker",
   "destructive-preview",
+  "file-state-map",
+  "pattern-lab",
 ] as const;
 
 export type WidgetName = (typeof WIDGET_NAMES)[number];

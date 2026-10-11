@@ -10,6 +10,7 @@ export type PathState =
   | "modified"
   | "staged-and-modified"
   | "untracked"
+  | "ignored"
   | "absent";
 
 /** A commit variable; it binds to a real commit through anchors and parents. */

@@ -8,7 +8,12 @@ import {
   type Snapshot,
 } from "../diff/forms";
 import { diffFormat, FORMAT_OPTIONS, renderDiff } from "../diff/render";
+import { unmergedDiff, unmergedLine } from "../diff/unmerged";
+import { unifiedDiff } from "../diff/unified";
 import { notSimulated } from "../messages/git";
+import { matchesPathspec } from "../pathspec";
+import { conflictedPaths } from "../staging/index";
+import { compareBytes } from "../util/compare";
 import { resolveHead } from "../refs/refs";
 import { revisionInput } from "../revisions/args";
 import type { Oid } from "../types";
@@ -106,9 +111,37 @@ export const diff = defineCommand({
       commit: () => [commit(oids[0]), worktreeSnapshot(repo, machine.fs)],
       commits: () => [commit(oids[0]), commit(oids[1])],
     };
-    const [before, after] =
-      pick[diffForm(flag(options, "staged"), oids.length)]();
-    const pairs = changedPairs(before, after, input.specs);
-    return { stdout: renderDiff(pool, pairs, diffFormat(options, "patch")) };
+    const form = diffForm(flag(options, "staged"), oids.length);
+    const [before, after] = pick[form]();
+    const conflicted =
+      form === "commits"
+        ? []
+        : conflictedPaths(repo.index).filter(
+            (p) =>
+              !input.specs.length ||
+              input.specs.some((s) => matchesPathspec(s, p)),
+          );
+    const unmerged = new Set<string>(conflicted);
+    const pairs = changedPairs(before, after, input.specs).filter(
+      (pair) => !unmerged.has(pair.path),
+    );
+    const format = diffFormat(options, "patch");
+    if (format !== "patch" || !conflicted.length) {
+      return { stdout: renderDiff(pool, pairs, format) };
+    }
+    const blocks: [string, string][] = [
+      ...pairs.map((pair): [string, string] => [
+        pair.path,
+        unifiedDiff(pool, pair),
+      ]),
+      ...conflicted.map((path): [string, string] => [
+        path,
+        form === "unstaged"
+          ? unmergedDiff(pool, repo, machine.fs, path)
+          : unmergedLine(path),
+      ]),
+    ];
+    blocks.sort((a, b) => compareBytes(a[0], b[0]));
+    return { stdout: blocks.map(([, text]) => text).join("") };
   },
 });

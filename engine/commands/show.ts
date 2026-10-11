@@ -8,6 +8,7 @@ import {
   unbornRefusal,
 } from "../log/format";
 import { notSimulated } from "../messages/git";
+import { mergeDiff } from "../diff/combined";
 import { resolveHead } from "../refs/refs";
 import { revisionInput } from "../revisions/args";
 import { log } from "./log";
@@ -63,16 +64,12 @@ export const show = defineCommand({
           1,
         );
       }
-      if (commit.parents.length > 1) {
-        return refuse(
-          "not-simulated",
-          notSimulated("git show for merge commits"),
-          1,
-        );
-      }
       const pairs = commitChanges(pool, commit, input.specs);
       if (input.specs.length && !pairs.length) continue;
-      const changes = renderDiff(pool, pairs, format);
+      const changes =
+        commit.parents.length > 1 && format === "patch"
+          ? mergeDiff(pool, commit, input.specs)
+          : renderDiff(pool, pairs, format);
       blocks.push(commitEntry(pool, repo, { oid, commit }, style, changes));
     }
     return { stdout: blocks.join(style.oneline ? "" : "\n") };

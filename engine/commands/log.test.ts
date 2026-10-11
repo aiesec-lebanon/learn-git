@@ -51,7 +51,7 @@ describe("git log", () => {
     expect(run(history(1), line).last?.output.stderr).toBe(out);
   });
 
-  it("answers octopus graphs and show for merges as not simulated", () => {
+  it("answers octopus graphs as not simulated and shows octopus merges", () => {
     const world = history(2);
     const repo = repoOf(world, ID);
     const head = resolveHead(repo) as Oid;
@@ -69,9 +69,7 @@ describe("git log", () => {
     expect(run(merged, "git log --graph").last?.output.stderr).toBe(
       "not simulated here: git log --graph with octopus merges\n",
     );
-    expect(run(merged, "git show").last?.output.stderr).toBe(
-      "not simulated here: git show for merge commits\n",
-    );
+    expect(run(merged, "git show").last?.output.exitCode).toBe(0);
     expect(run(merged, "git log --oneline -1").last?.output.exitCode).toBe(0);
   });
 

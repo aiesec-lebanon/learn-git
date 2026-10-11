@@ -1,0 +1,46 @@
+{
+  "world": {
+    "files": {
+      "project/a.txt": "1\n2\n3\n4\n5\n6\n7\n8\n9\n",
+      "project/c.txt": "c\n",
+      "project/d.txt": "d\n",
+      "v/a-main.txt": "1\nA\n3\n4\n5\n6\n7\n8\nM\n",
+      "v/a-topic.txt": "1\nB\n3\n4\n5\n6\nT\n8\n9\n",
+      "v/a-fixed.txt": "1\nAB\n3\n4\n5\n6\nT\n8\nM\n"
+    },
+    "cwd": "project"
+  },
+  "steps": [
+    "git init -q",
+    "git add .",
+    "git commit -q -m \"Base\"",
+    "git switch -q -c topic",
+    "cat ../v/a-topic.txt > a.txt",
+    "echo topic > both.txt",
+    "echo t >> d.txt",
+    "echo t >> c.txt",
+    "git add .",
+    "git commit -q -m \"Topic\"",
+    "git switch -q main",
+    "cat ../v/a-main.txt > a.txt",
+    "echo main > both.txt",
+    "git rm -q d.txt",
+    "git add .",
+    "git commit -q -m \"Main\"",
+    "git merge topic",
+    "git diff",
+    "git diff a.txt",
+    "git diff --staged",
+    "cat ../v/a-fixed.txt > a.txt",
+    "git diff a.txt",
+    "echo resolved > both.txt",
+    "git add a.txt both.txt",
+    "git rm -q d.txt",
+    "git diff",
+    "git commit -q -m \"Merge topic\"",
+    "git show",
+    "git show --stat",
+    "git log -p -2",
+    "git show HEAD^2"
+  ]
+}

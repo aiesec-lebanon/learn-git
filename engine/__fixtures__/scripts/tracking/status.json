@@ -1,0 +1,72 @@
+{
+  "world": {
+    "machines": {
+      "sam": {
+        "global": {
+          "user.name": "Sam Rivera",
+          "user.email": "sam@team.test",
+          "init.defaultBranch": "main"
+        }
+      }
+    },
+    "hub": { "sam/team": {} }
+  },
+  "steps": [
+    { "cmd": "git clone -q https://hub.test/sam/team.git", "machine": "sam" },
+    { "cmd": "cd team", "machine": "sam" },
+    { "cmd": "echo \"# Team\" > README.md", "machine": "sam" },
+    { "cmd": "git add README.md", "machine": "sam" },
+    { "cmd": "git commit -q -m \"Add README\"", "machine": "sam" },
+    { "cmd": "git push -q", "machine": "sam" },
+    { "cmd": "git switch -q -c docs", "machine": "sam" },
+    { "cmd": "echo docs > docs.txt", "machine": "sam" },
+    { "cmd": "git add docs.txt", "machine": "sam" },
+    { "cmd": "git commit -q -m \"Add docs\"", "machine": "sam" },
+    { "cmd": "git push -q -u origin docs", "machine": "sam" },
+    { "cmd": "git switch -q main", "machine": "sam" },
+    "git clone -q https://hub.test/sam/team.git",
+    "cd team",
+    "echo mine > mine.txt",
+    "git add mine.txt",
+    "git commit -q -m \"Add mine\"",
+    "git status",
+    "git status -sb",
+    "git branch -v",
+    "git branch -vv",
+    { "cmd": "echo \"Fridays\" >> README.md", "machine": "sam" },
+    { "cmd": "git commit -q -a -m \"Meet on Fridays\"", "machine": "sam" },
+    { "cmd": "git push -q", "machine": "sam" },
+    "git fetch -q",
+    "git status",
+    "git status -sb",
+    "git branch -vv",
+    "git switch docs",
+    "git status",
+    "git switch -q main",
+    "git branch -d docs",
+    "git switch -q -c local-only",
+    "git status",
+    "git status -sb",
+    "git branch -vv",
+    "git switch -q main",
+    "git checkout docs",
+    "git switch -q main",
+    "git branch -vv",
+    "git switch nope",
+    { "cmd": "git push -q origin --delete docs", "machine": "sam" },
+    "git fetch -q --prune",
+    "git switch docs",
+    "git status",
+    "git status -sb",
+    "git branch -vv",
+    "git branch -a",
+    "git branch -av",
+    "git branch -rv",
+    "git switch -q main",
+    "git branch -d docs",
+    "echo more >> mine.txt",
+    "git add mine.txt",
+    { "cmd": "git commit", "editor": "Add more\n" },
+    "git status -sb"
+  ]
+}

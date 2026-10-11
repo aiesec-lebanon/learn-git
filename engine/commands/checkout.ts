@@ -11,6 +11,7 @@ import { abbreviate } from "../objects/abbrev";
 import { readObject } from "../objects/pool";
 import { branchRef, isValidBranchName } from "../refs/names";
 import { resolveHead } from "../refs/refs";
+import { guessRemoteBranch } from "../refs/upstream";
 import { applyRestore, sourceFiles } from "../restore/apply";
 import type { Machine, Oid, Repo, World } from "../types";
 import { defineCommand, refuse, type CommandResult } from "./registry";
@@ -165,6 +166,27 @@ export const checkout = defineCommand({
       return switchTo(ctx, "HEAD", "HEAD", head);
     }
     const name = expandPrevious(repo, typed) ?? typed;
+    const guessed =
+      afterDashDash === null &&
+      args.length === 1 &&
+      !flag(options, "detach") &&
+      !repo.refs.has(branchRef(name))
+        ? guessRemoteBranch(repo, name)
+        : null;
+    if (guessed) {
+      return moveTo(
+        ctx,
+        {
+          kind: "create",
+          name,
+          start: guessed.ref,
+          oid: guessed.oid,
+          reset: false,
+          track: guessed,
+        },
+        [typed],
+      );
+    }
     const oid = commitOf(world.objects, repo, name);
     if (!oid) {
       if (afterDashDash === 1) {

@@ -23,6 +23,7 @@ import { resolveHead, updateRef } from "../refs/refs";
 import { conflictedPaths, stagedFiles } from "../staging/index";
 import { computeStatus } from "../status/compute";
 import { commitTemplate, longStatus } from "../status/format";
+import { headTracking } from "../status/tracking";
 import type { Commit, Effect, Repo, RepoPath, Signature } from "../types";
 import { withRepo } from "../world/access";
 import { defineCommand, refuse } from "./registry";
@@ -171,6 +172,7 @@ export const commit = defineCommand({
         pool: world.objects,
         from: machine.cwd,
         keep: () => true,
+        tracking: headTracking(world, machine, repo),
       };
       const written = writeObjects(world, repo.id, trees);
       return {
@@ -193,6 +195,7 @@ export const commit = defineCommand({
         pool: world.objects,
         from: machine.cwd,
         keep: () => true,
+        tracking: headTracking(world, machine, repo),
       };
       return {
         request: {

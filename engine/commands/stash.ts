@@ -24,6 +24,7 @@ import {
 import { conflictedPaths, stagedFiles } from "../staging/index";
 import { computeStatus } from "../status/compute";
 import { longStatus } from "../status/format";
+import { headTracking } from "../status/tracking";
 import type { Oid, Repo, World } from "../types";
 import { compareBytes } from "../util/compare";
 import { machineOf, withMachine, withRepo } from "../world/access";
@@ -61,6 +62,7 @@ function statusText(world: World, repo: Repo): string {
     pool: world.objects,
     from: machine.cwd,
     keep: () => true,
+    tracking: headTracking(world, machine, repo),
   });
 }
 

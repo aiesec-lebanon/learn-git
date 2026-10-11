@@ -4,6 +4,7 @@ import { addMessages } from "../messages/add";
 import { matchesPathspec, parsePathspecs } from "../pathspec";
 import { computeStatus } from "../status/compute";
 import { longStatus, shortStatus } from "../status/format";
+import { headTracking } from "../status/tracking";
 import { defineCommand, refuse } from "./registry";
 
 const x = (long: string, short?: string, value?: "required" | "optional") => ({
@@ -93,6 +94,7 @@ export const status = defineCommand({
             from: repo.workdir,
             keep,
             ignored,
+            tracking: headTracking(world, machine, repo),
           },
           branch,
         ),
@@ -105,6 +107,7 @@ export const status = defineCommand({
       from: machine.cwd,
       keep,
       ignored,
+      tracking: headTracking(world, machine, repo),
     };
     const short = flag(options, "short") && !flag(options, "long");
     return { stdout: short ? shortStatus(view, branch) : longStatus(view) };

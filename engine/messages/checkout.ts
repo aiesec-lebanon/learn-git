@@ -35,6 +35,8 @@ ${listed(untracked)}Please move or remove them before you ${then}.
 hint: If you want to detach HEAD at the commit, try again with the --detach option.
 `,
   switched: (name: string) => `Switched to branch '${name}'\n`,
+  setUpToTrack: (name: string, upstream: string) =>
+    `branch '${name}' set up to track '${upstream}'.\n`,
   switchedNew: (name: string) => `Switched to a new branch '${name}'\n`,
   switchedReset: (name: string) => `Switched to and reset branch '${name}'\n`,
   resetBranch: (name: string) => `Reset branch '${name}'\n`,

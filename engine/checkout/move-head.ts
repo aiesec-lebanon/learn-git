@@ -8,6 +8,8 @@ import { leftBehind } from "../reachability";
 import { branchRef, shortRefName } from "../refs/names";
 import { appendReflog } from "../refs/reflog";
 import { headBranch, resolveHead, updateRef } from "../refs/refs";
+import { upstreamConfig, type TrackSetup } from "../refs/upstream";
+import { trackingLines, trackingOf } from "../status/tracking";
 import type { Effect, Head, Machine, Oid, Repo, World } from "../types";
 import { withMachine, withRepo } from "../world/access";
 import { localChanges, twoWayCheckout } from "./two-way";
@@ -23,6 +25,8 @@ export type HeadTarget =
       /** null on an unborn branch with no start point. */
       readonly oid: Oid | null;
       readonly reset: boolean;
+      /** Link the new branch to this upstream (guess mode). */
+      readonly track?: TrackSetup;
     }
   | {
       readonly kind: "detach";
@@ -128,6 +132,20 @@ export function moveHead(ctx: MoveContext, target: HeadTarget): CommandResult {
     );
     repo = updated.repo;
     effects.push(updated.effect);
+    if (target.track) {
+      const added = upstreamConfig(target.name, target.track);
+      repo = { ...repo, config: [...repo.config, ...added] };
+      for (const e of added) {
+        effects.push({
+          kind: "config-changed",
+          scope: "local",
+          target: repo.id,
+          key: e.key,
+          from: null,
+          to: e.value,
+        });
+      }
+    }
   }
   const head: Head =
     target.kind === "detach"
@@ -169,7 +187,19 @@ export function moveHead(ctx: MoveContext, target: HeadTarget): CommandResult {
     }
     stderr += arrival(world, target, sameHead, before);
   }
-  const stdout = quiet ? "" : localChanges(world.objects, repo, fs, to);
+  const tracking =
+    target.kind === "branch"
+      ? trackingOf(world, machine, repo, branchRef(target.name))
+      : null;
+  const setup =
+    target.kind === "create" && target.track
+      ? m.setUpToTrack(target.name, shortRefName(target.track.ref))
+      : "";
+  const stdout = quiet
+    ? ""
+    : setup +
+      localChanges(world.objects, repo, fs, to) +
+      (tracking ? `${trackingLines(tracking).join("\n")}\n` : "");
   const next = withRepo(world, repo);
   return {
     world: fs === machine.fs ? next : withMachine(next, { ...machine, fs }),

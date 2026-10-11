@@ -4,14 +4,20 @@ import { reflogWho } from "../config/identity";
 import { moveSection } from "../config/scopes";
 import { compileName } from "../ignore/wildmatch";
 import { BRANCH_USAGE, branchMessages as m } from "../messages/branch";
+import { notSimulated } from "../messages/git";
 import { abbreviate } from "../objects/abbrev";
 import { readObject } from "../objects/pool";
 import { isAncestor } from "../reachability";
 import { detachedHead } from "../refs/detached";
 import { branchRef, isValidBranchName, shortRefName } from "../refs/names";
 import { appendReflog } from "../refs/reflog";
-import { headBranch, resolveHead, updateRef } from "../refs/refs";
+import { allRefs, headBranch, resolveHead, updateRef } from "../refs/refs";
 import { upstreamOf } from "../refs/upstream";
+import {
+  trackingBrackets,
+  trackingOf,
+  type Tracking,
+} from "../status/tracking";
 import { resolveRevision } from "../revisions/resolve";
 import type { Effect, Machine, Oid, RefName, Repo, World } from "../types";
 import { compareBytes } from "../util/compare";
@@ -31,8 +37,8 @@ const OPTIONS: readonly OptionSpec[] = [
   x("copy", "c"),
   x("C", "C"),
   x("force", "f"),
-  x("all", "a"),
-  x("remotes", "r"),
+  { key: "all", short: "a", long: "all" },
+  { key: "remotes", short: "r", long: "remotes" },
   x("track", "t", "optional"),
   x("set-upstream-to", "u", "required"),
   x("unset-upstream"),
@@ -70,6 +76,10 @@ type Row = {
   readonly name: string;
   readonly oid: Oid;
   readonly current: boolean;
+  /** A local branch's upstream comparison, shown by `-v` and `-vv`. */
+  readonly tracking?: Tracking | null;
+  /** A symbolic ref's target (`origin/HEAD -> origin/main`). */
+  readonly target?: string;
 };
 
 /** The detached HEAD row `git branch` lists first, as `(HEAD detached at X)`. */
@@ -82,34 +92,62 @@ function detachedRow(world: World, repo: Repo): Row | null {
   return { name, oid: repo.head.oid, current: true };
 }
 
-function list({ world, repo, options }: Ctx): CommandResult {
+/** `remotes/origin/main` rows (`origin/main` with `-r` alone), symbolic ones with their target. */
+function remoteRows(repo: Repo, prefix: string): Row[] {
+  const refs = allRefs(repo);
+  return [...refs.keys()]
+    .filter((ref) => ref.startsWith("refs/remotes/"))
+    .sort(compareBytes)
+    .map((ref) => {
+      const target = repo.symrefs?.get(ref);
+      return {
+        name: `${prefix}${shortRefName(ref)}`,
+        oid: refs.get(ref) as Oid,
+        current: false,
+        ...(target ? { target: shortRefName(target) } : {}),
+      };
+    });
+}
+
+function list({ world, machine, repo, options }: Ctx): CommandResult {
   const patterns = options.args.map(compileName);
   const current = headBranch(repo);
-  const detached = patterns.length ? null : detachedRow(world, repo);
+  const all = flag(options, "all");
+  const remotes = flag(options, "remotes");
+  const local = all || !remotes;
+  const detached = patterns.length || !local ? null : detachedRow(world, repo);
   const rows: Row[] = [
     ...(detached ? [detached] : []),
-    ...branchNames(repo)
-      .map((ref) => ({
-        name: shortRefName(ref),
-        oid: repo.refs.get(ref) as Oid,
-        current: ref === current,
-      }))
-      .filter(
-        (row) => !patterns.length || patterns.some((match) => match(row.name)),
-      ),
-  ];
+    ...(local
+      ? branchNames(repo).map((ref) => ({
+          name: shortRefName(ref),
+          oid: repo.refs.get(ref) as Oid,
+          current: ref === current,
+          tracking: trackingOf(world, machine, repo, ref),
+        }))
+      : []),
+    ...(all || remotes ? remoteRows(repo, all ? "remotes/" : "") : []),
+  ].filter(
+    (row) =>
+      row === detached ||
+      !patterns.length ||
+      patterns.some((match) => match(row.name)),
+  );
   const width = Math.max(0, ...rows.map((row) => row.name.length));
-  const verbose = flag(options, "verbose");
+  const verbosity = (options.values.get("verbose") ?? []).filter(
+    (v) => v === true,
+  ).length;
   const stdout = rows
-    .map(({ name, oid, current: here }) => {
+    .map(({ name, oid, current: here, tracking, target }) => {
       const mark = here ? "* " : "  ";
-      if (!verbose)
-        return `${mark}${name}
-`;
+      if (target) return `${mark}${name} -> ${target}\n`;
+      if (!verbosity) return `${mark}${name}\n`;
       const commit = readObject(world.objects, oid, "commit");
       const short = abbreviate(world.objects, oid);
-      return `${mark}${name.padEnd(width)} ${short} ${subjectOf(commit.message)}
-`;
+      const brackets = tracking
+        ? trackingBrackets(tracking, verbosity > 1)
+        : "";
+      return `${mark}${name.padEnd(width)} ${short} ${brackets}${subjectOf(commit.message)}\n`;
     })
     .join("");
   return { stdout };
@@ -335,6 +373,13 @@ export const branch = defineCommand({
     const forceMove = flag(options, "force-move");
     const moving = flag(options, "move") || forceMove;
     if (deleting && moving) return usage();
+    if (flag(options, "remotes") && (deleting || moving)) {
+      return refuse(
+        "not-simulated",
+        notSimulated("deleting or renaming remote-tracking branches"),
+        1,
+      );
+    }
     if (deleting) return remove(ctx, forceDelete);
     if (moving) return rename(ctx, forceMove);
     if (

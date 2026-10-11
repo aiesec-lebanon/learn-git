@@ -5,6 +5,7 @@ import { mergeMessages } from "../messages/merge";
 import { SWITCH_USAGE, checkoutMessages as m } from "../messages/checkout";
 import { branchRef, isValidBranchName } from "../refs/names";
 import { resolveHead } from "../refs/refs";
+import { guessRemoteBranch } from "../refs/upstream";
 import { resolveRevision } from "../revisions/resolve";
 import type { ObjectPool, Oid, Repo } from "../types";
 import { defineCommand, refuse, type CommandResult } from "./registry";
@@ -116,6 +117,17 @@ export const switchCommand = defineCommand({
     if (name === null) return invalid("@{-1}");
     if (!detach && repo.refs.has(branchRef(name))) {
       return move({ kind: "branch", name });
+    }
+    const guessed = detach ? null : guessRemoteBranch(repo, name);
+    if (guessed) {
+      return move({
+        kind: "create",
+        name,
+        start: guessed.ref,
+        oid: guessed.oid,
+        reset: false,
+        track: guessed,
+      });
     }
     const oid = commitOf(pool, repo, name);
     if (!oid) return invalid(name);

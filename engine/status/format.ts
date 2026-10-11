@@ -6,6 +6,7 @@ import { detachedHead } from "../refs/detached";
 import type { ObjectPool, Repo } from "../types";
 import { compareBytes } from "../util/compare";
 import type { FileChange, StatusData, UnmergedCode } from "./compute";
+import { shortTrackingHeader, trackingLines, type Tracking } from "./tracking";
 import { collapseIgnored, collapseUntracked } from "./compute";
 
 export type StatusView = {
@@ -17,6 +18,8 @@ export type StatusView = {
   readonly keep: (path: string) => boolean;
   /** `--ignored`: list what `.gitignore` hides too. */
   readonly ignored?: boolean;
+  /** The current branch against its upstream, when it has one. */
+  readonly tracking?: Tracking | null;
 };
 
 /** A change as status shows it: staged renames folded in. */
@@ -118,6 +121,7 @@ export function longStatus(
   const { staged, unstaged, unmerged, untracked, ignored } = filtered(view);
   const { unborn } = view.data;
   let out = `${headLine(view)}\n`;
+  if (view.tracking) out += `${trackingLines(view.tracking).join("\n")}\n\n`;
   const state = mergeState(view, true);
   if (state.length) out += `${state.join("\n")}\n\n`;
   if (unborn) out += `\n${unbornTitle}\n\n`;
@@ -174,7 +178,7 @@ export function shortStatus(view: StatusView, branch: boolean): string {
       ? `## No commits yet on ${branchName(view.repo)}\n`
       : view.repo.head.kind === "detached"
         ? "## HEAD (no branch)\n"
-        : `## ${branchName(view.repo)}\n`;
+        : `## ${branchName(view.repo)}${view.tracking ? shortTrackingHeader(view.tracking) : ""}\n`;
   const index = new Map(staged.map((c) => [c.path, c]));
   const tree = new Map(unstaged.map((c) => [c.path as string, c.kind]));
   const conflicts = new Map<string, string>(
@@ -209,6 +213,7 @@ export function commitTemplate(view: StatusView): string {
     "with '#' will be ignored, and an empty message aborts the commit.",
     "",
     headLine(view),
+    ...(view.tracking ? [...trackingLines(view.tracking, false), ""] : []),
   ];
   const state = mergeState(view, false);
   if (state.length) lines.push(...state, "");

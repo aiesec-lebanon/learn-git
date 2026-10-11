@@ -5,7 +5,7 @@ const heading = (page: Page) => page.getByRole("heading", { level: 1 });
 
 test("track and lesson links reach the right page", async ({ page }) => {
   await page.goto("/");
-  await page.getByRole("link", { name: "See the Beginner track" }).click();
+  await page.getByRole("link", { name: "Beginner", exact: true }).click();
   await expect(heading(page)).toHaveText("Beginner track");
 
   await page.getByRole("link", { name: "B1.1 Save points" }).click();

@@ -13,6 +13,10 @@ test("a newcomer finishes B1.1 and resumes where they left off", async ({
   await page.goto("/");
   await page.getByRole("link", { name: "New to Git? Start here" }).click();
   await expect(page.getByRole("heading", { level: 1 })).toHaveText(
+    "Orientation",
+  );
+  await page.getByRole("link", { name: "Start B1.1" }).click();
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText(
     "B1.1 Save points for a whole project",
   );
   await expect(page.getByRole("heading", { name: "Your turn" })).toBeVisible();

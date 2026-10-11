@@ -3,8 +3,8 @@ import { confirmation, terminal, YOUR_TURN } from "./b1-1";
 import { tabTo } from "./keys";
 
 test("B1.1 can be finished by keyboard alone", async ({ page }) => {
-  await page.goto("/");
-  await tabTo(page, page.getByRole("link", { name: "New to Git? Start here" }));
+  await page.goto("/orientation");
+  await tabTo(page, page.getByRole("link", { name: "Start B1.1" }));
   await page.keyboard.press("Enter");
   await expect(page.getByRole("heading", { level: 1 })).toContainText("B1.1");
   // The route change moves focus to the main content; tabbing starts after it.

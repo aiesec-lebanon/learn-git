@@ -51,6 +51,8 @@ describe("opening a pull request", () => {
       head: "feature",
       opened: out.world.seq * 60 - 60 + 1767225600,
       state: "open",
+      comments: [],
+      reviews: [],
     });
     const second = hub(
       runLine(

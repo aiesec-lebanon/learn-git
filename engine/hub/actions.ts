@@ -14,8 +14,15 @@ import { hostedRepoId } from "../world/network";
 import { hubCommit, setHubBranch } from "./commit";
 import { openPullRequest } from "./pulls";
 import { refuseHub, type HubContext, type HubResult } from "./result";
+import { commentOnPull, reviewPull } from "./reviews";
 import { addHostedRepo } from "./state";
 import { GITIGNORE, mitLicense, readmeFor } from "./templates";
+
+const REVIEW_WORDS = {
+  commented: "review",
+  approved: "approve",
+  "changes-requested": "request changes on",
+} as const;
 
 const REPO_NAME = /^[A-Za-z0-9._-]{1,100}$/;
 
@@ -88,6 +95,10 @@ function perform(ctx: HubContext, action: HubAction): HubResult {
       return createRepository(ctx, action);
     case "open-pull-request":
       return openPullRequest(ctx, action);
+    case "comment":
+      return commentOnPull(ctx, action);
+    case "review":
+      return reviewPull(ctx, action);
     default: {
       const never: never = action;
       return never;
@@ -102,6 +113,10 @@ export function hubActionText(action: HubAction): string {
       return `Hub: create repository ${action.name}`;
     case "open-pull-request":
       return `Hub: open a pull request from ${action.head} into ${action.base}`;
+    case "comment":
+      return `Hub: comment on #${action.number}`;
+    case "review":
+      return `Hub: ${REVIEW_WORDS[action.state]} #${action.number}`;
     default: {
       const never: never = action;
       return never;

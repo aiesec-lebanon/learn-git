@@ -112,6 +112,53 @@ export function findPull(
   return hosted.pulls.find((p) => p.number === number) ?? null;
 }
 
+export type LocatedPull =
+  | {
+      readonly ok: true;
+      readonly hosted: HostedRepo;
+      readonly pull: PullRequest;
+    }
+  | { readonly ok: false; readonly message: string };
+
+/** A repository's pull request by number, or why there is none. */
+export function locatePull(
+  world: World,
+  fullName: string,
+  number: number,
+): LocatedPull {
+  const hosted = world.hub?.repos.get(fullName);
+  if (!hosted)
+    return { ok: false, message: `The Hub has no repository ${fullName}.` };
+  const pull = findPull(hosted, number);
+  return pull
+    ? { ok: true, hosted, pull }
+    : { ok: false, message: `${fullName} has no pull request #${number}.` };
+}
+
+/** The world with one pull request replaced. */
+export function replacePull(
+  world: World,
+  hosted: HostedRepo,
+  pull: PullRequest,
+): World {
+  return withHosted(world, {
+    ...hosted,
+    pulls: hosted.pulls.map((p) => (p.number === pull.number ? pull : p)),
+  });
+}
+
+/** What the pull request proposes now (null when its branches no longer compare). */
+export function pullCompare(
+  world: World,
+  fullName: string,
+  pull: PullRequest,
+): CompareView | null {
+  const { refs } = repoOf(world, hostedRepo(world, fullName).repo);
+  const base = refs.get(branchRef(pull.base));
+  const head = refs.get(branchRef(pull.head));
+  return base && head ? compareCommits(world, fullName, base, head) : null;
+}
+
 /** Issue numbers the pull request would close: keywords count only into the default branch. */
 export function closesIssues(
   world: World,
@@ -151,6 +198,8 @@ export function openPullRequest(
     head,
     opened: ctx.time,
     state: "open",
+    comments: [],
+    reviews: [],
   };
   return {
     ok: true,

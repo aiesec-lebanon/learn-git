@@ -55,3 +55,7 @@ export {
 } from "./hub/pulls";
 export type { CompareResult, CompareView, Mergeability } from "./hub/pulls";
 export { closingIssues } from "./hub/keywords";
+export { pullCompare } from "./hub/pulls";
+export { reviewDecision } from "./hub/reviews";
+export { pullTimeline } from "./hub/timeline";
+export type { TimelineItem } from "./hub/timeline";

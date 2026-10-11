@@ -190,6 +190,35 @@ export type PullRequest = {
   readonly head: string;
   readonly opened: number;
   readonly state: "open" | "closed" | "merged";
+  readonly comments: readonly HubComment[];
+  readonly reviews: readonly Review[];
+};
+
+/** A conversation comment (Markdown). */
+export type HubComment = {
+  readonly author: string;
+  readonly body: string;
+  readonly time: number;
+};
+
+export type ReviewState = "commented" | "approved" | "changes-requested";
+
+/** A comment on one line of the head version, as the diff showed it. */
+export type LineComment = {
+  readonly path: string;
+  /** The line's number in the head version at the reviewed commit. */
+  readonly line: number;
+  readonly body: string;
+};
+
+export type Review = {
+  readonly author: string;
+  readonly state: ReviewState;
+  readonly body: string;
+  readonly time: number;
+  /** The head commit the review saw. */
+  readonly commit: Oid;
+  readonly comments: readonly LineComment[];
 };
 
 /** The Hub's own state (ADR-009); Git data stays in the bare repositories. */
@@ -218,6 +247,20 @@ export type HubAction =
       readonly head: string;
       readonly title: string;
       readonly body?: string;
+    }
+  | {
+      readonly type: "comment";
+      readonly repo: string;
+      readonly number: number;
+      readonly body: string;
+    }
+  | {
+      readonly type: "review";
+      readonly repo: string;
+      readonly number: number;
+      readonly state: ReviewState;
+      readonly body?: string;
+      readonly comments?: readonly LineComment[];
     };
 
 /** A Hub action as an invocation: `actor` is the account that acts. */
@@ -235,6 +278,17 @@ export type HubEvent =
       readonly repo: string;
       readonly number: number;
       readonly title: string;
+    }
+  | {
+      readonly type: "comment-added";
+      readonly repo: string;
+      readonly number: number;
+    }
+  | {
+      readonly type: "review-submitted";
+      readonly repo: string;
+      readonly number: number;
+      readonly state: ReviewState;
     };
 
 export type WorldSpec = MachineSpec & {

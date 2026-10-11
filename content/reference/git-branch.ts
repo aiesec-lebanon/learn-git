@@ -50,5 +50,5 @@ export default defineReferenceEntry({
     "-d refuses when the branch holds commits nothing else reaches. -D deletes it anyway, and those commits fade.",
     "Deleting a branch removes only the label; its commits stay while another label reaches them.",
   ],
-  lessons: ["b3-1", "b3-2", "b3-3"],
+  lessons: ["b3-1", "b3-2", "b3-3", "b5-1"],
 });

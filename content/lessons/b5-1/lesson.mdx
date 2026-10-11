@@ -1,0 +1,51 @@
+<ColdOpen>
+  Sam keeps the bake sale site on the Hub, and you are joining him. Copying it
+  takes one command. But once there are two repositories, how does yours know
+  what happened in the other one?
+</ColdOpen>
+
+<Beat id="clone" title="Two complete repositories">
+  `git clone` copies every commit from the Hub into a new folder. Your
+  repository gets its own `main`, plus a hollow `origin/main` label: the
+  <Term>remote-tracking branch</Term> that remembers where origin's main was.
+</Beat>
+
+<Beat id="origin" title="Meet origin">
+  `origin` is the short name the clone gave the Hub address; `git remote -v`
+  shows it. `git branch -vv` shows that your main tracks `origin/main`: that is
+  its <Term>upstream</Term>, the branch it compares itself with.
+</Beat>
+
+<Beat id="last-contact" title="A bookmark, not a live view">
+  Sam pushes a commit, and origin's main moves on the Hub. Your `origin/main`
+  stays where it was, and `git status` still says "up to date". It compares
+  against the bookmark from your last contact with origin, not the Hub itself.
+</Beat>
+
+<Beat id="all" title="Every label you have">
+  `git branch -a` lists your branches and the remote-tracking ones together.
+  Origin also has a `docs` branch, but you only hold `origin/docs`, a bookmark
+  you can look at, not a branch of your own.
+</Beat>
+
+<Beat id="docs" title="Your own docs">
+  `git switch docs` finds `origin/docs` and creates a local `docs` that tracks
+  it, then switches to it. `git branch -vv` now shows both of your branches,
+  each with its upstream.
+</Beat>
+
+<YourTurn />
+
+<Wrap
+  commands={[
+    "git clone",
+    "git remote -v",
+    "git branch -a",
+    "git branch -vv",
+    "git switch",
+  ]}
+>
+  A clone is a complete repository of your own. `origin/*` labels record where
+  origin's branches were the last time you talked to it, and they only move when
+  you contact origin again.
+</Wrap>

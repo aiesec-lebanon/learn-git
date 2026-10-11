@@ -48,5 +48,5 @@ export default defineReferenceEntry({
     { older: "git checkout dark-mode", today: "git switch dark-mode" },
     { older: "git checkout -b footer", today: "git switch -c footer" },
   ],
-  lessons: ["b3-1", "b3-3"],
+  lessons: ["b3-1", "b3-3", "b5-1"],
 });

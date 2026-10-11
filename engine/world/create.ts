@@ -13,6 +13,7 @@ import type {
 } from "../types";
 import { DEFAULT_GLOBAL_CONFIG, HOME, LEARNER } from "./defaults";
 import { createHub } from "../hub/state";
+import { withActors } from "./actors";
 
 function configFrom(entries: Readonly<Record<string, string>>): ConfigFile {
   return Object.entries(entries).map(([key, value]) => {
@@ -66,7 +67,11 @@ export function createWorld(spec: WorldSpec = {}): World {
     repos: new Map(),
     available: new Map(),
   };
-  return (spec.setup ?? []).reduce(setUp, createHub(world, spec.hub ?? {}));
+  const ready = (spec.setup ?? []).reduce(
+    setUp,
+    createHub(world, spec.hub ?? {}),
+  );
+  return spec.actors ? withActors(ready, spec.actors) : ready;
 }
 
 function setUp(world: World, step: SetupStep): World {

@@ -192,6 +192,8 @@ export type WorldSpec = MachineSpec & {
   readonly hub?: Readonly<Record<string, HostedRepoSpec>>;
   /** Commands run once the files exist, e.g. to record earlier commits. */
   readonly setup?: readonly SetupStep[];
+  /** Scripted teammates, scheduled once the setup has run. */
+  readonly actors?: readonly ActorScript[];
 };
 
 /** When a scripted actor acts (each script acts once). */

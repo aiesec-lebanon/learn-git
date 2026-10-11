@@ -6,6 +6,7 @@ import { lessonCode, readyLessons } from "./registry";
 import { conflictKit } from "./worlds/conflict-kit";
 import { emptyFolder } from "./worlds/empty-folder";
 import { recipeSiteWithIdentity } from "./worlds/recipe-site";
+import { teamRepoPlayground } from "./worlds/team-repo";
 
 export type StarterWorld = {
   readonly id: string;
@@ -22,6 +23,11 @@ const EMPTY: StarterWorld = {
 export const STARTER_WORLDS: readonly StarterWorld[] = [
   EMPTY,
   { id: "recipe-site", title: "Recipe site", world: recipeSiteWithIdentity },
+  {
+    id: "team-repo",
+    title: "Team repo with origin and Sam",
+    world: teamRepoPlayground,
+  },
   { id: "conflict-kit", title: "Conflict kit", world: conflictKit },
 ];
 

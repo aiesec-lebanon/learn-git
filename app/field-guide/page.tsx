@@ -58,6 +58,10 @@ export default function FieldGuidePage() {
           .
         </p>
         <p className="my-3">
+          The sounds are made in your browser as you play; there are no audio
+          files.
+        </p>
+        <p className="my-3">
           Git and the Git logo are either registered trademarks or trademarks of
           Software Freedom Conservancy, Inc., corporate home of the Git Project,
           in the United States and/or other countries. GitHub is a trademark of

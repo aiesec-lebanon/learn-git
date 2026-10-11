@@ -156,3 +156,31 @@ export type ThemeIcon = (props: {
   name: HubIconName;
   className?: string;
 }) => ReactNode;
+
+/** The moments that may make a sound: a commit, a merge, a conflict. */
+export type SoundCue = "commit" | "merge" | "conflict";
+
+/** One sound's parameters for the synth. */
+export type SoundVoice = Readonly<{
+  f?: number;
+  f2?: number;
+  glide?: number;
+  type?: OscillatorType;
+  a?: number;
+  d?: number;
+  gain?: number;
+  filter?: BiquadFilterType;
+  ff?: number;
+  q?: number;
+}>;
+
+export type SoundInstruments = Readonly<{
+  tone(t: number, v: SoundVoice & { readonly f: number }): void;
+  noise(t: number, v: SoundVoice): void;
+}>;
+
+/** What to play for a cue, starting at time `t`. */
+export type SoundRecipe = (play: SoundInstruments, t: number) => void;
+
+/** The theme's sound recipes, one per cue; played only when sound is on. */
+export type ThemeSounds = Readonly<Record<SoundCue, SoundRecipe>>;

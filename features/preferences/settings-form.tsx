@@ -74,7 +74,7 @@ function Radios<K extends "theme" | "motion" | "guide">({
   );
 }
 
-type Flag = "predictions" | "challengeMode";
+type Flag = "sound" | "predictions" | "challengeMode";
 
 function Toggle({
   name,
@@ -117,6 +117,12 @@ export function SettingsForm() {
       <Radios choice={THEME} value={prefs.theme} />
       <Radios choice={MOTION} value={prefs.motion} />
       <Radios choice={GUIDE} value={prefs.guide} />
+      <Toggle
+        name="sound"
+        legend="Sound"
+        label="Play short sounds when you commit, merge or hit a conflict"
+        value={prefs.sound}
+      />
       <Toggle
         name="predictions"
         legend="Predictions"

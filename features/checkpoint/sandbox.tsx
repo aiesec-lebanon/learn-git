@@ -23,6 +23,7 @@ import type { ResumePointer } from "@/features/progress/schema";
 import { ReferenceSheet } from "@/features/reference/reference-sheet";
 import { ScenarioPanel } from "@/features/scenario/scenario-panel";
 import { useActsReached } from "@/features/scenario/use-acts";
+import { useSoundCues } from "@/features/sound/service";
 import { EditorSheet } from "@/features/stage/editor-sheet";
 import { Rewind } from "@/features/stage/rewind";
 import { sandboxFor } from "@/features/stage/session-registry";
@@ -134,6 +135,7 @@ export function Sandbox({
   const acts = useActsReached(scenario, session);
   const resolved = scenario ? acts === scenario.acts.length : false;
   const { guide } = useProgress().prefs;
+  useSoundCues(session);
   const ran = useRef(false);
   useEffect(() => {
     if (queued && !ran.current) session.run(queued);

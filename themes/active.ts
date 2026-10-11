@@ -6,5 +6,6 @@ export {
   pairs,
   scale,
   skin,
+  sounds,
   tokens,
 } from "./officehours";

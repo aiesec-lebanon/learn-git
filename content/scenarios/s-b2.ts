@@ -92,6 +92,7 @@ export default defineScenario({
         nudge: "Does origin know about summer yet?",
         pointer:
           "A new branch is published with git push -u origin and its name. The -u makes summer track origin/summer.",
+        reference: "push",
         next: "Run git push -u origin summer.",
       },
     },

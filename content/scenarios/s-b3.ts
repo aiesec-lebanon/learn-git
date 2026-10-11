@@ -102,6 +102,7 @@ export default defineScenario({
         nudge: "Does origin's main have your work yet?",
         pointer:
           "Your main now contains Sam's commit, so a push only adds commits and origin accepts it. A force push would erase Sam's commit, which is why the Hub refuses one.",
+        reference: "push",
         next: "Run git push.",
       },
     },

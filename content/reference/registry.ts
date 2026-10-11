@@ -12,6 +12,8 @@ import init from "./git-init";
 import log from "./git-log";
 import merge from "./git-merge";
 import mv from "./git-mv";
+import pull from "./git-pull";
+import push from "./git-push";
 import remote from "./git-remote";
 import restore from "./git-restore";
 import rm from "./git-rm";
@@ -40,6 +42,8 @@ export const REFERENCE: readonly ReferenceEntry[] = [
   clone,
   remote,
   fetchCmd,
+  pull,
+  push,
 ];
 
 export const referenceById = (id: string): ReferenceEntry | undefined =>

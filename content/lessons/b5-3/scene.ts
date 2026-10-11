@@ -106,7 +106,7 @@ export default defineLesson({
         "origin has never heard of dark-mode. Where should the branch go, and should yours remember it?",
       pointer:
         "git push -u origin <branch> creates the branch on origin and sets it as your branch's upstream, so later pushes and pulls know where to go.",
-      reference: "branch",
+      reference: "push",
       next: "Run git push -u origin dark-mode.",
     },
   },

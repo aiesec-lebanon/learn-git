@@ -68,7 +68,7 @@ export default defineCapstone({
       "After Sam's push, your main and origin's main have each moved on. What brings them back together, and what tells origin about flyer?",
     pointer:
       "git pull --no-rebase fetches Sam's commit and merges it into main. A branch made from there and pushed with -u appears on origin and tracks it.",
-    reference: "merge",
+    reference: "pull",
     next: "After cloning and committing rota.md, run git pull --no-rebase, then git switch -c flyer, commit flyer.md and git push -u origin flyer.",
   },
 });

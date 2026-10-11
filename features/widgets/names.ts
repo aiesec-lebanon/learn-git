@@ -8,6 +8,8 @@ export const WIDGET_NAMES = [
   "hash-chain",
   "diff-anatomy",
   "diff-lens",
+  "restore-picker",
+  "destructive-preview",
 ] as const;
 
 export type WidgetName = (typeof WIDGET_NAMES)[number];

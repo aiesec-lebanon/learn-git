@@ -7,7 +7,12 @@ import {
   lensCommand,
   lensSnapshots,
 } from "./diff-lens.model";
-import { bakeSaleHistory } from "@/content/worlds/bake-sale";
+import { bakeSaleHistory, bakeSaleUndo } from "@/content/worlds/bake-sale";
+import {
+  discardable,
+  discardPreview,
+  restoreDirection,
+} from "./restore-picker.model";
 import { snapshotAt, snapshotText } from "./snapshot-scrubber.model";
 import { carryable, dropCommand, STAGING } from "./stage-files.model";
 import { lensSections } from "./status-lens.model";
@@ -66,6 +71,35 @@ describe("diff widgets", () => {
       "context",
       "context",
     ]);
+  });
+});
+
+describe("restore widgets", () => {
+  it("print a restore only for directions that are one", () => {
+    expect(restoreDirection("head", "index")).toMatchObject({
+      command: "git restore --staged <file>",
+      safe: true,
+    });
+    expect(restoreDirection("index", "worktree", "a.txt")).toMatchObject({
+      command: "git restore a.txt",
+      safe: false,
+    });
+    expect(restoreDirection("head", "worktree")).toMatchObject({
+      command: "git restore --source=HEAD <file>",
+    });
+    expect(restoreDirection("worktree", "index")).toHaveProperty("why");
+    expect(restoreDirection("index", "head")).toHaveProperty("why");
+    expect(restoreDirection("index", "index")).toHaveProperty("why");
+  });
+
+  it("preview a discard without running it and flag lost edits", () => {
+    const world = createWorld(bakeSaleUndo);
+    expect(discardable(world)).toEqual(["index.html", "style.css"]);
+    const preview = discardPreview(world, "style.css");
+    expect(preview.command).toBe("git restore style.css");
+    expect(preview.lost).toBe(true);
+    expect(preview.lines.filter((l) => l.part === "removed")).toHaveLength(1);
+    expect(discardable(world)).toEqual(["index.html", "style.css"]);
   });
 });
 

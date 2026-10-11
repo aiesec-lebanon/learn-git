@@ -33,6 +33,14 @@ const WIDGETS: Record<WidgetName, ComponentType> = {
   "diff-lens": lazy(() =>
     import("./diff-lens").then((m) => ({ default: m.DiffLens })),
   ),
+  "restore-picker": lazy(() =>
+    import("./restore-picker").then((m) => ({ default: m.RestorePicker })),
+  ),
+  "destructive-preview": lazy(() =>
+    import("./destructive-preview").then((m) => ({
+      default: m.DestructivePreview,
+    })),
+  ),
 };
 
 /** A lesson widget by name, loaded with its own code (R3). */

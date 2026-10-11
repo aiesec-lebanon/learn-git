@@ -9,6 +9,8 @@
   <file>` copies the last commit's version into the staging area. Plain `git
   restore <file>` copies the staged version over your working copy. The
   direction decides what you can lose.
+
+  <Widget name="restore-picker" />
 </Beat>
 
 <Beat id="unstage" title="Unstaging is safe">
@@ -21,6 +23,8 @@
   `git restore README.md` overwrites your file with the staged version. An edit
   that was never staged or committed is gone, and real Git cannot bring it back.
   Check what you are about to lose first.
+
+  <Widget name="destructive-preview" />
 </Beat>
 
 <Beat id="source" title="A file from the past">

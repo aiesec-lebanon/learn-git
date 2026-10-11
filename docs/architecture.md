@@ -42,7 +42,7 @@ ESLint enforces the table per folder. Inside `engine/` it also bans React, Next.
 - **World:** repositories (refs, reflogs, object availability, commit arrival order, config), worktrees (HEAD, index with stages 0 to 3, files, current directory, paused operation), machines and identities, a simulated network, scripted actors, the Hub and a clock (2026-01-01, plus 60 s per invocation).
 - **Layers:** objects, then refs, index and files, diff, merge, revisions, sequencer, commands, network, world, CLI (tokenizer, Git's option rules, dispatch, message catalog), session.
 - **Editors** are interaction requests stored in the world and answered by a resume invocation, so Rewind and prerendering keep working.
-- **Fidelity:** conformance fixtures recorded with Git for Windows 2.45.1 through Git Bash (`core.autocrlf=false`, `LANG=C`, `TZ=UTC`, fixed identities and dates; the version is pinned in each fixture's metadata) and replayed in Vitest, comparing output and object IDs exactly. `engine/limits.ts` caps input sizes and algorithmic work.
+- **Fidelity:** conformance fixtures recorded with Git for Windows 2.45.1 through Git Bash (`core.autocrlf=false`, `LANG=C`, `TZ=UTC`, fixed identities and dates; the version is pinned in each fixture's metadata) and replayed in Vitest, comparing output and object IDs exactly. Remote fixtures run several machines against bare repositories that stand in for `https://hub.test/` (an environment-only `insteadOf`, plus a hook that keeps the Hub URL in merge messages). `engine/limits.ts` caps input sizes and algorithmic work.
 
 ## Rendering and routes
 

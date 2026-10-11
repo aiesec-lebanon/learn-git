@@ -1,5 +1,11 @@
 import { describe, expect, it } from "vitest";
-import { countPar, createWorld, match, Session } from "@/engine";
+import {
+  countPar,
+  createWorld,
+  match,
+  Session,
+  type HistoryEntry,
+} from "@/engine";
 import { CAPSTONES } from "./capstones";
 import type { Checkpoint } from "./define";
 import { voiceProblems } from "./guide/voice";
@@ -57,6 +63,13 @@ function mdxBeats(mdx: string): { id: string; words: number }[] {
       .filter((w) => /[\p{L}\p{N}]/u.test(w)).length,
   }));
 }
+
+/** A non-zero exit that isn't a merge pausing on a conflict. */
+const refused = (entry: HistoryEntry) =>
+  entry.outcome.output.exitCode !== 0 &&
+  !entry.outcome.effects.some(
+    (e) => e.kind === "operation" && e.phase === "paused",
+  );
 
 function replay(checkpoint: Checkpoint) {
   const session = new Session(createWorld(checkpoint.world));
@@ -125,7 +138,7 @@ for (const lesson of readyLessons()) {
       for (const beat of scene?.beats ?? [])
         for (const line of beat.run ?? [])
           for (const entry of session.run(line))
-            expect(entry.outcome.output.exitCode, entry.text).toBe(0);
+            expect(refused(entry), entry.text).toBe(false);
     });
 
     it("reaches the Your turn target with its solution, not before", () => {
@@ -176,7 +189,7 @@ for (const [chapter, capstone] of Object.entries(CAPSTONES)) {
       );
       const end = replay(capstone);
       for (const entry of end.history)
-        expect(entry.outcome.output.exitCode, entry.text).toBe(0);
+        expect(refused(entry), entry.text).toBe(false);
       expect(match(end.world, capstone.target).differences).toEqual([]);
     });
   });

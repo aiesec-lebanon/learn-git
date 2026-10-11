@@ -103,3 +103,23 @@ export const bakeSaleMessy = defineWorld({
     'echo "build finished" > build.log',
   ],
 });
+
+export const MENU_SAM = MENU.replace("$4", "$5");
+export const MENU_YOURS = MENU_FIXED;
+export const MENU_AGREED = MENU.replace("$4", "$4.50");
+
+/** Sam's pricing branch raised the lemon cake price and the hours; main lowered the price. HEAD on main. */
+export const bakeSalePriceClash = defineWorld({
+  files,
+  cwd: "bake-sale",
+  setup: [
+    ...FIRST_COMMIT,
+    "git switch -c pricing",
+    writeFile("menu.html", MENU_SAM),
+    writeFile("index.html", INDEX_LATER),
+    'git commit -am "Raise the lemon cake price, open longer"',
+    "git switch main",
+    writeFile("menu.html", MENU_YOURS),
+    'git commit -am "Lower the lemon cake price"',
+  ],
+});

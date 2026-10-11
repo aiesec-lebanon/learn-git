@@ -35,7 +35,7 @@ export const LESSONS = [
   l("b3-3", "b3", "Visiting the past: detached HEAD", 12, true),
   l("b4-1", "b4", "Fast-forward merges", 8, true),
   l("b4-2", "b4", "Three-way merges", 10, true),
-  l("b4-3", "b4", "Merge conflicts", 15),
+  l("b4-3", "b4", "Merge conflicts", 15, true),
   l("b5-1", "b5", "Clone: your copy and origin", 12),
   l("b5-2", "b5", "Fetch and pull: catching up", 12),
   l("b5-3", "b5", "Push and upstream", 12),

@@ -1,0 +1,51 @@
+<ColdOpen>
+  You lowered the lemon cake price to $3. On the `pricing` branch, Sam raised it
+  to $5. Both changes touch the same line of `menu.html`. Git can't pick a price
+  for you, so what happens when you merge?
+</ColdOpen>
+
+<Beat id="clash" title="The same line, twice">
+  Both branches start from the first snapshot and both change the lemon cake
+  line. Sam's branch also changes the opening hours in `index.html`, a line
+  nobody else touched.
+</Beat>
+
+<Beat id="stop" title="The merge pauses">
+  `git merge pricing` merges `index.html` on its own but reports a
+  <Term>conflict</Term> in `menu.html` and stops before committing. `git status`
+  lists it under "Unmerged paths" as "both modified". The merge is paused, not
+  failed.
+</Beat>
+
+<Beat id="markers" title="Reading the markers">
+  Git writes both versions into the file. The lines between `<<<<<<< HEAD` and
+  `=======` are ours, from main. The lines between `=======` and
+  `>>>>>>> pricing` are theirs. Everything outside the markers merged cleanly.
+</Beat>
+
+<Beat id="abort" title="Nothing is lost">
+  `git merge --abort` puts everything back the way it was before the merge. Both
+  branches still hold their commits, so you can try again whenever you are
+  ready.
+</Beat>
+
+<Beat id="resolve" title="Decide, mark, commit">
+  Merge again, then edit `menu.html` to the price you agreed on and remove the
+  markers. `git add menu.html` marks the file resolved. `git commit` finishes
+  the merge commit; it offers the message "Merge branch 'pricing'", given here
+  with `-m`.
+</Beat>
+
+<Beat id="zdiff3" title="See the base too">
+  `git config merge.conflictStyle zdiff3` makes later conflicts show the base
+  version between `|||||||` and `=======`, so you can see what each side
+  changed, not only where they ended up.
+</Beat>
+
+<YourTurn />
+
+<Wrap commands={["git merge", "git merge --abort", "git add", "git commit"]}>
+  A conflict is Git asking you to decide where both sides changed the same
+  lines. Edit the file, mark it resolved with `git add` and commit, or abort to
+  go back.
+</Wrap>

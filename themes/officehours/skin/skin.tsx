@@ -11,7 +11,7 @@ const NOTE: Record<SkinLabel["slot"], string> = {
   3: "bg-g-b3 text-g-b3-fg",
 };
 
-/** One hand-drawn circle; a merge is circled twice; a root gets a start bar. */
+/** One hand-drawn circle; a merge is circled twice; a root gets a start bar; a ghost fades and dashes. */
 function Node({ node }: { node: SkinNode }) {
   const seed = hashStr(node.id) % 100000;
   const faint = node.ghost > 0;
@@ -23,7 +23,7 @@ function Node({ node }: { node: SkinNode }) {
         viewBox={`${-R - 3} ${-R - 3} ${2 * R + 6} ${2 * R + 6}`}
         aria-hidden="true"
         focusable="false"
-        className={`block overflow-visible ${faint ? "opacity-60" : ""}`}
+        className={`block overflow-visible transition-opacity duration-(--dur-4) ${faint ? "opacity-45" : ""}`}
       >
         {node.root ? (
           <path
@@ -40,7 +40,7 @@ function Node({ node }: { node: SkinNode }) {
           stroke={faint ? "var(--g-dim)" : "var(--g-node)"}
           strokeWidth={2.8}
           strokeLinecap="round"
-          strokeDasharray={node.ghost === 2 ? "3 3" : undefined}
+          strokeDasharray={faint ? "3 3" : undefined}
         />
         {node.merge ? (
           <path

@@ -248,7 +248,7 @@ export function CommitGraph({
                     {...dropProps(drop, commitTarget(commit.oid))}
                     {...marks(highlight, commit.oid)}
                     onKeyDown={onKeyDown}
-                    className="relative block -translate-x-1/2 -translate-y-1/2 rounded-full focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-focus data-aimed:outline-2 data-aimed:outline-offset-4 data-aimed:outline-focus data-[reach=in]:ring-6 data-[reach=in]:ring-hl data-[reach=out]:opacity-40 data-lost:outline-2 data-lost:outline-offset-4 data-lost:outline-fg data-lost:outline-dashed motion-safe:data-lost:animate-pulse"
+                    className="relative block -translate-x-1/2 -translate-y-1/2 rounded-full focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-focus data-aimed:outline-2 data-aimed:outline-offset-4 data-aimed:outline-focus data-[reach=in]:ring-6 data-[reach=in]:ring-hl data-[reach=out]:opacity-40 data-lost:outline-2 data-lost:outline-offset-4 data-lost:outline-fg data-lost:outline-dashed"
                   >
                     <skin.Node
                       node={{

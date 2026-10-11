@@ -4,7 +4,7 @@ import type { CommitView, LabelView, RepoView } from "./view-model";
 /** One part of an accessible name; `isolate` parts are learner text (`<bdi>`). */
 export type NamePart = { readonly text: string; readonly isolate: boolean };
 
-const GHOST = ["", "only in the reflog", "unreachable"] as const;
+const GHOST = ["", "unreachable, still in the reflog", "unreachable"] as const;
 
 export function labelsAt(view: RepoView, oid: Oid): readonly LabelView[] {
   return view.labels.filter((l) => l.target === oid);

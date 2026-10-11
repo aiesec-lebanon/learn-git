@@ -24,6 +24,8 @@ export const WIDGET_NAMES = [
   "parent-inspector",
   "counters",
   "would-lose",
+  "fetch-vs-pull",
+  "pull-mode",
 ] as const;
 
 export type WidgetName = (typeof WIDGET_NAMES)[number];

@@ -89,6 +89,12 @@ const WIDGETS: Record<WidgetName, ComponentType> = {
   "would-lose": lazy(() =>
     import("./would-lose").then((m) => ({ default: m.WouldLose })),
   ),
+  "fetch-vs-pull": lazy(() =>
+    import("./fetch-vs-pull").then((m) => ({ default: m.FetchVsPull })),
+  ),
+  "pull-mode": lazy(() =>
+    import("./fetch-vs-pull").then((m) => ({ default: m.PullMode })),
+  ),
 };
 
 /** A lesson widget by name, loaded with its own code (R3). */

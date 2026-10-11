@@ -58,18 +58,9 @@ describe("challenge model", () => {
     expect(
       underParWhy(play(challenge, challenge.solution as string[]), challenge),
     ).toBeNull();
-    expect(underParWhy(short, challenge)).toMatch(/shorter than the reference/);
-    const recorded: Challenge = {
-      ...challenge,
-      underPar: [
-        {
-          solution: ['git commit -m "x" README.md'],
-          why: "A pathspec commits just that file.",
-        },
-      ],
-    };
-    expect(underParWhy(short, recorded)).toBe(
-      "A pathspec commits just that file.",
+    expect(underParWhy(short, challenge)).toBe(challenge.underPar?.[0]?.why);
+    expect(underParWhy(short, { ...challenge, underPar: [] })).toMatch(
+      /shorter than the reference/,
     );
   });
 });

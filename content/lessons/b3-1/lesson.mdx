@@ -1,0 +1,52 @@
+<ColdOpen>
+  You want to try a dark theme for the recipe site without risking the version
+  that works. Copying the whole folder feels safe. Git has a lighter way: what
+  is a branch, really?
+</ColdOpen>
+
+<Beat id="label" title="A second label">
+  `git branch dark-mode` adds a second label to the commit you are on. No files
+  are copied and the working tree stays the same: a <Term>branch</Term> is a
+  name that points at one commit. `git branch` lists the labels and marks the
+  one you are on with `*`.
+
+  <Widget name="reachability" />
+</Beat>
+
+<Beat id="switch" title="HEAD hops">
+  `git switch dark-mode` moves <Term>HEAD</Term> onto the other label. HEAD
+  marks the branch you are on, so the next commit knows which label to move.
+  The files don't change, because both labels point at the same commit.
+
+  <Widget name="pointer-drag" />
+</Beat>
+
+<Beat id="move" title="Only one label moves">
+  Commit on `dark-mode` and only that label moves forward to the new commit.
+  `main` stays where it was, and the new commit is reachable from `dark-mode`
+  alone.
+</Beat>
+
+<Beat id="back" title="Back to main">
+  `git switch main` moves HEAD back and rewrites the working tree to main's
+  snapshot, so `dark.css` leaves the folder. It isn't lost: it lives in the
+  commit `dark-mode` points at.
+</Beat>
+
+<Beat id="create" title="Make and switch at once">
+  `git switch -c footer` creates a branch and switches to it in one step. Older
+  tutorials write `git checkout -b footer`, which does the same.
+</Beat>
+
+<Beat id="carry" title="Changes come along">
+  An edit you haven't committed lives in the working tree, not on a branch. So
+  `git switch` takes it along and prints it as `M README.md`. Git refuses to
+  switch only when that would overwrite your edit.
+</Beat>
+
+<YourTurn />
+
+<Wrap commands={["git branch", "git switch", "git switch -c"]}>
+  A branch is a label on one commit, and HEAD says which label you are on. A
+  commit moves that label; switching moves HEAD and changes the files to match.
+</Wrap>

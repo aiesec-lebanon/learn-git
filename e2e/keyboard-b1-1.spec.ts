@@ -7,6 +7,8 @@ test("B1.1 can be finished by keyboard alone", async ({ page }) => {
   await tabTo(page, page.getByRole("link", { name: "New to Git? Start here" }));
   await page.keyboard.press("Enter");
   await expect(page.getByRole("heading", { level: 1 })).toContainText("B1.1");
+  // The route change moves focus to the main content; tabbing starts after it.
+  await expect(page.locator("#main")).toBeFocused();
 
   await tabTo(page, page.getByRole("button", { name: "Next" }));
   await page.keyboard.press("ArrowRight");

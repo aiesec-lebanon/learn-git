@@ -8,7 +8,8 @@ export type RefUpdate = {
   readonly code: string;
   readonly summary: string;
   readonly from: string;
-  readonly to: string;
+  /** Absent when a push deletes a branch (` - [deleted]         x`). */
+  readonly to?: string;
   /** Printed after the line as is, e.g. `  (forced update)` or ` (fetch first)`. */
   readonly suffix?: string;
 };
@@ -30,5 +31,6 @@ export function rangeSummary(
  */
 export function refUpdateLine(update: RefUpdate, width?: number): string {
   const from = width === undefined ? update.from : update.from.padEnd(width);
-  return ` ${update.code} ${update.summary.padEnd(SUMMARY_WIDTH)} ${from} -> ${update.to}${update.suffix ?? ""}\n`;
+  const to = update.to === undefined ? "" : ` -> ${update.to}`;
+  return ` ${update.code} ${update.summary.padEnd(SUMMARY_WIDTH)} ${from}${to}${update.suffix ?? ""}\n`;
 }

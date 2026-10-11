@@ -18,7 +18,7 @@ export const REFUSAL_FACTS: Readonly<Record<RefusalCode, string>> = {
   "not-recursive":
     "That path is a folder, and Git removes folders only with -r.",
   "not-tracked": "Git does not track that file.",
-  "destination-exists": "A file already has that name.",
+  "destination-exists": "Something already has that name.",
   "no-such-directory": "The destination folder does not exist.",
   "path-ignored": "A .gitignore rule hides that path from git add.",
   "invalid-ref-name": "Git does not allow that name for a branch.",
@@ -30,5 +30,9 @@ export const REFUSAL_FACTS: Readonly<Record<RefusalCode, string>> = {
   "unmerged-paths": "Some files still have unresolved conflicts.",
   "operation-in-progress": "A merge is still in progress.",
   "no-operation": "No merge is in progress.",
+  "no-remote": "Git could not reach a repository by that name or address.",
+  "no-upstream": "The branch has no upstream branch on the remote yet.",
+  "push-rejected":
+    "The remote has commits the push would remove, so nothing moved there.",
   "shell-error": "The shell could not run that line.",
 };

@@ -69,13 +69,13 @@ export const clone = defineCommand({
       (machine.fs.dirs.has(path) && listDir(machine.fs, path).length > 0);
     if (taken) return refuse("destination-exists", m.destinationExists(name));
     if (!url.includes("://")) {
-      return refuse("not-a-repository", m.doesNotExist(url));
+      return refuse("no-remote", m.doesNotExist(url));
     }
     const quiet = flag(options, "quiet");
     const cloning = quiet ? "" : m.cloningInto(name);
     const reached = connect(world, url);
     if (!reached.ok) {
-      return refuse("not-a-repository", cloning + reached.stderr);
+      return refuse("no-remote", cloning + reached.stderr);
     }
     const source = reached.repo;
     const fs = makeDir(makeDir(machine.fs, path), `${path}/.git`);

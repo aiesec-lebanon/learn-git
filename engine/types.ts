@@ -277,6 +277,9 @@ export type RefusalCode =
   | "unmerged-paths"
   | "operation-in-progress"
   | "no-operation"
+  | "no-remote"
+  | "no-upstream"
+  | "push-rejected"
   | "shell-error";
 
 export type EditorRequest = {

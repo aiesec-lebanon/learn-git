@@ -220,6 +220,17 @@ export const VERBS: readonly ChipVerb[] = [
   },
   {
     program: "git",
+    name: "push",
+    hint: "send your commits to the remote",
+    params: [
+      { kind: "flag", flag: "-u", label: "link the branch the first time" },
+      { kind: "value", label: "remote" },
+      { kind: "value", label: "branch" },
+    ],
+    ready: (s) => s.commits,
+  },
+  {
+    program: "git",
     name: "remote",
     hint: "list the repositories this one talks to",
     params: [{ kind: "flag", flag: "-v", label: "with addresses" }],

@@ -1,0 +1,67 @@
+{
+  "world": {
+    "machines": {
+      "sam": {
+        "global": {
+          "user.name": "Sam Rivera",
+          "user.email": "sam@team.test",
+          "init.defaultBranch": "main"
+        }
+      }
+    },
+    "hub": { "sam/team": {} }
+  },
+  "steps": [
+    { "cmd": "git clone -q https://hub.test/sam/team.git", "machine": "sam" },
+    { "cmd": "cd team", "machine": "sam" },
+    { "cmd": "echo \"# Team\" > README.md", "machine": "sam" },
+    { "cmd": "git add README.md", "machine": "sam" },
+    { "cmd": "git commit -q -m \"Add README\"", "machine": "sam" },
+    { "cmd": "git push", "machine": "sam" },
+    "git clone -q https://hub.test/sam/team.git",
+    "cd team",
+    "git push",
+    "git switch -q -c dark-mode",
+    "echo dark > theme.txt",
+    "git add theme.txt",
+    "git commit -q -m \"Add dark mode\"",
+    "git push",
+    "git push -u origin dark-mode",
+    "echo darker >> theme.txt",
+    "git commit -q -a -m \"Darker\"",
+    "git status -sb",
+    "git push",
+    "git status -sb",
+    "git push",
+    "git config push.autoSetupRemote true",
+    "git switch -q -c later",
+    "echo later > later.txt",
+    "git add later.txt",
+    "git commit -q -m \"Add later\"",
+    "git push",
+    "git switch -q main",
+    { "cmd": "echo \"Fridays\" >> README.md", "machine": "sam" },
+    { "cmd": "git commit -q -a -m \"Meet on Fridays\"", "machine": "sam" },
+    { "cmd": "git push -q", "machine": "sam" },
+    "echo mine > mine.txt",
+    "git add mine.txt",
+    "git commit -q -m \"Add mine\"",
+    "git push",
+    "git fetch -q",
+    "git push",
+    "git push origin main",
+    "git push --force",
+    "git push origin --delete later",
+    "git push origin --delete later",
+    "git push origin nope",
+    "git push nope",
+    "git push -q origin dark-mode",
+    "git switch -q --detach HEAD",
+    "git push",
+    "git switch -q dark-mode",
+    "git push origin HEAD",
+    "git push origin dark-mode main",
+    "git branch -a",
+    "git log --oneline --all"
+  ]
+}

@@ -31,7 +31,7 @@ export const REFUSAL_GUIDE: Readonly<Record<RefusalCode, string>> = {
   "not-tracked":
     "git mv moves files Git already tracks. git add the file first, or use mv for an untracked one.",
   "destination-exists":
-    "git mv won't overwrite a file by default. Pick another name, or add -f to replace it.",
+    "Something already has that name. Pick another name; git mv can replace a file with -f.",
   "no-such-directory":
     "git mv doesn't create folders. Make the folder with mkdir first, then move the file.",
   "path-ignored":
@@ -46,6 +46,12 @@ export const REFUSAL_GUIDE: Readonly<Record<RefusalCode, string>> = {
     "HEAD is on that branch, so Git won't delete or replace it. Switch to another branch first.",
   "not-fully-merged":
     "Deleting that label would leave commits no branch reaches. Merge it first, or use -D if you really want those commits gone.",
+  "no-remote":
+    "Git couldn't reach that repository. git remote -v lists the remotes and their addresses.",
+  "no-upstream":
+    "Git doesn't know where this branch goes on the remote yet. Push it once with git push -u origin and the branch name.",
+  "push-rejected":
+    "Origin has commits you don't have, and this push would remove them. Bring them in with git pull, then push again.",
   "unmerged-paths":
     "Some files still hold conflicts. Edit each one, mark it resolved with git add, then commit. Or run git merge --abort to go back.",
   "operation-in-progress":

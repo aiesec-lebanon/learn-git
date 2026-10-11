@@ -14,6 +14,7 @@ import { mv } from "./mv";
 import { createRegistry } from "./registry";
 import { remote } from "./remote";
 import { restore } from "./restore";
+import { push } from "./push";
 import { rm } from "./rm";
 import { show } from "./show";
 import { stash } from "./stash";
@@ -42,4 +43,5 @@ export const GIT_REGISTRY = createRegistry([
   remote,
   clone,
   fetch,
+  push,
 ]);

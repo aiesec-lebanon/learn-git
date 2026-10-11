@@ -99,12 +99,12 @@ export function fetchRemote(req: FetchRequest): Fetched {
   if (url === null) {
     return {
       ok: false,
-      result: refuse("not-a-repository", net.notARepository(remote)),
+      result: refuse("no-remote", net.notARepository(remote)),
     };
   }
   const reached = connect(world, url, remote);
   if (!reached.ok) {
-    return { ok: false, result: refuse("not-a-repository", reached.stderr) };
+    return { ok: false, result: refuse("no-remote", reached.stderr) };
   }
   if (branches.some((b) => b.includes(":"))) {
     return {

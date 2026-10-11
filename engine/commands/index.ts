@@ -12,6 +12,7 @@ import { restore } from "./restore";
 import { rm } from "./rm";
 import { show } from "./show";
 import { status } from "./status";
+import { switchCommand } from "./switch";
 
 /** Every simulated Git command; adding one means adding it here. */
 export const GIT_REGISTRY = createRegistry([
@@ -27,6 +28,7 @@ export const GIT_REGISTRY = createRegistry([
   rm,
   mv,
   branch,
+  switchCommand,
   checkout,
   reset,
 ]);

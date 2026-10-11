@@ -1,0 +1,589 @@
+{
+  "final": {
+    "config": {
+      "global": [
+        [
+          "user.name",
+          "Sam Lee"
+        ],
+        [
+          "user.email",
+          "sam@example.com"
+        ],
+        [
+          "init.defaultbranch",
+          "main"
+        ]
+      ],
+      "system": []
+    },
+    "dirs": [
+      "project",
+      "project/sub"
+    ],
+    "files": {
+      "project/.gitignore": "*.log\n",
+      "project/a.txt": "a\nm\n",
+      "project/b.txt": "b\nz\n",
+      "project/new.txt": "n\n",
+      "project/sub/d.txt": "d\n"
+    },
+    "repos": {
+      "project": {
+        "config": [
+          [
+            "core.repositoryformatversion",
+            "0"
+          ],
+          [
+            "core.filemode",
+            "false"
+          ],
+          [
+            "core.bare",
+            "false"
+          ],
+          [
+            "core.logallrefupdates",
+            "true"
+          ],
+          [
+            "core.symlinks",
+            "false"
+          ],
+          [
+            "core.ignorecase",
+            "true"
+          ]
+        ],
+        "head": {
+          "ref": "refs/heads/main"
+        },
+        "index": [
+          {
+            "mode": "100644",
+            "oid": "397b4a7624e35fa60563a9c03b1213d93f7b6546",
+            "path": ".gitignore",
+            "stage": 0
+          },
+          {
+            "mode": "100644",
+            "oid": "9327e295f637fe6fd721999358fd4aa194024d19",
+            "path": "a.txt",
+            "stage": 0
+          },
+          {
+            "mode": "100644",
+            "oid": "63d7d705891b78daf172fb11da13d666fd5062cd",
+            "path": "b.txt",
+            "stage": 0
+          },
+          {
+            "mode": "100644",
+            "oid": "8ba3a16384aacc37d01564b28401755ce8053f51",
+            "path": "new.txt",
+            "stage": 0
+          },
+          {
+            "mode": "100644",
+            "oid": "4bcfe98e640c8284511312660fb8709b0afa888e",
+            "path": "sub/d.txt",
+            "stage": 0
+          }
+        ],
+        "objects": {
+          "065de2f9eae684cfd160dc6f0c406526e978bd7d": {
+            "body": "tree ec1ee6377fa9c322d7a76a723657bbe8f60f3f97\nauthor Sam Lee <sam@example.com> 1767225720 +0000\ncommitter Sam Lee <sam@example.com> 1767225720 +0000\n\nFirst\n",
+            "type": "commit"
+          },
+          "1f9d725a9de833a65966881dce2e907b86e72c5e": {
+            "body": "l\n",
+            "type": "blob"
+          },
+          "397b4a7624e35fa60563a9c03b1213d93f7b6546": {
+            "body": "*.log\n",
+            "type": "blob"
+          },
+          "4bcfe98e640c8284511312660fb8709b0afa888e": {
+            "body": "d\n",
+            "type": "blob"
+          },
+          "61780798228d17af2d34fce4cfbdf35556832472": {
+            "body": "b\n",
+            "type": "blob"
+          },
+          "63d7d705891b78daf172fb11da13d666fd5062cd": {
+            "body": "b\nz\n",
+            "type": "blob"
+          },
+          "78981922613b2afb6025042ff6bd878ac1994e85": {
+            "body": "a\n",
+            "type": "blob"
+          },
+          "8ba3a16384aacc37d01564b28401755ce8053f51": {
+            "body": "n\n",
+            "type": "blob"
+          },
+          "9327e295f637fe6fd721999358fd4aa194024d19": {
+            "body": "a\nm\n",
+            "type": "blob"
+          },
+          "94a1f2580e8a7f7853e87f6bf945e73ed1fb6693": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": ".gitignore",
+                "oid": "397b4a7624e35fa60563a9c03b1213d93f7b6546"
+              },
+              {
+                "mode": "100644",
+                "name": "a.txt",
+                "oid": "78981922613b2afb6025042ff6bd878ac1994e85"
+              },
+              {
+                "mode": "100644",
+                "name": "b.txt",
+                "oid": "fcd2c724aee71816ae2f0e497b058ef58fd65655"
+              },
+              {
+                "mode": "100644",
+                "name": "c.txt",
+                "oid": "f2ad6c76f0115a6ba5b00456a849810e7ec0af20"
+              },
+              {
+                "mode": "100644",
+                "name": "keep.log",
+                "oid": "1f9d725a9de833a65966881dce2e907b86e72c5e"
+              }
+            ],
+            "type": "tree"
+          },
+          "a2c2ca8b5f7e85d4ad6396cebcb75542b6a300d6": {
+            "body": "tree 94a1f2580e8a7f7853e87f6bf945e73ed1fb6693\nparent 065de2f9eae684cfd160dc6f0c406526e978bd7d\nauthor Sam Lee <sam@example.com> 1767226140 +0000\ncommitter Sam Lee <sam@example.com> 1767226140 +0000\n\nTopic work\n",
+            "type": "commit"
+          },
+          "abc366656a510a2a2f9f848d218d7dc5a7ee5ef7": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "d.txt",
+                "oid": "4bcfe98e640c8284511312660fb8709b0afa888e"
+              }
+            ],
+            "type": "tree"
+          },
+          "ec1ee6377fa9c322d7a76a723657bbe8f60f3f97": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": ".gitignore",
+                "oid": "397b4a7624e35fa60563a9c03b1213d93f7b6546"
+              },
+              {
+                "mode": "100644",
+                "name": "a.txt",
+                "oid": "78981922613b2afb6025042ff6bd878ac1994e85"
+              },
+              {
+                "mode": "100644",
+                "name": "b.txt",
+                "oid": "61780798228d17af2d34fce4cfbdf35556832472"
+              },
+              {
+                "mode": "40000",
+                "name": "sub",
+                "oid": "abc366656a510a2a2f9f848d218d7dc5a7ee5ef7"
+              }
+            ],
+            "type": "tree"
+          },
+          "f2ad6c76f0115a6ba5b00456a849810e7ec0af20": {
+            "body": "c\n",
+            "type": "blob"
+          },
+          "fcd2c724aee71816ae2f0e497b058ef58fd65655": {
+            "body": "b\nt\n",
+            "type": "blob"
+          }
+        },
+        "reflogs": {
+          "HEAD": [
+            "0000000000000000000000000000000000000000 065de2f9eae684cfd160dc6f0c406526e978bd7d Sam Lee <sam@example.com> 1767225720 +0000\tcommit (initial): First",
+            "065de2f9eae684cfd160dc6f0c406526e978bd7d 065de2f9eae684cfd160dc6f0c406526e978bd7d Sam Lee <sam@example.com> 1767225780 +0000\tcheckout: moving from main to topic",
+            "065de2f9eae684cfd160dc6f0c406526e978bd7d a2c2ca8b5f7e85d4ad6396cebcb75542b6a300d6 Sam Lee <sam@example.com> 1767226140 +0000\tcommit: Topic work",
+            "a2c2ca8b5f7e85d4ad6396cebcb75542b6a300d6 065de2f9eae684cfd160dc6f0c406526e978bd7d Sam Lee <sam@example.com> 1767226200 +0000\tcheckout: moving from topic to main",
+            "065de2f9eae684cfd160dc6f0c406526e978bd7d a2c2ca8b5f7e85d4ad6396cebcb75542b6a300d6 Sam Lee <sam@example.com> 1767226320 +0000\tcheckout: moving from main to topic",
+            "a2c2ca8b5f7e85d4ad6396cebcb75542b6a300d6 065de2f9eae684cfd160dc6f0c406526e978bd7d Sam Lee <sam@example.com> 1767226380 +0000\tcheckout: moving from topic to main",
+            "065de2f9eae684cfd160dc6f0c406526e978bd7d a2c2ca8b5f7e85d4ad6396cebcb75542b6a300d6 Sam Lee <sam@example.com> 1767227040 +0000\tcheckout: moving from main to topic",
+            "a2c2ca8b5f7e85d4ad6396cebcb75542b6a300d6 065de2f9eae684cfd160dc6f0c406526e978bd7d Sam Lee <sam@example.com> 1767227100 +0000\tcheckout: moving from topic to main",
+            "065de2f9eae684cfd160dc6f0c406526e978bd7d a2c2ca8b5f7e85d4ad6396cebcb75542b6a300d6 Sam Lee <sam@example.com> 1767227460 +0000\tcheckout: moving from main to topic",
+            "a2c2ca8b5f7e85d4ad6396cebcb75542b6a300d6 065de2f9eae684cfd160dc6f0c406526e978bd7d Sam Lee <sam@example.com> 1767227760 +0000\tcheckout: moving from topic to main"
+          ],
+          "refs/heads/main": [
+            "0000000000000000000000000000000000000000 065de2f9eae684cfd160dc6f0c406526e978bd7d Sam Lee <sam@example.com> 1767225720 +0000\tcommit (initial): First"
+          ],
+          "refs/heads/topic": [
+            "0000000000000000000000000000000000000000 065de2f9eae684cfd160dc6f0c406526e978bd7d Sam Lee <sam@example.com> 1767225780 +0000\tbranch: Created from HEAD",
+            "065de2f9eae684cfd160dc6f0c406526e978bd7d a2c2ca8b5f7e85d4ad6396cebcb75542b6a300d6 Sam Lee <sam@example.com> 1767226140 +0000\tcommit: Topic work"
+          ]
+        },
+        "refs": {
+          "refs/heads/main": "065de2f9eae684cfd160dc6f0c406526e978bd7d",
+          "refs/heads/topic": "a2c2ca8b5f7e85d4ad6396cebcb75542b6a300d6"
+        }
+      }
+    }
+  },
+  "git": "2.45.1.windows.1",
+  "script": {
+    "steps": [
+      "git init -q",
+      "git add .",
+      "git commit -q -m \"First\"",
+      "git switch -q -c topic",
+      "echo t >> b.txt",
+      "echo c > c.txt",
+      "echo l > keep.log",
+      "git add -f c.txt keep.log",
+      "git rm -q -r sub",
+      "git commit -q -a -m \"Topic work\"",
+      "git switch main",
+      "echo m >> a.txt",
+      "git switch topic",
+      "git switch main",
+      "echo x >> b.txt",
+      "git switch topic",
+      "git restore b.txt",
+      "echo y >> sub/d.txt",
+      "git switch topic",
+      "git restore sub/d.txt",
+      "echo u > c.txt",
+      "git switch topic",
+      "rm c.txt",
+      "echo ignored > keep.log",
+      "git switch topic",
+      "git switch main",
+      "git add a.txt",
+      "echo n > new.txt",
+      "git add new.txt",
+      "rm b.txt",
+      "cd sub",
+      "git switch topic",
+      "cd ..",
+      "git status --short",
+      "echo b > b.txt",
+      "git add b.txt",
+      "git switch main",
+      "git status --short",
+      "echo z >> b.txt",
+      "git add b.txt",
+      "git switch topic",
+      "git status --short"
+    ],
+    "world": {
+      "cwd": "project",
+      "files": {
+        "project/.gitignore": "*.log\n",
+        "project/a.txt": "a\n",
+        "project/b.txt": "b\n",
+        "project/sub/d.txt": "d\n"
+      }
+    }
+  },
+  "steps": [
+    {
+      "cmd": "git init -q",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git add .",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git commit -q -m \"First\"",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git switch -q -c topic",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "echo t >> b.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "echo c > c.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "echo l > keep.log",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git add -f c.txt keep.log",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git rm -q -r sub",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git commit -q -a -m \"Topic work\"",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git switch main",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "Switched to branch 'main'\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "echo m >> a.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git switch topic",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "Switched to branch 'topic'\n",
+      "stdout": "M\ta.txt\n"
+    },
+    {
+      "cmd": "git switch main",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "Switched to branch 'main'\n",
+      "stdout": "M\ta.txt\n"
+    },
+    {
+      "cmd": "echo x >> b.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git switch topic",
+      "cwd": "/home/you/project",
+      "exitCode": 1,
+      "stderr": "error: Your local changes to the following files would be overwritten by checkout:\n\tb.txt\nPlease commit your changes or stash them before you switch branches.\nAborting\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git restore b.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "echo y >> sub/d.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git switch topic",
+      "cwd": "/home/you/project",
+      "exitCode": 1,
+      "stderr": "error: Your local changes to the following files would be overwritten by checkout:\n\tsub/d.txt\nPlease commit your changes or stash them before you switch branches.\nAborting\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git restore sub/d.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "echo u > c.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git switch topic",
+      "cwd": "/home/you/project",
+      "exitCode": 1,
+      "stderr": "error: The following untracked working tree files would be overwritten by checkout:\n\tc.txt\nPlease move or remove them before you switch branches.\nAborting\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "rm c.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "echo ignored > keep.log",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git switch topic",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "Switched to branch 'topic'\n",
+      "stdout": "M\ta.txt\n"
+    },
+    {
+      "cmd": "git switch main",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "Switched to branch 'main'\n",
+      "stdout": "M\ta.txt\n"
+    },
+    {
+      "cmd": "git add a.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "echo n > new.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git add new.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "rm b.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "cd sub",
+      "cwd": "/home/you/project/sub",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git switch topic",
+      "cwd": "/home/you/project/sub",
+      "exitCode": 0,
+      "stderr": "Switched to branch 'topic'\n",
+      "stdout": "M\ta.txt\nA\tnew.txt\n"
+    },
+    {
+      "cmd": "cd ..",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git status --short",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "M  a.txt\nA  new.txt\n"
+    },
+    {
+      "cmd": "echo b > b.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git add b.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git switch main",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "Switched to branch 'main'\n",
+      "stdout": "M\ta.txt\nA\tnew.txt\n"
+    },
+    {
+      "cmd": "git status --short",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "M  a.txt\nA  new.txt\n"
+    },
+    {
+      "cmd": "echo z >> b.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git add b.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git switch topic",
+      "cwd": "/home/you/project",
+      "exitCode": 1,
+      "stderr": "error: Your local changes to the following files would be overwritten by checkout:\n\tb.txt\nPlease commit your changes or stash them before you switch branches.\nAborting\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git status --short",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "M  a.txt\nM  b.txt\nA  new.txt\n"
+    }
+  ]
+}

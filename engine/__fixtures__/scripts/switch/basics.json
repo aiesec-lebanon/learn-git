@@ -1,0 +1,42 @@
+{
+  "world": {
+    "files": {
+      "project/a.txt": "a\n"
+    },
+    "cwd": "project"
+  },
+  "steps": [
+    "git init -q",
+    "git switch -",
+    "git switch -c dev",
+    "git switch main",
+    "git switch -c main",
+    "git add a.txt",
+    "git commit -q -m \"First\"",
+    "git switch",
+    "git switch -c topic",
+    "echo t >> a.txt",
+    "git commit -q -a -m \"Topic\"",
+    "git switch main",
+    "git switch main",
+    "git switch -",
+    "git switch @{-1}",
+    "git switch nope",
+    "git switch -c topic",
+    "git switch -c \"a b\"",
+    "git switch -c new nope",
+    "git switch -C topic",
+    "git switch main",
+    "git switch topic extra",
+    "git switch -c later topic",
+    "git switch -q main",
+    "git switch HEAD~0",
+    "git switch --detach",
+    "git switch --detach later",
+    "git switch main",
+    "git switch --detach HEAD",
+    "git switch -c fromhere",
+    "git switch -c bad --detach",
+    "git branch -v"
+  ]
+}

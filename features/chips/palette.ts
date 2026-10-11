@@ -170,6 +170,16 @@ export const VERBS: readonly ChipVerb[] = [
     ready: (s) => s.commits,
   },
   {
+    program: "git",
+    name: "switch",
+    hint: "move HEAD to a branch",
+    params: [
+      { kind: "flag", flag: "-c", label: "make the branch first" },
+      { kind: "value", label: "branch", required: true },
+    ],
+    ready: (s) => s.commits,
+  },
+  {
     program: "shell",
     name: "ls",
     hint: "list files",

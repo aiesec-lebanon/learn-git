@@ -1,0 +1,414 @@
+{
+  "final": {
+    "config": {
+      "global": [
+        [
+          "user.name",
+          "Sam Lee"
+        ],
+        [
+          "user.email",
+          "sam@example.com"
+        ],
+        [
+          "init.defaultbranch",
+          "main"
+        ]
+      ],
+      "system": []
+    },
+    "dirs": [
+      "project"
+    ],
+    "files": {
+      "project/a.txt": "a\n"
+    },
+    "repos": {
+      "project": {
+        "config": [
+          [
+            "core.repositoryformatversion",
+            "0"
+          ],
+          [
+            "core.filemode",
+            "false"
+          ],
+          [
+            "core.bare",
+            "false"
+          ],
+          [
+            "core.logallrefupdates",
+            "true"
+          ],
+          [
+            "core.symlinks",
+            "false"
+          ],
+          [
+            "core.ignorecase",
+            "true"
+          ]
+        ],
+        "head": {
+          "ref": "refs/heads/fromhere"
+        },
+        "index": [
+          {
+            "mode": "100644",
+            "oid": "78981922613b2afb6025042ff6bd878ac1994e85",
+            "path": "a.txt",
+            "stage": 0
+          }
+        ],
+        "objects": {
+          "08585692ce06452da6f82ae66b90d98b55536fca": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "a.txt",
+                "oid": "78981922613b2afb6025042ff6bd878ac1994e85"
+              }
+            ],
+            "type": "tree"
+          },
+          "1d8672efe8a5159a1b19a42524fe4d8ec3b92514": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "a.txt",
+                "oid": "87bb4758f46a6745a72a73198ad017ad4609d3c5"
+              }
+            ],
+            "type": "tree"
+          },
+          "6f0445d2be3a7ec38bfe0a737172ed7703674374": {
+            "body": "tree 08585692ce06452da6f82ae66b90d98b55536fca\nauthor Sam Lee <sam@example.com> 1767225960 +0000\ncommitter Sam Lee <sam@example.com> 1767225960 +0000\n\nFirst\n",
+            "type": "commit"
+          },
+          "750c5e3d0e598dd546e45438bad6dfac387b8cc2": {
+            "body": "tree 1d8672efe8a5159a1b19a42524fe4d8ec3b92514\nparent 6f0445d2be3a7ec38bfe0a737172ed7703674374\nauthor Sam Lee <sam@example.com> 1767226200 +0000\ncommitter Sam Lee <sam@example.com> 1767226200 +0000\n\nTopic\n",
+            "type": "commit"
+          },
+          "78981922613b2afb6025042ff6bd878ac1994e85": {
+            "body": "a\n",
+            "type": "blob"
+          },
+          "87bb4758f46a6745a72a73198ad017ad4609d3c5": {
+            "body": "a\nt\n",
+            "type": "blob"
+          }
+        },
+        "reflogs": {
+          "HEAD": [
+            "0000000000000000000000000000000000000000 6f0445d2be3a7ec38bfe0a737172ed7703674374 Sam Lee <sam@example.com> 1767225960 +0000\tcommit (initial): First",
+            "6f0445d2be3a7ec38bfe0a737172ed7703674374 6f0445d2be3a7ec38bfe0a737172ed7703674374 Sam Lee <sam@example.com> 1767226080 +0000\tcheckout: moving from main to topic",
+            "6f0445d2be3a7ec38bfe0a737172ed7703674374 750c5e3d0e598dd546e45438bad6dfac387b8cc2 Sam Lee <sam@example.com> 1767226200 +0000\tcommit: Topic",
+            "750c5e3d0e598dd546e45438bad6dfac387b8cc2 6f0445d2be3a7ec38bfe0a737172ed7703674374 Sam Lee <sam@example.com> 1767226260 +0000\tcheckout: moving from topic to main",
+            "6f0445d2be3a7ec38bfe0a737172ed7703674374 6f0445d2be3a7ec38bfe0a737172ed7703674374 Sam Lee <sam@example.com> 1767226320 +0000\tcheckout: moving from main to main",
+            "6f0445d2be3a7ec38bfe0a737172ed7703674374 6f0445d2be3a7ec38bfe0a737172ed7703674374 Sam Lee <sam@example.com> 1767226380 +0000\tcheckout: moving from main to main",
+            "6f0445d2be3a7ec38bfe0a737172ed7703674374 6f0445d2be3a7ec38bfe0a737172ed7703674374 Sam Lee <sam@example.com> 1767226440 +0000\tcheckout: moving from main to main",
+            "6f0445d2be3a7ec38bfe0a737172ed7703674374 6f0445d2be3a7ec38bfe0a737172ed7703674374 Sam Lee <sam@example.com> 1767226740 +0000\tcheckout: moving from main to topic",
+            "6f0445d2be3a7ec38bfe0a737172ed7703674374 6f0445d2be3a7ec38bfe0a737172ed7703674374 Sam Lee <sam@example.com> 1767226800 +0000\tcheckout: moving from topic to main",
+            "6f0445d2be3a7ec38bfe0a737172ed7703674374 6f0445d2be3a7ec38bfe0a737172ed7703674374 Sam Lee <sam@example.com> 1767226920 +0000\tcheckout: moving from main to later",
+            "6f0445d2be3a7ec38bfe0a737172ed7703674374 6f0445d2be3a7ec38bfe0a737172ed7703674374 Sam Lee <sam@example.com> 1767226980 +0000\tcheckout: moving from later to main",
+            "6f0445d2be3a7ec38bfe0a737172ed7703674374 6f0445d2be3a7ec38bfe0a737172ed7703674374 Sam Lee <sam@example.com> 1767227100 +0000\tcheckout: moving from main to HEAD",
+            "6f0445d2be3a7ec38bfe0a737172ed7703674374 6f0445d2be3a7ec38bfe0a737172ed7703674374 Sam Lee <sam@example.com> 1767227220 +0000\tcheckout: moving from 6f0445d2be3a7ec38bfe0a737172ed7703674374 to main",
+            "6f0445d2be3a7ec38bfe0a737172ed7703674374 6f0445d2be3a7ec38bfe0a737172ed7703674374 Sam Lee <sam@example.com> 1767227280 +0000\tcheckout: moving from main to HEAD",
+            "6f0445d2be3a7ec38bfe0a737172ed7703674374 6f0445d2be3a7ec38bfe0a737172ed7703674374 Sam Lee <sam@example.com> 1767227340 +0000\tcheckout: moving from 6f0445d2be3a7ec38bfe0a737172ed7703674374 to fromhere"
+          ],
+          "refs/heads/fromhere": [
+            "0000000000000000000000000000000000000000 6f0445d2be3a7ec38bfe0a737172ed7703674374 Sam Lee <sam@example.com> 1767227340 +0000\tbranch: Created from HEAD"
+          ],
+          "refs/heads/later": [
+            "0000000000000000000000000000000000000000 6f0445d2be3a7ec38bfe0a737172ed7703674374 Sam Lee <sam@example.com> 1767226920 +0000\tbranch: Created from topic"
+          ],
+          "refs/heads/main": [
+            "0000000000000000000000000000000000000000 6f0445d2be3a7ec38bfe0a737172ed7703674374 Sam Lee <sam@example.com> 1767225960 +0000\tcommit (initial): First"
+          ],
+          "refs/heads/topic": [
+            "0000000000000000000000000000000000000000 6f0445d2be3a7ec38bfe0a737172ed7703674374 Sam Lee <sam@example.com> 1767226080 +0000\tbranch: Created from HEAD",
+            "6f0445d2be3a7ec38bfe0a737172ed7703674374 750c5e3d0e598dd546e45438bad6dfac387b8cc2 Sam Lee <sam@example.com> 1767226200 +0000\tcommit: Topic",
+            "750c5e3d0e598dd546e45438bad6dfac387b8cc2 6f0445d2be3a7ec38bfe0a737172ed7703674374 Sam Lee <sam@example.com> 1767226740 +0000\tbranch: Reset to HEAD"
+          ]
+        },
+        "refs": {
+          "refs/heads/fromhere": "6f0445d2be3a7ec38bfe0a737172ed7703674374",
+          "refs/heads/later": "6f0445d2be3a7ec38bfe0a737172ed7703674374",
+          "refs/heads/main": "6f0445d2be3a7ec38bfe0a737172ed7703674374",
+          "refs/heads/topic": "6f0445d2be3a7ec38bfe0a737172ed7703674374"
+        }
+      }
+    }
+  },
+  "git": "2.45.1.windows.1",
+  "script": {
+    "steps": [
+      "git init -q",
+      "git switch -",
+      "git switch -c dev",
+      "git switch main",
+      "git switch -c main",
+      "git add a.txt",
+      "git commit -q -m \"First\"",
+      "git switch",
+      "git switch -c topic",
+      "echo t >> a.txt",
+      "git commit -q -a -m \"Topic\"",
+      "git switch main",
+      "git switch main",
+      "git switch -",
+      "git switch @{-1}",
+      "git switch nope",
+      "git switch -c topic",
+      "git switch -c \"a b\"",
+      "git switch -c new nope",
+      "git switch -C topic",
+      "git switch main",
+      "git switch topic extra",
+      "git switch -c later topic",
+      "git switch -q main",
+      "git switch HEAD~0",
+      "git switch --detach",
+      "git switch --detach later",
+      "git switch main",
+      "git switch --detach HEAD",
+      "git switch -c fromhere",
+      "git switch -c bad --detach",
+      "git branch -v"
+    ],
+    "world": {
+      "cwd": "project",
+      "files": {
+        "project/a.txt": "a\n"
+      }
+    }
+  },
+  "steps": [
+    {
+      "cmd": "git init -q",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git switch -",
+      "cwd": "/home/you/project",
+      "exitCode": 128,
+      "stderr": "fatal: invalid reference: @{-1}\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git switch -c dev",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "Switched to a new branch 'dev'\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git switch main",
+      "cwd": "/home/you/project",
+      "exitCode": 128,
+      "stderr": "fatal: invalid reference: main\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git switch -c main",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "Switched to a new branch 'main'\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git add a.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git commit -q -m \"First\"",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git switch",
+      "cwd": "/home/you/project",
+      "exitCode": 128,
+      "stderr": "fatal: missing branch or commit argument\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git switch -c topic",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "Switched to a new branch 'topic'\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "echo t >> a.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git commit -q -a -m \"Topic\"",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git switch main",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "Switched to branch 'main'\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git switch main",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "Already on 'main'\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git switch -",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "Already on 'main'\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git switch @{-1}",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "Already on 'main'\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git switch nope",
+      "cwd": "/home/you/project",
+      "exitCode": 128,
+      "stderr": "fatal: invalid reference: nope\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git switch -c topic",
+      "cwd": "/home/you/project",
+      "exitCode": 128,
+      "stderr": "fatal: a branch named 'topic' already exists\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git switch -c \"a b\"",
+      "cwd": "/home/you/project",
+      "exitCode": 128,
+      "stderr": "fatal: 'a b' is not a valid branch name\nhint: See `man git check-ref-format`\nhint: Disable this message with \"git config advice.refSyntax false\"\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git switch -c new nope",
+      "cwd": "/home/you/project",
+      "exitCode": 128,
+      "stderr": "fatal: invalid reference: nope\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git switch -C topic",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "Switched to and reset branch 'topic'\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git switch main",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "Switched to branch 'main'\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git switch topic extra",
+      "cwd": "/home/you/project",
+      "exitCode": 128,
+      "stderr": "fatal: only one reference expected\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git switch -c later topic",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "Switched to a new branch 'later'\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git switch -q main",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git switch HEAD~0",
+      "cwd": "/home/you/project",
+      "exitCode": 128,
+      "stderr": "fatal: a branch is expected, got commit 'HEAD~0'\nhint: If you want to detach HEAD at the commit, try again with the --detach option.\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git switch --detach",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "HEAD is now at 6f0445d First\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git switch --detach later",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "HEAD is now at 6f0445d First\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git switch main",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "Switched to branch 'main'\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git switch --detach HEAD",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "HEAD is now at 6f0445d First\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git switch -c fromhere",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "Switched to a new branch 'fromhere'\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git switch -c bad --detach",
+      "cwd": "/home/you/project",
+      "exitCode": 128,
+      "stderr": "fatal: '--detach' cannot be used with '-b/-B/--orphan'\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git branch -v",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "* fromhere 6f0445d First\n  later    6f0445d First\n  main     6f0445d First\n  topic    6f0445d First\n"
+    }
+  ]
+}

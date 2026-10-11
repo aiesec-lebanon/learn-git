@@ -1,5 +1,6 @@
 import {
   abbreviate,
+  reachability,
   resolveHead,
   shortRefName,
   subjectOf,
@@ -52,28 +53,9 @@ const KINDS = [
   ["refs/tags/", "tag"],
 ] as const;
 
-function reach(world: World, starts: Iterable<Oid>): Set<Oid> {
-  const seen = new Set<Oid>();
-  const stack = [...starts];
-  for (let oid = stack.pop(); oid; oid = stack.pop()) {
-    if (seen.has(oid)) continue;
-    const commit = world.objects.get(oid);
-    if (commit?.type !== "commit") continue;
-    seen.add(oid);
-    stack.push(...commit.parents);
-  }
-  return seen;
-}
-
 export function repoView(world: World, repo: Repo): RepoView {
   const head = resolveHead(repo);
-  const live = reach(world, [...repo.refs.values(), ...(head ? [head] : [])]);
-  const logged = reach(
-    world,
-    [...repo.reflogs.values()].flatMap((log) =>
-      log.flatMap((e) => [e.old, e.new]).filter((o): o is Oid => o !== null),
-    ),
-  );
+  const { live, logged } = reachability(world.objects, repo);
   const commits = repo.arrival.map((oid): CommitView => {
     const commit = world.objects.get(oid) as Commit;
     return {

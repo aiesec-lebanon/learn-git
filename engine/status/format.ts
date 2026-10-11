@@ -2,7 +2,8 @@ import { displayRelative } from "../files/paths";
 import { quotePath } from "../files/quote";
 import { shortRefName } from "../refs/names";
 import { statusMessages as m } from "../messages/status";
-import type { Repo } from "../types";
+import { detachedHead } from "../refs/detached";
+import type { ObjectPool, Repo } from "../types";
 import { compareBytes } from "../util/compare";
 import type { FileChange, StatusData } from "./compute";
 import { collapseIgnored, collapseUntracked } from "./compute";
@@ -10,6 +11,7 @@ import { collapseIgnored, collapseUntracked } from "./compute";
 export type StatusView = {
   readonly data: StatusData;
   readonly repo: Repo;
+  readonly pool: ObjectPool;
   /** Where paths are shown from: the cwd, or the worktree root for porcelain. */
   readonly from: string;
   readonly keep: (path: string) => boolean;
@@ -72,6 +74,17 @@ function filtered(view: StatusView) {
 const branchName = (repo: Repo) =>
   repo.head.kind === "symbolic" ? shortRefName(repo.head.ref) : "HEAD";
 
+/** The first status line: the branch, or where HEAD is detached. */
+function headLine(view: StatusView): string {
+  if (view.repo.head.kind === "symbolic") {
+    return `On branch ${branchName(view.repo)}`;
+  }
+  const detached = detachedHead(view.pool, view.repo);
+  return detached
+    ? `HEAD detached ${detached.at ? "at" : "from"} ${detached.label}`
+    : "Not currently on any branch.";
+}
+
 /** `git status` in the long format; `git commit` titles an unborn branch "Initial commit". */
 export function longStatus(
   view: StatusView,
@@ -79,7 +92,7 @@ export function longStatus(
 ): string {
   const { staged, unstaged, untracked, ignored } = filtered(view);
   const { unborn } = view.data;
-  let out = `On branch ${branchName(view.repo)}\n`;
+  let out = `${headLine(view)}\n`;
   if (unborn) out += `\n${unbornTitle}\n\n`;
   const entry = (c: Entry) =>
     `\t${LABELS[c.kind].padEnd(12)}${named(view, c)}\n`;
@@ -120,7 +133,9 @@ export function shortStatus(view: StatusView, branch: boolean): string {
     ? ""
     : view.data.unborn
       ? `## No commits yet on ${branchName(view.repo)}\n`
-      : `## ${branchName(view.repo)}\n`;
+      : view.repo.head.kind === "detached"
+        ? "## HEAD (no branch)\n"
+        : `## ${branchName(view.repo)}\n`;
   const index = new Map(staged.map((c) => [c.path, c]));
   const tree = new Map(unstaged.map((c) => [c.path as string, c.kind]));
   const paths = [...new Set([...index.keys(), ...tree.keys()])].sort(
@@ -147,7 +162,7 @@ export function commitTemplate(view: StatusView): string {
     "Please enter the commit message for your changes. Lines starting",
     "with '#' will be ignored, and an empty message aborts the commit.",
     "",
-    `On branch ${branchName(view.repo)}`,
+    headLine(view),
   ];
   if (view.data.unborn) lines.push("", "Initial commit", "");
   const section = (title: string, entries: readonly string[]) => {

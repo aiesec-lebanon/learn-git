@@ -15,6 +15,13 @@ const DWIM = [
   (n: string) => `refs/remotes/${n}/HEAD`,
 ];
 
+/** Every ref a short name matches by Git's search order. */
+export function dwimRefs(repo: Repo, name: string): RefName[] {
+  return DWIM.map((rule) => rule(name) as RefName).filter((ref) =>
+    repo.refs.has(ref),
+  );
+}
+
 const FULL_ID = /^[0-9a-f]{40}$/;
 const SHORT_ID = /^[0-9a-f]{4,39}$/;
 

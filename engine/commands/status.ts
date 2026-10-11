@@ -86,12 +86,26 @@ export const status = defineCommand({
     if (porcelain !== undefined && porcelain !== false) {
       return {
         stdout: shortStatus(
-          { data, repo, from: repo.workdir, keep, ignored },
+          {
+            data,
+            repo,
+            pool: world.objects,
+            from: repo.workdir,
+            keep,
+            ignored,
+          },
           branch,
         ),
       };
     }
-    const view = { data, repo, from: machine.cwd, keep, ignored };
+    const view = {
+      data,
+      repo,
+      pool: world.objects,
+      from: machine.cwd,
+      keep,
+      ignored,
+    };
     const short = flag(options, "short") && !flag(options, "long");
     return { stdout: short ? shortStatus(view, branch) : longStatus(view) };
   },

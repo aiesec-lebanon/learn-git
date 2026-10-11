@@ -4,6 +4,7 @@ import { reflogWho } from "../config/identity";
 import { checkoutMessages as m } from "../messages/checkout";
 import { abbreviate } from "../objects/abbrev";
 import { readObject } from "../objects/pool";
+import { leftBehind } from "../reachability";
 import { branchRef, shortRefName } from "../refs/names";
 import { appendReflog } from "../refs/reflog";
 import { headBranch, resolveHead, updateRef } from "../refs/refs";
@@ -45,6 +46,29 @@ function landing(repo: Repo, target: HeadTarget): Oid | null {
     return repo.refs.get(branchRef(target.name)) ?? null;
   }
   return target.oid;
+}
+
+const CUTOFF = 4;
+
+/** Leaving a detached HEAD: the commits left behind, or where HEAD was. */
+function departure(world: World, repo: Repo, from: Oid, to: Oid | null) {
+  const lost = leftBehind(world.objects, repo, from, to);
+  if (!lost.length) return m.previousPosition(...line(world, from));
+  const describe = (oid: Oid) => `  ${line(world, oid).join(" ")}
+`;
+  const more = lost.length - CUTOFF;
+  const shown = lost.slice(0, CUTOFF).map(describe).join("");
+  const tail =
+    more <= 0
+      ? ""
+      : more === 1
+        ? describe(lost.at(-1) as Oid)
+        : m.andMore(more);
+  return m.leavingBehind(
+    lost.length,
+    shown + tail,
+    abbreviate(world.objects, from),
+  );
 }
 
 /** The line Git prints once HEAD has moved. */
@@ -132,7 +156,7 @@ export function moveHead(ctx: MoveContext, target: HeadTarget): CommandResult {
   let stderr = "";
   if (!quiet) {
     if (before.head.kind === "detached" && from && from !== to) {
-      stderr += m.previousPosition(...line(world, from));
+      stderr += departure(world, before, from, to);
     }
     stderr += arrival(world, target, sameHead, before);
   }

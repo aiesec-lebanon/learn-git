@@ -143,7 +143,13 @@ export const commit = defineCommand({
       : after.size === 0;
     if (unchanged) {
       const data = computeStatus(world.objects, repo, machine.fs);
-      const view = { data, repo, from: machine.cwd, keep: () => true };
+      const view = {
+        data,
+        repo,
+        pool: world.objects,
+        from: machine.cwd,
+        keep: () => true,
+      };
       const written = writeObjects(world, repo.id, trees);
       return {
         world: written.world,
@@ -159,7 +165,13 @@ export const commit = defineCommand({
     if (paragraphs.length === 0 && answer === undefined) {
       const staged = { ...repo, index: prepared.index };
       const data = computeStatus(world.objects, staged, machine.fs);
-      const view = { data, repo: staged, from: machine.cwd, keep: () => true };
+      const view = {
+        data,
+        repo: staged,
+        pool: world.objects,
+        from: machine.cwd,
+        keep: () => true,
+      };
       return {
         request: {
           kind: "editor",

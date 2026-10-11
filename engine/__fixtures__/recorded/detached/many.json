@@ -1,0 +1,434 @@
+{
+  "final": {
+    "config": {
+      "global": [
+        [
+          "user.name",
+          "Sam Lee"
+        ],
+        [
+          "user.email",
+          "sam@example.com"
+        ],
+        [
+          "init.defaultbranch",
+          "main"
+        ]
+      ],
+      "system": []
+    },
+    "dirs": [
+      "project"
+    ],
+    "files": {
+      "project/a.txt": "a\n7\n"
+    },
+    "repos": {
+      "project": {
+        "config": [
+          [
+            "core.repositoryformatversion",
+            "0"
+          ],
+          [
+            "core.filemode",
+            "false"
+          ],
+          [
+            "core.bare",
+            "false"
+          ],
+          [
+            "core.logallrefupdates",
+            "true"
+          ],
+          [
+            "core.symlinks",
+            "false"
+          ],
+          [
+            "core.ignorecase",
+            "true"
+          ]
+        ],
+        "head": {
+          "oid": "ff0199d3033bbf5ad2be63467e61d4b20354847d"
+        },
+        "index": [
+          {
+            "mode": "100644",
+            "oid": "ad0afba7bf8ec52df934f46e5eb93a52dc801c2a",
+            "path": "a.txt",
+            "stage": 0
+          }
+        ],
+        "objects": {
+          "0163cd627227dbc81d45c0ea7d16d609b107a3eb": {
+            "body": "tree 19e5772bbbb82386d522b124ec7f1334a63fb4aa\nparent c93173d5d81d5b9ebd8fb6fa3330bc366cde6689\nauthor Sam Lee <sam@example.com> 1767225900 +0000\ncommitter Sam Lee <sam@example.com> 1767225900 +0000\n\nOne\n",
+            "type": "commit"
+          },
+          "08585692ce06452da6f82ae66b90d98b55536fca": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "a.txt",
+                "oid": "78981922613b2afb6025042ff6bd878ac1994e85"
+              }
+            ],
+            "type": "tree"
+          },
+          "09a9454037cb0c55915c915ebacc9f1ba30e2a92": {
+            "body": "tree 9c1e99f7cbac189bcb3ea9d938349394316a0950\nparent 0163cd627227dbc81d45c0ea7d16d609b107a3eb\nauthor Sam Lee <sam@example.com> 1767226020 +0000\ncommitter Sam Lee <sam@example.com> 1767226020 +0000\n\nTwo\n",
+            "type": "commit"
+          },
+          "145ec8a5cf4b9b292483e652a8ba1a7b0d518630": {
+            "body": "a\n1\n2\n3\n4\n5\n",
+            "type": "blob"
+          },
+          "19e5772bbbb82386d522b124ec7f1334a63fb4aa": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "a.txt",
+                "oid": "38c94da49473ad9ff172c45d5caff133fb8ca53f"
+              }
+            ],
+            "type": "tree"
+          },
+          "25d33bad9a7853fdff230c0ec38cf848d5ecd8cf": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "a.txt",
+                "oid": "ad0afba7bf8ec52df934f46e5eb93a52dc801c2a"
+              }
+            ],
+            "type": "tree"
+          },
+          "2c4410b31c51d9a6af8eddc24881d98d92fdb00b": {
+            "body": "tree 6fbf1f07c7759866289ee9dd6a7ec4e114b8326d\nparent c8208ef1c0b4e1e6c3493d043684a1b0b28b75e2\nauthor Sam Lee <sam@example.com> 1767226500 +0000\ncommitter Sam Lee <sam@example.com> 1767226500 +0000\n\nSix\n",
+            "type": "commit"
+          },
+          "2e2b3f5040e6698f7eaf3bbc496992aa2e680fd8": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "a.txt",
+                "oid": "5d936c78dd16e843978e4509e2522f7ee97b70c6"
+              }
+            ],
+            "type": "tree"
+          },
+          "38c94da49473ad9ff172c45d5caff133fb8ca53f": {
+            "body": "a\n1\n",
+            "type": "blob"
+          },
+          "5d936c78dd16e843978e4509e2522f7ee97b70c6": {
+            "body": "a\n1\n2\n3\n4\n",
+            "type": "blob"
+          },
+          "61418f11b102137c5fece9064717bc0369567e5a": {
+            "body": "a\n1\n2\n3\n4\n5\n6\n",
+            "type": "blob"
+          },
+          "6fbf1f07c7759866289ee9dd6a7ec4e114b8326d": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "a.txt",
+                "oid": "61418f11b102137c5fece9064717bc0369567e5a"
+              }
+            ],
+            "type": "tree"
+          },
+          "78981922613b2afb6025042ff6bd878ac1994e85": {
+            "body": "a\n",
+            "type": "blob"
+          },
+          "9255cffcde0079a8f4f0bd0ee3a20057dd3ce990": {
+            "body": "a\n1\n2\n",
+            "type": "blob"
+          },
+          "9c1e99f7cbac189bcb3ea9d938349394316a0950": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "a.txt",
+                "oid": "9255cffcde0079a8f4f0bd0ee3a20057dd3ce990"
+              }
+            ],
+            "type": "tree"
+          },
+          "a6ec2e9e9bd20e78c960b62193c7b8136a632c70": {
+            "body": "tree c470e622ac09fd6ceffbb6f32bf3a76fc83eebfc\nparent 09a9454037cb0c55915c915ebacc9f1ba30e2a92\nauthor Sam Lee <sam@example.com> 1767226140 +0000\ncommitter Sam Lee <sam@example.com> 1767226140 +0000\n\nThree\n",
+            "type": "commit"
+          },
+          "a7c53ba79a27ed80a12608df8cb2a1ebb411ccac": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "a.txt",
+                "oid": "145ec8a5cf4b9b292483e652a8ba1a7b0d518630"
+              }
+            ],
+            "type": "tree"
+          },
+          "ad0afba7bf8ec52df934f46e5eb93a52dc801c2a": {
+            "body": "a\n7\n",
+            "type": "blob"
+          },
+          "c470e622ac09fd6ceffbb6f32bf3a76fc83eebfc": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "a.txt",
+                "oid": "ee6df6514c641ba2a940b00952da6e4c7c2253fb"
+              }
+            ],
+            "type": "tree"
+          },
+          "c8208ef1c0b4e1e6c3493d043684a1b0b28b75e2": {
+            "body": "tree a7c53ba79a27ed80a12608df8cb2a1ebb411ccac\nparent d1a950fd7c4bcc3c3c7c2b2301cd7f4d4db52ec5\nauthor Sam Lee <sam@example.com> 1767226380 +0000\ncommitter Sam Lee <sam@example.com> 1767226380 +0000\n\nFive\n",
+            "type": "commit"
+          },
+          "c93173d5d81d5b9ebd8fb6fa3330bc366cde6689": {
+            "body": "tree 08585692ce06452da6f82ae66b90d98b55536fca\nauthor Sam Lee <sam@example.com> 1767225720 +0000\ncommitter Sam Lee <sam@example.com> 1767225720 +0000\n\nBase\n",
+            "type": "commit"
+          },
+          "d1a950fd7c4bcc3c3c7c2b2301cd7f4d4db52ec5": {
+            "body": "tree 2e2b3f5040e6698f7eaf3bbc496992aa2e680fd8\nparent a6ec2e9e9bd20e78c960b62193c7b8136a632c70\nauthor Sam Lee <sam@example.com> 1767226260 +0000\ncommitter Sam Lee <sam@example.com> 1767226260 +0000\n\nFour\n",
+            "type": "commit"
+          },
+          "ee6df6514c641ba2a940b00952da6e4c7c2253fb": {
+            "body": "a\n1\n2\n3\n",
+            "type": "blob"
+          },
+          "ff0199d3033bbf5ad2be63467e61d4b20354847d": {
+            "body": "tree 25d33bad9a7853fdff230c0ec38cf848d5ecd8cf\nparent c93173d5d81d5b9ebd8fb6fa3330bc366cde6689\nauthor Sam Lee <sam@example.com> 1767226740 +0000\ncommitter Sam Lee <sam@example.com> 1767226740 +0000\n\nSeven\n",
+            "type": "commit"
+          }
+        },
+        "reflogs": {
+          "HEAD": [
+            "0000000000000000000000000000000000000000 c93173d5d81d5b9ebd8fb6fa3330bc366cde6689 Sam Lee <sam@example.com> 1767225720 +0000\tcommit (initial): Base",
+            "c93173d5d81d5b9ebd8fb6fa3330bc366cde6689 c93173d5d81d5b9ebd8fb6fa3330bc366cde6689 Sam Lee <sam@example.com> 1767225780 +0000\tcheckout: moving from main to HEAD",
+            "c93173d5d81d5b9ebd8fb6fa3330bc366cde6689 0163cd627227dbc81d45c0ea7d16d609b107a3eb Sam Lee <sam@example.com> 1767225900 +0000\tcommit: One",
+            "0163cd627227dbc81d45c0ea7d16d609b107a3eb 09a9454037cb0c55915c915ebacc9f1ba30e2a92 Sam Lee <sam@example.com> 1767226020 +0000\tcommit: Two",
+            "09a9454037cb0c55915c915ebacc9f1ba30e2a92 a6ec2e9e9bd20e78c960b62193c7b8136a632c70 Sam Lee <sam@example.com> 1767226140 +0000\tcommit: Three",
+            "a6ec2e9e9bd20e78c960b62193c7b8136a632c70 d1a950fd7c4bcc3c3c7c2b2301cd7f4d4db52ec5 Sam Lee <sam@example.com> 1767226260 +0000\tcommit: Four",
+            "d1a950fd7c4bcc3c3c7c2b2301cd7f4d4db52ec5 c8208ef1c0b4e1e6c3493d043684a1b0b28b75e2 Sam Lee <sam@example.com> 1767226380 +0000\tcommit: Five",
+            "c8208ef1c0b4e1e6c3493d043684a1b0b28b75e2 2c4410b31c51d9a6af8eddc24881d98d92fdb00b Sam Lee <sam@example.com> 1767226500 +0000\tcommit: Six",
+            "2c4410b31c51d9a6af8eddc24881d98d92fdb00b c93173d5d81d5b9ebd8fb6fa3330bc366cde6689 Sam Lee <sam@example.com> 1767226560 +0000\tcheckout: moving from 2c4410b31c51d9a6af8eddc24881d98d92fdb00b to main",
+            "c93173d5d81d5b9ebd8fb6fa3330bc366cde6689 c93173d5d81d5b9ebd8fb6fa3330bc366cde6689 Sam Lee <sam@example.com> 1767226620 +0000\tcheckout: moving from main to HEAD",
+            "c93173d5d81d5b9ebd8fb6fa3330bc366cde6689 ff0199d3033bbf5ad2be63467e61d4b20354847d Sam Lee <sam@example.com> 1767226740 +0000\tcommit: Seven",
+            "ff0199d3033bbf5ad2be63467e61d4b20354847d c93173d5d81d5b9ebd8fb6fa3330bc366cde6689 Sam Lee <sam@example.com> 1767226800 +0000\tcheckout: moving from ff0199d3033bbf5ad2be63467e61d4b20354847d to main",
+            "c93173d5d81d5b9ebd8fb6fa3330bc366cde6689 ff0199d3033bbf5ad2be63467e61d4b20354847d Sam Lee <sam@example.com> 1767226860 +0000\tcheckout: moving from main to ff0199d3033bbf5ad2be63467e61d4b20354847d"
+          ],
+          "refs/heads/main": [
+            "0000000000000000000000000000000000000000 c93173d5d81d5b9ebd8fb6fa3330bc366cde6689 Sam Lee <sam@example.com> 1767225720 +0000\tcommit (initial): Base"
+          ]
+        },
+        "refs": {
+          "refs/heads/main": "c93173d5d81d5b9ebd8fb6fa3330bc366cde6689"
+        }
+      }
+    }
+  },
+  "git": "2.45.1.windows.1",
+  "script": {
+    "steps": [
+      "git init -q",
+      "git add a.txt",
+      "git commit -q -m \"Base\"",
+      "git switch -q --detach",
+      "echo 1 >> a.txt",
+      "git commit -q -a -m \"One\"",
+      "echo 2 >> a.txt",
+      "git commit -q -a -m \"Two\"",
+      "echo 3 >> a.txt",
+      "git commit -q -a -m \"Three\"",
+      "echo 4 >> a.txt",
+      "git commit -q -a -m \"Four\"",
+      "echo 5 >> a.txt",
+      "git commit -q -a -m \"Five\"",
+      "echo 6 >> a.txt",
+      "git commit -q -a -m \"Six\"",
+      "git switch main",
+      "git switch -q --detach HEAD",
+      "echo 7 >> a.txt",
+      "git commit -q -a -m \"Seven\"",
+      "git switch -q main",
+      "git switch --detach @{-1}",
+      "git status"
+    ],
+    "world": {
+      "cwd": "project",
+      "files": {
+        "project/a.txt": "a\n"
+      }
+    }
+  },
+  "steps": [
+    {
+      "cmd": "git init -q",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git add a.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git commit -q -m \"Base\"",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git switch -q --detach",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "echo 1 >> a.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git commit -q -a -m \"One\"",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "echo 2 >> a.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git commit -q -a -m \"Two\"",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "echo 3 >> a.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git commit -q -a -m \"Three\"",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "echo 4 >> a.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git commit -q -a -m \"Four\"",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "echo 5 >> a.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git commit -q -a -m \"Five\"",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "echo 6 >> a.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git commit -q -a -m \"Six\"",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git switch main",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "Warning: you are leaving 6 commits behind, not connected to\nany of your branches:\n\n  2c4410b Six\n  c8208ef Five\n  d1a950f Four\n  a6ec2e9 Three\n ... and 2 more.\n\nIf you want to keep them by creating a new branch, this may be a good time\nto do so with:\n\n git branch <new-branch-name> 2c4410b\n\nSwitched to branch 'main'\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git switch -q --detach HEAD",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "echo 7 >> a.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git commit -q -a -m \"Seven\"",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git switch -q main",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git switch --detach @{-1}",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "HEAD is now at ff0199d Seven\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git status",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "HEAD detached at ff0199d\nnothing to commit, working tree clean\n"
+    }
+  ]
+}

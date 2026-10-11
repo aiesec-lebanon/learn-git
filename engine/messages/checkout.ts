@@ -30,6 +30,21 @@ hint: If you want to detach HEAD at the commit, try again with the --detach opti
   alreadyOn: (name: string) => `Already on '${name}'\n`,
   headNowAt: (short: string, subject: string) =>
     `HEAD is now at ${short} ${subject}\n`,
+  leavingBehind: (count: number, lines: string, short: string) => {
+    const one = count === 1;
+    return `Warning: you are leaving ${count} commit${one ? "" : "s"} behind, not connected to
+any of your branches:
+
+${lines}
+If you want to keep ${one ? "it" : "them"} by creating a new branch, this may be a good time
+to do so with:
+
+ git branch <new-branch-name> ${short}
+
+`;
+  },
+  andMore: (count: number) => ` ... and ${count} more.
+`,
   previousPosition: (short: string, subject: string) =>
     `Previous HEAD position was ${short} ${subject}\n`,
 };

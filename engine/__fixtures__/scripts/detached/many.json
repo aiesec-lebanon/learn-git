@@ -1,0 +1,33 @@
+{
+  "world": {
+    "files": {
+      "project/a.txt": "a\n"
+    },
+    "cwd": "project"
+  },
+  "steps": [
+    "git init -q",
+    "git add a.txt",
+    "git commit -q -m \"Base\"",
+    "git switch -q --detach",
+    "echo 1 >> a.txt",
+    "git commit -q -a -m \"One\"",
+    "echo 2 >> a.txt",
+    "git commit -q -a -m \"Two\"",
+    "echo 3 >> a.txt",
+    "git commit -q -a -m \"Three\"",
+    "echo 4 >> a.txt",
+    "git commit -q -a -m \"Four\"",
+    "echo 5 >> a.txt",
+    "git commit -q -a -m \"Five\"",
+    "echo 6 >> a.txt",
+    "git commit -q -a -m \"Six\"",
+    "git switch main",
+    "git switch -q --detach HEAD",
+    "echo 7 >> a.txt",
+    "git commit -q -a -m \"Seven\"",
+    "git switch -q main",
+    "git switch --detach @{-1}",
+    "git status"
+  ]
+}

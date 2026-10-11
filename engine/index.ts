@@ -35,3 +35,5 @@ export type { DiffArea } from "./diff/forms";
 export type { CommitSnapshot, SnapshotFile } from "./preview/chain";
 export { rewriteMessage } from "./preview/rewrite-message";
 export type { Rewritten } from "./preview/rewrite-message";
+export { leftBehind, reachability, reachableFrom } from "./reachability";
+export type { Reachability } from "./reachability";

@@ -7,6 +7,7 @@ import { BRANCH_USAGE, branchMessages as m } from "../messages/branch";
 import { abbreviate } from "../objects/abbrev";
 import { readObject } from "../objects/pool";
 import { isAncestor } from "../reachability";
+import { detachedHead } from "../refs/detached";
 import { branchRef, isValidBranchName, shortRefName } from "../refs/names";
 import { appendReflog } from "../refs/reflog";
 import { headBranch, resolveHead, updateRef } from "../refs/refs";
@@ -65,24 +66,50 @@ const branchNames = (repo: Repo) =>
     .filter((ref) => ref.startsWith("refs/heads/"))
     .sort(compareBytes);
 
+type Row = {
+  readonly name: string;
+  readonly oid: Oid;
+  readonly current: boolean;
+};
+
+/** The detached HEAD row `git branch` lists first, as `(HEAD detached at X)`. */
+function detachedRow(world: World, repo: Repo): Row | null {
+  if (repo.head.kind !== "detached") return null;
+  const detached = detachedHead(world.objects, repo);
+  const name = detached
+    ? `(HEAD detached ${detached.at ? "at" : "from"} ${detached.label})`
+    : "(no branch)";
+  return { name, oid: repo.head.oid, current: true };
+}
+
 function list({ world, repo, options }: Ctx): CommandResult {
   const patterns = options.args.map(compileName);
   const current = headBranch(repo);
-  const shown = branchNames(repo).filter(
-    (ref) =>
-      !patterns.length || patterns.some((match) => match(shortRefName(ref))),
-  );
-  const width = Math.max(0, ...shown.map((ref) => shortRefName(ref).length));
+  const detached = patterns.length ? null : detachedRow(world, repo);
+  const rows: Row[] = [
+    ...(detached ? [detached] : []),
+    ...branchNames(repo)
+      .map((ref) => ({
+        name: shortRefName(ref),
+        oid: repo.refs.get(ref) as Oid,
+        current: ref === current,
+      }))
+      .filter(
+        (row) => !patterns.length || patterns.some((match) => match(row.name)),
+      ),
+  ];
+  const width = Math.max(0, ...rows.map((row) => row.name.length));
   const verbose = flag(options, "verbose");
-  const stdout = shown
-    .map((ref) => {
-      const mark = ref === current ? "* " : "  ";
-      const name = shortRefName(ref);
-      if (!verbose) return `${mark}${name}\n`;
-      const oid = repo.refs.get(ref) as Oid;
+  const stdout = rows
+    .map(({ name, oid, current: here }) => {
+      const mark = here ? "* " : "  ";
+      if (!verbose)
+        return `${mark}${name}
+`;
       const commit = readObject(world.objects, oid, "commit");
       const short = abbreviate(world.objects, oid);
-      return `${mark}${name.padEnd(width)} ${short} ${subjectOf(commit.message)}\n`;
+      return `${mark}${name.padEnd(width)} ${short} ${subjectOf(commit.message)}
+`;
     })
     .join("");
   return { stdout };

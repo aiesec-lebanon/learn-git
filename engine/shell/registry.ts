@@ -65,9 +65,13 @@ export function parseFlags(
   return { flags, operands };
 }
 
+const hasControlCharacter = (path: string) =>
+  [...path].some((ch) => ch.charCodeAt(0) < 0x20 || ch === "\u007f");
+
 /** Why the sandbox shell will not write `path`, or null when it can. */
 export function writeGuard(path: string): string | null {
   if (isGitPath(path)) return "files inside .git (Git's own storage)";
+  if (hasControlCharacter(path)) return "control characters in file names";
   const depth = (relativeTo("/", path) ?? "").split("/").length;
   return depth > LIMITS.pathDepth
     ? `paths deeper than ${LIMITS.pathDepth} folders`

@@ -54,6 +54,18 @@ describe("pseudo-shell", () => {
       "not simulated here: files inside .git (Git's own storage)\n",
     ],
     [
+      "echo x > 'a\u0000b'",
+      "not simulated here: control characters in file names\n",
+    ],
+    [
+      "touch 'e\u001b[31m'",
+      "not simulated here: control characters in file names\n",
+    ],
+    [
+      "mkdir 'd\u007f'",
+      "not simulated here: control characters in file names\n",
+    ],
+    [
       "rm -r .",
       "not simulated here: removing the current folder or one above it\n",
     ],

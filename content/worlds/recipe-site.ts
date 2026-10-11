@@ -79,3 +79,25 @@ export const recipeSiteDetached = defineWorld({
     'git commit -am "Suggest bread with the soup"',
   ],
 });
+
+/** The dark-mode branch one commit ahead of main on the same line; HEAD on main. */
+export const recipeSiteMergeReady = defineWorld({
+  ...recipeSiteDarkMode,
+  setup: [...(recipeSiteDarkMode.setup ?? []), "git switch main"],
+});
+
+/** main on the soup commit; feature two commits ahead of it; HEAD on feature. */
+export const recipeSiteFeatureAhead = defineWorld({
+  ...recipeSiteWithIdentity,
+  setup: [
+    ...FIRST_COMMIT,
+    'echo "<h1>Lentil soup</h1>" > soup.html',
+    "git add soup.html",
+    'git commit -m "Add the soup recipe"',
+    "git switch -c feature",
+    'echo "Try the lentil soup." >> README.md',
+    'git commit -am "Mention the soup in the README"',
+    'echo "Serves four." >> soup.html',
+    'git commit -am "Note the servings"',
+  ],
+});

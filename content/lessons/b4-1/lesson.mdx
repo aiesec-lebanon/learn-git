@@ -1,0 +1,46 @@
+<ColdOpen>
+  The dark theme on `dark-mode` is finished and main should have it. Branches
+  are labels on commits, so what does bringing one branch into another actually
+  change?
+</ColdOpen>
+
+<Beat id="behind" title="Behind on one line">
+  `main` sits on an older commit, and `dark-mode` is one commit further along
+  the same line. main has nothing new of its own: every commit it reaches,
+  dark-mode reaches too.
+</Beat>
+
+<Beat id="predict" title="Where will main land?">
+  Before running anything, guess where `main` ends up after
+  `git merge dark-mode`. Tap a commit or choose a new one. Nothing is scored;
+  the guess only gives you something to compare with.
+
+  <Widget name="predict-reveal" />
+</Beat>
+
+<Beat id="glide" title="Fast-forward">
+  `git merge dark-mode` prints "Fast-forward" and the `main` label slides to
+  dark-mode's commit. No new commit appears, because no snapshot needs
+  combining. This is a <Term>fast-forward</Term> merge.
+</Beat>
+
+<Beat id="no-ff" title="Forcing a merge commit">
+  `git merge --no-ff footer` records a merge commit with two parents even
+  though a fast-forward was possible, so the history shows where the branch
+  joined. GitHub's "Create a merge commit" button does the same.
+
+  <Widget name="merge-preview" />
+</Beat>
+
+<Beat id="tidy" title="Delete what is merged">
+  Both labels now point at commits main reaches, so `git branch -d` deletes them
+  without a warning. The commits stay; only the names go.
+</Beat>
+
+<YourTurn />
+
+<Wrap commands={["git merge", "git merge --no-ff", "git branch -d"]}>
+  When the branch you merge is ahead on the same line, Git slides your branch
+  forward: a fast-forward, with no new commit. `--no-ff` records a merge commit
+  anyway.
+</Wrap>

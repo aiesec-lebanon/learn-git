@@ -56,5 +56,10 @@ export async function expectAxeClean(page: Page) {
   const blocking = violations.filter(
     (v) => v.impact === "serious" || v.impact === "critical",
   );
-  expect(blocking.map((v) => `${v.id}: ${v.help}`)).toEqual([]);
+  expect(
+    blocking.map(
+      (v) =>
+        `${v.id}: ${v.help} (${v.nodes.map((n) => n.target.join(" ")).join(", ")})`,
+    ),
+  ).toEqual([]);
 }

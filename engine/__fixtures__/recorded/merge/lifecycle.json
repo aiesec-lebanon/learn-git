@@ -1,0 +1,643 @@
+{
+  "final": {
+    "config": {
+      "global": [
+        [
+          "user.name",
+          "Sam Lee"
+        ],
+        [
+          "user.email",
+          "sam@example.com"
+        ],
+        [
+          "init.defaultbranch",
+          "main"
+        ]
+      ],
+      "system": []
+    },
+    "dirs": [
+      "project",
+      "v"
+    ],
+    "files": {
+      "project/a.txt": "1\nAB\n3\n4\n5\n",
+      "project/both.txt": "<<<<<<< HEAD\nmain\n=======\ntopic\n>>>>>>> topic\n",
+      "project/e.txt": "e\nm\n",
+      "project/notes.txt": "local\n",
+      "v/a-fixed.txt": "1\nAB\n3\n4\n5\n",
+      "v/a-main.txt": "1\nA\n3\n4\n5\n",
+      "v/a-topic.txt": "1\nB\n3\n4\n5\n"
+    },
+    "repos": {
+      "project": {
+        "config": [
+          [
+            "core.repositoryformatversion",
+            "0"
+          ],
+          [
+            "core.filemode",
+            "false"
+          ],
+          [
+            "core.bare",
+            "false"
+          ],
+          [
+            "core.logallrefupdates",
+            "true"
+          ],
+          [
+            "core.symlinks",
+            "false"
+          ],
+          [
+            "core.ignorecase",
+            "true"
+          ]
+        ],
+        "head": {
+          "ref": "refs/heads/main"
+        },
+        "index": [
+          {
+            "mode": "100644",
+            "oid": "18caa90d8b67250048216f1b42e643c194bb4bf5",
+            "path": "a.txt",
+            "stage": 0
+          },
+          {
+            "mode": "100644",
+            "oid": "9cc58b59eda55efe1c7e9dc0b0f438b9d8396540",
+            "path": "both.txt",
+            "stage": 0
+          },
+          {
+            "mode": "100644",
+            "oid": "0be8ef2bf8e844a23da12782acc4a3d31fa3b249",
+            "path": "e.txt",
+            "stage": 0
+          }
+        ],
+        "objects": {
+          "00b3a82cb8e37f77e233af20f2f3200ed08fb7cc": {
+            "body": "tree 12f2eed987102764a7a8b956aec43a1c845e94e8\nauthor Sam Lee <sam@example.com> 1767225720 +0000\ncommitter Sam Lee <sam@example.com> 1767225720 +0000\n\nBase\n",
+            "type": "commit"
+          },
+          "0be8ef2bf8e844a23da12782acc4a3d31fa3b249": {
+            "body": "e\nm\n",
+            "type": "blob"
+          },
+          "0cbc0c2c26af8931bfba7a9afa6c80ae7eb1a49f": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "a.txt",
+                "oid": "18caa90d8b67250048216f1b42e643c194bb4bf5"
+              },
+              {
+                "mode": "100644",
+                "name": "both.txt",
+                "oid": "9cc58b59eda55efe1c7e9dc0b0f438b9d8396540"
+              },
+              {
+                "mode": "100644",
+                "name": "e.txt",
+                "oid": "0be8ef2bf8e844a23da12782acc4a3d31fa3b249"
+              }
+            ],
+            "type": "tree"
+          },
+          "0f62d67e76ce1255a098942495a846df0f8a2c11": {
+            "body": "topic\n",
+            "type": "blob"
+          },
+          "12f2eed987102764a7a8b956aec43a1c845e94e8": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "a.txt",
+                "oid": "8a1218a1024a212bb3db30becd860315f9f3ac52"
+              },
+              {
+                "mode": "100644",
+                "name": "d.txt",
+                "oid": "4bcfe98e640c8284511312660fb8709b0afa888e"
+              },
+              {
+                "mode": "100644",
+                "name": "e.txt",
+                "oid": "d905d9da82c97264ab6f4920e20242e088850ce9"
+              }
+            ],
+            "type": "tree"
+          },
+          "18caa90d8b67250048216f1b42e643c194bb4bf5": {
+            "body": "1\nAB\n3\n4\n5\n",
+            "type": "blob"
+          },
+          "20b33a0ff688b6435803b7b2e7e9c7206f137687": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "a.txt",
+                "oid": "869b2ca3e5ddca9ca499184efd70d64e3fc7eb85"
+              },
+              {
+                "mode": "100644",
+                "name": "both.txt",
+                "oid": "ba2906d0666cf726c7eaadd2cd3db615dedfdf3a"
+              },
+              {
+                "mode": "100644",
+                "name": "e.txt",
+                "oid": "0be8ef2bf8e844a23da12782acc4a3d31fa3b249"
+              }
+            ],
+            "type": "tree"
+          },
+          "4bcfe98e640c8284511312660fb8709b0afa888e": {
+            "body": "d\n",
+            "type": "blob"
+          },
+          "510c759214604328bef3b8c0060711b4dfa489af": {
+            "body": "d\nt\n",
+            "type": "blob"
+          },
+          "5a7c19fcedb4b08881ba82ce585675f785b70f08": {
+            "body": "tree 20b33a0ff688b6435803b7b2e7e9c7206f137687\nparent 00b3a82cb8e37f77e233af20f2f3200ed08fb7cc\nauthor Sam Lee <sam@example.com> 1767226560 +0000\ncommitter Sam Lee <sam@example.com> 1767226560 +0000\n\nMain\n",
+            "type": "commit"
+          },
+          "60e4a3865cb1087c78a13fb49054ecfc20dd2ec6": {
+            "body": "1\nB\n3\n4\n5\n",
+            "type": "blob"
+          },
+          "7e54efeb488d41fb1c2f2c612bf09c2526c8a493": {
+            "body": "tree 0cbc0c2c26af8931bfba7a9afa6c80ae7eb1a49f\nparent 5a7c19fcedb4b08881ba82ce585675f785b70f08\nparent ad8796cd38a6ffd6141c7d5602f84118060e70f8\nauthor Sam Lee <sam@example.com> 1767227940 +0000\ncommitter Sam Lee <sam@example.com> 1767227940 +0000\n\nMerge branch 'topic'\n",
+            "type": "commit"
+          },
+          "869b2ca3e5ddca9ca499184efd70d64e3fc7eb85": {
+            "body": "1\nA\n3\n4\n5\n",
+            "type": "blob"
+          },
+          "8a1218a1024a212bb3db30becd860315f9f3ac52": {
+            "body": "1\n2\n3\n4\n5\n",
+            "type": "blob"
+          },
+          "9cc58b59eda55efe1c7e9dc0b0f438b9d8396540": {
+            "body": "<<<<<<< HEAD\nmain\n=======\ntopic\n>>>>>>> topic\n",
+            "type": "blob"
+          },
+          "a61088f3c4d720a395403716c921468765ea5bb4": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "a.txt",
+                "oid": "febeb7e1b6978752c7ec3cc0b4eb07bbc5a992e5"
+              },
+              {
+                "mode": "100644",
+                "name": "both.txt",
+                "oid": "9cc58b59eda55efe1c7e9dc0b0f438b9d8396540"
+              },
+              {
+                "mode": "100644",
+                "name": "d.txt",
+                "oid": "510c759214604328bef3b8c0060711b4dfa489af"
+              },
+              {
+                "mode": "100644",
+                "name": "e.txt",
+                "oid": "0be8ef2bf8e844a23da12782acc4a3d31fa3b249"
+              }
+            ],
+            "type": "tree"
+          },
+          "ad8796cd38a6ffd6141c7d5602f84118060e70f8": {
+            "body": "tree f23fe965833a0630099f3d1e20305ad69fa7f361\nparent 00b3a82cb8e37f77e233af20f2f3200ed08fb7cc\nauthor Sam Lee <sam@example.com> 1767226140 +0000\ncommitter Sam Lee <sam@example.com> 1767226140 +0000\n\nTopic\n",
+            "type": "commit"
+          },
+          "ba2906d0666cf726c7eaadd2cd3db615dedfdf3a": {
+            "body": "main\n",
+            "type": "blob"
+          },
+          "d905d9da82c97264ab6f4920e20242e088850ce9": {
+            "body": "e\n",
+            "type": "blob"
+          },
+          "f23fe965833a0630099f3d1e20305ad69fa7f361": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "a.txt",
+                "oid": "60e4a3865cb1087c78a13fb49054ecfc20dd2ec6"
+              },
+              {
+                "mode": "100644",
+                "name": "both.txt",
+                "oid": "0f62d67e76ce1255a098942495a846df0f8a2c11"
+              },
+              {
+                "mode": "100644",
+                "name": "d.txt",
+                "oid": "510c759214604328bef3b8c0060711b4dfa489af"
+              }
+            ],
+            "type": "tree"
+          },
+          "febeb7e1b6978752c7ec3cc0b4eb07bbc5a992e5": {
+            "body": "1\n<<<<<<< HEAD\nA\n=======\nB\n>>>>>>> topic\n3\n4\n5\n",
+            "type": "blob"
+          }
+        },
+        "pseudo": {
+          "ORIG_HEAD": "5a7c19fcedb4b08881ba82ce585675f785b70f08\n"
+        },
+        "reflogs": {
+          "HEAD": [
+            "0000000000000000000000000000000000000000 00b3a82cb8e37f77e233af20f2f3200ed08fb7cc Sam Lee <sam@example.com> 1767225720 +0000\tcommit (initial): Base",
+            "00b3a82cb8e37f77e233af20f2f3200ed08fb7cc 00b3a82cb8e37f77e233af20f2f3200ed08fb7cc Sam Lee <sam@example.com> 1767225780 +0000\tcheckout: moving from main to topic",
+            "00b3a82cb8e37f77e233af20f2f3200ed08fb7cc ad8796cd38a6ffd6141c7d5602f84118060e70f8 Sam Lee <sam@example.com> 1767226140 +0000\tcommit: Topic",
+            "ad8796cd38a6ffd6141c7d5602f84118060e70f8 00b3a82cb8e37f77e233af20f2f3200ed08fb7cc Sam Lee <sam@example.com> 1767226200 +0000\tcheckout: moving from topic to main",
+            "00b3a82cb8e37f77e233af20f2f3200ed08fb7cc 5a7c19fcedb4b08881ba82ce585675f785b70f08 Sam Lee <sam@example.com> 1767226560 +0000\tcommit: Main",
+            "5a7c19fcedb4b08881ba82ce585675f785b70f08 5a7c19fcedb4b08881ba82ce585675f785b70f08 Sam Lee <sam@example.com> 1767227040 +0000\treset: moving to HEAD",
+            "5a7c19fcedb4b08881ba82ce585675f785b70f08 7e54efeb488d41fb1c2f2c612bf09c2526c8a493 Sam Lee <sam@example.com> 1767227940 +0000\tcommit (merge): Merge branch 'topic'"
+          ],
+          "refs/heads/main": [
+            "0000000000000000000000000000000000000000 00b3a82cb8e37f77e233af20f2f3200ed08fb7cc Sam Lee <sam@example.com> 1767225720 +0000\tcommit (initial): Base",
+            "00b3a82cb8e37f77e233af20f2f3200ed08fb7cc 5a7c19fcedb4b08881ba82ce585675f785b70f08 Sam Lee <sam@example.com> 1767226560 +0000\tcommit: Main",
+            "5a7c19fcedb4b08881ba82ce585675f785b70f08 7e54efeb488d41fb1c2f2c612bf09c2526c8a493 Sam Lee <sam@example.com> 1767227940 +0000\tcommit (merge): Merge branch 'topic'"
+          ],
+          "refs/heads/topic": [
+            "0000000000000000000000000000000000000000 00b3a82cb8e37f77e233af20f2f3200ed08fb7cc Sam Lee <sam@example.com> 1767225780 +0000\tbranch: Created from HEAD",
+            "00b3a82cb8e37f77e233af20f2f3200ed08fb7cc ad8796cd38a6ffd6141c7d5602f84118060e70f8 Sam Lee <sam@example.com> 1767226140 +0000\tcommit: Topic"
+          ]
+        },
+        "refs": {
+          "refs/heads/main": "7e54efeb488d41fb1c2f2c612bf09c2526c8a493",
+          "refs/heads/topic": "ad8796cd38a6ffd6141c7d5602f84118060e70f8"
+        }
+      }
+    }
+  },
+  "git": "2.45.1.windows.1",
+  "script": {
+    "steps": [
+      "git init -q",
+      "git add .",
+      "git commit -q -m \"Base\"",
+      "git switch -q -c topic",
+      "cat ../v/a-topic.txt > a.txt",
+      "echo topic > both.txt",
+      "echo t >> d.txt",
+      "git rm -q e.txt",
+      "git add .",
+      "git commit -q -m \"Topic\"",
+      "git switch -q main",
+      "cat ../v/a-main.txt > a.txt",
+      "echo main > both.txt",
+      "git rm -q d.txt",
+      "echo m >> e.txt",
+      "git add .",
+      "git commit -q -m \"Main\"",
+      "echo local > notes.txt",
+      "git merge topic",
+      "git status",
+      "git status --short",
+      "git commit -m \"Done\"",
+      "git commit",
+      "git merge --continue",
+      "git merge --abort",
+      "git status --short",
+      "git merge --abort",
+      "git merge --continue",
+      "git merge topic",
+      "cat ../v/a-fixed.txt > a.txt",
+      "git add a.txt",
+      "git status",
+      "git add both.txt",
+      "git rm -q d.txt",
+      "git add e.txt",
+      "git status",
+      "git status --short",
+      "git merge topic",
+      "git switch topic",
+      "git commit",
+      "git status",
+      "git log --oneline --graph"
+    ],
+    "world": {
+      "cwd": "project",
+      "files": {
+        "project/a.txt": "1\n2\n3\n4\n5\n",
+        "project/d.txt": "d\n",
+        "project/e.txt": "e\n",
+        "v/a-fixed.txt": "1\nAB\n3\n4\n5\n",
+        "v/a-main.txt": "1\nA\n3\n4\n5\n",
+        "v/a-topic.txt": "1\nB\n3\n4\n5\n"
+      }
+    }
+  },
+  "steps": [
+    {
+      "cmd": "git init -q",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git add .",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git commit -q -m \"Base\"",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git switch -q -c topic",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "cat ../v/a-topic.txt > a.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "echo topic > both.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "echo t >> d.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git rm -q e.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git add .",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git commit -q -m \"Topic\"",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git switch -q main",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "cat ../v/a-main.txt > a.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "echo main > both.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git rm -q d.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "echo m >> e.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git add .",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git commit -q -m \"Main\"",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "echo local > notes.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git merge topic",
+      "cwd": "/home/you/project",
+      "exitCode": 1,
+      "stderr": "",
+      "stdout": "Auto-merging a.txt\nCONFLICT (content): Merge conflict in a.txt\nAuto-merging both.txt\nCONFLICT (add/add): Merge conflict in both.txt\nCONFLICT (modify/delete): d.txt deleted in HEAD and modified in topic.  Version topic of d.txt left in tree.\nCONFLICT (modify/delete): e.txt deleted in topic and modified in HEAD.  Version HEAD of e.txt left in tree.\nAutomatic merge failed; fix conflicts and then commit the result.\n"
+    },
+    {
+      "cmd": "git status",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "On branch main\nYou have unmerged paths.\n  (fix conflicts and run \"git commit\")\n  (use \"git merge --abort\" to abort the merge)\n\nUnmerged paths:\n  (use \"git add/rm <file>...\" as appropriate to mark resolution)\n\tboth modified:   a.txt\n\tboth added:      both.txt\n\tdeleted by us:   d.txt\n\tdeleted by them: e.txt\n\nUntracked files:\n  (use \"git add <file>...\" to include in what will be committed)\n\tnotes.txt\n\nno changes added to commit (use \"git add\" and/or \"git commit -a\")\n"
+    },
+    {
+      "cmd": "git status --short",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "UU a.txt\nAA both.txt\nDU d.txt\nUD e.txt\n?? notes.txt\n"
+    },
+    {
+      "cmd": "git commit -m \"Done\"",
+      "cwd": "/home/you/project",
+      "exitCode": 128,
+      "stderr": "error: Committing is not possible because you have unmerged files.\nhint: Fix them up in the work tree, and then use 'git add/rm <file>'\nhint: as appropriate to mark resolution and make a commit.\nfatal: Exiting because of an unresolved conflict.\n",
+      "stdout": "U\ta.txt\nU\tboth.txt\nU\td.txt\nU\te.txt\n"
+    },
+    {
+      "cmd": "git commit",
+      "cwd": "/home/you/project",
+      "exitCode": 128,
+      "stderr": "error: Committing is not possible because you have unmerged files.\nhint: Fix them up in the work tree, and then use 'git add/rm <file>'\nhint: as appropriate to mark resolution and make a commit.\nfatal: Exiting because of an unresolved conflict.\n",
+      "stdout": "U\ta.txt\nU\tboth.txt\nU\td.txt\nU\te.txt\n"
+    },
+    {
+      "cmd": "git merge --continue",
+      "cwd": "/home/you/project",
+      "exitCode": 128,
+      "stderr": "error: Committing is not possible because you have unmerged files.\nhint: Fix them up in the work tree, and then use 'git add/rm <file>'\nhint: as appropriate to mark resolution and make a commit.\nfatal: Exiting because of an unresolved conflict.\n",
+      "stdout": "U\ta.txt\nU\tboth.txt\nU\td.txt\nU\te.txt\n"
+    },
+    {
+      "cmd": "git merge --abort",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git status --short",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "?? notes.txt\n"
+    },
+    {
+      "cmd": "git merge --abort",
+      "cwd": "/home/you/project",
+      "exitCode": 128,
+      "stderr": "fatal: There is no merge to abort (MERGE_HEAD missing).\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git merge --continue",
+      "cwd": "/home/you/project",
+      "exitCode": 128,
+      "stderr": "fatal: There is no merge in progress (MERGE_HEAD missing).\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git merge topic",
+      "cwd": "/home/you/project",
+      "exitCode": 1,
+      "stderr": "",
+      "stdout": "Auto-merging a.txt\nCONFLICT (content): Merge conflict in a.txt\nAuto-merging both.txt\nCONFLICT (add/add): Merge conflict in both.txt\nCONFLICT (modify/delete): d.txt deleted in HEAD and modified in topic.  Version topic of d.txt left in tree.\nCONFLICT (modify/delete): e.txt deleted in topic and modified in HEAD.  Version HEAD of e.txt left in tree.\nAutomatic merge failed; fix conflicts and then commit the result.\n"
+    },
+    {
+      "cmd": "cat ../v/a-fixed.txt > a.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git add a.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git status",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "On branch main\nYou have unmerged paths.\n  (fix conflicts and run \"git commit\")\n  (use \"git merge --abort\" to abort the merge)\n\nChanges to be committed:\n\tmodified:   a.txt\n\nUnmerged paths:\n  (use \"git add/rm <file>...\" as appropriate to mark resolution)\n\tboth added:      both.txt\n\tdeleted by us:   d.txt\n\tdeleted by them: e.txt\n\nUntracked files:\n  (use \"git add <file>...\" to include in what will be committed)\n\tnotes.txt\n\n"
+    },
+    {
+      "cmd": "git add both.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git rm -q d.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git add e.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git status",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "On branch main\nAll conflicts fixed but you are still merging.\n  (use \"git commit\" to conclude merge)\n\nChanges to be committed:\n\tmodified:   a.txt\n\tmodified:   both.txt\n\nUntracked files:\n  (use \"git add <file>...\" to include in what will be committed)\n\tnotes.txt\n\n"
+    },
+    {
+      "cmd": "git status --short",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "M  a.txt\nM  both.txt\n?? notes.txt\n"
+    },
+    {
+      "cmd": "git merge topic",
+      "cwd": "/home/you/project",
+      "exitCode": 128,
+      "stderr": "fatal: You have not concluded your merge (MERGE_HEAD exists).\nPlease, commit your changes before you merge.\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git switch topic",
+      "cwd": "/home/you/project",
+      "exitCode": 128,
+      "stderr": "fatal: cannot switch branch while merging\nConsider \"git merge --quit\" or \"git worktree add\".\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git commit",
+      "cwd": "/home/you/project",
+      "editor": {
+        "received": "Merge branch 'topic'\n\n# Conflicts:\n#\ta.txt\n#\tboth.txt\n#\td.txt\n#\te.txt\n#\n# It looks like you may be committing a merge.\n# If this is not correct, please run\n#\tgit update-ref -d MERGE_HEAD\n# and try again.\n\n\n# Please enter the commit message for your changes. Lines starting\n# with '#' will be ignored, and an empty message aborts the commit.\n#\n# On branch main\n# All conflicts fixed but you are still merging.\n#\n# Changes to be committed:\n#\tmodified:   a.txt\n#\tmodified:   both.txt\n#\n# Untracked files:\n#\tnotes.txt\n#\n",
+        "wrote": null
+      },
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "[main 7e54efe] Merge branch 'topic'\n"
+    },
+    {
+      "cmd": "git status",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "On branch main\nUntracked files:\n  (use \"git add <file>...\" to include in what will be committed)\n\tnotes.txt\n\nnothing added to commit but untracked files present (use \"git add\" to track)\n"
+    },
+    {
+      "cmd": "git log --oneline --graph",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "*   7e54efe (HEAD -> main) Merge branch 'topic'\n|\\  \n| * ad8796c (topic) Topic\n* | 5a7c19f Main\n|/  \n* 00b3a82 Base\n"
+    }
+  ]
+}

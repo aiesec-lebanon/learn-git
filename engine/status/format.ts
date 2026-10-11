@@ -5,7 +5,7 @@ import { statusMessages as m } from "../messages/status";
 import { detachedHead } from "../refs/detached";
 import type { ObjectPool, Repo } from "../types";
 import { compareBytes } from "../util/compare";
-import type { FileChange, StatusData } from "./compute";
+import type { FileChange, StatusData, UnmergedCode } from "./compute";
 import { collapseIgnored, collapseUntracked } from "./compute";
 
 export type StatusView = {
@@ -64,11 +64,36 @@ function filtered(view: StatusView) {
   return {
     staged: stagedEntries(data).filter((c) => keep(c.path)),
     unstaged: data.unstaged.filter((c) => keep(c.path)),
+    unmerged: data.unmerged.filter((u) => keep(u.path)),
     untracked: collapseUntracked(data.untracked.filter(keep), repo.index),
     ignored: view.ignored
       ? collapseIgnored(data.ignored.filter(keep), data.untracked, repo.index)
       : [],
   };
+}
+
+const UNMERGED_LABELS: Readonly<Record<UnmergedCode, string>> = {
+  DD: "both deleted:",
+  AU: "added by us:",
+  UD: "deleted by them:",
+  UA: "added by them:",
+  DU: "deleted by us:",
+  AA: "both added:",
+  UU: "both modified:",
+};
+
+/** The merge-in-progress lines after the branch line (long format and template). */
+function mergeState(view: StatusView, hints: boolean): string[] {
+  if (!view.repo.op) return [];
+  return view.data.unmerged.length
+    ? [m.unmergedHere(), ...(hints ? [m.fixAndCommit(), m.abortMerge()] : [])]
+    : [m.allFixed(), ...(hints ? [m.concludeMerge()] : [])];
+}
+
+function unmergedHint(codes: readonly UnmergedCode[]): string {
+  const deleteModify = codes.some((c) => c === "UD" || c === "DU");
+  if (codes.includes("DD") && !deleteModify) return m.markRm();
+  return deleteModify || codes.includes("DD") ? m.markAddRm() : m.markAdd();
 }
 
 const branchName = (repo: Repo) =>
@@ -90,15 +115,27 @@ export function longStatus(
   view: StatusView,
   unbornTitle = m.noCommitsYet(),
 ): string {
-  const { staged, unstaged, untracked, ignored } = filtered(view);
+  const { staged, unstaged, unmerged, untracked, ignored } = filtered(view);
   const { unborn } = view.data;
   let out = `${headLine(view)}\n`;
+  const state = mergeState(view, true);
+  if (state.length) out += `${state.join("\n")}\n\n`;
   if (unborn) out += `\n${unbornTitle}\n\n`;
   const entry = (c: Entry) =>
     `\t${LABELS[c.kind].padEnd(12)}${named(view, c)}\n`;
   if (staged.length) {
-    out += `${m.stagedTitle()}\n${unborn ? m.unstageUnborn() : m.unstage()}\n`;
-    out += `${staged.map(entry).join("")}\n`;
+    const hint = view.repo.op
+      ? ""
+      : `${unborn ? m.unstageUnborn() : m.unstage()}\n`;
+    out += `${m.stagedTitle()}\n${hint}${staged.map(entry).join("")}\n`;
+  }
+  if (unmerged.length) {
+    const label = (code: UnmergedCode) => UNMERGED_LABELS[code].padEnd(17);
+    out += `${m.unmergedTitle()}\n${unmergedHint(unmerged.map((u) => u.code))}\n`;
+    out += unmerged
+      .map((u) => `\t${label(u.code)}${shown(view, u.path)}\n`)
+      .join("");
+    out += "\n";
   }
   if (unstaged.length) {
     const deletions = unstaged.some((c) => c.kind === "deleted");
@@ -114,7 +151,9 @@ export function longStatus(
     out += `${ignored.map((p) => `\t${shown(view, p)}\n`).join("")}\n`;
   }
   if (staged.length) return out;
-  if (unstaged.length) return `${out}${m.noChangesAdded()}\n`;
+  if (unstaged.length || unmerged.length) {
+    return `${out}${m.noChangesAdded()}\n`;
+  }
   if (untracked.length) return `${out}${m.untrackedOnly()}\n`;
   return `${out}${unborn ? m.nothingUnborn() : m.clean()}\n`;
 }
@@ -128,7 +167,7 @@ const CODES: Readonly<Record<Entry["kind"], string>> = {
 
 /** `git status -s` (and porcelain v1, which only differs in where paths start). */
 export function shortStatus(view: StatusView, branch: boolean): string {
-  const { staged, unstaged, untracked, ignored } = filtered(view);
+  const { staged, unstaged, unmerged, untracked, ignored } = filtered(view);
   const header = !branch
     ? ""
     : view.data.unborn
@@ -138,11 +177,18 @@ export function shortStatus(view: StatusView, branch: boolean): string {
         : `## ${branchName(view.repo)}\n`;
   const index = new Map(staged.map((c) => [c.path, c]));
   const tree = new Map(unstaged.map((c) => [c.path as string, c.kind]));
-  const paths = [...new Set([...index.keys(), ...tree.keys()])].sort(
-    compareBytes,
+  const conflicts = new Map<string, string>(
+    unmerged.map((u) => [u.path, u.code]),
   );
+  const paths = [
+    ...new Set([...index.keys(), ...tree.keys(), ...conflicts.keys()]),
+  ].sort(compareBytes);
   const code = (kind: Entry["kind"] | undefined) => (kind ? CODES[kind] : " ");
   const tracked = paths.map((p) => {
+    const conflict = conflicts.get(p);
+    if (conflict)
+      return `${conflict} ${shown(view, p)}
+`;
     const change = index.get(p);
     const name = change ? named(view, change) : shown(view, p);
     return `${code(change?.kind)}${code(tree.get(p))} ${name}\n`;
@@ -164,6 +210,8 @@ export function commitTemplate(view: StatusView): string {
     "",
     headLine(view),
   ];
+  const state = mergeState(view, false);
+  if (state.length) lines.push(...state, "");
   if (view.data.unborn) lines.push("", "Initial commit", "");
   const section = (title: string, entries: readonly string[]) => {
     if (entries.length) lines.push(title, ...entries, "");

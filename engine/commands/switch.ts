@@ -68,7 +68,12 @@ export const switchCommand = defineCommand({
   run: ({ world, machine, repo, options, time }) => {
     const unsupported = refuseUnsimulated("switch", options);
     if (unsupported) return unsupported;
-    if (repo.op) return refuse("usage", mergeMessages.switchWhileMerging());
+    if (repo.op) {
+      return refuse(
+        "operation-in-progress",
+        mergeMessages.switchWhileMerging(),
+      );
+    }
     const pool = world.objects;
     const { args } = options;
     const created =

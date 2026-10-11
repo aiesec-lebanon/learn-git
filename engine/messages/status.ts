@@ -22,4 +22,14 @@ export const statusMessages = {
   nothingUnborn: () =>
     'nothing to commit (create/copy files and use "git add" to track)',
   clean: () => "nothing to commit, working tree clean",
+  unmergedHere: () => "You have unmerged paths.",
+  fixAndCommit: () => '  (fix conflicts and run "git commit")',
+  abortMerge: () => '  (use "git merge --abort" to abort the merge)',
+  allFixed: () => "All conflicts fixed but you are still merging.",
+  concludeMerge: () => '  (use "git commit" to conclude merge)',
+  unmergedTitle: () => "Unmerged paths:",
+  markAdd: () => '  (use "git add <file>..." to mark resolution)',
+  markRm: () => '  (use "git rm <file>..." to mark resolution)',
+  markAddRm: () =>
+    '  (use "git add/rm <file>..." as appropriate to mark resolution)',
 };

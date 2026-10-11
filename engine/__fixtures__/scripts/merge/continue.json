@@ -1,0 +1,39 @@
+{
+  "world": {
+    "files": {
+      "project/a.txt": "1\n2\n3\n",
+      "v/a-main.txt": "1\nA\n3\n",
+      "v/a-topic.txt": "1\nB\n3\n",
+      "v/a-side.txt": "1\nS\n3\n"
+    },
+    "cwd": "project"
+  },
+  "steps": [
+    "git init -q",
+    "git add .",
+    "git commit -q -m \"Base\"",
+    "git switch -q -c topic",
+    "cat ../v/a-topic.txt > a.txt",
+    "git commit -q -a -m \"Topic\"",
+    "git switch -q -c side main",
+    "cat ../v/a-side.txt > a.txt",
+    "git commit -q -a -m \"Side\"",
+    "git switch -q main",
+    "cat ../v/a-main.txt > a.txt",
+    "git commit -q -a -m \"Main\"",
+    "git merge -m \"Combine topic\" topic",
+    "echo AB > a.txt",
+    "git add a.txt",
+    {
+      "cmd": "git merge --continue",
+      "editor": "Combine topic\n\nKept both.\n"
+    },
+    "git merge side",
+    "git add a.txt",
+    "git commit -m \"Take side\"",
+    "git switch -q topic",
+    "git merge main",
+    "git merge -q main",
+    "git log --oneline --graph --all"
+  ]
+}

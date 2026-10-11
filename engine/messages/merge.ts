@@ -14,6 +14,10 @@ export const mergeMessages = {
     "Automatic merge failed; fix conflicts and then commit the result.\n",
   indexHasChanges: (paths: readonly string[]) =>
     `error: Your local changes to the following files would be overwritten by merge:\n  ${paths.join(" ")}\n`,
+  noMergeToAbort: () =>
+    "fatal: There is no merge to abort (MERGE_HEAD missing).\n",
+  noMergeInProgress: () =>
+    "fatal: There is no merge in progress (MERGE_HEAD missing).\n",
   unrelated: () => "fatal: refusing to merge unrelated histories\n",
   unmerged: (doing: "Merging" | "Committing") =>
     `error: ${doing} is not possible because you have unmerged files.

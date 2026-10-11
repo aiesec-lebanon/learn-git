@@ -250,6 +250,9 @@ export type RefusalCode =
   | "no-such-branch"
   | "branch-checked-out"
   | "not-fully-merged"
+  | "unmerged-paths"
+  | "operation-in-progress"
+  | "no-operation"
   | "shell-error";
 
 export type EditorRequest = {

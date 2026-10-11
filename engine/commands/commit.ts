@@ -10,6 +10,8 @@ import { resolveIdentity } from "../config/identity";
 import { LIMITS } from "../limits";
 import { addMessages } from "../messages/add";
 import { notSimulated } from "../messages/git";
+import { mergeMessages } from "../messages/merge";
+import { withoutOperation } from "../merge/state";
 import { abbreviate } from "../objects/abbrev";
 import { readObject } from "../objects/pool";
 import { buildTree, flattenTree, type TreeFile } from "../objects/tree";
@@ -18,7 +20,7 @@ import { parsePathspecs } from "../pathspec";
 import { shortRefName } from "../refs/names";
 import { appendReflog } from "../refs/reflog";
 import { resolveHead, updateRef } from "../refs/refs";
-import { stagedFiles } from "../staging/index";
+import { conflictedPaths, stagedFiles } from "../staging/index";
 import { computeStatus } from "../status/compute";
 import { commitTemplate, longStatus } from "../status/format";
 import type { Commit, Effect, Repo, RepoPath, Signature } from "../types";
@@ -66,6 +68,14 @@ const OPTIONS: readonly OptionSpec[] = [
 
 const ABORT_EMPTY = "Aborting commit due to empty commit message.\n";
 
+const MERGE_ADVICE = `#
+# It looks like you may be committing a merge.
+# If this is not correct, please run
+#\tgit update-ref -d MERGE_HEAD
+# and try again.
+
+`;
+
 export const commit = defineCommand({
   name: "commit",
   counted: true,
@@ -88,6 +98,15 @@ export const commit = defineCommand({
         "not-simulated",
         notSimulated(`git commit --${unsupported.slice(2)}`),
         1,
+      );
+    }
+    const unmerged = conflictedPaths(repo.index);
+    if (unmerged.length) {
+      return refuse(
+        "unmerged-paths",
+        mergeMessages.unmerged("Committing"),
+        128,
+        unmerged.map((p) => `U\t${p}\n`).join(""),
       );
     }
     const all = flag(options, "all");
@@ -138,9 +157,12 @@ export const commit = defineCommand({
     if (!identity.ok) return refuse("identity-unknown", identity.stderr);
     const after = prepared.files;
     const { root, trees } = buildTree(after);
-    const unchanged = parent
-      ? readObject(world.objects, parent, "commit").tree === root
-      : after.size === 0;
+    const merging = repo.op;
+    const unchanged =
+      !merging &&
+      (parent
+        ? readObject(world.objects, parent, "commit").tree === root
+        : after.size === 0);
     if (unchanged) {
       const data = computeStatus(world.objects, repo, machine.fs);
       const view = {
@@ -177,7 +199,9 @@ export const commit = defineCommand({
           kind: "editor",
           purpose: "commit-message",
           file: ".git/COMMIT_EDITMSG",
-          initial: commitTemplate(view),
+          initial: merging
+            ? merging.message + MERGE_ADVICE + commitTemplate(view)
+            : commitTemplate(view),
         },
       };
     }
@@ -196,7 +220,10 @@ export const commit = defineCommand({
     const object: Commit = {
       type: "commit",
       tree: root,
-      parents: parent ? [parent] : [],
+      parents: [
+        ...(parent ? [parent] : []),
+        ...(merging ? [merging.head] : []),
+      ],
       author: who,
       committer: who,
       message,
@@ -212,7 +239,8 @@ export const commit = defineCommand({
     const oid = written.oids.at(-1) ?? root;
     const subject = subjectOf(message);
     const firstLine = (message.split("\n")[0] ?? "").trimStart();
-    const reflog = `commit${parent ? "" : " (initial)"}: ${firstLine}`;
+    const kind = merging ? " (merge)" : parent ? "" : " (initial)";
+    const reflog = `commit${kind}: ${firstLine}`;
     const effects: Effect[] = [...written.effects];
     if (prepared.changes.length) {
       effects.push({
@@ -223,10 +251,18 @@ export const commit = defineCommand({
       });
     }
     let next: Repo = {
-      ...repo,
+      ...withoutOperation(repo),
       index: prepared.index,
       arrival: [...repo.arrival, oid],
     };
+    if (merging) {
+      effects.push({
+        kind: "operation",
+        repo: repo.id,
+        operation: "merge",
+        phase: "finished",
+      });
+    }
     if (repo.head.kind === "symbolic") {
       const moved = updateRef(next, repo.head.ref, oid, who, reflog);
       next = moved.repo;
@@ -257,7 +293,7 @@ export const commit = defineCommand({
     const pool = written.world.objects;
     const stdout = flag(options, "quiet")
       ? ""
-      : `[${label}${parent ? "" : " (root-commit)"} ${abbreviate(pool, oid)}] ${subject}\n${commitSummary(pool, before, after)}`;
+      : `[${label}${parent ? "" : " (root-commit)"} ${abbreviate(pool, oid)}] ${subject}\n${merging ? "" : commitSummary(pool, before, after)}`;
     return { world: withRepo(written.world, next), stdout, effects };
   },
 });

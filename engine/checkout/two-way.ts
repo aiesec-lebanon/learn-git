@@ -22,7 +22,7 @@ import type {
 } from "../types";
 import { compareBytes } from "../util/compare";
 
-type Files = ReadonlyMap<RepoPath, TreeFile>;
+export type Files = ReadonlyMap<RepoPath, TreeFile>;
 
 const treeOf = (pool: ObjectPool, oid: Oid | null): Files =>
   oid ? flattenTree(pool, readObject(pool, oid, "commit").tree) : new Map();
@@ -99,11 +99,29 @@ export function twoWayUpdate(
       ),
     };
   }
+  return {
+    ok: true,
+    ...checkoutPaths(world.objects, repo, machine, next, updates),
+  };
+}
+
+/**
+ * Writes `paths` from `next` into the index (stage 0) and working tree,
+ * removing those `next` lacks; no safety checks (the caller made them).
+ */
+export function checkoutPaths(
+  pool: ObjectPool,
+  repo: Repo,
+  machine: Machine,
+  next: Files,
+  paths: readonly RepoPath[],
+): { repo: Repo; fs: Fs; effects: Effect[] } {
+  const files = worktreeFiles(machine.fs, repo.workdir);
   let nextIndex = repo.index;
   let fs = machine.fs;
   const indexChanges: PathChange[] = [];
   const fileChanges: (PathChange & { node: "file" | "dir" })[] = [];
-  for (const path of updates) {
+  for (const path of paths) {
     const t = next.get(path);
     const absolute = resolvePath(repo.workdir, path);
     const had = files.get(path);
@@ -111,7 +129,7 @@ export function twoWayUpdate(
       nextIndex = stageEntry(nextIndex, { path, ...t, stage: 0 });
       indexChanges.push({
         path,
-        change: index.has(path) ? "modified" : "added",
+        change: repo.index.has(path) ? "modified" : "added",
       });
       const content = readObject(pool, t.oid, "blob").content;
       if (had !== content) {
@@ -134,7 +152,7 @@ export function twoWayUpdate(
       }
     } else {
       nextIndex = unstagePath(nextIndex, path);
-      indexChanges.push({ path, change: "deleted" });
+      if (repo.index.has(path)) indexChanges.push({ path, change: "deleted" });
       if (had !== undefined) {
         const pruned = removeFilePruning(fs, absolute, repo.workdir);
         fs = pruned.fs;
@@ -165,7 +183,7 @@ export function twoWayUpdate(
       changes: fileChanges,
     });
   }
-  return { ok: true, repo: { ...repo, index: nextIndex }, fs, effects };
+  return { repo: { ...repo, index: nextIndex }, fs, effects };
 }
 
 /** `M\tpath` lines for what differs from `commit` after a switch (Git's local changes). */

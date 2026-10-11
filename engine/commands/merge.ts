@@ -4,6 +4,7 @@ import { cleanupMessage } from "../commit/message";
 import { reflogWho } from "../config/identity";
 import { ancestorsOf } from "../merge/base";
 import { advanceHead, mergeStat } from "../merge/conclude";
+import { abortMerge } from "../merge/state";
 import { commitFiles, threeWayMerge } from "../merge/three-way";
 import { notSimulated } from "../messages/git";
 import { MERGE_USAGE, mergeMessages as m } from "../messages/merge";
@@ -20,6 +21,7 @@ import {
   type CommandResult,
   type GitContext,
 } from "./registry";
+import { commit } from "./commit";
 import { commitOf } from "./switch";
 import { refuseUnsimulated, unsimulated as x } from "./unsimulated";
 
@@ -30,8 +32,8 @@ const OPTIONS: readonly OptionSpec[] = [
   { key: "quiet", short: "q", long: "quiet" },
   { key: "edit", short: "e", long: "edit" },
   { key: "allow-unrelated-histories", long: "allow-unrelated-histories" },
-  x("abort"),
-  x("continue"),
+  { key: "abort", long: "abort" },
+  { key: "continue", long: "continue" },
   x("squash"),
   x("commit"),
   x("strategy", "s", "required"),
@@ -52,6 +54,8 @@ const OPTIONS: readonly OptionSpec[] = [
 ];
 
 type MergeContext = GitContext & { readonly repo: Repo };
+
+const NO_OPTIONS = { values: new Map(), args: [], afterDashDash: null };
 
 function fastForward(
   ctx: MergeContext,
@@ -109,10 +113,20 @@ export const merge = defineCommand({
     if (flag(options, "edit")) {
       return refuse("not-simulated", notSimulated("git merge --edit"), 1);
     }
-    if (conflictedPaths(repo.index).length) {
-      return refuse("usage", m.unmerged("Merging"));
+    if (flag(options, "abort")) {
+      return repo.op
+        ? abortMerge(world, repo, machine, time)
+        : refuse("no-operation", m.noMergeToAbort());
     }
-    if (repo.op) return refuse("usage", m.notConcluded());
+    if (flag(options, "continue")) {
+      return repo.op
+        ? commit.run({ ...ctx, options: NO_OPTIONS })
+        : refuse("no-operation", m.noMergeInProgress());
+    }
+    if (conflictedPaths(repo.index).length) {
+      return refuse("unmerged-paths", m.unmerged("Merging"));
+    }
+    if (repo.op) return refuse("operation-in-progress", m.notConcluded());
     const pool = world.objects;
     let names = options.args;
     if (!names.length) {
@@ -149,7 +163,8 @@ export const merge = defineCommand({
     }
     const marked: Repo = { ...repo, origHead: head };
     if (ancestorsOf(pool, head).has(theirs)) {
-      return { world: withRepo(world, marked), stdout: m.upToDate() };
+      const stdout = flag(options, "quiet") ? "" : m.upToDate();
+      return { world: withRepo(world, marked), stdout };
     }
     const ff = lastValue(options, "ff");
     if (ff !== false && ancestorsOf(pool, theirs).has(head)) {

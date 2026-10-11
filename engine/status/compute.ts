@@ -14,8 +14,16 @@ export type FileChange = {
   readonly kind: "added" | "modified" | "deleted";
 };
 
+/** Git's two-letter code for a conflicted path (`UU`, `AA`, `DU`, ...). */
+export type UnmergedCode = "DD" | "AU" | "UD" | "UA" | "DU" | "AA" | "UU";
+
 export type StatusData = {
   readonly unborn: boolean;
+  /** Paths with conflict stages, in path order. */
+  readonly unmerged: readonly {
+    readonly path: RepoPath;
+    readonly code: UnmergedCode;
+  }[];
   /** HEAD against the index. */
   readonly staged: readonly FileChange[];
   /** The index against the working tree. */
@@ -71,6 +79,33 @@ function compare(
   return changes;
 }
 
+const CODES: Readonly<Record<string, UnmergedCode>> = {
+  "1": "DD",
+  "2": "AU",
+  "12": "UD",
+  "3": "UA",
+  "13": "DU",
+  "23": "AA",
+  "123": "UU",
+};
+
+/** Conflicted paths with the code their stages give. */
+export function unmergedPaths(index: Index): StatusData["unmerged"] {
+  return [...index]
+    .filter(([, entries]) => entries.some((e) => e.stage > 0))
+    .map(([path, entries]) => ({
+      path,
+      code:
+        CODES[
+          entries
+            .map((e) => e.stage)
+            .sort()
+            .join("")
+        ] ?? "UU",
+    }))
+    .sort((a, b) => compareBytes(a.path, b.path));
+}
+
 const memo = new WeakMap<Index, WeakMap<Fs, Map<string, StatusData>>>();
 
 /** The three-way comparison behind `git status`, memoized per snapshot. */
@@ -106,7 +141,11 @@ export function computeStatus(
       unstaged.push({ path, kind: "modified" });
     }
   }
-  const changes = compare(headFiles, staged);
+  const unmerged = unmergedPaths(repo.index);
+  const conflicted = new Set<string>(unmerged.map((u) => u.path));
+  const changes = compare(headFiles, staged).filter(
+    (c) => !conflicted.has(c.path),
+  );
   const rules = ignoreRules(files);
   const untracked: RepoPath[] = [];
   const ignored: RepoPath[] = [];
@@ -116,6 +155,7 @@ export function computeStatus(
   }
   const result: StatusData = {
     unborn: head === null,
+    unmerged,
     staged: changes,
     unstaged,
     untracked,

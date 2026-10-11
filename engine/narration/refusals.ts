@@ -27,5 +27,8 @@ export const REFUSAL_FACTS: Readonly<Record<RefusalCode, string>> = {
   "branch-checked-out": "That branch is the one HEAD is on.",
   "not-fully-merged":
     "The branch holds commits that no other branch or HEAD reaches.",
+  "unmerged-paths": "Some files still have unresolved conflicts.",
+  "operation-in-progress": "A merge is still in progress.",
+  "no-operation": "No merge is in progress.",
   "shell-error": "The shell could not run that line.",
 };

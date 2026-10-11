@@ -1,10 +1,9 @@
 "use client";
 
-import { useId, useMemo, useRef, useState, type KeyboardEvent } from "react";
+import { useId, useRef, useState, type KeyboardEvent } from "react";
 import type { Session } from "@/engine";
 import { useAnnounce } from "@/features/announcer/announcer";
 import { useLessonSession } from "@/features/lesson/lesson-sandbox";
-import { stageFiles } from "@/features/stage/files";
 import {
   aim,
   carryKey,
@@ -13,10 +12,9 @@ import {
   type Carry,
 } from "@/features/stage/manipulate/pick-and-drop";
 import { useDrag } from "@/features/stage/manipulate/use-drag";
-import { useSession } from "@/features/stage/use-session";
 import { cx } from "@/lib/cx";
-import { CommitGraph, graphLayout } from "../graph";
-import { repoView } from "../view-model";
+import { CommitGraph } from "../graph";
+import { useSandboxView } from "../use-sandbox-view";
 import {
   dropOutcome,
   dropTargets,
@@ -40,13 +38,7 @@ export function PointerDrag() {
 }
 
 function PointerDragFor({ session }: { session: Session }) {
-  const { world } = useSession(session);
-  const view = useMemo(() => {
-    const id = stageFiles(world).repo;
-    const repo = id ? world.repos.get(id) : undefined;
-    return repo ? repoView(world, repo) : null;
-  }, [world]);
-  const layout = useMemo(() => (view ? graphLayout(view) : null), [view]);
+  const { view, layout } = useSandboxView(session);
   const say = useAnnounce();
   const help = useId();
   const [name, setName] = useState("");

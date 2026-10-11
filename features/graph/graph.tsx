@@ -16,6 +16,7 @@ import { DROP_ATTR } from "@/features/stage/manipulate/use-drag";
 import { commitNameParts, headAt, labelsAt } from "./describe";
 import { branchTarget, commitTarget } from "./drag/targets";
 import { nextFocus } from "./keyboard";
+import type { Highlight } from "./reach";
 import { layoutGraph, type Layout } from "./layout";
 import type { CommitView, RepoView } from "./view-model";
 
@@ -75,6 +76,13 @@ const dropProps = (drop: GraphDrop | undefined, target: string) =>
       }
     : {};
 
+const marks = (highlight: Highlight | null | undefined, oid: Oid) => {
+  if (!highlight) return {};
+  const inside = highlight.oids.has(oid);
+  if (highlight.kind === "lost") return inside ? { "data-lost": "" } : {};
+  return { "data-reach": inside ? "in" : "out" };
+};
+
 /** The layout with the active theme's metrics. */
 export const graphLayout = (view: RepoView): Layout =>
   layoutGraph(view, skin.graph);
@@ -86,11 +94,17 @@ export function CommitGraph({
   label,
   describe,
   drop,
+  highlight,
+  onLabelHover,
 }: {
   view: RepoView;
   layout: Layout;
   label: string;
   drop?: GraphDrop;
+  /** Commits to light up (reachable) or mark (about to be lost); CSS only. */
+  highlight?: Highlight | null;
+  /** Pointer over a branch label (its name) or off it (null). */
+  onLabelHover?: (name: string | null) => void;
   /** "Describe this graph": an engine summary of the repository. */
   describe?: () => string;
 }) {
@@ -195,6 +209,12 @@ export function CommitGraph({
                           ? dropProps(drop, branchTarget(l.text))
                           : {})}
                         {...(l.kind === "head" && drop ? drop.head : {})}
+                        {...(onLabelHover && l.kind !== "head"
+                          ? {
+                              onPointerEnter: () => onLabelHover(l.text),
+                              onPointerLeave: () => onLabelHover(null),
+                            }
+                          : {})}
                         className={
                           !drop
                             ? undefined
@@ -217,8 +237,9 @@ export function CommitGraph({
                     tabIndex={commit.oid === active ? 0 : -1}
                     onFocus={() => setFocused(commit.oid)}
                     {...dropProps(drop, commitTarget(commit.oid))}
+                    {...marks(highlight, commit.oid)}
                     onKeyDown={onKeyDown}
-                    className="relative block -translate-x-1/2 -translate-y-1/2 rounded-full focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-focus data-aimed:outline-2 data-aimed:outline-offset-4 data-aimed:outline-focus"
+                    className="relative block -translate-x-1/2 -translate-y-1/2 rounded-full focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-focus data-aimed:outline-2 data-aimed:outline-offset-4 data-aimed:outline-focus data-[reach=in]:ring-6 data-[reach=in]:ring-hl data-[reach=out]:opacity-40 data-lost:outline-2 data-lost:outline-offset-4 data-lost:outline-fg data-lost:outline-dashed motion-safe:data-lost:animate-pulse"
                   >
                     <skin.Node
                       node={{

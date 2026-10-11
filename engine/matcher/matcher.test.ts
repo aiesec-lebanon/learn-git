@@ -200,6 +200,49 @@ describe("match", () => {
     ).toEqual(["upstream has no branch main yet."]);
   });
 
+  it("checks pull requests and issues on the Hub repository a remote reaches", () => {
+    const url = "https://hub.test/ana/site.git";
+    const s = play({ hub: { "ana/site": {} } }, [
+      `git clone -q ${url}`,
+      "cd site",
+      "echo hi > a.txt && git add a.txt && git commit -q -m one",
+      "git push -q",
+      "git switch -q -c fix",
+      "echo fixed > a.txt && git commit -q -am two",
+      "git push -q -u origin fix",
+    ]);
+    s.act({ type: "open-issue", repo: "ana/site", title: "Broken" });
+    const target: TargetSpec = {
+      repo: "site",
+      hub: {
+        origin: {
+          pulls: [{ head: "fix", base: "main", state: "merged" }],
+          issues: { 1: "closed" },
+        },
+      },
+    };
+    expect(match(world(s), target).differences).toEqual([
+      "origin has no merged pull request from fix into main.",
+      "Issue #1 on origin should be closed.",
+    ]);
+    s.act({
+      type: "open-pull-request",
+      repo: "ana/site",
+      base: "main",
+      head: "fix",
+      title: "Fix",
+      body: "Fixes #1",
+    });
+    s.act({ type: "merge-pull-request", repo: "ana/site", number: 2 });
+    expect(match(world(s), target).differences).toEqual([]);
+    expect(
+      match(world(s), {
+        repo: "site",
+        hub: { upstream: { issues: { 1: "open" } } },
+      }).differences,
+    ).toEqual(["Issue #1 on upstream should be open."]);
+  });
+
   it("names commits that collide or are reached two ways", () => {
     const s = play(B12, [
       "git init && git add . && git commit -m one",

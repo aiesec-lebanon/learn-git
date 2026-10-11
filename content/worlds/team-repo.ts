@@ -168,3 +168,97 @@ export const teamRepoMonday: WorldSpec = defineWorld({
     sam(SAM_PRICE),
   ],
 });
+
+export const TEAM_REPO = "sam/bake-sale";
+
+/** Main takes one approving review before a pull request merges. */
+const reviewedMain = {
+  [TEAM_REPO]: {
+    rules: [
+      { branch: "main", requirePullRequest: false, requiredApprovals: 1 },
+    ],
+  },
+} as const;
+
+const PULL_OPENED = "^Hub: open a pull request";
+
+/** Sam asks, on line 1 of style.css, for coloured headings once a pull request opens. */
+export const samAsksForHeadings: ActorScript = {
+  id: "sam-review",
+  machine: "sam",
+  name: "Sam",
+  trigger: { kind: "after-command", pattern: PULL_OPENED },
+  when: "after you open the pull request",
+  run: [
+    {
+      type: "review",
+      repo: TEAM_REPO,
+      number: 1,
+      state: "changes-requested",
+      body: "Nearly there.",
+      comments: [
+        {
+          path: "style.css",
+          line: 1,
+          body: "Could the headings get a warm colour too?",
+        },
+      ],
+    },
+  ],
+  says: "Sam requested changes on #1: could the headings get a warm colour too?",
+};
+
+/** Sam approves pull request #1 after your next plain `git push`. */
+export const samApprovesAfterPush: ActorScript = {
+  id: "sam-approve",
+  machine: "sam",
+  name: "Sam",
+  trigger: { kind: "after-command", pattern: "^git push$" },
+  when: "after you push the fix",
+  run: [
+    {
+      type: "review",
+      repo: TEAM_REPO,
+      number: 1,
+      state: "approved",
+      body: "Lovely, thanks.",
+    },
+  ],
+  says: "Sam approved #1.",
+};
+
+/** Sam approves pull request #1 as soon as it opens. */
+export const samApprovesOnOpen: ActorScript = {
+  ...samApprovesAfterPush,
+  trigger: { kind: "after-command", pattern: PULL_OPENED },
+  when: "after you open the pull request",
+};
+
+/** Your clone; main needs Sam's approval before a pull request merges, and Sam reviews (B6.2). */
+export const teamRepoReviewed: WorldSpec = defineWorld({
+  ...teamRepo,
+  hub: reviewedMain,
+  actors: [samAsksForHeadings, samApprovesAfterPush],
+});
+
+/** As teamRepoReviewed, starting with an unpublished dark-mode branch. */
+export const teamRepoDarkModeReviewed: WorldSpec = defineWorld({
+  ...teamRepoDarkMode,
+  hub: reviewedMain,
+  actors: [samAsksForHeadings, samApprovesAfterPush],
+});
+
+/** feature (two commits) pushed with upstream, no pull request yet; Sam approves any pull request. */
+export const teamRepoFeaturePushed: WorldSpec = defineWorld({
+  ...people,
+  hub: reviewedMain,
+  setup: [
+    ...CLONED,
+    "git switch -q -c feature",
+    ...DARK_MODE,
+    writeFile("style.css", DARK_HEADINGS),
+    'git commit -q -am "Colour the headings"',
+    "git push -q -u origin feature",
+  ],
+  actors: [samApprovesOnOpen],
+});

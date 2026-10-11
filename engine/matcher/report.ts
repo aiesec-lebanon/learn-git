@@ -23,6 +23,10 @@ export const report = {
     `${remote} has no branch ${branch} yet.`,
   remoteBranchExtra: (remote: string, branch: string) =>
     `${remote} should not have a branch ${branch}.`,
+  noPull: (remote: string, state: string, head: string, base: string) =>
+    `${remote} has no ${state} pull request from ${head} into ${base}.`,
+  issueState: (remote: string, number: number, want: string) =>
+    `Issue #${number} on ${remote} should be ${want}.`,
   noCommit: (name: string) => `No commit matches ${name} yet.`,
   sameCommit: (a: string, b: string) =>
     `${a} and ${b} should be different commits.`,

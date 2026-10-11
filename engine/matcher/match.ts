@@ -11,7 +11,7 @@ import { computeStatus } from "../status/compute";
 import type { Commit, Oid, Repo, RepoPath, World } from "../types";
 import { compareBytes } from "../util/compare";
 import { machineOf } from "../world/access";
-import { resolveUrl } from "../world/network";
+import { hubName, resolveUrl } from "../world/network";
 import { report } from "./report";
 import type {
   CommitTarget,
@@ -226,6 +226,26 @@ function stateDifferences(
   for (const [path, want] of Object.entries(target.paths ?? {})) {
     const got = stateOf(path);
     if (got !== want) out.push(report.pathState(path, want, got));
+  }
+  for (const [remote, want] of Object.entries(target.hub ?? {})) {
+    const url = configValue(world, machine, repo, `remote.${remote}.url`);
+    const name = url ? hubName(url) : null;
+    const hosted = name ? world.hub?.repos.get(name) : undefined;
+    for (const pull of want.pulls ?? []) {
+      const found = hosted?.pulls.some(
+        (p) =>
+          p.head === pull.head &&
+          p.base === pull.base &&
+          p.state === pull.state,
+      );
+      if (!found)
+        out.push(report.noPull(remote, pull.state, pull.head, pull.base));
+    }
+    for (const [number, state] of Object.entries(want.issues ?? {})) {
+      const issue = hosted?.issues.find((i) => i.number === Number(number));
+      if (issue?.state !== state)
+        out.push(report.issueState(remote, Number(number), state));
+    }
   }
   if (target.clean) {
     const dirty = [...new Set([...staged, ...unstaged, ...untracked])].sort(

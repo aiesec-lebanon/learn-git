@@ -25,6 +25,20 @@ export type CommitTarget = {
   readonly message?: string;
 };
 
+/** A pull request on the Hub, found by its branches. */
+export type PullTarget = {
+  readonly head: string;
+  readonly base: string;
+  readonly state: "open" | "closed" | "merged";
+};
+
+/** Pull requests and issues on one Hub repository. */
+export type HubTarget = {
+  readonly pulls?: readonly PullTarget[];
+  /** Issue number to its state. */
+  readonly issues?: Readonly<Record<number, "open" | "closed">>;
+};
+
 /** A declarative end state; hashes and times are never compared. */
 export type TargetSpec = {
   /** The repository folder relative to home; default: the only repository. */
@@ -42,6 +56,8 @@ export type TargetSpec = {
   readonly remotes?: Readonly<
     Record<string, Readonly<Record<string, string | null>>>
   >;
+  /** The Hub repository a remote reaches, by remote name. */
+  readonly hub?: Readonly<Record<string, HubTarget>>;
   readonly head?: { readonly branch: string } | { readonly detached: string };
   readonly paths?: Readonly<Record<string, PathState>>;
   /** Nothing staged, modified or untracked. */

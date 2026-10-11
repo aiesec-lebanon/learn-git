@@ -106,6 +106,14 @@ export function describeTarget(target: TargetSpec): string[] {
           ? `${remote} has ${branch} at ${nameOf(commits, id)}.`
           : `${remote} has no branch called ${branch}.`,
       );
+  for (const [remote, hub] of Object.entries(target.hub ?? {})) {
+    for (const pull of hub.pulls ?? [])
+      out.push(
+        `${remote} has a ${pull.state} pull request from ${pull.head} into ${pull.base}.`,
+      );
+    for (const [number, state] of Object.entries(hub.issues ?? {}))
+      out.push(`Issue #${number} on ${remote} is ${state}.`);
+  }
   if (target.head)
     out.push(
       "branch" in target.head

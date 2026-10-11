@@ -1,0 +1,50 @@
+<ColdOpen>
+  Your dark theme is ready, and Sam wants to look before it reaches main. On
+  GitHub that conversation is a pull request. What changes on origin when it
+  merges, and what is still missing from your machine?
+</ColdOpen>
+
+<Beat id="push" title="Push a branch">
+  You commit the dark theme on a new `dark-mode` branch and push it with `-u`.
+  Origin now has the branch, but nobody has been asked to merge it yet.
+</Beat>
+
+<Beat id="open" title="Open a pull request">
+  On the Hub you open a <Term>pull request</Term>: base `main` ← compare
+  `dark-mode`. Its diff starts at the merge base, so it shows only what the
+  branch adds. Sam reviews right away and asks for warm headings on line 1 of
+  `style.css`.
+</Beat>
+
+<Beat id="review" title="Push the fix">
+  You colour the headings, commit, and `git push`. The pull request follows the
+  branch, so the new commit appears in its timeline without opening anything
+  new. Sam approves.
+</Beat>
+
+<Beat id="merge" title="Merged on origin only">
+  "Merge pull request" makes a merge commit on origin's main. Your own `main`
+  and `origin/main` have not moved: the merge happened on the Hub, and your
+  repository has not heard about it yet.
+</Beat>
+
+<Beat id="cleanup" title="Clean up both sides">
+  You delete `dark-mode` on the Hub. Locally, `git switch main` and `git pull`
+  bring the merge commit home, `git branch -d dark-mode` removes your branch,
+  and `git fetch --prune` drops the stale `origin/dark-mode` label.
+</Beat>
+
+<YourTurn />
+
+<Wrap
+  commands={[
+    "git push -u origin",
+    "git pull",
+    "git branch -d",
+    "git fetch --prune",
+  ]}
+>
+  A pull request is a conversation about merging one branch into another, and it
+  updates with every push. Merging it changes origin only, so finish with a pull
+  and delete the branch on both sides.
+</Wrap>

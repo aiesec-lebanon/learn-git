@@ -1,7 +1,16 @@
 import { LIMITS } from "./limits";
 import { mergeOutcomes, resume } from "./execute";
 import { runLine } from "./run";
-import { runActors } from "./world/actors";
+import { runActors, stepActor, type ActorRun } from "./world/actors";
+
+const actorEntries = (runs: readonly ActorRun[]): HistoryEntry[] =>
+  runs.flatMap((run) =>
+    run.outcomes.map((outcome, i): HistoryEntry => ({
+      text: run.texts[i] ?? "",
+      outcome,
+      actor: run.script.name,
+    })),
+  );
 import type { InteractionRequest, Outcome, World } from "./types";
 
 /** One command the learner (or, with `actor`, a scripted teammate) ran, as text, with what it did. */
@@ -24,6 +33,8 @@ export type SessionSnapshot = {
   readonly latest: readonly HistoryEntry[];
   /** What the latest command asks of the UI, if anything. */
   readonly pending: InteractionRequest | null;
+  /** Teammates wait for Step instead of acting on their triggers. */
+  readonly actorsPaused: boolean;
 };
 
 const entriesOf = (world: World, line: string) => {
@@ -42,6 +53,7 @@ export class Session {
   private latest: readonly HistoryEntry[] = [];
   private floor = 0;
   private snapshot: SessionSnapshot | null = null;
+  private paused = false;
   private readonly listeners = new Set<() => void>();
 
   constructor(world: World, options: { historyCap?: number } = {}) {
@@ -54,7 +66,8 @@ export class Session {
     const mine = entriesOf(this.world, line);
     this.record(mine);
     const waiting = mine.some((e) => e.outcome.request?.kind === "editor");
-    const acted = waiting ? [] : this.actorsAfter(mine.map((e) => e.text));
+    const acted =
+      waiting || this.paused ? [] : this.actorsAfter(mine.map((e) => e.text));
     this.record(acted);
     const ran = [...mine, ...acted];
     this.latest = ran;
@@ -78,13 +91,25 @@ export class Session {
   /** Teammates whose triggers the learner's last commands met, as entries. */
   private actorsAfter(texts: readonly string[]): HistoryEntry[] {
     const step = this.entries.filter((e) => !e.actor).length;
-    return runActors(this.world, { step, texts }).runs.flatMap((run) =>
-      run.outcomes.map((outcome, i): HistoryEntry => ({
-        text: run.texts[i] ?? "",
-        outcome,
-        actor: run.script.name,
-      })),
-    );
+    return actorEntries(runActors(this.world, { step, texts }).runs);
+  }
+
+  /** Pauses teammates (they wait for `stepActor`) or lets them act again. */
+  setActorsPaused(paused: boolean): void {
+    if (this.paused === paused) return;
+    this.paused = paused;
+    this.changed();
+  }
+
+  /** The next waiting teammate acts now, whatever its trigger. */
+  stepActor(): readonly HistoryEntry[] {
+    if (this.entries.at(-1)?.outcome.request?.kind === "editor") return [];
+    const acted = actorEntries(stepActor(this.world).runs);
+    if (!acted.length) return acted;
+    this.record(acted);
+    this.latest = acted;
+    this.changed();
+    return acted;
   }
 
   /** Answers the editor the last command waits for (null = closed unsaved). */
@@ -97,7 +122,10 @@ export class Session {
     };
     this.entries[this.entries.length - 1] = entry;
     this.worlds[this.worlds.length - 1] = entry.outcome.world;
-    const acted = entry.outcome.request ? [] : this.actorsAfter([entry.text]);
+    const acted =
+      entry.outcome.request || this.paused
+        ? []
+        : this.actorsAfter([entry.text]);
     this.record(acted);
     this.latest = [entry, ...acted];
     this.changed();
@@ -132,6 +160,7 @@ export class Session {
       floor: this.floor,
       latest: this.latest,
       pending: this.entries.at(-1)?.outcome.request ?? null,
+      actorsPaused: this.paused,
     };
     return this.snapshot;
   }

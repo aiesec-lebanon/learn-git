@@ -11,6 +11,7 @@ import { Annotations } from "./choreography/annotations";
 import { planChoreography, type GraphFrame } from "./choreography/plan";
 import { playChoreography, type Timeline } from "./choreography/runner";
 import { FileCard } from "./file-card";
+import { ActorTimeline } from "./multi-repo/actor-timeline";
 import { RepoPanels } from "./multi-repo/panels";
 import { planTransfers, type ScopedGraph } from "./multi-repo/transfer";
 import type { FileCard as Card } from "./files";
@@ -185,7 +186,12 @@ function SessionStage({ session }: { session: Session }) {
       ),
     [world, latest],
   );
-  return <StageView frame={frame} />;
+  return (
+    <div className="grid gap-4">
+      <StageView frame={frame} />
+      <ActorTimeline session={session} />
+    </div>
+  );
 }
 
 /** The three-area stage for one sandbox session. */

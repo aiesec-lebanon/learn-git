@@ -4,7 +4,7 @@ export { invocationText, runLine } from "./run";
 export { Session } from "./session";
 export type { HistoryEntry, SessionSnapshot } from "./session";
 export { createWorld } from "./world/create";
-export { withActors } from "./world/actors";
+export { pendingActors, withActors } from "./world/actors";
 export { timeAt } from "./world/clock";
 export type * from "./types";
 export { describeGraph } from "./narration/describe";

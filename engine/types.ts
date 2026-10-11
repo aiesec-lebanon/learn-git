@@ -214,6 +214,8 @@ export type ActorScript = {
   readonly run: readonly string[];
   /** One sentence for "What happened" and the announcer. */
   readonly says?: string;
+  /** When it happens, in words for the timeline, e.g. `after you clone`. */
+  readonly when?: string;
 };
 
 /** The schedule a world carries, and the scripts that already acted (so Rewind undoes them). */

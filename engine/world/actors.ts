@@ -37,6 +37,53 @@ export function withActors(
   return { ...world, actors: { scripts, fired: [] } };
 }
 
+/** Runs one script's lines on its machine and marks it as having acted. */
+function perform(
+  world: World,
+  script: ActorScript,
+): { world: World; run: ActorRun } {
+  let current = world;
+  const outcomes: Outcome[] = [];
+  const texts: string[] = [];
+  for (const line of script.run) {
+    const ran = runLine(current, line, script.machine);
+    ran.outcomes.forEach((outcome, i) => {
+      outcomes.push({
+        ...outcome,
+        effects: [{ kind: "actor", actor: script.name }, ...outcome.effects],
+        meta: { ...outcome.meta, counted: false },
+      });
+      texts.push(ran.texts[i] ?? "");
+    });
+    current = ran.world;
+  }
+  const schedule = current.actors ?? { scripts: [], fired: [] };
+  current = {
+    ...current,
+    actors: { ...schedule, fired: [...schedule.fired, script.id] },
+  };
+  const last = outcomes.at(-1);
+  if (last) {
+    outcomes[outcomes.length - 1] = {
+      ...last,
+      world: current,
+      effects: script.says
+        ? [
+            { kind: "actor", actor: script.name, says: script.says },
+            ...last.effects.slice(1),
+          ]
+        : last.effects,
+    };
+  }
+  return { world: current, run: { script, texts, outcomes } };
+}
+
+/** Scripts that have not acted yet, in schedule order. */
+export function pendingActors(world: World): readonly ActorScript[] {
+  const fired = world.actors?.fired ?? [];
+  return (world.actors?.scripts ?? []).filter((s) => !fired.includes(s.id));
+}
+
 /**
  * Runs every script that is due after `move`, in schedule order; a script
  * that fires can make a later one due (one pass, deterministic). Actor
@@ -48,41 +95,22 @@ export function runActors(
 ): { world: World; runs: readonly ActorRun[] } {
   let current = world;
   const runs: ActorRun[] = [];
-  for (const script of world.actors?.scripts ?? []) {
-    const schedule = current.actors;
-    if (!schedule || schedule.fired.includes(script.id)) continue;
+  for (const script of pendingActors(world)) {
     if (!due(current, script, move)) continue;
-    const outcomes: Outcome[] = [];
-    const texts: string[] = [];
-    for (const line of script.run) {
-      const ran = runLine(current, line, script.machine);
-      ran.outcomes.forEach((outcome, i) => {
-        outcomes.push({
-          ...outcome,
-          effects: [{ kind: "actor", actor: script.name }, ...outcome.effects],
-          meta: { ...outcome.meta, counted: false },
-        });
-        texts.push(ran.texts[i] ?? "");
-      });
-      current = ran.world;
-    }
-    const said = outcomes.at(-1);
-    if (said && script.says) {
-      outcomes[outcomes.length - 1] = {
-        ...said,
-        effects: [
-          { kind: "actor", actor: script.name, says: script.says },
-          ...said.effects.slice(1),
-        ],
-      };
-    }
-    current = {
-      ...current,
-      actors: { ...schedule, fired: [...schedule.fired, script.id] },
-    };
-    const last = outcomes.at(-1);
-    if (last) outcomes[outcomes.length - 1] = { ...last, world: current };
-    runs.push({ script, texts, outcomes });
+    const done = perform(current, script);
+    current = done.world;
+    runs.push(done.run);
   }
   return { world: current, runs };
+}
+
+/** The timeline's Step: the next pending script acts now, whatever its trigger. */
+export function stepActor(world: World): {
+  world: World;
+  runs: readonly ActorRun[];
+} {
+  const [next] = pendingActors(world);
+  if (!next) return { world, runs: [] };
+  const done = perform(world, next);
+  return { world: done.world, runs: [done.run] };
 }

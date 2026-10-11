@@ -12,6 +12,7 @@ import type {
   WorldSpec,
 } from "../types";
 import { DEFAULT_GLOBAL_CONFIG, HOME, LEARNER } from "./defaults";
+import { act } from "../hub/actions";
 import { createHub } from "../hub/state";
 import { withActors } from "./actors";
 
@@ -75,6 +76,16 @@ export function createWorld(spec: WorldSpec = {}): World {
 }
 
 function setUp(world: World, step: SetupStep): World {
+  if (typeof step !== "string" && "hub" in step) {
+    const done = act(world, {
+      kind: "hub",
+      actor: step.machine,
+      action: step.hub,
+    });
+    if (done.output.exitCode !== 0)
+      throw new EngineInvariantError(`Setup failed: ${done.output.stderr}`);
+    return done.world;
+  }
   const { machine, run } =
     typeof step === "string" ? { machine: LEARNER, run: step } : step;
   const ran = runLine(world, run, machine);

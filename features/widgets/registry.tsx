@@ -104,6 +104,12 @@ const WIDGETS: Record<WidgetName, ComponentType> = {
   "pull-sync": lazy(() =>
     import("./pull-sync").then((m) => ({ default: m.PullSync })),
   ),
+  "keyword-highlighter": lazy(() =>
+    import("./issue-link").then((m) => ({ default: m.KeywordHighlighter })),
+  ),
+  "issue-link": lazy(() =>
+    import("./issue-link").then((m) => ({ default: m.IssueLink })),
+  ),
 };
 
 /** A lesson widget by name, loaded with its own code (R3). */

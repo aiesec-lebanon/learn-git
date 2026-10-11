@@ -1,4 +1,10 @@
-import type { ActorScript, SetupStep, Trigger, WorldSpec } from "@/engine";
+import type {
+  ActorScript,
+  HubAction,
+  SetupStep,
+  Trigger,
+  WorldSpec,
+} from "@/engine";
 import { defineWorld, writeFile } from "../define";
 import { INDEX, INDEX_LATER, MENU, MENU_YOURS, README } from "./bake-sale";
 
@@ -261,4 +267,73 @@ export const teamRepoFeaturePushed: WorldSpec = defineWorld({
     "git push -q -u origin feature",
   ],
   actors: [samApprovesOnOpen],
+});
+
+export const INDEX_FOOTER = `${INDEX}<footer><a href="menu.htm">Menu</a></footer>\n`;
+export const INDEX_FOOTER_FIXED = INDEX_FOOTER.replace(
+  'href="menu.htm"',
+  'href="menu.html"',
+);
+
+const samOnHub = (hub: HubAction): SetupStep => ({ machine: "sam", hub });
+const issue = (title: string, labels: string[]): HubAction => ({
+  type: "open-issue",
+  repo: TEAM_REPO,
+  title,
+  labels,
+});
+const close = (number: number): HubAction => ({
+  type: "close-issue",
+  repo: TEAM_REPO,
+  number,
+});
+
+/** Sam's footer with a broken menu link, and two issues the team already closed. */
+const FOOTER: readonly SetupStep[] = [
+  ...PUBLISHED,
+  sam(
+    `cd ${SAM} && ${writeFile("index.html", INDEX_FOOTER)} && git commit -q -am "Add a footer" && git push -q`,
+  ),
+  samOnHub(issue("List the volunteers", ["documentation"])),
+  samOnHub(close(1)),
+  samOnHub(issue("Add apple pie to the menu", ["enhancement"])),
+  samOnHub(close(2)),
+];
+
+/** Your clone of the site with the broken footer link; nobody has filed it yet. */
+export const teamRepoFooter: WorldSpec = defineWorld({
+  ...people,
+  setup: [...FOOTER, `git clone -q ${TEAM_URL}`, "cd bake-sale"],
+});
+
+export const FOOTER_ISSUE = 3;
+
+/** As teamRepoFooter, with issue #3 for the broken link, assigned to you (B6.3). */
+export const teamRepoIssues: WorldSpec = defineWorld({
+  ...people,
+  setup: [
+    ...FOOTER,
+    samOnHub({
+      type: "open-issue",
+      repo: TEAM_REPO,
+      title: "The footer's menu link is broken",
+      body: "It points to `menu.htm`, which does not exist.",
+      labels: ["bug"],
+      assignee: "you",
+    }),
+    `git clone -q ${TEAM_URL}`,
+    "cd bake-sale",
+  ],
+});
+
+/** As teamRepoIssues, with your fix pushed on fix-footer and no pull request yet. */
+export const teamRepoFixPushed: WorldSpec = defineWorld({
+  ...teamRepoIssues,
+  setup: [
+    ...(teamRepoIssues.setup ?? []),
+    "git switch -q -c fix-footer",
+    writeFile("index.html", INDEX_FOOTER_FIXED),
+    'git commit -q -am "Fix the footer link"',
+    "git push -q -u origin fix-footer",
+  ],
 });

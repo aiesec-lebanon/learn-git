@@ -29,6 +29,8 @@ export const WIDGET_NAMES = [
   "hub-split",
   "two-roots",
   "pull-sync",
+  "keyword-highlighter",
+  "issue-link",
 ] as const;
 
 export type WidgetName = (typeof WIDGET_NAMES)[number];

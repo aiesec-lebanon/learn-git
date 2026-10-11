@@ -3,7 +3,7 @@ import { LIMITS } from "../limits";
 import { runLine } from "../run";
 import { hub, pullOf, SHOP, shopWorld, withPull } from "../test/hub";
 import type { HubAction, World } from "../types";
-import { closingIssues } from "./keywords";
+import { closingIssues, closingMatches } from "./keywords";
 import { closesIssues, compareBranches } from "./pulls";
 
 const open = (
@@ -149,6 +149,16 @@ describe("comparing branches", () => {
 });
 
 describe("closing keywords", () => {
+  it("says where each closing reference sits", () => {
+    const text = "See #2. Fixes: #3 and closes #4";
+    expect(
+      closingMatches(text).map((m) => [text.slice(m.start, m.end), m.number]),
+    ).toEqual([
+      ["Fixes: #3", 3],
+      ["closes #4", 4],
+    ]);
+  });
+
   it("finds every closing keyword in any case, once per issue", () => {
     expect(
       closingIssues(

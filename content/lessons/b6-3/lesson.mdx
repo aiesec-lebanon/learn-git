@@ -1,0 +1,47 @@
+<ColdOpen>
+  The footer's menu link on the bake sale site is broken, and Sam filed it as
+  issue #3. Can the fix close the issue by itself, without anybody remembering
+  to tidy up?
+</ColdOpen>
+
+<Beat id="anatomy" title="What an issue holds">
+  An <Term>issue</Term> is a task or problem the team tracks: a title, a
+  description, labels such as `bug`, an assignee, and comments. You comment that
+  you will take it. Issues and pull requests share one number sequence.
+</Beat>
+
+<Beat id="keywords" title="Mention it, or close it">
+  You fix the link on `fix-footer`, push, and open pull request #4. Writing `#3`
+  in its description links the issue. A closing keyword in front, such as
+  "Fixes #3", also asks the Hub to close it on merge.
+
+  <Widget name="keyword-highlighter" />
+</Beat>
+
+<Beat id="merge" title="Merge, and it closes">
+  You merge #4 into main, the default branch. The Hub closes issue #3 and names
+  the pull request that did it, so the history of the fix and the reason for it
+  stay connected.
+
+  <Widget name="issue-link" />
+</Beat>
+
+<Beat id="default-only" title="Only into the default branch">
+  A new issue, #5, asks for a date on the volunteers page. A pull request into
+  `docs` saying "Fixes #5" merges, and #5 stays open: keywords close issues only
+  when the pull request targets the default branch.
+</Beat>
+
+<Beat id="larger" title="Bigger pieces of work">
+  For larger work, GitHub can split an issue into sub-issues and give issues a
+  type, such as bug or feature. They organise the list; closing still works the
+  same way.
+</Beat>
+
+<YourTurn />
+
+<Wrap commands={["git switch -c", "git push -u origin"]}>
+  An issue records what needs doing. "Fixes #3" in a pull request into the
+  default branch closes issue 3 when that pull request merges, so the fix and
+  its reason stay linked.
+</Wrap>

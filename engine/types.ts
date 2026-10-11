@@ -155,7 +155,10 @@ export type MachineSpec = {
 
 /** A setup line, run on the learner's machine unless another is named. */
 export type SetupStep =
-  string | { readonly machine: MachineId; readonly run: string };
+  | string
+  | { readonly machine: MachineId; readonly run: string }
+  /** A Hub action taken as the account named `machine`. */
+  | { readonly machine: MachineId; readonly hub: HubAction };
 
 /** A protected branch: force pushes and deletions are always refused. */
 export type BranchRule = {

@@ -62,6 +62,33 @@ describe("createWorld", () => {
     );
   });
 
+  it("takes Hub actions in the setup as the named account", () => {
+    const world = createWorld({
+      hub: { "sam/site": {} },
+      setup: [
+        {
+          machine: "sam",
+          hub: { type: "open-issue", repo: "sam/site", title: "Broken" },
+        },
+      ],
+    });
+    expect(world.hub?.repos.get("sam/site")?.issues[0]).toMatchObject({
+      number: 1,
+      author: "sam",
+    });
+    expect(() =>
+      createWorld({
+        hub: {},
+        setup: [
+          {
+            machine: "you",
+            hub: { type: "open-issue", repo: "sam/site", title: "x" },
+          },
+        ],
+      }),
+    ).toThrow(EngineInvariantError);
+  });
+
   it("rejects config keys Git would reject", () => {
     expect(() => createWorld({ global: { nodot: "x" } })).toThrow(
       EngineInvariantError,

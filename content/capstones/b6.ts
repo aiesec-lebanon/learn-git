@@ -51,7 +51,7 @@ export default defineCapstone({
         id: "sam-approve",
         machine: "sam",
         name: "Sam",
-        trigger: { kind: "after-command", pattern: "^git push$" },
+        trigger: { kind: "pull-updated", repo: TEAM_REPO, number: PULL },
         when: "after you push the fix",
         run: [review("approved")],
         says: `Sam approved #${PULL}.`,

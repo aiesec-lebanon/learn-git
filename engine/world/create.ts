@@ -13,7 +13,7 @@ import type {
 } from "../types";
 import { DEFAULT_GLOBAL_CONFIG, HOME, LEARNER } from "./defaults";
 import { act } from "../hub/actions";
-import { createHub } from "../hub/state";
+import { applyRules, createHub } from "../hub/state";
 import { withActors } from "./actors";
 
 function configFrom(entries: Readonly<Record<string, string>>): ConfigFile {
@@ -54,7 +54,7 @@ function createMachine(
   };
 }
 
-/** A fresh, deterministic world: the learner's machine with files and config, other machines, Hub repositories, then the setup commands. */
+/** A fresh, deterministic world: the learner's machine with files and config, other machines, Hub repositories, the setup commands, then the Hub's branch rules. */
 export function createWorld(spec: WorldSpec = {}): World {
   const machines: Machine[] = [createMachine(LEARNER, HOME, spec)];
   for (const [id, other] of Object.entries(spec.machines ?? {})) {
@@ -68,10 +68,11 @@ export function createWorld(spec: WorldSpec = {}): World {
     repos: new Map(),
     available: new Map(),
   };
-  const ready = (spec.setup ?? []).reduce(
+  const setUpWorld = (spec.setup ?? []).reduce(
     setUp,
     spec.hub ? createHub(world, spec.hub) : world,
   );
+  const ready = spec.hub ? applyRules(setUpWorld, spec.hub) : setUpWorld;
   return spec.actors ? withActors(ready, spec.actors) : ready;
 }
 

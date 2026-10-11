@@ -214,12 +214,12 @@ export const samAsksForHeadings: ActorScript = {
   says: "Sam requested changes on #1: could the headings get a warm colour too?",
 };
 
-/** Sam approves pull request #1 after your next plain `git push`. */
+/** Sam approves pull request #1 once it has commits his review has not seen. */
 export const samApprovesAfterPush: ActorScript = {
   id: "sam-approve",
   machine: "sam",
   name: "Sam",
-  trigger: { kind: "after-command", pattern: "^git push$" },
+  trigger: { kind: "pull-updated", repo: TEAM_REPO, number: 1 },
   when: "after you push the fix",
   run: [
     {
@@ -335,5 +335,42 @@ export const teamRepoFixPushed: WorldSpec = defineWorld({
     writeFile("index.html", INDEX_FOOTER_FIXED),
     'git commit -q -am "Fix the footer link"',
     "git push -q -u origin fix-footer",
+  ],
+});
+
+export const README_SETUP = `${README}\n## Setup\n\nOpen index.htm in a browser.\n`;
+export const README_SETUP_FIXED = README_SETUP.replace(
+  "index.htm ",
+  "index.html ",
+);
+export const SETUP_ISSUE = 3;
+
+/** Day one (S-B1): Sam's README has a broken setup step, filed as #3; main takes changes only through an approved pull request. You have not cloned yet. */
+export const teamRepoFirstDay: WorldSpec = defineWorld({
+  ...people,
+  hub: {
+    [TEAM_REPO]: {
+      rules: [
+        { branch: "main", requirePullRequest: true, requiredApprovals: 1 },
+      ],
+    },
+  },
+  setup: [
+    ...PUBLISHED,
+    sam(
+      `cd ${SAM} && ${writeFile("README.md", README_SETUP)} && git commit -q -am "Add the setup steps" && git push -q`,
+    ),
+    samOnHub(issue("List the volunteers", ["documentation"])),
+    samOnHub(close(1)),
+    samOnHub(issue("Add apple pie to the menu", ["enhancement"])),
+    samOnHub(close(2)),
+    samOnHub({
+      type: "open-issue",
+      repo: TEAM_REPO,
+      title: "The README's setup step is broken",
+      body: "It says `index.htm`; the file is `index.html`.",
+      labels: ["bug", "good first issue"],
+      assignee: "you",
+    }),
   ],
 });

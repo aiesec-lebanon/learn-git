@@ -31,6 +31,8 @@ export function triggerText(script: ActorScript): string {
       return "after a matching command of yours";
     case "at-time":
       return `at ${clockTime(trigger.time)}`;
+    case "pull-updated":
+      return `after you push to #${trigger.number}`;
   }
 }
 

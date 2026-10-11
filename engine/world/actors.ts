@@ -1,4 +1,5 @@
 import { act, hubActionText } from "../hub/actions";
+import { branchRef } from "../refs/names";
 import { runLine } from "../run";
 import type { ActorScript, HubAction, Outcome, World } from "../types";
 import { timeAt } from "./clock";
@@ -27,7 +28,18 @@ function due(world: World, script: ActorScript, move: LearnerMove): boolean {
       return move.texts.some((t) => new RegExp(trigger.pattern).test(t));
     case "at-time":
       return timeAt(world.seq) >= trigger.time;
+    case "pull-updated":
+      return pullUpdated(world, trigger.repo, trigger.number);
   }
+}
+
+function pullUpdated(world: World, fullName: string, number: number): boolean {
+  const hosted = world.hub?.repos.get(fullName);
+  const pull = hosted?.pulls.find((p) => p.number === number);
+  const seen = pull?.reviews.at(-1)?.commit;
+  if (!hosted || !pull || pull.state !== "open" || !seen) return false;
+  const tip = world.repos.get(hosted.repo)?.refs.get(branchRef(pull.head));
+  return tip !== undefined && tip !== seen;
 }
 
 /** Adds a schedule to a world (content worlds attach their teammates here). */

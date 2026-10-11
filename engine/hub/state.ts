@@ -48,14 +48,28 @@ export function addHostedRepo(
   };
 }
 
-/** The Hub with its hosted repositories (empty, default branch `main`) and accounts. */
+/** The Hub with its hosted repositories (empty, default branch `main`, no rules yet) and accounts. */
 export function createHub(
   world: World,
   specs: Readonly<Record<string, HostedRepoSpec>>,
 ): World {
-  return Object.entries(specs).reduce(
-    (next, [fullName, spec]) => addHostedRepo(next, fullName, spec.rules),
+  return Object.keys(specs).reduce(
+    (next, fullName) => addHostedRepo(next, fullName),
     ensureHub(world),
+  );
+}
+
+/** Puts the specs' branch rules in place; worlds protect branches once their setup has run. */
+export function applyRules(
+  world: World,
+  specs: Readonly<Record<string, HostedRepoSpec>>,
+): World {
+  return Object.entries(specs).reduce(
+    (next, [fullName, spec]) =>
+      spec.rules
+        ? withHosted(next, { ...hostedRepo(next, fullName), rules: spec.rules })
+        : next,
+    world,
   );
 }
 

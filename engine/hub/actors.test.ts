@@ -54,6 +54,33 @@ describe("scripted collaborators on the Hub", () => {
     expect(session.getSnapshot().world.hub?.repos.get(SHOP)?.pulls).toEqual([]);
   });
 
+  it("re-review once the pull request has commits the review has not seen", () => {
+    const approves: ActorScript = {
+      id: "approve",
+      machine: "sam",
+      name: "Sam",
+      trigger: { kind: "pull-updated", repo: SHOP, number: 1 },
+      run: [{ type: "review", repo: SHOP, number: 1, state: "approved" }],
+    };
+    const session = new Session(
+      withActors(shopWorld(), [samReviews, approves]),
+    );
+    session.run("git push");
+    session.act(OPEN);
+    expect(session.run("git status").some((e) => e.actor)).toBe(false);
+    const pushed = session.run(
+      'echo Four >> menu.txt && git commit -q -am "Capital F" && git push',
+    );
+    expect(pushed.filter((e) => e.actor).map((e) => e.text)).toEqual([
+      "Hub: approve #1",
+    ]);
+    const { world } = session.getSnapshot();
+    expect(pullOf(world, 1).reviews.map((r) => r.state)).toEqual([
+      "changes-requested",
+      "approved",
+    ]);
+  });
+
   it("count successful learner Hub actions for par, not refused ones", () => {
     const session = new Session(shopWorld());
     session.act(OPEN);

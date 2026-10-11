@@ -442,7 +442,13 @@ export type Trigger =
   /** After a learner command whose text matches `pattern` (a regular expression). */
   | { readonly kind: "after-command"; readonly pattern: string }
   /** Once the simulated clock reaches `time` (seconds since the epoch). */
-  | { readonly kind: "at-time"; readonly time: number };
+  | { readonly kind: "at-time"; readonly time: number }
+  /** Once an open, reviewed pull request has commits its latest review has not seen. */
+  | {
+      readonly kind: "pull-updated";
+      readonly repo: string;
+      readonly number: number;
+    };
 
 /** A teammate's scripted action: lines run in their machine's shell. */
 export type ActorScript = {

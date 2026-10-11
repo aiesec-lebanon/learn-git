@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { canonicalKey } from "../config/keys";
-import { createWorld, EngineInvariantError, timeAt } from "../index";
+import { createWorld, EngineInvariantError, runLine, timeAt } from "../index";
 import { CLOCK_EPOCH } from "./clock";
 
 describe("createWorld", () => {
@@ -87,6 +87,27 @@ describe("createWorld", () => {
         ],
       }),
     ).toThrow(EngineInvariantError);
+  });
+
+  it("protects Hub branches only once the setup has run", () => {
+    const url = "https://hub.test/you/site.git";
+    const world = createWorld({
+      hub: {
+        "you/site": { rules: [{ branch: "main", requirePullRequest: true }] },
+      },
+      setup: [
+        `git clone -q ${url}`,
+        "cd site",
+        "echo a > a.txt && git add a.txt && git commit -q -m one",
+        "git push -q",
+      ],
+    });
+    expect(world.hub?.repos.get("you/site")?.rules).toHaveLength(1);
+    const pushed = runLine(
+      world,
+      "echo b >> a.txt && git commit -q -am two && git push -q",
+    );
+    expect(pushed.outcomes.at(-1)?.output.exitCode).toBe(1);
   });
 
   it("rejects config keys Git would reject", () => {

@@ -158,7 +158,7 @@ export const commit = defineCommand({
     if (!identity.ok) return refuse("identity-unknown", identity.stderr);
     const after = prepared.files;
     const { root, trees } = buildTree(after);
-    const merging = repo.op;
+    const merging = repo.op?.kind === "merge" ? repo.op : undefined;
     const unchanged =
       !merging &&
       (parent

@@ -150,7 +150,7 @@ export type PausedMerge = {
 export function pausedMerge(world: World): PausedMerge | null {
   const machine = machineOf(world);
   const repo = discoverRepo(world, machine);
-  if (!repo?.op) return null;
+  if (repo?.op?.kind !== "merge") return null;
   const tree = worktreeFiles(machine.fs, repo.workdir);
   const files = [...repo.index]
     .filter(([, entries]) => entries.some((e) => e.stage > 0))

@@ -220,6 +220,13 @@ export const VERBS: readonly ChipVerb[] = [
   },
   {
     program: "git",
+    name: "rebase",
+    hint: "replay your commits on top of another branch",
+    params: [{ kind: "value", label: "onto branch" }],
+    ready: (s) => s.commits,
+  },
+  {
+    program: "git",
     name: "pull",
     hint: "fetch, then bring the remote's commits into your branch",
     params: [

@@ -12,7 +12,9 @@ export function pathForms(nativeDir) {
  * Turns one recorded string into what the learner's machine would show:
  * the temp root disappears (so `<tmp>/home/you` reads `/home/you`), bare
  * repositories under `<tmp>/hub/` read as `https://hub.test/`, the host
- * name is neutral and bash's `line N:` (from `bash -c`) is dropped.
+ * name is neutral, bash's `line N:` (from `bash -c`) is dropped and
+ * progress Git redraws in place (`Rebasing (1/2)\r`) is left out, as a
+ * terminal shows only the lines that stay.
  */
 export function createRewriter({
   tmpDir,
@@ -33,7 +35,9 @@ export function createRewriter({
     if (username) out = out.split(`${username}@laptop`).join("you@laptop");
     return out
       .replace(/^(?:\/usr\/bin\/)?bash: line \d+: /gm, "bash: ")
-      .replace(COMMAND_SCOPE_LINE, "");
+      .replace(COMMAND_SCOPE_LINE, "")
+      .replace(/Rebasing \(\d+\/\d+\)\r/g, "")
+      .replace(/\r\x1b\[K/g, "");
   };
 }
 

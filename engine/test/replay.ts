@@ -57,7 +57,7 @@ function dumpObject(object: GitObject): RecordedObject {
 /** Pseudo-ref and operation files as `.git` holds them. */
 function pseudoFiles(repo: Repo): Record<string, string> {
   const out: Record<string, string> = {};
-  if (repo.op) {
+  if (repo.op?.kind === "merge") {
     out.MERGE_HEAD = `${repo.op.head}
 `;
     out.MERGE_MSG = repo.op.message;
@@ -346,14 +346,17 @@ export function replayFixture(fixture: RecordedFixture): {
         ...(machine ? { machine } : {}),
         ...(editor ? { editor } : {}),
       };
-      const normalized =
-        expected.exitCode === 129
-          ? {
-              ...expected,
-              stdout: withoutOptionTable(expected.stdout),
-              stderr: withoutOptionTable(expected.stderr),
-            }
-          : expected;
+      const normalized = {
+        ...expected,
+        stdout:
+          expected.exitCode === 129
+            ? withoutOptionTable(expected.stdout)
+            : expected.stdout,
+        stderr:
+          expected.exitCode === 129
+            ? withoutOptionTable(expected.stderr)
+            : expected.stderr,
+      };
       const comparable: RecordedStep = { ...normalized };
       if (!comparable.editor?.received) delete comparable.editor;
       return { expected: comparable, actual, changes };

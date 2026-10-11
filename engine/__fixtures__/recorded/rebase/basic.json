@@ -1,0 +1,903 @@
+{
+  "final": {
+    "config": {
+      "global": [
+        [
+          "user.name",
+          "Sam Lee"
+        ],
+        [
+          "user.email",
+          "sam@example.com"
+        ],
+        [
+          "init.defaultbranch",
+          "main"
+        ]
+      ],
+      "system": []
+    },
+    "dirs": [
+      "project"
+    ],
+    "files": {
+      "project/a.txt": "a\nm\n",
+      "project/b.txt": "b\n",
+      "project/c.txt": "one\n2\n3\n4\n5\n6\nseven\n",
+      "project/t2.txt": "t2\n"
+    },
+    "repos": {
+      "project": {
+        "config": [
+          [
+            "core.repositoryformatversion",
+            "0"
+          ],
+          [
+            "core.filemode",
+            "false"
+          ],
+          [
+            "core.bare",
+            "false"
+          ],
+          [
+            "core.logallrefupdates",
+            "true"
+          ],
+          [
+            "core.symlinks",
+            "false"
+          ],
+          [
+            "core.ignorecase",
+            "true"
+          ]
+        ],
+        "head": {
+          "ref": "refs/heads/late"
+        },
+        "index": [
+          {
+            "mode": "100644",
+            "oid": "9327e295f637fe6fd721999358fd4aa194024d19",
+            "path": "a.txt",
+            "stage": 0
+          },
+          {
+            "mode": "100644",
+            "oid": "61780798228d17af2d34fce4cfbdf35556832472",
+            "path": "b.txt",
+            "stage": 0
+          },
+          {
+            "mode": "100644",
+            "oid": "e6b809853513354381043debdbeacbef8cd769f2",
+            "path": "c.txt",
+            "stage": 0
+          },
+          {
+            "mode": "100644",
+            "oid": "9bc7ad0d42bb3581c31ef220203f8d951552b94f",
+            "path": "t2.txt",
+            "stage": 0
+          }
+        ],
+        "objects": {
+          "026e7ed5d9c33ae2df5bc3f34738e8d77f145e96": {
+            "body": "tree 4e826b2fa08f580c931ad822978d995d98f02696\nparent b831c479259d54269a86ebd52c102be82457c05b\nauthor Sam Lee <sam@example.com> 1767227520 +0000\ncommitter Sam Lee <sam@example.com> 1767227640 +0000\n\nSide\n",
+            "type": "commit"
+          },
+          "0301c17879d6bc11f843535083b81ab6416ecc0a": {
+            "body": "tree ec96009fc370a2cfaca5621ae3f1aa5144ca802a\nparent 0cf9c4964dc23a1d8cd4f20e06a963fc2cc04ed7\nauthor Sam Lee <sam@example.com> 1767225960 +0000\ncommitter Sam Lee <sam@example.com> 1767225960 +0000\n\nTopic one\n",
+            "type": "commit"
+          },
+          "06e567b11dfdafeaf7d3edcc89864149383aeab6": {
+            "body": "1\n2\n3\n4\n5\n6\n7\n",
+            "type": "blob"
+          },
+          "0cf9c4964dc23a1d8cd4f20e06a963fc2cc04ed7": {
+            "body": "tree d34534b53375eafef2d7f5189fc1614c1d15832a\nauthor Sam Lee <sam@example.com> 1767225720 +0000\ncommitter Sam Lee <sam@example.com> 1767225720 +0000\n\nFirst\n",
+            "type": "commit"
+          },
+          "10cfb28d7fde91a07c748b34dcd8186d4f49d72b": {
+            "body": "tree 54b614bb38e5877bafe2e7a42765608422713c9b\nparent b831c479259d54269a86ebd52c102be82457c05b\nauthor Sam Lee <sam@example.com> 1767227940 +0000\ncommitter Sam Lee <sam@example.com> 1767227940 +0000\n\nEdit line one\n",
+            "type": "commit"
+          },
+          "3b9b33c29f94ab8bee8fb94386dfb0fad5f8079b": {
+            "body": "tree f595b76b400ae21bb8849b37cadaeda285fcd7b7\nparent 0301c17879d6bc11f843535083b81ab6416ecc0a\nauthor Sam Lee <sam@example.com> 1767226140 +0000\ncommitter Sam Lee <sam@example.com> 1767226140 +0000\n\nTopic two\n",
+            "type": "commit"
+          },
+          "4e826b2fa08f580c931ad822978d995d98f02696": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "a.txt",
+                "oid": "9327e295f637fe6fd721999358fd4aa194024d19"
+              },
+              {
+                "mode": "100644",
+                "name": "b.txt",
+                "oid": "61780798228d17af2d34fce4cfbdf35556832472"
+              },
+              {
+                "mode": "100644",
+                "name": "c.txt",
+                "oid": "06e567b11dfdafeaf7d3edcc89864149383aeab6"
+              },
+              {
+                "mode": "100644",
+                "name": "s.txt",
+                "oid": "b4785957bc986dc39c629de9fac9df46972c00fc"
+              },
+              {
+                "mode": "100644",
+                "name": "t2.txt",
+                "oid": "9bc7ad0d42bb3581c31ef220203f8d951552b94f"
+              }
+            ],
+            "type": "tree"
+          },
+          "518b727e7758626b7d4270cbbd9a8265a6547c4a": {
+            "body": "tree d4e3605569999b8e60224e779768ce80d71e4357\nparent 0cf9c4964dc23a1d8cd4f20e06a963fc2cc04ed7\nauthor Sam Lee <sam@example.com> 1767227520 +0000\ncommitter Sam Lee <sam@example.com> 1767227520 +0000\n\nSide\n",
+            "type": "commit"
+          },
+          "54b614bb38e5877bafe2e7a42765608422713c9b": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "a.txt",
+                "oid": "9327e295f637fe6fd721999358fd4aa194024d19"
+              },
+              {
+                "mode": "100644",
+                "name": "b.txt",
+                "oid": "61780798228d17af2d34fce4cfbdf35556832472"
+              },
+              {
+                "mode": "100644",
+                "name": "c.txt",
+                "oid": "965b507be063db4ea2a906b8bd0f1c9f13209bf3"
+              },
+              {
+                "mode": "100644",
+                "name": "t2.txt",
+                "oid": "9bc7ad0d42bb3581c31ef220203f8d951552b94f"
+              }
+            ],
+            "type": "tree"
+          },
+          "5565710c0d1558b6f095ea0fca81a0d62f6893c5": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "a.txt",
+                "oid": "9327e295f637fe6fd721999358fd4aa194024d19"
+              },
+              {
+                "mode": "100644",
+                "name": "b.txt",
+                "oid": "61780798228d17af2d34fce4cfbdf35556832472"
+              },
+              {
+                "mode": "100644",
+                "name": "c.txt",
+                "oid": "06e567b11dfdafeaf7d3edcc89864149383aeab6"
+              },
+              {
+                "mode": "100644",
+                "name": "t1.txt",
+                "oid": "795ea43143ebd1173b2ff6d1f24e7705306545dd"
+              },
+              {
+                "mode": "100644",
+                "name": "t2.txt",
+                "oid": "9bc7ad0d42bb3581c31ef220203f8d951552b94f"
+              }
+            ],
+            "type": "tree"
+          },
+          "61780798228d17af2d34fce4cfbdf35556832472": {
+            "body": "b\n",
+            "type": "blob"
+          },
+          "6445f4be72ca163ce690bcaa459f5e9c80b79a05": {
+            "body": "tree f15f5b7980895d014a1bc67372a6f59b49d1c474\nparent 0cf9c4964dc23a1d8cd4f20e06a963fc2cc04ed7\nauthor Sam Lee <sam@example.com> 1767226320 +0000\ncommitter Sam Lee <sam@example.com> 1767226320 +0000\n\nMain moves\n",
+            "type": "commit"
+          },
+          "73af2ea9f8fedaf84480bba47eaa1b90940f1029": {
+            "body": "tree b988107c98271ffd68840f2e5f64d2ca35ae8051\nparent 10cfb28d7fde91a07c748b34dcd8186d4f49d72b\nauthor Sam Lee <sam@example.com> 1767228120 +0000\ncommitter Sam Lee <sam@example.com> 1767228180 +0000\n\nEdit line seven\n",
+            "type": "commit"
+          },
+          "74f32cca0aadd156b421f7d74ad8ecc9a1511369": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "a.txt",
+                "oid": "9327e295f637fe6fd721999358fd4aa194024d19"
+              },
+              {
+                "mode": "100644",
+                "name": "b.txt",
+                "oid": "61780798228d17af2d34fce4cfbdf35556832472"
+              },
+              {
+                "mode": "100644",
+                "name": "c.txt",
+                "oid": "06e567b11dfdafeaf7d3edcc89864149383aeab6"
+              },
+              {
+                "mode": "100644",
+                "name": "t2.txt",
+                "oid": "9bc7ad0d42bb3581c31ef220203f8d951552b94f"
+              }
+            ],
+            "type": "tree"
+          },
+          "78981922613b2afb6025042ff6bd878ac1994e85": {
+            "body": "a\n",
+            "type": "blob"
+          },
+          "795ea43143ebd1173b2ff6d1f24e7705306545dd": {
+            "body": "t1\n",
+            "type": "blob"
+          },
+          "8c9b6959529f6793529338a96ef73e31d7e97013": {
+            "body": "1\n2\n3\n4\n5\n6\nseven\n",
+            "type": "blob"
+          },
+          "9327e295f637fe6fd721999358fd4aa194024d19": {
+            "body": "a\nm\n",
+            "type": "blob"
+          },
+          "965b507be063db4ea2a906b8bd0f1c9f13209bf3": {
+            "body": "one\n2\n3\n4\n5\n6\n7\n",
+            "type": "blob"
+          },
+          "9bc7ad0d42bb3581c31ef220203f8d951552b94f": {
+            "body": "t2\n",
+            "type": "blob"
+          },
+          "b4785957bc986dc39c629de9fac9df46972c00fc": {
+            "body": "s\n",
+            "type": "blob"
+          },
+          "b831c479259d54269a86ebd52c102be82457c05b": {
+            "body": "tree 74f32cca0aadd156b421f7d74ad8ecc9a1511369\nparent 6445f4be72ca163ce690bcaa459f5e9c80b79a05\nauthor Sam Lee <sam@example.com> 1767226500 +0000\ncommitter Sam Lee <sam@example.com> 1767226500 +0000\n\nSame as topic two\n",
+            "type": "commit"
+          },
+          "b988107c98271ffd68840f2e5f64d2ca35ae8051": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "a.txt",
+                "oid": "9327e295f637fe6fd721999358fd4aa194024d19"
+              },
+              {
+                "mode": "100644",
+                "name": "b.txt",
+                "oid": "61780798228d17af2d34fce4cfbdf35556832472"
+              },
+              {
+                "mode": "100644",
+                "name": "c.txt",
+                "oid": "e6b809853513354381043debdbeacbef8cd769f2"
+              },
+              {
+                "mode": "100644",
+                "name": "t2.txt",
+                "oid": "9bc7ad0d42bb3581c31ef220203f8d951552b94f"
+              }
+            ],
+            "type": "tree"
+          },
+          "c2aa7bc8ba9eaf2629d5b22eada58aabcd330786": {
+            "body": "tree 5565710c0d1558b6f095ea0fca81a0d62f6893c5\nparent b831c479259d54269a86ebd52c102be82457c05b\nauthor Sam Lee <sam@example.com> 1767225960 +0000\ncommitter Sam Lee <sam@example.com> 1767226920 +0000\n\nTopic one\n",
+            "type": "commit"
+          },
+          "d34534b53375eafef2d7f5189fc1614c1d15832a": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "a.txt",
+                "oid": "78981922613b2afb6025042ff6bd878ac1994e85"
+              },
+              {
+                "mode": "100644",
+                "name": "b.txt",
+                "oid": "61780798228d17af2d34fce4cfbdf35556832472"
+              },
+              {
+                "mode": "100644",
+                "name": "c.txt",
+                "oid": "06e567b11dfdafeaf7d3edcc89864149383aeab6"
+              }
+            ],
+            "type": "tree"
+          },
+          "d40d818b022c7319f7bd46c34761667450fe0d9b": {
+            "body": "tree fe495eb16fc47b9c457450ca79359d5198476172\nparent b831c479259d54269a86ebd52c102be82457c05b\nauthor Sam Lee <sam@example.com> 1767228120 +0000\ncommitter Sam Lee <sam@example.com> 1767228120 +0000\n\nEdit line seven\n",
+            "type": "commit"
+          },
+          "d4e3605569999b8e60224e779768ce80d71e4357": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "a.txt",
+                "oid": "78981922613b2afb6025042ff6bd878ac1994e85"
+              },
+              {
+                "mode": "100644",
+                "name": "b.txt",
+                "oid": "61780798228d17af2d34fce4cfbdf35556832472"
+              },
+              {
+                "mode": "100644",
+                "name": "c.txt",
+                "oid": "06e567b11dfdafeaf7d3edcc89864149383aeab6"
+              },
+              {
+                "mode": "100644",
+                "name": "s.txt",
+                "oid": "b4785957bc986dc39c629de9fac9df46972c00fc"
+              }
+            ],
+            "type": "tree"
+          },
+          "e6b809853513354381043debdbeacbef8cd769f2": {
+            "body": "one\n2\n3\n4\n5\n6\nseven\n",
+            "type": "blob"
+          },
+          "ec96009fc370a2cfaca5621ae3f1aa5144ca802a": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "a.txt",
+                "oid": "78981922613b2afb6025042ff6bd878ac1994e85"
+              },
+              {
+                "mode": "100644",
+                "name": "b.txt",
+                "oid": "61780798228d17af2d34fce4cfbdf35556832472"
+              },
+              {
+                "mode": "100644",
+                "name": "c.txt",
+                "oid": "06e567b11dfdafeaf7d3edcc89864149383aeab6"
+              },
+              {
+                "mode": "100644",
+                "name": "t1.txt",
+                "oid": "795ea43143ebd1173b2ff6d1f24e7705306545dd"
+              }
+            ],
+            "type": "tree"
+          },
+          "f15f5b7980895d014a1bc67372a6f59b49d1c474": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "a.txt",
+                "oid": "9327e295f637fe6fd721999358fd4aa194024d19"
+              },
+              {
+                "mode": "100644",
+                "name": "b.txt",
+                "oid": "61780798228d17af2d34fce4cfbdf35556832472"
+              },
+              {
+                "mode": "100644",
+                "name": "c.txt",
+                "oid": "06e567b11dfdafeaf7d3edcc89864149383aeab6"
+              }
+            ],
+            "type": "tree"
+          },
+          "f595b76b400ae21bb8849b37cadaeda285fcd7b7": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "a.txt",
+                "oid": "78981922613b2afb6025042ff6bd878ac1994e85"
+              },
+              {
+                "mode": "100644",
+                "name": "b.txt",
+                "oid": "61780798228d17af2d34fce4cfbdf35556832472"
+              },
+              {
+                "mode": "100644",
+                "name": "c.txt",
+                "oid": "06e567b11dfdafeaf7d3edcc89864149383aeab6"
+              },
+              {
+                "mode": "100644",
+                "name": "t1.txt",
+                "oid": "795ea43143ebd1173b2ff6d1f24e7705306545dd"
+              },
+              {
+                "mode": "100644",
+                "name": "t2.txt",
+                "oid": "9bc7ad0d42bb3581c31ef220203f8d951552b94f"
+              }
+            ],
+            "type": "tree"
+          },
+          "fe495eb16fc47b9c457450ca79359d5198476172": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "a.txt",
+                "oid": "9327e295f637fe6fd721999358fd4aa194024d19"
+              },
+              {
+                "mode": "100644",
+                "name": "b.txt",
+                "oid": "61780798228d17af2d34fce4cfbdf35556832472"
+              },
+              {
+                "mode": "100644",
+                "name": "c.txt",
+                "oid": "8c9b6959529f6793529338a96ef73e31d7e97013"
+              },
+              {
+                "mode": "100644",
+                "name": "t2.txt",
+                "oid": "9bc7ad0d42bb3581c31ef220203f8d951552b94f"
+              }
+            ],
+            "type": "tree"
+          }
+        },
+        "pseudo": {
+          "ORIG_HEAD": "d40d818b022c7319f7bd46c34761667450fe0d9b\n"
+        },
+        "reflogs": {
+          "HEAD": [
+            "0000000000000000000000000000000000000000 0cf9c4964dc23a1d8cd4f20e06a963fc2cc04ed7 Sam Lee <sam@example.com> 1767225720 +0000\tcommit (initial): First",
+            "0cf9c4964dc23a1d8cd4f20e06a963fc2cc04ed7 0cf9c4964dc23a1d8cd4f20e06a963fc2cc04ed7 Sam Lee <sam@example.com> 1767225780 +0000\tcheckout: moving from main to topic",
+            "0cf9c4964dc23a1d8cd4f20e06a963fc2cc04ed7 0301c17879d6bc11f843535083b81ab6416ecc0a Sam Lee <sam@example.com> 1767225960 +0000\tcommit: Topic one",
+            "0301c17879d6bc11f843535083b81ab6416ecc0a 3b9b33c29f94ab8bee8fb94386dfb0fad5f8079b Sam Lee <sam@example.com> 1767226140 +0000\tcommit: Topic two",
+            "3b9b33c29f94ab8bee8fb94386dfb0fad5f8079b 0cf9c4964dc23a1d8cd4f20e06a963fc2cc04ed7 Sam Lee <sam@example.com> 1767226200 +0000\tcheckout: moving from topic to main",
+            "0cf9c4964dc23a1d8cd4f20e06a963fc2cc04ed7 6445f4be72ca163ce690bcaa459f5e9c80b79a05 Sam Lee <sam@example.com> 1767226320 +0000\tcommit: Main moves",
+            "6445f4be72ca163ce690bcaa459f5e9c80b79a05 b831c479259d54269a86ebd52c102be82457c05b Sam Lee <sam@example.com> 1767226500 +0000\tcommit: Same as topic two",
+            "b831c479259d54269a86ebd52c102be82457c05b 3b9b33c29f94ab8bee8fb94386dfb0fad5f8079b Sam Lee <sam@example.com> 1767226560 +0000\tcheckout: moving from main to topic",
+            "3b9b33c29f94ab8bee8fb94386dfb0fad5f8079b b831c479259d54269a86ebd52c102be82457c05b Sam Lee <sam@example.com> 1767226920 +0000\trebase (start): checkout main",
+            "b831c479259d54269a86ebd52c102be82457c05b c2aa7bc8ba9eaf2629d5b22eada58aabcd330786 Sam Lee <sam@example.com> 1767226920 +0000\trebase (pick): Topic one",
+            "c2aa7bc8ba9eaf2629d5b22eada58aabcd330786 c2aa7bc8ba9eaf2629d5b22eada58aabcd330786 Sam Lee <sam@example.com> 1767226920 +0000\trebase (finish): returning to refs/heads/topic",
+            "c2aa7bc8ba9eaf2629d5b22eada58aabcd330786 6445f4be72ca163ce690bcaa459f5e9c80b79a05 Sam Lee <sam@example.com> 1767227160 +0000\tcheckout: moving from topic to behind",
+            "6445f4be72ca163ce690bcaa459f5e9c80b79a05 b831c479259d54269a86ebd52c102be82457c05b Sam Lee <sam@example.com> 1767227220 +0000\trebase (start): checkout main",
+            "b831c479259d54269a86ebd52c102be82457c05b b831c479259d54269a86ebd52c102be82457c05b Sam Lee <sam@example.com> 1767227220 +0000\trebase (finish): returning to refs/heads/behind",
+            "b831c479259d54269a86ebd52c102be82457c05b b831c479259d54269a86ebd52c102be82457c05b Sam Lee <sam@example.com> 1767227280 +0000\tcheckout: moving from behind to main",
+            "b831c479259d54269a86ebd52c102be82457c05b 0cf9c4964dc23a1d8cd4f20e06a963fc2cc04ed7 Sam Lee <sam@example.com> 1767227340 +0000\tcheckout: moving from main to side",
+            "0cf9c4964dc23a1d8cd4f20e06a963fc2cc04ed7 518b727e7758626b7d4270cbbd9a8265a6547c4a Sam Lee <sam@example.com> 1767227520 +0000\tcommit: Side",
+            "518b727e7758626b7d4270cbbd9a8265a6547c4a b831c479259d54269a86ebd52c102be82457c05b Sam Lee <sam@example.com> 1767227580 +0000\tcheckout: moving from side to main",
+            "b831c479259d54269a86ebd52c102be82457c05b b831c479259d54269a86ebd52c102be82457c05b Sam Lee <sam@example.com> 1767227640 +0000\trebase (start): checkout main",
+            "b831c479259d54269a86ebd52c102be82457c05b 026e7ed5d9c33ae2df5bc3f34738e8d77f145e96 Sam Lee <sam@example.com> 1767227640 +0000\trebase (pick): Side",
+            "026e7ed5d9c33ae2df5bc3f34738e8d77f145e96 026e7ed5d9c33ae2df5bc3f34738e8d77f145e96 Sam Lee <sam@example.com> 1767227640 +0000\trebase (finish): returning to refs/heads/side",
+            "026e7ed5d9c33ae2df5bc3f34738e8d77f145e96 c2aa7bc8ba9eaf2629d5b22eada58aabcd330786 Sam Lee <sam@example.com> 1767227760 +0000\trebase (start): checkout topic",
+            "c2aa7bc8ba9eaf2629d5b22eada58aabcd330786 c2aa7bc8ba9eaf2629d5b22eada58aabcd330786 Sam Lee <sam@example.com> 1767227760 +0000\trebase (finish): returning to refs/heads/behind",
+            "c2aa7bc8ba9eaf2629d5b22eada58aabcd330786 b831c479259d54269a86ebd52c102be82457c05b Sam Lee <sam@example.com> 1767227820 +0000\tcheckout: moving from behind to main",
+            "b831c479259d54269a86ebd52c102be82457c05b 10cfb28d7fde91a07c748b34dcd8186d4f49d72b Sam Lee <sam@example.com> 1767227940 +0000\tcommit: Edit line one",
+            "10cfb28d7fde91a07c748b34dcd8186d4f49d72b b831c479259d54269a86ebd52c102be82457c05b Sam Lee <sam@example.com> 1767228000 +0000\tcheckout: moving from main to late",
+            "b831c479259d54269a86ebd52c102be82457c05b d40d818b022c7319f7bd46c34761667450fe0d9b Sam Lee <sam@example.com> 1767228120 +0000\tcommit: Edit line seven",
+            "d40d818b022c7319f7bd46c34761667450fe0d9b 10cfb28d7fde91a07c748b34dcd8186d4f49d72b Sam Lee <sam@example.com> 1767228180 +0000\trebase (start): checkout main",
+            "10cfb28d7fde91a07c748b34dcd8186d4f49d72b 73af2ea9f8fedaf84480bba47eaa1b90940f1029 Sam Lee <sam@example.com> 1767228180 +0000\trebase (pick): Edit line seven",
+            "73af2ea9f8fedaf84480bba47eaa1b90940f1029 73af2ea9f8fedaf84480bba47eaa1b90940f1029 Sam Lee <sam@example.com> 1767228180 +0000\trebase (finish): returning to refs/heads/late"
+          ],
+          "refs/heads/behind": [
+            "0000000000000000000000000000000000000000 6445f4be72ca163ce690bcaa459f5e9c80b79a05 Sam Lee <sam@example.com> 1767227160 +0000\tbranch: Created from main~1",
+            "6445f4be72ca163ce690bcaa459f5e9c80b79a05 b831c479259d54269a86ebd52c102be82457c05b Sam Lee <sam@example.com> 1767227220 +0000\trebase (finish): refs/heads/behind onto b831c479259d54269a86ebd52c102be82457c05b",
+            "b831c479259d54269a86ebd52c102be82457c05b c2aa7bc8ba9eaf2629d5b22eada58aabcd330786 Sam Lee <sam@example.com> 1767227760 +0000\trebase (finish): refs/heads/behind onto c2aa7bc8ba9eaf2629d5b22eada58aabcd330786"
+          ],
+          "refs/heads/late": [
+            "0000000000000000000000000000000000000000 b831c479259d54269a86ebd52c102be82457c05b Sam Lee <sam@example.com> 1767228000 +0000\tbranch: Created from main~1",
+            "b831c479259d54269a86ebd52c102be82457c05b d40d818b022c7319f7bd46c34761667450fe0d9b Sam Lee <sam@example.com> 1767228120 +0000\tcommit: Edit line seven",
+            "d40d818b022c7319f7bd46c34761667450fe0d9b 73af2ea9f8fedaf84480bba47eaa1b90940f1029 Sam Lee <sam@example.com> 1767228180 +0000\trebase (finish): refs/heads/late onto 10cfb28d7fde91a07c748b34dcd8186d4f49d72b"
+          ],
+          "refs/heads/main": [
+            "0000000000000000000000000000000000000000 0cf9c4964dc23a1d8cd4f20e06a963fc2cc04ed7 Sam Lee <sam@example.com> 1767225720 +0000\tcommit (initial): First",
+            "0cf9c4964dc23a1d8cd4f20e06a963fc2cc04ed7 6445f4be72ca163ce690bcaa459f5e9c80b79a05 Sam Lee <sam@example.com> 1767226320 +0000\tcommit: Main moves",
+            "6445f4be72ca163ce690bcaa459f5e9c80b79a05 b831c479259d54269a86ebd52c102be82457c05b Sam Lee <sam@example.com> 1767226500 +0000\tcommit: Same as topic two",
+            "b831c479259d54269a86ebd52c102be82457c05b 10cfb28d7fde91a07c748b34dcd8186d4f49d72b Sam Lee <sam@example.com> 1767227940 +0000\tcommit: Edit line one"
+          ],
+          "refs/heads/side": [
+            "0000000000000000000000000000000000000000 0cf9c4964dc23a1d8cd4f20e06a963fc2cc04ed7 Sam Lee <sam@example.com> 1767227340 +0000\tbranch: Created from main~2",
+            "0cf9c4964dc23a1d8cd4f20e06a963fc2cc04ed7 518b727e7758626b7d4270cbbd9a8265a6547c4a Sam Lee <sam@example.com> 1767227520 +0000\tcommit: Side",
+            "518b727e7758626b7d4270cbbd9a8265a6547c4a 026e7ed5d9c33ae2df5bc3f34738e8d77f145e96 Sam Lee <sam@example.com> 1767227640 +0000\trebase (finish): refs/heads/side onto b831c479259d54269a86ebd52c102be82457c05b"
+          ],
+          "refs/heads/topic": [
+            "0000000000000000000000000000000000000000 0cf9c4964dc23a1d8cd4f20e06a963fc2cc04ed7 Sam Lee <sam@example.com> 1767225780 +0000\tbranch: Created from HEAD",
+            "0cf9c4964dc23a1d8cd4f20e06a963fc2cc04ed7 0301c17879d6bc11f843535083b81ab6416ecc0a Sam Lee <sam@example.com> 1767225960 +0000\tcommit: Topic one",
+            "0301c17879d6bc11f843535083b81ab6416ecc0a 3b9b33c29f94ab8bee8fb94386dfb0fad5f8079b Sam Lee <sam@example.com> 1767226140 +0000\tcommit: Topic two",
+            "3b9b33c29f94ab8bee8fb94386dfb0fad5f8079b c2aa7bc8ba9eaf2629d5b22eada58aabcd330786 Sam Lee <sam@example.com> 1767226920 +0000\trebase (finish): refs/heads/topic onto b831c479259d54269a86ebd52c102be82457c05b"
+          ]
+        },
+        "refs": {
+          "refs/heads/behind": "c2aa7bc8ba9eaf2629d5b22eada58aabcd330786",
+          "refs/heads/late": "73af2ea9f8fedaf84480bba47eaa1b90940f1029",
+          "refs/heads/main": "10cfb28d7fde91a07c748b34dcd8186d4f49d72b",
+          "refs/heads/side": "026e7ed5d9c33ae2df5bc3f34738e8d77f145e96",
+          "refs/heads/topic": "c2aa7bc8ba9eaf2629d5b22eada58aabcd330786"
+        }
+      }
+    }
+  },
+  "git": "2.45.1.windows.1",
+  "script": {
+    "steps": [
+      "git init -q",
+      "git add a.txt b.txt c.txt",
+      "git commit -q -m \"First\"",
+      "git switch -q -c topic",
+      "echo t1 > t1.txt",
+      "git add t1.txt",
+      "git commit -q -m \"Topic one\"",
+      "echo t2 > t2.txt",
+      "git add t2.txt",
+      "git commit -q -m \"Topic two\"",
+      "git switch -q main",
+      "echo m >> a.txt",
+      "git commit -q -a -m \"Main moves\"",
+      "echo t2 > t2.txt",
+      "git add t2.txt",
+      "git commit -q -m \"Same as topic two\"",
+      "git switch -q topic",
+      "echo dirty >> b.txt",
+      "git rebase main",
+      "git restore b.txt",
+      "git rebase",
+      "git rebase nope",
+      "git rebase main",
+      "git log --oneline --graph --all",
+      "git status",
+      "git rebase main",
+      "git switch -q -c behind main~1",
+      "git rebase main",
+      "git switch -q main",
+      "git switch -q -c side main~2",
+      "echo s > s.txt",
+      "git add s.txt",
+      "git commit -q -m \"Side\"",
+      "git switch -q main",
+      "git rebase main side",
+      "git branch -v",
+      "git rebase -q topic behind",
+      "git switch -q main",
+      "mv c1.txt c.txt",
+      "git commit -q -a -m \"Edit line one\"",
+      "git switch -q -c late main~1",
+      "mv c7.txt c.txt",
+      "git commit -q -a -m \"Edit line seven\"",
+      "git rebase main",
+      "cat c.txt"
+    ],
+    "world": {
+      "cwd": "project",
+      "files": {
+        "project/a.txt": "a\n",
+        "project/b.txt": "b\n",
+        "project/c.txt": "1\n2\n3\n4\n5\n6\n7\n",
+        "project/c1.txt": "one\n2\n3\n4\n5\n6\n7\n",
+        "project/c7.txt": "1\n2\n3\n4\n5\n6\nseven\n"
+      }
+    }
+  },
+  "steps": [
+    {
+      "cmd": "git init -q",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git add a.txt b.txt c.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git commit -q -m \"First\"",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git switch -q -c topic",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "echo t1 > t1.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git add t1.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git commit -q -m \"Topic one\"",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "echo t2 > t2.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git add t2.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git commit -q -m \"Topic two\"",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git switch -q main",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "echo m >> a.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git commit -q -a -m \"Main moves\"",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "echo t2 > t2.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git add t2.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git commit -q -m \"Same as topic two\"",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git switch -q topic",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "echo dirty >> b.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git rebase main",
+      "cwd": "/home/you/project",
+      "exitCode": 1,
+      "stderr": "error: cannot rebase: You have unstaged changes.\nerror: Please commit or stash them.\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git restore b.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git rebase",
+      "cwd": "/home/you/project",
+      "exitCode": 1,
+      "stderr": "",
+      "stdout": "There is no tracking information for the current branch.\nPlease specify which branch you want to rebase against.\nSee git-rebase(1) for details.\n\n    git rebase '<branch>'\n\nIf you wish to set tracking information for this branch you can do so with:\n\n    git branch --set-upstream-to=<remote>/<branch> topic\n\n"
+    },
+    {
+      "cmd": "git rebase nope",
+      "cwd": "/home/you/project",
+      "exitCode": 128,
+      "stderr": "fatal: invalid upstream 'nope'\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git rebase main",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "warning: skipped previously applied commit 3b9b33c\nhint: use --reapply-cherry-picks to include skipped commits\nhint: Disable this message with \"git config advice.skippedCherryPicks false\"\nSuccessfully rebased and updated refs/heads/topic.\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git log --oneline --graph --all",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "* c2aa7bc (HEAD -> topic) Topic one\n* b831c47 (main) Same as topic two\n* 6445f4b Main moves\n* 0cf9c49 First\n"
+    },
+    {
+      "cmd": "git status",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "On branch topic\nUntracked files:\n  (use \"git add <file>...\" to include in what will be committed)\n\tc1.txt\n\tc7.txt\n\nnothing added to commit but untracked files present (use \"git add\" to track)\n"
+    },
+    {
+      "cmd": "git rebase main",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "Current branch topic is up to date.\n"
+    },
+    {
+      "cmd": "git switch -q -c behind main~1",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git rebase main",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "Successfully rebased and updated refs/heads/behind.\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git switch -q main",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git switch -q -c side main~2",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "echo s > s.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git add s.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git commit -q -m \"Side\"",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git switch -q main",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git rebase main side",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "Successfully rebased and updated refs/heads/side.\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git branch -v",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "  behind b831c47 Same as topic two\n  main   b831c47 Same as topic two\n* side   026e7ed Side\n  topic  c2aa7bc Topic one\n"
+    },
+    {
+      "cmd": "git rebase -q topic behind",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git switch -q main",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "mv c1.txt c.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git commit -q -a -m \"Edit line one\"",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git switch -q -c late main~1",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "mv c7.txt c.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git commit -q -a -m \"Edit line seven\"",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git rebase main",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "Successfully rebased and updated refs/heads/late.\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "cat c.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "one\n2\n3\n4\n5\n6\nseven\n"
+    }
+  ]
+}

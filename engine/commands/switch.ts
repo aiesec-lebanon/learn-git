@@ -2,6 +2,7 @@ import { flag, lastValue, type OptionSpec } from "../cli/options";
 import { moveHead, type HeadTarget } from "../checkout/move-head";
 import { branchMessages } from "../messages/branch";
 import { mergeMessages } from "../messages/merge";
+import { rebaseMessages } from "../messages/rebase";
 import { SWITCH_USAGE, checkoutMessages as m } from "../messages/checkout";
 import { branchRef, isValidBranchName } from "../refs/names";
 import { resolveHead } from "../refs/refs";
@@ -72,7 +73,9 @@ export const switchCommand = defineCommand({
     if (repo.op) {
       return refuse(
         "operation-in-progress",
-        mergeMessages.switchWhileMerging(),
+        repo.op.kind === "rebase"
+          ? rebaseMessages.switchWhileRebasing()
+          : mergeMessages.switchWhileMerging(),
       );
     }
     const pool = world.objects;

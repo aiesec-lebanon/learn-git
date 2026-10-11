@@ -89,6 +89,23 @@ export type MergeOperation = {
   readonly message: string;
 };
 
+/** A rebase stopped on a conflicting pick (`.git/rebase-merge`). */
+export type RebaseOperation = {
+  readonly kind: "rebase";
+  /** The branch being rebased; null when HEAD was detached. */
+  readonly branch: RefName | null;
+  /** Where HEAD was before the rebase. */
+  readonly head: Oid;
+  readonly onto: Oid;
+  /** Picks applied so far, the stopped one last. */
+  readonly done: readonly Oid[];
+  readonly todo: readonly Oid[];
+  /** What reflog entries start with: `rebase` or `pull --rebase`. */
+  readonly action: string;
+};
+
+export type Operation = MergeOperation | RebaseOperation;
+
 export type Repo = {
   readonly id: RepoId;
   readonly machine: MachineId;
@@ -106,7 +123,7 @@ export type Repo = {
   /** `ORIG_HEAD`: where HEAD was before the last merge. */
   readonly origHead?: Oid;
   /** The operation in progress, if any. */
-  readonly op?: MergeOperation;
+  readonly op?: Operation;
   /** `FETCH_HEAD`: what the last fetch brought, as Git writes the file. */
   readonly fetchHead?: string;
   /** A bare repository (no worktree, index or reflogs), as hosted on the Hub. */

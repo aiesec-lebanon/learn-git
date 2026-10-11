@@ -12,6 +12,7 @@ import { log } from "./log";
 import { merge } from "./merge";
 import { mv } from "./mv";
 import { createRegistry } from "./registry";
+import { rebase } from "./rebase";
 import { remote } from "./remote";
 import { restore } from "./restore";
 import { pull } from "./pull";
@@ -46,4 +47,5 @@ export const GIT_REGISTRY = createRegistry([
   fetch,
   push,
   pull,
+  rebase,
 ]);

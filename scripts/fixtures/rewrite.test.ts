@@ -48,6 +48,10 @@ describe("fixture rewriting", () => {
     ["user.name=Sam\nlog.decorate=short\n", "user.name=Sam\n"],
     ["command\tlog.decorate=short\n", ""],
     [
+      "Rebasing (1/2)\rRebasing (2/2)\r\r\u001b[KSuccessfully rebased\n",
+      "Successfully rebased\n",
+    ],
+    [
       "From file:///C:/Users/Ada/AppData/Local/Temp/lg-fx-abc/hub/sam/team\n",
       "From https://hub.test/sam/team\n",
     ],

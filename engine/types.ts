@@ -449,7 +449,8 @@ export type ActorScript = {
   /** The name narration and the timeline show, e.g. `Sam`. */
   readonly name: string;
   readonly trigger: Trigger;
-  readonly run: readonly string[];
+  /** Lines run in their machine's shell, and Hub actions taken as the account named `machine`. */
+  readonly run: readonly (string | HubAction)[];
   /** One sentence for "What happened" and the announcer. */
   readonly says?: string;
   /** When it happens, in words for the timeline, e.g. `after you clone`. */

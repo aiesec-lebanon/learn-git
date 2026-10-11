@@ -1,5 +1,6 @@
+import { act, hubActionText } from "../hub/actions";
 import { runLine } from "../run";
-import type { ActorScript, Outcome, World } from "../types";
+import type { ActorScript, HubAction, Outcome, World } from "../types";
 import { timeAt } from "./clock";
 
 /** What the learner just did, as the triggers see it. */
@@ -37,6 +38,16 @@ export function withActors(
   return { ...world, actors: { scripts, fired: [] } };
 }
 
+/** A Hub action taken by the script's account, shaped like a line's result. */
+function hubStep(world: World, actor: string, action: HubAction) {
+  const outcome = act(world, { kind: "hub", actor, action });
+  return {
+    world: outcome.world,
+    outcomes: [outcome],
+    texts: [hubActionText(action)],
+  };
+}
+
 /** Runs one script's lines on its machine and marks it as having acted. */
 function perform(
   world: World,
@@ -46,7 +57,10 @@ function perform(
   const outcomes: Outcome[] = [];
   const texts: string[] = [];
   for (const line of script.run) {
-    const ran = runLine(current, line, script.machine);
+    const ran =
+      typeof line === "string"
+        ? runLine(current, line, script.machine)
+        : hubStep(current, script.machine, line);
     ran.outcomes.forEach((outcome, i) => {
       outcomes.push({
         ...outcome,

@@ -58,6 +58,19 @@ describe("the teammate timeline", () => {
     ).toBe("after you clone");
   });
 
+  it("names a Hub action by what it does", () => {
+    const hubWorld = withActors(world, [
+      {
+        id: "r",
+        machine: "sam",
+        name: "Sam",
+        trigger: { kind: "after-step", step: 1 },
+        run: [{ type: "comment", repo: "sam/s", number: 1, body: "Hi" }],
+      },
+    ]);
+    expect(timelineItems(hubWorld)[0]?.what).toBe("Hub: comment on #1");
+  });
+
   it("pauses teammates and steps them one at a time", () => {
     const session = new Session(world);
     session.setActorsPaused(true);

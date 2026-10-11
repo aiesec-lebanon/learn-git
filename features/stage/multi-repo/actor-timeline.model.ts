@@ -1,4 +1,4 @@
-import type { ActorScript, World } from "@/engine";
+import { hubActionText, type ActorScript, type World } from "@/engine";
 import { clockTime } from "@/features/graph/view-model";
 
 export type TimelineItem = {
@@ -10,6 +10,13 @@ export type TimelineItem = {
   readonly when: string;
   readonly state: "done" | "next" | "waiting";
 };
+
+const stepText = (step: ActorScript["run"][number] | undefined) =>
+  step === undefined
+    ? ""
+    : typeof step === "string"
+      ? step
+      : hubActionText(step);
 
 const ORDINALS = ["first", "second", "third", "fourth", "fifth"];
 
@@ -38,7 +45,7 @@ export function timelineItems(world: World): readonly TimelineItem[] {
     return {
       id: script.id,
       name: script.name,
-      what: script.says ?? script.run[0] ?? "",
+      what: script.says ?? stepText(script.run[0]),
       when: done ? "done" : triggerText(script),
       state,
     };

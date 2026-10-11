@@ -198,4 +198,38 @@ describe("Hub repository views", () => {
       },
     ]);
   });
+
+  it("shows deletions and renames on a commit page", () => {
+    const w = runLine(
+      world(),
+      'git mv docs/guide.md docs/howto.md && git rm -q soup.txt && git commit -q -m "Tidy" && git push -q origin soup',
+    ).world;
+    const tip = resolveHubRevision(w, "you/recipes", "soup") as Oid;
+    expect(
+      hubCommitPage(w, tip).files.map(
+        ({ path, from, change, added, deleted }) => ({
+          path,
+          from,
+          change,
+          added,
+          deleted,
+        }),
+      ),
+    ).toEqual([
+      {
+        path: "docs/howto.md",
+        from: "docs/guide.md",
+        change: "renamed",
+        added: 0,
+        deleted: 0,
+      },
+      {
+        path: "soup.txt",
+        from: undefined,
+        change: "deleted",
+        added: 0,
+        deleted: 1,
+      },
+    ]);
+  });
 });

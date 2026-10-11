@@ -161,7 +161,9 @@ export function narrate(effects: readonly Effect[], world: World): Narration {
         lines.push(`Nothing changed. ${REFUSAL_FACTS[e.code]}`);
         break;
       case "actor":
-        lines.push(e.says ?? `${e.actor} acted.`);
+        if (e.says) lines.push(e.says);
+        else if (!effects.some((h) => h.kind === "hub"))
+          lines.push(`${e.actor} acted.`);
         break;
       case "hub":
         lines.push(hubEventSentence(e.actor, e.event));
@@ -186,13 +188,12 @@ function announce(
   subject: (oid: Oid) => string,
 ): string {
   const actor = effects.find((e) => e.kind === "actor");
-  if (actor?.kind === "actor") {
-    return clip(actor.says ?? `${actor.actor} acted.`, MAX_WORDS);
-  }
+  if (actor?.kind === "actor" && actor.says) return clip(actor.says, MAX_WORDS);
   const hub = effects.flatMap((e) =>
     e.kind === "hub" ? [hubEventSentence(e.actor, e.event)] : [],
   );
   if (hub.length) return clip(hub.join(" "), MAX_WORDS);
+  if (actor?.kind === "actor") return `${actor.actor} acted.`;
   const commit = effects.find(
     (e) => e.kind === "object-written" && e.type === "commit",
   );

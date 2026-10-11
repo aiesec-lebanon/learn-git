@@ -1,3 +1,4 @@
+import { act, hubActionText } from "./hub/actions";
 import { LIMITS } from "./limits";
 import { mergeOutcomes, resume } from "./execute";
 import { runLine } from "./run";
@@ -11,7 +12,8 @@ const actorEntries = (runs: readonly ActorRun[]): HistoryEntry[] =>
       actor: run.script.name,
     })),
   );
-import type { InteractionRequest, Outcome, World } from "./types";
+import type { HubAction, InteractionRequest, Outcome, World } from "./types";
+import { LEARNER } from "./world/defaults";
 
 /** One command the learner (or, with `actor`, a scripted teammate) ran, as text, with what it did. */
 export type HistoryEntry = {
@@ -73,6 +75,19 @@ export class Session {
     this.latest = ran;
     this.changed();
     return ran;
+  }
+
+  /** Takes a Hub action as the learner; one history entry, then any teammate it triggers. */
+  act(action: HubAction): readonly HistoryEntry[] {
+    const text = hubActionText(action);
+    const outcome = act(this.world, { kind: "hub", actor: LEARNER, action });
+    const mine: HistoryEntry[] = [{ text, outcome }];
+    this.record(mine);
+    const acted = this.paused ? [] : this.actorsAfter([text]);
+    this.record(acted);
+    this.latest = [...mine, ...acted];
+    this.changed();
+    return this.latest;
   }
 
   private record(entries: readonly HistoryEntry[]): void {

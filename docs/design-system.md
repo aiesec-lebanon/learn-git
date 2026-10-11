@@ -66,7 +66,7 @@ Rules: AIESEC blue is 3.98:1 on white, so it is used only where 3:1 suffices (gr
 | `text-sm`      | JetBrains Mono 500 | 14 px               | Commands and hashes, never handwritten |
 | `text-xs`      | Shantell Sans 600  | 12 px               | Notes in the margin                    |
 
-Fonts are self-hosted with `next/font` (Latin subset, `swap`; only Shantell Sans is preloaded; weight axes only, which keeps the three families under 150 KB). Shantell Sans writes the board (titles, notes, Nib's lines), Figtree sets everything read at length, JetBrains Mono sets every command and hash: nothing a learner might type is handwritten. All three use the SIL Open Font License.
+Fonts are self-hosted with `next/font` (Latin subset, `swap`; only Shantell Sans is preloaded; weight axes only, which keeps the three families under 150 KB; each falls back to a metric-matched face on Arial or, where Arial is missing, Liberation Sans, Arimo or Roboto, so the swap barely moves text). Shantell Sans writes the board (titles, notes, Nib's lines), Figtree sets everything read at length, JetBrains Mono sets every command and hash: nothing a learner might type is handwritten. All three use the SIL Open Font License.
 
 ## Spacing, radii, elevation
 
@@ -88,6 +88,8 @@ Easings: `ease-standard` (everyday UI), `ease-draw` (a steady pull, then the pen
 Choreography: draw in the order Git writes (the new commit, then its arrow back to the parent); then HEAD's note peels off and presses onto the new commit while every other note stays put. History is never redrawn to look tidier. Unreachable history fades to a ghost. Parallax only separates the four depths (working tree, staging area, repository, origin).
 
 Reduced motion (system setting or `data-motion="reduce"`): every `--dur-*` becomes 0; strokes appear complete, notes jump, the hero holds one frame, parallax is off, Nib holds still while its expressions still change.
+
+Nothing moves on its own for more than 5 s: Nib sways and blinks once, its talking stops after a few strokes, and the hero's loop has Pause.
 
 ## Git visual language
 
@@ -111,14 +113,12 @@ Reduced motion (system setting or `data-motion="reduce"`): every `--dur-*` becom
 
 A green whiteboard marker who keeps office hours. Warm, patient and a little dry: Nib draws what changed, circles it and gives the next step. Nib never stands for anything in Git.
 
-| State           | When                                                     |
-| --------------- | -------------------------------------------------------- |
-| `idle`          | Waiting; office hours are open                           |
-| `explaining`    | Narrating a beat                                         |
-| `pointing`      | Lighting up the part of the board that changed           |
-| `refusal`       | Git refused a command ("Hm."), with the translation      |
-| `acknowledging` | Stating an outcome as information                        |
-| `pleased`       | A brief pose after a success; no praise words or rewards |
+| State        | When                                                     |
+| ------------ | -------------------------------------------------------- |
+| `idle`       | Waiting; office hours are open                           |
+| `explaining` | Narrating what a command changed, as information         |
+| `surprised`  | Git refused a command, with the one-line translation     |
+| `pleased`    | A brief pose after a success; no praise words or rewards |
 
 Voice: name the Git term right after the idea; draw first, then explain in one short line; say what changed as a state, then what to try next. Never "just", "simply", "easy" or "obviously"; no "Great job" or "Oops"; no exclamation marks, emoji or scores.
 
@@ -136,4 +136,5 @@ Muted by default; small desk sounds under 1 s, cued by Git events, never by succ
 - Keyboard: a skip link first; visible focus everywhere; targets at least 24 px, 44 px for buttons and chips.
 - Screen readers: one polite announcer; learner text renders as text inside `<bdi>`; external links say they open a new tab.
 - Motion and colour: reduced motion honored with an in-app override; no information by colour alone.
-- Phones: lessons, boards and Nib work in full; the playground uses command chips; the board scrolls inside its frame, never the page.
+- Phones: lessons, boards and Nib work in full; sandboxes use command chips, and every Beginner target can be reached with them; the board scrolls inside its frame, never the page, and every page reflows at 320 px.
+- Code and conflict text wrap instead of scrolling sideways. The header is 95% opaque in light mode so its links keep 4.5:1 over anything scrolled beneath.

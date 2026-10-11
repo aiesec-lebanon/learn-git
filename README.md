@@ -20,6 +20,8 @@ npx playwright install --with-deps   # once
 npm run e2e
 ```
 
+For the release candidate, `PERF_STRICT=1` turns the timing tripwires into the real budgets (`npm test -- --run --project timing`, `npx playwright test e2e/perf.spec.ts --project=chromium`).
+
 ## Docs
 
 - [Context](docs/context.md): what the product is and its rules

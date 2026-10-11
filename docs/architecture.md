@@ -31,7 +31,7 @@ ESLint enforces the table per folder. Inside `engine/` it also bans React, Next.
 
 1. Typing, a chip, a drag or a Hub button becomes one invocation.
 2. `Session.run` calls `execute(world, invocation)`, which returns the next world, Git's output and exit code, typed effects and, when an editor is needed, an interaction request.
-3. The session records the step (Rewind, "Your path") and notifies React (`useSyncExternalStore`).
+3. The session records the step (Rewind, "Your path") and notifies React (`useSyncExternalStore`; hydration reads the session's starting snapshot, which is what the server rendered).
 4. Consumers read the same effects: the stage plans and plays the choreography, narration writes "What happened" and one screen-reader announcement, sound maps effects to cues, the matcher checks the target, the par counter classifies the step.
 5. Progress is written only on checkpoints, navigation and settings changes.
 
@@ -60,7 +60,7 @@ ESLint enforces the table per folder. Inside `engine/` it also bans React, Next.
 
 ## Theme
 
-One theme module, **Office Hours**, behind a typed contract (`themes/contract.ts`), chosen at build time in `themes/active.ts` (fonts in `themes/active-fonts.ts`, because `next/font` runs only in the Next.js build). Its parts are added as the features that use them arrive: tokens, scale, contrast pairs, fonts, logo and copy now; graph skin, icons, guide character, sound recipes and hero later. `themeToCss()` turns the tokens into CSS variables in a build-time `<style>`; `app/globals.css` maps them into Tailwind once (`bg-surface`, `text-fg-muted`, `rounded-btn`), so components never use `dark:` variants or Tailwind's default palette. An inline script (`applyDisplayPrefs`, serialized) sets `data-theme` and `data-motion` before the first paint, and `ThemeController` re-applies them after React's development remount. Every declared contrast pair is unit-tested in both modes.
+One theme module, **Office Hours**, behind a typed contract (`themes/contract.ts`), chosen at build time in `themes/active.ts` (fonts in `themes/active-fonts.ts`, because `next/font` runs only in the Next.js build). It provides tokens, scale, contrast pairs, fonts (with metric-matched fallbacks that also cover systems without Arial), logo, copy, graph skin, icons, the guide character, sound recipes and the hero. `themeToCss()` turns the tokens into CSS variables in a build-time `<style>`; `app/globals.css` maps them into Tailwind once (`bg-surface`, `text-fg-muted`, `rounded-btn`), so components never use `dark:` variants or Tailwind's default palette. An inline script (`applyDisplayPrefs`, serialized) sets `data-theme` and `data-motion` before the first paint, and `ThemeController` re-applies them after React's development remount. Every declared contrast pair is unit-tested in both modes.
 
 ## Persistence
 
@@ -80,12 +80,13 @@ Content scripts take Hub steps beside typed lines (`Step = string | HubAction`):
 
 ## Testing
 
-| Level                      | What runs                                                                                                                                                       |
-| -------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Unit and fixtures (Vitest) | Engine modules and commands; fixture scripts recorded from Git for Windows 2.45.1; engine coverage at least 90%; theme contrast and CSS                         |
-| Properties (fast-check)    | Determinism, purity, referential integrity, Rewind, effects versus state, layout stability, matcher, tokenizer, diff, storage parsing                           |
-| Content (Vitest)           | Every beat, target, par solution, scenario path and reference variant replays; voice and length rules                                                           |
-| E2E (Playwright)           | Key journeys on Chromium, Firefox and WebKit plus phone emulation: keyboard only, chips only, reduced motion, storage blocked, no flash, axe, same-origin guard |
+| Level                      | What runs                                                                                                                                                                                                               |
+| -------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Unit and fixtures (Vitest) | Engine modules and commands; fixture scripts recorded from Git for Windows 2.45.1; engine coverage at least 90%; theme contrast and CSS                                                                                 |
+| Properties (fast-check)    | Determinism, purity, referential integrity, Rewind, effects versus state, layout stability, matcher, tokenizer, diff, storage parsing                                                                                   |
+| Content (Vitest)           | Every beat, target, par solution, scenario path and reference variant replays; every target is reached again through chips only; voice and length rules                                                                 |
+| Timing (Vitest `timing`)   | `*.timing.test.ts`: engine per command on every Beginner solution and on a 300-commit world, graph layout, diff caps                                                                                                    |
+| E2E (Playwright)           | Key journeys on Chromium, Firefox and WebKit plus phone emulation: keyboard only, chips only, reduced motion, storage blocked, no flash, same-origin guard; axe on every page type and stage state; performance budgets |
 
 ## Delivery
 
@@ -95,7 +96,9 @@ Content scripts take Hub steps beside typed lines (`Step = string | HubAction`):
 
 ## Performance budgets
 
-Field (p75): LCP 2.5 s, INP 200 ms, CLS 0.1 or less. Lab, compressed JavaScript: Home 170 KB, a lesson 230 KB before the engine; engine chunk 100 KB; Hub chunk with Markdown 60 KB; fonts 150 KB. Engine: p95 16 ms per command on Beginner worlds and 50 ms on a 300-commit world. Graph layout: 8 ms for 300 commits.
+Field (p75): LCP 2.5 s, INP 200 ms, CLS 0.1 or less. Lab, Brotli-compressed JavaScript: Home 170 KB, a lesson 230 KB before the engine; engine and sandbox 100 KB; Hub panels with Markdown 60 KB; fonts 150 KB in at most three families. Lab LCP 2.5 s (4x CPU, mobile network), lesson CLS 0.02, no frame over 50 ms while commands play. Engine: p95 16 ms per command on Beginner worlds and 50 ms on a 300-commit world. Graph layout: 8 ms for 300 commits.
+
+`e2e/perf.spec.ts` and the `timing` project check them. Bytes gate CI; timings fail CI only at 3x, and `PERF_STRICT=1` applies the real numbers for the release candidate. The engine stays out of initial JavaScript because `package.json` marks the code free of side effects (except CSS), so the `@/engine` barrel tree-shakes, and because modules that server pages and the root layout import hold no session (`stage-view`, `lesson-sandbox` and `announcer` are split from their session-reading halves). The sandbox, lesson widgets, Hub panels, Markdown, the reference sheet and sound load lazily.
 
 ## Decisions
 

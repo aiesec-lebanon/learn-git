@@ -3,7 +3,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import {
   match,
-  narrate,
   type HistoryEntry,
   type MatchReport,
   type TargetSpec,
@@ -12,12 +11,14 @@ import {
 import { useAnnounce } from "@/features/announcer/announcer";
 import { CommandChips } from "@/features/chips/chips";
 import { ConflictResolver } from "@/features/conflict/resolver";
-import type { Hints } from "@/content/define";
+import type { Hints, ScenarioScene } from "@/content/define";
 import { Guide } from "@/features/guide/guide";
 import { HintLadder } from "@/features/guide/hint-ladder";
 import { progressStore, useProgress } from "@/features/progress/progress";
 import type { ResumePointer } from "@/features/progress/schema";
 import { ReferenceSheet } from "@/features/reference/reference-sheet";
+import { ScenarioPanel } from "@/features/scenario/scenario-panel";
+import { useActsReached } from "@/features/scenario/use-acts";
 import { EditorSheet } from "@/features/stage/editor-sheet";
 import { Rewind } from "@/features/stage/rewind";
 import { sandboxFor } from "@/features/stage/session-registry";
@@ -27,6 +28,7 @@ import { WhatHappened } from "@/features/stage/what-happened";
 import { Terminal } from "@/features/terminal/terminal";
 import { Button } from "@/ui/button";
 import { TargetPanel } from "./target-panel";
+import { YourPath } from "./your-path";
 
 /** What reaching the target records: the resume point, the finished chapter. */
 export type Reached = {
@@ -41,31 +43,12 @@ export type SandboxProps = {
   target?: TargetSpec;
   reached?: Reached;
   hints?: Hints;
+  /** A scenario: its acts take the place of a single target. */
+  scenario?: ScenarioScene;
   /** A command typed before the sandbox loaded; it runs first. */
   queued: string | null;
   focus: boolean;
 };
-
-function YourPath({ history }: { history: readonly HistoryEntry[] }) {
-  return (
-    <details className="text-sm">
-      <summary className="min-h-11 cursor-pointer content-center font-semibold">
-        Your path ({history.length} commands)
-      </summary>
-      <ol className="m-0 grid gap-2 pl-5">
-        {history.map((entry, i) => (
-          <li key={i}>
-            <code className="font-mono">{entry.text}</code>
-            <br />
-            <span className="text-fg-muted">
-              {narrate(entry.outcome.effects, entry.outcome.world).announcement}
-            </span>
-          </li>
-        ))}
-      </ol>
-    </details>
-  );
-}
 
 function Check({
   report,
@@ -123,6 +106,7 @@ export function Sandbox({
   target,
   reached = NOTHING,
   hints,
+  scenario,
   queued,
   focus,
 }: SandboxProps) {
@@ -135,6 +119,8 @@ export function Sandbox({
     () => (target ? match(now, target) : null),
     [now, target],
   );
+  const acts = useActsReached(scenario, session);
+  const resolved = scenario ? acts === scenario.acts.length : false;
   const { guide } = useProgress().prefs;
   const ran = useRef(false);
   useEffect(() => {
@@ -145,11 +131,14 @@ export function Sandbox({
   return (
     <div className="grid gap-6 lg:grid-cols-[minmax(0,1.3fr)_minmax(0,1fr)]">
       <div className="grid content-start gap-4">
-        <Guide
-          session={session}
-          verbosity={guide}
-          achieved={report?.ok ?? false}
-        />
+        {/* In a scenario the guide stays silent until the debrief (learning design 4). */}
+        {scenario && !resolved ? null : (
+          <Guide
+            session={session}
+            verbosity={guide}
+            achieved={report?.ok ?? resolved}
+          />
+        )}
         <Stage session={session} />
         <ConflictResolver session={session} />
       </div>
@@ -161,6 +150,9 @@ export function Sandbox({
           <CommandChips session={session} />
         </div>
         <Rewind session={session} />
+        {scenario ? (
+          <ScenarioPanel scene={scenario} session={session} reached={acts} />
+        ) : null}
         {report && target ? (
           <>
             <Check report={report} history={history} reached={reached} />

@@ -74,6 +74,38 @@ export const chaptersOf = (track: TrackId) =>
 export const lessonsOf = (chapter: ChapterId): readonly Lesson[] =>
   LESSONS.filter((lesson) => lesson.chapter === chapter);
 
+export const SCENARIOS = [
+  s("s-b1", "First contribution", 15),
+  s("s-b2", "Wrong branch, uncommitted work", 8),
+  s("s-b3", "Monday-morning push", 12),
+  s("s-b4", "Conflict on your PR", 15),
+] as const;
+
+function s<const I extends string>(
+  id: I,
+  title: string,
+  minutes: number,
+  ready = false,
+) {
+  return { id, track: "beginner" as TrackId, title, minutes, ready };
+}
+
+export type ScenarioId = (typeof SCENARIOS)[number]["id"];
+export type Scenario = (typeof SCENARIOS)[number];
+
+/** Scenarios that have content and a page. */
+export const readyScenarios = (): readonly Scenario[] =>
+  SCENARIOS.filter((scenario) => scenario.ready);
+
+export const scenariosOf = (track: TrackId): readonly Scenario[] =>
+  SCENARIOS.filter((scenario) => scenario.track === track);
+
+export const scenarioById = (id: string): Scenario | undefined =>
+  SCENARIOS.find((scenario) => scenario.id === id);
+
+/** The scenario's code as the curriculum writes it, e.g. "S-B2". */
+export const scenarioCode = (id: ScenarioId): string => id.toUpperCase();
+
 /** The chapter's code as the curriculum writes it, e.g. "B1". */
 export const chapterCode = (id: ChapterId): string => id.toUpperCase();
 

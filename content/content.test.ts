@@ -11,7 +11,9 @@ import type { Checkpoint } from "./define";
 import { voiceProblems } from "./guide/voice";
 import { referenceById } from "./reference/registry";
 import { SCENES } from "./lessons";
-import { CHAPTERS, LESSONS, readyLessons } from "./registry";
+import { CHAPTERS, LESSONS, readyLessons, readyScenarios } from "./registry";
+import { actsReached } from "./scenarios/acts";
+import { SCENARIO_SCENES } from "./scenarios";
 
 const ALLOWED = new Set([
   "ColdOpen",
@@ -198,5 +200,64 @@ for (const [chapter, capstone] of Object.entries(CAPSTONES)) {
         expect(refused(entry), entry.text).toBe(false);
       expect(match(end.world, capstone.target).differences).toEqual([]);
     });
+  });
+}
+
+describe("scenarios", () => {
+  it("have scenes for exactly the ready scenarios", () => {
+    expect(Object.keys(SCENARIO_SCENES).sort()).toEqual(
+      readyScenarios()
+        .map((s) => s.id)
+        .sort(),
+    );
+  });
+});
+
+for (const [id, scene] of Object.entries(SCENARIO_SCENES)) {
+  describe(`scenario ${id}`, () => {
+    if (!scene) throw new Error("no scene");
+    const progress = (solution: readonly string[]) => {
+      const session = new Session(createWorld(scene.world));
+      const counts = [actsReached(scene, session.getSnapshot().world)];
+      for (const line of solution) {
+        session.run(line);
+        counts.push(actsReached(scene, session.getSnapshot().world));
+      }
+      return counts;
+    };
+
+    it("is written in the guide's voice, with two to four acts", () => {
+      expect(scene.id).toBe(id);
+      expect(scene.acts.length).toBeGreaterThanOrEqual(2);
+      expect(scene.acts.length).toBeLessThanOrEqual(4);
+      const texts = [
+        scene.brief.message,
+        scene.goal,
+        ...scene.acts.flatMap((a) => [a.title, a.goal]),
+        ...scene.acts.flatMap(({ hints }) => {
+          const { reference, ...lines } = hints ?? { nudge: "" };
+          if (reference) expect(referenceById(reference)).toBeDefined();
+          return Object.values(lines);
+        }),
+        ...scene.experts.map((e) => e.tradeoffs),
+      ];
+      for (const text of texts) expect(voiceProblems(text)).toEqual([]);
+    });
+
+    it("reaches every act in order along the first expert path", () => {
+      const counts = progress(scene.experts[0].solution);
+      expect(counts[0]).toBe(0);
+      const seen = [...new Set(counts)];
+      expect(seen).toEqual(
+        scene.acts.map((_, i) => i).concat(scene.acts.length),
+      );
+    });
+
+    it.each(scene.experts.map((e) => [e.title, e] as const))(
+      "ends in an acceptable end state on the path %s",
+      (_, expert) => {
+        expect(progress(expert.solution).at(-1)).toBe(scene.acts.length);
+      },
+    );
   });
 }

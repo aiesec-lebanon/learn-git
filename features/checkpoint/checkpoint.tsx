@@ -9,7 +9,7 @@ import {
   type FormEvent,
 } from "react";
 import type { TargetSpec, WorldSpec } from "@/engine";
-import type { Hints } from "@/content/define";
+import type { Hints, ScenarioScene } from "@/content/define";
 import type { StageFrame } from "@/features/stage/frame";
 import { StageView } from "@/features/stage/stage";
 import { onIdle } from "@/lib/idle";
@@ -20,8 +20,9 @@ type Props = {
   sessionKey: string;
   reached: Reached;
   world: WorldSpec;
-  target: TargetSpec;
+  target?: TargetSpec;
   hints?: Hints;
+  scenario?: ScenarioScene;
   /** The start state, built on the server: the page shows it before the engine loads. */
   start: StageFrame;
 };
@@ -68,7 +69,7 @@ function Preview({
             Preparing the sandbox.
           </p>
         ) : null}
-        <TargetPanel target={target} />
+        {target ? <TargetPanel target={target} /> : null}
       </div>
     </div>
   );
@@ -86,6 +87,7 @@ export function Checkpoint({
   world,
   target,
   hints,
+  scenario,
   start,
 }: Props) {
   const root = useRef<HTMLDivElement>(null);
@@ -133,6 +135,7 @@ export function Checkpoint({
           hints={hints}
           world={world}
           target={target}
+          scenario={scenario}
           queued={queued}
           focus={focus}
         />

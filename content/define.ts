@@ -1,5 +1,5 @@
 import { shellQuote, type TargetSpec, type WorldSpec } from "@/engine";
-import type { ChapterId, LessonId } from "./registry";
+import type { ChapterId, LessonId, ScenarioId } from "./registry";
 
 /** One story beat: the commands it runs on the lesson's world, in order. */
 export type BeatScript = {
@@ -43,6 +43,38 @@ export type LessonScene = {
 
 /** A chapter's unguided checkpoint; reaching its target finishes the chapter. */
 export type CapstoneScene = Checkpoint & { readonly chapter: ChapterId };
+
+/** One act of a scenario, detected after every command. */
+export type ScenarioAct = {
+  readonly id: string;
+  readonly title: string;
+  /** What to do next, shown while this is the current act. */
+  readonly goal: string;
+  /** Reached when the world matches any of these; the last act's are the acceptable end states. */
+  readonly targets: readonly [TargetSpec, ...TargetSpec[]];
+  readonly hints?: Hints;
+};
+
+/** A way an expert would solve the scenario, for the debrief. */
+export type ExpertPath = {
+  readonly title: string;
+  readonly solution: readonly string[];
+  readonly tradeoffs: string;
+};
+
+export type ScenarioScene = {
+  readonly id: ScenarioId;
+  /** A teammate's message that opens the scenario. */
+  readonly brief: { readonly from: string; readonly message: string };
+  readonly goal: string;
+  readonly world: WorldSpec;
+  /** Two to four, in order. */
+  readonly acts: readonly ScenarioAct[];
+  /** The first one re-seeds a resumed scenario. */
+  readonly experts: readonly [ExpertPath, ...ExpertPath[]];
+};
+
+export const defineScenario = (scene: ScenarioScene): ScenarioScene => scene;
 
 export const defineWorld = (spec: WorldSpec): WorldSpec => spec;
 

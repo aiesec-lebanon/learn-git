@@ -5,9 +5,9 @@ export const SCHEMA_VERSION = 1;
 export const MAX_RAW_LENGTH = 16 * 1024;
 
 export type ResumePointer = {
-  readonly kind: "lesson";
+  readonly kind: "lesson" | "scenario";
   readonly id: string;
-  /** Beat index; the beat count means "at Your turn". */
+  /** Lessons: beat index, the beat count means "at Your turn". Scenarios: acts reached. */
   readonly step: number;
 };
 
@@ -49,6 +49,7 @@ export const EMPTY_DOC: ProgressDoc = {
 export type RegistryIds = {
   readonly lessons: readonly string[];
   readonly chapters: readonly string[];
+  readonly scenarios: readonly string[];
 };
 
 const MAX_STEP = 99;
@@ -82,11 +83,15 @@ function parsePrefs(value: unknown): Prefs {
 
 function parseResume(value: unknown, ids: RegistryIds): ResumePointer | null {
   const r = record(value);
-  if (!r || r.kind !== "lesson" || typeof r.id !== "string") return null;
-  if (!ids.lessons.includes(r.id)) return null;
+  if (!r || typeof r.id !== "string") return null;
+  const known =
+    r.kind === "lesson"
+      ? ids.lessons.includes(r.id)
+      : r.kind === "scenario" && ids.scenarios.includes(r.id);
+  if (!known) return null;
   const step = Number.isInteger(r.step) ? (r.step as number) : 0;
   return {
-    kind: "lesson",
+    kind: r.kind as ResumePointer["kind"],
     id: r.id,
     step: Math.min(Math.max(step, 0), MAX_STEP),
   };

@@ -7,10 +7,12 @@ import {
   chaptersOf,
   lessonCode,
   lessonsOf,
+  scenarioCode,
+  scenariosOf,
   TRACKS,
   trackById,
 } from "@/content/registry";
-import { capstoneHref, lessonHref } from "@/content/routes";
+import { capstoneHref, lessonHref, scenarioHref } from "@/content/routes";
 import { ChapterStatus } from "@/features/track/chapter-status";
 import { NAV_FORWARD } from "@/features/site/page-transition";
 import { AppLink } from "@/ui/link";
@@ -85,6 +87,39 @@ export default async function TrackPage({
           </li>
         ))}
       </ol>
+      {scenariosOf(track.id).length ? (
+        <section aria-labelledby="scenarios" className="mt-10">
+          <h2 id="scenarios" className="m-0 text-2xl font-bold">
+            Scenarios
+          </h2>
+          <p className="mt-3 max-w-prose">
+            Team situations that mix the chapters. There is no single right
+            answer: any good end state resolves one, and the debrief shows how
+            others would have gone.
+          </p>
+          <ul className="m-0 grid list-none gap-1 p-0">
+            {scenariosOf(track.id).map((scenario) => (
+              <li key={scenario.id}>
+                {scenario.ready ? (
+                  <AppLink
+                    href={scenarioHref(scenario.id)}
+                    transitionTypes={NAV_FORWARD}
+                  >
+                    {scenarioCode(scenario.id)} {scenario.title}
+                  </AppLink>
+                ) : (
+                  <span className="text-fg-muted">
+                    {scenarioCode(scenario.id)} {scenario.title} (being written)
+                  </span>
+                )}{" "}
+                <span className="text-sm text-fg-muted">
+                  · {scenario.minutes} min
+                </span>
+              </li>
+            ))}
+          </ul>
+        </section>
+      ) : null}
     </div>
   );
 }

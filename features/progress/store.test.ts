@@ -10,7 +10,7 @@ import {
 } from "./schema";
 import { createProgressStore } from "./store";
 
-const ids = { lessons: ["b1-1"], chapters: ["b1", "b2"] };
+const ids = { lessons: ["b1-1"], chapters: ["b1", "b2"], scenarios: ["s-b2"] };
 const resume = { kind: "lesson", id: "b1-1", step: 3 } as const;
 
 function memory(initial: string | null = null) {
@@ -70,6 +70,19 @@ describe("parseProgress", () => {
       finished: ["b1"],
       prefs: { ...DEFAULT_PREFS, motion: "reduce" },
     });
+  });
+
+  it("keeps scenario pointers to known scenarios only", () => {
+    const raw = (kind: string, id: string) =>
+      JSON.stringify({ v: 1, resume: { kind, id, step: 2 } });
+    expect(parseProgress(raw("scenario", "s-b2"), ids).doc.resume).toEqual({
+      kind: "scenario",
+      id: "s-b2",
+      step: 2,
+    });
+    expect(parseProgress(raw("scenario", "b1-1"), ids).doc.resume).toBeNull();
+    expect(parseProgress(raw("lesson", "s-b2"), ids).doc.resume).toBeNull();
+    expect(parseProgress(raw("capstone", "b1"), ids).doc.resume).toBeNull();
   });
 
   it("clamps the step", () => {

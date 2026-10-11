@@ -1,7 +1,7 @@
 "use client";
 
 import { useSyncExternalStore } from "react";
-import { CHAPTERS, readyLessons } from "@/content/registry";
+import { CHAPTERS, readyLessons, readyScenarios } from "@/content/registry";
 import { browserStorage } from "@/lib/storage";
 import { STORAGE_KEY, type ProgressDoc } from "./schema";
 import { createProgressStore, type ProgressStore } from "./store";
@@ -14,6 +14,7 @@ export function progressStore(): ProgressStore {
   const created = createProgressStore(browserStorage(), {
     lessons: readyLessons().map((l) => l.id),
     chapters: CHAPTERS.map((c) => c.id),
+    scenarios: readyScenarios().map((s) => s.id),
   });
   window.addEventListener("storage", (event) => {
     if (event.key === STORAGE_KEY) created.receive(event.newValue);

@@ -4,18 +4,44 @@ import Link from "next/link";
 import type { Route } from "next";
 import { use } from "react";
 import { browser } from "react-dom";
-import { lessonById, lessonCode } from "@/content/registry";
-import { lessonHref } from "@/content/routes";
+import {
+  lessonById,
+  lessonCode,
+  scenarioById,
+  scenarioCode,
+} from "@/content/registry";
+import { lessonHref, scenarioHref } from "@/content/routes";
 import { NAV_FORWARD } from "@/features/site/page-transition";
 import { buttonClass } from "@/ui/button";
 import { useProgress } from "./progress";
+import type { ResumePointer } from "./schema";
 
-/** "Continue where you left off": opens the lesson at the stored beat. */
+/** Where the pointer leads: a lesson at the stored beat, or a scenario (which offers its stored act). */
+function destination(resume: ResumePointer) {
+  if (resume.kind === "scenario") {
+    const scenario = scenarioById(resume.id);
+    return scenario?.ready
+      ? {
+          label: `${scenarioCode(scenario.id)} ${scenario.title}`,
+          href: scenarioHref(scenario.id),
+        }
+      : null;
+  }
+  const lesson = lessonById(resume.id);
+  return lesson
+    ? {
+        label: `${lessonCode(lesson.id)} ${lesson.title}`,
+        href: `${lessonHref(lesson.id)}#step-${resume.step}` as Route,
+      }
+    : null;
+}
+
+/** "Continue where you left off". */
 export function ContinueCard() {
   use(browser("Progress lives in localStorage."));
   const { resume } = useProgress();
-  const lesson = resume ? lessonById(resume.id) : undefined;
-  if (!resume || !lesson) return null;
+  const to = resume ? destination(resume) : null;
+  if (!to) return null;
   return (
     <section
       aria-labelledby="continue"
@@ -24,11 +50,9 @@ export function ContinueCard() {
       <h2 id="continue" className="m-0 text-xl font-bold">
         Continue where you left off
       </h2>
-      <p className="m-0">
-        {lessonCode(lesson.id)} {lesson.title}
-      </p>
+      <p className="m-0">{to.label}</p>
       <Link
-        href={`${lessonHref(lesson.id)}#step-${resume.step}` as Route}
+        href={to.href}
         transitionTypes={NAV_FORWARD}
         className={buttonClass("primary")}
       >

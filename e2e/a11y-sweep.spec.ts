@@ -38,17 +38,19 @@ for (const colorScheme of ["light", "dark"] as const) {
   });
 }
 
-test("pages reflow at 320 px without sideways scrolling", async ({ page }) => {
-  await page.setViewportSize({ width: 320, height: 640 });
+test.describe("at 320 px", () => {
+  test.use({ viewport: { width: 320, height: 640 } });
   for (const path of PAGES) {
-    await page.goto(path);
-    await settled(page);
-    const overflow = await page.evaluate(
-      () =>
-        document.documentElement.scrollWidth -
-        document.documentElement.clientWidth,
-    );
-    expect(overflow, path).toBeLessThanOrEqual(0);
+    test(`${path} reflows without sideways scrolling`, async ({ page }) => {
+      await page.goto(path);
+      await settled(page);
+      const overflow = await page.evaluate(
+        () =>
+          document.documentElement.scrollWidth -
+          document.documentElement.clientWidth,
+      );
+      expect(overflow).toBeLessThanOrEqual(0);
+    });
   }
 });
 

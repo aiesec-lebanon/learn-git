@@ -23,7 +23,7 @@ const OPTIONS: readonly OptionSpec[] = [
   { key: "long", long: "long" },
   x("null", "z"),
   x("untracked-files", "u", "optional"),
-  x("ignored", undefined, "optional"),
+  { key: "ignored", long: "ignored", value: "optional" },
   x("ignore-submodules", undefined, "optional"),
   x("column", undefined, "optional"),
   { key: "x-no-renames", long: "no-renames", negatable: false },
@@ -56,6 +56,21 @@ export const status = defineCommand({
         1,
       );
     }
+    const mode = lastValue(options, "ignored");
+    if (mode === "matching") {
+      return refuse(
+        "not-simulated",
+        notSimulated("git status --ignored=matching"),
+        1,
+      );
+    }
+    if (typeof mode === "string" && mode !== "no" && mode !== "traditional")
+      return refuse(
+        "usage",
+        `fatal: Invalid ignored mode '${mode}'
+`,
+      );
+    const ignored = mode === true || mode === "traditional";
     const parsed = parsePathspecs(options.args, repo.workdir, machine.cwd);
     if (!parsed.ok) {
       return refuse(
@@ -70,10 +85,13 @@ export const status = defineCommand({
     const branch = flag(options, "branch");
     if (porcelain !== undefined && porcelain !== false) {
       return {
-        stdout: shortStatus({ data, repo, from: repo.workdir, keep }, branch),
+        stdout: shortStatus(
+          { data, repo, from: repo.workdir, keep, ignored },
+          branch,
+        ),
       };
     }
-    const view = { data, repo, from: machine.cwd, keep };
+    const view = { data, repo, from: machine.cwd, keep, ignored };
     const short = flag(options, "short") && !flag(options, "long");
     return { stdout: short ? shortStatus(view, branch) : longStatus(view) };
   },

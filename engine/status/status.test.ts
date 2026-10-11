@@ -57,7 +57,10 @@ describe("git status", () => {
       "not simulated here: git status --porcelain=v2\n",
     ],
     ["git status -uno", "not simulated here: git status --untracked-files\n"],
-    ["git status --ignored", "not simulated here: git status --ignored\n"],
+    [
+      "git status --ignored=matching",
+      "not simulated here: git status --ignored=matching\n",
+    ],
     [
       "git status ../x",
       "fatal: ../x: '../x' is outside repository at '/home/you/p'\n",

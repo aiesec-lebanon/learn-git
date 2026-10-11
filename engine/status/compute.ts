@@ -1,5 +1,6 @@
 import { detectRenames } from "../diff/renames";
 import { worktreeFiles } from "../files/worktree";
+import { ignoreRules } from "../ignore/rules";
 import { hashObject } from "../objects/hash";
 import { readObject } from "../objects/pool";
 import { flattenTree, type TreeFile } from "../objects/tree";
@@ -20,6 +21,8 @@ export type StatusData = {
   /** The index against the working tree. */
   readonly unstaged: readonly FileChange[];
   readonly untracked: readonly RepoPath[];
+  /** Untracked files a `.gitignore` rule hides. */
+  readonly ignored: readonly RepoPath[];
   /** Staged deletions and additions Git shows as renames. */
   readonly renames: readonly {
     readonly from: RepoPath;
@@ -104,15 +107,53 @@ export function computeStatus(
     }
   }
   const changes = compare(headFiles, staged);
+  const rules = ignoreRules(files);
+  const untracked: RepoPath[] = [];
+  const ignored: RepoPath[] = [];
+  for (const path of files.keys()) {
+    if (repo.index.has(path)) continue;
+    (rules.ignored(path) ? ignored : untracked).push(path);
+  }
   const result: StatusData = {
     unborn: head === null,
     staged: changes,
     unstaged,
-    untracked: [...files.keys()].filter((p) => !repo.index.has(p)),
+    untracked,
+    ignored,
     renames: stagedRenames(pool, headFiles, staged, changes),
   };
   byKey.set(key, result);
   return result;
+}
+
+function foldersOf(paths: Iterable<string>): Set<string> {
+  const folders = new Set<string>();
+  for (const path of paths) {
+    for (let cut = path.indexOf("/"); cut > 0; cut = path.indexOf("/", cut + 1))
+      folders.add(path.slice(0, cut));
+  }
+  return folders;
+}
+
+/** Each path, or the topmost folder above it that `folds` accepts, as `folder/`. */
+function fold(paths: readonly string[], folds: (dir: string) => boolean) {
+  const shown = new Set<string>();
+  for (const path of paths) {
+    let display = path;
+    for (
+      let cut = path.indexOf("/");
+      cut > 0;
+      cut = path.indexOf("/", cut + 1)
+    ) {
+      const dir = path.slice(0, cut);
+      if (folds(dir)) {
+        display = `${dir}/`;
+        break;
+      }
+    }
+    shown.add(display);
+  }
+  return [...shown].sort(compareBytes);
 }
 
 /**
@@ -123,24 +164,16 @@ export function collapseUntracked(
   untracked: readonly RepoPath[],
   index: Index,
 ): string[] {
-  const trackedDirs = new Set<string>();
-  for (const path of index.keys()) {
-    const parts = path.split("/");
-    for (let i = 1; i < parts.length; i++)
-      trackedDirs.add(parts.slice(0, i).join("/"));
-  }
-  const shown = new Set<string>();
-  for (const path of untracked) {
-    const parts = path.split("/");
-    let display: string = path;
-    for (let i = 1; i < parts.length; i++) {
-      const dir = parts.slice(0, i).join("/");
-      if (!trackedDirs.has(dir)) {
-        display = `${dir}/`;
-        break;
-      }
-    }
-    shown.add(display);
-  }
-  return [...shown].sort(compareBytes);
+  const tracked = foldersOf(index.keys());
+  return fold(untracked, (dir) => !tracked.has(dir));
+}
+
+/** Ignored paths as `--ignored` lists them: a folder holding only ignored files collapses. */
+export function collapseIgnored(
+  ignored: readonly RepoPath[],
+  untracked: readonly RepoPath[],
+  index: Index,
+): string[] {
+  const kept = foldersOf([...index.keys(), ...untracked]);
+  return fold(ignored, (dir) => !kept.has(dir));
 }

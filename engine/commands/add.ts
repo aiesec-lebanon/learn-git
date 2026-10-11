@@ -1,10 +1,11 @@
 import { flag, type OptionSpec } from "../cli/options";
 import { resolvePath } from "../files/paths";
 import { isGitPath, worktreeFiles } from "../files/worktree";
+import { ignoreRules } from "../ignore/rules";
 import { addMessages as m } from "../messages/add";
 import { notSimulated } from "../messages/git";
 import { writeObjects } from "../objects/write";
-import { matchesPathspec, parsePathspecs } from "../pathspec";
+import { matchesPathspec, parsePathspecs, type Pathspec } from "../pathspec";
 import { stageEntry, stagedEntry, unstagePath } from "../staging/index";
 import type { Effect, GitObject, Index, PathChange, RepoPath } from "../types";
 import { compareBytes } from "../util/compare";
@@ -18,6 +19,29 @@ const unsimulated = (long: string, short?: string, value?: "required") => ({
   ...(short ? { short } : {}),
   ...(value ? { value } : {}),
 });
+
+/**
+ * What Git names when a literal pathspec reaches an ignored path: the
+ * topmost excluded folder that holds no tracked file, or the file itself.
+ */
+function ignoredTarget(
+  spec: Pathspec,
+  index: Index,
+  isDir: (path: string) => boolean,
+  ignored: (path: string, isDir: boolean) => boolean,
+): string | null {
+  if (spec.regex || spec.path === "" || index.has(spec.path as RepoPath))
+    return null;
+  const parts = spec.path.split("/");
+  for (let i = 1; i <= parts.length; i++) {
+    const path = parts.slice(0, i).join("/");
+    const dir = i < parts.length || isDir(path);
+    if (dir && [...index.keys()].some((p) => p.startsWith(`${path}/`)))
+      continue;
+    return ignored(path, dir) ? path : null;
+  }
+  return null;
+}
 
 const OPTIONS: readonly OptionSpec[] = [
   { key: "all", short: "A", long: "all" },
@@ -82,6 +106,16 @@ export const add = defineCommand({
       if (!matched)
         return refuse("pathspec-no-match", m.noMatch(spec.original));
     }
+    const force = flag(options, "force");
+    const rules = ignoreRules(files);
+    const isDir = (path: string) =>
+      machine.fs.dirs.has(resolvePath(repo.workdir, path));
+    const refused = force
+      ? []
+      : parsed.specs.flatMap((s) => {
+          const target = ignoredTarget(s, repo.index, isDir, rules.ignored);
+          return target === null ? [] : [target];
+        });
     const inScope = (path: string) =>
       parsed.specs.length === 0 ||
       parsed.specs.some((s) => matchesPathspec(s, path));
@@ -96,7 +130,7 @@ export const add = defineCommand({
         changes.push({ path, change: "deleted" });
         continue;
       }
-      if (update && !tracked) continue;
+      if (!tracked && (update || (!force && rules.ignored(path)))) continue;
       const blob: GitObject = { type: "blob", content };
       const oid = hashObject(blob);
       const staged = stagedEntry(index, path);
@@ -114,6 +148,13 @@ export const add = defineCommand({
         from: "worktree",
         changes,
       });
-    return { world: withRepo(written.world, { ...repo, index }), effects };
+    const next = withRepo(written.world, { ...repo, index });
+    if (!refused.length) return { world: next, effects };
+    return {
+      world: next,
+      stderr: m.ignored([...new Set(refused)]),
+      exitCode: 1,
+      effects: [...effects, { kind: "refused", code: "path-ignored" }],
+    };
   },
 });

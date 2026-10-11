@@ -233,6 +233,7 @@ export type RefusalCode =
   | "not-tracked"
   | "destination-exists"
   | "no-such-directory"
+  | "path-ignored"
   | "shell-error";
 
 export type EditorRequest = {

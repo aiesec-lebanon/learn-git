@@ -1,0 +1,618 @@
+{
+  "final": {
+    "config": {
+      "global": [
+        [
+          "user.name",
+          "Sam Lee"
+        ],
+        [
+          "user.email",
+          "sam@example.com"
+        ],
+        [
+          "init.defaultbranch",
+          "main"
+        ]
+      ],
+      "system": []
+    },
+    "dirs": [
+      "project",
+      "project/build",
+      "project/dist",
+      "project/docs",
+      "project/docs/deep",
+      "project/src",
+      "project/src/build",
+      "project/vendor",
+      "project/vendor/lib"
+    ],
+    "files": {
+      "project/!bang.txt": "bang\n",
+      "project/#hash.txt": "hash\n",
+      "project/.env": "SECRET=1\n",
+      "project/.gitignore": "*.log\n!keep.log\ndist/\n/build\ndocs/**/*.tmp\n# a comment\n\\#hash.txt\n\\!bang.txt\n.env\nvendor/\n!vendor/lib/keep.js\n",
+      "project/README.md": "# App\n",
+      "project/app.log": "log\n",
+      "project/build/report.txt": "report\n",
+      "project/dist/app.css": "built\n",
+      "project/dist/app.js": "built\n",
+      "project/docs/deep/more.tmp": "tmp\n",
+      "project/docs/guide.md": "guide\n",
+      "project/docs/notes.tmp": "tmp\n",
+      "project/keep.log": "keep\n",
+      "project/src/.gitignore": "*.js\n!main.js\n",
+      "project/src/build/out.js": "out\n",
+      "project/src/debug.log": "debug\n",
+      "project/src/main.js": "main\n",
+      "project/vendor/lib/keep.js": "k\n",
+      "project/vendor/lib/x.js": "x\n"
+    },
+    "repos": {
+      "project": {
+        "config": [
+          [
+            "core.repositoryformatversion",
+            "0"
+          ],
+          [
+            "core.filemode",
+            "false"
+          ],
+          [
+            "core.bare",
+            "false"
+          ],
+          [
+            "core.logallrefupdates",
+            "true"
+          ],
+          [
+            "core.symlinks",
+            "false"
+          ],
+          [
+            "core.ignorecase",
+            "true"
+          ]
+        ],
+        "head": {
+          "ref": "refs/heads/main"
+        },
+        "index": [
+          {
+            "mode": "100644",
+            "oid": "65ec2679eeaac690801f2a00b7de9baebbef7a2d",
+            "path": ".env",
+            "stage": 0
+          },
+          {
+            "mode": "100644",
+            "oid": "4e3ed94403d749c0eca2ed03da7c01bf413cd3c3",
+            "path": ".gitignore",
+            "stage": 0
+          },
+          {
+            "mode": "100644",
+            "oid": "95f541a31a59581a0805203467c33f6baf1df983",
+            "path": "README.md",
+            "stage": 0
+          },
+          {
+            "mode": "100644",
+            "oid": "6bfe6b19e3753a35e40496a9f2b2ab1722f65055",
+            "path": "app.log",
+            "stage": 0
+          },
+          {
+            "mode": "100644",
+            "oid": "e0c2b391a5e2a8ea8847c5eaaaa44bb14c5963f3",
+            "path": "dist/app.css",
+            "stage": 0
+          },
+          {
+            "mode": "100644",
+            "oid": "e0c2b391a5e2a8ea8847c5eaaaa44bb14c5963f3",
+            "path": "dist/app.js",
+            "stage": 0
+          },
+          {
+            "mode": "100644",
+            "oid": "7e2b6439aebf0bb975796f691b3b227d0af43bb5",
+            "path": "docs/guide.md",
+            "stage": 0
+          },
+          {
+            "mode": "100644",
+            "oid": "2fa992c0b8b5c6acd2bdd4fa31de29d29799bdd5",
+            "path": "keep.log",
+            "stage": 0
+          },
+          {
+            "mode": "100644",
+            "oid": "1fcb1529f8e5e43037c4710ce09da0becd28823a",
+            "path": "src/build/out.js",
+            "stage": 0
+          },
+          {
+            "mode": "100644",
+            "oid": "ba2906d0666cf726c7eaadd2cd3db615dedfdf3a",
+            "path": "src/main.js",
+            "stage": 0
+          }
+        ],
+        "objects": {
+          "134b9ac7d66341fa7171ced37b900c659bf7a8fb": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": ".env",
+                "oid": "65ec2679eeaac690801f2a00b7de9baebbef7a2d"
+              },
+              {
+                "mode": "100644",
+                "name": "README.md",
+                "oid": "95f541a31a59581a0805203467c33f6baf1df983"
+              }
+            ],
+            "type": "tree"
+          },
+          "1fcb1529f8e5e43037c4710ce09da0becd28823a": {
+            "body": "out\n",
+            "type": "blob"
+          },
+          "2aa01b31a549507c29830f8fb4972ec772b79c2d": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "app.css",
+                "oid": "e0c2b391a5e2a8ea8847c5eaaaa44bb14c5963f3"
+              },
+              {
+                "mode": "100644",
+                "name": "app.js",
+                "oid": "e0c2b391a5e2a8ea8847c5eaaaa44bb14c5963f3"
+              }
+            ],
+            "type": "tree"
+          },
+          "2fa992c0b8b5c6acd2bdd4fa31de29d29799bdd5": {
+            "body": "keep\n",
+            "type": "blob"
+          },
+          "4e3ed94403d749c0eca2ed03da7c01bf413cd3c3": {
+            "body": "*.log\n!keep.log\ndist/\n/build\ndocs/**/*.tmp\n# a comment\n\\#hash.txt\n\\!bang.txt\n.env\nvendor/\n!vendor/lib/keep.js\n",
+            "type": "blob"
+          },
+          "6172584f58935c405d10cc3463d03d9b8d5f6175": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": ".env",
+                "oid": "65ec2679eeaac690801f2a00b7de9baebbef7a2d"
+              },
+              {
+                "mode": "100644",
+                "name": ".gitignore",
+                "oid": "4e3ed94403d749c0eca2ed03da7c01bf413cd3c3"
+              },
+              {
+                "mode": "100644",
+                "name": "README.md",
+                "oid": "95f541a31a59581a0805203467c33f6baf1df983"
+              },
+              {
+                "mode": "100644",
+                "name": "app.log",
+                "oid": "6bfe6b19e3753a35e40496a9f2b2ab1722f65055"
+              },
+              {
+                "mode": "40000",
+                "name": "dist",
+                "oid": "2aa01b31a549507c29830f8fb4972ec772b79c2d"
+              },
+              {
+                "mode": "40000",
+                "name": "docs",
+                "oid": "6566a947656ac242329ffe5d925e5c0ac35094ea"
+              },
+              {
+                "mode": "100644",
+                "name": "keep.log",
+                "oid": "2fa992c0b8b5c6acd2bdd4fa31de29d29799bdd5"
+              },
+              {
+                "mode": "40000",
+                "name": "src",
+                "oid": "9520d95ef3c66f675efe714f1981ca95cbd53fb7"
+              }
+            ],
+            "type": "tree"
+          },
+          "6566a947656ac242329ffe5d925e5c0ac35094ea": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "guide.md",
+                "oid": "7e2b6439aebf0bb975796f691b3b227d0af43bb5"
+              }
+            ],
+            "type": "tree"
+          },
+          "65ec2679eeaac690801f2a00b7de9baebbef7a2d": {
+            "body": "SECRET=1\n",
+            "type": "blob"
+          },
+          "6bfe6b19e3753a35e40496a9f2b2ab1722f65055": {
+            "body": "log\n",
+            "type": "blob"
+          },
+          "7e2b6439aebf0bb975796f691b3b227d0af43bb5": {
+            "body": "guide\n",
+            "type": "blob"
+          },
+          "9520d95ef3c66f675efe714f1981ca95cbd53fb7": {
+            "entries": [
+              {
+                "mode": "40000",
+                "name": "build",
+                "oid": "b758de68e2ea237f26ac31f4fb28be3e0c8164c2"
+              },
+              {
+                "mode": "100644",
+                "name": "main.js",
+                "oid": "ba2906d0666cf726c7eaadd2cd3db615dedfdf3a"
+              }
+            ],
+            "type": "tree"
+          },
+          "95f541a31a59581a0805203467c33f6baf1df983": {
+            "body": "# App\n",
+            "type": "blob"
+          },
+          "b758de68e2ea237f26ac31f4fb28be3e0c8164c2": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "out.js",
+                "oid": "1fcb1529f8e5e43037c4710ce09da0becd28823a"
+              }
+            ],
+            "type": "tree"
+          },
+          "ba2906d0666cf726c7eaadd2cd3db615dedfdf3a": {
+            "body": "main\n",
+            "type": "blob"
+          },
+          "dc042ae0bf23c964c2bae13243a309b2daa943ef": {
+            "body": "tree 6172584f58935c405d10cc3463d03d9b8d5f6175\nparent e774e5aa1e53b8b4ce0c30f039a329562bb91b9f\nauthor Sam Lee <sam@example.com> 1767227460 +0000\ncommitter Sam Lee <sam@example.com> 1767227460 +0000\n\nIgnore rules\n",
+            "type": "commit"
+          },
+          "e0c2b391a5e2a8ea8847c5eaaaa44bb14c5963f3": {
+            "body": "built\n",
+            "type": "blob"
+          },
+          "e774e5aa1e53b8b4ce0c30f039a329562bb91b9f": {
+            "body": "tree 134b9ac7d66341fa7171ced37b900c659bf7a8fb\nauthor Sam Lee <sam@example.com> 1767225720 +0000\ncommitter Sam Lee <sam@example.com> 1767225720 +0000\n\nFirst\n",
+            "type": "commit"
+          }
+        },
+        "reflogs": {
+          "HEAD": [
+            "0000000000000000000000000000000000000000 e774e5aa1e53b8b4ce0c30f039a329562bb91b9f Sam Lee <sam@example.com> 1767225720 +0000\tcommit (initial): First",
+            "e774e5aa1e53b8b4ce0c30f039a329562bb91b9f dc042ae0bf23c964c2bae13243a309b2daa943ef Sam Lee <sam@example.com> 1767227460 +0000\tcommit: Ignore rules"
+          ],
+          "refs/heads/main": [
+            "0000000000000000000000000000000000000000 e774e5aa1e53b8b4ce0c30f039a329562bb91b9f Sam Lee <sam@example.com> 1767225720 +0000\tcommit (initial): First",
+            "e774e5aa1e53b8b4ce0c30f039a329562bb91b9f dc042ae0bf23c964c2bae13243a309b2daa943ef Sam Lee <sam@example.com> 1767227460 +0000\tcommit: Ignore rules"
+          ]
+        },
+        "refs": {
+          "refs/heads/main": "dc042ae0bf23c964c2bae13243a309b2daa943ef"
+        }
+      }
+    }
+  },
+  "git": "2.45.1.windows.1",
+  "script": {
+    "steps": [
+      "git init -q",
+      "git add .env README.md",
+      "git commit -q -m \"First\"",
+      "echo '*.log' > .gitignore",
+      "echo '!keep.log' >> .gitignore",
+      "echo 'dist/' >> .gitignore",
+      "echo '/build' >> .gitignore",
+      "echo 'docs/**/*.tmp' >> .gitignore",
+      "echo '# a comment' >> .gitignore",
+      "echo '\\#hash.txt' >> .gitignore",
+      "echo '\\!bang.txt' >> .gitignore",
+      "echo '.env' >> .gitignore",
+      "echo 'vendor/' >> .gitignore",
+      "echo '!vendor/lib/keep.js' >> .gitignore",
+      "cat .gitignore",
+      "git status --short",
+      "git status --short --ignored",
+      "git status --ignored",
+      "git add .",
+      "git status --short",
+      "git add app.log",
+      "git add src/debug.log src/main.js",
+      "git status --short",
+      "git add -f app.log",
+      "git status --short --ignored",
+      "echo '*.js' > src/.gitignore",
+      "echo '!main.js' >> src/.gitignore",
+      "git status --short --ignored",
+      "git add dist",
+      "git add -f dist",
+      "git status --short",
+      "git commit -q -m \"Ignore rules\"",
+      "git status --short --ignored",
+      "git status"
+    ],
+    "world": {
+      "cwd": "project",
+      "files": {
+        "project/!bang.txt": "bang\n",
+        "project/#hash.txt": "hash\n",
+        "project/.env": "SECRET=1\n",
+        "project/README.md": "# App\n",
+        "project/app.log": "log\n",
+        "project/build/report.txt": "report\n",
+        "project/dist/app.css": "built\n",
+        "project/dist/app.js": "built\n",
+        "project/docs/deep/more.tmp": "tmp\n",
+        "project/docs/guide.md": "guide\n",
+        "project/docs/notes.tmp": "tmp\n",
+        "project/keep.log": "keep\n",
+        "project/src/build/out.js": "out\n",
+        "project/src/debug.log": "debug\n",
+        "project/src/main.js": "main\n",
+        "project/vendor/lib/keep.js": "k\n",
+        "project/vendor/lib/x.js": "x\n"
+      }
+    }
+  },
+  "steps": [
+    {
+      "cmd": "git init -q",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git add .env README.md",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git commit -q -m \"First\"",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "echo '*.log' > .gitignore",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "echo '!keep.log' >> .gitignore",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "echo 'dist/' >> .gitignore",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "echo '/build' >> .gitignore",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "echo 'docs/**/*.tmp' >> .gitignore",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "echo '# a comment' >> .gitignore",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "echo '\\#hash.txt' >> .gitignore",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "echo '\\!bang.txt' >> .gitignore",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "echo '.env' >> .gitignore",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "echo 'vendor/' >> .gitignore",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "echo '!vendor/lib/keep.js' >> .gitignore",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "cat .gitignore",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "*.log\n!keep.log\ndist/\n/build\ndocs/**/*.tmp\n# a comment\n\\#hash.txt\n\\!bang.txt\n.env\nvendor/\n!vendor/lib/keep.js\n"
+    },
+    {
+      "cmd": "git status --short",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "?? .gitignore\n?? docs/\n?? keep.log\n?? src/\n"
+    },
+    {
+      "cmd": "git status --short --ignored",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "?? .gitignore\n?? docs/\n?? keep.log\n?? src/\n!! !bang.txt\n!! #hash.txt\n!! app.log\n!! build/\n!! dist/\n!! docs/deep/\n!! docs/notes.tmp\n!! src/debug.log\n!! vendor/\n"
+    },
+    {
+      "cmd": "git status --ignored",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "On branch main\nUntracked files:\n  (use \"git add <file>...\" to include in what will be committed)\n\t.gitignore\n\tdocs/\n\tkeep.log\n\tsrc/\n\nIgnored files:\n  (use \"git add -f <file>...\" to include in what will be committed)\n\t!bang.txt\n\t#hash.txt\n\tapp.log\n\tbuild/\n\tdist/\n\tdocs/deep/\n\tdocs/notes.tmp\n\tsrc/debug.log\n\tvendor/\n\nnothing added to commit but untracked files present (use \"git add\" to track)\n"
+    },
+    {
+      "cmd": "git add .",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git status --short",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "A  .gitignore\nA  docs/guide.md\nA  keep.log\nA  src/build/out.js\nA  src/main.js\n"
+    },
+    {
+      "cmd": "git add app.log",
+      "cwd": "/home/you/project",
+      "exitCode": 1,
+      "stderr": "The following paths are ignored by one of your .gitignore files:\napp.log\nhint: Use -f if you really want to add them.\nhint: Disable this message with \"git config advice.addIgnoredFile false\"\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git add src/debug.log src/main.js",
+      "cwd": "/home/you/project",
+      "exitCode": 1,
+      "stderr": "The following paths are ignored by one of your .gitignore files:\nsrc/debug.log\nhint: Use -f if you really want to add them.\nhint: Disable this message with \"git config advice.addIgnoredFile false\"\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git status --short",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "A  .gitignore\nA  docs/guide.md\nA  keep.log\nA  src/build/out.js\nA  src/main.js\n"
+    },
+    {
+      "cmd": "git add -f app.log",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git status --short --ignored",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "A  .gitignore\nA  app.log\nA  docs/guide.md\nA  keep.log\nA  src/build/out.js\nA  src/main.js\n!! !bang.txt\n!! #hash.txt\n!! build/\n!! dist/\n!! docs/deep/\n!! docs/notes.tmp\n!! src/debug.log\n!! vendor/\n"
+    },
+    {
+      "cmd": "echo '*.js' > src/.gitignore",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "echo '!main.js' >> src/.gitignore",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git status --short --ignored",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "A  .gitignore\nA  app.log\nA  docs/guide.md\nA  keep.log\nA  src/build/out.js\nA  src/main.js\n?? src/.gitignore\n!! !bang.txt\n!! #hash.txt\n!! build/\n!! dist/\n!! docs/deep/\n!! docs/notes.tmp\n!! src/debug.log\n!! vendor/\n"
+    },
+    {
+      "cmd": "git add dist",
+      "cwd": "/home/you/project",
+      "exitCode": 1,
+      "stderr": "The following paths are ignored by one of your .gitignore files:\ndist\nhint: Use -f if you really want to add them.\nhint: Disable this message with \"git config advice.addIgnoredFile false\"\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git add -f dist",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git status --short",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "A  .gitignore\nA  app.log\nA  dist/app.css\nA  dist/app.js\nA  docs/guide.md\nA  keep.log\nA  src/build/out.js\nA  src/main.js\n?? src/.gitignore\n"
+    },
+    {
+      "cmd": "git commit -q -m \"Ignore rules\"",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git status --short --ignored",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "?? src/.gitignore\n!! !bang.txt\n!! #hash.txt\n!! build/\n!! docs/deep/\n!! docs/notes.tmp\n!! src/debug.log\n!! vendor/\n"
+    },
+    {
+      "cmd": "git status",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "On branch main\nUntracked files:\n  (use \"git add <file>...\" to include in what will be committed)\n\tsrc/.gitignore\n\nnothing added to commit but untracked files present (use \"git add\" to track)\n"
+    }
+  ]
+}

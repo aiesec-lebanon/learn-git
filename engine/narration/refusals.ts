@@ -20,5 +20,6 @@ export const REFUSAL_FACTS: Readonly<Record<RefusalCode, string>> = {
   "not-tracked": "Git does not track that file.",
   "destination-exists": "A file already has that name.",
   "no-such-directory": "The destination folder does not exist.",
+  "path-ignored": "A .gitignore rule hides that path from git add.",
   "shell-error": "The shell could not run that line.",
 };

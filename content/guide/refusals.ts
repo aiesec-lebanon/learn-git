@@ -34,6 +34,8 @@ export const REFUSAL_GUIDE: Readonly<Record<RefusalCode, string>> = {
     "git mv won't overwrite a file by default. Pick another name, or add -f to replace it.",
   "no-such-directory":
     "git mv doesn't create folders. Make the folder with mkdir first, then move the file.",
+  "path-ignored":
+    "A .gitignore rule tells Git to leave that path alone. Add -f to track it anyway, or change the rule.",
   "shell-error":
     "The shell couldn't run that line. The message above says why.",
 };

@@ -5,7 +5,7 @@ import { statusMessages as m } from "../messages/status";
 import type { Repo } from "../types";
 import { compareBytes } from "../util/compare";
 import type { FileChange, StatusData } from "./compute";
-import { collapseUntracked } from "./compute";
+import { collapseIgnored, collapseUntracked } from "./compute";
 
 export type StatusView = {
   readonly data: StatusData;
@@ -13,6 +13,8 @@ export type StatusView = {
   /** Where paths are shown from: the cwd, or the worktree root for porcelain. */
   readonly from: string;
   readonly keep: (path: string) => boolean;
+  /** `--ignored`: list what `.gitignore` hides too. */
+  readonly ignored?: boolean;
 };
 
 /** A change as status shows it: staged renames folded in. */
@@ -61,6 +63,9 @@ function filtered(view: StatusView) {
     staged: stagedEntries(data).filter((c) => keep(c.path)),
     unstaged: data.unstaged.filter((c) => keep(c.path)),
     untracked: collapseUntracked(data.untracked.filter(keep), repo.index),
+    ignored: view.ignored
+      ? collapseIgnored(data.ignored.filter(keep), data.untracked, repo.index)
+      : [],
   };
 }
 
@@ -72,7 +77,7 @@ export function longStatus(
   view: StatusView,
   unbornTitle = m.noCommitsYet(),
 ): string {
-  const { staged, unstaged, untracked } = filtered(view);
+  const { staged, unstaged, untracked, ignored } = filtered(view);
   const { unborn } = view.data;
   let out = `On branch ${branchName(view.repo)}\n`;
   if (unborn) out += `\n${unbornTitle}\n\n`;
@@ -91,6 +96,10 @@ export function longStatus(
     out += `${m.untrackedTitle()}\n${m.include()}\n`;
     out += `${untracked.map((p) => `\t${shown(view, p)}\n`).join("")}\n`;
   }
+  if (ignored.length) {
+    out += `${m.ignoredTitle()}\n${m.includeIgnored()}\n`;
+    out += `${ignored.map((p) => `\t${shown(view, p)}\n`).join("")}\n`;
+  }
   if (staged.length) return out;
   if (unstaged.length) return `${out}${m.noChangesAdded()}\n`;
   if (untracked.length) return `${out}${m.untrackedOnly()}\n`;
@@ -106,7 +115,7 @@ const CODES: Readonly<Record<Entry["kind"], string>> = {
 
 /** `git status -s` (and porcelain v1, which only differs in where paths start). */
 export function shortStatus(view: StatusView, branch: boolean): string {
-  const { staged, unstaged, untracked } = filtered(view);
+  const { staged, unstaged, untracked, ignored } = filtered(view);
   const header = !branch
     ? ""
     : view.data.unborn
@@ -123,7 +132,10 @@ export function shortStatus(view: StatusView, branch: boolean): string {
     const name = change ? named(view, change) : shown(view, p);
     return `${code(change?.kind)}${code(tree.get(p))} ${name}\n`;
   });
-  const others = untracked.map((p) => `?? ${shown(view, p)}\n`);
+  const others = [
+    ...untracked.map((p) => `?? ${shown(view, p)}\n`),
+    ...ignored.map((p) => `!! ${shown(view, p)}\n`),
+  ];
   return header + tracked.join("") + others.join("");
 }
 

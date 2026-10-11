@@ -12,6 +12,9 @@ export const statusMessages = {
   untrackedTitle: () => "Untracked files:",
   include: () =>
     '  (use "git add <file>..." to include in what will be committed)',
+  ignoredTitle: () => "Ignored files:",
+  includeIgnored: () =>
+    '  (use "git add -f <file>..." to include in what will be committed)',
   noChangesAdded: () =>
     'no changes added to commit (use "git add" and/or "git commit -a")',
   untrackedOnly: () =>

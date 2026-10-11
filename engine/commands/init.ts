@@ -11,7 +11,7 @@ import { repoIdFor, withMachine, withRepo } from "../world/access";
 import { defineCommand, refuse } from "./registry";
 
 /** What Git for Windows writes into a new repository's `.git/config`. */
-const NEW_REPO_CONFIG: ConfigFile = [
+export const NEW_REPO_CONFIG: ConfigFile = [
   { key: "core.repositoryformatversion", value: "0" },
   { key: "core.filemode", value: "false" },
   { key: "core.bare", value: "false" },

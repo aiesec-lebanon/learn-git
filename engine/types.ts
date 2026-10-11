@@ -95,6 +95,8 @@ export type Repo = {
   readonly workdir: string;
   readonly head: Head;
   readonly refs: ReadonlyMap<RefName, Oid>;
+  /** Symbolic refs other than HEAD, such as `refs/remotes/origin/HEAD`. */
+  readonly symrefs?: ReadonlyMap<RefName, RefName>;
   /** Keyed by `HEAD` or a full ref name. */
   readonly reflogs: ReadonlyMap<string, readonly ReflogEntry[]>;
   readonly index: Index;

@@ -1,0 +1,784 @@
+{
+  "final": {
+    "config": {
+      "global": [
+        [
+          "user.name",
+          "Sam Lee"
+        ],
+        [
+          "user.email",
+          "sam@example.com"
+        ],
+        [
+          "init.defaultbranch",
+          "main"
+        ]
+      ],
+      "system": []
+    },
+    "dirs": [
+      "mine",
+      "team"
+    ],
+    "files": {
+      "mine/README.md": "# Team\n",
+      "team/README.md": "# Team\n",
+      "team/docs.txt": "docs\n"
+    },
+    "hub": {
+      "sam/team.git": {
+        "config": [
+          [
+            "core.repositoryformatversion",
+            "0"
+          ],
+          [
+            "core.filemode",
+            "false"
+          ],
+          [
+            "core.bare",
+            "true"
+          ],
+          [
+            "core.symlinks",
+            "false"
+          ],
+          [
+            "core.ignorecase",
+            "true"
+          ]
+        ],
+        "head": {
+          "ref": "refs/heads/main"
+        },
+        "index": [],
+        "objects": {
+          "06dece12029835da5fd761199a3a45b375df4f7b": {
+            "body": "tree d0cf98080b199b1c12d6f00dd50e2a0c8f2a2de4\nparent ac6f1f490f9796fa8d70b49f742ed5af2769d8cc\nauthor Sam Rivera <sam@team.test> 1767226140 +0000\ncommitter Sam Rivera <sam@team.test> 1767226140 +0000\n\nAdd docs\n",
+            "type": "commit"
+          },
+          "770f0f1005d6b4482c472a84a1072409acca1bf2": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "README.md",
+                "oid": "d9aa0f3cbd9248e08f457c112a184e32319b2d3e"
+              }
+            ],
+            "type": "tree"
+          },
+          "ac6f1f490f9796fa8d70b49f742ed5af2769d8cc": {
+            "body": "tree 770f0f1005d6b4482c472a84a1072409acca1bf2\nauthor Sam Rivera <sam@team.test> 1767225840 +0000\ncommitter Sam Rivera <sam@team.test> 1767225840 +0000\n\nAdd README\n",
+            "type": "commit"
+          },
+          "d0cf98080b199b1c12d6f00dd50e2a0c8f2a2de4": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "README.md",
+                "oid": "d9aa0f3cbd9248e08f457c112a184e32319b2d3e"
+              },
+              {
+                "mode": "100644",
+                "name": "docs.txt",
+                "oid": "d8f8d46921aa81abc4c0d27703a8908333ae38c3"
+              }
+            ],
+            "type": "tree"
+          },
+          "d8f8d46921aa81abc4c0d27703a8908333ae38c3": {
+            "body": "docs\n",
+            "type": "blob"
+          },
+          "d9aa0f3cbd9248e08f457c112a184e32319b2d3e": {
+            "body": "# Team\n",
+            "type": "blob"
+          }
+        },
+        "reflogs": {},
+        "refs": {
+          "refs/heads/docs": "06dece12029835da5fd761199a3a45b375df4f7b",
+          "refs/heads/main": "ac6f1f490f9796fa8d70b49f742ed5af2769d8cc"
+        }
+      }
+    },
+    "machines": {
+      "sam": {
+        "config": {
+          "global": [
+            [
+              "user.name",
+              "Sam Rivera"
+            ],
+            [
+              "user.email",
+              "sam@team.test"
+            ],
+            [
+              "init.defaultbranch",
+              "main"
+            ]
+          ],
+          "system": []
+        },
+        "dirs": [
+          "team"
+        ],
+        "files": {
+          "team/README.md": "# Team\n",
+          "team/docs.txt": "docs\n"
+        },
+        "repos": {
+          "team": {
+            "config": [
+              [
+                "core.repositoryformatversion",
+                "0"
+              ],
+              [
+                "core.filemode",
+                "false"
+              ],
+              [
+                "core.bare",
+                "false"
+              ],
+              [
+                "core.logallrefupdates",
+                "true"
+              ],
+              [
+                "core.symlinks",
+                "false"
+              ],
+              [
+                "core.ignorecase",
+                "true"
+              ],
+              [
+                "remote.origin.url",
+                "https://hub.test/sam/team.git"
+              ],
+              [
+                "remote.origin.fetch",
+                "+refs/heads/*:refs/remotes/origin/*"
+              ],
+              [
+                "branch.main.remote",
+                "origin"
+              ],
+              [
+                "branch.main.merge",
+                "refs/heads/main"
+              ],
+              [
+                "branch.docs.remote",
+                "origin"
+              ],
+              [
+                "branch.docs.merge",
+                "refs/heads/docs"
+              ]
+            ],
+            "head": {
+              "ref": "refs/heads/docs"
+            },
+            "index": [
+              {
+                "mode": "100644",
+                "oid": "d9aa0f3cbd9248e08f457c112a184e32319b2d3e",
+                "path": "README.md",
+                "stage": 0
+              },
+              {
+                "mode": "100644",
+                "oid": "d8f8d46921aa81abc4c0d27703a8908333ae38c3",
+                "path": "docs.txt",
+                "stage": 0
+              }
+            ],
+            "objects": {
+              "06dece12029835da5fd761199a3a45b375df4f7b": {
+                "body": "tree d0cf98080b199b1c12d6f00dd50e2a0c8f2a2de4\nparent ac6f1f490f9796fa8d70b49f742ed5af2769d8cc\nauthor Sam Rivera <sam@team.test> 1767226140 +0000\ncommitter Sam Rivera <sam@team.test> 1767226140 +0000\n\nAdd docs\n",
+                "type": "commit"
+              },
+              "770f0f1005d6b4482c472a84a1072409acca1bf2": {
+                "entries": [
+                  {
+                    "mode": "100644",
+                    "name": "README.md",
+                    "oid": "d9aa0f3cbd9248e08f457c112a184e32319b2d3e"
+                  }
+                ],
+                "type": "tree"
+              },
+              "ac6f1f490f9796fa8d70b49f742ed5af2769d8cc": {
+                "body": "tree 770f0f1005d6b4482c472a84a1072409acca1bf2\nauthor Sam Rivera <sam@team.test> 1767225840 +0000\ncommitter Sam Rivera <sam@team.test> 1767225840 +0000\n\nAdd README\n",
+                "type": "commit"
+              },
+              "d0cf98080b199b1c12d6f00dd50e2a0c8f2a2de4": {
+                "entries": [
+                  {
+                    "mode": "100644",
+                    "name": "README.md",
+                    "oid": "d9aa0f3cbd9248e08f457c112a184e32319b2d3e"
+                  },
+                  {
+                    "mode": "100644",
+                    "name": "docs.txt",
+                    "oid": "d8f8d46921aa81abc4c0d27703a8908333ae38c3"
+                  }
+                ],
+                "type": "tree"
+              },
+              "d8f8d46921aa81abc4c0d27703a8908333ae38c3": {
+                "body": "docs\n",
+                "type": "blob"
+              },
+              "d9aa0f3cbd9248e08f457c112a184e32319b2d3e": {
+                "body": "# Team\n",
+                "type": "blob"
+              }
+            },
+            "reflogs": {
+              "HEAD": [
+                "0000000000000000000000000000000000000000 ac6f1f490f9796fa8d70b49f742ed5af2769d8cc Sam Rivera <sam@team.test> 1767225840 +0000\tcommit (initial): Add README",
+                "ac6f1f490f9796fa8d70b49f742ed5af2769d8cc ac6f1f490f9796fa8d70b49f742ed5af2769d8cc Sam Rivera <sam@team.test> 1767225960 +0000\tcheckout: moving from main to docs",
+                "ac6f1f490f9796fa8d70b49f742ed5af2769d8cc 06dece12029835da5fd761199a3a45b375df4f7b Sam Rivera <sam@team.test> 1767226140 +0000\tcommit: Add docs"
+              ],
+              "refs/heads/docs": [
+                "0000000000000000000000000000000000000000 ac6f1f490f9796fa8d70b49f742ed5af2769d8cc Sam Rivera <sam@team.test> 1767225960 +0000\tbranch: Created from HEAD",
+                "ac6f1f490f9796fa8d70b49f742ed5af2769d8cc 06dece12029835da5fd761199a3a45b375df4f7b Sam Rivera <sam@team.test> 1767226140 +0000\tcommit: Add docs"
+              ],
+              "refs/heads/main": [
+                "0000000000000000000000000000000000000000 ac6f1f490f9796fa8d70b49f742ed5af2769d8cc Sam Rivera <sam@team.test> 1767225840 +0000\tcommit (initial): Add README"
+              ],
+              "refs/remotes/origin/docs": [
+                "0000000000000000000000000000000000000000 06dece12029835da5fd761199a3a45b375df4f7b Sam Rivera <sam@team.test> 1767226200 +0000\tupdate by push"
+              ],
+              "refs/remotes/origin/main": [
+                "0000000000000000000000000000000000000000 ac6f1f490f9796fa8d70b49f742ed5af2769d8cc Sam Rivera <sam@team.test> 1767225900 +0000\tupdate by push"
+              ]
+            },
+            "refs": {
+              "refs/heads/docs": "06dece12029835da5fd761199a3a45b375df4f7b",
+              "refs/heads/main": "ac6f1f490f9796fa8d70b49f742ed5af2769d8cc",
+              "refs/remotes/origin/docs": "06dece12029835da5fd761199a3a45b375df4f7b",
+              "refs/remotes/origin/main": "ac6f1f490f9796fa8d70b49f742ed5af2769d8cc"
+            }
+          }
+        }
+      }
+    },
+    "repos": {
+      "mine": {
+        "config": [
+          [
+            "core.repositoryformatversion",
+            "0"
+          ],
+          [
+            "core.filemode",
+            "false"
+          ],
+          [
+            "core.bare",
+            "false"
+          ],
+          [
+            "core.logallrefupdates",
+            "true"
+          ],
+          [
+            "core.symlinks",
+            "false"
+          ],
+          [
+            "core.ignorecase",
+            "true"
+          ],
+          [
+            "remote.origin.url",
+            "https://hub.test/sam/team"
+          ],
+          [
+            "remote.origin.fetch",
+            "+refs/heads/*:refs/remotes/origin/*"
+          ],
+          [
+            "branch.main.remote",
+            "origin"
+          ],
+          [
+            "branch.main.merge",
+            "refs/heads/main"
+          ]
+        ],
+        "head": {
+          "ref": "refs/heads/main"
+        },
+        "index": [
+          {
+            "mode": "100644",
+            "oid": "d9aa0f3cbd9248e08f457c112a184e32319b2d3e",
+            "path": "README.md",
+            "stage": 0
+          }
+        ],
+        "objects": {
+          "06dece12029835da5fd761199a3a45b375df4f7b": {
+            "body": "tree d0cf98080b199b1c12d6f00dd50e2a0c8f2a2de4\nparent ac6f1f490f9796fa8d70b49f742ed5af2769d8cc\nauthor Sam Rivera <sam@team.test> 1767226140 +0000\ncommitter Sam Rivera <sam@team.test> 1767226140 +0000\n\nAdd docs\n",
+            "type": "commit"
+          },
+          "770f0f1005d6b4482c472a84a1072409acca1bf2": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "README.md",
+                "oid": "d9aa0f3cbd9248e08f457c112a184e32319b2d3e"
+              }
+            ],
+            "type": "tree"
+          },
+          "ac6f1f490f9796fa8d70b49f742ed5af2769d8cc": {
+            "body": "tree 770f0f1005d6b4482c472a84a1072409acca1bf2\nauthor Sam Rivera <sam@team.test> 1767225840 +0000\ncommitter Sam Rivera <sam@team.test> 1767225840 +0000\n\nAdd README\n",
+            "type": "commit"
+          },
+          "d0cf98080b199b1c12d6f00dd50e2a0c8f2a2de4": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "README.md",
+                "oid": "d9aa0f3cbd9248e08f457c112a184e32319b2d3e"
+              },
+              {
+                "mode": "100644",
+                "name": "docs.txt",
+                "oid": "d8f8d46921aa81abc4c0d27703a8908333ae38c3"
+              }
+            ],
+            "type": "tree"
+          },
+          "d8f8d46921aa81abc4c0d27703a8908333ae38c3": {
+            "body": "docs\n",
+            "type": "blob"
+          },
+          "d9aa0f3cbd9248e08f457c112a184e32319b2d3e": {
+            "body": "# Team\n",
+            "type": "blob"
+          }
+        },
+        "reflogs": {
+          "HEAD": [
+            "0000000000000000000000000000000000000000 ac6f1f490f9796fa8d70b49f742ed5af2769d8cc Sam Lee <sam@example.com> 1767226380 +0000\tclone: from https://hub.test/sam/team"
+          ],
+          "refs/heads/main": [
+            "0000000000000000000000000000000000000000 ac6f1f490f9796fa8d70b49f742ed5af2769d8cc Sam Lee <sam@example.com> 1767226380 +0000\tclone: from https://hub.test/sam/team"
+          ],
+          "refs/remotes/origin/HEAD": [
+            "0000000000000000000000000000000000000000 ac6f1f490f9796fa8d70b49f742ed5af2769d8cc Sam Lee <sam@example.com> 1767226380 +0000\tclone: from https://hub.test/sam/team"
+          ]
+        },
+        "refs": {
+          "refs/heads/main": "ac6f1f490f9796fa8d70b49f742ed5af2769d8cc",
+          "refs/remotes/origin/HEAD": "ac6f1f490f9796fa8d70b49f742ed5af2769d8cc",
+          "refs/remotes/origin/docs": "06dece12029835da5fd761199a3a45b375df4f7b",
+          "refs/remotes/origin/main": "ac6f1f490f9796fa8d70b49f742ed5af2769d8cc"
+        }
+      },
+      "team": {
+        "config": [
+          [
+            "core.repositoryformatversion",
+            "0"
+          ],
+          [
+            "core.filemode",
+            "false"
+          ],
+          [
+            "core.bare",
+            "false"
+          ],
+          [
+            "core.logallrefupdates",
+            "true"
+          ],
+          [
+            "core.symlinks",
+            "false"
+          ],
+          [
+            "core.ignorecase",
+            "true"
+          ],
+          [
+            "remote.origin.url",
+            "https://hub.test/sam/team.git"
+          ],
+          [
+            "remote.origin.fetch",
+            "+refs/heads/*:refs/remotes/origin/*"
+          ],
+          [
+            "branch.main.remote",
+            "origin"
+          ],
+          [
+            "branch.main.merge",
+            "refs/heads/main"
+          ],
+          [
+            "branch.docs.remote",
+            "origin"
+          ],
+          [
+            "branch.docs.merge",
+            "refs/heads/docs"
+          ]
+        ],
+        "head": {
+          "ref": "refs/heads/docs"
+        },
+        "index": [
+          {
+            "mode": "100644",
+            "oid": "d9aa0f3cbd9248e08f457c112a184e32319b2d3e",
+            "path": "README.md",
+            "stage": 0
+          },
+          {
+            "mode": "100644",
+            "oid": "d8f8d46921aa81abc4c0d27703a8908333ae38c3",
+            "path": "docs.txt",
+            "stage": 0
+          }
+        ],
+        "objects": {
+          "06dece12029835da5fd761199a3a45b375df4f7b": {
+            "body": "tree d0cf98080b199b1c12d6f00dd50e2a0c8f2a2de4\nparent ac6f1f490f9796fa8d70b49f742ed5af2769d8cc\nauthor Sam Rivera <sam@team.test> 1767226140 +0000\ncommitter Sam Rivera <sam@team.test> 1767226140 +0000\n\nAdd docs\n",
+            "type": "commit"
+          },
+          "770f0f1005d6b4482c472a84a1072409acca1bf2": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "README.md",
+                "oid": "d9aa0f3cbd9248e08f457c112a184e32319b2d3e"
+              }
+            ],
+            "type": "tree"
+          },
+          "ac6f1f490f9796fa8d70b49f742ed5af2769d8cc": {
+            "body": "tree 770f0f1005d6b4482c472a84a1072409acca1bf2\nauthor Sam Rivera <sam@team.test> 1767225840 +0000\ncommitter Sam Rivera <sam@team.test> 1767225840 +0000\n\nAdd README\n",
+            "type": "commit"
+          },
+          "d0cf98080b199b1c12d6f00dd50e2a0c8f2a2de4": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "README.md",
+                "oid": "d9aa0f3cbd9248e08f457c112a184e32319b2d3e"
+              },
+              {
+                "mode": "100644",
+                "name": "docs.txt",
+                "oid": "d8f8d46921aa81abc4c0d27703a8908333ae38c3"
+              }
+            ],
+            "type": "tree"
+          },
+          "d8f8d46921aa81abc4c0d27703a8908333ae38c3": {
+            "body": "docs\n",
+            "type": "blob"
+          },
+          "d9aa0f3cbd9248e08f457c112a184e32319b2d3e": {
+            "body": "# Team\n",
+            "type": "blob"
+          }
+        },
+        "reflogs": {
+          "HEAD": [
+            "0000000000000000000000000000000000000000 ac6f1f490f9796fa8d70b49f742ed5af2769d8cc Sam Lee <sam@example.com> 1767226260 +0000\tclone: from https://hub.test/sam/team.git",
+            "ac6f1f490f9796fa8d70b49f742ed5af2769d8cc 06dece12029835da5fd761199a3a45b375df4f7b Sam Lee <sam@example.com> 1767226860 +0000\tcheckout: moving from main to docs"
+          ],
+          "refs/heads/docs": [
+            "0000000000000000000000000000000000000000 06dece12029835da5fd761199a3a45b375df4f7b Sam Lee <sam@example.com> 1767226860 +0000\tbranch: Created from refs/remotes/origin/docs"
+          ],
+          "refs/heads/main": [
+            "0000000000000000000000000000000000000000 ac6f1f490f9796fa8d70b49f742ed5af2769d8cc Sam Lee <sam@example.com> 1767226260 +0000\tclone: from https://hub.test/sam/team.git"
+          ],
+          "refs/remotes/origin/HEAD": [
+            "0000000000000000000000000000000000000000 ac6f1f490f9796fa8d70b49f742ed5af2769d8cc Sam Lee <sam@example.com> 1767226260 +0000\tclone: from https://hub.test/sam/team.git"
+          ]
+        },
+        "refs": {
+          "refs/heads/docs": "06dece12029835da5fd761199a3a45b375df4f7b",
+          "refs/heads/main": "ac6f1f490f9796fa8d70b49f742ed5af2769d8cc",
+          "refs/remotes/origin/HEAD": "ac6f1f490f9796fa8d70b49f742ed5af2769d8cc",
+          "refs/remotes/origin/docs": "06dece12029835da5fd761199a3a45b375df4f7b",
+          "refs/remotes/origin/main": "ac6f1f490f9796fa8d70b49f742ed5af2769d8cc"
+        }
+      }
+    }
+  },
+  "git": "2.45.1.windows.1",
+  "script": {
+    "steps": [
+      {
+        "cmd": "git clone https://hub.test/sam/team.git",
+        "machine": "sam"
+      },
+      {
+        "cmd": "cd team",
+        "machine": "sam"
+      },
+      {
+        "cmd": "echo \"# Team\" > README.md",
+        "machine": "sam"
+      },
+      {
+        "cmd": "git add README.md",
+        "machine": "sam"
+      },
+      {
+        "cmd": "git commit -q -m \"Add README\"",
+        "machine": "sam"
+      },
+      {
+        "cmd": "git push",
+        "machine": "sam"
+      },
+      {
+        "cmd": "git switch -q -c docs",
+        "machine": "sam"
+      },
+      {
+        "cmd": "echo docs > docs.txt",
+        "machine": "sam"
+      },
+      {
+        "cmd": "git add docs.txt",
+        "machine": "sam"
+      },
+      {
+        "cmd": "git commit -q -m \"Add docs\"",
+        "machine": "sam"
+      },
+      {
+        "cmd": "git push -u origin docs",
+        "machine": "sam"
+      },
+      "git clone https://hub.test/sam/team.git",
+      "git clone https://hub.test/sam/team.git",
+      "git clone https://hub.test/sam/team mine",
+      "cd team",
+      "git status",
+      "git remote -v",
+      "git branch -a",
+      "git branch -r",
+      "git branch -vv",
+      "git log --oneline --all",
+      "git switch docs",
+      "git branch -vv",
+      "git status -sb"
+    ],
+    "world": {
+      "hub": {
+        "sam/team": {}
+      },
+      "machines": {
+        "sam": {
+          "global": {
+            "init.defaultBranch": "main",
+            "user.email": "sam@team.test",
+            "user.name": "Sam Rivera"
+          }
+        }
+      }
+    }
+  },
+  "steps": [
+    {
+      "cmd": "git clone https://hub.test/sam/team.git",
+      "cwd": "/home/sam",
+      "exitCode": 0,
+      "machine": "sam",
+      "stderr": "Cloning into 'team'...\nwarning: You appear to have cloned an empty repository.\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "cd team",
+      "cwd": "/home/sam/team",
+      "exitCode": 0,
+      "machine": "sam",
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "echo \"# Team\" > README.md",
+      "cwd": "/home/sam/team",
+      "exitCode": 0,
+      "machine": "sam",
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git add README.md",
+      "cwd": "/home/sam/team",
+      "exitCode": 0,
+      "machine": "sam",
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git commit -q -m \"Add README\"",
+      "cwd": "/home/sam/team",
+      "exitCode": 0,
+      "machine": "sam",
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git push",
+      "cwd": "/home/sam/team",
+      "exitCode": 0,
+      "machine": "sam",
+      "stderr": "To https://hub.test/sam/team.git\n * [new branch]      main -> main\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git switch -q -c docs",
+      "cwd": "/home/sam/team",
+      "exitCode": 0,
+      "machine": "sam",
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "echo docs > docs.txt",
+      "cwd": "/home/sam/team",
+      "exitCode": 0,
+      "machine": "sam",
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git add docs.txt",
+      "cwd": "/home/sam/team",
+      "exitCode": 0,
+      "machine": "sam",
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git commit -q -m \"Add docs\"",
+      "cwd": "/home/sam/team",
+      "exitCode": 0,
+      "machine": "sam",
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git push -u origin docs",
+      "cwd": "/home/sam/team",
+      "exitCode": 0,
+      "machine": "sam",
+      "stderr": "To https://hub.test/sam/team.git\n * [new branch]      docs -> docs\n",
+      "stdout": "branch 'docs' set up to track 'origin/docs'.\n"
+    },
+    {
+      "cmd": "git clone https://hub.test/sam/team.git",
+      "cwd": "/home/you",
+      "exitCode": 0,
+      "stderr": "Cloning into 'team'...\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git clone https://hub.test/sam/team.git",
+      "cwd": "/home/you",
+      "exitCode": 128,
+      "stderr": "fatal: destination path 'team' already exists and is not an empty directory.\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git clone https://hub.test/sam/team mine",
+      "cwd": "/home/you",
+      "exitCode": 0,
+      "stderr": "Cloning into 'mine'...\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "cd team",
+      "cwd": "/home/you/team",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git status",
+      "cwd": "/home/you/team",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "On branch main\nYour branch is up to date with 'origin/main'.\n\nnothing to commit, working tree clean\n"
+    },
+    {
+      "cmd": "git remote -v",
+      "cwd": "/home/you/team",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "origin\thttps://hub.test/sam/team.git (fetch)\norigin\thttps://hub.test/sam/team.git (push)\n"
+    },
+    {
+      "cmd": "git branch -a",
+      "cwd": "/home/you/team",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "* main\n  remotes/origin/HEAD -> origin/main\n  remotes/origin/docs\n  remotes/origin/main\n"
+    },
+    {
+      "cmd": "git branch -r",
+      "cwd": "/home/you/team",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "  origin/HEAD -> origin/main\n  origin/docs\n  origin/main\n"
+    },
+    {
+      "cmd": "git branch -vv",
+      "cwd": "/home/you/team",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "* main ac6f1f4 [origin/main] Add README\n"
+    },
+    {
+      "cmd": "git log --oneline --all",
+      "cwd": "/home/you/team",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "06dece1 (origin/docs) Add docs\nac6f1f4 (HEAD -> main, origin/main, origin/HEAD) Add README\n"
+    },
+    {
+      "cmd": "git switch docs",
+      "cwd": "/home/you/team",
+      "exitCode": 0,
+      "stderr": "Switched to a new branch 'docs'\n",
+      "stdout": "branch 'docs' set up to track 'origin/docs'.\n"
+    },
+    {
+      "cmd": "git branch -vv",
+      "cwd": "/home/you/team",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "* docs 06dece1 [origin/docs] Add docs\n  main ac6f1f4 [origin/main] Add README\n"
+    },
+    {
+      "cmd": "git status -sb",
+      "cwd": "/home/you/team",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "## docs...origin/docs\n"
+    }
+  ]
+}

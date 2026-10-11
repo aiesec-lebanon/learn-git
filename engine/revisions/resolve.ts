@@ -1,5 +1,5 @@
 import type { ObjectPool, Oid, RefName, Repo } from "../types";
-import { resolveHead } from "../refs/refs";
+import { allRefs, resolveHead } from "../refs/refs";
 import { parseRevision } from "./parse";
 
 export type Resolved =
@@ -17,8 +17,9 @@ const DWIM = [
 
 /** Every ref a short name matches by Git's search order. */
 export function dwimRefs(repo: Repo, name: string): RefName[] {
+  const refs = allRefs(repo);
   return DWIM.map((rule) => rule(name) as RefName).filter((ref) =>
-    repo.refs.has(ref),
+    refs.has(ref),
   );
 }
 
@@ -31,8 +32,9 @@ function resolveBase(pool: ObjectPool, repo: Repo, name: string): Resolved {
     const head = resolveHead(repo);
     return head ? { ok: true, oid: head } : { ok: false, reason: "unknown" };
   }
+  const refs = allRefs(repo);
   for (const rule of DWIM) {
-    const oid = repo.refs.get(rule(name) as RefName);
+    const oid = refs.get(rule(name) as RefName);
     if (oid) return { ok: true, oid };
   }
   if (!SHORT_ID.test(name)) return { ok: false, reason: "unknown" };

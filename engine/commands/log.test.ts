@@ -82,8 +82,8 @@ describe("git log", () => {
       .set("refs/heads/topic" as RefName, head);
     expect(decorations({ ...repo, refs }, head)).toEqual([
       "HEAD -> main",
-      "topic",
       "tag: v1",
+      "topic",
     ]);
     expect(
       decorations({ ...repo, head: { kind: "detached", oid: head } }, head),

@@ -2,6 +2,7 @@ import { reset } from "../cli/legacy";
 import { checkout } from "./checkout";
 import { branch } from "./branch";
 import { add } from "./add";
+import { clone } from "./clone";
 import { commit } from "./commit";
 import { config } from "./config";
 import { diff } from "./diff";
@@ -38,4 +39,5 @@ export const GIT_REGISTRY = createRegistry([
   stash,
   reset,
   remote,
+  clone,
 ]);

@@ -1,0 +1,40 @@
+{
+  "world": {
+    "machines": {
+      "sam": {
+        "global": {
+          "user.name": "Sam Rivera",
+          "user.email": "sam@team.test",
+          "init.defaultBranch": "main"
+        }
+      }
+    },
+    "hub": { "sam/team": {} }
+  },
+  "steps": [
+    { "cmd": "git clone https://hub.test/sam/team.git", "machine": "sam" },
+    { "cmd": "cd team", "machine": "sam" },
+    { "cmd": "echo \"# Team\" > README.md", "machine": "sam" },
+    { "cmd": "git add README.md", "machine": "sam" },
+    { "cmd": "git commit -q -m \"Add README\"", "machine": "sam" },
+    { "cmd": "git push", "machine": "sam" },
+    { "cmd": "git switch -q -c docs", "machine": "sam" },
+    { "cmd": "echo docs > docs.txt", "machine": "sam" },
+    { "cmd": "git add docs.txt", "machine": "sam" },
+    { "cmd": "git commit -q -m \"Add docs\"", "machine": "sam" },
+    { "cmd": "git push -u origin docs", "machine": "sam" },
+    "git clone https://hub.test/sam/team.git",
+    "git clone https://hub.test/sam/team.git",
+    "git clone https://hub.test/sam/team mine",
+    "cd team",
+    "git status",
+    "git remote -v",
+    "git branch -a",
+    "git branch -r",
+    "git branch -vv",
+    "git log --oneline --all",
+    "git switch docs",
+    "git branch -vv",
+    "git status -sb"
+  ]
+}

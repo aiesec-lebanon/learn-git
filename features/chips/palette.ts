@@ -204,6 +204,13 @@ export const VERBS: readonly ChipVerb[] = [
   },
   {
     program: "git",
+    name: "clone",
+    hint: "copy a hosted repository",
+    params: [{ kind: "value", label: "address", required: true }],
+    ready: always,
+  },
+  {
+    program: "git",
     name: "remote",
     hint: "list the repositories this one talks to",
     params: [{ kind: "flag", flag: "-v", label: "with addresses" }],

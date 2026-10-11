@@ -7,6 +7,17 @@ export function headBranch(repo: Repo): RefName | null {
   return repo.head.kind === "symbolic" ? repo.head.ref : null;
 }
 
+/** Every ref with the commit it names, symbolic ones resolved (dangling ones left out). */
+export function allRefs(repo: Repo): ReadonlyMap<RefName, Oid> {
+  if (!repo.symrefs?.size) return repo.refs;
+  const out = new Map(repo.refs);
+  for (const [ref, target] of repo.symrefs) {
+    const oid = repo.refs.get(target);
+    if (oid) out.set(ref, oid);
+  }
+  return out;
+}
+
 /** The commit HEAD resolves to, or null on an unborn branch. */
 export function resolveHead(repo: Repo): Oid | null {
   return repo.head.kind === "detached"

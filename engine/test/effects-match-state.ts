@@ -83,10 +83,28 @@ export function stateChanges(before: World, after: World): string[] {
   return [...out].sort();
 }
 
-/** The same keys from emitted effects; effects without state are skipped. */
+/**
+ * The same keys from emitted effects; effects without state are skipped,
+ * and so are a new repository's own refs, HEAD, index and config (the
+ * derived side reports only that the repository appeared).
+ */
 export function effectChanges(effects: readonly Effect[]): string[] {
   const out = new Set<string>();
+  const created = new Set(
+    effects.flatMap((e) =>
+      e.kind === "repo-created" && !e.reinitialized ? [e.repo] : [],
+    ),
+  );
   for (const e of effects) {
+    if (
+      (e.kind === "ref-updated" ||
+        e.kind === "head-changed" ||
+        e.kind === "index-changed") &&
+      created.has(e.repo)
+    ) {
+      continue;
+    }
+    if (e.kind === "config-changed" && created.has(e.target)) continue;
     switch (e.kind) {
       case "object-written":
         out.add(`object ${e.repo} ${e.oid}`);

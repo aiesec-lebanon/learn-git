@@ -7,6 +7,7 @@ import { GIT_COMMANDS } from "../messages/commands";
 import { SHELL_REGISTRY } from "../shell";
 import { commitText } from "../objects/serialize";
 import { reflogLine } from "../refs/reflog";
+import { allRefs } from "../refs/refs";
 import { indexEntries } from "../staging/index";
 import type {
   ConfigFile,
@@ -75,7 +76,7 @@ function dumpRepo(world: World, repo: Repo): RecordedRepo {
       repo.head.kind === "symbolic"
         ? { ref: repo.head.ref }
         : { oid: repo.head.oid },
-    refs: Object.fromEntries(repo.refs),
+    refs: Object.fromEntries(allRefs(repo)),
     objects: Object.fromEntries(
       [...world.objects]
         .filter(([oid]) => have.has(oid))

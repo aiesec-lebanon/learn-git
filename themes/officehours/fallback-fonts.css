@@ -1,0 +1,31 @@
+/* Metric fallbacks (as next/font computes them against Arial), also on Arial's metric twins where Arial is missing (Linux; Roboto on Android is close), so font swaps barely move text. */
+@font-face {
+  font-family: "Shantell Sans Fallback Twin";
+  src:
+    local("Arial"), local("ArialMT"), local("Liberation Sans"), local("Arimo"),
+    local("Roboto");
+  ascent-override: 90.04%;
+  descent-override: 28.25%;
+  line-gap-override: 0%;
+  size-adjust: 113.28%;
+}
+@font-face {
+  font-family: "Figtree Fallback Twin";
+  src:
+    local("Arial"), local("ArialMT"), local("Liberation Sans"), local("Arimo"),
+    local("Roboto");
+  ascent-override: 94.32%;
+  descent-override: 24.82%;
+  line-gap-override: 0%;
+  size-adjust: 100.72%;
+}
+@font-face {
+  font-family: "JetBrains Mono Fallback Twin";
+  src:
+    local("Arial"), local("ArialMT"), local("Liberation Sans"), local("Arimo"),
+    local("Roboto");
+  ascent-override: 75.79%;
+  descent-override: 22.29%;
+  line-gap-override: 0%;
+  size-adjust: 134.59%;
+}

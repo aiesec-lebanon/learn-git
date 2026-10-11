@@ -12,7 +12,7 @@ import type {
   WorldSpec,
 } from "../types";
 import { DEFAULT_GLOBAL_CONFIG, HOME, LEARNER } from "./defaults";
-import { HUB_MACHINE, hostRepo } from "./network";
+import { createHub } from "../hub/state";
 
 function configFrom(entries: Readonly<Record<string, string>>): ConfigFile {
   return Object.entries(entries).map(([key, value]) => {
@@ -58,9 +58,7 @@ export function createWorld(spec: WorldSpec = {}): World {
   for (const [id, other] of Object.entries(spec.machines ?? {})) {
     machines.push(createMachine(id, `/home/${id}`, other));
   }
-  const hosted = Object.keys(spec.hub ?? {});
-  if (hosted.length) machines.push(HUB_MACHINE);
-  let world: World = {
+  const world: World = {
     seq: 0,
     objects: new Map(),
     system: configFrom(spec.system ?? {}),
@@ -68,8 +66,7 @@ export function createWorld(spec: WorldSpec = {}): World {
     repos: new Map(),
     available: new Map(),
   };
-  for (const name of hosted) world = hostRepo(world, name);
-  return (spec.setup ?? []).reduce(setUp, world);
+  return (spec.setup ?? []).reduce(setUp, createHub(world, spec.hub ?? {}));
 }
 
 function setUp(world: World, step: SetupStep): World {

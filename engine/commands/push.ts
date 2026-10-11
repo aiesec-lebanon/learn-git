@@ -11,6 +11,7 @@ import { notSimulated } from "../messages/git";
 import { PUSH_USAGE, pushMessages as m } from "../messages/push";
 import { networkMessages as net } from "../messages/remote";
 import { checkoutMessages } from "../messages/checkout";
+import { pushRefusal } from "../hub/rules";
 import { isAncestor } from "../reachability";
 import { branchRef, shortRefName } from "../refs/names";
 import { headBranch, updateRef } from "../refs/refs";
@@ -71,6 +72,13 @@ type Decision =
       readonly kind: "rejected";
       readonly plan: Plan;
       readonly reason: "fetch first" | "non-fast-forward";
+      readonly line: RefUpdate;
+    }
+  | {
+      readonly kind: "remote-rejected";
+      readonly plan: Plan;
+      /** The Hub's `remote:` explanation. */
+      readonly message: string;
       readonly line: RefUpdate;
     };
 
@@ -172,6 +180,27 @@ function decide(
       summary: "[rejected]",
       ...names,
       suffix: ` (${reason})`,
+    },
+  };
+}
+
+/** The Hub's rules turn an accepted update into a remote rejection. */
+function checkRules(world: World, hosted: Repo, d: Decision): Decision {
+  if (d.kind !== "accepted") return d;
+  const kind =
+    d.to === null ? "delete" : d.line.code === "+" ? "force" : "update";
+  const refusal = pushRefusal(world, hosted.id, d.plan.dst, kind);
+  if (!refusal) return d;
+  return {
+    kind: "remote-rejected",
+    plan: d.plan,
+    message: refusal.message,
+    line: {
+      code: "!",
+      summary: "[remote rejected]",
+      from: d.line.from,
+      ...(d.line.to === undefined ? {} : { to: d.line.to }),
+      suffix: ` (${refusal.reason})`,
     },
   };
 }
@@ -286,10 +315,16 @@ export const push = defineCommand({
     );
     if (missing) return failure(m.noRemoteRef(missing.dst) + m.failed(url), 1);
     const decisions = plans.map((p) =>
-      decide(world, repo, hosted, p, flag(options, "force")),
+      checkRules(
+        world,
+        hosted,
+        decide(world, repo, hosted, p, flag(options, "force")),
+      ),
     );
     const accepted = decisions.filter((d) => d.kind === "accepted");
     const rejected = decisions.filter((d) => d.kind === "rejected");
+    const declined = decisions.filter((d) => d.kind === "remote-rejected");
+    const failed = rejected.length + declined.length > 0;
     const sent = transfer(
       world,
       repo.id,
@@ -327,7 +362,9 @@ export const push = defineCommand({
       const linked = setUpstreams(
         local,
         remote,
-        decisions.filter((d) => d.kind !== "rejected").map((d) => d.plan),
+        decisions
+          .filter((d) => d.kind === "accepted" || d.kind === "up-to-date")
+          .map((d) => d.plan),
       );
       local = linked.repo;
       stdout = quiet ? "" : linked.stdout;
@@ -337,20 +374,28 @@ export const push = defineCommand({
     const lines = decisions.flatMap((d) =>
       d.kind === "up-to-date" ? [] : [d.line],
     );
-    let stderr = "";
+    let stderr = declined.map((d) => m.remote(d.message)).join("");
     if (!lines.length) stderr = quiet ? "" : m.upToDate();
-    else if (!quiet || rejected.length) {
-      stderr = m.to(url) + lines.map((l) => refUpdateLine(l)).join("");
+    else if (!quiet || failed) {
+      stderr += m.to(url) + lines.map((l) => refUpdateLine(l)).join("");
     }
-    if (rejected.length) {
+    if (failed) {
       stderr += m.failed(url) + rejectionHint(rejected, currentName);
-      effects.push({ kind: "refused", code: "push-rejected" });
     }
+    for (const d of declined) {
+      effects.push({
+        kind: "refused",
+        code: "remote-rejected",
+        subject: d.plan.dst,
+      });
+    }
+    if (rejected.length)
+      effects.push({ kind: "refused", code: "push-rejected" });
     return {
       world: next,
       stdout,
       stderr,
-      exitCode: rejected.length ? 1 : 0,
+      exitCode: failed ? 1 : 0,
       effects,
     };
   },

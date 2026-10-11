@@ -32,6 +32,8 @@ export const REFUSAL_FACTS: Readonly<Record<RefusalCode, string>> = {
   "no-operation": "No merge is in progress.",
   "no-remote": "Git could not reach a repository by that name or address.",
   "no-upstream": "The branch has no upstream branch on the remote yet.",
+  "remote-rejected":
+    "The Hub's rules refused the push, so nothing moved there.",
   "push-rejected":
     "The remote has commits the push would remove, so nothing moved there.",
   "shell-error": "The shell could not run that line.",

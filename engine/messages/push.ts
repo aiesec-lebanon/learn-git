@@ -6,6 +6,7 @@ const FAST_FORWARDS =
 
 export const pushMessages = {
   to: (url: string) => `To ${url}\n`,
+  remote: (message: string) => `remote: error: ${message}\n`,
   upToDate: () => "Everything up-to-date\n",
   failed: (url: string) => `error: failed to push some refs to '${url}'\n`,
   noDestination: () => `fatal: No configured push destination.

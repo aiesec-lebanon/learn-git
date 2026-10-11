@@ -120,6 +120,8 @@ export type World = {
   readonly system: ConfigFile;
   readonly machines: ReadonlyMap<MachineId, Machine>;
   readonly repos: ReadonlyMap<RepoId, Repo>;
+  /** Present when the world has a Hub. */
+  readonly hub?: HubState;
   /** The objects each repository has (the pool is shared; transfers move availability). */
   readonly available: ReadonlyMap<RepoId, ReadonlySet<Oid>>;
   /** Set while the last command waits for its editor (ADR-002). */
@@ -138,9 +140,31 @@ export type MachineSpec = {
 export type SetupStep =
   string | { readonly machine: MachineId; readonly run: string };
 
+/** A protected branch: force pushes and deletions are always refused. */
+export type BranchRule = {
+  readonly branch: string;
+  /** Changes arrive only through pull requests (direct pushes refused). */
+  readonly requirePullRequest: boolean;
+};
+
 export type HostedRepoSpec = {
-  /** Branches the Hub refuses direct and force pushes to. */
-  readonly protected?: readonly string[];
+  readonly rules?: readonly BranchRule[];
+};
+
+/** A repository the Hub hosts, backed by a bare engine repository. */
+export type HostedRepo = {
+  /** `<owner>/<name>`. */
+  readonly fullName: string;
+  readonly owner: string;
+  readonly repo: RepoId;
+  readonly rules: readonly BranchRule[];
+};
+
+/** The Hub's own state (ADR-009); Git data stays in the bare repositories. */
+export type HubState = {
+  /** Account logins: the learner (`you`) and every repository owner. */
+  readonly accounts: readonly string[];
+  readonly repos: ReadonlyMap<string, HostedRepo>;
 };
 
 export type WorldSpec = MachineSpec & {
@@ -280,6 +304,7 @@ export type RefusalCode =
   | "no-remote"
   | "no-upstream"
   | "push-rejected"
+  | "remote-rejected"
   | "shell-error";
 
 export type EditorRequest = {

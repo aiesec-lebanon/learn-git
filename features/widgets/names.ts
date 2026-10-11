@@ -20,6 +20,8 @@ export const WIDGET_NAMES = [
   "text-graph",
   "merge-preview",
   "predict-reveal",
+  "three-way-view",
+  "parent-inspector",
 ] as const;
 
 export type WidgetName = (typeof WIDGET_NAMES)[number];

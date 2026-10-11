@@ -15,6 +15,8 @@
   <Term>ours</Term>, and the other tip, called <Term>theirs</Term>. A change
   made on one side only is taken as it is. Here `README.md` changed on main and
   `index.html` on footer, so nothing collides.
+
+  <Widget name="three-way-view" />
 </Beat>
 
 <Beat id="merge" title="A commit with two parents">
@@ -26,6 +28,8 @@
 <Beat id="parents" title="Reading a merge commit">
   `git show HEAD` prints a "Merge:" line with both parent IDs. The first parent
   is where main was; the second is the branch that came in.
+
+  <Widget name="parent-inspector" />
 </Beat>
 
 <Beat id="graph" title="main reaches both">

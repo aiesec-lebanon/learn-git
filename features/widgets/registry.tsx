@@ -77,6 +77,12 @@ const WIDGETS: Record<WidgetName, ComponentType> = {
   "predict-reveal": lazy(() =>
     import("./predict-reveal").then((m) => ({ default: m.PredictReveal })),
   ),
+  "three-way-view": lazy(() =>
+    import("./three-way-view").then((m) => ({ default: m.ThreeWayView })),
+  ),
+  "parent-inspector": lazy(() =>
+    import("./parent-inspector").then((m) => ({ default: m.ParentInspector })),
+  ),
 };
 
 /** A lesson widget by name, loaded with its own code (R3). */

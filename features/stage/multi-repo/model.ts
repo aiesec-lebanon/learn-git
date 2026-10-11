@@ -1,4 +1,10 @@
-import { hubName, type Repo, type RepoId, type World } from "@/engine";
+import {
+  hubName,
+  type Oid,
+  type Repo,
+  type RepoId,
+  type World,
+} from "@/engine";
 import { repoView, type RepoView } from "@/features/graph/view-model";
 
 /** Another repository on the stage: the Hub's copy or a teammate's clone. */
@@ -12,6 +18,14 @@ export type RepoPanel = {
   readonly view: RepoView;
   /** Prefix for this panel's choreography keys (one graph per repository). */
   readonly scope: string;
+  /** Commits here that your repository does not have yet, oldest first. */
+  readonly onlyHere: readonly PanelCommit[];
+};
+
+export type PanelCommit = {
+  readonly oid: Oid;
+  readonly short: string;
+  readonly subject: string;
 };
 
 const capitalized = (id: string) => id.charAt(0).toUpperCase() + id.slice(1);
@@ -44,17 +58,25 @@ function ownerName(world: World, machine: string): string {
 export function repoPanels(world: World, main: RepoId | null): RepoPanel[] {
   const hosted = [...world.repos.values()].filter((r) => r.bare);
   if (!hosted.length) return [];
-  const names = main ? remotesOf(world.repos.get(main) as Repo) : new Map();
+  const mine = main ? (world.repos.get(main) as Repo) : null;
+  const names = mine ? remotesOf(mine) : new Map();
+  const have = new Set(mine?.arrival);
   const shared = new Set(hosted.map(fullNameOf));
   const panels: RepoPanel[] = hosted.map((repo) => {
     const fullName = fullNameOf(repo);
+    const view = repoView(world, repo);
     return {
       id: repo.id,
       role: "remote",
       title: names.get(fullName) ?? "The Hub",
       where: `hub.test/${fullName}`,
-      view: repoView(world, repo),
+      view,
       scope: `${repo.id}|`,
+      onlyHere: mine
+        ? view.commits
+            .filter((c) => c.ghost === 0 && !have.has(c.oid))
+            .map(({ oid, short, subject }) => ({ oid, short, subject }))
+        : [],
     };
   });
   for (const repo of world.repos.values()) {
@@ -72,6 +94,7 @@ export function repoPanels(world: World, main: RepoId | null): RepoPanel[] {
         : repo.workdir,
       view: repoView(world, repo),
       scope: `${repo.id}|`,
+      onlyHere: [],
     });
   }
   return panels;

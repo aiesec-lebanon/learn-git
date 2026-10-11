@@ -101,6 +101,9 @@ const WIDGETS: Record<WidgetName, ComponentType> = {
   "two-roots": lazy(() =>
     import("./hub-split").then((m) => ({ default: m.TwoRoots })),
   ),
+  "pull-sync": lazy(() =>
+    import("./pull-sync").then((m) => ({ default: m.PullSync })),
+  ),
 };
 
 /** A lesson widget by name, loaded with its own code (R3). */

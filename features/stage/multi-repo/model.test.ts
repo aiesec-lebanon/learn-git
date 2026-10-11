@@ -48,6 +48,22 @@ describe("the multi-repository stage", () => {
     expect(origin?.head.target).toBeNull();
   });
 
+  it("lists the commits only origin has until you fetch them", () => {
+    const world = team();
+    const main = stageFrame(world, []).view?.id ?? null;
+    expect(repoPanels(world, main)[0]?.onlyHere).toEqual([]);
+    const pushed = sam(
+      world,
+      "echo b >> a.txt && git commit -q -am Two && git push -q",
+    );
+    expect(repoPanels(pushed, main)[0]?.onlyHere.map((c) => c.subject)).toEqual(
+      ["Two"],
+    );
+    expect(repoPanels(pushed, main)[1]?.onlyHere).toEqual([]);
+    const fetched = runLine(pushed, "git fetch -q").world;
+    expect(repoPanels(fetched, main)[0]?.onlyHere).toEqual([]);
+  });
+
   it("stamps origin/* with the last contact and counts ahead and behind", () => {
     const pushed = sam(
       team(),

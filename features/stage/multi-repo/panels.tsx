@@ -4,7 +4,35 @@ import { useState } from "react";
 import { CommitGraph } from "@/features/graph/graph";
 import type { Layout } from "@/features/graph/layout";
 import { Area } from "../area";
-import type { RepoPanel } from "./model";
+import type { PanelCommit, RepoPanel } from "./model";
+
+const SHOWN = 3;
+
+/** Which commits only this panel has: your repository needs a fetch or pull to see them. */
+function OnlyHere({
+  title,
+  commits,
+}: {
+  title: string;
+  commits: readonly PanelCommit[];
+}) {
+  if (!commits.length) return null;
+  const newest = commits.slice(-SHOWN).reverse();
+  const more = commits.length - newest.length;
+  return (
+    <p className="m-0 mt-2 rounded-sm border-2 border-dashed border-accent bg-accent-soft p-2 text-sm">
+      <strong>Only on {title} so far:</strong>{" "}
+      {newest.map((c, i) => (
+        <span key={c.oid}>
+          {i ? "; " : ""}
+          <code className="font-mono">{c.short}</code> {c.subject}
+        </span>
+      ))}
+      {more ? `; and ${more} more` : ""}. A fetch or pull brings{" "}
+      {commits.length === 1 ? "it" : "them"} into your repository.
+    </p>
+  );
+}
 
 const chip =
   "inline-flex min-h-11 items-center rounded-sm border-2 border-line-strong bg-surface px-3 text-sm font-semibold aria-pressed:border-accent aria-pressed:bg-accent-soft";
@@ -60,8 +88,17 @@ export function RepoPanels({
                   layout={layout}
                   label={`${p.title} (${p.where})`}
                   scope={p.scope}
+                  highlight={
+                    p.onlyHere.length
+                      ? {
+                          kind: "reach",
+                          oids: new Set(p.onlyHere.map((c) => c.oid)),
+                        }
+                      : null
+                  }
                 />
               ) : null}
+              <OnlyHere title={p.title} commits={p.onlyHere} />
             </Area>
           </div>
         );

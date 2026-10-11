@@ -23,7 +23,9 @@ test.describe("with motion", () => {
     await expect(
       stage.getByRole("button", { name: /First snapshot of the recipe site/ }),
     ).toBeVisible();
-    await expect(stage.getByText("README.md → staging area")).toHaveCount(0);
+    await expect(
+      stage.getByText("README.md: copied into the staging area"),
+    ).toHaveCount(0);
   });
 });
 
@@ -46,6 +48,8 @@ test.describe("with reduced motion", () => {
       page.getByRole("heading", { name: "A folder full of copies" }),
     ).toBeHidden();
     const stage = page.getByRole("region", { name: "Lesson stage" });
-    await expect(stage.getByText("README.md → staging area")).toBeVisible();
+    await expect(
+      stage.getByText("README.md: copied into the staging area"),
+    ).toBeVisible();
   });
 });

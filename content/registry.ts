@@ -78,7 +78,7 @@ export const SCENARIOS = [
   s("s-b1", "First contribution", 15, true),
   s("s-b2", "Wrong branch, uncommitted work", 8, true),
   s("s-b3", "Monday-morning push", 12, true),
-  s("s-b4", "Conflict on your PR", 15),
+  s("s-b4", "Conflict on your PR", 15, true),
 ] as const;
 
 function s<const I extends string>(

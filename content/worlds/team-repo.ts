@@ -374,3 +374,27 @@ export const teamRepoFirstDay: WorldSpec = defineWorld({
     }),
   ],
 });
+
+/** Your price-fix pull request (#1) lowers the lemon cake price; then Sam raised it on main, so #1 has conflicts (S-B4). */
+export const teamRepoConflictingPull: WorldSpec = defineWorld({
+  ...people,
+  setup: [
+    ...CLONED,
+    "git switch -q -c price-fix",
+    writeFile("menu.html", MENU_YOURS),
+    'git commit -q -am "Lower the lemon cake price"',
+    "git push -q -u origin price-fix",
+    {
+      machine: "you",
+      hub: {
+        type: "open-pull-request",
+        repo: TEAM_REPO,
+        base: "main",
+        head: "price-fix",
+        title: "Lower the lemon cake price",
+        body: "Cheaper cake sells out sooner.",
+      },
+    },
+    sam(SAM_PRICE),
+  ],
+});

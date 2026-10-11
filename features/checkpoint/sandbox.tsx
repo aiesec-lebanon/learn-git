@@ -14,6 +14,7 @@ import { ConflictResolver } from "@/features/conflict/resolver";
 import type { Hints, ScenarioScene } from "@/content/define";
 import { Guide } from "@/features/guide/guide";
 import { HintLadder } from "@/features/guide/hint-ladder";
+import { StageAndHub } from "@/features/hub/hub-and-stage";
 import { progressStore, useProgress } from "@/features/progress/progress";
 import type { ResumePointer } from "@/features/progress/schema";
 import { ReferenceSheet } from "@/features/reference/reference-sheet";
@@ -138,7 +139,7 @@ export function Sandbox({
           }
           achieved={report?.ok ?? resolved}
         />
-        <Stage session={session} />
+        <StageAndHub session={session} stage={<Stage session={session} />} />
         <ConflictResolver session={session} />
       </div>
       <div className="grid content-start gap-4">

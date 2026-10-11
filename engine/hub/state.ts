@@ -55,7 +55,7 @@ export function createHub(
 ): World {
   return Object.entries(specs).reduce(
     (next, [fullName, spec]) => addHostedRepo(next, fullName, spec.rules),
-    world,
+    ensureHub(world),
   );
 }
 

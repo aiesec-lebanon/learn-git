@@ -69,7 +69,7 @@ export function createWorld(spec: WorldSpec = {}): World {
   };
   const ready = (spec.setup ?? []).reduce(
     setUp,
-    createHub(world, spec.hub ?? {}),
+    spec.hub ? createHub(world, spec.hub) : world,
   );
   return spec.actors ? withActors(ready, spec.actors) : ready;
 }

@@ -1,6 +1,7 @@
 import type { ThemeCopy } from "../contract";
 
 export { Nib as GuideCharacter } from "./guide/character";
+export { Icon } from "./icons";
 export { Logo } from "./logo";
 export { pairs } from "./pairs";
 export { scale } from "./scale";

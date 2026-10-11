@@ -134,3 +134,25 @@ export type GuideCharacter = (props: {
   pose: GuidePose;
   animate: boolean;
 }) => ReactNode;
+
+export type HubIconName =
+  | "repo"
+  | "branch"
+  | "commit"
+  | "pull"
+  | "merged"
+  | "issue"
+  | "issue-closed"
+  | "file"
+  | "folder"
+  | "comment"
+  | "check"
+  | "alert"
+  | "back"
+  | "forward";
+
+/** The theme's icon set for the Hub: decoration only (aria-hidden). */
+export type ThemeIcon = (props: {
+  name: HubIconName;
+  className?: string;
+}) => ReactNode;

@@ -424,7 +424,7 @@ export type WorldSpec = MachineSpec & {
   readonly system?: Readonly<Record<string, string>>;
   /** Other people's machines (home `/home/<id>`), e.g. a teammate's. */
   readonly machines?: Readonly<Record<MachineId, MachineSpec>>;
-  /** Empty repositories hosted on the Hub, keyed `<owner>/<name>`. */
+  /** Empty repositories hosted on the Hub, keyed `<owner>/<name>` (`{}`: a Hub with none yet). */
   readonly hub?: Readonly<Record<string, HostedRepoSpec>>;
   /** Commands run once the files exist, e.g. to record earlier commits. */
   readonly setup?: readonly SetupStep[];

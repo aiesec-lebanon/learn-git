@@ -1,4 +1,12 @@
-import type { Oid, PullRequest, Review, World } from "../types";
+import type {
+  HubComment,
+  Issue,
+  IssueEvent,
+  Oid,
+  PullRequest,
+  Review,
+  World,
+} from "../types";
 import { pullCompare } from "./pulls";
 
 export type TimelineItem =
@@ -70,4 +78,23 @@ export function pullTimeline(
     .map((item, i) => ({ item, i }))
     .sort((a, b) => a.item.time - b.item.time || a.i - b.i)
     .map(({ item }) => item);
+}
+
+export type IssueTimelineItem =
+  | { readonly kind: "comment"; readonly comment: HubComment }
+  | { readonly kind: "event"; readonly event: IssueEvent };
+
+/** An issue's comments and events after its description, oldest first. */
+export function issueTimeline(issue: Issue): IssueTimelineItem[] {
+  const items: { time: number; item: IssueTimelineItem }[] = [
+    ...issue.comments.map((comment) => ({
+      time: comment.time,
+      item: { kind: "comment" as const, comment },
+    })),
+    ...issue.events.map((event) => ({
+      time: event.time,
+      item: { kind: "event" as const, event },
+    })),
+  ];
+  return items.sort((a, b) => a.time - b.time).map(({ item }) => item);
 }

@@ -60,3 +60,7 @@ export { reviewDecision } from "./hub/reviews";
 export { pullTimeline } from "./hub/timeline";
 export type { TimelineItem } from "./hub/timeline";
 export { mergeBlockers } from "./hub/merge";
+export { HUB_LABELS, issueLinks } from "./hub/issues";
+export type { IssueLink } from "./hub/issues";
+export { issueTimeline } from "./hub/timeline";
+export type { IssueTimelineItem } from "./hub/timeline";

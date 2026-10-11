@@ -32,6 +32,7 @@ describe("the Hub", () => {
       repo: SHOP,
       rules: [],
       pulls: [],
+      issues: [],
     });
     expect(repoOf(w, SHOP).bare).toBe(true);
   });

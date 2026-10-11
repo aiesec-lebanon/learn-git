@@ -35,6 +35,7 @@ export function addHostedRepo(
     repo: hostedRepoId(fullName),
     rules,
     pulls: [],
+    issues: [],
   };
   return {
     ...next,
@@ -83,4 +84,5 @@ export function withHosted(world: World, hosted: HostedRepo): World {
 }
 
 /** The number the next pull request or issue in a repository gets. */
-export const nextNumber = (hosted: HostedRepo) => hosted.pulls.length + 1;
+export const nextNumber = (hosted: HostedRepo) =>
+  hosted.pulls.length + hosted.issues.length + 1;

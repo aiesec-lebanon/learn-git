@@ -38,7 +38,7 @@ describe("comments on a pull request", () => {
       "The comment can't be empty.\n",
     );
     expect(comment(withPull(), "Hi", "sam", 9).output.stderr).toBe(
-      "sam/shop has no pull request #9.\n",
+      "sam/shop has no issue or pull request #9.\n",
     );
     expect(
       hub(withPull(), { type: "comment", repo: "x/y", number: 1, body: "Hi" })

@@ -1,4 +1,5 @@
 import type { HubAction, PullRequest, Review } from "../types";
+import { locateIssue, replaceIssue } from "./issues";
 import { locatePull, pullCompare, replacePull } from "./pulls";
 import {
   refuseHub,
@@ -7,31 +8,42 @@ import {
   type HubResult,
 } from "./result";
 
-export function commentOnPull(
+/** A conversation comment on an issue or a pull request (they share numbers). */
+export function comment(
   ctx: HubContext,
   action: Extract<HubAction, { type: "comment" }>,
 ): HubResult {
-  const found = locatePull(ctx.world, action.repo, action.number);
-  if (!found.ok) return refuseHub(found.message);
-  const problem = textProblem("The comment", action.body, true);
+  const { repo, number, body } = action;
+  const pull = locatePull(ctx.world, repo, number);
+  const issue = locateIssue(ctx.world, repo, number);
+  if (!pull.ok && !issue.ok)
+    return refuseHub(
+      ctx.world.hub?.repos.has(repo)
+        ? `${repo} has no issue or pull request #${number}.`
+        : pull.message,
+    );
+  const problem = textProblem("The comment", body, true);
   if (problem) return refuseHub(problem);
-  const { hosted, pull } = found;
-  const comment = { author: ctx.actor, body: action.body, time: ctx.time };
+  const added = { author: ctx.actor, body, time: ctx.time };
+  const world = pull.ok
+    ? replacePull(ctx.world, pull.hosted, {
+        ...pull.pull,
+        comments: [...pull.pull.comments, added],
+      })
+    : issue.ok
+      ? replaceIssue(ctx.world, issue.hosted, {
+          ...issue.issue,
+          comments: [...issue.issue.comments, added],
+        })
+      : ctx.world;
   return {
     ok: true,
-    world: replacePull(ctx.world, hosted, {
-      ...pull,
-      comments: [...pull.comments, comment],
-    }),
+    world,
     effects: [
       {
         kind: "hub",
         actor: ctx.actor,
-        event: {
-          type: "comment-added",
-          repo: action.repo,
-          number: action.number,
-        },
+        event: { type: "comment-added", repo, number },
       },
     ],
   };

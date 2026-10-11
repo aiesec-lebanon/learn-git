@@ -2,6 +2,7 @@ import { branchRef } from "../refs/names";
 import type { HubAction, Oid, PullRequest, World } from "../types";
 import { repoOf } from "../world/access";
 import { hubCommit, setHubBranch } from "./commit";
+import { closeLinkedIssues } from "./issues";
 import { dryMerge } from "./mergeability";
 import { locatePull, pullCompare, replacePull } from "./pulls";
 import { refuseHub, type HubContext, type HubResult } from "./result";
@@ -75,9 +76,15 @@ function mergePull(ctx: HubContext, action: PullAction): HubResult {
     state: "merged",
     merged: { by: ctx.actor, time: ctx.time, commit: made.oid, base, head },
   };
+  const closed = closeLinkedIssues(
+    replacePull(moved.world, hosted, done),
+    action.repo,
+    done,
+    ctx,
+  );
   return {
     ok: true,
-    world: replacePull(moved.world, hosted, done),
+    world: closed.world,
     effects: [
       {
         kind: "hub",
@@ -91,6 +98,7 @@ function mergePull(ctx: HubContext, action: PullAction): HubResult {
       },
       ...made.effects,
       moved.effect,
+      ...closed.effects,
     ],
   };
 }

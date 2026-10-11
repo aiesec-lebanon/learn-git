@@ -12,10 +12,11 @@ import type {
 import { timeAt } from "../world/clock";
 import { hostedRepoId } from "../world/network";
 import { hubCommit, setHubBranch } from "./commit";
+import { runIssueAction } from "./issues";
 import { runPullAction } from "./merge";
 import { openPullRequest } from "./pulls";
 import { refuseHub, type HubContext, type HubResult } from "./result";
-import { commentOnPull, reviewPull } from "./reviews";
+import { comment, reviewPull } from "./reviews";
 import { addHostedRepo } from "./state";
 import { GITIGNORE, mitLicense, readmeFor } from "./templates";
 
@@ -97,13 +98,19 @@ function perform(ctx: HubContext, action: HubAction): HubResult {
     case "open-pull-request":
       return openPullRequest(ctx, action);
     case "comment":
-      return commentOnPull(ctx, action);
+      return comment(ctx, action);
     case "review":
       return reviewPull(ctx, action);
     case "merge-pull-request":
     case "delete-branch":
     case "restore-branch":
       return runPullAction(ctx, action);
+    case "open-issue":
+    case "close-issue":
+    case "reopen-issue":
+    case "label-issue":
+    case "assign-issue":
+      return runIssueAction(ctx, action);
     default: {
       const never: never = action;
       return never;
@@ -128,6 +135,16 @@ export function hubActionText(action: HubAction): string {
       return `Hub: delete the branch of #${action.number}`;
     case "restore-branch":
       return `Hub: restore the branch of #${action.number}`;
+    case "open-issue":
+      return `Hub: open issue "${action.title}"`;
+    case "close-issue":
+      return `Hub: close issue #${action.number}`;
+    case "reopen-issue":
+      return `Hub: reopen issue #${action.number}`;
+    case "label-issue":
+      return `Hub: label issue #${action.number}`;
+    case "assign-issue":
+      return `Hub: assign issue #${action.number}`;
     default: {
       const never: never = action;
       return never;

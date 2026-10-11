@@ -27,6 +27,22 @@ export function hubEventSentence(actor: string, event: HubEvent): string {
       return `${who(actor)} deleted the branch ${event.branch} on ${event.repo}.`;
     case "branch-restored":
       return `${who(actor)} restored the branch ${event.branch} on ${event.repo}.`;
+    case "issue-opened":
+      return `${who(actor)} opened issue #${event.number} "${event.title}" on ${event.repo}.`;
+    case "issue-closed":
+      return event.pull === undefined
+        ? `${who(actor)} closed issue #${event.number} on ${event.repo}.`
+        : `Pull request #${event.pull} closed issue #${event.number} on ${event.repo}.`;
+    case "issue-reopened":
+      return `${who(actor)} reopened issue #${event.number} on ${event.repo}.`;
+    case "issue-labeled":
+      return event.labels.length
+        ? `${who(actor)} labeled issue #${event.number} ${event.labels.join(", ")}.`
+        : `${who(actor)} removed the labels from issue #${event.number}.`;
+    case "issue-assigned":
+      return event.assignee === null
+        ? `${who(actor)} unassigned issue #${event.number}.`
+        : `${who(actor)} assigned issue #${event.number} to ${who(event.assignee).replace(/^You$/, "you")}.`;
     default: {
       const never: never = event;
       return never;

@@ -178,7 +178,46 @@ export type HostedRepo = {
   readonly repo: RepoId;
   readonly rules: readonly BranchRule[];
   readonly pulls: readonly PullRequest[];
+  readonly issues: readonly Issue[];
 };
+
+/** An issue: a task or problem the team tracks, numbered with the pull requests. */
+export type Issue = {
+  readonly number: number;
+  readonly title: string;
+  /** Markdown. */
+  readonly body: string;
+  readonly author: string;
+  readonly opened: number;
+  readonly state: "open" | "closed";
+  readonly labels: readonly string[];
+  readonly assignee: string | null;
+  readonly comments: readonly HubComment[];
+  readonly events: readonly IssueEvent[];
+};
+
+export type IssueEvent =
+  | {
+      readonly kind: "closed";
+      readonly by: string;
+      readonly time: number;
+      /** The merged pull request that closed it with a keyword. */
+      readonly pull?: number;
+    }
+  | { readonly kind: "reopened"; readonly by: string; readonly time: number }
+  | {
+      readonly kind: "labeled";
+      readonly by: string;
+      readonly time: number;
+      /** The labels after the change. */
+      readonly labels: readonly string[];
+    }
+  | {
+      readonly kind: "assigned";
+      readonly by: string;
+      readonly time: number;
+      readonly assignee: string | null;
+    };
 
 /** A pull request: a proposal to merge `head` into `base` in the same repository. */
 export type PullRequest = {
@@ -286,6 +325,31 @@ export type HubAction =
       readonly type: "merge-pull-request" | "delete-branch" | "restore-branch";
       readonly repo: string;
       readonly number: number;
+    }
+  | {
+      readonly type: "close-issue" | "reopen-issue";
+      readonly repo: string;
+      readonly number: number;
+    }
+  | {
+      readonly type: "open-issue";
+      readonly repo: string;
+      readonly title: string;
+      readonly body?: string;
+      readonly labels?: readonly string[];
+      readonly assignee?: string | null;
+    }
+  | {
+      readonly type: "label-issue";
+      readonly repo: string;
+      readonly number: number;
+      readonly labels: readonly string[];
+    }
+  | {
+      readonly type: "assign-issue";
+      readonly repo: string;
+      readonly number: number;
+      readonly assignee: string | null;
     };
 
 /** A Hub action as an invocation: `actor` is the account that acts. */
@@ -325,6 +389,35 @@ export type HubEvent =
       readonly type: "branch-deleted" | "branch-restored";
       readonly repo: string;
       readonly branch: string;
+    }
+  | {
+      readonly type: "issue-opened";
+      readonly repo: string;
+      readonly number: number;
+      readonly title: string;
+    }
+  | {
+      readonly type: "issue-closed";
+      readonly repo: string;
+      readonly number: number;
+      readonly pull?: number;
+    }
+  | {
+      readonly type: "issue-reopened";
+      readonly repo: string;
+      readonly number: number;
+    }
+  | {
+      readonly type: "issue-labeled";
+      readonly repo: string;
+      readonly number: number;
+      readonly labels: readonly string[];
+    }
+  | {
+      readonly type: "issue-assigned";
+      readonly repo: string;
+      readonly number: number;
+      readonly assignee: string | null;
     };
 
 export type WorldSpec = MachineSpec & {

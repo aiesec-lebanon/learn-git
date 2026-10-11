@@ -1,0 +1,39 @@
+<ColdOpen>
+  The bake sale site has a build folder, a log file and a `.env` file with a
+  payment key in it, and that `.env` went into the first commit. Which files
+  should Git track at all?
+</ColdOpen>
+
+<Beat id="states" title="Every file has a state">
+  A file Git has recorded is <Term>tracked</Term>: unmodified, modified or
+  staged. A file Git has never recorded is untracked. A third group is
+  <Term>ignored</Term>: untracked files that Git hides because a `.gitignore`
+  rule names them.
+</Beat>
+
+<Beat id="patterns" title="Patterns in .gitignore">
+  Each line of `.gitignore` is a pattern. `*.log` matches every log file in any
+  folder, `dist/` matches the folder and everything inside, and a leading `!`
+  takes a file back out, as in `!keep.log`. `git status --ignored` lists what
+  the rules hide.
+</Beat>
+
+<Beat id="trap" title="The tracked .env trap">
+  `.gitignore` only affects untracked files. `.env` is already tracked, so
+  adding it to `.gitignore` changes nothing. `git rm --cached .env` takes it out
+  of the staging area and keeps it on disk. It stays in old commits, so rotate
+  any key it held.
+</Beat>
+
+<Beat id="rename" title="Renames and removals">
+  Rename `menu.html` with plain `mv` and `git add -A`, and Git reports a rename:
+  it compares content, not names. `git mv` does both steps at once, and `git rm`
+  deletes a file and stages the deletion.
+</Beat>
+
+<YourTurn />
+
+<Wrap commands={["git rm --cached", "git mv", "git status --ignored"]}>
+  `.gitignore` hides untracked files only. To stop tracking a file and keep it,
+  use `git rm --cached`; anything already committed stays in history.
+</Wrap>

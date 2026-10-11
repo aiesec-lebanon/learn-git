@@ -69,3 +69,17 @@ export const bakeSaleUndo = defineWorld({
     "git add debug.log",
   ],
 });
+
+export const ENV = "PAYMENT_KEY=test-1234\n";
+
+/** One commit that tracks .env by mistake; then build output in dist/ and a log appear. */
+export const bakeSaleSecrets = defineWorld({
+  files: { ...files, "bake-sale/.env": ENV },
+  cwd: "bake-sale",
+  setup: [
+    ...FIRST_COMMIT,
+    "mkdir dist",
+    'echo "<h1>Menu</h1>" > dist/menu.min.html',
+    'echo "build finished" > app.log',
+  ],
+});

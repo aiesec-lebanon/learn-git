@@ -133,12 +133,18 @@ for (const lesson of readyLessons()) {
         expect(beat.words, beat.id).toBeLessThanOrEqual(MAX_BEAT_WORDS);
     });
 
-    it("replays every beat without a refusal", () => {
+    it("replays every beat, refused only where the beat says", () => {
       const session = new Session(createWorld(scene?.world));
       for (const beat of scene?.beats ?? [])
-        for (const line of beat.run ?? [])
-          for (const entry of session.run(line))
-            expect(refused(entry), entry.text).toBe(false);
+        for (const line of beat.run ?? []) {
+          const entries = session.run(line);
+          const own = entries.filter((e) => !e.actor);
+          expect(own.some(refused), line).toBe(
+            beat.refusals?.includes(line) ?? false,
+          );
+          for (const e of entries.filter((x) => x.actor))
+            expect(refused(e), e.text).toBe(false);
+        }
     });
 
     it("reaches the Your turn target with its solution, not before", () => {

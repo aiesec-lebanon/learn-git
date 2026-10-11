@@ -1,0 +1,57 @@
+<ColdOpen>
+  Sam pushed to origin, and your `origin/main` still sits where you last saw it.
+  Catching up is two steps, and Git also offers them as one command. What does
+  each step change, and what stays exactly as it was?
+</ColdOpen>
+
+<Beat id="fetch" title="Fetch downloads, nothing more">
+  Sam pushes. `git fetch` brings his commit into your repository and moves the
+  hollow `origin/main` label. Your `main` and your files stay put, so `git
+  status` now says you are behind by 1.
+
+  <Widget name="counters" />
+</Beat>
+
+<Beat id="merge" title="Then merge it in">
+  `git merge origin/main` brings the fetched commit into main. main has nothing
+  new of its own, so this is a fast-forward, the same as merging any branch that
+  is ahead (B4.1).
+</Beat>
+
+<Beat id="pull" title="Pull does both">
+  Sam pushes again, and `git status -sb` cannot tell yet. `git pull` fetches and
+  then integrates in one go: `origin/main` jumps, and main fast-forwards right
+  after it.
+
+  <Widget name="fetch-vs-pull" />
+</Beat>
+
+<Beat id="diverged" title="When you both committed">
+  You commit longer hours while Sam pushes a note about bags. Now `git pull`
+  stops: "Need to specify how to reconcile divergent branches". `git pull
+  --no-rebase` merges this once; `git config pull.rebase false` makes merging
+  the default here.
+
+  <Widget name="pull-mode" />
+</Beat>
+
+<Beat id="conflict" title="Conflicts work the same">
+  If you and Sam had changed the same lines, the merge inside `git pull` would
+  pause on a conflict the same way a local merge does (B4.3). Resolve the file,
+  `git add` it and `git commit`, or run `git merge --abort`.
+</Beat>
+
+<YourTurn />
+
+<Wrap
+  commands={[
+    "git fetch",
+    "git merge origin/main",
+    "git pull",
+    "git pull --no-rebase",
+  ]}
+>
+  `git fetch` only downloads commits and moves the `origin/*` labels. `git pull`
+  is a fetch followed by a merge (or a rebase); when both sides committed, tell
+  it which.
+</Wrap>

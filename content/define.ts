@@ -5,6 +5,8 @@ import type { ChapterId, LessonId } from "./registry";
 export type BeatScript = {
   readonly id: string;
   readonly run?: readonly string[];
+  /** Lines the beat shows Git refusing; content tests expect exactly these to fail. */
+  readonly refusals?: readonly string[];
 };
 
 /** The hint ladder, shown one step at a time on request (learning design 6). */

@@ -1,9 +1,10 @@
 import type { ActorScript, SetupStep, Trigger, WorldSpec } from "@/engine";
 import { defineWorld, writeFile } from "../define";
-import { INDEX, MENU, README } from "./bake-sale";
+import { INDEX, INDEX_LATER, MENU, README } from "./bake-sale";
 
 export const TEAM_URL = "https://hub.test/sam/bake-sale.git";
 export const MEETING = `${README}Team meeting: Fridays at 18:00.\n`;
+export const MEETING_BAGS = `${MEETING}Bring your own bag.\n`;
 export const MENU_RAISED = MENU.replace("$4", "$5");
 export const VOLUNTEERS = "# Volunteers\n\nSam: setup. Ana: cash box.\n";
 
@@ -50,15 +51,21 @@ const PUBLISHED: readonly SetupStep[] = [
   sam("git switch -q main"),
 ];
 
+const CLONED: readonly SetupStep[] = [
+  ...PUBLISHED,
+  `git clone -q ${TEAM_URL}`,
+  "cd bake-sale",
+];
+
+const SAM_MEETING = `cd ${SAM} && ${writeFile("README.md", MEETING)} && git commit -q -am "Add the team meeting" && git push -q`;
+
 /** Sam adds the team meeting to the README and pushes it to origin's main. */
 export const samPushesMeeting = (trigger: Trigger): ActorScript => ({
   id: "sam-meeting",
   machine: "sam",
   name: "Sam",
   trigger,
-  run: [
-    `cd ${SAM} && ${writeFile("README.md", MEETING)} && git commit -q -am "Add the team meeting" && git push -q`,
-  ],
+  run: [SAM_MEETING],
   says: "Sam pushed 1 commit to main on origin: Add the team meeting.",
 });
 
@@ -81,10 +88,7 @@ export const teamRepoBeforeClone: WorldSpec = defineWorld({
 });
 
 /** You cloned the team repository into `~/bake-sale`; Sam is about to push. */
-export const teamRepo: WorldSpec = defineWorld({
-  ...people,
-  setup: [...PUBLISHED, `git clone -q ${TEAM_URL}`, "cd bake-sale"],
-});
+export const teamRepo: WorldSpec = defineWorld({ ...people, setup: CLONED });
 
 /** The playground's Team repo: your clone, with Sam pushing twice while you work. */
 export const teamRepoPlayground: WorldSpec = defineWorld({
@@ -92,5 +96,28 @@ export const teamRepoPlayground: WorldSpec = defineWorld({
   actors: [
     samPushesMeeting({ kind: "after-step", step: 2 }),
     samRaisesPrice({ kind: "after-step", step: 6 }),
+  ],
+});
+
+/** Sam asks for bags in the README (a different file from your hours change). */
+export const samAsksForBags = (trigger: Trigger): ActorScript => ({
+  id: "sam-bags",
+  machine: "sam",
+  name: "Sam",
+  trigger,
+  run: [
+    `cd ${SAM} && git pull -q --no-rebase && ${writeFile("README.md", MEETING_BAGS)} && git commit -q -am "Ask for bags" && git push -q`,
+  ],
+  says: "Sam pushed 1 commit to main on origin: Ask for bags.",
+});
+
+/** Sam pushed the team meeting after you cloned, and you committed longer hours: diverged, not yet fetched. */
+export const teamRepoDiverged: WorldSpec = defineWorld({
+  ...people,
+  setup: [
+    ...CLONED,
+    sam(SAM_MEETING),
+    writeFile("index.html", INDEX_LATER),
+    'git commit -q -am "Open until 15:00"',
   ],
 });

@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { stepText } from "@/content/define";
 import { lessonById, lessonCode } from "@/content/registry";
 import { REFERENCE, referenceById } from "@/content/reference/registry";
 import { lessonHref } from "@/content/routes";
 import { EntryView } from "@/features/reference/entry-view";
 import { entryFrames } from "@/features/reference/frames";
 import { NAV_BACK } from "@/features/site/page-transition";
+import { cx } from "@/lib/cx";
 import { AppLink } from "@/ui/link";
 
 export function generateStaticParams() {
@@ -36,13 +38,25 @@ export default async function ReferenceEntryPage({
             Reference
           </AppLink>
         </p>
-        <h1 className="m-0 mt-2 font-mono text-3xl font-bold">{entry.title}</h1>
+        <h1
+          className={cx(
+            "m-0 mt-2 text-3xl font-bold",
+            !entry.hub && "font-mono",
+          )}
+        >
+          {entry.title}
+        </h1>
         <p className="mt-3 mb-0 text-lg">{entry.summary}</p>
       </header>
       <EntryView
         presets={entry.presets.map(({ id, label }) => ({ id, label }))}
-        variants={entry.variants.map(({ id, command }) => ({ id, command }))}
+        variants={entry.variants.map(({ id, command, label }) => ({
+          id,
+          command,
+          label: label ?? stepText(command),
+        }))}
         frames={entryFrames(entry)}
+        hub={entry.hub ?? false}
       />
       <div className="mt-10 grid max-w-prose gap-8">
         <section aria-labelledby="gotchas">

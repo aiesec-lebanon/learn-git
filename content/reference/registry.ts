@@ -8,6 +8,11 @@ import config from "./git-config";
 import diff from "./git-diff";
 import fetchCmd from "./git-fetch";
 import gitignore from "./gitignore";
+import hubBranch from "./hub-branch";
+import hubCreateRepository from "./hub-create-repository";
+import hubIssues from "./hub-issues";
+import hubMerge from "./hub-merge";
+import hubPullRequest from "./hub-pull-request";
 import init from "./git-init";
 import log from "./git-log";
 import merge from "./git-merge";
@@ -44,6 +49,11 @@ export const REFERENCE: readonly ReferenceEntry[] = [
   fetchCmd,
   pull,
   push,
+  hubCreateRepository,
+  hubPullRequest,
+  hubMerge,
+  hubBranch,
+  hubIssues,
 ];
 
 export const referenceById = (id: string): ReferenceEntry | undefined =>

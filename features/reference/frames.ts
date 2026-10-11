@@ -1,5 +1,10 @@
 import { createWorld, Session, type World } from "@/engine";
-import type { ReferenceEntry, ReferencePreset } from "@/content/define";
+import {
+  runStep,
+  type ReferenceEntry,
+  type ReferencePreset,
+  type Step,
+} from "@/content/define";
 import { stageFrame, type StageFrame } from "@/features/stage/frame";
 import { transcriptOf, type TranscriptLine } from "@/features/stage/transcript";
 import { frameKey } from "./key";
@@ -13,13 +18,13 @@ export type ReferenceFrame = {
 
 export function presetWorld(preset: ReferencePreset): World {
   const session = new Session(createWorld(preset.world));
-  for (const line of preset.setup ?? []) session.run(line);
+  for (const step of preset.setup ?? []) runStep(session, step);
   return session.getSnapshot().world;
 }
 
-export function referenceFrame(world: World, command: string): ReferenceFrame {
+export function referenceFrame(world: World, command: Step): ReferenceFrame {
   const session = new Session(world);
-  const entries = session.run(command);
+  const entries = runStep(session, command);
   return {
     before: stageFrame(world, []),
     after: stageFrame(

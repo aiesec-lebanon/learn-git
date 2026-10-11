@@ -3,6 +3,7 @@ import { canonicalKey } from "../config/keys";
 import { configValue } from "../config/scopes";
 import { resolvePath } from "../files/paths";
 import { worktreeFiles } from "../files/worktree";
+import { reviewDecision } from "../hub/reviews";
 import { readObject } from "../objects/pool";
 import { flattenTree } from "../objects/tree";
 import { branchRef } from "../refs/names";
@@ -231,15 +232,24 @@ function stateDifferences(
     const url = configValue(world, machine, repo, `remote.${remote}.url`);
     const name = url ? hubName(url) : null;
     const hosted = name ? world.hub?.repos.get(name) : undefined;
+    if (want.exists !== undefined && Boolean(hosted) !== want.exists)
+      out.push(report.hubRepo(remote, want.exists));
     for (const pull of want.pulls ?? []) {
       const found = hosted?.pulls.some(
         (p) =>
           p.head === pull.head &&
           p.base === pull.base &&
-          p.state === pull.state,
+          p.state === pull.state &&
+          (!pull.review ||
+            (pull.review.state === "approved"
+              ? reviewDecision(p).approved
+              : reviewDecision(p).changesRequested
+            ).includes(pull.review.by)),
       );
       if (!found)
-        out.push(report.noPull(remote, pull.state, pull.head, pull.base));
+        out.push(
+          report.noPull(remote, pull.state, pull.head, pull.base, pull.review),
+        );
     }
     for (const [number, state] of Object.entries(want.issues ?? {})) {
       const issue = hosted?.issues.find((i) => i.number === Number(number));

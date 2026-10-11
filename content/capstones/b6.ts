@@ -113,7 +113,7 @@ export default defineCapstone({
       "Which number will your issue get, and what must the pull request's description say so that merging closes it?",
     pointer:
       'Open the issue first, then push fix-footer and open a pull request into main saying "Fixes #3". Each push to fix-footer updates the pull request, and the merge happens on origin, so main needs a pull afterwards.',
-    reference: "push",
+    reference: "hub-issues",
     next: 'Issue, then git switch -c fix-footer, commit, git push -u origin fix-footer, a pull request with "Fixes #3", commit and git push the change Sam asks for, merge, delete the branch, git switch main, git pull and git branch -d fix-footer.',
   },
 });

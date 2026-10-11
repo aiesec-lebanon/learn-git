@@ -30,10 +30,17 @@ export type PullTarget = {
   readonly head: string;
   readonly base: string;
   readonly state: "open" | "closed" | "merged";
+  /** A reviewer whose latest verdict stands, e.g. `{ by: "sam", state: "approved" }`. */
+  readonly review?: {
+    readonly by: string;
+    readonly state: "approved" | "changes-requested";
+  };
 };
 
 /** Pull requests and issues on one Hub repository. */
 export type HubTarget = {
+  /** Whether the Hub hosts the repository at all. */
+  readonly exists?: boolean;
   readonly pulls?: readonly PullTarget[];
   /** Issue number to its state. */
   readonly issues?: Readonly<Record<number, "open" | "closed">>;

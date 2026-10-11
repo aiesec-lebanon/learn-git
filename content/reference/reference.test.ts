@@ -1,13 +1,13 @@
 import { describe, expect, it } from "vitest";
 import { createWorld, match, Session } from "@/engine";
-import type { ReferencePreset } from "../define";
+import { runStep, stepText, type ReferencePreset } from "../define";
 import { voiceProblems } from "../guide/voice";
 import { lessonById } from "../registry";
 import { REFERENCE } from "./registry";
 
 const start = (preset: ReferencePreset) => {
   const session = new Session(createWorld(preset.world));
-  for (const line of preset.setup ?? []) session.run(line);
+  for (const step of preset.setup ?? []) runStep(session, step);
   return session;
 };
 
@@ -31,19 +31,22 @@ for (const entry of REFERENCE) {
       for (const preset of entry.presets)
         for (const variant of entry.variants) {
           const session = start(preset);
-          session.run(variant.command);
-          expect(session.getSnapshot().pending, variant.command).toBeNull();
+          runStep(session, variant.command);
+          expect(
+            session.getSnapshot().pending,
+            stepText(variant.command),
+          ).toBeNull();
         }
     });
 
-    it.each(entry.variants)("$command does what it claims", (variant) => {
+    it.each(entry.variants)("$id does what it claims", (variant) => {
       expect(variant.after ?? variant.shows).toBeDefined();
       const preset =
         entry.presets.find((p) => p.id === variant.preset) ?? entry.presets[0];
       expect(preset.id).toBe(variant.preset ?? entry.presets[0].id);
       const session = start(preset);
       const before = session.getSnapshot().world;
-      const [result] = session.run(variant.command);
+      const [result] = runStep(session, variant.command);
       const output = result?.outcome.output;
       if (variant.shows)
         expect(`${output?.stdout}${output?.stderr}`).toContain(variant.shows);

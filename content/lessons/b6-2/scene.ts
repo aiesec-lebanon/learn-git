@@ -110,7 +110,7 @@ export default defineLesson({
         "Sam reviews on the Hub, not in your repository. What does he need to see there, and what does his comment ask for?",
       pointer:
         "A pull request shows your branch's commits, and every push to the branch adds to it. Once Sam approves, the merge happens on origin, so main needs a pull afterwards.",
-      reference: "push",
+      reference: "hub-pull-request",
       next: "Push dark-mode, open a pull request into main, commit and push the headings colour, merge, delete the branch, then git switch main, git pull and git branch -d dark-mode.",
     },
   },

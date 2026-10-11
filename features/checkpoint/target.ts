@@ -107,9 +107,13 @@ export function describeTarget(target: TargetSpec): string[] {
           : `${remote} has no branch called ${branch}.`,
       );
   for (const [remote, hub] of Object.entries(target.hub ?? {})) {
+    if (hub.exists !== undefined)
+      out.push(
+        `The Hub ${hub.exists ? "has a" : "has no"} repository at ${remote}'s address.`,
+      );
     for (const pull of hub.pulls ?? [])
       out.push(
-        `${remote} has a ${pull.state} pull request from ${pull.head} into ${pull.base}.`,
+        `${remote} has a ${pull.state} pull request from ${pull.head} into ${pull.base}${pull.review ? `, ${pull.review.state} by ${pull.review.by}` : ""}.`,
       );
     for (const [number, state] of Object.entries(hub.issues ?? {}))
       out.push(`Issue #${number} on ${remote} is ${state}.`);

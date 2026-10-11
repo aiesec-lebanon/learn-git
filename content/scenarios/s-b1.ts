@@ -134,7 +134,7 @@ export default defineScenario({
       hints: {
         nudge: `Origin's main refuses direct pushes. Where can your fix live so that Sam can review it?`,
         pointer: `Commit the fix on a branch, push it with -u so it tracks origin's copy, then open a pull request on the Hub whose description says "Fixes #${SETUP_ISSUE}".`,
-        reference: "push",
+        reference: "hub-pull-request",
         next: `Run git switch -c ${BRANCH}, commit the fix, git push -u origin ${BRANCH}, then open a pull request into main.`,
       },
     },
@@ -148,7 +148,7 @@ export default defineScenario({
           "Sam asked for a change. Where does a change to a pull request come from?",
         pointer:
           "The pull request follows its branch: commit the change on the branch and push, and it appears in the pull request. Main needs Sam's approval before it merges.",
-        reference: "push",
+        reference: "hub-merge",
         next: `Edit README.md as Sam asks, commit, git push, wait for the approval, then merge pull request #${PULL}.`,
       },
     },

@@ -1,5 +1,6 @@
 import fc from "fast-check";
 import { describe, expect, it } from "vitest";
+import { act } from "../hub/actions";
 import { readObject } from "../objects/pool";
 import { flattenTree } from "../objects/tree";
 import { countPar } from "../par";
@@ -241,6 +242,62 @@ describe("match", () => {
         hub: { upstream: { issues: { 1: "open" } } },
       }).differences,
     ).toEqual(["Issue #1 on upstream should be open."]);
+  });
+
+  it("checks that the Hub repository exists and who approved a pull request", () => {
+    const url = "https://hub.test/ana/site.git";
+    const s = play({ hub: { "ana/site": {} } }, [
+      `git clone -q ${url}`,
+      "cd site",
+      "echo hi > a.txt && git add a.txt && git commit -q -m one",
+      "git push -q",
+      "git switch -q -c fix",
+      "echo fixed > a.txt && git commit -q -am two",
+      "git push -q -u origin fix",
+      "git remote add other https://hub.test/ana/none.git",
+    ]);
+    s.act({
+      type: "open-pull-request",
+      repo: "ana/site",
+      base: "main",
+      head: "fix",
+      title: "Fix",
+    });
+    const approved: TargetSpec = {
+      repo: "site",
+      hub: {
+        origin: {
+          exists: true,
+          pulls: [
+            {
+              head: "fix",
+              base: "main",
+              state: "open",
+              review: { by: "ana", state: "approved" },
+            },
+          ],
+        },
+        other: { exists: false },
+      },
+    };
+    expect(match(world(s), approved).differences).toEqual([
+      `origin has no open pull request from fix into main with a review "approved" from ana.`,
+    ]);
+    const reviewed = act(world(s), {
+      kind: "hub",
+      actor: "ana",
+      action: {
+        type: "review",
+        repo: "ana/site",
+        number: 1,
+        state: "approved",
+      },
+    }).world;
+    expect(match(reviewed, approved).differences).toEqual([]);
+    expect(
+      match(reviewed, { repo: "site", hub: { other: { exists: true } } })
+        .differences,
+    ).toEqual(["The Hub has no repository at other's address yet."]);
   });
 
   it("names commits that collide or are reached two ways", () => {

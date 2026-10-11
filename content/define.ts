@@ -120,13 +120,16 @@ export type ReferencePreset = {
   readonly id: string;
   readonly label: string;
   readonly world: WorldSpec;
-  readonly setup?: readonly string[];
+  readonly setup?: readonly Step[];
 };
 
 /** One form of the command; content tests check its claim on the first preset. */
 export type ReferenceVariant = {
   readonly id: string;
-  readonly command: string;
+  /** A command, or a Hub action on a Hub card. */
+  readonly command: Step;
+  /** How the form is listed; default the command itself. */
+  readonly label?: string;
   /** The state the command reaches (and the preset does not). */
   readonly after?: TargetSpec;
   /** Text the command prints, on either stream. */
@@ -136,8 +139,10 @@ export type ReferenceVariant = {
 };
 
 export type ReferenceEntry = {
-  /** The name `git <cmd> -h` asks for, e.g. "init". */
+  /** The name `git <cmd> -h` asks for, e.g. "init"; Hub cards start with "hub-". */
   readonly id: string;
+  /** A Hub card: actions on the simulated GitHub rather than a Git command. */
+  readonly hub?: boolean;
   readonly title: string;
   readonly summary: string;
   readonly presets: readonly [ReferencePreset, ...ReferencePreset[]];

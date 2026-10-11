@@ -125,7 +125,7 @@ export default defineLesson({
         "Which number does the Hub give your issue, and how can the pull request mention it so that merging also closes it?",
       pointer:
         'A closing keyword followed by the number, such as "Fixes #3", in the description of a pull request into the default branch closes that issue when the pull request merges.',
-      reference: "push",
+      reference: "hub-issues",
       next: 'Open the issue (it becomes #3), fix index.html on fix-footer, push it, open a pull request into main whose description says "Fixes #3", then merge it.',
     },
   },

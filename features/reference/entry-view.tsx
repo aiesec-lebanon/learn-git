@@ -2,6 +2,7 @@
 
 import { useId, useMemo, useState, type ReactNode } from "react";
 import type { World } from "@/engine";
+import type { Step } from "@/content/define";
 import { useMotion } from "@/features/motion/policy";
 import { StageView } from "@/features/stage/stage";
 import { Transcript } from "@/features/stage/transcript";
@@ -13,7 +14,7 @@ type Option = { readonly id: string; readonly label: string };
 
 type Sandbox = {
   readonly world: World;
-  readonly frame: (world: World, command: string) => ReferenceFrame;
+  readonly frame: (world: World, command: Step) => ReferenceFrame;
 };
 
 function Choice({
@@ -67,9 +68,16 @@ export function EntryView({
   presets,
   variants,
   frames,
+  hub = false,
 }: {
+  /** A Hub card: its forms are actions on the Hub, not commands. */
+  hub?: boolean;
   presets: readonly Option[];
-  variants: readonly { readonly id: string; readonly command: string }[];
+  variants: readonly {
+    readonly id: string;
+    readonly label: string;
+    readonly command: Step;
+  }[];
   frames: Readonly<Record<string, ReferenceFrame>>;
 }) {
   const motion = useMotion();
@@ -142,11 +150,11 @@ export function EntryView({
           />
         )}
         <Choice
-          legend="Form"
-          options={variants.map((v) => ({ id: v.id, label: v.command }))}
+          legend={hub ? "Action" : "Form"}
+          options={variants.map((v) => ({ id: v.id, label: v.label }))}
           value={variant}
           onChange={pick(setVariant)}
-          code
+          code={!hub}
         />
       </div>
       <div className="flex flex-wrap items-center gap-3">
@@ -192,7 +200,7 @@ export function EntryView({
           <StageView frame={after} at={at} />
         </Panel>
       </div>
-      <Panel title="What Git prints">
+      <Panel title={hub ? "What happened" : "What Git prints"}>
         <Transcript lines={frame.transcript} />
       </Panel>
     </div>

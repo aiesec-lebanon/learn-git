@@ -4,6 +4,7 @@ import { useRef, useState } from "react";
 import type { Session } from "@/engine";
 import type { Hints } from "@/content/define";
 import { useSession } from "@/features/stage/use-session";
+import { referenceById } from "@/content/reference/registry";
 import { referenceHref } from "@/content/routes";
 import { Button } from "@/ui/button";
 import { AppLink } from "@/ui/link";
@@ -71,7 +72,9 @@ export function HintLadder({
                   <>
                     {" "}
                     <AppLink href={referenceHref(hints.reference)}>
-                      Reference: git {hints.reference}
+                      Reference:{" "}
+                      {referenceById(hints.reference)?.title ??
+                        `git ${hints.reference}`}
                     </AppLink>
                   </>
                 ) : null}

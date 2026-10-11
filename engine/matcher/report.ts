@@ -23,8 +23,18 @@ export const report = {
     `${remote} has no branch ${branch} yet.`,
   remoteBranchExtra: (remote: string, branch: string) =>
     `${remote} should not have a branch ${branch}.`,
-  noPull: (remote: string, state: string, head: string, base: string) =>
-    `${remote} has no ${state} pull request from ${head} into ${base}.`,
+  noPull: (
+    remote: string,
+    state: string,
+    head: string,
+    base: string,
+    review?: { by: string; state: string },
+  ) =>
+    `${remote} has no ${state} pull request from ${head} into ${base}${review ? ` with a review "${review.state}" from ${review.by}` : ""}.`,
+  hubRepo: (remote: string, exists: boolean) =>
+    exists
+      ? `The Hub has no repository at ${remote}'s address yet.`
+      : `The Hub should not have a repository at ${remote}'s address.`,
   issueState: (remote: string, number: number, want: string) =>
     `Issue #${number} on ${remote} should be ${want}.`,
   noCommit: (name: string) => `No commit matches ${name} yet.`,

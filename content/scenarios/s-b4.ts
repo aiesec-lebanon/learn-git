@@ -106,6 +106,7 @@ export default defineScenario({
         nudge: "What does the pull request's merge box say now?",
         pointer:
           "With no conflicts left, the Hub can make the merge commit on main itself.",
+        reference: "hub-merge",
         next: "Merge pull request #1 on the Hub.",
       },
     },

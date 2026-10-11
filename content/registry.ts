@@ -76,7 +76,7 @@ export const lessonsOf = (chapter: ChapterId): readonly Lesson[] =>
 
 export const SCENARIOS = [
   s("s-b1", "First contribution", 15),
-  s("s-b2", "Wrong branch, uncommitted work", 8),
+  s("s-b2", "Wrong branch, uncommitted work", 8, true),
   s("s-b3", "Monday-morning push", 12),
   s("s-b4", "Conflict on your PR", 15),
 ] as const;

@@ -55,12 +55,14 @@ export class Session {
   private latest: readonly HistoryEntry[] = [];
   private floor = 0;
   private snapshot: SessionSnapshot | null = null;
+  private readonly initial: SessionSnapshot;
   private paused = false;
   private readonly listeners = new Set<() => void>();
 
   constructor(world: World, options: { historyCap?: number } = {}) {
     this.worlds = [world];
     this.cap = options.historyCap ?? LIMITS.historySnapshots;
+    this.initial = this.getSnapshot();
   }
 
   /** Runs a typed line; one history entry per command it ran, then any teammate it triggers. */
@@ -164,6 +166,11 @@ export class Session {
   subscribe(listener: () => void): () => void {
     this.listeners.add(listener);
     return () => this.listeners.delete(listener);
+  }
+
+  /** The state it started in, which a server render shows (hydration's snapshot). */
+  getInitialSnapshot(): SessionSnapshot {
+    return this.initial;
   }
 
   /** The same object until something changes (for `useSyncExternalStore`). */

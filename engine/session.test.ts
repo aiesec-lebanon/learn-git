@@ -18,6 +18,15 @@ const POOL = [
 ];
 
 describe("Session", () => {
+  it("keeps the snapshot it started with for hydration", () => {
+    const session = new Session(world());
+    const initial = session.getSnapshot();
+    session.run("git init");
+    expect(session.getInitialSnapshot()).toBe(initial);
+    expect(session.getSnapshot()).not.toBe(initial);
+    expect(initial).toMatchObject({ step: 0, history: [], pending: null });
+  });
+
   it("records one entry per command, with its text", () => {
     const session = new Session(world());
     const ran = session.run("git init && git add 'a.txt'; nope && ls");

@@ -9,5 +9,6 @@ export function useSession(session: Session): SessionSnapshot {
     [session],
   );
   const snapshot = useCallback(() => session.getSnapshot(), [session]);
-  return useSyncExternalStore(subscribe, snapshot, snapshot);
+  const initial = useCallback(() => session.getInitialSnapshot(), [session]);
+  return useSyncExternalStore(subscribe, snapshot, initial);
 }

@@ -8,9 +8,7 @@
       "project/docs/faq.md": "# FAQ\n",
       "project/notes.txt": "untracked\n"
     },
-    "dirs": [
-      "project/archive"
-    ],
+    "dirs": ["project/archive"],
     "cwd": "project"
   },
   "steps": [

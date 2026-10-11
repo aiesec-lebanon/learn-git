@@ -53,3 +53,19 @@ export const readmeThreeVersions = defineWorld({
     writeFile("README.md", README_V3),
   ],
 });
+
+export const STYLE = "body { font-family: serif; }\nh1 { color: teal; }\n";
+export const INDEX_LATER = INDEX.replace("14:00", "15:00");
+
+/** One commit with a stylesheet; then index.html improved, style.css broken and debug.log staged by accident. */
+export const bakeSaleUndo = defineWorld({
+  files: { ...files, "bake-sale/style.css": STYLE },
+  cwd: "bake-sale",
+  setup: [
+    ...FIRST_COMMIT,
+    writeFile("index.html", INDEX_LATER),
+    writeFile("style.css", STYLE.replace("; }", ";")),
+    'echo "debug: menu loaded" > debug.log',
+    "git add debug.log",
+  ],
+});

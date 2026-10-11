@@ -1,0 +1,44 @@
+<ColdOpen>
+  You tried a new colour in `style.css`, broke the page, and staged a debug log
+  by accident. One good change sits in `index.html`. How do you undo the mess
+  and keep the good part?
+</ColdOpen>
+
+<Beat id="directions" title="Two directions">
+  `git restore` copies a file from one place to another. `git restore --staged
+  <file>` copies the last commit's version into the staging area. Plain `git
+  restore <file>` copies the staged version over your working copy. The
+  direction decides what you can lose.
+</Beat>
+
+<Beat id="unstage" title="Unstaging is safe">
+  `git restore --staged README.md` takes the file out of the draft. The staging
+  area goes back to the last commit's version, and your edit stays in the
+  working tree, now modified and unstaged. Nothing is lost.
+</Beat>
+
+<Beat id="discard" title="Discarding is final">
+  `git restore README.md` overwrites your file with the staged version. An edit
+  that was never staged or committed is gone, and real Git cannot bring it back.
+  Check what you are about to lose first.
+</Beat>
+
+<Beat id="source" title="A file from the past">
+  `git restore --source=HEAD~1 menu.html` copies the menu as it was one commit
+  ago into your working tree. No branch moves and no commit changes: you only
+  get an old version of one file to keep or discard.
+</Beat>
+
+<Beat id="older" title="Older tutorials">
+  Older guides use `git checkout -- <file>` to discard and `git reset HEAD
+  <file>` to unstage. They still work and do the same as `git restore <file>`
+  and `git restore --staged <file>`. The sandbox notes the modern form when you
+  use them.
+</Beat>
+
+<YourTurn />
+
+<Wrap commands={["git restore", "git restore --staged"]}>
+  `git restore --staged` only unstages, so your edits are safe. Plain `git
+  restore` overwrites your file, so look before you discard.
+</Wrap>

@@ -22,7 +22,7 @@ export { discoverRepo } from "./repo/discover";
 export { computeStatus } from "./status/compute";
 export { trackingOf } from "./status/tracking";
 export type { Tracking } from "./status/tracking";
-export { hubName } from "./world/network";
+export { hubName, resolveUrl } from "./world/network";
 export { listDir, worktreeFiles } from "./files/worktree";
 export { machineOf } from "./world/access";
 export { LIMITS } from "./limits";

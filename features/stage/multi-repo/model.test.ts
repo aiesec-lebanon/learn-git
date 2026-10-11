@@ -59,11 +59,16 @@ describe("the multi-repository stage", () => {
     ).world;
     const view = stageFrame(mine, []).view;
     const remote = view?.labels.find((l) => l.name === "origin/main");
-    expect(remote?.note).toMatch(/^last contact \d\d:\d\d$/);
+    expect(remote?.note).toMatch(
+      /^last contact \d\d:\d\d · origin moved since$/,
+    );
     const local = view?.labels.find((l) => l.name === "main");
     expect(local?.note).toBe("ahead 1");
     const fetched = runLine(mine, "git fetch -q").world;
     const after = stageFrame(fetched, []).view;
+    expect(after?.labels.find((l) => l.name === "origin/main")?.note).toMatch(
+      /^last contact \d\d:\d\d$/,
+    );
     expect(after?.labels.find((l) => l.name === "main")?.note).toBe(
       "ahead 1 · behind 1",
     );

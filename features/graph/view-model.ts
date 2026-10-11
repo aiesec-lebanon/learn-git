@@ -2,6 +2,7 @@ import {
   abbreviate,
   reachability,
   resolveHead,
+  resolveUrl,
   shortRefName,
   subjectOf,
   trackingOf,
@@ -30,7 +31,7 @@ export type LabelView = {
   readonly name: string;
   readonly kind: "branch" | "remote" | "tag";
   readonly target: Oid;
-  /** Small print under the label: `ahead 1 · behind 2`, `last contact 00:12`. */
+  /** Small print under the label: `ahead 1 · behind 2`, `last contact 00:12 · origin moved since`. */
   readonly note?: string;
 };
 
@@ -74,6 +75,16 @@ export function lastContact(repo: Repo, ref: string): number | null {
   return cloned?.who.time ?? null;
 }
 
+/** The remote name when its Hub copy of the branch is no longer where `ref` remembers it. */
+function movedSince(world: World, repo: Repo, ref: RefName): string | null {
+  const [, remote, branch] = /^refs\/remotes\/([^/]+)\/(.+)$/.exec(ref) ?? [];
+  if (!remote || !branch) return null;
+  const url = repo.config.find((e) => e.key === `remote.${remote}.url`)?.value;
+  const hosted = url ? resolveUrl(world, url) : null;
+  const now = hosted?.refs.get(`refs/heads/${branch}` as RefName);
+  return now !== undefined && now !== repo.refs.get(ref) ? remote : null;
+}
+
 function labelNote(
   world: World,
   repo: Repo,
@@ -82,7 +93,9 @@ function labelNote(
 ): string | undefined {
   if (kind === "remote") {
     const time = lastContact(repo, ref);
-    return time === null ? undefined : `last contact ${clockTime(time)}`;
+    if (time === null) return undefined;
+    const moved = movedSince(world, repo, ref);
+    return `last contact ${clockTime(time)}${moved ? ` · ${moved} moved since` : ""}`;
   }
   if (kind !== "branch") return undefined;
   const machine = world.machines.get(repo.machine);

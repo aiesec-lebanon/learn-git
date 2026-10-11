@@ -62,15 +62,24 @@ function Node({ node }: { node: SkinNode }) {
   );
 }
 
+/** Where a remote-tracking note says origin has moved on (B5.1). */
+const MOVED = / · (?=\S+ moved since$)/;
+
 /** A label with its small print (counters, last contact) underneath. */
 function Label({ label }: { label: SkinLabel }) {
   if (!label.note) return <LabelBody label={label} />;
+  const [contact, moved] = label.note.split(MOVED);
   return (
     <span className="inline-flex flex-col items-center gap-0.5">
       <LabelBody label={label} />
       <span className="font-display text-[11px] leading-3 whitespace-nowrap text-g-text">
-        {label.note}
+        {contact}
       </span>
+      {moved !== undefined ? (
+        <span className="bg-[linear-gradient(transparent_45%,var(--hl)_45%)] font-display text-[11px] leading-3 font-semibold whitespace-nowrap text-g-text">
+          {moved}
+        </span>
+      ) : null}
     </span>
   );
 }

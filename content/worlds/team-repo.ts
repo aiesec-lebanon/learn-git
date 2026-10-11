@@ -59,7 +59,7 @@ export const samPushesMeeting = (trigger: Trigger): ActorScript => ({
   run: [
     `cd ${SAM} && ${writeFile("README.md", MEETING)} && git commit -q -am "Add the team meeting" && git push -q`,
   ],
-  says: "Sam pushed 1 commit to origin/main: Add the team meeting.",
+  says: "Sam pushed 1 commit to main on origin: Add the team meeting.",
 });
 
 /** Sam raises the lemon cake price on origin's main (a conflict waiting for anyone who changes it too). */
@@ -71,7 +71,7 @@ export const samRaisesPrice = (trigger: Trigger): ActorScript => ({
   run: [
     `cd ${SAM} && git pull -q --no-rebase && ${writeFile("menu.html", MENU_RAISED)} && git commit -q -am "Raise the lemon cake price" && git push -q`,
   ],
-  says: "Sam pushed 1 commit to origin/main: Raise the lemon cake price.",
+  says: "Sam pushed 1 commit to main on origin: Raise the lemon cake price.",
 });
 
 /** Origin on the Hub and Sam's clone; you have not cloned yet (B5.1 starts here). */

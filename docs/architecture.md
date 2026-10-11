@@ -70,6 +70,8 @@ One theme module, **Office Hours**, behind a typed contract (`themes/contract.ts
 
 Hub state lives in the engine world, and Hub actions are invocations: they create real commits, emit effects, count for par and rewind with the sandbox. Original panels sit in a simulated browser frame at `hub.test`. Markdown renders with `react-markdown` and `remark-gfm`, without raw HTML; images show their alt text.
 
+Content scripts take Hub steps beside typed lines (`Step = string | HubAction`): beats, solutions, expert paths, world setup (`{ machine, hub }`) and Hub cards in the reference. Branch rules apply once a world's setup has run. Targets can name pull requests (head, base, state, a standing review), issue states and whether a Hub repository exists. Teammates can act when a pull request gains commits their last review has not seen (`pull-updated`).
+
 ## Security
 
 - Static headers from `headers()` in `next.config.ts` (`lib/security-headers.ts`): CSP `default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'` (no `upgrade-insecure-requests`: WebKit applies it to `http://localhost`), plus HSTS, `nosniff`, `Referrer-Policy`, `Permissions-Policy`, COOP and `X-Frame-Options`; `poweredByHeader: false`. Nonces are not used because they would make every page dynamic.

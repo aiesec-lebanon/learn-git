@@ -64,5 +64,13 @@ export default defineLesson({
     target: onDocs,
     par: 2,
     solution: [CLONE, "cd bake-sale", "git switch docs"],
+    hints: {
+      nudge:
+        "What makes a local repository from one on the Hub, and where does a local docs come from?",
+      pointer:
+        "git clone copies the repository and names it origin. git switch docs makes a local docs from origin/docs and tracks it. cd is free.",
+      reference: "clone",
+      next: "Run git clone https://hub.test/sam/bake-sale.git, cd bake-sale, then git switch docs.",
+    },
   },
 });

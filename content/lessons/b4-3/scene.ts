@@ -77,5 +77,13 @@ export default defineLesson({
       "git add menu.html",
       COMMIT,
     ],
+    hints: {
+      nudge:
+        "Which parts of menu.html are yours and which are Sam's after the merge stops?",
+      pointer:
+        "A conflicted merge waits for you. Edit the file to the result you want (edits are free), stage it with git add, and git commit finishes the merge.",
+      reference: "merge",
+      next: "Run git merge pricing, edit menu.html to keep your $3 price and Sam's longer hours, then git add menu.html and git commit.",
+    },
   },
 });

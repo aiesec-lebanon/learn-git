@@ -127,5 +127,13 @@ export default defineLesson({
       "git pull",
       "git branch -d feature",
     ],
+    hints: {
+      nudge:
+        "The branch is on the Hub already. What asks for it to join main there?",
+      pointer:
+        "A pull request from feature into main gets Sam's approval. Merge it and delete its branch on the Hub, then switch to main, pull, and delete your local feature.",
+      reference: "hub-pull-request",
+      next: "Open a pull request from feature into main with a description, merge it, delete the branch on the Hub, then run git switch main, git pull and git branch -d feature.",
+    },
   },
 });

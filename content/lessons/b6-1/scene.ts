@@ -93,5 +93,13 @@ export default defineLesson({
       `git remote add origin ${RECIPES_URL}`,
       "git push -u origin main",
     ],
+    hints: {
+      nudge:
+        "Where will main go, and what name will your repository use for it?",
+      pointer:
+        "Create the empty repository on the Hub, add its address as origin with git remote add, then push main with -u. Pushing one branch by name leaves the others at home.",
+      reference: "remote",
+      next: "Create the recipes repository on the Hub, run git remote add origin https://hub.test/you/recipes.git, then git push -u origin main.",
+    },
   },
 });

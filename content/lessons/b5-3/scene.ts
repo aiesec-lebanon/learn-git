@@ -116,5 +116,13 @@ export default defineLesson({
     target: featurePublished,
     par: 3,
     solution: ["git push -u origin feature", "git switch main", "git pull"],
+    hints: {
+      nudge:
+        "feature exists only here. Which command publishes it and remembers where it went?",
+      pointer:
+        "git push -u origin feature publishes the branch and sets origin/feature as its upstream. On main, git pull brings in what origin has.",
+      reference: "push",
+      next: "Run git push -u origin feature, then git switch main, then git pull.",
+    },
   },
 });

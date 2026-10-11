@@ -74,5 +74,13 @@ export default defineLesson({
     target: mergedFeature,
     par: 3,
     solution: ["git switch main", "git merge feature", "git branch -d feature"],
+    hints: {
+      nudge:
+        "A merge moves the branch HEAD is on. Which branch should move here?",
+      pointer:
+        "When main has nothing feature lacks, git merge feature on main slides main forward to feature's tip. git branch -d then removes the name, and the commits stay.",
+      reference: "merge",
+      next: "Run git switch main, then git merge feature, then git branch -d feature.",
+    },
   },
 });

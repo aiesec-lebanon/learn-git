@@ -65,5 +65,13 @@ export default defineLesson({
     target: mergedFeature,
     par: 3,
     solution: ["git switch main", "git merge feature", "git branch -d feature"],
+    hints: {
+      nudge:
+        "Both branches have commits the other lacks. What kind of commit joins two lines of work?",
+      pointer:
+        "git merge on main makes a merge commit with two parents: main's tip and feature's tip. Once feature's commits are in main, git branch -d can remove the name.",
+      reference: "merge",
+      next: "Run git switch main, then git merge feature, then git branch -d feature.",
+    },
   },
 });

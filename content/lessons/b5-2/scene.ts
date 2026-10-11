@@ -96,5 +96,19 @@ export default defineLesson({
     target: caughtUp,
     par: 2,
     solution: ["git fetch", "git merge origin/main"],
+    hints: {
+      nudge:
+        "Your repository does not know about origin's new commit yet. What brings it in without changing your branch?",
+      pointer:
+        "git fetch updates origin/main. git merge origin/main then joins it with your commit. git pull does both, once you say how to reconcile.",
+      reference: "fetch",
+      next: "Run git fetch, then git merge origin/main.",
+    },
+    underPar: [
+      {
+        solution: ["git pull --no-rebase"],
+        why: "git pull is a fetch followed by a merge. With branches that diverged it needs to know how to join them, and --no-rebase says merge, so one command does both steps.",
+      },
+    ],
   },
 });

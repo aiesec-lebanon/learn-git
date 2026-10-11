@@ -15,9 +15,6 @@ const play = (
   return session.getSnapshot();
 };
 
-/** Chapters whose puzzles have their hint ladders and under-par paths. */
-const WRITTEN = new Set(["b1", "b2", "b3"]);
-
 describe("puzzles", () => {
   it("lists one puzzle per Beginner lesson, by chapter in lesson order", () => {
     const ids = CHAPTERS.flatMap((c) =>
@@ -32,7 +29,7 @@ describe("puzzles", () => {
   });
 });
 
-for (const chapter of CHAPTERS.filter((c) => WRITTEN.has(c.id))) {
+for (const chapter of CHAPTERS) {
   for (const { lesson, challenge } of puzzlesOf(chapter.id)) {
     describe(`puzzle ${lesson.id}`, () => {
       it("does not start solved", () => {

@@ -138,5 +138,13 @@ export default defineLesson({
       pullInto("main", "fix-footer", "Fix the footer link", "Fixes #3"),
       merge(4),
     ],
+    hints: {
+      nudge:
+        "How can a pull request say which issue it fixes, so merging closes it?",
+      pointer:
+        'A closing keyword and the number, such as "Fixes #3", in a pull request into the default branch closes the issue when the pull request merges.',
+      reference: "hub-issues",
+      next: 'Open a pull request from fix-footer into main whose description says "Fixes #3", then merge it.',
+    },
   },
 });

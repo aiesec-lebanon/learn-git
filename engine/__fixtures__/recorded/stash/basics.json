@@ -1,0 +1,598 @@
+{
+  "final": {
+    "config": {
+      "global": [
+        [
+          "user.name",
+          "Sam Lee"
+        ],
+        [
+          "user.email",
+          "sam@example.com"
+        ],
+        [
+          "init.defaultbranch",
+          "main"
+        ]
+      ],
+      "system": []
+    },
+    "dirs": [
+      "project",
+      "project/sub"
+    ],
+    "files": {
+      "project/a.txt": "a\n",
+      "project/b.txt": "b\n",
+      "project/new.txt": "n\n",
+      "project/sub/c.txt": "c\n"
+    },
+    "repos": {
+      "project": {
+        "config": [
+          [
+            "core.repositoryformatversion",
+            "0"
+          ],
+          [
+            "core.filemode",
+            "false"
+          ],
+          [
+            "core.bare",
+            "false"
+          ],
+          [
+            "core.logallrefupdates",
+            "true"
+          ],
+          [
+            "core.symlinks",
+            "false"
+          ],
+          [
+            "core.ignorecase",
+            "true"
+          ]
+        ],
+        "head": {
+          "ref": "refs/heads/main"
+        },
+        "index": [
+          {
+            "mode": "100644",
+            "oid": "78981922613b2afb6025042ff6bd878ac1994e85",
+            "path": "a.txt",
+            "stage": 0
+          },
+          {
+            "mode": "100644",
+            "oid": "61780798228d17af2d34fce4cfbdf35556832472",
+            "path": "b.txt",
+            "stage": 0
+          },
+          {
+            "mode": "100644",
+            "oid": "f2ad6c76f0115a6ba5b00456a849810e7ec0af20",
+            "path": "sub/c.txt",
+            "stage": 0
+          }
+        ],
+        "objects": {
+          "03636ad810f6511b30a3f23af812c4ff191a46c1": {
+            "body": "tree f4ace9220164372a9d94f92acf45d82c0c873fb7\nparent b636b5e0673436d5f7c560e053b15cef1f7a90c2\nparent 4b6bec4b7efc582082d3579451db68147b36d4ce\nauthor Sam Lee <sam@example.com> 1767227640 +0000\ncommitter Sam Lee <sam@example.com> 1767227640 +0000\n\nOn main: oops",
+            "type": "commit"
+          },
+          "089bb97f895a4112fab3f2d7746704c83cefca02": {
+            "body": "b\nstaged\n",
+            "type": "blob"
+          },
+          "0b39bfb70ca2ef1546816bc08c18d0d0cd9dc97d": {
+            "body": "tree 7b5bb57acc502b96bb0a3c28ba1d5ecb011526ea\nparent b636b5e0673436d5f7c560e053b15cef1f7a90c2\nauthor Sam Lee <sam@example.com> 1767226680 +0000\ncommitter Sam Lee <sam@example.com> 1767226680 +0000\n\nindex on main: b636b5e First\n",
+            "type": "commit"
+          },
+          "2eed278cba60563fef1c7949f23dfabac1a9ff7b": {
+            "body": "tree 71d3d6d7c8bed7593cbf00ee8f872b6a1fccd7b1\nparent b636b5e0673436d5f7c560e053b15cef1f7a90c2\nauthor Sam Lee <sam@example.com> 1767226440 +0000\ncommitter Sam Lee <sam@example.com> 1767226440 +0000\n\nindex on main: b636b5e First\n",
+            "type": "commit"
+          },
+          "4b6bec4b7efc582082d3579451db68147b36d4ce": {
+            "body": "tree ee48588847791a0a30d2795a7fdcf26f05611c43\nparent b636b5e0673436d5f7c560e053b15cef1f7a90c2\nauthor Sam Lee <sam@example.com> 1767227640 +0000\ncommitter Sam Lee <sam@example.com> 1767227640 +0000\n\nindex on main: b636b5e First\n",
+            "type": "commit"
+          },
+          "4d5176ac313a3fe3cfa5652d3990c8413521029f": {
+            "body": "tree f4ace9220164372a9d94f92acf45d82c0c873fb7\nparent b636b5e0673436d5f7c560e053b15cef1f7a90c2\nparent fd3d3f86e9cac217bc5e4ae0cd02d3d74735643f\nauthor Sam Lee <sam@example.com> 1767227400 +0000\ncommitter Sam Lee <sam@example.com> 1767227400 +0000\n\nWIP on main: b636b5e First",
+            "type": "commit"
+          },
+          "61780798228d17af2d34fce4cfbdf35556832472": {
+            "body": "b\n",
+            "type": "blob"
+          },
+          "71d3d6d7c8bed7593cbf00ee8f872b6a1fccd7b1": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "a.txt",
+                "oid": "78981922613b2afb6025042ff6bd878ac1994e85"
+              },
+              {
+                "mode": "100644",
+                "name": "added.txt",
+                "oid": "b4785957bc986dc39c629de9fac9df46972c00fc"
+              },
+              {
+                "mode": "100644",
+                "name": "b.txt",
+                "oid": "089bb97f895a4112fab3f2d7746704c83cefca02"
+              }
+            ],
+            "type": "tree"
+          },
+          "76dc50edb0834c051e768c820109dcc7f594c1d4": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "a.txt",
+                "oid": "93829c7b4af9dfbeea3b31395b042a614d7a190d"
+              },
+              {
+                "mode": "100644",
+                "name": "b.txt",
+                "oid": "61780798228d17af2d34fce4cfbdf35556832472"
+              },
+              {
+                "mode": "40000",
+                "name": "sub",
+                "oid": "cf67e9ef3a0fc6d858423fc177f2fbbe985a6f17"
+              }
+            ],
+            "type": "tree"
+          },
+          "78981922613b2afb6025042ff6bd878ac1994e85": {
+            "body": "a\n",
+            "type": "blob"
+          },
+          "7b5bb57acc502b96bb0a3c28ba1d5ecb011526ea": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "a.txt",
+                "oid": "78981922613b2afb6025042ff6bd878ac1994e85"
+              },
+              {
+                "mode": "100644",
+                "name": "b.txt",
+                "oid": "61780798228d17af2d34fce4cfbdf35556832472"
+              },
+              {
+                "mode": "40000",
+                "name": "sub",
+                "oid": "cf67e9ef3a0fc6d858423fc177f2fbbe985a6f17"
+              }
+            ],
+            "type": "tree"
+          },
+          "8cd63ec1c8d8ef5b87ff97b87b4a2fd62ff15d9d": {
+            "body": "a\nchange\n",
+            "type": "blob"
+          },
+          "93829c7b4af9dfbeea3b31395b042a614d7a190d": {
+            "body": "a\nx\n",
+            "type": "blob"
+          },
+          "99934cd95e2f468de040a166e28b29e4c175c5fc": {
+            "body": "tree f4ace9220164372a9d94f92acf45d82c0c873fb7\nparent b636b5e0673436d5f7c560e053b15cef1f7a90c2\nparent 2eed278cba60563fef1c7949f23dfabac1a9ff7b\nauthor Sam Lee <sam@example.com> 1767226440 +0000\ncommitter Sam Lee <sam@example.com> 1767226440 +0000\n\nWIP on main: b636b5e First",
+            "type": "commit"
+          },
+          "b4785957bc986dc39c629de9fac9df46972c00fc": {
+            "body": "s\n",
+            "type": "blob"
+          },
+          "b636b5e0673436d5f7c560e053b15cef1f7a90c2": {
+            "body": "tree 7b5bb57acc502b96bb0a3c28ba1d5ecb011526ea\nauthor Sam Lee <sam@example.com> 1767225720 +0000\ncommitter Sam Lee <sam@example.com> 1767225720 +0000\n\nFirst\n",
+            "type": "commit"
+          },
+          "cf67e9ef3a0fc6d858423fc177f2fbbe985a6f17": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "c.txt",
+                "oid": "f2ad6c76f0115a6ba5b00456a849810e7ec0af20"
+              }
+            ],
+            "type": "tree"
+          },
+          "e8ad717334eeb6ff690ed9388e25f6d906c10f21": {
+            "body": "tree 76dc50edb0834c051e768c820109dcc7f594c1d4\nparent b636b5e0673436d5f7c560e053b15cef1f7a90c2\nparent 0b39bfb70ca2ef1546816bc08c18d0d0cd9dc97d\nauthor Sam Lee <sam@example.com> 1767226680 +0000\ncommitter Sam Lee <sam@example.com> 1767226680 +0000\n\nOn main: second try",
+            "type": "commit"
+          },
+          "ee48588847791a0a30d2795a7fdcf26f05611c43": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "a.txt",
+                "oid": "78981922613b2afb6025042ff6bd878ac1994e85"
+              },
+              {
+                "mode": "100644",
+                "name": "added.txt",
+                "oid": "b4785957bc986dc39c629de9fac9df46972c00fc"
+              },
+              {
+                "mode": "100644",
+                "name": "b.txt",
+                "oid": "61780798228d17af2d34fce4cfbdf35556832472"
+              },
+              {
+                "mode": "40000",
+                "name": "sub",
+                "oid": "cf67e9ef3a0fc6d858423fc177f2fbbe985a6f17"
+              }
+            ],
+            "type": "tree"
+          },
+          "f2ad6c76f0115a6ba5b00456a849810e7ec0af20": {
+            "body": "c\n",
+            "type": "blob"
+          },
+          "f4ace9220164372a9d94f92acf45d82c0c873fb7": {
+            "entries": [
+              {
+                "mode": "100644",
+                "name": "a.txt",
+                "oid": "8cd63ec1c8d8ef5b87ff97b87b4a2fd62ff15d9d"
+              },
+              {
+                "mode": "100644",
+                "name": "added.txt",
+                "oid": "b4785957bc986dc39c629de9fac9df46972c00fc"
+              },
+              {
+                "mode": "100644",
+                "name": "b.txt",
+                "oid": "089bb97f895a4112fab3f2d7746704c83cefca02"
+              }
+            ],
+            "type": "tree"
+          },
+          "fd3d3f86e9cac217bc5e4ae0cd02d3d74735643f": {
+            "body": "tree ee48588847791a0a30d2795a7fdcf26f05611c43\nparent b636b5e0673436d5f7c560e053b15cef1f7a90c2\nauthor Sam Lee <sam@example.com> 1767227400 +0000\ncommitter Sam Lee <sam@example.com> 1767227400 +0000\n\nindex on main: b636b5e First\n",
+            "type": "commit"
+          }
+        },
+        "pseudo": {
+          "ORIG_HEAD": "b636b5e0673436d5f7c560e053b15cef1f7a90c2\n"
+        },
+        "reflogs": {
+          "HEAD": [
+            "0000000000000000000000000000000000000000 b636b5e0673436d5f7c560e053b15cef1f7a90c2 Sam Lee <sam@example.com> 1767225720 +0000\tcommit (initial): First",
+            "b636b5e0673436d5f7c560e053b15cef1f7a90c2 b636b5e0673436d5f7c560e053b15cef1f7a90c2 Sam Lee <sam@example.com> 1767226440 +0000\treset: moving to HEAD",
+            "b636b5e0673436d5f7c560e053b15cef1f7a90c2 b636b5e0673436d5f7c560e053b15cef1f7a90c2 Sam Lee <sam@example.com> 1767226680 +0000\treset: moving to HEAD",
+            "b636b5e0673436d5f7c560e053b15cef1f7a90c2 b636b5e0673436d5f7c560e053b15cef1f7a90c2 Sam Lee <sam@example.com> 1767227400 +0000\treset: moving to HEAD",
+            "b636b5e0673436d5f7c560e053b15cef1f7a90c2 b636b5e0673436d5f7c560e053b15cef1f7a90c2 Sam Lee <sam@example.com> 1767227640 +0000\treset: moving to HEAD"
+          ],
+          "refs/heads/main": [
+            "0000000000000000000000000000000000000000 b636b5e0673436d5f7c560e053b15cef1f7a90c2 Sam Lee <sam@example.com> 1767225720 +0000\tcommit (initial): First"
+          ],
+          "refs/stash": [
+            "0000000000000000000000000000000000000000 03636ad810f6511b30a3f23af812c4ff191a46c1 Sam Lee <sam@example.com> 1767227640 +0000\tOn main: oops"
+          ]
+        },
+        "refs": {
+          "refs/heads/main": "b636b5e0673436d5f7c560e053b15cef1f7a90c2",
+          "refs/stash": "03636ad810f6511b30a3f23af812c4ff191a46c1"
+        }
+      }
+    }
+  },
+  "git": "2.45.1.windows.1",
+  "script": {
+    "steps": [
+      "git init -q",
+      "git add .",
+      "git commit -q -m \"First\"",
+      "git stash",
+      "git stash list",
+      "git stash pop",
+      "git stash drop",
+      "echo change >> a.txt",
+      "echo staged >> b.txt",
+      "git add b.txt",
+      "echo n > new.txt",
+      "echo s > added.txt",
+      "git add added.txt",
+      "git rm -q sub/c.txt",
+      "git stash",
+      "git status --short",
+      "git stash list",
+      "echo x >> a.txt",
+      "git stash push -m \"second try\"",
+      "git stash list",
+      "git stash apply",
+      "git status --short",
+      "git stash drop",
+      "git restore a.txt",
+      "git stash list",
+      "cd sub",
+      "git stash pop",
+      "cd ..",
+      "git status --short",
+      "git stash list",
+      "git stash -q",
+      "git stash apply -q stash@{0}",
+      "git stash drop stash@{0}",
+      "git stash drop",
+      "git stash save oops",
+      "git stash show",
+      "git log --oneline --graph --all"
+    ],
+    "world": {
+      "cwd": "project",
+      "files": {
+        "project/a.txt": "a\n",
+        "project/b.txt": "b\n",
+        "project/sub/c.txt": "c\n"
+      }
+    }
+  },
+  "steps": [
+    {
+      "cmd": "git init -q",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git add .",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git commit -q -m \"First\"",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git stash",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "No local changes to save\n"
+    },
+    {
+      "cmd": "git stash list",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git stash pop",
+      "cwd": "/home/you/project",
+      "exitCode": 1,
+      "stderr": "No stash entries found.\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git stash drop",
+      "cwd": "/home/you/project",
+      "exitCode": 1,
+      "stderr": "No stash entries found.\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "echo change >> a.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "echo staged >> b.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git add b.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "echo n > new.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "echo s > added.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git add added.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git rm -q sub/c.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git stash",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "Saved working directory and index state WIP on main: b636b5e First\n"
+    },
+    {
+      "cmd": "git status --short",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "?? new.txt\n"
+    },
+    {
+      "cmd": "git stash list",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "stash@{0}: WIP on main: b636b5e First\n"
+    },
+    {
+      "cmd": "echo x >> a.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git stash push -m \"second try\"",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "Saved working directory and index state On main: second try\n"
+    },
+    {
+      "cmd": "git stash list",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "stash@{0}: On main: second try\nstash@{1}: WIP on main: b636b5e First\n"
+    },
+    {
+      "cmd": "git stash apply",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "On branch main\nChanges not staged for commit:\n  (use \"git add <file>...\" to update what will be committed)\n  (use \"git restore <file>...\" to discard changes in working directory)\n\tmodified:   a.txt\n\nUntracked files:\n  (use \"git add <file>...\" to include in what will be committed)\n\tnew.txt\n\nno changes added to commit (use \"git add\" and/or \"git commit -a\")\n"
+    },
+    {
+      "cmd": "git status --short",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": " M a.txt\n?? new.txt\n"
+    },
+    {
+      "cmd": "git stash drop",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "Dropped refs/stash@{0} (e8ad717334eeb6ff690ed9388e25f6d906c10f21)\n"
+    },
+    {
+      "cmd": "git restore a.txt",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git stash list",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "stash@{0}: WIP on main: b636b5e First\n"
+    },
+    {
+      "cmd": "cd sub",
+      "cwd": "/home/you/project/sub",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git stash pop",
+      "cwd": "/home/you/project/sub",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "On branch main\nChanges to be committed:\n  (use \"git restore --staged <file>...\" to unstage)\n\tnew file:   ../added.txt\n\nChanges not staged for commit:\n  (use \"git add/rm <file>...\" to update what will be committed)\n  (use \"git restore <file>...\" to discard changes in working directory)\n\tmodified:   ../a.txt\n\tmodified:   ../b.txt\n\tdeleted:    c.txt\n\nUntracked files:\n  (use \"git add <file>...\" to include in what will be committed)\n\t../new.txt\n\nDropped refs/stash@{0} (99934cd95e2f468de040a166e28b29e4c175c5fc)\n"
+    },
+    {
+      "cmd": "cd ..",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git status --short",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": " M a.txt\nA  added.txt\n M b.txt\n D sub/c.txt\n?? new.txt\n"
+    },
+    {
+      "cmd": "git stash list",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git stash -q",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git stash apply -q stash@{0}",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git stash drop stash@{0}",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "Dropped stash@{0} (4d5176ac313a3fe3cfa5652d3990c8413521029f)\n"
+    },
+    {
+      "cmd": "git stash drop",
+      "cwd": "/home/you/project",
+      "exitCode": 1,
+      "stderr": "No stash entries found.\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git stash save oops",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "Saved working directory and index state On main: oops\n"
+    },
+    {
+      "cmd": "git stash show",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": " a.txt     | 1 +\n added.txt | 1 +\n b.txt     | 1 +\n sub/c.txt | 1 -\n 4 files changed, 3 insertions(+), 1 deletion(-)\n"
+    },
+    {
+      "cmd": "git log --oneline --graph --all",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "*   03636ad (refs/stash) On main: oops\n|\\  \n| * 4b6bec4 index on main: b636b5e First\n|/  \n* b636b5e (HEAD -> main) First\n"
+    }
+  ]
+}

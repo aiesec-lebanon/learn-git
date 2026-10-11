@@ -1,0 +1,30 @@
+{
+  "world": {
+    "files": {
+      "project/a.txt": "1\n2\n3\n",
+      "project/b.txt": "b\n"
+    },
+    "cwd": "project"
+  },
+  "steps": [
+    "git init -q",
+    "git add .",
+    "git commit -q -m \"First\"",
+    "echo s > a.txt",
+    "echo s >> b.txt",
+    "git stash",
+    "echo m > a.txt",
+    "git commit -q -a -m \"Second\"",
+    "echo local >> b.txt",
+    "git stash pop",
+    "git restore b.txt",
+    "git stash pop",
+    "git status",
+    "git stash list",
+    "git stash pop",
+    "echo resolved > a.txt",
+    "git add a.txt",
+    "git stash drop",
+    "git status --short"
+  ]
+}

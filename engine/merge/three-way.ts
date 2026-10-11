@@ -87,6 +87,8 @@ export function applyTreeMerge(
   machine: Machine,
   trees: { base: Files; ours: Files; theirs: Files },
   labels: MergeLabels,
+  /** The files the working tree starts from when that is not HEAD. */
+  from?: Files,
 ): Applied {
   const style = conflictStyle(world, machine, repo);
   const merged = mergeTrees(world.objects, trees, labels, style);
@@ -113,7 +115,14 @@ export function applyTreeMerge(
     ...merged.blobs,
     ...buildTree(result).trees,
   ]);
-  const moved = twoWayUpdate(written.world, repo, machine, result, "merge");
+  const moved = twoWayUpdate(
+    written.world,
+    repo,
+    machine,
+    result,
+    "merge",
+    from,
+  );
   if (!moved.ok) return { ok: false, result: moved.refusal };
   let index = moved.repo.index;
   for (const path of merged.conflicts) {

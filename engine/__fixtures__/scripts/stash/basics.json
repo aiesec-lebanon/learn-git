@@ -1,0 +1,49 @@
+{
+  "world": {
+    "files": {
+      "project/a.txt": "a\n",
+      "project/b.txt": "b\n",
+      "project/sub/c.txt": "c\n"
+    },
+    "cwd": "project"
+  },
+  "steps": [
+    "git init -q",
+    "git add .",
+    "git commit -q -m \"First\"",
+    "git stash",
+    "git stash list",
+    "git stash pop",
+    "git stash drop",
+    "echo change >> a.txt",
+    "echo staged >> b.txt",
+    "git add b.txt",
+    "echo n > new.txt",
+    "echo s > added.txt",
+    "git add added.txt",
+    "git rm -q sub/c.txt",
+    "git stash",
+    "git status --short",
+    "git stash list",
+    "echo x >> a.txt",
+    "git stash push -m \"second try\"",
+    "git stash list",
+    "git stash apply",
+    "git status --short",
+    "git stash drop",
+    "git restore a.txt",
+    "git stash list",
+    "cd sub",
+    "git stash pop",
+    "cd ..",
+    "git status --short",
+    "git stash list",
+    "git stash -q",
+    "git stash apply -q stash@{0}",
+    "git stash drop stash@{0}",
+    "git stash drop",
+    "git stash save oops",
+    "git stash show",
+    "git log --oneline --graph --all"
+  ]
+}

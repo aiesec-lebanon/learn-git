@@ -8,10 +8,11 @@ export function reflogLine(entry: ReflogEntry): string {
   return `${entry.old ?? ZERO_OID} ${entry.new ?? ZERO_OID} ${signatureLine(entry.who)}\t${entry.message}`;
 }
 
-/** Reflogs are kept for HEAD, local branches and remote-tracking branches. */
+/** Reflogs are kept for HEAD, the stash, local and remote-tracking branches. */
 export function keepsReflog(key: string): boolean {
   return (
     key === "HEAD" ||
+    key === "refs/stash" ||
     key.startsWith("refs/heads/") ||
     key.startsWith("refs/remotes/")
   );

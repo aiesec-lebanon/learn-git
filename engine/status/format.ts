@@ -123,15 +123,15 @@ export function longStatus(
   if (unborn) out += `\n${unbornTitle}\n\n`;
   const entry = (c: Entry) =>
     `\t${LABELS[c.kind].padEnd(12)}${named(view, c)}\n`;
+  const unstageHint = view.repo.op
+    ? ""
+    : `${unborn ? m.unstageUnborn() : m.unstage()}\n`;
   if (staged.length) {
-    const hint = view.repo.op
-      ? ""
-      : `${unborn ? m.unstageUnborn() : m.unstage()}\n`;
-    out += `${m.stagedTitle()}\n${hint}${staged.map(entry).join("")}\n`;
+    out += `${m.stagedTitle()}\n${unstageHint}${staged.map(entry).join("")}\n`;
   }
   if (unmerged.length) {
     const label = (code: UnmergedCode) => UNMERGED_LABELS[code].padEnd(17);
-    out += `${m.unmergedTitle()}\n${unmergedHint(unmerged.map((u) => u.code))}\n`;
+    out += `${m.unmergedTitle()}\n${unstageHint}${unmergedHint(unmerged.map((u) => u.code))}\n`;
     out += unmerged
       .map((u) => `\t${label(u.code)}${shown(view, u.path)}\n`)
       .join("");

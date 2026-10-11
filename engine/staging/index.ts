@@ -1,5 +1,5 @@
 import type { TreeFile } from "../objects/tree";
-import type { Index, IndexEntry, RepoPath } from "../types";
+import type { Index, IndexEntry, PathChange, RepoPath } from "../types";
 import { compareBytes } from "../util/compare";
 import { withEntry, withoutEntry } from "../util/cow";
 
@@ -53,4 +53,22 @@ export function conflictedPaths(index: Index): readonly RepoPath[] {
         .map((e) => e.path),
     ),
   ];
+}
+
+const sameEntries = (a: readonly IndexEntry[], b: readonly IndexEntry[]) =>
+  a.length === b.length &&
+  a.every((e, i) => e.oid === b[i]?.oid && e.stage === b[i]?.stage);
+
+/** How the index changed per path, for an `index-changed` effect. */
+export function indexChanges(before: Index, after: Index): PathChange[] {
+  const paths = [...new Set([...before.keys(), ...after.keys()])].sort(
+    compareBytes,
+  );
+  return paths.flatMap((path): PathChange[] => {
+    const a = before.get(path);
+    const b = after.get(path);
+    if (!a && b) return [{ path, change: "added" }];
+    if (a && !b) return [{ path, change: "deleted" }];
+    return a && b && !sameEntries(a, b) ? [{ path, change: "modified" }] : [];
+  });
 }

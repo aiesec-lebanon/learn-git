@@ -60,9 +60,11 @@ export function twoWayUpdate(
   machine: Machine,
   next: Files,
   action: "checkout" | "merge" = "checkout",
+  /** What the move starts from: HEAD's files unless given (a stash applies on the index). */
+  from?: Files,
 ): TwoWay {
   const pool = world.objects;
-  const head = treeOf(pool, resolveHead(repo));
+  const head = from ?? treeOf(pool, resolveHead(repo));
   const index = stagedFiles(repo.index);
   const files = worktreeFiles(machine.fs, repo.workdir);
   const status = computeStatus(pool, repo, machine.fs);
@@ -127,10 +129,15 @@ export function checkoutPaths(
     const had = files.get(path);
     if (t) {
       nextIndex = stageEntry(nextIndex, { path, ...t, stage: 0 });
-      indexChanges.push({
-        path,
-        change: repo.index.has(path) ? "modified" : "added",
-      });
+      const [entry, ...others] = repo.index.get(path) ?? [];
+      const unchanged =
+        !others.length &&
+        entry?.stage === 0 &&
+        entry.oid === t.oid &&
+        entry.mode === t.mode;
+      if (!unchanged) {
+        indexChanges.push({ path, change: entry ? "modified" : "added" });
+      }
       const content = readObject(pool, t.oid, "blob").content;
       if (had !== content) {
         const current = fs;

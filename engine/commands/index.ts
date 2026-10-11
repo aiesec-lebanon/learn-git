@@ -13,6 +13,7 @@ import { createRegistry } from "./registry";
 import { restore } from "./restore";
 import { rm } from "./rm";
 import { show } from "./show";
+import { stash } from "./stash";
 import { status } from "./status";
 import { switchCommand } from "./switch";
 
@@ -33,5 +34,6 @@ export const GIT_REGISTRY = createRegistry([
   switchCommand,
   checkout,
   merge,
+  stash,
   reset,
 ]);

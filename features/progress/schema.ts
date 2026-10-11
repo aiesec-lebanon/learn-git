@@ -17,6 +17,8 @@ export type Prefs = {
   readonly motion: "system" | "reduce";
   readonly challengeMode: boolean;
   readonly guide: "full" | "light" | "off";
+  /** Offer predict-and-reveal before key operations. */
+  readonly predictions: boolean;
 };
 
 /** Everything stored: no timestamps, answers, sandbox contents or identifiers. */
@@ -33,6 +35,7 @@ export const DEFAULT_PREFS: Prefs = {
   motion: "system",
   challengeMode: false,
   guide: "full",
+  predictions: true,
 };
 
 export const EMPTY_DOC: ProgressDoc = {
@@ -73,6 +76,7 @@ function parsePrefs(value: unknown): Prefs {
     motion: oneOf(p.motion, ["system", "reduce"], d.motion),
     challengeMode: flag(p.challengeMode, d.challengeMode),
     guide: oneOf(p.guide, ["full", "light", "off"], d.guide),
+    predictions: flag(p.predictions, d.predictions),
   };
 }
 

@@ -83,6 +83,22 @@ export function SettingsForm() {
       <Radios choice={THEME} value={prefs.theme} />
       <Radios choice={MOTION} value={prefs.motion} />
       <Radios choice={GUIDE} value={prefs.guide} />
+      <fieldset className="m-0 grid gap-1 border-0 p-0">
+        <legend className="mb-2 p-0 font-display text-xl font-bold">
+          Predictions
+        </legend>
+        <label className="flex min-h-11 cursor-pointer items-center gap-3">
+          <input
+            type="checkbox"
+            checked={prefs.predictions}
+            onChange={(event) =>
+              progressStore().setPrefs({ predictions: event.target.checked })
+            }
+            className="size-5 accent-accent-fill"
+          />
+          Offer a guess before key commands (never scored)
+        </label>
+      </fieldset>
       <section
         aria-labelledby="reset"
         className="grid justify-items-start gap-2"

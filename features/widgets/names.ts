@@ -18,6 +18,8 @@ export const WIDGET_NAMES = [
   "lost-preview",
   "leave-preview",
   "text-graph",
+  "merge-preview",
+  "predict-reveal",
 ] as const;
 
 export type WidgetName = (typeof WIDGET_NAMES)[number];

@@ -55,7 +55,13 @@ describe("parseProgress", () => {
       v: 1,
       resume: { kind: "lesson", id: "b9-9", step: 2 },
       finished: ["b1", "b1", "zz", 4],
-      prefs: { theme: "neon", sound: "yes", motion: "reduce", extra: 1 },
+      prefs: {
+        theme: "neon",
+        sound: "yes",
+        motion: "reduce",
+        predictions: "no",
+        extra: 1,
+      },
       name: "Sam",
     });
     expect(parseProgress(raw, ids).doc).toEqual({

@@ -71,6 +71,12 @@ const WIDGETS: Record<WidgetName, ComponentType> = {
       default: m.DestructivePreview,
     })),
   ),
+  "merge-preview": lazy(() =>
+    import("./merge-preview").then((m) => ({ default: m.MergePreviewWidget })),
+  ),
+  "predict-reveal": lazy(() =>
+    import("./predict-reveal").then((m) => ({ default: m.PredictReveal })),
+  ),
 };
 
 /** A lesson widget by name, loaded with its own code (R3). */

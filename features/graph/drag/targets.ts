@@ -66,7 +66,7 @@ function dropLabel(view: RepoView, name: string, target: TargetId): Drop {
   return run(`git branch ${shellQuote(trimmed)} ${commit.short}`);
 }
 
-function splitTarget(target: TargetId): [string, string | undefined] {
+export function splitTarget(target: TargetId): [string, string | undefined] {
   const at = target.indexOf(":");
   return [target.slice(0, at), target.slice(at + 1)];
 }

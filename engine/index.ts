@@ -37,3 +37,6 @@ export { rewriteMessage } from "./preview/rewrite-message";
 export type { Rewritten } from "./preview/rewrite-message";
 export { leftBehind, reachability, reachableFrom } from "./reachability";
 export type { Reachability } from "./reachability";
+export { previewMerge } from "./merge/preview";
+export type { FilePreview, MergePreview } from "./merge/preview";
+export type { MergeChunk } from "./merge/file";

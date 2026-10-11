@@ -95,6 +95,12 @@ const WIDGETS: Record<WidgetName, ComponentType> = {
   "pull-mode": lazy(() =>
     import("./fetch-vs-pull").then((m) => ({ default: m.PullMode })),
   ),
+  "hub-split": lazy(() =>
+    import("./hub-split").then((m) => ({ default: m.HubSplit })),
+  ),
+  "two-roots": lazy(() =>
+    import("./hub-split").then((m) => ({ default: m.TwoRoots })),
+  ),
 };
 
 /** A lesson widget by name, loaded with its own code (R3). */

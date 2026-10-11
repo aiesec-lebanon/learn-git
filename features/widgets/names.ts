@@ -26,6 +26,8 @@ export const WIDGET_NAMES = [
   "would-lose",
   "fetch-vs-pull",
   "pull-mode",
+  "hub-split",
+  "two-roots",
 ] as const;
 
 export type WidgetName = (typeof WIDGET_NAMES)[number];

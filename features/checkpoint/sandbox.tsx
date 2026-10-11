@@ -131,14 +131,13 @@ export function Sandbox({
   return (
     <div className="grid gap-6 lg:grid-cols-[minmax(0,1.3fr)_minmax(0,1fr)]">
       <div className="grid content-start gap-4">
-        {/* In a scenario the guide stays silent until the debrief (learning design 4). */}
-        {scenario && !resolved ? null : (
-          <Guide
-            session={session}
-            verbosity={guide}
-            achieved={report?.ok ?? resolved}
-          />
-        )}
+        <Guide
+          session={session}
+          verbosity={
+            scenario && !resolved && guide === "full" ? "light" : guide
+          }
+          achieved={report?.ok ?? resolved}
+        />
         <Stage session={session} />
         <ConflictResolver session={session} />
       </div>

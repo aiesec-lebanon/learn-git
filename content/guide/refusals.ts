@@ -51,7 +51,7 @@ export const REFUSAL_GUIDE: Readonly<Record<RefusalCode, string>> = {
   "no-upstream":
     "Git doesn't know where this branch goes on the remote yet. Push it once with git push -u origin and the branch name.",
   "remote-rejected":
-    "The Hub protects that branch. Push your work to a branch of its own and open a pull request.",
+    "The Hub protects that branch; its remote: line names the rule. Force pushes would erase teammates' commits, so pull theirs in first.",
   "divergent-branches":
     "You and origin both have new commits. Pick a way: git pull --no-rebase merges them, git pull --rebase replays yours on top.",
   "push-rejected":

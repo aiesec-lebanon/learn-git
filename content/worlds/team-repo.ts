@@ -1,6 +1,6 @@
 import type { ActorScript, SetupStep, Trigger, WorldSpec } from "@/engine";
 import { defineWorld, writeFile } from "../define";
-import { INDEX, INDEX_LATER, MENU, README } from "./bake-sale";
+import { INDEX, INDEX_LATER, MENU, MENU_YOURS, README } from "./bake-sale";
 
 export const TEAM_URL = "https://hub.test/sam/bake-sale.git";
 export const MEETING = `${README}Team meeting: Fridays at 18:00.\n`;
@@ -71,15 +71,15 @@ export const samPushesMeeting = (trigger: Trigger): ActorScript => ({
   says: "Sam pushed 1 commit to main on origin: Add the team meeting.",
 });
 
+const SAM_PRICE = `cd ${SAM} && git pull -q --no-rebase && ${writeFile("menu.html", MENU_RAISED)} && git commit -q -am "Raise the lemon cake price" && git push -q`;
+
 /** Sam raises the lemon cake price on origin's main (a conflict waiting for anyone who changes it too). */
 export const samRaisesPrice = (trigger: Trigger): ActorScript => ({
   id: "sam-price",
   machine: "sam",
   name: "Sam",
   trigger,
-  run: [
-    `cd ${SAM} && git pull -q --no-rebase && ${writeFile("menu.html", MENU_RAISED)} && git commit -q -am "Raise the lemon cake price" && git push -q`,
-  ],
+  run: [SAM_PRICE],
   says: "Sam pushed 1 commit to main on origin: Raise the lemon cake price.",
 });
 
@@ -146,5 +146,19 @@ export const teamRepoFeature: WorldSpec = defineWorld({
     writeFile("style.css", DARK_HEADINGS),
     'git commit -q -am "Colour the headings"',
     sam(SAM_MEETING),
+  ],
+});
+
+/** Friday you committed a lower lemon cake price; over the weekend Sam pushed a higher one. The Hub refuses force pushes to main. */
+export const teamRepoMonday: WorldSpec = defineWorld({
+  ...people,
+  hub: {
+    "sam/bake-sale": { rules: [{ branch: "main", requirePullRequest: false }] },
+  },
+  setup: [
+    ...CLONED,
+    writeFile("menu.html", MENU_YOURS),
+    'git commit -q -am "Lower the lemon cake price"',
+    sam(SAM_PRICE),
   ],
 });

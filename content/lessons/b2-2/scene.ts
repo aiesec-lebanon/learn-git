@@ -58,5 +58,13 @@ export default defineLesson({
     target: backToGood,
     par: 2,
     solution,
+    hints: {
+      nudge:
+        "Which edit should disappear from your files, and which file only needs to leave the staging area?",
+      pointer:
+        "git restore puts a file back the way it is staged, and the edit is gone. git restore --staged unstages a file and leaves your folder alone.",
+      reference: "restore",
+      next: "Run git restore style.css to discard that edit, then git restore --staged debug.log. index.html stays as it is.",
+    },
   },
 });

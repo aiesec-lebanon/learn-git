@@ -69,5 +69,13 @@ export default defineLesson({
     target: savedExperiment,
     par: 2,
     solution: ["git switch -c experiment", "git switch main"],
+    hints: {
+      nudge:
+        "HEAD points straight at the experiment. What keeps that commit reachable once HEAD moves?",
+      pointer:
+        "A branch is a name for a commit. git switch -c makes one where HEAD is now and puts HEAD on it.",
+      reference: "switch",
+      next: "Run git switch -c experiment to name the commit, then git switch main.",
+    },
   },
 });

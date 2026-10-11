@@ -84,5 +84,13 @@ export default defineLesson({
     target: ignoredAndUntracked,
     par: 3,
     solution,
+    hints: {
+      nudge:
+        "Which of these files does Git already track, and which has it never recorded?",
+      pointer:
+        "A .gitignore only skips files nothing tracks yet. git rm --cached takes a tracked file out of the next snapshot and leaves it on disk. Writing files is free.",
+      reference: "gitignore",
+      next: 'Write .gitignore with .env, dist/ and *.log on separate lines, then run git rm --cached .env, git add .gitignore and git commit -m "Ignore secrets and build output".',
+    },
   },
 });

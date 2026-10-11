@@ -59,5 +59,13 @@ export default defineLesson({
     target: firstSnapshot,
     par: 3,
     solution: ["git init", "git add .", 'git commit -m "First snapshot"'],
+    hints: {
+      nudge:
+        "This folder is not a repository yet. What has to exist before Git can keep a snapshot?",
+      pointer:
+        "git init makes the repository, git add . stages every file in the folder, and git commit records what is staged.",
+      reference: "init",
+      next: 'Run git init, then git add ., then git commit -m "First snapshot".',
+    },
   },
 });

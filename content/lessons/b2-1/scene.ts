@@ -105,5 +105,22 @@ export default defineLesson({
       "git add README.md",
       'git commit -m "Take cards too"',
     ],
+    hints: {
+      nudge:
+        "What is in the staging area right now, and is it the first version you want to record?",
+      pointer:
+        "git diff --staged shows what the next commit holds; git diff shows what is still only in your files.",
+      reference: "diff",
+      next: 'Run git commit -m "Take cash" to record the staged version, then git add README.md and git commit -m "Take cards too".',
+    },
+    underPar: [
+      {
+        solution: [
+          'git commit -m "Take cash"',
+          'git commit -am "Take cards too"',
+        ],
+        why: "After the first commit, the only change left is README.md in your files. git commit -a stages changes to tracked files and commits them in one step.",
+      },
+    ],
   },
 });

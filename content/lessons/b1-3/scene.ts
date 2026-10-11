@@ -67,5 +67,22 @@ export default defineLesson({
     target: twoCommits,
     par: 4,
     solution: record,
+    hints: {
+      nudge: "Two commits means two snapshots. What does the first one hold?",
+      pointer:
+        "Stage dessert.html alone and commit, then stage the README change and commit again.",
+      reference: "add",
+      next: 'Run git add dessert.html and git commit -m "Add the dessert page", then git add README.md and git commit -m "Link the dessert page".',
+    },
+    underPar: [
+      {
+        solution: [
+          "git add dessert.html",
+          'git commit -m "Add the dessert page"',
+          'git commit -am "Link the dessert page"',
+        ],
+        why: "git commit -a stages every change to a tracked file before it commits. After the first commit the README change is the only one left, so -a picks up exactly that.",
+      },
+    ],
   },
 });

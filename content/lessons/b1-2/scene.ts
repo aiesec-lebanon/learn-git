@@ -70,5 +70,18 @@ export default defineLesson({
     target: typoFixOnly,
     par: 2,
     solution: ["git add README.md", 'git commit -m "Fix typo"'],
+    hints: {
+      nudge: "Which one change belongs in this commit, and which two stay out?",
+      pointer:
+        "A commit records the staging area, so stage README.md alone. Naming a file to git commit works too.",
+      reference: "commit",
+      next: 'Run git add README.md, then git commit -m "Fix typo". app.js stays modified and notes.txt stays untracked.',
+    },
+    underPar: [
+      {
+        solution: ['git commit -m "Fix typo" README.md'],
+        why: "Naming a file after git commit stages that file as it is in your folder and commits only it, in one step. app.js and notes.txt stay out because you did not name them.",
+      },
+    ],
   },
 });

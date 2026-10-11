@@ -96,5 +96,12 @@ export default defineLesson({
       FIX,
       'git commit -am "Promise fresh recipes"',
     ],
+    hints: {
+      nudge: "Which branch should each new commit land on?",
+      pointer:
+        "A commit moves the branch HEAD is on. Make topic with git switch -c, commit twice, then switch back to main and commit there.",
+      reference: "switch",
+      next: "Run git switch -c topic, edit README.md and git commit -am twice, then git switch main, edit index.html and git commit -am.",
+    },
   },
 });

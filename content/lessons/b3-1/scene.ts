@@ -83,5 +83,13 @@ export default defineLesson({
       'git commit -am "Note the servings"',
       "git switch main",
     ],
+    hints: {
+      nudge:
+        "Where should the new branch start: at main, or one commit before it?",
+      pointer:
+        "git switch -c takes a starting point, and HEAD~1 names the commit before HEAD. Edits are free, and git commit -am records them.",
+      reference: "switch",
+      next: 'Run git switch -c feature HEAD~1, add a line to README.md, git commit -am "Note the servings", then git switch main.',
+    },
   },
 });

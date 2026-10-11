@@ -40,8 +40,11 @@ function mapDiff<K, V>(
 /** State changes between two worlds, as comparable keys (ADR-002 drift check). */
 export function stateChanges(before: World, after: World): string[] {
   const out = new Set<string>();
-  for (const oid of after.objects.keys()) {
-    if (!before.objects.has(oid)) out.add(`object ${oid}`);
+  for (const [id, have] of after.available) {
+    const old = before.available.get(id);
+    for (const oid of have) {
+      if (!old?.has(oid)) out.add(`object ${id} ${oid}`);
+    }
   }
   for (const [id, repo] of after.repos) {
     const old = before.repos.get(id);
@@ -86,7 +89,10 @@ export function effectChanges(effects: readonly Effect[]): string[] {
   for (const e of effects) {
     switch (e.kind) {
       case "object-written":
-        out.add(`object ${e.oid}`);
+        out.add(`object ${e.repo} ${e.oid}`);
+        break;
+      case "transfer":
+        for (const oid of e.oids) out.add(`object ${e.to} ${oid}`);
         break;
       case "repo-created":
         if (!e.reinitialized) out.add(`repo ${e.repo}`);

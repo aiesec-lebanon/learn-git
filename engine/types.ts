@@ -105,6 +105,8 @@ export type Repo = {
   readonly origHead?: Oid;
   /** The operation in progress, if any. */
   readonly op?: MergeOperation;
+  /** A bare repository (no worktree, index or reflogs), as hosted on the Hub. */
+  readonly bare?: boolean;
 };
 
 export type World = {
@@ -114,19 +116,37 @@ export type World = {
   readonly system: ConfigFile;
   readonly machines: ReadonlyMap<MachineId, Machine>;
   readonly repos: ReadonlyMap<RepoId, Repo>;
+  /** The objects each repository has (the pool is shared; transfers move availability). */
+  readonly available: ReadonlyMap<RepoId, ReadonlySet<Oid>>;
   /** Set while the last command waits for its editor (ADR-002). */
   readonly pending?: PendingEdit;
 };
 
 /** Paths are relative to the machine's home; Git config keys as Git spells them. */
-export type WorldSpec = {
+export type MachineSpec = {
   readonly files?: Readonly<Record<string, string>>;
   readonly dirs?: readonly string[];
   readonly cwd?: string;
   readonly global?: Readonly<Record<string, string>>;
+};
+
+/** A setup line, run on the learner's machine unless another is named. */
+export type SetupStep =
+  string | { readonly machine: MachineId; readonly run: string };
+
+export type HostedRepoSpec = {
+  /** Branches the Hub refuses direct and force pushes to. */
+  readonly protected?: readonly string[];
+};
+
+export type WorldSpec = MachineSpec & {
   readonly system?: Readonly<Record<string, string>>;
+  /** Other people's machines (home `/home/<id>`), e.g. a teammate's. */
+  readonly machines?: Readonly<Record<MachineId, MachineSpec>>;
+  /** Empty repositories hosted on the Hub, keyed `<owner>/<name>`. */
+  readonly hub?: Readonly<Record<string, HostedRepoSpec>>;
   /** Commands run once the files exist, e.g. to record earlier commits. */
-  readonly setup?: readonly string[];
+  readonly setup?: readonly SetupStep[];
 };
 
 /** A shell word; `pattern` is set when it has unquoted `*`, `?` or `[`. */

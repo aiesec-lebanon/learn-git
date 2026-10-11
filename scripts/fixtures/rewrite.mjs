@@ -1,4 +1,5 @@
-const COMMAND_SCOPE_LINE = /^(?:command(?: line:)?\t)?log\.decorate=short\n/gm;
+const COMMAND_SCOPE_LINE =
+  /^(?:command(?: line:)?\t)?(?:log\.decorate=short|url\..*\.insteadof=.*)\n/gm;
 
 /** The spellings Git for Windows and Git Bash use for one directory. */
 export function pathForms(nativeDir) {
@@ -23,7 +24,9 @@ export function createRewriter({
   return (text) => {
     let out = text;
     for (const form of forms) {
-      out = out.split(`file://${form}/hub/`).join("https://hub.test/");
+      for (const scheme of ["file:///", "file://"]) {
+        out = out.split(`${scheme}${form}/hub/`).join("https://hub.test/");
+      }
       out = out.split(form).join("");
     }
     if (hostname) out = out.split(hostname).join("laptop");

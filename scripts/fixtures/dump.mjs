@@ -119,7 +119,7 @@ function dumpPseudo(gitDir) {
   };
 }
 
-function dumpRepo(git, env, workdir) {
+function dumpRepo(git, env, workdir, bare = false) {
   const run = (args, encoding = "utf8") =>
     execFileSync(git, args, {
       cwd: workdir,
@@ -127,7 +127,7 @@ function dumpRepo(git, env, workdir) {
       encoding,
       maxBuffer: 1 << 28,
     });
-  const gitDir = path.join(workdir, ".git");
+  const gitDir = bare ? workdir : path.join(workdir, ".git");
   const head = readFileSync(path.join(gitDir, "HEAD"), "utf8").trim();
   const refs = Object.fromEntries(
     run(["for-each-ref", "--format=%(refname) %(objectname)"])
@@ -135,7 +135,7 @@ function dumpRepo(git, env, workdir) {
       .filter(Boolean)
       .map((line) => line.split(" ")),
   );
-  const index = run(["ls-files", "-s", "-z"])
+  const index = (bare ? "" : run(["ls-files", "-s", "-z"]))
     .split("\0")
     .filter(Boolean)
     .map((line) => {
@@ -176,4 +176,22 @@ export function dumpState({ git, env, home, systemConfig }) {
     },
     repos,
   };
+}
+
+/** Bare repositories under `hub` (`<owner>/<name>.git`), keyed by that path. */
+export function dumpBare(git, hub) {
+  const repos = {};
+  if (!existsSync(hub)) return repos;
+  const env = { ...process.env, GIT_CONFIG_NOSYSTEM: "1" };
+  for (const owner of readdirSync(hub).sort()) {
+    for (const name of readdirSync(path.join(hub, owner)).sort()) {
+      repos[`${owner}/${name}`] = dumpRepo(
+        git,
+        env,
+        path.join(hub, owner, name),
+        true,
+      );
+    }
+  }
+  return repos;
 }

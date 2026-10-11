@@ -14,7 +14,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { DEFAULT_GLOBAL_CONFIG } from "../engine/world/defaults.ts";
 import { timeAt } from "../engine/world/clock.ts";
-import { dumpState } from "./fixtures/dump.mjs";
+import { dumpBare, dumpState } from "./fixtures/dump.mjs";
 import { resolveTools, stepEnv } from "./fixtures/env.mjs";
 import {
   createRewriter,
@@ -42,20 +42,38 @@ function writeConfig(git, file, entries) {
   }
 }
 
-function prepare(git, tmp, world) {
-  const home = path.join(tmp, "home", "you");
+function prepareHome(git, home, spec) {
   mkdirSync(home, { recursive: true });
-  for (const dir of world.dirs ?? [])
+  for (const dir of spec.dirs ?? [])
     mkdirSync(path.join(home, dir), { recursive: true });
-  for (const [file, content] of Object.entries(world.files ?? {})) {
+  for (const [file, content] of Object.entries(spec.files ?? {})) {
     mkdirSync(path.dirname(path.join(home, file)), { recursive: true });
     writeFileSync(path.join(home, file), content);
   }
   writeConfig(
     git,
     path.join(home, ".gitconfig"),
-    world.global ?? DEFAULT_GLOBAL_CONFIG,
+    spec.global ?? DEFAULT_GLOBAL_CONFIG,
   );
+}
+
+function prepare(git, tmp, world) {
+  const home = path.join(tmp, "home", "you");
+  prepareHome(git, home, world);
+  const homes = { you: home };
+  for (const [id, spec] of Object.entries(world.machines ?? {})) {
+    homes[id] = path.join(tmp, "home", id);
+    prepareHome(git, homes[id], spec);
+  }
+  const hub = path.join(tmp, "hub");
+  for (const name of Object.keys(world.hub ?? {})) {
+    const dir = path.join(hub, `${name}.git`);
+    mkdirSync(dir, { recursive: true });
+    execFileSync(git, ["init", "-q", "--bare", "-b", "main"], {
+      cwd: dir,
+      env: { ...stepEnv({ home, systemConfig: null, time: timeAt(0) }) },
+    });
+  }
   let systemConfig = null;
   if (world.system) {
     systemConfig = path.join(tmp, "etc", "gitconfig");
@@ -67,11 +85,31 @@ function prepare(git, tmp, world) {
     editorScript,
     'cp "$1" "$LG_EDITOR_LOG"\nif [ -f "$LG_EDITOR_TEXT" ]; then cp "$LG_EDITOR_TEXT" "$1"; fi\n',
   );
-  return { home, systemConfig, editorScript };
+  return {
+    home,
+    homes,
+    hub: world.hub ? hub : null,
+    systemConfig,
+    editorScript,
+  };
+}
+
+/** Every machine reaches `https://hub.test/` through the bare repositories under `<tmp>/hub/`. */
+function hubConfig(hub) {
+  if (!hub) return {};
+  return {
+    GIT_CONFIG_COUNT: "2",
+    GIT_CONFIG_KEY_1: `url.file:///${forward(hub)}/.insteadOf`,
+    GIT_CONFIG_VALUE_1: "https://hub.test/",
+  };
 }
 
 function runStep(tools, ctx, step, seq) {
-  const { cmd, editor } = typeof step === "string" ? { cmd: step } : step;
+  const {
+    cmd,
+    editor,
+    machine = "you",
+  } = typeof step === "string" ? { cmd: step } : step;
   const cwdFile = path.join(ctx.tmp, "cwd.txt");
   const editorLog = path.join(ctx.tmp, "editor-log.txt");
   const editorText = path.join(ctx.tmp, "editor-text.txt");
@@ -80,12 +118,13 @@ function runStep(tools, ctx, step, seq) {
   if (editor !== undefined) writeFileSync(editorText, editor);
   const env = {
     ...stepEnv({
-      home: forward(ctx.home),
+      home: forward(ctx.homes[machine]),
       systemConfig: ctx.systemConfig && forward(ctx.systemConfig),
       time: timeAt(seq),
       editor: `bash '${forward(ctx.editorScript)}'`,
     }),
-    LG_CWD: forward(ctx.cwd),
+    ...hubConfig(ctx.hub),
+    LG_CWD: forward(ctx.cwds[machine]),
     LG_CWD_FILE: forward(cwdFile),
     LG_EDITOR_LOG: forward(editorLog),
     LG_EDITOR_TEXT: forward(editorText),
@@ -96,13 +135,14 @@ function runStep(tools, ctx, step, seq) {
     encoding: "utf8",
   });
   if (result.error) throw result.error;
-  ctx.cwd = readFileSync(cwdFile, "utf8").trim();
+  ctx.cwds[machine] = readFileSync(cwdFile, "utf8").trim();
   const record = {
     cmd,
     stdout: result.stdout,
     stderr: result.stderr,
     exitCode: result.status,
-    cwd: ctx.cwd,
+    cwd: ctx.cwds[machine],
+    ...(machine === "you" ? {} : { machine }),
   };
   try {
     record.editor = {
@@ -121,24 +161,43 @@ function record(tools, rel) {
   const tmp = mkdtempSync(path.join(os.tmpdir(), "lg-fx-"));
   try {
     const prepared = prepare(tools.git, tmp, world);
+    const specs = { you: world, ...world.machines };
     const ctx = {
       tmp,
       ...prepared,
-      cwd: path.join(prepared.home, world.cwd ?? ""),
+      cwds: Object.fromEntries(
+        Object.entries(prepared.homes).map(([id, home]) => [
+          id,
+          path.join(home, specs[id]?.cwd ?? ""),
+        ]),
+      ),
     };
     const steps = script.steps.map((step, seq) =>
       runStep(tools, ctx, step, seq),
     );
-    const final = dumpState({
-      git: tools.git,
-      env: stepEnv({
-        home: ctx.home,
+    const dump = (home) =>
+      dumpState({
+        git: tools.git,
+        env: stepEnv({
+          home,
+          systemConfig: ctx.systemConfig,
+          time: timeAt(steps.length),
+        }),
+        home,
         systemConfig: ctx.systemConfig,
-        time: timeAt(steps.length),
-      }),
-      home: ctx.home,
-      systemConfig: ctx.systemConfig,
-    });
+      });
+    const others = Object.keys(world.machines ?? {});
+    const final = {
+      ...dump(ctx.home),
+      ...(others.length
+        ? {
+            machines: Object.fromEntries(
+              others.map((id) => [id, dump(ctx.homes[id])]),
+            ),
+          }
+        : {}),
+      ...(ctx.hub ? { hub: dumpBare(tools.git, ctx.hub) } : {}),
+    };
     const rewrite = createRewriter({
       tmpDir: tmp,
       hostname: os.hostname(),

@@ -2,14 +2,20 @@
 
 export const PINNED_GIT = "2.45.1";
 
-export type ScriptStep = string | { cmd: string; editor: string };
+export type ScriptStep =
+  string | { cmd: string; editor?: string; machine?: string };
 
-export type FixtureWorld = {
+type FixtureMachine = {
   files?: Record<string, string>;
   dirs?: string[];
   cwd?: string;
   global?: Record<string, string>;
+};
+
+export type FixtureWorld = FixtureMachine & {
   system?: Record<string, string>;
+  machines?: Record<string, FixtureMachine>;
+  hub?: Record<string, Record<string, never>>;
 };
 
 export type FixtureScript = {
@@ -39,7 +45,19 @@ export type RecordedStep = {
   stderr: string;
   exitCode: number;
   cwd: string;
+  /** Set when the step ran on another machine than the learner's. */
+  machine?: string;
   editor?: { received: string | null; wrote: string | null };
+};
+
+export type RecordedMachine = {
+  files: Record<string, string>;
+  dirs: string[];
+  config: {
+    system: [string, string | null][];
+    global: [string, string | null][];
+  };
+  repos: Record<string, RecordedRepo>;
 };
 
 export type RecordedFixture = {
@@ -47,14 +65,10 @@ export type RecordedFixture = {
   git: string;
   script: FixtureScript;
   steps: RecordedStep[];
-  final: {
-    files: Record<string, string>;
-    dirs: string[];
-    config: {
-      system: [string, string | null][];
-      global: [string, string | null][];
-    };
-    repos: Record<string, RecordedRepo>;
+  final: RecordedMachine & {
+    machines?: Record<string, RecordedMachine>;
+    /** Bare repositories on the Hub, keyed `<owner>/<name>.git`. */
+    hub?: Record<string, RecordedRepo>;
   };
 };
 

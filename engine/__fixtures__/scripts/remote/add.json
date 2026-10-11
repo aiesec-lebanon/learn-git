@@ -1,0 +1,20 @@
+{
+  "world": {
+    "files": { "project/a.txt": "a\n" },
+    "cwd": "project"
+  },
+  "steps": [
+    "git init -q",
+    "git remote",
+    "git remote -v",
+    "git remote add origin https://hub.test/sam/team.git",
+    "git remote add upstream https://hub.test/ada/team.git",
+    "git remote",
+    "git remote -v",
+    "git remote add origin https://hub.test/x/y.git",
+    "git remote add \"bad name\" https://hub.test/x/y.git",
+    "git remote add solo",
+    "git remote --verbose",
+    "git remote nope"
+  ]
+}

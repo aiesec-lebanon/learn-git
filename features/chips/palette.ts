@@ -203,6 +203,13 @@ export const VERBS: readonly ChipVerb[] = [
     ready: (s) => s.commits,
   },
   {
+    program: "git",
+    name: "remote",
+    hint: "list the repositories this one talks to",
+    params: [{ kind: "flag", flag: "-v", label: "with addresses" }],
+    ready: inRepo,
+  },
+  {
     program: "shell",
     name: "ls",
     hint: "list files",

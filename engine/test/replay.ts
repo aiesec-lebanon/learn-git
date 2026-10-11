@@ -14,6 +14,7 @@ import type {
   Index,
   IndexEntry,
   Invocation,
+  MachineId,
   Oid,
   RefName,
   ReflogEntry,
@@ -22,6 +23,7 @@ import type {
   World,
 } from "../types";
 import { machineOf, repoIdFor, withMachine } from "../world/access";
+import { HUB } from "../world/network";
 import { HOME, LEARNER } from "../world/defaults";
 import { importObject } from "./import";
 import { createWorld } from "../world/create";
@@ -29,6 +31,7 @@ import { effectChanges, stateChanges } from "./effects-match-state";
 import { fixtureScripts } from "./fixtures";
 import type {
   RecordedFixture,
+  RecordedMachine,
   RecordedObject,
   RecordedRepo,
   RecordedStep,
@@ -64,9 +67,31 @@ function pseudoFiles(repo: Repo): Record<string, string> {
   return out;
 }
 
-/** The world in the recorder's dump format, so final states compare directly. */
-export function dumpWorld(world: World): Final {
-  const machine = machineOf(world);
+function dumpRepo(world: World, repo: Repo): RecordedRepo {
+  const pseudo = pseudoFiles(repo);
+  const have = world.available.get(repo.id) ?? new Set<Oid>();
+  return {
+    head:
+      repo.head.kind === "symbolic"
+        ? { ref: repo.head.ref }
+        : { oid: repo.head.oid },
+    refs: Object.fromEntries(repo.refs),
+    objects: Object.fromEntries(
+      [...world.objects]
+        .filter(([oid]) => have.has(oid))
+        .map(([oid, o]) => [oid, dumpObject(o)]),
+    ),
+    index: indexEntries(repo.index).map((e) => ({ ...e })),
+    config: pairs(repo.config),
+    reflogs: Object.fromEntries(
+      [...repo.reflogs].map(([k, log]) => [k, log.map(reflogLine)]),
+    ),
+    ...(Object.keys(pseudo).length ? { pseudo } : {}),
+  };
+}
+
+function dumpMachine(world: World, id: MachineId): RecordedMachine {
+  const machine = machineOf(world, id);
   const rel = (path: string) => relativeTo(machine.home, path);
   const files: Record<string, string> = {};
   for (const [path, content] of machine.fs.files) {
@@ -79,23 +104,8 @@ export function dumpWorld(world: World): Final {
     .sort();
   const repos: Record<string, RecordedRepo> = {};
   for (const repo of world.repos.values()) {
-    const pseudo = pseudoFiles(repo);
-    repos[rel(repo.workdir) ?? repo.workdir] = {
-      head:
-        repo.head.kind === "symbolic"
-          ? { ref: repo.head.ref }
-          : { oid: repo.head.oid },
-      refs: Object.fromEntries(repo.refs),
-      objects: Object.fromEntries(
-        [...world.objects].map(([oid, o]) => [oid, dumpObject(o)]),
-      ),
-      index: indexEntries(repo.index).map((e) => ({ ...e })),
-      config: pairs(repo.config),
-      reflogs: Object.fromEntries(
-        [...repo.reflogs].map(([k, log]) => [k, log.map(reflogLine)]),
-      ),
-      ...(Object.keys(pseudo).length ? { pseudo } : {}),
-    };
+    if (repo.machine !== id) continue;
+    repos[rel(repo.workdir) ?? repo.workdir] = dumpRepo(world, repo);
   }
   return {
     files,
@@ -108,6 +118,31 @@ export function dumpWorld(world: World): Final {
   };
 }
 
+/** The world in the recorder's dump format, so final states compare directly. */
+export function dumpWorld(world: World): Final {
+  const others = [...world.machines.keys()].filter(
+    (id) => id !== LEARNER && id !== HUB,
+  );
+  const hosted = [...world.repos.values()].filter((r) => r.machine === HUB);
+  return {
+    ...dumpMachine(world, LEARNER),
+    ...(others.length
+      ? {
+          machines: Object.fromEntries(
+            others.map((id) => [id, dumpMachine(world, id)]),
+          ),
+        }
+      : {}),
+    ...(world.machines.has(HUB)
+      ? {
+          hub: Object.fromEntries(
+            hosted.map((r) => [r.workdir.slice(1), dumpRepo(world, r)]),
+          ),
+        }
+      : {}),
+  };
+}
+
 /** Git's option table after a usage synopsis is left to the reference entry. */
 export function withoutOptionTable(text: string): string {
   const at = text.indexOf("usage: ");
@@ -116,14 +151,18 @@ export function withoutOptionTable(text: string): string {
   return end < 0 ? text : text.slice(0, end + 2);
 }
 
-function singleInvocation(world: World, cmd: string): Invocation {
-  const parsed = tokenize(cmd, machineOf(world).home);
+function singleInvocation(
+  world: World,
+  cmd: string,
+  machine?: MachineId,
+): Invocation {
+  const parsed = tokenize(cmd, machineOf(world, machine).home);
   if (!parsed.ok || parsed.steps.length !== 1) {
     throw new Error(`Fixture steps must be one simple command: ${cmd}`);
   }
   const [step] = parsed.steps;
   if (!step) throw new Error(cmd);
-  return step.command;
+  return machine ? { ...step.command, machine } : step.command;
 }
 
 /** Why a fixture cannot replay yet (a Git command the engine lacks), or null. */
@@ -200,6 +239,7 @@ export function seedWorld(fixture: RecordedFixture): World {
     pairs.map(([key, value]) => ({ key, value }));
   const objects = new Map<Oid, GitObject>();
   const repos = new Map<string, Repo>();
+  const available = new Map<string, ReadonlySet<Oid>>();
   let fs = machineOf(base).fs;
   for (const [rel, recorded] of Object.entries(final.repos)) {
     for (const [oid, object] of Object.entries(recorded.objects)) {
@@ -222,6 +262,7 @@ export function seedWorld(fixture: RecordedFixture): World {
       ]),
     );
     const id = repoIdFor(LEARNER, workdir);
+    available.set(id, new Set(Object.keys(recorded.objects) as Oid[]));
     repos.set(id, {
       id,
       machine: LEARNER,
@@ -256,6 +297,7 @@ export function seedWorld(fixture: RecordedFixture): World {
     objects,
     system: config(final.config.system),
     repos,
+    available,
   };
 }
 
@@ -272,7 +314,11 @@ export function replayFixture(fixture: RecordedFixture): {
   const steps = (seeded ? fixture.steps.slice(-1) : fixture.steps).map(
     (expected) => {
       const before = world;
-      let outcome = execute(world, singleInvocation(world, expected.cmd));
+      const { machine } = expected;
+      let outcome = execute(
+        world,
+        singleInvocation(world, expected.cmd, machine),
+      );
       const request = outcome.request;
       const editor =
         request?.kind === "editor"
@@ -293,7 +339,8 @@ export function replayFixture(fixture: RecordedFixture): {
         stdout: strip(outcome.output.stdout),
         stderr: strip(outcome.output.stderr),
         exitCode: outcome.output.exitCode,
-        cwd: machineOf(world).cwd,
+        cwd: machineOf(world, machine).cwd,
+        ...(machine ? { machine } : {}),
         ...(editor ? { editor } : {}),
       };
       const normalized =

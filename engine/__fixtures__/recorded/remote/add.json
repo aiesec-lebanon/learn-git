@@ -1,0 +1,189 @@
+{
+  "final": {
+    "config": {
+      "global": [
+        [
+          "user.name",
+          "Sam Lee"
+        ],
+        [
+          "user.email",
+          "sam@example.com"
+        ],
+        [
+          "init.defaultbranch",
+          "main"
+        ]
+      ],
+      "system": []
+    },
+    "dirs": [
+      "project"
+    ],
+    "files": {
+      "project/a.txt": "a\n"
+    },
+    "repos": {
+      "project": {
+        "config": [
+          [
+            "core.repositoryformatversion",
+            "0"
+          ],
+          [
+            "core.filemode",
+            "false"
+          ],
+          [
+            "core.bare",
+            "false"
+          ],
+          [
+            "core.logallrefupdates",
+            "true"
+          ],
+          [
+            "core.symlinks",
+            "false"
+          ],
+          [
+            "core.ignorecase",
+            "true"
+          ],
+          [
+            "remote.origin.url",
+            "https://hub.test/sam/team.git"
+          ],
+          [
+            "remote.origin.fetch",
+            "+refs/heads/*:refs/remotes/origin/*"
+          ],
+          [
+            "remote.upstream.url",
+            "https://hub.test/ada/team.git"
+          ],
+          [
+            "remote.upstream.fetch",
+            "+refs/heads/*:refs/remotes/upstream/*"
+          ]
+        ],
+        "head": {
+          "ref": "refs/heads/main"
+        },
+        "index": [],
+        "objects": {},
+        "reflogs": {},
+        "refs": {}
+      }
+    }
+  },
+  "git": "2.45.1.windows.1",
+  "script": {
+    "steps": [
+      "git init -q",
+      "git remote",
+      "git remote -v",
+      "git remote add origin https://hub.test/sam/team.git",
+      "git remote add upstream https://hub.test/ada/team.git",
+      "git remote",
+      "git remote -v",
+      "git remote add origin https://hub.test/x/y.git",
+      "git remote add \"bad name\" https://hub.test/x/y.git",
+      "git remote add solo",
+      "git remote --verbose",
+      "git remote nope"
+    ],
+    "world": {
+      "cwd": "project",
+      "files": {
+        "project/a.txt": "a\n"
+      }
+    }
+  },
+  "steps": [
+    {
+      "cmd": "git init -q",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git remote",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git remote -v",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git remote add origin https://hub.test/sam/team.git",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git remote add upstream https://hub.test/ada/team.git",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "cmd": "git remote",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "origin\nupstream\n"
+    },
+    {
+      "cmd": "git remote -v",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "origin\thttps://hub.test/sam/team.git (fetch)\norigin\thttps://hub.test/sam/team.git (push)\nupstream\thttps://hub.test/ada/team.git (fetch)\nupstream\thttps://hub.test/ada/team.git (push)\n"
+    },
+    {
+      "cmd": "git remote add origin https://hub.test/x/y.git",
+      "cwd": "/home/you/project",
+      "exitCode": 3,
+      "stderr": "error: remote origin already exists.\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git remote add \"bad name\" https://hub.test/x/y.git",
+      "cwd": "/home/you/project",
+      "exitCode": 128,
+      "stderr": "fatal: 'bad name' is not a valid remote name\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git remote add solo",
+      "cwd": "/home/you/project",
+      "exitCode": 129,
+      "stderr": "usage: git remote add [<options>] <name> <url>\n\n    -f, --[no-]fetch      fetch the remote branches\n    --[no-]tags           import all tags and associated objects when fetching\n                          or do not fetch any tag at all (--no-tags)\n    -t, --[no-]track <branch>\n                          branch(es) to track\n    -m, --[no-]master <branch>\n                          master branch\n    --[no-]mirror[=(push|fetch)]\n                          set up remote as a mirror to push to or fetch from\n\n",
+      "stdout": ""
+    },
+    {
+      "cmd": "git remote --verbose",
+      "cwd": "/home/you/project",
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "origin\thttps://hub.test/sam/team.git (fetch)\norigin\thttps://hub.test/sam/team.git (push)\nupstream\thttps://hub.test/ada/team.git (fetch)\nupstream\thttps://hub.test/ada/team.git (push)\n"
+    },
+    {
+      "cmd": "git remote nope",
+      "cwd": "/home/you/project",
+      "exitCode": 129,
+      "stderr": "error: unknown subcommand: `nope'\nusage: git remote [-v | --verbose]\n   or: git remote add [-t <branch>] [-m <master>] [-f] [--tags | --no-tags] [--mirror=<fetch|push>] <name> <url>\n   or: git remote rename [--[no-]progress] <old> <new>\n   or: git remote remove <name>\n   or: git remote set-head <name> (-a | --auto | -d | --delete | <branch>)\n   or: git remote [-v | --verbose] show [-n] <name>\n   or: git remote prune [-n | --dry-run] <name>\n   or: git remote [-v | --verbose] update [-p | --prune] [(<group> | <remote>)...]\n   or: git remote set-branches [--add] <name> <branch>...\n   or: git remote get-url [--push] [--all] <name>\n   or: git remote set-url [--push] <name> <newurl> [<oldurl>]\n   or: git remote set-url --add <name> <newurl>\n   or: git remote set-url --delete <name> <url>\n\n    -v, --[no-]verbose    be verbose; must be placed before a subcommand\n\n",
+      "stdout": ""
+    }
+  ]
+}

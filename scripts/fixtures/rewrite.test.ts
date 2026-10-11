@@ -47,6 +47,14 @@ describe("fixture rewriting", () => {
     ],
     ["user.name=Sam\nlog.decorate=short\n", "user.name=Sam\n"],
     ["command\tlog.decorate=short\n", ""],
+    [
+      "From file:///C:/Users/Ada/AppData/Local/Temp/lg-fx-abc/hub/sam/team\n",
+      "From https://hub.test/sam/team\n",
+    ],
+    [
+      "command\turl.file:///C:/Users/Ada/AppData/Local/Temp/lg-fx-abc/hub/.insteadof=https://hub.test/\n",
+      "",
+    ],
   ])("rewrites %j", (input, output) => {
     expect(rewrite(input)).toBe(output);
   });
